@@ -1,0 +1,17 @@
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Segredos — nunca versionar
+.env
+.env.*
+*.key
+
+# Dependências e builds (para quando o código chegar)
+node_modules/
+dist/
+build/
+
+# Configurações locais do Claude Code (específicas de cada máquina)
+.claude/settings.local.json

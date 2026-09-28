@@ -1,0 +1,2 @@
+# Normaliza quebras de linha entre Mac e Windows (o Git guarda sempre no formato LF)
+* text=auto
