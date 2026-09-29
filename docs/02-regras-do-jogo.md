@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 02 — Regras do jogo |
-| Versão | 0.2 |
+| Versão | 0.3 |
 | Data | 28/09/2026 |
 | Status | Em revisão: falta a pontuação (P-006) |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -128,7 +128,7 @@ A fase tem dois pontos de retorno: a base e a plataforma da tripulação. Os pos
 | Depois de chegar à plataforma da tripulação: na própria plataforma ou na volta | Na plataforma da tripulação | O mesmo que tinha ao chegar lá | Continua a bordo | Definido |
 | Quando fica sem combustível para decolar, pousada numa plataforma que não abastece | Na base, no início da fase | Cheio (a base abastece) | Volta a aguardar na plataforma: o resgate é perdido | Definido |
 
-**Efeito colateral a acompanhar (Proposta):** como o ponto de retorno na plataforma guarda o combustível da chegada, quem chegar lá com muito pouco pode perder as vidas seguidas na volta, até o fim de jogo. A proposta é aceitar esse efeito, porque planejar o combustível da volta faz parte do desafio, e reforçar o aviso de combustível baixo quando a nave pousar na plataforma da tripulação.
+**Efeito colateral aceito (Definido):** como o ponto de retorno na plataforma guarda o combustível da chegada, quem chegar lá com muito pouco pode perder as vidas seguidas na volta, até o fim de jogo. O efeito foi aceito, porque planejar o combustível da volta faz parte do desafio. Para o jogador perceber o risco a tempo, o jogo mostra um **aviso forte de combustível baixo** quando a nave pousa na plataforma da tripulação com pouco combustível.
 
 ### 7.2 Situações e resultados
 
@@ -193,7 +193,7 @@ Os textos do jogo são em inglês ([D-007](05-registro-de-decisoes.md#d-007--jog
 
 | Elemento | Para quê |
 |---|---|
-| Barra de combustível | Mostrar quanto resta; pisca quando está acabando |
+| Barra de combustível | Mostrar quanto resta; pisca quando está acabando. O aviso forte ao pousar na plataforma da tripulação com pouco combustível já está definido (seção 7.1) |
 | Vidas | Três pequenos triângulos |
 | Situação da tripulação | Aguardando (na ida) ou a bordo (na volta) |
 | Cronômetro | Tempo da fase, que define a pontuação |
@@ -224,6 +224,7 @@ São os números que definem a "sensação" do jogo. Eles serão calibrados no p
 | Velocidade máxima de pouso | Limite para pousar sem explodir | Tolerante: o pouso "não é tão delicado" |
 | Inclinação máxima de pouso | Quanto a nave pode estar torta ao pousar | Ex.: 20° |
 | Tanque e consumo | Quanto tempo de propulsor cabe num tanque cheio | Varia por fase |
+| Combustível baixo | A partir de quanto o jogo avisa que o combustível está acabando | Calibrar no protótipo (ex.: 20% do tanque) |
 | Duração do embarque | Tempo da animação da tripulação | Cerca de 2 segundos |
 
 ## 14. Pontos em aberto
@@ -258,3 +259,4 @@ Registradas para não se perderem. **Não são compromisso**: só entram se o Ro
 |---|---|---|
 | 0.1 | 28/09/2026 | Primeira versão, a partir do kickoff |
 | 0.2 | 28/09/2026 | Pontos de retorno definidos pelo Fernando; controle por toque definido (direcional virtual); propostas de vidas, abastecimento, embarque, colisão, tela na horizontal e curva de fases aprovadas |
+| 0.3 | 28/09/2026 | Efeito colateral do ponto de retorno aceito, com aviso forte de combustível baixo na plataforma da tripulação |
