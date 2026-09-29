@@ -147,7 +147,8 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | P-004 | Com que tecnologia construir? | Depois do PRD | Decisão técnica guiada pelos requisitos |
 | P-005 | Onde hospedar o jogo? | Junto com P-001 | Precisa ser gratuito (D-003) |
 | P-006 | Como funciona a pontuação? | Antes de construir a tela de resultado | Já definido: sem limite de tempo; resgate mais rápido faz mais pontos. Perguntas no [documento 02, seção 8](02-regras-do-jogo.md#8-tempo-e-pontuação) |
-| P-007 | Quantas fases terá o MVP? | No documento 04, Roadmap | Curva de dificuldade sugerida no documento 02, seção 10 |
+| P-007 | Quantas fases entram no MVP? | No documento 04, Roadmap | A curva de 5 fases está definida no documento 02, seção 10 |
+| P-008 | Qual ferramenta de medição anônima usar? | Junto com P-004 | Precisa ser gratuita, dispensar cookies e aceitar eventos personalizados ([PRD, seção 7](03-prd.md#7-medição)) |
 
 ## Modelo para novas decisões
 

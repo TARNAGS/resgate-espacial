@@ -20,8 +20,8 @@ Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável
 |---|---|---|---|
 | 01 | [Visão do produto](docs/01-visao-do-produto.md) | O quê, para quem, por quê e como saber se deu certo | Em revisão |
 | 02 | [Regras do jogo](docs/02-regras-do-jogo.md) | Como se joga | Em revisão (falta a pontuação) |
-| 03 | PRD | O que o produto precisa ter | Próximo |
-| 04 | Roadmap | O que entra no MVP e o que fica para depois | A fazer |
+| 03 | [PRD](docs/03-prd.md) | O que o produto precisa ter | Rascunho em revisão |
+| 04 | Roadmap | O que entra no MVP e o que fica para depois | Próximo |
 | 05 | [Registro de decisões](docs/05-registro-de-decisoes.md) | Por que escolhemos X e não Y | Contínuo |
 
 ## Como o trabalho é organizado
