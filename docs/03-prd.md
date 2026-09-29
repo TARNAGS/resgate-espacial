@@ -203,7 +203,7 @@ O tempo entre o link e o controle da nave (RNF-01) é medido em teste, não pela
 ## 12. Próximos passos
 
 1. Revisar este PRD.
-2. Escrever o documento 04, Roadmap: cortar o MVP, decidir quantas fases entram (P-007) e definir as iniciativas.
+2. Escrever o documento 04, Roadmap: cortar o MVP e definir as iniciativas. Feito: [Roadmap](04-roadmap.md).
 3. Decidir a tecnologia (P-004), a hospedagem (P-005) e a ferramenta de medição (P-008).
 4. Quebrar as iniciativas em épicos e histórias no GitHub, com o quadro kanban.
 
