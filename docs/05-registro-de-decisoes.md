@@ -89,10 +89,12 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | ID | Pergunta | Quando decidir | Observação |
 |---|---|---|---|
 | P-001 | O repositório será público ou privado? | Antes de divulgar no portfólio | Portfólio pede visibilidade; no plano gratuito do GitHub, o GitHub Pages só publica repositórios públicos |
-| P-002 | Como funciona o controle por toque? | No documento 02, Regras do jogo | Maior risco do produto (Visão, seção 10) |
+| P-002 | Como funciona o controle por toque? | Na revisão do documento 02 | Maior risco do produto (Visão, seção 10). Opções e recomendação no [documento 02, seção 4.2](02-regras-do-jogo.md#42-toque-celular--em-aberto-p-002) |
 | P-003 | Qual será o nome final do jogo? | Antes do lançamento | — |
 | P-004 | Com que tecnologia construir? | Depois do PRD | Decisão técnica guiada pelos requisitos |
 | P-005 | Onde hospedar o jogo? | Junto com P-001 | Precisa ser gratuito (D-003) |
+| P-006 | Como funciona a pontuação? | Antes de construir a tela de resultado | Já definido: sem limite de tempo; resgate mais rápido faz mais pontos. Perguntas no [documento 02, seção 8](02-regras-do-jogo.md#8-tempo-e-pontuação) |
+| P-007 | Quantas fases terá o MVP? | No documento 04, Roadmap | Curva de dificuldade sugerida no documento 02, seção 10 |
 
 ## Modelo para novas decisões
 
