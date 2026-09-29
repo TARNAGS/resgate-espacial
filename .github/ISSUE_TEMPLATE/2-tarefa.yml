@@ -1,0 +1,23 @@
+name: Tarefa
+description: Trabalho técnico, decisão ou atividade de produto que habilita histórias.
+labels: ["tarefa"]
+body:
+  - type: textarea
+    id: objetivo
+    attributes:
+      label: Objetivo
+      description: O que precisa ser feito e por quê.
+    validations:
+      required: true
+  - type: textarea
+    id: pronto
+    attributes:
+      label: Pronto quando
+      description: Como saber que a tarefa terminou.
+      placeholder: "- ..."
+    validations:
+      required: true
+  - type: textarea
+    id: referencias
+    attributes:
+      label: Referências

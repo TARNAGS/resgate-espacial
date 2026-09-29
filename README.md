@@ -4,7 +4,7 @@
 
 Jogo 2D de nave com gravidade: pilote um pequeno triângulo, dose o propulsor contra o peso da nave, atravesse os obstáculos, resgate a tripulação perdida no espaço e volte para a base antes de o combustível acabar.
 
-**Status:** em documentação. O jogo ainda não começou a ser construído.
+**Status:** documentação base escrita e backlog montado. Próximo marco: M0 (fundação técnica). O jogo ainda não começou a ser construído.
 
 ## Sobre o projeto
 
@@ -21,12 +21,17 @@ Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável
 | 01 | [Visão do produto](docs/01-visao-do-produto.md) | O quê, para quem, por quê e como saber se deu certo | Em revisão |
 | 02 | [Regras do jogo](docs/02-regras-do-jogo.md) | Como se joga | Em revisão (falta a pontuação) |
 | 03 | [PRD](docs/03-prd.md) | O que o produto precisa ter | Rascunho em revisão |
-| 04 | [Roadmap](docs/04-roadmap.md) | Em que ordem o produto é construído | Rascunho em revisão |
+| 04 | [Roadmap](docs/04-roadmap.md) | Em que ordem o produto é construído | Aprovado |
 | 05 | [Registro de decisões](docs/05-registro-de-decisoes.md) | Por que escolhemos X e não Y | Contínuo |
 
 ## Como o trabalho é organizado
 
-O [roadmap](docs/04-roadmap.md) avança por marcos, do M0 (fundação) ao M3 (V1), sem data-alvo. O trabalho se divide em **iniciativas**, que se dividem em **épicos**, que se dividem em **histórias de usuário**. Tudo fica em issues do GitHub, acompanhado num quadro kanban (em breve).
+O [roadmap](docs/04-roadmap.md) avança por marcos, do M0 (fundação) ao M3 (V1), sem data-alvo. O trabalho se divide em **iniciativas**, que se dividem em **épicos**, que se dividem em **histórias de usuário** e **tarefas**. Tudo fica nas [issues](https://github.com/TARNAGS/resgate-espacial/issues) do GitHub, organizado por [marcos](https://github.com/TARNAGS/resgate-espacial/milestones) e acompanhado num quadro kanban (em breve).
+
+- **Pronta para começar:** a história está no formato "Como / Quero / Para", tem critérios de aceite verificáveis, está ligada a um épico e tem marco definido.
+- **Pronta de verdade:** os critérios de aceite foram atendidos, o resultado foi testado no iPhone (e no computador, quando fizer sentido), está publicado, e a documentação foi atualizada se alguma regra mudou.
+
+Novas issues seguem os modelos de história, tarefa, épico e iniciativa, disponíveis ao criar uma issue.
 
 ## Como jogar
 

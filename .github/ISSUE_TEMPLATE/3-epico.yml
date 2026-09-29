@@ -1,0 +1,22 @@
+name: Épico
+description: Entrega grande dentro de uma iniciativa; agrupa histórias e tarefas.
+title: "E-XX · "
+labels: ["épico"]
+body:
+  - type: textarea
+    id: inclui
+    attributes:
+      label: O que inclui
+    validations:
+      required: true
+  - type: input
+    id: iniciativa
+    attributes:
+      label: Iniciativa
+      placeholder: "I-0X · Nome da iniciativa"
+    validations:
+      required: true
+  - type: textarea
+    id: referencias
+    attributes:
+      label: Referências

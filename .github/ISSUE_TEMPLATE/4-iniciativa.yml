@@ -1,0 +1,27 @@
+name: Iniciativa
+description: Grande frente ligada a um objetivo da Visão; agrupa épicos.
+title: "I-XX · "
+labels: ["iniciativa"]
+body:
+  - type: textarea
+    id: objetivo
+    attributes:
+      label: Objetivo
+    validations:
+      required: true
+  - type: input
+    id: visao
+    attributes:
+      label: Objetivo da Visão atendido
+      placeholder: "Ex.: North Star, resgates concluídos (Visão, seção 6.1)"
+    validations:
+      required: true
+  - type: input
+    id: marcos
+    attributes:
+      label: Marcos
+      placeholder: "Ex.: M2 — MVP"
+  - type: textarea
+    id: referencias
+    attributes:
+      label: Referências

@@ -1,0 +1,33 @@
+name: História de usuário
+description: Fatia de valor para o jogador ou testador, pequena o bastante para caber em poucos dias.
+labels: ["história"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Depois de criar, ligue a história ao épico dela (sub-issue) e defina o marco (milestone).
+  - type: textarea
+    id: historia
+    attributes:
+      label: História
+      description: "Como <quem>, quero <o quê>, para <por quê>."
+      placeholder: "Como jogador no iPhone, quero ..., para ..."
+    validations:
+      required: true
+  - type: textarea
+    id: criterios
+    attributes:
+      label: Critérios de aceite
+      description: "Cenários no formato Dado / Quando / Então, ou regras que dá para verificar."
+      placeholder: "- Dado que ..., quando ..., então ..."
+    validations:
+      required: true
+  - type: textarea
+    id: referencias
+    attributes:
+      label: Referências
+      description: "Documentos, regras ou decisões relacionadas (ex.: Regras do jogo, seção 4.2; D-006)."
+  - type: textarea
+    id: observacoes
+    attributes:
+      label: Observações

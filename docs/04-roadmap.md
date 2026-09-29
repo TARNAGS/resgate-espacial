@@ -3,12 +3,14 @@
 | Campo | Valor |
 |---|---|
 | Documento | 04 — Roadmap |
-| Versão | 0.1 |
+| Versão | 1.0 |
 | Data | 28/09/2026 |
-| Status | Rascunho, em revisão |
+| Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
 
 O roadmap organiza **em que ordem** o produto vai ser construído. Não há data-alvo ([D-010](05-registro-de-decisoes.md#d-010--sem-data-alvo-planejamento-por-marcos)): o projeto avança por marcos, e cada marco só termina quando cumpre o seu critério de saída.
+
+O backlog está no GitHub: [issues](https://github.com/TARNAGS/resgate-espacial/issues) e [marcos](https://github.com/TARNAGS/resgate-espacial/milestones). Os IDs das tabelas abaixo levam à issue correspondente.
 
 ## 1. Visão geral
 
@@ -31,12 +33,12 @@ flowchart LR
 
 | ID | Iniciativa | Objetivo da Visão que atende | Marcos |
 |---|---|---|---|
-| I-01 | Fundação técnica | Publicar o jogo (seção 6.3) | M0 |
-| I-02 | Provar a diversão do controle | Princípio "o controle é o produto" e maior risco do produto (seção 10) | M1 |
-| I-03 | Jogo completo: do voo ao resgate | North Star: resgates concluídos (seção 6.1) | M2 e M3 |
-| I-04 | Instalável e confiável no celular | Acesso sem atrito e instalação (seção 6.2) | M2 e M3 |
-| I-05 | Aprender com os jogadores | Métricas e hipóteses H1 a H3 (seções 3 e 6) | M2 e M3 |
-| I-06 | Portfólio: contar a história | Mostrar o processo de produto (seção 6.3) | M2 |
+| [I-01](https://github.com/TARNAGS/resgate-espacial/issues/1) | Fundação técnica | Publicar o jogo (seção 6.3) | M0 |
+| [I-02](https://github.com/TARNAGS/resgate-espacial/issues/2) | Provar a diversão do controle | Princípio "o controle é o produto" e maior risco do produto (seção 10) | M1 |
+| [I-03](https://github.com/TARNAGS/resgate-espacial/issues/3) | Jogo completo: do voo ao resgate | North Star: resgates concluídos (seção 6.1) | M2 e M3 |
+| [I-04](https://github.com/TARNAGS/resgate-espacial/issues/4) | Instalável e confiável no celular | Acesso sem atrito e instalação (seção 6.2) | M2 e M3 |
+| [I-05](https://github.com/TARNAGS/resgate-espacial/issues/5) | Aprender com os jogadores | Métricas e hipóteses H1 a H3 (seções 3 e 6) | M2 e M3 |
+| [I-06](https://github.com/TARNAGS/resgate-espacial/issues/6) | Portfólio: contar a história | Mostrar o processo de produto (seção 6.3) | M2 |
 
 ## 3. Épicos
 
@@ -44,51 +46,51 @@ flowchart LR
 
 | ID | Épico | O que inclui | Referências |
 |---|---|---|---|
-| E-01 | Decisões técnicas de base | Escolher a tecnologia, a visibilidade do repositório e a hospedagem, e registrar como decisões | P-004, P-001, P-005 |
-| E-02 | Esqueleto publicado | Estrutura do código e publicação automática por HTTPS a cada envio ao GitHub, abrindo no iPhone | RNF-07, RNF-08 |
+| [E-01](https://github.com/TARNAGS/resgate-espacial/issues/7) | Decisões técnicas de base | Escolher a tecnologia, a visibilidade do repositório e a hospedagem, e registrar como decisões | P-004, P-001, P-005 |
+| [E-02](https://github.com/TARNAGS/resgate-espacial/issues/8) | Esqueleto publicado | Estrutura do código e publicação automática por HTTPS a cada envio ao GitHub, abrindo no iPhone | RNF-07, RNF-08 |
 
 ### I-02 — Provar a diversão do controle (M1)
 
 | ID | Épico | O que inclui | Referências |
 |---|---|---|---|
-| E-03 | Física da nave | Gravidade, propulsor, inércia e giro, com os parâmetros de ajuste num único lugar | Doc 02, seção 3.1; RNF-12 |
-| E-04 | Controle por teclado | Setas para girar e tecla do propulsor | Doc 02, seção 4.1 |
-| E-05 | Direcional virtual | Tocar aciona o propulsor, arrastar aponta a direção | Doc 02, seção 4.2; D-006 |
-| E-06 | Teste com jogadores e calibragem | Roteiro de teste, 3 a 5 testes no iPhone, ajuste dos parâmetros e decisão sobre a variante do direcional | Doc 02, seção 13 |
+| [E-03](https://github.com/TARNAGS/resgate-espacial/issues/9) | Física da nave | Gravidade, propulsor, inércia e giro, com os parâmetros de ajuste num único lugar, e um cenário de teste com uma plataforma | Doc 02, seções 3.1 e 13; RNF-12 |
+| [E-04](https://github.com/TARNAGS/resgate-espacial/issues/10) | Controle por teclado | Setas para girar e tecla do propulsor | Doc 02, seção 4.1 |
+| [E-05](https://github.com/TARNAGS/resgate-espacial/issues/11) | Direcional virtual | Tocar aciona o propulsor, arrastar aponta a direção; tocar e arrastar não rola nem dá zoom na página | Doc 02, seção 4.2; D-006; RNF-10 |
+| [E-06](https://github.com/TARNAGS/resgate-espacial/issues/12) | Teste com jogadores e calibragem | Roteiro de teste, 3 a 5 testes no iPhone, ajuste dos parâmetros e decisão sobre a variante do direcional | Doc 02, seção 13 |
 
 ### I-03 — Jogo completo: do voo ao resgate (M2 e M3)
 
 | ID | Épico | O que inclui | Referências |
 |---|---|---|---|
-| E-07 | Voo, pouso e combustível | Plataformas, regras de pouso, colisões, consumo e abastecimento | Doc 02, seções 3, 5 e 7.2 |
-| E-08 | Resgate, vidas e pontos de retorno | Embarque da tripulação, vidas, pontos de retorno, aviso de combustível baixo e fim de jogo | Doc 02, seções 6 e 7 |
-| E-09 | Fases 1 a 3 | Desenho das três primeiras fases, câmera e liberação das fases em sequência | Doc 02, seção 10; D-009 |
-| E-10 | Telas, interface e som | Abertura, seleção de fases, pausa, resultado, fim de jogo, "Sobre", indicadores da partida e efeitos sonoros, com os textos em inglês | RF-02 a RF-08, RF-12 a RF-14; RNF-11 |
-| E-11 | Pontuação | Fechar o sistema de pontuação e mostrá-lo no resultado e na seleção de fases | P-006; doc 02, seção 8 |
-| E-12 | Fases 4 e 5 (M3) | Túneis, passagens estreitas e o primeiro obstáculo móvel | Doc 02, seções 9 e 10 |
+| [E-07](https://github.com/TARNAGS/resgate-espacial/issues/13) | Voo, pouso e combustível | Plataformas, regras de pouso, colisões, consumo e abastecimento | Doc 02, seções 3, 5 e 7.2 |
+| [E-08](https://github.com/TARNAGS/resgate-espacial/issues/14) | Resgate, vidas e pontos de retorno | Embarque da tripulação, vidas, pontos de retorno, aviso de combustível baixo e fim de jogo | Doc 02, seções 6 e 7 |
+| [E-09](https://github.com/TARNAGS/resgate-espacial/issues/15) | Fases 1 a 3 | Desenho das três primeiras fases, câmera e liberação das fases em sequência | Doc 02, seção 10; D-009 |
+| [E-10](https://github.com/TARNAGS/resgate-espacial/issues/16) | Telas, interface e som | Abertura, seleção de fases, pausa, resultado, fim de jogo, "Sobre", indicadores da partida e efeitos sonoros, com os textos em inglês | RF-02 a RF-08, RF-12 a RF-14; RNF-11 |
+| [E-11](https://github.com/TARNAGS/resgate-espacial/issues/17) | Pontuação | Fechar o sistema de pontuação e mostrá-lo no resultado e na seleção de fases | P-006; doc 02, seção 8 |
+| [E-12](https://github.com/TARNAGS/resgate-espacial/issues/18) | Fases 4 e 5 (M3) | Túneis, passagens estreitas e o primeiro obstáculo móvel | Doc 02, seções 9 e 10 |
 
 ### I-04 — Instalável e confiável no celular (M2 e M3)
 
 | ID | Épico | O que inclui | Referências |
 |---|---|---|---|
-| E-13 | App instalável no iPhone | Manifesto, ícone, abertura sem as barras do navegador e passo a passo de instalação | RF-10; PRD, seção 6 |
-| E-14 | Sem internet e progresso salvo | Funcionamento sem conexão, progresso guardado no aparelho e pedido de armazenamento persistente | RF-09, RNF-03 |
-| E-15 | Tela, toque e desempenho no iPhone | Aviso para girar, áreas seguras, toque sem efeitos do navegador, carregamento e fluidez | RF-11; RNF-01, RNF-02, RNF-04, RNF-09, RNF-10 |
-| E-16 | Android (M3) | Testes em aparelho real e botão "Instalar" | RF-16, RNF-05; D-008 |
+| [E-13](https://github.com/TARNAGS/resgate-espacial/issues/19) | App instalável no iPhone | Manifesto, ícone, abertura sem as barras do navegador e passo a passo de instalação | RF-10; PRD, seção 6 |
+| [E-14](https://github.com/TARNAGS/resgate-espacial/issues/20) | Sem internet e progresso salvo | Funcionamento sem conexão, progresso guardado no aparelho e pedido de armazenamento persistente | RF-09, RNF-03 |
+| [E-15](https://github.com/TARNAGS/resgate-espacial/issues/21) | Tela e desempenho no iPhone | Aviso para girar, áreas seguras, carregamento e fluidez | RF-11; RNF-01, RNF-02, RNF-04, RNF-09 |
+| [E-16](https://github.com/TARNAGS/resgate-espacial/issues/22) | Android (M3) | Testes em aparelho real e botão "Instalar" | RF-16, RNF-05; D-008 |
 
 ### I-05 — Aprender com os jogadores (M2 e M3)
 
 | ID | Épico | O que inclui | Referências |
 |---|---|---|---|
-| E-17 | Medição anônima (M2) | Escolher a ferramenta e implementar os eventos, sem dados pessoais | P-008; PRD, seção 7; RF-15, RNF-06 |
-| E-18 | Leitura dos dados e ajustes (M3) | Revisar as metas da Visão com dados reais e ajustar as fases onde os jogadores mais perdem vidas | Visão, seção 6.2 |
+| [E-17](https://github.com/TARNAGS/resgate-espacial/issues/23) | Medição anônima (M2) | Escolher a ferramenta e implementar os eventos, sem dados pessoais | P-008; PRD, seção 7; RF-15, RNF-06 |
+| [E-18](https://github.com/TARNAGS/resgate-espacial/issues/24) | Leitura dos dados e ajustes (M3) | Revisar as metas da Visão com dados reais e ajustar as fases onde os jogadores mais perdem vidas | Visão, seção 6.2 |
 
 ### I-06 — Portfólio: contar a história (M2)
 
 | ID | Épico | O que inclui | Referências |
 |---|---|---|---|
-| E-19 | Identidade do jogo | Nome final, ícone e arte próprios | P-003; D-005 |
-| E-20 | Estudo de caso | README contando a história do projeto, com decisões, métricas e aprendizados; abertura do repositório, se ainda for privado | P-001; Visão, seção 6.3 |
+| [E-19](https://github.com/TARNAGS/resgate-espacial/issues/25) | Identidade do jogo | Nome final, ícone e arte próprios | P-003; D-005 |
+| [E-20](https://github.com/TARNAGS/resgate-espacial/issues/26) | Estudo de caso | README contando a história do projeto, com decisões, métricas e aprendizados; abertura do repositório, se ainda for privado | P-001; Visão, seção 6.3 |
 
 ## 4. Decisões pendentes por marco
 
@@ -103,9 +105,10 @@ A hospedagem deixou de ser um detalhe do fim do projeto: para testar o controle 
 
 ## 5. Como o roadmap vira backlog
 
-- Cada iniciativa e cada épico vira uma issue no GitHub. Os épicos ficam como sub-issues das iniciativas, e as histórias, como sub-issues dos épicos.
-- Os marcos viram *milestones* do GitHub.
-- **Histórias só para os próximos marcos.** Agora são escritas as histórias do M0 e do M1. As dos marcos seguintes são escritas quando eles se aproximarem, já com o que o protótipo ensinar. Escrever tudo agora seria detalhar suposições que o M1 ainda pode mudar.
+- Cada iniciativa e cada épico é uma issue no GitHub. Os épicos são sub-issues das iniciativas, e as histórias e tarefas são sub-issues dos épicos.
+- Os marcos são *milestones* do GitHub.
+- Além de histórias, o backlog tem **tarefas**: trabalho técnico, decisões e atividades de produto que habilitam as histórias, mas não são percebidas pelo jogador (ex.: decidir a hospedagem).
+- **Histórias só para os próximos marcos.** Só o M0 e o M1 têm histórias e tarefas escritas. As dos marcos seguintes são escritas quando eles se aproximarem, já com o que o protótipo ensinar. Escrever tudo agora seria detalhar suposições que o M1 ainda pode mudar.
 - Ao fim de cada marco, uma retrospectiva curta: o que funcionou, o que não funcionou e o que foi aprendido construindo com IA.
 
 ## 6. Riscos do plano
@@ -121,3 +124,4 @@ A hospedagem deixou de ser um detalhe do fim do projeto: para testar o controle 
 | Versão | Data | O que mudou |
 |---|---|---|
 | 0.1 | 28/09/2026 | Primeira versão: MVP com 3 fases (D-009) e sem data-alvo (D-010) |
+| 1.0 | 28/09/2026 | Aprovado pelo Fernando. Backlog criado no GitHub e ligado às tabelas. O requisito RNF-10 (tocar sem rolar nem dar zoom) passou do E-15 (M2) para o E-05 (M1), porque sem ele o teste do direcional no iPhone ficaria comprometido |
