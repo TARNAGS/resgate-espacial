@@ -5,7 +5,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 03 — PRD (requisitos do produto) |
-| Versão | 0.1 |
+| Versão | 0.2 |
 | Data | 28/09/2026 |
 | Status | Rascunho, em revisão |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -198,7 +198,6 @@ O tempo entre o link e o controle da nave (RNF-01) é medido em teste, não pela
 | P-004 | Com que tecnologia construir? | Como cumprir RNF-01 a RNF-03 |
 | P-005 | Onde hospedar? | Precisa servir por HTTPS e ser gratuita (RNF-07 e RNF-08) |
 | P-006 | Como funciona a pontuação? | Telas de resultado e de seleção de fases (RF-05 e RF-07) |
-| P-007 | Quantas fases entram no MVP? | Escopo do RF-03 |
 | P-008 | Qual ferramenta de medição anônima usar? | RF-15 e seção 7 |
 
 ## 12. Próximos passos
@@ -226,3 +225,4 @@ O tempo entre o link e o controle da nave (RNF-01) é medido em teste, não pela
 | Versão | Data | O que mudou |
 |---|---|---|
 | 0.1 | 28/09/2026 | Primeira versão |
+| 0.2 | 28/09/2026 | Pendência P-007 resolvida: MVP com as fases 1 a 3 (D-009) |

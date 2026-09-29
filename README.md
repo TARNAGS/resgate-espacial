@@ -21,12 +21,12 @@ Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável
 | 01 | [Visão do produto](docs/01-visao-do-produto.md) | O quê, para quem, por quê e como saber se deu certo | Em revisão |
 | 02 | [Regras do jogo](docs/02-regras-do-jogo.md) | Como se joga | Em revisão (falta a pontuação) |
 | 03 | [PRD](docs/03-prd.md) | O que o produto precisa ter | Rascunho em revisão |
-| 04 | Roadmap | O que entra no MVP e o que fica para depois | Próximo |
+| 04 | [Roadmap](docs/04-roadmap.md) | Em que ordem o produto é construído | Rascunho em revisão |
 | 05 | [Registro de decisões](docs/05-registro-de-decisoes.md) | Por que escolhemos X e não Y | Contínuo |
 
 ## Como o trabalho é organizado
 
-O roadmap vira **iniciativas**, que se dividem em **épicos**, que se dividem em **histórias de usuário**. Tudo fica em issues do GitHub, acompanhado num quadro kanban (em breve).
+O [roadmap](docs/04-roadmap.md) avança por marcos, do M0 (fundação) ao M3 (V1), sem data-alvo. O trabalho se divide em **iniciativas**, que se dividem em **épicos**, que se dividem em **histórias de usuário**. Tudo fica em issues do GitHub, acompanhado num quadro kanban (em breve).
 
 ## Como jogar
 

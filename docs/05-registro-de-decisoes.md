@@ -20,6 +20,8 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-006 | Controle por toque: direcional virtual | 28/09/2026 | Aceita |
 | D-007 | Jogo em inglês | 28/09/2026 | Aceita |
 | D-008 | iPhone primeiro | 28/09/2026 | Aceita |
+| D-009 | MVP com 3 fases | 28/09/2026 | Aceita |
+| D-010 | Sem data-alvo: planejamento por marcos | 28/09/2026 | Aceita |
 
 ## D-001 — Sem login e sem contas
 
@@ -138,6 +140,36 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 
 **Revisitar se** surgir acesso fácil a um Android para testes.
 
+## D-009 — MVP com 3 fases
+
+**Contexto.** A curva de dificuldade tem 5 fases (documento 02, seção 10). Esta decisão resolve a pendência P-007.
+
+**Opções consideradas.**
+
+| Opção | A favor | Contra |
+|---|---|---|
+| **3 fases** | Já cobre o ciclo inteiro: voar, pousar, abastecer, resgatar e voltar; lança antes | Sem túneis nem obstáculo móvel no lançamento |
+| 5 fases | Curva completa | Lançamento mais demorado; o obstáculo móvel tende a ser a parte mais trabalhosa das fases |
+
+**Decisão.** O MVP tem as fases 1 a 3. As fases 4 e 5 entram na V1.
+
+**Consequências.**
+
+- O avaliador de portfólio, que joga poucos minutos, dificilmente passaria da fase 2; as fases 4 e 5 não mudariam a primeira impressão.
+- Obstáculos móveis ficam fora do MVP.
+
+**Revisitar se** os dados do MVP mostrarem jogadores concluindo as 3 fases e voltando para jogar mais.
+
+## D-010 — Sem data-alvo: planejamento por marcos
+
+**Contexto.** Projeto paralelo, feito em horas vagas, sem compromisso externo de data.
+
+**Decisão.** O roadmap não tem datas. O projeto avança por marcos em sequência, cada um com um critério de saída ([Roadmap](04-roadmap.md)).
+
+**Consequências.** Sem pressão de prazo, o risco é o projeto se arrastar. Para compensar, os marcos são pequenos e cada um termina numa entrega que dá para mostrar.
+
+**Revisitar se** surgir uma data importante, como uma apresentação ou entrevista em que o jogo seria mostrado.
+
 ## Decisões pendentes
 
 | ID | Pergunta | Quando decidir | Observação |
@@ -147,7 +179,6 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | P-004 | Com que tecnologia construir? | Depois do PRD | Decisão técnica guiada pelos requisitos |
 | P-005 | Onde hospedar o jogo? | Junto com P-001 | Precisa ser gratuito (D-003) |
 | P-006 | Como funciona a pontuação? | Antes de construir a tela de resultado | Já definido: sem limite de tempo; resgate mais rápido faz mais pontos. Perguntas no [documento 02, seção 8](02-regras-do-jogo.md#8-tempo-e-pontuação) |
-| P-007 | Quantas fases entram no MVP? | No documento 04, Roadmap | A curva de 5 fases está definida no documento 02, seção 10 |
 | P-008 | Qual ferramenta de medição anônima usar? | Junto com P-004 | Precisa ser gratuita, dispensar cookies e aceitar eventos personalizados ([PRD, seção 7](03-prd.md#7-medição)) |
 
 ## Modelo para novas decisões

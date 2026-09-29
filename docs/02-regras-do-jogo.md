@@ -175,7 +175,7 @@ Perguntas a responder para fechar a pontuação:
 | Cada fase apresenta uma novidade, e a primeira funciona como tutorial (curva abaixo) | Definido |
 | A fase é mais larga que a tela, e a câmera acompanha a nave | Proposta |
 | As fases são liberadas em sequência: concluir uma libera a próxima | Proposta |
-| Quantas fases entram no MVP é decidido no Roadmap (P-007) | Em aberto |
+| O MVP tem as fases 1 a 3; as fases 4 e 5 entram na V1 (D-009) | Definido |
 
 Curva de dificuldade:
 
@@ -232,7 +232,6 @@ São os números que definem a "sensação" do jogo. Eles serão calibrados no p
 | ID | Pergunta | Onde |
 |---|---|---|
 | P-006 | Como funciona a pontuação? | Seção 8 |
-| P-007 | Quantas fases entram no MVP? | Roadmap |
 
 ## 15. Ideias para depois
 
@@ -259,4 +258,4 @@ Registradas para não se perderem. **Não são compromisso**: só entram se o Ro
 |---|---|---|
 | 0.1 | 28/09/2026 | Primeira versão, a partir do kickoff |
 | 0.2 | 28/09/2026 | Pontos de retorno definidos pelo Fernando; controle por toque definido (direcional virtual); propostas de vidas, abastecimento, embarque, colisão, tela na horizontal e curva de fases aprovadas |
-| 0.3 | 28/09/2026 | Efeito colateral do ponto de retorno aceito, com aviso forte de combustível baixo na plataforma da tripulação |
+| 0.3 | 28/09/2026 | Efeito colateral do ponto de retorno aceito, com aviso forte de combustível baixo na plataforma da tripulação; MVP com as fases 1 a 3 (D-009) |
