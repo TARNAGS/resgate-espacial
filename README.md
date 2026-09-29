@@ -10,15 +10,16 @@ Jogo 2D de nave com gravidade: pilote um pequeno triângulo, dose o propulsor co
 
 Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável, levado da ideia ao lançamento, com documentação, backlog e construção com apoio de IA (Claude Code).
 
-- **Plataformas:** navegador e celular (iOS e Android), instalável direto do site, sem loja.
+- **Plataformas:** navegador e celular, instalável direto do site, sem loja. iPhone primeiro; Android numa etapa seguinte.
+- **Idioma do jogo:** inglês.
 - **Modelo:** gratuito, sem cadastro e sem anúncios.
 
 ## Documentação
 
 | # | Documento | Pergunta que responde | Status |
 |---|---|---|---|
-| 01 | [Visão do produto](docs/01-visao-do-produto.md) | O quê, para quem, por quê e como saber se deu certo | Rascunho em revisão |
-| 02 | [Regras do jogo](docs/02-regras-do-jogo.md) | Como se joga | Rascunho em revisão |
+| 01 | [Visão do produto](docs/01-visao-do-produto.md) | O quê, para quem, por quê e como saber se deu certo | Em revisão |
+| 02 | [Regras do jogo](docs/02-regras-do-jogo.md) | Como se joga | Em revisão (falta a pontuação) |
 | 03 | PRD | O que o produto precisa ter | Próximo |
 | 04 | Roadmap | O que entra no MVP e o que fica para depois | A fazer |
 | 05 | [Registro de decisões](docs/05-registro-de-decisoes.md) | Por que escolhemos X e não Y | Contínuo |

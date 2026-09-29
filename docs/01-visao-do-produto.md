@@ -5,9 +5,9 @@
 | Campo | Valor |
 |---|---|
 | Documento | 01 — Visão do produto |
-| Versão | 0.1 |
+| Versão | 0.2 |
 | Data | 28/09/2026 |
-| Status | Rascunho, em revisão |
+| Status | Em revisão |
 | Responsável | Fernando Nunes (Product Manager) |
 
 ## 1. Resumo
@@ -67,7 +67,7 @@ As metas serão revistas após as primeiras semanas de uso real. A medição ser
 
 | Objetivo | Como saberemos que foi atingido |
 |---|---|
-| Publicar o jogo | Endereço público no ar e instalação testada em um iPhone e em um Android |
+| Publicar o jogo | Endereço público no ar e instalação testada no iPhone (MVP) e no Android (etapa seguinte, D-008) |
 | Mostrar o processo de produto | Documentos base publicados e backlog rastreável no GitHub (iniciativa → épico → história), com critérios de aceite em todas as histórias |
 | Aprender a construir com IA | Uma retrospectiva registrada ao fim de cada entrega |
 
@@ -87,7 +87,8 @@ Regras de desempate para as decisões de produto:
 
 - **Núcleo do jogo:** nave com gravidade e propulsor, combustível limitado, pousos para abastecer, resgate da tripulação, volta à base e obstáculos entre o ponto A e o ponto B.
 - **Fases:** sequência de fases com dificuldade crescente.
-- **Plataformas:** navegador (computador e celular) e instalação no iOS e no Android como app (PWA), com controles de teclado e de toque.
+- **Plataformas:** navegador (computador e celular) e instalação como app (PWA), com o iPhone como prioridade e o Android numa etapa seguinte (D-008). Controles de teclado e de toque, com direcional virtual (D-006).
+- **Idioma:** jogo em inglês (D-007).
 - **Progresso:** salvo no próprio aparelho.
 
 As regras detalhadas ficam no documento 02 (Regras do jogo) e os requisitos, no 03 (PRD).
@@ -114,7 +115,7 @@ As regras detalhadas ficam no documento 02 (Regras do jogo) e os requisitos, no 
 
 | Risco | Severidade | Mitigação |
 |---|---|---|
-| O controle por toque não reproduzir a sensação do teclado | Alta | Prototipar o controle no celular antes de construir as fases |
+| O controle por toque não reproduzir a sensação do teclado | Alta | Prototipar o direcional virtual (D-006) no iPhone antes de construir as fases |
 | No iPhone, a instalação é manual (Compartilhar → Adicionar à Tela de Início), sem aviso automático | Média | Ensinar a instalar dentro do jogo; testar em iPhone real |
 | Escopo crescer (editor de fases, ranking, novas mecânicas) | Média | MVP fechado no roadmap e decisões registradas |
 | Desempenho ruim em celulares mais simples | Média | Gráficos simples e teste em aparelho de entrada |
@@ -153,3 +154,10 @@ O jogo original que inspirou o projeto não foi identificado. Estes clássicos s
 | PWA | *Progressive Web App*: site que pode ser instalado no celular como um app, sem passar pela loja |
 | MVP | Produto mínimo viável: a menor versão que já entrega o valor principal |
 | North Star | Métrica principal, que representa o valor entregue ao usuário |
+
+## Histórico de versões
+
+| Versão | Data | O que mudou |
+|---|---|---|
+| 0.1 | 28/09/2026 | Primeira versão, a partir do kickoff |
+| 0.2 | 28/09/2026 | Inclui iPhone primeiro (D-008), jogo em inglês (D-007) e direcional virtual (D-006) |

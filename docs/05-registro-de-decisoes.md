@@ -17,6 +17,9 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-003 | Gratuito, sem anúncios e sem compras | 28/09/2026 | Aceita |
 | D-004 | Apenas um jogador | 28/09/2026 | Aceita |
 | D-005 | Identidade própria, inspirada no gênero | 28/09/2026 | Aceita |
+| D-006 | Controle por toque: direcional virtual | 28/09/2026 | Aceita |
+| D-007 | Jogo em inglês | 28/09/2026 | Aceita |
+| D-008 | iPhone primeiro | 28/09/2026 | Aceita |
 
 ## D-001 — Sem login e sem contas
 
@@ -84,12 +87,62 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 
 **Consequências.** "Resgate Espacial" é um codinome; o nome final é a decisão pendente P-003.
 
+## D-006 — Controle por toque: direcional virtual
+
+**Contexto.** O controle no celular é o maior risco do produto (Visão, seção 10). No teclado, as setas giram a nave e o propulsor é acionado à parte; no celular não existem teclas. Esta decisão resolve a pendência P-002.
+
+**Opções consideradas.**
+
+| Opção | Como funciona | A favor | Contra |
+|---|---|---|---|
+| A. Botões na tela | Dois botões de girar e um de propulsor | Mesma lógica do teclado | Sem resposta tátil, o dedo escorrega do botão |
+| B. Direcional + botão de propulsor | Um polegar aponta a direção, o outro aciona o propulsor | Precisão | Exige os dois polegares |
+| C. Inclinar o celular | Inclinar gira a nave; tocar aciona o propulsor | Tela livre | Impreciso; no iPhone, exige autorizar o sensor de movimento |
+| **D. Direcional único** | Tocar aciona o propulsor; arrastar indica a direção | Um polegar só; padrão conhecido de jogos de celular | Não dá para girar sem acelerar |
+
+**Decisão.** Opção D, proposta pelo Fernando: um direcional virtual (anel com uma bola no centro). Tocar aciona o propulsor, arrastar indica para onde a ponta da nave deve apontar e soltar desliga o propulsor. No teclado, nada muda.
+
+**Consequências.**
+
+- No toque, "girar" vira "apontar": a nave vira para a direção do dedo, na velocidade calibrada no protótipo.
+- Não dá para girar sem acelerar. Se a nave virar rápido para a direção do dedo, isso quase não faz falta; o protótipo vai mostrar.
+- O toque pode ficar mais fácil ou mais difícil que o teclado. Como não há ranking online (D-001), jogadores de aparelhos diferentes não competem entre si, e isso não é problema.
+- O outro polegar fica livre, por exemplo para a pausa.
+
+**Revisitar se** no protótipo fizer falta girar sem acelerar. A variante a testar é uma pequena zona no centro do direcional que só aponta, sem acionar o propulsor.
+
+## D-007 — Jogo em inglês
+
+**Contexto.** O jogo é peça de portfólio. Em inglês, ele pode ser jogado e avaliado também por quem não fala português.
+
+**Decisão.** Todos os textos do jogo (menus, dicas, avisos e instruções de instalação) ficam em inglês. A documentação do projeto continua em português.
+
+**Consequências.**
+
+- O nome final do jogo (P-003) precisa funcionar em inglês; "Resgate Espacial" segue só como codinome.
+- Os documentos descrevem os textos em português; a redação final em inglês é feita na construção.
+
+**Revisitar se** surgir interesse em outros idiomas. Manter os textos separados do código deixa a tradução simples depois (ver PRD).
+
+## D-008 — iPhone primeiro
+
+**Contexto.** O iPhone é o aparelho disponível para testes, e o Fernando pediu para priorizar o iOS. Como PWA, o mesmo código roda no Android, mas cada plataforma tem particularidades que só aparecem no teste em aparelho real.
+
+**Decisão.** O MVP é testado e ajustado no iPhone (no Safari e instalado na tela de início) e no navegador do computador. Testar e ajustar para Android fica para uma etapa seguinte.
+
+**Consequências.**
+
+- O objetivo da Visão "instalação testada em um iPhone e em um Android" passa a ter duas etapas: iPhone no MVP, Android depois.
+- As limitações do iPhone para PWAs viram requisitos do MVP (PRD, seção 6).
+- O jogo provavelmente já vai funcionar no Android, mas sem garantia até ser testado.
+
+**Revisitar se** surgir acesso fácil a um Android para testes.
+
 ## Decisões pendentes
 
 | ID | Pergunta | Quando decidir | Observação |
 |---|---|---|---|
 | P-001 | O repositório será público ou privado? | Antes de divulgar no portfólio | Portfólio pede visibilidade; no plano gratuito do GitHub, o GitHub Pages só publica repositórios públicos |
-| P-002 | Como funciona o controle por toque? | Na revisão do documento 02 | Maior risco do produto (Visão, seção 10). Opções e recomendação no [documento 02, seção 4.2](02-regras-do-jogo.md#42-toque-celular--em-aberto-p-002) |
 | P-003 | Qual será o nome final do jogo? | Antes do lançamento | — |
 | P-004 | Com que tecnologia construir? | Depois do PRD | Decisão técnica guiada pelos requisitos |
 | P-005 | Onde hospedar o jogo? | Junto com P-001 | Precisa ser gratuito (D-003) |

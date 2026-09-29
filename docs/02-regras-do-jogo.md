@@ -3,12 +3,12 @@
 | Campo | Valor |
 |---|---|
 | Documento | 02 — Regras do jogo |
-| Versão | 0.1 |
+| Versão | 0.2 |
 | Data | 28/09/2026 |
-| Status | Rascunho, em revisão |
+| Status | Em revisão: falta a pontuação (P-006) |
 | Responsável | Fernando Nunes (Product Manager) |
 
-Este documento descreve **como o jogo funciona**. O que o produto precisa ter em volta do jogo (instalação, salvamento, medição) fica no PRD.
+Este documento descreve **como o jogo funciona**. O que o produto precisa ter em volta do jogo (instalação, salvamento, medição) fica no [PRD](03-prd.md).
 
 **Como ler as marcações:**
 
@@ -44,7 +44,7 @@ Base (A) → voo com obstáculos → [posto: abastecer] → plataforma da tripul
 |---|---|
 | A gravidade puxa a nave para baixo o tempo todo | Definido |
 | O propulsor empurra a nave na direção para onde a ponta do triângulo aponta, enquanto estiver acionado. Acionar e soltar em sequência permite dosar a subida e "flutuar" | Definido |
-| As setas giram a nave para a esquerda e para a direita | Definido |
+| O jogador gira a nave para a esquerda e para a direita (no teclado, com as setas) | Definido |
 | A nave tem inércia: continua se movendo na direção em que estava até a gravidade ou o propulsor mudarem isso | Proposta |
 | O propulsor vence a gravidade com folga, para que a nave suba ao segurar e desça ao soltar | Proposta |
 
@@ -52,9 +52,9 @@ Base (A) → voo com obstáculos → [posto: abastecer] → plataforma da tripul
 
 | Regra | Status |
 |---|---|
-| O combustível é limitado e é reabastecido nos postos | Definido |
+| O combustível é limitado e é reabastecido nos postos e na base | Definido |
 | Só o propulsor gasta combustível; girar não gasta | Proposta |
-| Pousada num posto, a nave abastece até encher o tanque, em poucos segundos, com a barra subindo na tela | Proposta |
+| Pousada num lugar que abastece, a nave enche o tanque em poucos segundos, com a barra subindo na tela | Proposta |
 
 O que acontece quando o combustível acaba está na [seção 7](#7-vidas-derrota-e-vitória).
 
@@ -68,7 +68,7 @@ O que acontece quando o combustível acaba está na [seção 7](#7-vidas-derrota
 
 ## 4. Controles
 
-### 4.1 Teclado
+### 4.1 Teclado (computador)
 
 | Tecla | Ação | Status |
 |---|---|---|
@@ -77,58 +77,70 @@ O que acontece quando o combustível acaba está na [seção 7](#7-vidas-derrota
 | A e D / W ou Espaço | Alternativas para girar / para o propulsor | Proposta |
 | P ou Esc | Pausar | Proposta |
 
-### 4.2 Toque (celular) — Em aberto (P-002)
+### 4.2 Toque (celular)
 
-Esta é a decisão de maior risco do produto ([Visão, seção 10](01-visao-do-produto.md#10-riscos-principais)): a graça do original está em apertar e soltar a tecla, e no celular não existe tecla. Em qualquer opção, é obrigatório conseguir **girar e acionar o propulsor ao mesmo tempo**, com dois dedos.
-
-| Critério | A. Botões na tela | B. Direcional + propulsor | C. Inclinar o celular |
-|---|---|---|---|
-| Como funciona | Dois botões à esquerda (girar para cada lado) e um botão grande à direita (propulsor) | O polegar esquerdo aponta uma direção num direcional virtual e a nave vira para lá; o direito aciona o propulsor | Inclinar o celular gira a nave; tocar e segurar a tela aciona o propulsor |
-| Fidelidade ao original | Alta: mesma lógica do teclado | Média: "girar" vira "apontar" | Baixa |
-| Precisão em passagens estreitas | Média: sem resposta tátil, o dedo pode escorregar do botão | Alta | Baixa |
-| Facilidade de aprender | Alta | Alta | Média |
-| Esforço para construir | Baixo | Médio: exige calibrar a sensibilidade do direcional | Médio: no iPhone, o jogador precisa autorizar o uso do sensor de movimento |
-
-**Recomendação:** começar pela opção A no protótipo de controle, porque ela preserva a sensação do original (princípio "o controle é o produto") e é a mais simples de construir. Testar com 3 a 5 pessoas. Se os dedos escorregarem dos botões ou o giro ficar lento demais para as passagens, testar a opção B. A opção C fica fora do MVP.
-
-## 5. Plataformas
-
-| Plataforma | Onde fica | O que acontece ao pousar | Status |
-|---|---|---|---|
-| Base | Início da fase, à esquerda (ponto A) | Com a tripulação a bordo, conclui o resgate | Definido |
-| Base | — | Também abastece, caso o jogador precise voltar | Proposta |
-| Posto de abastecimento | No meio do caminho | Enche o tanque | Definido |
-| Plataforma da tripulação | Fim da fase, à direita (ponto B) | Os três tripulantes embarcam | Definido |
-| Plataforma da tripulação | — | Não abastece: planejar o combustível da volta faz parte do desafio | Proposta |
-
-## 6. Tripulação
+O controle por toque é um **direcional virtual**: um anel com uma bola no centro, que o polegar puxa, como em muitos jogos de celular. Decisão registrada em [D-006](05-registro-de-decisoes.md#d-006--controle-por-toque-direcional-virtual).
 
 | Regra | Status |
 |---|---|
-| Sempre três tripulantes por fase | Definido |
-| A tripulação é figurativa: mostra o objetivo da fase, mas não cria dificuldade. Não há limite de lugares e o resgate é feito numa viagem só | Definido |
-| O embarque tem a estética do original: traços que "correm" para dentro do triângulo | Definido |
-| O embarque começa sozinho quando a nave pousa na plataforma e dura cerca de 2 segundos, com os controles travados até terminar | Proposta |
+| Tocar no direcional aciona o propulsor; soltar desliga | Definido |
+| Arrastar a bola indica a direção: a ponta da nave vira para onde o dedo aponta | Definido |
+| Um único polegar controla a nave inteira | Definido |
+| O botão de pausa fica num canto superior, longe do direcional | Proposta |
+| O direcional aparece onde o polegar tocar, na metade esquerda da tela, em vez de ficar fixo num canto | Proposta (testar no protótipo) |
+
+**A validar no protótipo:** com esse controle, **não dá para girar a nave sem acelerar**, porque tocar já aciona o propulsor. No teclado, o jogador pode girar primeiro e acelerar depois. Se a nave virar rápido para a direção do dedo, isso quase não faz falta. Se fizer, a variante a testar é uma pequena zona no centro do direcional que só aponta, sem acionar o propulsor.
+
+## 5. Plataformas
+
+Todas as regras desta seção estão definidas.
+
+| Plataforma | Onde fica | O que acontece ao pousar | Abastece? | É ponto de retorno? |
+|---|---|---|---|---|
+| Base | Início da fase, à esquerda (ponto A) | Com a tripulação a bordo, conclui o resgate | Sim | Sim |
+| Posto de abastecimento | No meio do caminho | Enche o tanque | Sim | Não |
+| Plataforma da tripulação | Fim da fase, à direita (ponto B) | Os três tripulantes embarcam | Não: planejar o combustível da volta faz parte do desafio | Sim, depois que a nave chega nela |
+
+## 6. Tripulação
+
+Todas as regras desta seção estão definidas.
+
+- Sempre três tripulantes por fase.
+- A tripulação é figurativa: mostra o objetivo da fase, mas não cria dificuldade. Não há limite de lugares e o resgate é feito numa viagem só.
+- O embarque tem a estética do original: traços que "correm" para dentro do triângulo.
+- O embarque começa sozinho quando a nave pousa na plataforma e dura cerca de 2 segundos, com os controles travados até terminar.
 
 ## 7. Vidas, derrota e vitória
 
 | Regra | Status |
 |---|---|
-| A nave tem três vidas | Definido |
-| As vidas valem por fase: cada fase começa com três | Proposta |
-| Ao perder uma vida, a nave reaparece pousada na última plataforma em que pousou (o ponto de retorno), com o tanque cheio. Se a tripulação já tinha embarcado, continua a bordo | Proposta |
-| Ao perder a terceira vida, é fim de jogo e a fase recomeça do início | Proposta |
+| A nave tem três vidas por fase: cada fase começa com três | Definido |
+| Toda explosão custa uma vida, e a nave reaparece num ponto de retorno (seção 7.1) | Definido |
+| Ao perder a terceira vida, é fim de jogo e a fase recomeça do início | Definido |
+
+### 7.1 Onde a nave reaparece
+
+A fase tem dois pontos de retorno: a base e a plataforma da tripulação. Os postos de abastecimento **não** são pontos de retorno.
+
+| Quando a nave explode | Onde reaparece | Combustível | Tripulação | Status |
+|---|---|---|---|---|
+| Na ida, antes de chegar à plataforma da tripulação, mesmo que já esteja perto dela | Na base, no início da fase | Cheio (a base abastece) | Continua aguardando | Definido |
+| Depois de chegar à plataforma da tripulação: na própria plataforma ou na volta | Na plataforma da tripulação | O mesmo que tinha ao chegar lá | Continua a bordo | Definido |
+| Quando fica sem combustível para decolar, pousada numa plataforma que não abastece | Na base, no início da fase | Cheio (a base abastece) | Volta a aguardar na plataforma: o resgate é perdido | Definido |
+
+**Efeito colateral a acompanhar (Proposta):** como o ponto de retorno na plataforma guarda o combustível da chegada, quem chegar lá com muito pouco pode perder as vidas seguidas na volta, até o fim de jogo. A proposta é aceitar esse efeito, porque planejar o combustível da volta faz parte do desafio, e reforçar o aviso de combustível baixo quando a nave pousar na plataforma da tripulação.
+
+### 7.2 Situações e resultados
 
 | Situação | Resultado | Status |
 |---|---|---|
 | Pousar na base com a tripulação a bordo | Fase concluída | Definido |
-| Encostar em parede ou obstáculo | Explode e perde uma vida | Definido |
-| Pousar rápido demais | Explode e perde uma vida | Definido |
-| Tocar o chão fora de uma plataforma, mesmo devagar | Explode e perde uma vida | Proposta |
-| Pousar inclinado demais | Explode e perde uma vida | Proposta |
+| Encostar em parede ou obstáculo | Explode | Definido |
+| Pousar rápido demais | Explode | Definido |
+| Tocar o chão fora de uma plataforma, mesmo devagar | Explode | Definido |
+| Ficar sem combustível para decolar, pousada numa plataforma que não abastece | Explode | Definido |
+| Pousar inclinado demais | Explode | Proposta |
 | O combustível acabar em voo | O propulsor para de funcionar e a nave cai | Proposta |
-| O combustível acabar com a nave pousada fora de um posto | A nave não conseguiria decolar; para o jogador não ficar preso, o jogo avisa e ele perde uma vida | Proposta |
-| Perder a terceira vida | Fim de jogo; a fase recomeça | Proposta |
 
 ## 8. Tempo e pontuação
 
@@ -159,13 +171,13 @@ Perguntas a responder para fechar a pontuação:
 | Regra | Status |
 |---|---|
 | Toda fase vai da base, à esquerda, até a tripulação, à direita, e volta | Definido |
+| No celular, o jogo é jogado com a tela na horizontal | Definido |
+| Cada fase apresenta uma novidade, e a primeira funciona como tutorial (curva abaixo) | Definido |
 | A fase é mais larga que a tela, e a câmera acompanha a nave | Proposta |
-| No celular, o jogo é jogado com a tela na horizontal | Proposta |
 | As fases são liberadas em sequência: concluir uma libera a próxima | Proposta |
-| Cada fase apresenta uma novidade, e a primeira funciona como tutorial (curva sugerida abaixo) | Proposta |
-| A quantidade de fases do MVP é definida no Roadmap (P-007) | Em aberto |
+| Quantas fases entram no MVP é decidido no Roadmap (P-007) | Em aberto |
 
-Curva de dificuldade sugerida:
+Curva de dificuldade:
 
 | Fase | Novidade |
 |---|---|
@@ -177,11 +189,13 @@ Curva de dificuldade sugerida:
 
 ## 11. Interface durante o jogo — Proposta
 
+Os textos do jogo são em inglês ([D-007](05-registro-de-decisoes.md#d-007--jogo-em-inglês)); aqui eles estão descritos em português.
+
 | Elemento | Para quê |
 |---|---|
 | Barra de combustível | Mostrar quanto resta; pisca quando está acabando |
 | Vidas | Três pequenos triângulos |
-| Situação da tripulação | "Aguardando" na ida, "a bordo" na volta |
+| Situação da tripulação | Aguardando (na ida) ou a bordo (na volta) |
 | Cronômetro | Tempo da fase, que define a pontuação |
 | Seta de direção | Apontar para o objetivo (tripulação ou base) quando ele está fora da tela |
 | Botão de pausa | Pausar no celular; no teclado, P ou Esc |
@@ -204,7 +218,9 @@ São os números que definem a "sensação" do jogo. Eles serão calibrados no p
 |---|---|---|
 | Gravidade | Quão rápido a nave cai ao soltar o propulsor | Calibrar no protótipo |
 | Força do propulsor | Quanto a nave acelera ao acionar | Vencer a gravidade com folga (ex.: 2 vezes mais forte) |
-| Velocidade de giro | Quão rápido a nave vira | Calibrar no protótipo |
+| Velocidade de giro no teclado | Quão rápido a nave vira ao segurar a seta | Calibrar no protótipo |
+| Velocidade de giro no toque | Quão rápido a nave vira para a direção do dedo: na hora ou aos poucos | Calibrar no protótipo |
+| Direcional | Posição (fixa ou onde o polegar tocar) e tamanho | Testar no protótipo |
 | Velocidade máxima de pouso | Limite para pousar sem explodir | Tolerante: o pouso "não é tão delicado" |
 | Inclinação máxima de pouso | Quanto a nave pode estar torta ao pousar | Ex.: 20° |
 | Tanque e consumo | Quanto tempo de propulsor cabe num tanque cheio | Varia por fase |
@@ -214,9 +230,8 @@ São os números que definem a "sensação" do jogo. Eles serão calibrados no p
 
 | ID | Pergunta | Onde |
 |---|---|---|
-| P-002 | Como funciona o controle por toque? | Seção 4.2 |
 | P-006 | Como funciona a pontuação? | Seção 8 |
-| P-007 | Quantas fases terá o MVP? | Roadmap |
+| P-007 | Quantas fases entram no MVP? | Roadmap |
 
 ## 15. Ideias para depois
 
@@ -233,5 +248,13 @@ Registradas para não se perderem. **Não são compromisso**: só entram se o Ro
 |---|---|
 | Inércia | Tendência da nave de continuar se movendo na mesma direção e velocidade |
 | Ponto de retorno | Plataforma onde a nave reaparece depois de perder uma vida |
+| Direcional virtual | Controle desenhado na tela: um anel com uma bola que o polegar arrasta |
 | Parâmetros de ajuste | Números que controlam a sensação do jogo (gravidade, força do propulsor etc.) e são calibrados em teste |
 | Protótipo de controle | Versão mínima só com a nave e o controle, para testar a sensação antes de construir as fases |
+
+## Histórico de versões
+
+| Versão | Data | O que mudou |
+|---|---|---|
+| 0.1 | 28/09/2026 | Primeira versão, a partir do kickoff |
+| 0.2 | 28/09/2026 | Pontos de retorno definidos pelo Fernando; controle por toque definido (direcional virtual); propostas de vidas, abastecimento, embarque, colisão, tela na horizontal e curva de fases aprovadas |
