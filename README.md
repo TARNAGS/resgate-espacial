@@ -38,6 +38,6 @@ Novas issues seguem os modelos de história, tarefa, épico e iniciativa, dispon
 
 ## Como jogar
 
-Em breve no GitHub Pages: link para jogar no navegador e instruções para instalar no celular.
+O [protótipo 01](prototipos/README.md) está publicado e roda no navegador do computador e do celular: **https://tarnags.github.io/resgate-espacial/prototipos/01/** (no celular, use a tela na horizontal).
 
-Enquanto isso, dá para rodar o [protótipo 01](prototipos/README.md) no computador: na pasta do projeto, rode `node prototipos/servir.js` e abra `http://localhost:8080`.
+Para rodar no próprio computador, na pasta do projeto, rode `node prototipos/servir.js` e abra `http://localhost:8080`.
