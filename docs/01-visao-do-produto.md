@@ -5,7 +5,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 01 — Visão do produto |
-| Versão | 1.0 |
+| Versão | 1.1 |
 | Data | 01/10/2026 |
 | Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -86,7 +86,7 @@ Regras de desempate para as decisões de produto:
 ### 8.1 O que o produto inclui
 
 - **Núcleo do jogo:** nave com gravidade e propulsor, combustível limitado, pousos para abastecer, resgate da tripulação, volta à base e obstáculos entre o ponto A e o ponto B.
-- **Fases:** sequência de fases com dificuldade crescente.
+- **Fases:** níveis com dificuldade crescente. O cenário de cada fase é gerado aleatoriamente a cada partida, para o replay ser infinito (D-014), e um menu com mapa de progresso mostra a evolução do jogador (D-015).
 - **Plataformas:** navegador (computador e celular) e instalação como app (PWA), com o iPhone como prioridade e o Android numa etapa seguinte (D-008). Controles de teclado e de toque, com direcional virtual (D-006).
 - **Idioma:** jogo em inglês (D-007).
 - **Progresso:** salvo no próprio aparelho.
@@ -158,3 +158,4 @@ A documentação base está completa e aprovada. O que vem a seguir está no [Ro
 | 0.1 | 28/09/2026 | Primeira versão, a partir do kickoff |
 | 0.2 | 28/09/2026 | Inclui iPhone primeiro (D-008), jogo em inglês (D-007) e direcional virtual (D-006) |
 | 1.0 | 01/10/2026 | Aprovado pelo Fernando como versão de referência |
+| 1.1 | 01/10/2026 | Escopo inclui fases geradas aleatoriamente (D-014) e menu com mapa de progresso (D-015) |

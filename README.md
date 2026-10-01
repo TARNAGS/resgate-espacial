@@ -25,6 +25,7 @@ Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável
 | 03 | [PRD](docs/03-prd.md) | O que o produto precisa ter | Aprovado |
 | 04 | [Roadmap](docs/04-roadmap.md) | Em que ordem o produto é construído | Aprovado |
 | 05 | [Registro de decisões](docs/05-registro-de-decisoes.md) | Por que escolhemos X e não Y | Contínuo |
+| 06 | [Diário de bordo](docs/06-diario-de-bordo.md) | O que foi feito em cada sessão e onde o projeto parou | Contínuo |
 
 ## Como o trabalho é organizado
 
