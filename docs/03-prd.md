@@ -5,9 +5,9 @@
 | Campo | Valor |
 |---|---|
 | Documento | 03 — PRD (requisitos do produto) |
-| Versão | 0.2 |
-| Data | 28/09/2026 |
-| Status | Rascunho, em revisão |
+| Versão | 1.0 |
+| Data | 01/10/2026 |
+| Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
 
 ## 1. Objetivo
@@ -202,10 +202,7 @@ O tempo entre o link e o controle da nave (RNF-01) é medido em teste, não pela
 
 ## 12. Próximos passos
 
-1. Revisar este PRD.
-2. Escrever o documento 04, Roadmap: cortar o MVP e definir as iniciativas. Feito: [Roadmap](04-roadmap.md).
-3. Decidir a tecnologia (P-004), a hospedagem (P-005) e a ferramenta de medição (P-008).
-4. Quebrar as iniciativas em épicos e histórias no GitHub, com o quadro kanban.
+Os próximos passos estão no [Roadmap](04-roadmap.md) e no [quadro kanban](https://github.com/users/TARNAGS/projects/1). As decisões em aberto que afetam este documento estão na seção 11.
 
 ## 13. Glossário
 
@@ -226,3 +223,4 @@ O tempo entre o link e o controle da nave (RNF-01) é medido em teste, não pela
 |---|---|---|
 | 0.1 | 28/09/2026 | Primeira versão |
 | 0.2 | 28/09/2026 | Pendência P-007 resolvida: MVP com as fases 1 a 3 (D-009) |
+| 1.0 | 01/10/2026 | Aprovado pelo Fernando como versão de referência |

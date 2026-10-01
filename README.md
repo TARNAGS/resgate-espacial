@@ -4,7 +4,7 @@
 
 Jogo 2D de nave com gravidade: pilote um pequeno triângulo, dose o propulsor contra o peso da nave, atravesse os obstáculos, resgate a tripulação perdida no espaço e volte para a base antes de o combustível acabar.
 
-**Status:** documentação base escrita e backlog montado. Próximo marco: M0 (fundação técnica). O jogo ainda não começou a ser construído.
+**Status:** documentação base aprovada em 01/10/2026 e backlog montado. Marco atual: M0 (fundação técnica). O jogo ainda não começou a ser construído.
 
 ## Sobre o projeto
 
@@ -18,9 +18,9 @@ Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável
 
 | # | Documento | Pergunta que responde | Status |
 |---|---|---|---|
-| 01 | [Visão do produto](docs/01-visao-do-produto.md) | O quê, para quem, por quê e como saber se deu certo | Em revisão |
-| 02 | [Regras do jogo](docs/02-regras-do-jogo.md) | Como se joga | Em revisão (falta a pontuação) |
-| 03 | [PRD](docs/03-prd.md) | O que o produto precisa ter | Rascunho em revisão |
+| 01 | [Visão do produto](docs/01-visao-do-produto.md) | O quê, para quem, por quê e como saber se deu certo | Aprovado |
+| 02 | [Regras do jogo](docs/02-regras-do-jogo.md) | Como se joga | Aprovado (falta a pontuação) |
+| 03 | [PRD](docs/03-prd.md) | O que o produto precisa ter | Aprovado |
 | 04 | [Roadmap](docs/04-roadmap.md) | Em que ordem o produto é construído | Aprovado |
 | 05 | [Registro de decisões](docs/05-registro-de-decisoes.md) | Por que escolhemos X e não Y | Contínuo |
 

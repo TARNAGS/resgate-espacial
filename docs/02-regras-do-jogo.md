@@ -3,9 +3,9 @@
 | Campo | Valor |
 |---|---|
 | Documento | 02 — Regras do jogo |
-| Versão | 0.3 |
-| Data | 28/09/2026 |
-| Status | Em revisão: falta a pontuação (P-006) |
+| Versão | 1.0 |
+| Data | 01/10/2026 |
+| Status | Aprovado; pendente: pontuação (P-006) |
 | Responsável | Fernando Nunes (Product Manager) |
 
 Este documento descreve **como o jogo funciona**. O que o produto precisa ter em volta do jogo (instalação, salvamento, medição) fica no [PRD](03-prd.md).
@@ -259,3 +259,4 @@ Registradas para não se perderem. **Não são compromisso**: só entram se o Ro
 | 0.1 | 28/09/2026 | Primeira versão, a partir do kickoff |
 | 0.2 | 28/09/2026 | Pontos de retorno definidos pelo Fernando; controle por toque definido (direcional virtual); propostas de vidas, abastecimento, embarque, colisão, tela na horizontal e curva de fases aprovadas |
 | 0.3 | 28/09/2026 | Efeito colateral do ponto de retorno aceito, com aviso forte de combustível baixo na plataforma da tripulação; MVP com as fases 1 a 3 (D-009) |
+| 1.0 | 01/10/2026 | Aprovado pelo Fernando como versão de referência; a pontuação (P-006) segue em aberto |

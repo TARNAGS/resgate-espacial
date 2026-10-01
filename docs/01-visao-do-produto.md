@@ -5,9 +5,9 @@
 | Campo | Valor |
 |---|---|
 | Documento | 01 — Visão do produto |
-| Versão | 0.2 |
-| Data | 28/09/2026 |
-| Status | Em revisão |
+| Versão | 1.0 |
+| Data | 01/10/2026 |
+| Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
 
 ## 1. Resumo
@@ -136,11 +136,7 @@ O jogo original que inspirou o projeto não foi identificado. Estes clássicos s
 
 ## 12. Próximos passos
 
-1. Revisar esta visão.
-2. Escrever o documento 02, Regras do jogo.
-3. Escrever o documento 03, PRD.
-4. Montar o documento 04, Roadmap, com o corte do MVP.
-5. Quebrar o roadmap em iniciativas, épicos e histórias no GitHub.
+A documentação base está completa e aprovada. O que vem a seguir está no [Roadmap](04-roadmap.md) e no [quadro kanban](https://github.com/users/TARNAGS/projects/1).
 
 ## 13. Glossário
 
@@ -161,3 +157,4 @@ O jogo original que inspirou o projeto não foi identificado. Estes clássicos s
 |---|---|---|
 | 0.1 | 28/09/2026 | Primeira versão, a partir do kickoff |
 | 0.2 | 28/09/2026 | Inclui iPhone primeiro (D-008), jogo em inglês (D-007) e direcional virtual (D-006) |
+| 1.0 | 01/10/2026 | Aprovado pelo Fernando como versão de referência |
