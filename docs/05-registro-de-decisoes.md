@@ -25,6 +25,8 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-011 | Tecnologia: JavaScript puro com Canvas | 01/10/2026 | Aceita |
 | D-012 | Repositório e quadro públicos, sem expor o e-mail pessoal | 01/10/2026 | Aceita |
 | D-013 | Hospedagem: GitHub Pages | 01/10/2026 | Aceita |
+| D-014 | Fases geradas aleatoriamente (procedurais) | 01/10/2026 | Aceita |
+| D-015 | Menu com Jogar, Configurações e mapa de progresso | 01/10/2026 | Aceita |
 
 ## D-001 — Sem login e sem contas
 
@@ -237,12 +239,41 @@ A análise completa, com as fontes, está na [tarefa #27](https://github.com/TAR
 
 **Revisitar se** o jogo precisar de algo que o GitHub Pages não ofereça.
 
+## D-014 — Fases geradas aleatoriamente (procedurais)
+
+**Contexto.** Regra definida pelo Fernando em 01/10/2026: as fases são geradas aleatoriamente, para que o replay seja infinito.
+
+**Decisão.** O cenário de cada fase é gerado por um algoritmo a cada partida. Cada nível define as regras do gerador (comprimento, largura mínima do corredor, quantidade de pedras, posto de abastecimento e tamanho do tanque), e o cenário em si muda sempre. O MVP continua com 3 níveis (D-009).
+
+**Consequências.**
+
+- O "desenho de fases" vira "regras do gerador": em vez de desenhar cada fase, define-se o que cada nível pode gerar.
+- Todo cenário gerado precisa ter solução: corredor mínimo, passagem ao lado de toda pedra e combustível suficiente. O protótipo 01 já confere isso em centenas de cenários.
+- Cada cenário nasce de uma semente, e a mesma semente gera o mesmo cenário. Isso permite repetir uma partida.
+- O recorde de um nível passa a comparar cenários diferentes, o que afeta a pontuação (P-006).
+
+**Revisitar se** os testes mostrarem cenários repetitivos ou injustos. Nesse caso, a saída é misturar cenários gerados com trechos desenhados à mão.
+
+## D-015 — Menu com Jogar, Configurações e mapa de progresso
+
+**Contexto.** Regra definida pelo Fernando em 01/10/2026: antes de jogar, um menu com Jogar e Configurações, em que o jogador vê um mapa com a evolução dos níveis que já jogou.
+
+**Decisão.** A tela de abertura é um menu com Jogar, Configurações e um mapa de progresso. O mapa mostra um planeta por nível, com o estado (concluído, disponível ou bloqueado), o melhor tempo e quantos resgates o jogador já fez ali. Tocar num nível disponível o escolhe para jogar.
+
+**Consequências.**
+
+- O mapa substitui a seleção de fases (PRD, RF-05).
+- O mapa cresce junto com o número de níveis. No MVP, mostra 3 e sinaliza que virão mais.
+- As configurações do MVP são som e apagar o progresso.
+
 ## Decisões pendentes
 
 | ID | Pergunta | Quando decidir | Observação |
 |---|---|---|---|
 | P-003 | Qual será o nome final do jogo? | Antes do lançamento | — |
-| P-006 | Como funciona a pontuação? | Antes de construir a tela de resultado | Já definido: sem limite de tempo; resgate mais rápido faz mais pontos. Perguntas no [documento 02, seção 8](02-regras-do-jogo.md#8-tempo-e-pontuação) |
+| P-006 | Como funciona a pontuação? | Antes de construir a tela de resultado | Já definido: sem limite de tempo; resgate mais rápido faz mais pontos. Com cenários aleatórios (D-014), comparar tempos de cenários diferentes pode ser injusto. Perguntas no [documento 02, seção 8](02-regras-do-jogo.md#8-tempo-e-pontuação) |
+| P-009 | A fase 1, que é o tutorial, também é aleatória, ou é fixa e desenhada à mão? | Antes do M2 | No protótipo 01, ela é aleatória, com regras bem fáceis |
+| P-010 | Ao tentar de novo depois de perder as 3 vidas, o cenário se repete ou muda? | Antes do M2 | No protótipo 01, "Try again" repete o mesmo cenário |
 | P-008 | Qual ferramenta de medição anônima usar? | No M2, antes de construir a medição (E-17) | Precisa ser gratuita, dispensar cookies e aceitar eventos personalizados ([PRD, seção 7](03-prd.md#7-medição)) |
 
 ## Modelo para novas decisões

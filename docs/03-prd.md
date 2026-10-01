@@ -5,7 +5,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 03 — PRD (requisitos do produto) |
-| Versão | 1.2 |
+| Versão | 1.3 |
 | Data | 01/10/2026 |
 | Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -57,12 +57,13 @@ Abre o link → joga com o teclado → o progresso fica salvo naquele navegador
 ### 4.1 Mapa de telas
 
 ```
-Abertura ─┬─ Jogar ──► Fase ─┬─► Resultado ──► Próxima fase / Jogar de novo / Menu
-          │                  ├─► Pausa ──► Continuar / Recomeçar / Menu / Som
-          │                  └─► Fim de jogo ──► Tentar de novo / Menu
-          ├─ Fases (seleção)
-          ├─ Como instalar (só no iPhone, fora do app instalado)
-          └─ Sobre o projeto
+Menu, com o mapa de progresso
+  ─┬─ Jogar ──► Fase ─┬─► Resultado ──► Próxima fase / Jogar de novo / Menu
+   │                  ├─► Pausa ──► Continuar / Recomeçar / Menu / Som
+   │                  └─► Fim de jogo ──► Tentar de novo / Menu
+   ├─ Configurações ──► Som / Apagar progresso
+   ├─ Como instalar (só no iPhone, fora do app instalado)
+   └─ Sobre o projeto
 
 Em qualquer tela, com o celular na vertical: aviso "gire o celular"
 ```
@@ -74,10 +75,10 @@ Prioridade: **MVP** (entra na primeira versão pública) ou **Depois** (etapas s
 | ID | Requisito | Prioridade | Critério de aceite |
 |---|---|---|---|
 | RF-01 | Jogar direto pelo link, sem cadastro e sem instalar | MVP | Abrir o endereço leva à tela de abertura; nenhuma etapa pede dados do jogador |
-| RF-02 | Tela de abertura com Jogar, Fases, Como instalar (quando fizer sentido) e Sobre | MVP | "Jogar" leva à primeira fase ainda não concluída |
+| RF-02 | Menu com Jogar, Configurações, mapa de progresso, Como instalar (quando fizer sentido) e Sobre (D-015) | MVP | "Jogar" leva ao nível escolhido no mapa; por padrão, o primeiro ainda não concluído |
 | RF-03 | Jogo conforme as regras do documento 02 | MVP | Todas as regras marcadas como Definido funcionam |
 | RF-04 | Controles de teclado e direcional virtual (documento 02, seção 4) | MVP | Dá para concluir todas as fases com cada um dos controles |
-| RF-05 | Seleção de fases | MVP | Mostra as fases liberadas e as bloqueadas; o melhor resultado aparece quando a pontuação (P-006) estiver definida |
+| RF-05 | Mapa de progresso (D-015) | MVP | Mostra os níveis concluídos, disponíveis e bloqueados, com o melhor resultado e o número de resgates de cada um; tocar num nível disponível o escolhe para jogar |
 | RF-06 | Pausa | MVP | Pausa pelo botão ou por P/Esc, e sozinha quando o jogador sai do app; opções: continuar, recomeçar a fase, voltar ao menu, ligar ou desligar o som |
 | RF-07 | Tela de resultado da fase | MVP | Mostra o tempo e a pontuação (P-006); opções: próxima fase, jogar de novo, menu |
 | RF-08 | Tela de fim de jogo | MVP | Opções: tentar de novo (a fase recomeça) e voltar ao menu |
@@ -89,6 +90,7 @@ Prioridade: **MVP** (entra na primeira versão pública) ou **Depois** (etapas s
 | RF-14 | Sobre o projeto | MVP | Créditos, link para o repositório do projeto e explicação do que é medido ([seção 7](#7-medição)) |
 | RF-15 | Medição anônima de uso | MVP | Os eventos da seção 7 chegam à ferramenta de medição, sem dados pessoais |
 | RF-16 | Botão "Instalar" no Android e no computador, usando o convite do navegador | Depois | Nos navegadores que oferecem o convite (como o Chrome), o botão instala o jogo (D-008) |
+| RF-17 | Fases geradas aleatoriamente (D-014) | MVP | Cada partida gera um cenário novo, seguindo as regras do nível; todo cenário gerado tem solução; a mesma semente gera sempre o mesmo cenário |
 
 ## 5. Requisitos não funcionais
 
@@ -223,3 +225,4 @@ Os próximos passos estão no [Roadmap](04-roadmap.md) e no [quadro kanban](http
 | 1.0 | 01/10/2026 | Aprovado pelo Fernando como versão de referência |
 | 1.1 | 01/10/2026 | Pendência P-004 resolvida: JavaScript puro com Canvas (D-011) |
 | 1.2 | 01/10/2026 | Pendências P-001 e P-005 resolvidas: repositório público (D-012) e hospedagem no GitHub Pages (D-013) |
+| 1.3 | 01/10/2026 | Fases geradas aleatoriamente (D-014, novo RF-17) e menu com mapa de progresso (D-015, RF-02 e RF-05 revistos) |

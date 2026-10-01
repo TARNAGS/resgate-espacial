@@ -3,9 +3,9 @@
 | Campo | Valor |
 |---|---|
 | Documento | 02 — Regras do jogo |
-| Versão | 1.0 |
+| Versão | 1.1 |
 | Data | 01/10/2026 |
-| Status | Aprovado; pendente: pontuação (P-006) |
+| Status | Aprovado; pendentes: pontuação (P-006), fase 1 fixa ou aleatória (P-009) e repetição do cenário (P-010) |
 | Responsável | Fernando Nunes (Product Manager) |
 
 Este documento descreve **como o jogo funciona**. O que o produto precisa ter em volta do jogo (instalação, salvamento, medição) fica no [PRD](03-prd.md).
@@ -176,6 +176,10 @@ Perguntas a responder para fechar a pontuação:
 | A fase é mais larga que a tela, e a câmera acompanha a nave | Proposta |
 | As fases são liberadas em sequência: concluir uma libera a próxima | Proposta |
 | O MVP tem as fases 1 a 3; as fases 4 e 5 entram na V1 (D-009) | Definido |
+| O cenário de cada fase é gerado aleatoriamente a cada partida, para o replay ser infinito (D-014) | Definido |
+| Cada nível define as regras do gerador: comprimento, largura mínima do corredor, quantidade de pedras, posto de abastecimento e tamanho do tanque | Proposta |
+| Todo cenário gerado tem solução: corredor mínimo, passagem ao lado de toda pedra e combustível suficiente | Proposta |
+| A fase 1 (tutorial) é aleatória ou fixa (P-009); ao tentar de novo, o cenário se repete ou muda (P-010) | Em aberto |
 
 Curva de dificuldade:
 
@@ -201,6 +205,8 @@ Os textos do jogo são em inglês ([D-007](05-registro-de-decisoes.md#d-007--jog
 | Botão de pausa | Pausar no celular; no teclado, P ou Esc |
 
 O jogo também pausa sozinho quando o jogador sai do app ou recebe uma ligação.
+
+**Definido (D-015):** antes da partida, o jogador vê um menu com Jogar, Configurações e um mapa de progresso dos níveis, com o estado de cada um, o melhor tempo e o número de resgates.
 
 ## 12. Estética e som
 
@@ -232,6 +238,8 @@ São os números que definem a "sensação" do jogo. Eles serão calibrados no p
 | ID | Pergunta | Onde |
 |---|---|---|
 | P-006 | Como funciona a pontuação? | Seção 8 |
+| P-009 | A fase 1 (tutorial) é aleatória ou fixa? | Seção 10 |
+| P-010 | Ao tentar de novo, o cenário se repete ou muda? | Seção 10 |
 
 ## 15. Ideias para depois
 
@@ -260,3 +268,4 @@ Registradas para não se perderem. **Não são compromisso**: só entram se o Ro
 | 0.2 | 28/09/2026 | Pontos de retorno definidos pelo Fernando; controle por toque definido (direcional virtual); propostas de vidas, abastecimento, embarque, colisão, tela na horizontal e curva de fases aprovadas |
 | 0.3 | 28/09/2026 | Efeito colateral do ponto de retorno aceito, com aviso forte de combustível baixo na plataforma da tripulação; MVP com as fases 1 a 3 (D-009) |
 | 1.0 | 01/10/2026 | Aprovado pelo Fernando como versão de referência; a pontuação (P-006) segue em aberto |
+| 1.1 | 01/10/2026 | Fases geradas aleatoriamente (D-014) e menu com mapa de progresso (D-015); novas pendências P-009 e P-010 |

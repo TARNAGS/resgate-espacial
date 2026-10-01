@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 04 — Roadmap |
-| Versão | 1.2 |
+| Versão | 1.3 |
 | Data | 01/10/2026 |
 | Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -23,8 +23,8 @@ flowchart LR
 |---|---|---|---|
 | **M0 — Fundação** | Conseguir testar qualquer coisa no iPhone | Decisões de tecnologia, visibilidade do repositório e hospedagem; publicação automática | O endereço do jogo abre no iPhone, e cada envio ao GitHub atualiza o que está publicado |
 | **M1 — Protótipo de controle** | Validar o maior risco: o controle é divertido no iPhone? | Física da nave, teclado, direcional virtual e um cenário de teste com uma plataforma | Pelo menos 4 de 5 testadores decolam, voam e pousam em poucos minutos e aprovam a sensação (meta proposta); parâmetros de ajuste calibrados |
-| **M2 — MVP** | Lançar o ciclo completo do jogo e começar a medir | Fases 1 a 3 (D-009), requisitos MVP do PRD, pontuação, nome final e medição | Checklist de lançamento do PRD (seção 8) completo e jogo divulgado no portfólio |
-| **M3 — V1** | Mais conteúdo e mais aparelhos, guiados pelos dados | Fases 4 e 5, Android e ajustes a partir das métricas | Fases 4 e 5 no ar, instalação testada num Android e metas da Visão revistas com dados reais |
+| **M2 — MVP** | Lançar o ciclo completo do jogo e começar a medir | Níveis 1 a 3, com cenários gerados aleatoriamente (D-009 e D-014), menu com mapa de progresso (D-015), requisitos MVP do PRD, pontuação, nome final e medição | Checklist de lançamento do PRD (seção 8) completo e jogo divulgado no portfólio |
+| **M3 — V1** | Mais conteúdo e mais aparelhos, guiados pelos dados | Níveis 4 e 5, Android e ajustes a partir das métricas | Níveis 4 e 5 no ar, instalação testada num Android e metas da Visão revistas com dados reais |
 | **Depois** | Guardar ideias sem compromisso | Ideias do documento 02, seção 15 | — |
 
 **Se o M1 reprovar o controle, o projeto não avança para as fases.** Primeiro testa-se a variante do direcional (D-006); se ainda assim não ficar divertido, o design do controle é revisto. Falhar no protótipo é barato; falhar depois de construir as fases, não.
@@ -64,10 +64,10 @@ flowchart LR
 |---|---|---|---|
 | [E-07](https://github.com/TARNAGS/resgate-espacial/issues/13) | Voo, pouso e combustível | Plataformas, regras de pouso, colisões, consumo e abastecimento | Doc 02, seções 3, 5 e 7.2 |
 | [E-08](https://github.com/TARNAGS/resgate-espacial/issues/14) | Resgate, vidas e pontos de retorno | Embarque da tripulação, vidas, pontos de retorno, aviso de combustível baixo e fim de jogo | Doc 02, seções 6 e 7 |
-| [E-09](https://github.com/TARNAGS/resgate-espacial/issues/15) | Fases 1 a 3 | Desenho das três primeiras fases, câmera e liberação das fases em sequência | Doc 02, seção 10; D-009 |
-| [E-10](https://github.com/TARNAGS/resgate-espacial/issues/16) | Telas, interface e som | Abertura, seleção de fases, pausa, resultado, fim de jogo, "Sobre", indicadores da partida e efeitos sonoros, com os textos em inglês | RF-02 a RF-08, RF-12 a RF-14; RNF-11 |
-| [E-11](https://github.com/TARNAGS/resgate-espacial/issues/17) | Pontuação | Fechar o sistema de pontuação e mostrá-lo no resultado e na seleção de fases | P-006; doc 02, seção 8 |
-| [E-12](https://github.com/TARNAGS/resgate-espacial/issues/18) | Fases 4 e 5 (M3) | Túneis, passagens estreitas e o primeiro obstáculo móvel | Doc 02, seções 9 e 10 |
+| [E-09](https://github.com/TARNAGS/resgate-espacial/issues/15) | Gerador de fases e níveis 1 a 3 | Gerador aleatório de cenários com solução garantida, regras dos níveis 1 a 3, câmera e liberação dos níveis em sequência | Doc 02, seção 10; D-009, D-014; RF-17 |
+| [E-10](https://github.com/TARNAGS/resgate-espacial/issues/16) | Telas, interface e som | Menu com mapa de progresso e configurações, pausa, resultado, fim de jogo, "Sobre", indicadores da partida e efeitos sonoros, com os textos em inglês | RF-02 a RF-08, RF-12 a RF-14; RNF-11; D-015 |
+| [E-11](https://github.com/TARNAGS/resgate-espacial/issues/17) | Pontuação | Fechar o sistema de pontuação e mostrá-lo no resultado e no mapa de progresso | P-006; doc 02, seção 8 |
+| [E-12](https://github.com/TARNAGS/resgate-espacial/issues/18) | Níveis 4 e 5 (M3) | Regras do gerador para túneis, passagens estreitas e o primeiro obstáculo móvel | Doc 02, seções 9 e 10 |
 
 ### I-04 — Instalável e confiável no celular (M2 e M3)
 
@@ -127,3 +127,4 @@ A hospedagem deixou de ser um detalhe do fim do projeto: para testar o controle 
 | 1.0 | 28/09/2026 | Aprovado pelo Fernando. Backlog criado no GitHub e ligado às tabelas. O requisito RNF-10 (tocar sem rolar nem dar zoom) passou do E-15 (M2) para o E-05 (M1), porque sem ele o teste do direcional no iPhone ficaria comprometido |
 | 1.1 | 01/10/2026 | Tecnologia decidida: JavaScript puro com Canvas (D-011) |
 | 1.2 | 01/10/2026 | Repositório e quadro públicos (D-012) e hospedagem no GitHub Pages (D-013): as decisões do M0 estão fechadas |
+| 1.3 | 01/10/2026 | Fases geradas aleatoriamente (D-014) e menu com mapa de progresso (D-015): E-09 vira "Gerador de fases e níveis 1 a 3", E-12 vira "Níveis 4 e 5" e E-10 inclui o menu com mapa |

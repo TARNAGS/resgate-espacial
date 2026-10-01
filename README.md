@@ -14,6 +14,7 @@ Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável
 - **Idioma do jogo:** inglês.
 - **Modelo:** gratuito, sem cadastro e sem anúncios.
 - **Tecnologia:** JavaScript puro com Canvas, sem framework.
+- **Fases:** geradas aleatoriamente a cada partida, para o replay ser infinito, com um mapa de progresso no menu.
 
 ## Documentação
 
@@ -37,3 +38,5 @@ Novas issues seguem os modelos de história, tarefa, épico e iniciativa, dispon
 ## Como jogar
 
 Em breve no GitHub Pages: link para jogar no navegador e instruções para instalar no celular.
+
+Enquanto isso, dá para rodar o [protótipo 01](prototipos/README.md) no computador: na pasta do projeto, rode `node prototipos/servir.js` e abra `http://localhost:8080`.
