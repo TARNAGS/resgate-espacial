@@ -1,0 +1,50 @@
+name: Descoberta
+description: Pergunta a responder antes de construir — pesquisa, decisão ou teste.
+labels: ["descoberta"]
+projects: ["TARNAGS/1"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        O cartão cai na coluna "Caixa de entrada" do quadro. Para levar para "Para conversar", escreva um comentário com:
+        1. A pergunta respondida, em uma ou duas frases.
+        2. As evidências: links, prints, vídeos, o que os testadores disseram.
+        3. A sua recomendação ou preferência, quando for uma decisão.
+        4. O que ficou em aberto.
+  - type: textarea
+    id: pergunta
+    attributes:
+      label: Pergunta
+      description: O que precisamos saber, em uma frase.
+    validations:
+      required: true
+  - type: textarea
+    id: por-que
+    attributes:
+      label: Por que importa
+      description: Que decisão ou trabalho esta resposta destrava.
+    validations:
+      required: true
+  - type: textarea
+    id: trazer
+    attributes:
+      label: O que trazer
+      description: "O formato da resposta: sim ou não, uma lista, prints, vídeo, links, a opinião dos testadores."
+      placeholder: "- ..."
+  - type: dropdown
+    id: tema
+    attributes:
+      label: Tema
+      options:
+        - Jogo (regras e sensação)
+        - Formato (plataforma e iPhone)
+        - Estrutura (fases, telas e progressão)
+        - Identidade (nome e arte)
+        - Técnica
+        - Outro
+  - type: input
+    id: tempo
+    attributes:
+      label: Tempo máximo de pesquisa
+      description: Depois disso, traga o que tiver e decidimos juntos se vale continuar.
+      placeholder: "1 hora"

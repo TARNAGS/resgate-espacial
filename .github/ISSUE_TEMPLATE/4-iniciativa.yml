@@ -2,6 +2,7 @@ name: Iniciativa
 description: Grande frente ligada a um objetivo da Visão; agrupa épicos.
 title: "I-XX · "
 labels: ["iniciativa"]
+projects: ["TARNAGS/1"]
 body:
   - type: textarea
     id: objetivo

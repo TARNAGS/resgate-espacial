@@ -1,6 +1,7 @@
 name: Tarefa
-description: Trabalho técnico, decisão ou atividade de produto que habilita histórias.
+description: Trabalho técnico ou atividade de produto que habilita histórias. Pergunta a responder usa o modelo Descoberta.
 labels: ["tarefa"]
+projects: ["TARNAGS/1"]
 body:
   - type: textarea
     id: objetivo

@@ -29,12 +29,17 @@ Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável
 
 ## Como o trabalho é organizado
 
-O [roadmap](docs/04-roadmap.md) avança por marcos, do M0 (fundação) ao M3 (V1), sem data-alvo. O trabalho se divide em **iniciativas**, que se dividem em **épicos**, que se dividem em **histórias de usuário** e **tarefas**. Tudo fica nas [issues](https://github.com/TARNAGS/resgate-espacial/issues) do GitHub, organizado por [marcos](https://github.com/TARNAGS/resgate-espacial/milestones) e acompanhado no [quadro kanban](https://github.com/users/TARNAGS/projects/1) (colunas Backlog, Pronto, Em andamento, Em revisão e Concluído).
+O [roadmap](docs/04-roadmap.md) avança por marcos, do M0 (fundação) ao M3 (V1), sem data-alvo. O trabalho se divide em **iniciativas**, que se dividem em **épicos**, que se dividem em **histórias de usuário**, **tarefas** e **descobertas**. Tudo fica nas [issues](https://github.com/TARNAGS/resgate-espacial/issues) do GitHub, organizado por [marcos](https://github.com/TARNAGS/resgate-espacial/milestones) e acompanhado no [quadro kanban](https://github.com/users/TARNAGS/projects/1).
+
+O quadro tem duas trilhas ([D-016](docs/05-registro-de-decisoes.md#d-016--quadro-com-duas-trilhas-descoberta-e-entrega)):
+
+- **Descoberta:** Caixa de entrada, A investigar, Investigando e Para conversar. É onde se responde o que precisa ser entendido antes de construir: regras e sensação do jogo, formato, estrutura das fases, bugs a reproduzir.
+- **Entrega:** Backlog, Pronto, Em andamento, Em revisão e Concluído. É onde se constrói o que já está claro.
 
 - **Pronta para começar:** a história está no formato "Como / Quero / Para", tem critérios de aceite verificáveis, está ligada a um épico e tem marco definido.
 - **Pronta de verdade:** os critérios de aceite foram atendidos, o resultado foi testado no iPhone (e no computador, quando fizer sentido), está publicado, e a documentação foi atualizada se alguma regra mudou.
 
-Novas issues seguem os modelos de história, tarefa, épico e iniciativa, disponíveis ao criar uma issue.
+Novas issues seguem os modelos de história, tarefa, épico, iniciativa, descoberta e bug, disponíveis ao criar uma issue.
 
 ## Como jogar
 

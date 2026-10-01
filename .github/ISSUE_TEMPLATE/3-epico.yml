@@ -2,6 +2,7 @@ name: Épico
 description: Entrega grande dentro de uma iniciativa; agrupa histórias e tarefas.
 title: "E-XX · "
 labels: ["épico"]
+projects: ["TARNAGS/1"]
 body:
   - type: textarea
     id: inclui

@@ -27,6 +27,7 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-013 | Hospedagem: GitHub Pages | 01/10/2026 | Aceita |
 | D-014 | Fases geradas aleatoriamente (procedurais) | 01/10/2026 | Aceita |
 | D-015 | Menu com Jogar, Configurações e mapa de progresso | 01/10/2026 | Aceita |
+| D-016 | Quadro com duas trilhas: descoberta e entrega | 01/10/2026 | Aceita |
 
 ## D-001 — Sem login e sem contas
 
@@ -266,15 +267,49 @@ A análise completa, com as fontes, está na [tarefa #27](https://github.com/TAR
 - O mapa cresce junto com o número de níveis. No MVP, mostra 3 e sinaliza que virão mais.
 - As configurações do MVP são som e apagar o progresso.
 
+## D-016 — Quadro com duas trilhas: descoberta e entrega
+
+**Contexto.** Pedido do Fernando em 01/10/2026. O quadro só tinha colunas de entrega (Backlog a Concluído), mas muita coisa precisa ser entendida antes de virar trabalho: regras e sensação do jogo, formato, estrutura das fases, bugs a reproduzir. A squad é uma pessoa e uma máquina, e parte dessas perguntas o Fernando responde sozinho, fora das sessões. Ele precisava ver no quadro o que tem para pesquisar e trazer pronto.
+
+**Opções consideradas.**
+
+| Opção | A favor | Contra |
+|---|---|---|
+| **Duas trilhas no mesmo quadro** | O fluxo inteiro num lugar só, da ideia ao Concluído; visualizações separam as trilhas quando preciso | O quadro completo fica com 9 colunas |
+| Um quadro só para descoberta | Separação total | Duas ferramentas para acompanhar; a passagem da descoberta para a entrega fica invisível |
+| Só uma etiqueta "pesquisa" no quadro atual | Nenhuma mudança de colunas | Não mostra em que etapa cada pesquisa está |
+
+**Decisão.** Duas trilhas no mesmo GitHub Project, renomeado para "Resgate Espacial — Produto":
+
+- **Descoberta:** Caixa de entrada → A investigar → Investigando (no máximo 2 cartões) → Para conversar.
+- **Entrega:** Backlog → Pronto → Em andamento → Em revisão → Concluído, como antes.
+
+Junto com as trilhas, entraram:
+
+- **Campo "Quem"**, com Fernando ou Claude, para separar o que cada um pesquisa ou constrói.
+- **Visualizações** Descoberta, Entrega e Minha fila. Minha fila mostra o que está com o Fernando.
+- **Etiqueta `descoberta`** e os modelos de issue Descoberta e Bug.
+- **Critério de "Para conversar":** o cartão só entra nessa coluna com um comentário que traga a pergunta respondida, as evidências, a recomendação, quando for uma decisão, e o que ficou em aberto.
+
+**Consequências.**
+
+- Todo item novo entra na Caixa de entrada, e não mais no Backlog. A opção que a automação "Item added to project" usa passou a se chamar Caixa de entrada.
+- Os modelos de issue adicionam a issue ao quadro sozinhos (chave `projects`).
+- A pesquisa é fechada quando vira decisão, histórias ou descarte. O bug segue no mesmo cartão, da reprodução até a correção.
+- Parte do M1 é descoberta, e não entrega: o teste com pessoas (#43) e a variante do direcional (#44) passaram a ter a etiqueta `descoberta`, assim como P-009 (#48) e P-010 (#49).
+- No começo de cada sessão, o Claude olha primeiro a coluna "Para conversar".
+
+**Revisitar se** a Caixa de entrada virar um depósito sem triagem, ou se cartões ficarem parados em "Investigando" por mais de uma semana.
+
 ## Decisões pendentes
 
 | ID | Pergunta | Quando decidir | Observação |
 |---|---|---|---|
-| P-003 | Qual será o nome final do jogo? | Antes do lançamento | — |
-| P-006 | Como funciona a pontuação? | Antes de construir a tela de resultado | Já definido: sem limite de tempo; resgate mais rápido faz mais pontos. Com cenários aleatórios (D-014), comparar tempos de cenários diferentes pode ser injusto. Perguntas no [documento 02, seção 8](02-regras-do-jogo.md#8-tempo-e-pontuação) |
-| P-009 | A fase 1, que é o tutorial, também é aleatória, ou é fixa e desenhada à mão? | Antes do M2 | No protótipo 01, ela é aleatória, com regras bem fáceis |
-| P-010 | Ao tentar de novo depois de perder as 3 vidas, o cenário se repete ou muda? | Antes do M2 | No protótipo 01, "Try again" repete o mesmo cenário |
-| P-008 | Qual ferramenta de medição anônima usar? | No M2, antes de construir a medição (E-17) | Precisa ser gratuita, dispensar cookies e aceitar eventos personalizados ([PRD, seção 7](03-prd.md#7-medição)) |
+| P-003 | Qual será o nome final do jogo? | Antes do lançamento | Cartão [#54](https://github.com/TARNAGS/resgate-espacial/issues/54) |
+| P-006 | Como funciona a pontuação? | Antes de construir a tela de resultado | Já definido: sem limite de tempo; resgate mais rápido faz mais pontos. Com cenários aleatórios (D-014), comparar tempos de cenários diferentes pode ser injusto. Perguntas no [documento 02, seção 8](02-regras-do-jogo.md#8-tempo-e-pontuação). Cartão [#53](https://github.com/TARNAGS/resgate-espacial/issues/53) |
+| P-009 | A fase 1, que é o tutorial, também é aleatória, ou é fixa e desenhada à mão? | Antes do M2 | No protótipo 01, ela é aleatória, com regras bem fáceis. Cartão [#48](https://github.com/TARNAGS/resgate-espacial/issues/48) |
+| P-010 | Ao tentar de novo depois de perder as 3 vidas, o cenário se repete ou muda? | Antes do M2 | No protótipo 01, "Try again" repete o mesmo cenário. Cartão [#49](https://github.com/TARNAGS/resgate-espacial/issues/49) |
+| P-008 | Qual ferramenta de medição anônima usar? | No M2, antes de construir a medição (E-17) | Precisa ser gratuita, dispensar cookies e aceitar eventos personalizados ([PRD, seção 7](03-prd.md#7-medição)). Cartão [#56](https://github.com/TARNAGS/resgate-espacial/issues/56) |
 
 ## Modelo para novas decisões
 

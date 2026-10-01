@@ -19,8 +19,8 @@ Leia o [diário de bordo](docs/06-diario-de-bordo.md). A seção "Onde paramos" 
 | Visão, regras do jogo, PRD, roadmap e decisões | `docs/01` a `docs/05` |
 | O que foi feito e onde paramos | `docs/06-diario-de-bordo.md` |
 | Protótipos descartáveis | `prototipos/`; o 01 roda com `node prototipos/servir.js` em http://localhost:8080 |
-| Backlog (iniciativas, épicos, histórias e tarefas) | Issues do GitHub, ligadas por sub-issues, com os marcos M0 a M3 |
-| Quadro kanban | GitHub Project "Resgate Espacial — Backlog": https://github.com/users/TARNAGS/projects/1 |
+| Backlog (iniciativas, épicos, histórias, tarefas e descobertas) | Issues do GitHub, ligadas por sub-issues, com os marcos M0 a M3 |
+| Quadro kanban | GitHub Project "Resgate Espacial — Produto": https://github.com/users/TARNAGS/projects/1 |
 | Modelos de issue | `.github/ISSUE_TEMPLATE/` |
 | Abrir o protótipo pelo navegador do Claude Code | `.claude/launch.json`, configuração "prototipo" |
 
@@ -34,10 +34,21 @@ Leia o [diário de bordo](docs/06-diario-de-bordo.md). A seção "Onde paramos" 
 
 ## Quadro e issues
 
-- Ao começar um item, mover o cartão para "Em andamento". Ao terminar, fechar a issue: a automação do quadro move o cartão para "Concluído".
-- Item novo no quadro cai sozinho no "Backlog"; só vai para "Pronto" quando não tiver dependência aberta.
+O quadro tem duas trilhas (D-016):
+
+- **Descoberta:** Caixa de entrada → A investigar → Investigando → Para conversar.
+- **Entrega:** Backlog → Pronto → Em andamento → Em revisão → Concluído.
+
+O campo "Quem" (Fernando ou Claude) diz com quem o cartão está.
+
+- **No começo de cada sessão, olhar primeiro a coluna "Para conversar".** Os achados estão num comentário da issue. Da conversa sai uma decisão (D-xxx), histórias ou tarefas no Backlog, ou o descarte. A pesquisa é fechada e gera os itens novos; o bug segue no mesmo cartão até ser corrigido.
+- "Para conversar" exige um comentário com a pergunta respondida, as evidências, a recomendação (quando for uma decisão) e o que ficou em aberto. Se faltar algo, perguntar ao Fernando antes de seguir.
+- "Investigando" tem no máximo 2 cartões.
+- Todo item novo cai sozinho na "Caixa de entrada". Ao criar pelo `gh` um item que já está claro (história ou tarefa de construção), mover direto para o "Backlog". Do Backlog, só vai para "Pronto" quando não tiver dependência aberta.
+- Pergunta a responder antes de construir (pesquisa, decisão, teste com pessoas) é `descoberta`, não `tarefa`. Bug usa a etiqueta `bug` e o modelo Bug.
+- Ao começar um item, mover o cartão para "Em andamento" (ou "Investigando", na descoberta). Ao terminar, fechar a issue: a automação do quadro move o cartão para "Concluído".
 - Histórias só para os próximos marcos (Roadmap, seção 5). As dos marcos seguintes são escritas quando eles se aproximarem.
-- Tarefa (decisão ou trabalho técnico) não é história de usuário: usar a etiqueta `tarefa`.
+- Tarefa (trabalho técnico ou atividade de produto) não é história de usuário: usar a etiqueta `tarefa`.
 - O `gh` precisa do escopo `project` para mexer no quadro; `gh auth status` mostra os escopos. Para pedir o escopo, rodar `gh auth refresh -h github.com -s project` em segundo plano e passar ao Fernando o código e o link https://github.com/login/device.
 
 ## Git

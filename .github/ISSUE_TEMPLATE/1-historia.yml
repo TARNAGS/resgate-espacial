@@ -1,6 +1,7 @@
 name: História de usuário
 description: Fatia de valor para o jogador ou testador, pequena o bastante para caber em poucos dias.
 labels: ["história"]
+projects: ["TARNAGS/1"]
 body:
   - type: markdown
     attributes:

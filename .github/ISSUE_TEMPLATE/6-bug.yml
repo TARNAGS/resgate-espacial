@@ -1,0 +1,51 @@
+name: Bug
+description: Algo no jogo não funciona como deveria.
+labels: ["bug"]
+projects: ["TARNAGS/1"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        O cartão cai na coluna "Caixa de entrada" do quadro. Ele vai para o Backlog quando estiver reproduzido: seguindo os passos abaixo, o bug acontece de novo.
+  - type: textarea
+    id: aconteceu
+    attributes:
+      label: O que aconteceu
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: O que você esperava
+  - type: textarea
+    id: passos
+    attributes:
+      label: Passos para reproduzir
+      placeholder: |
+        1. ...
+        2. ...
+    validations:
+      required: true
+  - type: dropdown
+    id: frequencia
+    attributes:
+      label: Com que frequência acontece
+      options:
+        - Sempre
+        - Às vezes
+        - Só vi uma vez
+  - type: input
+    id: aparelho
+    attributes:
+      label: Aparelho e navegador
+      placeholder: "iPhone 13, iOS 18, Safari (ou instalado na Tela de Início)"
+  - type: input
+    id: endereco
+    attributes:
+      label: Endereço ou versão
+      placeholder: "https://tarnags.github.io/resgate-espacial/prototipos/01/"
+  - type: textarea
+    id: evidencias
+    attributes:
+      label: Prints ou vídeo
+      description: Arraste os arquivos para cá.

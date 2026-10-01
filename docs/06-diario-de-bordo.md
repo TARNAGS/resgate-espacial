@@ -12,15 +12,17 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 
 - **Marco atual: M0 — Fundação, quase concluído.** As três decisões do M0 estão tomadas (D-011, D-012 e D-013), e o jogo é publicado sozinho no GitHub Pages a cada envio ([#30](https://github.com/TARNAGS/resgate-espacial/issues/30), concluída). Falta o Fernando abrir no iPhone ([#31](https://github.com/TARNAGS/resgate-espacial/issues/31), em revisão) e a retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)).
 - **Protótipo 01 pronto e publicado** em https://tarnags.github.io/resgate-espacial/prototipos/01/ ([`prototipos/`](../prototipos/README.md)): menu com mapa de progresso, fases geradas aleatoriamente, física da nave, direcional virtual e todas as regras do documento 02. A primeira reação do Fernando foi de muita empolgação com o resultado.
-- **Pendências abertas:** P-003 (nome final), P-006 (pontuação), P-008 (ferramenta de medição), P-009 (fase 1 aleatória ou fixa) e P-010 (tentar de novo repete o cenário?).
+- **Pendências abertas:** P-003 (nome final), P-006 (pontuação), P-008 (ferramenta de medição), P-009 (fase 1 aleatória ou fixa) e P-010 (tentar de novo repete o cenário?). Cada uma tem um cartão de descoberta no quadro.
+- **Quadro com trilha de descoberta (D-016).** O que o Fernando precisa pesquisar e trazer pronto está na coluna "A investigar", em ordem de prioridade, e na visualização "Minha fila". A coluna "Para conversar" é a primeira coisa a olhar em cada sessão.
 
 ### Próximos passos
 
-1. O Fernando joga o protótipo no iPhone, o que fecha a [#31](https://github.com/TARNAGS/resgate-espacial/issues/31), e dá retorno sobre a sensação: gravidade, propulsor, giro, tamanho da nave e tolerância do pouso.
-2. Responder P-009 e P-010.
-3. Decidir se o protótipo 01 vira a base do M1. A recomendação é que sim, porque ele já tem a física, os parâmetros centralizados e o direcional.
+1. O Fernando adiciona as pesquisas que já tem em mente na Caixa de entrada, com o modelo Descoberta.
+2. O Fernando joga o protótipo no iPhone, o que fecha a [#31](https://github.com/TARNAGS/resgate-espacial/issues/31), e responde a [#50](https://github.com/TARNAGS/resgate-espacial/issues/50): sensação de gravidade, propulsor, giro, tamanho da nave e tolerância do pouso.
+3. Decisões rápidas do Fernando: protótipo 01 como base do M1 ([#51](https://github.com/TARNAGS/resgate-espacial/issues/51); a recomendação é que sim), P-009 ([#48](https://github.com/TARNAGS/resgate-espacial/issues/48)) e P-010 ([#49](https://github.com/TARNAGS/resgate-espacial/issues/49)).
 4. Com a [#31](https://github.com/TARNAGS/resgate-espacial/issues/31) aprovada, fazer a retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)) e fechar o marco.
 5. M1: roteiro de teste ([#41](https://github.com/TARNAGS/resgate-espacial/issues/41)), testes com 3 a 5 pessoas ([#43](https://github.com/TARNAGS/resgate-espacial/issues/43)), calibragem ([#36](https://github.com/TARNAGS/resgate-espacial/issues/36) e [#42](https://github.com/TARNAGS/resgate-espacial/issues/42)) e variante final do direcional ([#44](https://github.com/TARNAGS/resgate-espacial/issues/44)).
+6. Pesquisas do Claude, para quando o M2 se aproximar: ferramenta de medição ([#56](https://github.com/TARNAGS/resgate-espacial/issues/56)) e som no iPhone ([#57](https://github.com/TARNAGS/resgate-espacial/issues/57)).
 
 ## Sessões
 
@@ -49,6 +51,27 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **Protótipo publicado no GitHub Pages**, que publica sozinho a cada envio para a main, por HTTPS. O menu foi ajustado para caber no celular na horizontal; na vertical, o jogo pede para girar o celular.
 - **E-mail:** a conta do GitHub passou a recusar envios com o e-mail pessoal, e todos os commits passaram a usar o e-mail noreply.
 
+### 01/10/2026 — Trilha de descoberta no quadro
+
+- **Pedido do Fernando:** o quadro só cobria backlog e desenvolvimento. Faltava um lugar para ver o que ele precisa pesquisar sozinho e trazer pronto, sem explorar junto nas sessões.
+- **Quadro com duas trilhas (D-016)**, renomeado para "Resgate Espacial — Produto":
+  - Descoberta: Caixa de entrada, A investigar, Investigando (no máximo 2) e Para conversar.
+  - Entrega: as colunas de antes.
+  - Campo "Quem", com Fernando ou Claude.
+  - Visualizações novas: Descoberta, Entrega e Minha fila.
+  - Item novo agora cai na Caixa de entrada.
+- **Modelos de issue Descoberta e Bug**, com a etiqueta `descoberta`. Todos os modelos adicionam a issue ao quadro sozinhos.
+- **Oito cartões de descoberta novos**, com o que o Claude precisa que o Fernando responda e as próprias dúvidas do Claude:
+  - Sensação do protótipo ([#50](https://github.com/TARNAGS/resgate-espacial/issues/50)).
+  - Protótipo como base do M1 ([#51](https://github.com/TARNAGS/resgate-espacial/issues/51)).
+  - Nome do jogo original ([#52](https://github.com/TARNAGS/resgate-espacial/issues/52)).
+  - Pontuação, P-006 ([#53](https://github.com/TARNAGS/resgate-espacial/issues/53)).
+  - Nome final, P-003 ([#54](https://github.com/TARNAGS/resgate-espacial/issues/54)).
+  - Referências visuais ([#55](https://github.com/TARNAGS/resgate-espacial/issues/55)).
+  - Ferramenta de medição, P-008 ([#56](https://github.com/TARNAGS/resgate-espacial/issues/56)).
+  - Som no iPhone ([#57](https://github.com/TARNAGS/resgate-espacial/issues/57)).
+- **Cartões existentes que eram descoberta:** #43, #44, #48 e #49 trocaram a etiqueta `tarefa` por `descoberta`.
+
 ## Aprendizados de produto
 
 - Separar o objetivo do projeto (portfólio) do objetivo do produto (o jogador), com uma regra de desempate: quando os dois brigam, o jogador vence.
@@ -58,3 +81,4 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - Histórias só para os próximos marcos, e tarefa não é história.
 - Um protótipo rápido e descartável alinha a visão antes de investir na construção.
 - Privacidade também é requisito: antes de abrir o repositório, o e-mail pessoal foi tirado de todo o histórico.
+- Descoberta e entrega são trilhas diferentes. Separar as duas mostrou que boa parte do M1 (testes com pessoas e escolha do direcional) é pergunta a responder, e não código a escrever.
