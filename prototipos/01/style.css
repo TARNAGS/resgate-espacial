@@ -139,6 +139,18 @@ h2 { margin: 0; letter-spacing: 0.16em; }
 .node.locked .label, .node.locked .num { fill: #566079; }
 .node .ring { fill: none; stroke: var(--ink); stroke-width: 2; }
 
+/* Celular na horizontal: tela baixa, tudo mais compacto para o menu caber sem rolar */
+@media (max-height: 520px) {
+  .screen { gap: 8px; }
+  .title { font-size: 26px; }
+  .title br { display: none; }
+  .subtitle { font-size: 11px; }
+  .map { width: min(380px, 100%); }
+  .level-info { min-height: 0; font-size: 12px; }
+  .btn { min-width: 120px; padding: 8px 16px; font-size: 14px; }
+  .foot { display: none; }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .node .ring { animation: pulse 1.4s ease-in-out infinite; }
 }
