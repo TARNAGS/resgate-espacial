@@ -12,7 +12,7 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 
 - **Marco atual: M0 — Fundação, quase concluído.** As três decisões do M0 estão tomadas (D-011, D-012 e D-013), e o jogo é publicado sozinho no GitHub Pages a cada envio ([#30](https://github.com/TARNAGS/resgate-espacial/issues/30), concluída). Falta o Fernando abrir no iPhone ([#31](https://github.com/TARNAGS/resgate-espacial/issues/31), em revisão) e a retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)).
 - **Protótipo 01 pronto e publicado** em https://tarnags.github.io/resgate-espacial/prototipos/01/ ([`prototipos/`](../prototipos/README.md)): menu com mapa de progresso, fases geradas aleatoriamente, física da nave, direcional virtual e todas as regras do documento 02. A primeira reação do Fernando foi de muita empolgação com o resultado.
-- **Pendências abertas:** P-003 (nome final), P-006 (pontuação), P-008 (ferramenta de medição), P-009 (fase 1 aleatória ou fixa) e P-010 (tentar de novo repete o cenário?). Cada uma tem um cartão de descoberta no quadro.
+- **Pendências abertas:** P-003 (nome final), P-006 (pontuação), P-008 (ferramenta de medição), P-009 (tutorial e fase 1), P-010 (tentar de novo repete o cenário?), P-011 (obstáculos, mundo e fase), P-012 (modificadores), P-013 (ICP), P-014 (preço e publicação), P-015 (como receber dinheiro e CNPJ) e P-016 (o que o jogo guarda e onde). Cada uma tem um cartão de descoberta no quadro.
 - **Quadro com trilha de descoberta (D-016).** O que o Fernando precisa pesquisar e trazer pronto está na coluna "A investigar", em ordem de prioridade, e na visualização "Minha fila". A coluna "Para conversar" é a primeira coisa a olhar em cada sessão.
 
 ### Próximos passos
@@ -71,6 +71,11 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
   - Ferramenta de medição, P-008 ([#56](https://github.com/TARNAGS/resgate-espacial/issues/56)).
   - Som no iPhone ([#57](https://github.com/TARNAGS/resgate-espacial/issues/57)).
 - **Cartões existentes que eram descoberta:** #43, #44, #48 e #49 trocaram a etiqueta `tarefa` por `descoberta`.
+- **Reflexões do Fernando depois do primeiro teste**, viradas em cartões de descoberta:
+  - Enriquecem cartões que já existiam: tutorial vai para o [#48](https://github.com/TARNAGS/resgate-espacial/issues/48), que virou "como o jogo ensina a jogar"; risco de plágio vai para o [#52](https://github.com/TARNAGS/resgate-espacial/issues/52); eventos de medição vão para o [#56](https://github.com/TARNAGS/resgate-espacial/issues/56).
+  - Cartões novos: ICP ([#59](https://github.com/TARNAGS/resgate-espacial/issues/59), P-013), obstáculos, mundo e fase ([#60](https://github.com/TARNAGS/resgate-espacial/issues/60), P-011), modificadores ([#61](https://github.com/TARNAGS/resgate-espacial/issues/61), P-012), o que o jogo guarda ([#62](https://github.com/TARNAGS/resgate-espacial/issues/62), P-016), preço e publicação ([#63](https://github.com/TARNAGS/resgate-espacial/issues/63), P-014) e como receber dinheiro e CNPJ ([#64](https://github.com/TARNAGS/resgate-espacial/issues/64), P-015).
+  - O modelo Descoberta ganhou o tema "Negócio (público, preço e jurídico)".
+  - Um catch: cobrar pelo jogo reabre quatro decisões de uma vez (D-002, D-003, D-012 e D-013). Com o repositório público e o jogo no GitHub Pages, qualquer pessoa joga de graça pelo link.
 
 ## Aprendizados de produto
 

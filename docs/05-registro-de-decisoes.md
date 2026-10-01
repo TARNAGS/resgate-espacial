@@ -307,9 +307,15 @@ Junto com as trilhas, entraram:
 |---|---|---|---|
 | P-003 | Qual será o nome final do jogo? | Antes do lançamento | Cartão [#54](https://github.com/TARNAGS/resgate-espacial/issues/54) |
 | P-006 | Como funciona a pontuação? | Antes de construir a tela de resultado | Já definido: sem limite de tempo; resgate mais rápido faz mais pontos. Com cenários aleatórios (D-014), comparar tempos de cenários diferentes pode ser injusto. Perguntas no [documento 02, seção 8](02-regras-do-jogo.md#8-tempo-e-pontuação). Cartão [#53](https://github.com/TARNAGS/resgate-espacial/issues/53) |
-| P-009 | A fase 1, que é o tutorial, também é aleatória, ou é fixa e desenhada à mão? | Antes do M2 | No protótipo 01, ela é aleatória, com regras bem fáceis. Cartão [#48](https://github.com/TARNAGS/resgate-espacial/issues/48) |
+| P-009 | Como o jogo ensina a jogar: há um tutorial, e a fase 1 é aleatória ou fixa e desenhada à mão? | Antes do M2 | No protótipo 01, ela é aleatória, com regras bem fáceis. Ampliada em 01/10/2026 com a pergunta do Fernando sobre ter um tutorial. Cartão [#48](https://github.com/TARNAGS/resgate-espacial/issues/48) |
 | P-010 | Ao tentar de novo depois de perder as 3 vidas, o cenário se repete ou muda? | Antes do M2 | No protótipo 01, "Try again" repete o mesmo cenário. Cartão [#49](https://github.com/TARNAGS/resgate-espacial/issues/49) |
-| P-008 | Qual ferramenta de medição anônima usar? | No M2, antes de construir a medição (E-17) | Precisa ser gratuita, dispensar cookies e aceitar eventos personalizados ([PRD, seção 7](03-prd.md#7-medição)). Cartão [#56](https://github.com/TARNAGS/resgate-espacial/issues/56) |
+| P-008 | Qual ferramenta de medição anônima usar, e que eventos medir? | No M2, antes de construir a medição (E-17) | Precisa ser gratuita, dispensar cookies e aceitar eventos personalizados ([PRD, seção 7](03-prd.md#7-medição)). O Fernando revisa a lista de eventos. Cartão [#56](https://github.com/TARNAGS/resgate-espacial/issues/56) |
+| P-011 | Que obstáculos o jogo tem, e como ele se organiza em mundos e fases? | Antes de construir o gerador de fases (E-09) | Os documentos usam "fase" e "nível" como sinônimos, e "mundo" ainda não existe. Afeta D-009 e D-015. Cartão [#60](https://github.com/TARNAGS/resgate-espacial/issues/60) |
+| P-012 | Haverá modificadores de jogo e de fase (gravidade, vento, escuridão etc.)? | Antes de construir o gerador de fases (E-09) | Afeta a pontuação (P-006) e o mapa de progresso. Cartão [#61](https://github.com/TARNAGS/resgate-espacial/issues/61) |
+| P-013 | Quem é o jogador ideal do jogo (ICP)? | Antes dos testes com pessoas ([#43](https://github.com/TARNAGS/resgate-espacial/issues/43)) | Aprofunda a persona primária da Visão (seção 4). Cartão [#59](https://github.com/TARNAGS/resgate-espacial/issues/59) |
+| P-014 | O jogo continua gratuito e fora das lojas? | Antes do lançamento | Cobrar ou ir para as lojas reabre D-002, D-003, D-012 e D-013. Cartão [#63](https://github.com/TARNAGS/resgate-espacial/issues/63) |
+| P-015 | Como receber dinheiro, e é preciso CNPJ? | Só se a P-014 decidir cobrar ou aceitar doações | Cartão [#64](https://github.com/TARNAGS/resgate-espacial/issues/64) |
+| P-016 | O que o jogo guarda, e onde: só no aparelho ou também num servidor? | Antes de construir o progresso salvo (E-14) | Hoje tudo fica no aparelho; um servidor reabre D-001, D-003 e D-004. Cartão [#62](https://github.com/TARNAGS/resgate-espacial/issues/62) |
 
 ## Modelo para novas decisões
 
