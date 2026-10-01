@@ -36,4 +36,4 @@ Novas issues seguem os modelos de história, tarefa, épico e iniciativa, dispon
 
 ## Como jogar
 
-Em breve: link para jogar no navegador e instruções para instalar no celular.
+Em breve no GitHub Pages: link para jogar no navegador e instruções para instalar no celular.

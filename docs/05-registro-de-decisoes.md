@@ -23,6 +23,8 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-009 | MVP com 3 fases | 28/09/2026 | Aceita |
 | D-010 | Sem data-alvo: planejamento por marcos | 28/09/2026 | Aceita |
 | D-011 | Tecnologia: JavaScript puro com Canvas | 01/10/2026 | Aceita |
+| D-012 | Repositório e quadro públicos, sem expor o e-mail pessoal | 01/10/2026 | Aceita |
+| D-013 | Hospedagem: GitHub Pages | 01/10/2026 | Aceita |
 
 ## D-001 — Sem login e sem contas
 
@@ -198,13 +200,48 @@ A análise completa, com as fontes, está na [tarefa #27](https://github.com/TAR
 
 **Revisitar se** o protótipo do M1 mostrar que a física própria está dando trabalho demais. Trocar para o Phaser no fim do M1 ainda é barato, porque só existirá o protótipo.
 
+## D-012 — Repositório e quadro públicos, sem expor o e-mail pessoal
+
+**Contexto.** Esta decisão resolve a pendência P-001 ([tarefa #28](https://github.com/TARNAGS/resgate-espacial/issues/28)). O projeto é peça de portfólio, e o processo (documentos, decisões e quadro) é a parte mais forte dele. Cada commit do Git guarda o e-mail de quem o fez; num repositório público, esse e-mail fica visível no histórico.
+
+**Opções consideradas.**
+
+| Opção | A favor | Contra |
+|---|---|---|
+| **Público agora** | Mostra o processo desde o começo; libera o GitHub Pages no plano gratuito | Tudo o que está no histórico fica visível |
+| Privado até o MVP | Nada fica exposto antes do lançamento | Hospedagem num serviço externo, com conta nova, ou GitHub Pro, que é pago (contraria a D-003) |
+
+**Decisão.** Repositório e quadro públicos desde 01/10/2026. Antes de abrir, o histórico foi reescrito para trocar o e-mail pessoal pelo e-mail noreply do GitHub em todos os commits, e o repositório passou a usar o noreply nos commits novos.
+
+**Consequências.**
+
+- Qualquer pessoa vê os documentos, as decisões, as issues e o quadro.
+- A reescrita mudou os identificadores dos commits; quem já tinha uma cópia do repositório precisa baixá-lo de novo.
+- Em cada máquina, o repositório precisa estar configurado com o e-mail noreply antes do primeiro commit.
+
+**Revisitar se** surgir algo que não deva ser público. Nesse caso, sai o conteúdo, não o repositório inteiro.
+
+## D-013 — Hospedagem: GitHub Pages
+
+**Contexto.** Esta decisão resolve a pendência P-005 ([tarefa #29](https://github.com/TARNAGS/resgate-espacial/issues/29)). Com o repositório público (D-012), o GitHub Pages fica disponível no plano gratuito, e o jogo é feito só de arquivos estáticos (D-011).
+
+**Opções consideradas.** GitHub Pages, que é gratuito, fica na mesma plataforma e já serve por HTTPS; ou serviços externos como Cloudflare Pages e Netlify, que exigiriam conta nova e mais uma ferramenta.
+
+**Decisão.** GitHub Pages, publicando a cada envio para a branch main ([tarefa #30](https://github.com/TARNAGS/resgate-espacial/issues/30)).
+
+**Consequências.**
+
+- Custo zero e nenhuma conta nova (D-003).
+- HTTPS incluso, que o jogo precisa para funcionar sem internet (RNF-03 e RNF-08).
+- Até haver nome final (P-003), o endereço será `tarnags.github.io/resgate-espacial`. Como o jogo roda nesse subcaminho, o manifesto e o service worker precisam usar caminhos relativos.
+
+**Revisitar se** o jogo precisar de algo que o GitHub Pages não ofereça.
+
 ## Decisões pendentes
 
 | ID | Pergunta | Quando decidir | Observação |
 |---|---|---|---|
-| P-001 | O repositório será público ou privado? | No M0 ([tarefa #28](https://github.com/TARNAGS/resgate-espacial/issues/28)) | Portfólio pede visibilidade; no plano gratuito do GitHub, o GitHub Pages só publica repositórios públicos |
 | P-003 | Qual será o nome final do jogo? | Antes do lançamento | — |
-| P-005 | Onde hospedar o jogo? | No M0 ([tarefa #29](https://github.com/TARNAGS/resgate-espacial/issues/29)), junto com P-001 | Precisa ser gratuito (D-003) |
 | P-006 | Como funciona a pontuação? | Antes de construir a tela de resultado | Já definido: sem limite de tempo; resgate mais rápido faz mais pontos. Perguntas no [documento 02, seção 8](02-regras-do-jogo.md#8-tempo-e-pontuação) |
 | P-008 | Qual ferramenta de medição anônima usar? | No M2, antes de construir a medição (E-17) | Precisa ser gratuita, dispensar cookies e aceitar eventos personalizados ([PRD, seção 7](03-prd.md#7-medição)) |
 
