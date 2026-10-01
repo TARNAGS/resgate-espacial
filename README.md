@@ -13,6 +13,7 @@ Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável
 - **Plataformas:** navegador e celular, instalável direto do site, sem loja. iPhone primeiro; Android numa etapa seguinte.
 - **Idioma do jogo:** inglês.
 - **Modelo:** gratuito, sem cadastro e sem anúncios.
+- **Tecnologia:** JavaScript puro com Canvas, sem framework.
 
 ## Documentação
 

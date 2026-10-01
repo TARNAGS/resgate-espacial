@@ -5,7 +5,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 03 — PRD (requisitos do produto) |
-| Versão | 1.0 |
+| Versão | 1.1 |
 | Data | 01/10/2026 |
 | Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -195,7 +195,6 @@ O tempo entre o link e o controle da nave (RNF-01) é medido em teste, não pela
 |---|---|---|
 | P-001 | O repositório será público ou privado? | Define as opções de hospedagem gratuita (P-005) |
 | P-003 | Qual será o nome final do jogo? | Tela de abertura, ícone e nome na Tela de Início |
-| P-004 | Com que tecnologia construir? | Como cumprir RNF-01 a RNF-03 |
 | P-005 | Onde hospedar? | Precisa servir por HTTPS e ser gratuita (RNF-07 e RNF-08) |
 | P-006 | Como funciona a pontuação? | Telas de resultado e de seleção de fases (RF-05 e RF-07) |
 | P-008 | Qual ferramenta de medição anônima usar? | RF-15 e seção 7 |
@@ -224,3 +223,4 @@ Os próximos passos estão no [Roadmap](04-roadmap.md) e no [quadro kanban](http
 | 0.1 | 28/09/2026 | Primeira versão |
 | 0.2 | 28/09/2026 | Pendência P-007 resolvida: MVP com as fases 1 a 3 (D-009) |
 | 1.0 | 01/10/2026 | Aprovado pelo Fernando como versão de referência |
+| 1.1 | 01/10/2026 | Pendência P-004 resolvida: JavaScript puro com Canvas (D-011) |

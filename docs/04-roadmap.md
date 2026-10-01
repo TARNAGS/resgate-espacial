@@ -3,8 +3,8 @@
 | Campo | Valor |
 |---|---|
 | Documento | 04 — Roadmap |
-| Versão | 1.0 |
-| Data | 28/09/2026 |
+| Versão | 1.1 |
+| Data | 01/10/2026 |
 | Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
 
@@ -96,7 +96,7 @@ flowchart LR
 
 | Antes de | Decidir | ID |
 |---|---|---|
-| Começar o M0 | Tecnologia, visibilidade do repositório e hospedagem | P-004, P-001, P-005 |
+| Começar o M0 | Tecnologia (decidida: JavaScript puro com Canvas, D-011), visibilidade do repositório e hospedagem | P-001, P-005 |
 | Construir as telas de resultado (M2) | Sistema de pontuação | P-006 |
 | Construir a medição (M2) | Ferramenta de medição anônima | P-008 |
 | Lançar o MVP (M2) | Nome final do jogo | P-003 |
@@ -125,3 +125,4 @@ A hospedagem deixou de ser um detalhe do fim do projeto: para testar o controle 
 |---|---|---|
 | 0.1 | 28/09/2026 | Primeira versão: MVP com 3 fases (D-009) e sem data-alvo (D-010) |
 | 1.0 | 28/09/2026 | Aprovado pelo Fernando. Backlog criado no GitHub e ligado às tabelas. O requisito RNF-10 (tocar sem rolar nem dar zoom) passou do E-15 (M2) para o E-05 (M1), porque sem ele o teste do direcional no iPhone ficaria comprometido |
+| 1.1 | 01/10/2026 | Tecnologia decidida: JavaScript puro com Canvas (D-011) |

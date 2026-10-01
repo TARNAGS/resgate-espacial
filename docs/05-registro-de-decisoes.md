@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 05 — Registro de decisões |
-| Última atualização | 28/09/2026 |
+| Última atualização | 01/10/2026 |
 | Responsável | Fernando Nunes (Product Manager) |
 
 Cada decisão relevante de produto fica registrada aqui, com o contexto e o motivo. Assim ela não é rediscutida sem necessidade e pode ser revista quando o contexto mudar.
@@ -22,6 +22,7 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-008 | iPhone primeiro | 28/09/2026 | Aceita |
 | D-009 | MVP com 3 fases | 28/09/2026 | Aceita |
 | D-010 | Sem data-alvo: planejamento por marcos | 28/09/2026 | Aceita |
+| D-011 | Tecnologia: JavaScript puro com Canvas | 01/10/2026 | Aceita |
 
 ## D-001 — Sem login e sem contas
 
@@ -170,16 +171,42 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 
 **Revisitar se** surgir uma data importante, como uma apresentação ou entrevista em que o jogo seria mostrado.
 
+## D-011 — Tecnologia: JavaScript puro com Canvas
+
+**Contexto.** Esta decisão resolve a pendência P-004 ([tarefa #27](https://github.com/TARNAGS/resgate-espacial/issues/27)). O jogo é visualmente simples, no estilo dos jogos 2D de nave dos anos 2000 que vinham em CD de revista de PC, e a física também é simples: gravidade, propulsor, inércia e colisão. O maior risco do produto é a sensação do controle.
+
+**Opções consideradas.**
+
+| Opção | A favor | Contra |
+|---|---|---|
+| **A. JavaScript puro com Canvas** | Controle total da física; só o código do jogo para baixar; o formato mais seguro para construir com IA, o mesmo do repositório `jogos` | Câmera, colisão, telas, som e direcional precisam ser escritos do zero |
+| B. Phaser 4 | Câmera, cenas, som e toque prontos | Cerca de 345 KB a mais; a física simples não gira a colisão com a nave; a versão 4 é recente |
+| C. Godot 4 (exportação web) | Motor completo, com editor de fases | Cerca de 5 a 9 MB para baixar; boa parte do trabalho fica no editor, fora do alcance do Claude Code |
+
+A análise completa, com as fontes, está na [tarefa #27](https://github.com/TARNAGS/resgate-espacial/issues/27).
+
+**Decisão.** A: JavaScript puro com Canvas, sem framework.
+
+**Por quê.** O Fernando gosta da ideia de componentes prontos, mas construir do zero faz parte do aprendizado. O jogo não é complexo, e a estética de jogo de nave de CD de revista dos anos 2000 dispensa os recursos gráficos de um framework.
+
+**Consequências.**
+
+- Câmera, colisão, telas, som e direcional virtual serão escritos por nós; isso entra nas histórias do M1 e do M2.
+- O download fica pequeno, a favor do RNF-01.
+- A física fica explícita, com os parâmetros de ajuste num lugar só (RNF-12).
+- O jogo pode ser publicado como arquivos estáticos, sem etapa de build.
+
+**Revisitar se** o protótipo do M1 mostrar que a física própria está dando trabalho demais. Trocar para o Phaser no fim do M1 ainda é barato, porque só existirá o protótipo.
+
 ## Decisões pendentes
 
 | ID | Pergunta | Quando decidir | Observação |
 |---|---|---|---|
-| P-001 | O repositório será público ou privado? | Antes de divulgar no portfólio | Portfólio pede visibilidade; no plano gratuito do GitHub, o GitHub Pages só publica repositórios públicos |
+| P-001 | O repositório será público ou privado? | No M0 ([tarefa #28](https://github.com/TARNAGS/resgate-espacial/issues/28)) | Portfólio pede visibilidade; no plano gratuito do GitHub, o GitHub Pages só publica repositórios públicos |
 | P-003 | Qual será o nome final do jogo? | Antes do lançamento | — |
-| P-004 | Com que tecnologia construir? | Depois do PRD | Decisão técnica guiada pelos requisitos |
-| P-005 | Onde hospedar o jogo? | Junto com P-001 | Precisa ser gratuito (D-003) |
+| P-005 | Onde hospedar o jogo? | No M0 ([tarefa #29](https://github.com/TARNAGS/resgate-espacial/issues/29)), junto com P-001 | Precisa ser gratuito (D-003) |
 | P-006 | Como funciona a pontuação? | Antes de construir a tela de resultado | Já definido: sem limite de tempo; resgate mais rápido faz mais pontos. Perguntas no [documento 02, seção 8](02-regras-do-jogo.md#8-tempo-e-pontuação) |
-| P-008 | Qual ferramenta de medição anônima usar? | Junto com P-004 | Precisa ser gratuita, dispensar cookies e aceitar eventos personalizados ([PRD, seção 7](03-prd.md#7-medição)) |
+| P-008 | Qual ferramenta de medição anônima usar? | No M2, antes de construir a medição (E-17) | Precisa ser gratuita, dispensar cookies e aceitar eventos personalizados ([PRD, seção 7](03-prd.md#7-medição)) |
 
 ## Modelo para novas decisões
 
