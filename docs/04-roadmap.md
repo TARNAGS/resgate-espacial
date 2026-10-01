@@ -10,7 +10,7 @@
 
 O roadmap organiza **em que ordem** o produto vai ser construído. Não há data-alvo ([D-010](05-registro-de-decisoes.md#d-010--sem-data-alvo-planejamento-por-marcos)): o projeto avança por marcos, e cada marco só termina quando cumpre o seu critério de saída.
 
-O backlog está no GitHub: [issues](https://github.com/TARNAGS/resgate-espacial/issues) e [marcos](https://github.com/TARNAGS/resgate-espacial/milestones). Os IDs das tabelas abaixo levam à issue correspondente.
+O backlog está no GitHub: [issues](https://github.com/TARNAGS/resgate-espacial/issues), [marcos](https://github.com/TARNAGS/resgate-espacial/milestones) e [quadro kanban](https://github.com/users/TARNAGS/projects/1). Os IDs das tabelas abaixo levam à issue correspondente.
 
 ## 1. Visão geral
 

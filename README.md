@@ -26,7 +26,7 @@ Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável
 
 ## Como o trabalho é organizado
 
-O [roadmap](docs/04-roadmap.md) avança por marcos, do M0 (fundação) ao M3 (V1), sem data-alvo. O trabalho se divide em **iniciativas**, que se dividem em **épicos**, que se dividem em **histórias de usuário** e **tarefas**. Tudo fica nas [issues](https://github.com/TARNAGS/resgate-espacial/issues) do GitHub, organizado por [marcos](https://github.com/TARNAGS/resgate-espacial/milestones) e acompanhado num quadro kanban (em breve).
+O [roadmap](docs/04-roadmap.md) avança por marcos, do M0 (fundação) ao M3 (V1), sem data-alvo. O trabalho se divide em **iniciativas**, que se dividem em **épicos**, que se dividem em **histórias de usuário** e **tarefas**. Tudo fica nas [issues](https://github.com/TARNAGS/resgate-espacial/issues) do GitHub, organizado por [marcos](https://github.com/TARNAGS/resgate-espacial/milestones) e acompanhado no [quadro kanban](https://github.com/users/TARNAGS/projects/1) (colunas Backlog, Pronto, Em andamento, Em revisão e Concluído).
 
 - **Pronta para começar:** a história está no formato "Como / Quero / Para", tem critérios de aceite verificáveis, está ligada a um épico e tem marco definido.
 - **Pronta de verdade:** os critérios de aceite foram atendidos, o resultado foi testado no iPhone (e no computador, quando fizer sentido), está publicado, e a documentação foi atualizada se alguma regra mudou.
