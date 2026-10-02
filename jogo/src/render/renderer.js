@@ -28,7 +28,7 @@ export function createRenderer(canvas, view) {
 
   const twinControls = (params) => view.isTouch && params.touchScheme === 'twin';
 
-  // No controle C, os polegares ficam por cima dos cantos de baixo. A nave nunca pode ficar
+  // No controle A (dois polegares, D-022), os polegares ficam por cima dos cantos de baixo. A nave nunca pode ficar
   // embaixo deles (#44): a câmera a mantém na faixa da tela entre os dois controles, mesmo que
   // para isso precise mostrar um pouco além das pontas da fase.
   function keepShipVisible(s, params) {
@@ -368,7 +368,7 @@ export function createRenderer(canvas, view) {
     if (sx >= view.play.x && sx <= playRight) return;
     const right = sx > playRight;
     const x = right ? playRight - 24 - view.safe.right : view.play.x + 24 + view.safe.left;
-    // No controle C, a seta da direita fica acima do botão do propulsor
+    // No controle A (dois polegares), a seta da direita fica acima do botão do propulsor
     const bottom = right && twinControls(params) ? view.cssH - 70 - params.joystickRadius * 1.8 - view.safe.bottom : view.cssH - 50;
     const y = clamp(target.y * view.scale, 110, Math.max(110, bottom));
     const pulse = (0.6 + 0.4 * Math.sin(t * 5)).toFixed(2);
@@ -433,7 +433,7 @@ export function createRenderer(canvas, view) {
     ctx.textBaseline = 'bottom';
     ctx.font = `11px ${FONT}`;
     ctx.fillStyle = 'rgba(127,140,163,0.85)';
-    let foot = m.training ? 'crash freely · land on the pad' : `random layout #${m.seed}`;
+    let foot = m.training ? 'crash freely · land on the pad' : m.def.random ? `random layout #${m.seed}` : '';
     if (view.isTouch) foot += ` · control ${scene.schemeName}`;
     if (scene.tuned) foot += ' · TUNED';
     ctx.fillText(foot, left, view.cssH - 10 - view.safe.bottom);

@@ -32,14 +32,14 @@ Não explicar os controles. As dicas que aparecem na tela fazem parte do teste.
 | 2 | "Resgate a tripulação e volte para a base." | Nível 1, pelo menu | 5 min | Concluiu? Tempo; vidas perdidas; onde explodiu |
 | 3 | "Agora a fase 2." | Nível 2 | 5 min | Igual à tarefa 2 |
 | 4 | Repetir a tarefa 1 com o direcional fixo no canto | Painel → Joystick: fixed → TRAINING | 3 min | Igual à tarefa 1; qual preferiu |
-| 5 | Repetir a tarefa 2 com o controle C | Settings → Touch control (A ou C) | 5 min | Igual à tarefa 2; qual dos dois preferiu |
+| 5 | Repetir a tarefa 2 com o controle B | Settings → Touch control (A ou B) | 5 min | Igual à tarefa 2; qual dos dois preferiu |
 
 Se a tarefa passar do limite, agradecer e seguir para a próxima. Alternar a ordem das variantes entre testadores (metade começa pelo fixo; metade começa pelo C) para que o aprendizado não favoreça a última.
 
 Os dois controles de toque (#44):
 
-- **A, tocar e segurar:** encostar o dedo já aciona o propulsor; arrastar aponta. A fase ocupa a tela toda.
-- **C, dois polegares:** o polegar esquerdo aponta, sem acelerar; o direito, em qualquer ponto da metade direita, aciona o propulsor. Os botões ficam por cima da fase, e a câmera nunca deixa a nave ir para baixo dos polegares.
+- **A, dois polegares (o padrão, D-022):** o polegar esquerdo aponta, sem acelerar; o direito, em qualquer ponto da metade direita, aciona o propulsor. A câmera mantém a nave longe dos polegares.
+- **B, um polegar (opção):** encostar o dedo já aciona o propulsor; arrastar aponta.
 
 O B (arrasto curto só aponta e o propulsor acende depois) foi descartado pelo Fernando em 02/10: o propulsor demorava a responder.
 
@@ -72,7 +72,7 @@ O B (arrasto curto só aponta e o propulsor acende depois) foi descartado pelo F
 4. O que mais irritou?
 5. Você jogaria de novo? Por quê?
 6. Qual direcional você prefere, e por quê?
-7. Qual controle de toque você prefere (A ou C), e por quê?
+7. Qual controle de toque você prefere (A ou B), e por quê?
 
 ## 8. Depois do teste
 

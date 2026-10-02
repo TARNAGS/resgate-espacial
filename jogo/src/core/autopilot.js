@@ -182,41 +182,62 @@ function flyLeg(level, p, path, fromPad, toPad, cruise, crewOnBoard, startX = nu
   return null;
 }
 
-// Melhor corrida sem abastecer, ou null se o piloto não conseguir concluir
-export function bestRun(level, params) {
-  const base = level.pads.find((q) => q.kind === 'base');
-  const crew = level.pads.find((q) => q.kind === 'crew');
-  if (!base || !crew) return null;
-  if (level.obstacles.some((o) => !OBSTACLES[o.type].blockedAt)) return null;
-  const free = freeSpace(level);
+// Voa uma rota de plataforma em plataforma (por exemplo: base, posto, tripulação, base), sem
+// abastecer no caminho. Cada trecho começa onde o anterior pousou. Devolve os trechos, ou null.
+function flyRoute(level, params, free, kinds) {
+  const pads = kinds.map((k) => level.pads.find((q) => q.kind === k));
+  if (pads.some((p) => !p)) return null;
   const col = (pad) => Math.round((pad.x1 + pad.x2) / 2 / STEP);
-  const there = planPath(level, free, col(base), col(crew));
-  const back = planPath(level, free, col(crew), col(base));
-  if (!there || !back) return null;
-  const best = (path, from, to, crewOnBoard, startX) => {
+  const legs = [];
+  let startX = null, crewOnBoard = false;
+  for (let i = 0; i + 1 < pads.length; i++) {
+    const from = pads[i], to = pads[i + 1];
+    if (from.kind === 'crew') crewOnBoard = true;
+    const path = planPath(level, free, col(from), col(to));
+    if (!path) return null;
     let min = null;
     for (const v of CRUISE_SPEEDS) {
       const r = flyLeg(level, params, path, from, to, Math.min(v, params.maxSpeed * 0.9), crewOnBoard, startX);
-      if (r && (min === null || r.fuel < min.fuel)) min = { ...r, cruise: v, startX, path };
+      if (r && (min === null || r.fuel < min.fuel)) min = { ...r, cruise: v, startX, path, from: from.kind, to: to.kind, crewOnBoard };
     }
-    return min;
-  };
-  const go = best(there, base, crew, false, null);
-  if (!go) return null;
-  const ret = best(back, crew, base, true, go.x);   // a volta começa onde a ida pousou
-  if (!ret) return null;
-  return { thrustSeconds: go.fuel + ret.fuel, legs: [go, ret] };
+    if (!min) return null;
+    legs.push(min);
+    startX = min.x;
+  }
+  return legs;
 }
 
-// Comandos da melhor corrida, passo a passo, para cada trecho (ida e volta)
-export function bestRunInputs(level, params, run) {
-  const base = level.pads.find((q) => q.kind === 'base');
-  const crew = level.pads.find((q) => q.kind === 'crew');
-  const legs = [[base, crew, false], [crew, base, true]];
-  return run.legs.map((leg, i) => {
+const sum = (legs) => legs.reduce((n, l) => n + l.fuel, 0);
+
+// Melhor corrida sem abastecer (base, tripulação, base), ou null se o piloto não conseguir concluir
+export function bestRun(level, params) {
+  if (level.obstacles.some((o) => !OBSTACLES[o.type].blockedAt)) return null;
+  const legs = flyRoute(level, params, freeSpace(level), ['base', 'crew', 'base']);
+  return legs && { thrustSeconds: sum(legs), legs };
+}
+
+// Fases com posto (D-023): os dois planos com um abastecimento, na ida ou na volta.
+// tank é o menor tanque que permite os dois; full é o gasto da corrida sem abastecer.
+export function refuelPlans(level, params) {
+  if (level.obstacles.some((o) => !OBSTACLES[o.type].blockedAt)) return null;
+  const free = freeSpace(level);
+  const full = flyRoute(level, params, free, ['base', 'crew', 'base']);
+  const going = flyRoute(level, params, free, ['base', 'fuel', 'crew', 'base']);
+  const back = flyRoute(level, params, free, ['base', 'crew', 'fuel', 'base']);
+  if (!full || !going || !back) return null;
+  const goingTank = Math.max(going[0].fuel, going[1].fuel + going[2].fuel);
+  const backTank = Math.max(back[0].fuel + back[1].fuel, back[2].fuel);
+  return { full: sum(full), tank: Math.max(goingTank, backTank), going, back };
+}
+
+// Comandos de cada trecho, passo a passo, para reproduzir a rota numa partida de verdade
+export function routeInputs(level, params, legs) {
+  return legs.map((leg) => {
     const record = [];
-    const [from, to, crewOnBoard] = legs[i];
-    flyLeg(level, params, leg.path, from, to, Math.min(leg.cruise, params.maxSpeed * 0.9), crewOnBoard, leg.startX, record);
+    const from = level.pads.find((q) => q.kind === leg.from), to = level.pads.find((q) => q.kind === leg.to);
+    flyLeg(level, params, leg.path, from, to, Math.min(leg.cruise, params.maxSpeed * 0.9), leg.crewOnBoard, leg.startX, record);
     return record;
   });
 }
+
+export const bestRunInputs = (level, params, run) => routeInputs(level, params, run.legs);

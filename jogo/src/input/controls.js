@@ -25,4 +25,4 @@ export const TOUCH_HINTS = {
   twin: 'LEFT THUMB: AIM · RIGHT THUMB: THRUST',
 };
 
-export const SCHEME_NAMES = { hold: 'A', twin: 'C' };
+export const SCHEME_NAMES = { twin: 'A', hold: 'B' };   // D-022

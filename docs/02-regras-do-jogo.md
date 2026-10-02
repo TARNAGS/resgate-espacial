@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 02 — Regras do jogo |
-| Versão | 1.4 |
+| Versão | 1.5 |
 | Data | 02/10/2026 |
 | Status | Aprovado; pendentes: pontuação (P-006), fase 1 fixa ou aleatória (P-009) e repetição do cenário (P-010) |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -55,7 +55,7 @@ Base (A) → voo com obstáculos → [posto: abastecer] → plataforma da tripul
 | O combustível é limitado e é reabastecido nos postos e na base | Definido |
 | Só o propulsor gasta combustível; girar não gasta | Proposta |
 | Pousada num lugar que abastece, a nave enche o tanque em poucos segundos, com a barra subindo na tela | Proposta |
-| **Regra do melhor caminho:** em toda fase com posto, a melhor corrida possível conclui sem abastecer e chega ao fim quase sem combustível. O tanque de cada cenário sai da melhor corrida de um piloto automático, mais uma folga pequena ([D-018](05-registro-de-decisoes.md#d-018--regra-do-melhor-caminho-toda-fase-com-posto-pode-ser-concluída-sem-abastecer)) | Definido |
+| **Abastecer pelo menos uma vez (D-023, revê a D-018):** em toda fase com posto, não dá para concluir sem abastecer, e dá para concluir abastecendo uma vez, na ida ou na volta (o jogador escolhe). O tanque de cada fase sai das corridas de um piloto automático com um abastecimento, mais uma folga pequena | Definido |
 
 O que acontece quando o combustível acaba está na [seção 7](#7-vidas-derrota-e-vitória).
 
@@ -177,10 +177,10 @@ Perguntas a responder para fechar a pontuação:
 | A fase é mais larga que a tela, e a câmera acompanha a nave | Proposta |
 | As fases são liberadas em sequência: concluir uma libera a próxima | Proposta |
 | O MVP tem as fases 1 a 3; as fases 4 e 5 entram na V1 (D-009) | Definido |
-| O cenário de cada fase é gerado aleatoriamente a cada partida, para o replay ser infinito (D-014) | Definido |
+| **Fases com cenário fixo (D-021, revê a D-014):** os níveis da sequência e a PRACTICE têm sempre o mesmo cenário, igual para todos, para os jogadores compararem tempos. Só a fase **BONUS** é sorteada a cada partida | Definido |
 | Cada nível define as regras do gerador: comprimento, largura mínima do corredor, quantidade de pedras, posto de abastecimento e tamanho do tanque | Proposta |
 | Todo cenário gerado tem solução: corredor mínimo, passagem ao lado de toda pedra e combustível suficiente | Definido: o piloto automático conclui cada cenário antes de ele ser jogado (D-018) |
-| Além dos níveis, há desafios fora da sequência, sempre liberados no mapa. O primeiro é a PRACTICE, a fase mais difícil do jogo: corredor mais estreito, mais pedras e menos espaço para passar por elas | Definido |
+| Além dos níveis, há desafios fora da sequência, sempre liberados no mapa: a **PRACTICE**, a fase mais difícil do jogo (corredor mais estreito, mais pedras e menos espaço para passar), e a **BONUS**, com cenário novo a cada partida e recorde separado | Definido |
 | A fase 1 (tutorial) é aleatória ou fixa (P-009); ao tentar de novo, o cenário se repete ou muda (P-010) | Em aberto |
 | **Big picture:** o jogo se organiza em mundos, cada um com 10 fases e identidade visual própria, descrita num documento de design por mundo ([documento 08](08-design-de-mundos.md)). As fases 1 a 3 do MVP são as do Mundo 1 | Definido (D-020) |
 | Concluir a fase 10 de um mundo libera a fase 1 do próximo | Proposta |
@@ -255,7 +255,7 @@ São os números que definem a "sensação" do jogo. Eles serão calibrados no p
 | Força do propulsor | Quanto a nave acelera ao acionar | Vencer a gravidade com folga (ex.: 2 vezes mais forte) |
 | Velocidade de giro no teclado | Quão rápido a nave vira ao segurar a seta | Calibrar no protótipo |
 | Velocidade de giro no toque | Quão rápido a nave vira para a direção do dedo: na hora ou aos poucos | Calibrar no protótipo |
-| Direcional | Posição (fixa ou onde o polegar tocar), área da tela que aceita o toque e tamanho | Onde o polegar tocar, na tela inteira (#50); variante final na #44 |
+| Direcional | Controle principal de dois polegares, **A**: o esquerdo aponta e o direito acelera; o de um polegar, **B**, é opção em Settings (D-022) | Definido; tamanho e área no painel de ajuste |
 | Velocidade máxima de pouso | Limite para pousar sem explodir | Tolerante: o pouso "não é tão delicado" |
 | Inclinação máxima de pouso | Quanto a nave pode estar torta ao pousar | Ex.: 20° |
 | Folga na borda da plataforma | Quanto a nave pode passar da borda da plataforma e ainda pousar | 8 unidades, pouco menos que meia nave (#50) |
@@ -304,4 +304,5 @@ Registradas para não se perderem. **Não são compromisso**: só entram se o Ro
 | 1.1 | 01/10/2026 | Fases geradas aleatoriamente (D-014) e menu com mapa de progresso (D-015); novas pendências P-009 e P-010 |
 | 1.2 | 02/10/2026 | Retorno do primeiro teste no iPhone (#50): parâmetro novo de folga na borda da plataforma e direcional aceitando toque na tela inteira |
 | 1.3 | 02/10/2026 | Regra do melhor caminho (D-018) e desafio PRACTICE, a fase mais difícil do jogo |
+| 1.5 | 02/10/2026 | Depois do teste com amigos: fases fixas e fase BONUS (D-021), controle de dois polegares como principal (D-022) e abastecer pelo menos uma vez (D-023) |
 | 1.4 | 02/10/2026 | Big picture: mundos com 10 fases e visual próprio (D-020), abertura em três telas (seção 10.1, Proposta) e curva de dificuldade passa a ser a do Mundo 1. O MVP continua com 3 fases |

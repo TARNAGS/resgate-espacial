@@ -2,16 +2,16 @@ import { WORLD_H, STEP } from './constants.js';
 import { clamp, lerp, sampleLine } from './math.js';
 import { mulberry32 } from './rng.js';
 import { OBSTACLES } from '../content/obstacles/index.js';
-import { bestRun } from './autopilot.js';
+import { bestRun, refuelPlans } from './autopilot.js';
 
 // Gerador de fases (D-014): o nível define as regras, a semente define o cenário.
 // Mesma semente, mesmo cenário; todo cenário gerado precisa ter solução (validateLevel).
 //
-// Regra do melhor caminho (D-018): com os parâmetros da física, o gerador também joga o cenário
-// com o piloto automático (core/autopilot.js), sem abastecer. Se o piloto não conseguir concluir,
-// a semente é trocada até sair um cenário com caminho provado. O tanque sai da melhor corrida:
-//   - fase com posto: o tanque é a melhor corrida mais uma folga pequena (bestRunMargin), então
-//     quem faz a corrida perfeita conclui sem abastecer e chega quase sem combustível;
+// Caminho provado (D-018, revista pela D-023): com os parâmetros da física, o gerador joga o cenário
+// com o piloto automático (core/autopilot.js). Se o piloto não conseguir concluir, a semente é
+// trocada até sair um cenário com caminho provado. O tanque sai das corridas do piloto:
+//   - fase com posto (D-023): dá para concluir abastecendo uma vez, na ida ou na volta, mas não
+//     sem abastecer. Tanque = o maior dos dois planos com um abastecimento + refuelMargin;
 //   - fase sem posto: o tanque do nível, ou a melhor corrida mais 25%, o que for maior.
 
 const MAX_ATTEMPTS = 25;
@@ -22,11 +22,22 @@ export function generateLevel(def, seed, params = null) {
   let s = seed;
   for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
     const level = buildLayout(def, s);
-    const run = bestRun(level, params);
-    if (run) {
-      level.bestRun = run;
-      level.tankSeconds = tankFor(def.generator, run.thrustSeconds);
-      return level;
+    if (def.generator.fuelStation) {
+      // D-023: o tanque permite concluir abastecendo uma vez (na ida ou na volta), mas não sem abastecer
+      const plans = refuelPlans(level, params);
+      const tank = plans && plans.tank * (1 + (def.generator.refuelMargin ?? 0.08));
+      if (plans && tank < plans.full * 0.95) {
+        level.refuelPlans = plans;
+        level.tankSeconds = tank;
+        return level;
+      }
+    } else {
+      const run = bestRun(level, params);
+      if (run) {
+        level.bestRun = run;
+        level.tankSeconds = Math.max(def.generator.tankSeconds ?? 40, run.thrustSeconds * 1.25);
+        return level;
+      }
     }
     s = nextSeed(s);
   }
@@ -34,10 +45,6 @@ export function generateLevel(def, seed, params = null) {
   return buildLayout(def, seed);
 }
 
-function tankFor(g, best) {
-  if (g.fuelStation) return best * (1 + (g.bestRunMargin ?? 0.05));
-  return Math.max(g.tankSeconds ?? 40, best * 1.25);
-}
 
 // Terreno, plataformas e obstáculos de uma semente
 function buildLayout(def, seed) {

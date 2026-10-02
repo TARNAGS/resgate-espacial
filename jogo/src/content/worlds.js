@@ -10,7 +10,7 @@
 //   hint       dicas de controle na tela (o tutorial ainda está em aberto, P-009)
 //   generator  regras do cenário: comprimento, corredor mínimo, relevo, posto e obstacles (lista com as
 //              opções de cada tipo do catálogo, content/obstacles). Tanque, em segundos de propulsor:
-//              - fase com posto: bestRunMargin, a folga sobre a melhor corrida sem abastecer (D-018)
+//              - fase com posto: refuelMargin, a folga sobre o melhor plano com um abastecimento (D-023)
 //              - fase sem posto: tankSeconds, o mínimo (o gerador aumenta se a melhor corrida pedir)
 //   modifiers  lista de modificadores (content/modifiers.js); vazia até P-012 ser decidida
 
@@ -32,24 +32,27 @@ export const WORLDS = [
     levels: [
       {
         key: 'w1-1',
+        seed: 101,                 // cenário fixo, igual para todos (D-021)
         name: 'FIRST FLIGHT',
         goal: 'Take off, fly to the crew and bring them back.',
         hint: true,
-        generator: { length: 1800, minGap: 250, roughness: 45, fuelStation: false, tankSeconds: 40, obstacles: [] },
+        generator: { length: 1800, minGap: 225, roughness: 60, fuelStation: false, tankSeconds: 40, obstacles: [] },
         modifiers: [],
       },
       {
         key: 'w1-2',
+        seed: 202,
         name: 'ROCK FIELD',
         goal: 'Rocks ahead. Touching anything explodes the ship.',
-        generator: { length: 2600, minGap: 200, roughness: 85, fuelStation: false, tankSeconds: 40, obstacles: [{ type: 'rock', count: 7, passGap: 105 }] },
+        generator: { length: 2600, minGap: 185, roughness: 95, fuelStation: false, tankSeconds: 40, obstacles: [{ type: 'rock', count: 9, passGap: 95 }] },
         modifiers: [],
       },
       {
         key: 'w1-3',
+        seed: 303,
         name: 'LONG HAUL',
-        goal: 'Land on the fuel station, or fly a perfect run and skip it.',
-        generator: { length: 3800, minGap: 180, roughness: 100, fuelStation: true, bestRunMargin: 0.06, obstacles: [{ type: 'rock', count: 10, passGap: 95 }] },
+        goal: 'Too far for one tank: refuel once, on the way there or back.',
+        generator: { length: 3800, minGap: 165, roughness: 110, fuelStation: true, refuelMargin: 0.08, obstacles: [{ type: 'rock', count: 12, passGap: 85 }] },
         modifiers: [],
       },
     ],
@@ -73,12 +76,26 @@ export const TRAINING = {
 export const CHALLENGES = [
   {
     key: 'practice',
+    seed: 293233524,          // a primeira semente fixa com caminho provado (a 404 foi trocada pelo gerador)
     name: 'PRACTICE',
-    goal: 'The hardest run in the game. A perfect pilot never needs the fuel station.',
+    goal: 'The hardest run in the game. Plan your one refuel well.',
     challenge: true,
     generator: {
-      length: 4400, minGap: 140, roughness: 130, fuelStation: true, bestRunMargin: 0.04,
-      obstacles: [{ type: 'rock', count: 22, passGap: 64, spacing: 115 }],
+      length: 4400, minGap: 125, roughness: 135, fuelStation: true, refuelMargin: 0.05,
+      obstacles: [{ type: 'rock', count: 26, passGap: 56, spacing: 105 }],
+    },
+    modifiers: [],
+  },
+  // BONUS (D-021): a única fase sorteada a cada partida, para o replay infinito; recorde separado
+  {
+    key: 'bonus',
+    name: 'BONUS',
+    goal: 'A brand-new random layout every run.',
+    challenge: true,
+    random: true,
+    generator: {
+      length: 3200, minGap: 170, roughness: 105, fuelStation: true, refuelMargin: 0.08,
+      obstacles: [{ type: 'rock', count: 11, passGap: 85 }],
     },
     modifiers: [],
   },

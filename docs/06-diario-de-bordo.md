@@ -25,7 +25,6 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 
 ### Próximos passos
 
-0. **Construir as decisões do teste com amigos** (D-021 a D-023), na ordem das histórias [#82](https://github.com/TARNAGS/resgate-espacial/issues/82), [#83](https://github.com/TARNAGS/resgate-espacial/issues/83), [#84](https://github.com/TARNAGS/resgate-espacial/issues/84), [#85](https://github.com/TARNAGS/resgate-espacial/issues/85) e [#86](https://github.com/TARNAGS/resgate-espacial/issues/86). Elas estão em "Pronto", com o Claude.
 1. **Novos testes do Fernando** com o que existe hoje: controles A e C, aviso de pouso, PRACTICE e a regra do melhor caminho (sobrou combustível demais ou de menos na corrida perfeita?). Conferir também os cartões em revisão (#35, #40, #41 e #42).
 2. Escolher a velocidade de giro no toque ([#66](https://github.com/TARNAGS/resgate-espacial/issues/66)) e, depois do teste com pessoas, o controle final, A ou C ([#44](https://github.com/TARNAGS/resgate-espacial/issues/44)).
 3. Retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)).
@@ -197,6 +196,16 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **Dificuldade:** com o controle novo, o jogo ficou mais fácil; subir um pouco os níveis 1 a 3 e mais a PRACTICE.
 - **Histórias em "Pronto", com o Claude, nesta ordem:** [#82](https://github.com/TARNAGS/resgate-espacial/issues/82) controle, [#83](https://github.com/TARNAGS/resgate-espacial/issues/83) abastecer obrigatório, [#84](https://github.com/TARNAGS/resgate-espacial/issues/84) fases fixas, [#85](https://github.com/TARNAGS/resgate-espacial/issues/85) dificuldade (depende das três anteriores) e [#86](https://github.com/TARNAGS/resgate-espacial/issues/86) fase BONUS.
 - **Documentos 01 a 04 ainda não foram atualizados** com essas decisões; cada história lista o que atualizar.
+
+### 02/10/2026 — Construção das decisões do teste com amigos
+
+- **[#82](https://github.com/TARNAGS/resgate-espacial/issues/82) Controle (D-022):** o de dois polegares virou o **A**, padrão; o de um polegar virou o **B**, opção. Quem já tinha escolhido continua com o mesmo controle. `?control=a` e `?control=b` seguem os nomes novos.
+- **[#83](https://github.com/TARNAGS/resgate-espacial/issues/83) Abastecer obrigatório (D-023):** o piloto automático agora voa também as rotas com o posto (base, posto, tripulação, base, e base, tripulação, posto, base). O tanque é o maior dos dois planos com um abastecimento, mais 8% (5% na PRACTICE), e precisa ser menor que a corrida sem abastecer; senão, o gerador troca o cenário. Sem abastecer, o nível 3 gastaria 118% do tanque e a PRACTICE 132%. PERFECT RUN agora é "um abastecimento e nenhuma vida perdida".
+- **[#84](https://github.com/TARNAGS/resgate-espacial/issues/84) Fases fixas (D-021):** níveis 1 a 3 com as sementes 101, 202 e 303, e a PRACTICE com a primeira semente com caminho provado. Saíram os textos de "cenário novo a cada partida".
+- **[#85](https://github.com/TARNAGS/resgate-espacial/issues/85) Dificuldade:** níveis 1 a 3 um pouco mais difíceis (corredores menores, mais relevo, mais pedras, menos espaço para passar). A PRACTICE ficou bem mais difícil: corredor de 125, 26 pedras e 56 de passagem.
+- **[#86](https://github.com/TARNAGS/resgate-espacial/issues/86) BONUS (D-021):** quinta fase, sorteada a cada partida, com posto e recorde separado, no mapa ao lado da PRACTICE.
+- **62 testes automáticos**, incluindo a reprodução numa partida de verdade dos dois planos com um abastecimento (na ida e na volta), nas fases com posto.
+- Os cartões foram para "Em revisão": falta o Fernando jogar e aprovar a dificuldade nova.
 
 ## Aprendizados de produto
 

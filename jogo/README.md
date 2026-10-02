@@ -33,11 +33,11 @@ Os módulos do navegador não abrem com dois cliques no `index.html` (`file://`)
 
 As regras (`core`) não tocam no navegador: avisam o que aconteceu por eventos (pousou, explodiu, concluiu), e o som, as mensagens e a pontuação reagem. A medição (E-17) vai se ligar aos mesmos eventos.
 
-## Regra do melhor caminho (D-018)
+## Caminho provado e abastecer obrigatório (D-018 e D-023)
 
 Ao gerar um cenário, o piloto automático joga a fase inteira, ida e volta, sem abastecer, e fica com a corrida que gastou menos combustível. Com isso:
 
-- **Fase com posto** (`fuelStation: true`): o tanque é essa melhor corrida mais `bestRunMargin` (por exemplo, 0.06 = 6%). Quem voa perfeito conclui sem abastecer e chega quase sem combustível.
+- **Fase com posto** (`fuelStation: true`): o piloto também voa as rotas com o posto (abastecendo na ida ou na volta). O tanque é o maior desses dois planos mais `refuelMargin` (por exemplo, 0.08 = 8%) e precisa ser menor que a corrida sem abastecer (D-023): é obrigatório abastecer uma vez.
 - **Fase sem posto:** o tanque é `tankSeconds` ou a melhor corrida mais 25%, o que for maior.
 - Se o piloto não conseguir concluir um cenário, o gerador troca a semente. Toda fase jogada tem caminho provado.
 
@@ -70,6 +70,7 @@ Copie `src/content/obstacles/rock.js`, mude o comportamento e registre em `src/c
 
 - **Painel de ajuste (#42):** abrir o jogo com `?tuning`, ou tocar 5 vezes no subtítulo do menu, ou apertar a tecla `` ` ``. Durante a partida, o botão **T** abre o painel. Os valores mudam na hora, ficam salvos no aparelho e podem ser copiados.
 - **Treino (#35):** no painel, TRAINING. Chão, paredes e uma plataforma, sem tripulação e sem perder vidas.
-- **Atalho de nível:** com o painel liberado, `?level=w1-3`, `?level=training` ou `?level=practice` abre direto a fase.
+- **Atalho de nível:** com o painel liberado, `?level=w1-3`, `?level=training`, `?level=practice` ou `?level=bonus` abre direto a fase.
+- **Fases fixas (D-021):** cada fase da sequência e a PRACTICE têm `seed` em `src/content/worlds.js`; a BONUS tem `random: true`.
 - **Abertura (#76):** aparece sozinha no primeiro PLAY; para rever, Settings → WATCH INTRO, ou abra o jogo com `?intro` (pede um toque antes, para liberar o som). SKIP (ou Esc) pula e para a música. A música é o relógio da abertura: as telas começam nos compassos de `INTRO_SONG.scenes`. O desenho fica em `src/render/intro.js`.
-- **Controle de toque (#44):** Settings → Touch control alterna entre A (tocar e segurar) e C (dois polegares: o esquerdo aponta e o direito acelera; a câmera mantém a nave longe dos polegares), e a escolha fica salva no aparelho. Também dá para abrir com `?control=a` ou `?control=c`. Os botões do C só aparecem em telas de toque; no PC, o C funciona com o mouse apontando e ↑ ou Espaço no propulsor.
+- **Controle de toque (#44):** Settings → Touch control alterna entre A, o padrão (dois polegares: o esquerdo aponta e o direito acelera; a câmera mantém a nave longe dos polegares, D-022), e B (um polegar: tocar acelera e arrastar aponta), e a escolha fica salva no aparelho. Também dá para abrir com `?control=a` ou `?control=b`. Os botões do C só aparecem em telas de toque; no PC, o C funciona com o mouse apontando e ↑ ou Espaço no propulsor.

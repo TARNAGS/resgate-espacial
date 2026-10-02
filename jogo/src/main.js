@@ -81,8 +81,8 @@ const tuning = await createTuning({
   onTraining: () => startLevel(TRAINING_LEVEL),
 });
 
-// Esquema do toque pelo endereço, para comparar sem abrir o painel (#44): ?control=a ou c
-const CONTROL_FROM_URL = { a: 'hold', c: 'twin' }[(new URLSearchParams(location.search).get('control') || '').toLowerCase()];
+// Esquema do toque pelo endereço (D-022): ?control=a (dois polegares) ou b (um polegar)
+const CONTROL_FROM_URL = { a: 'twin', b: 'hold' }[(new URLSearchParams(location.search).get('control') || '').toLowerCase()];
 if (CONTROL_FROM_URL) PARAMS.touchScheme = CONTROL_FROM_URL;
 
 // ===== Mensagens e efeitos ligados aos eventos da partida =====
@@ -124,8 +124,9 @@ events.on('complete', ({ def, run }) => {
   buttons.push(['PLAY AGAIN', () => startLevel(def), !next]);
   buttons.push(['MENU', toMenu]);
   const best = isBest ? 'NEW BEST!' : `best ${SCORING.format(prevBest)}`;
-  const perfect = run.perfectRun ? 'PERFECT RUN: no refuel! · ' : '';
-  screens.overlay('RESCUE COMPLETE', `${perfect}Time ${SCORING.format(run)} · ${best} · The next run builds a new layout.`, buttons);
+  const perfect = run.perfectRun ? 'PERFECT RUN: one refuel, no lives lost! · ' : '';
+  const newLayout = def.random ? ' · The next run builds a new layout.' : '';
+  screens.overlay('RESCUE COMPLETE', `${perfect}Time ${SCORING.format(run)} · ${best}${newLayout}`, buttons);
 });
 events.on('gameOver', ({ def, seed }) => {
   Sound.setThrust(false);
@@ -154,6 +155,7 @@ function drawMap() {
 }
 
 function startLevel(def, seed = randomSeed()) {
+  if (def.seed != null) seed = def.seed;   // fases fixas: o mesmo cenário para todos (D-021)
   app.match = createMatch({ def, seed, getParams: () => PARAMS, events });
   app.paused = false;
   app.thumbHintShown = false;
@@ -193,7 +195,7 @@ function updateSoundButton() {
 }
 
 // Esquema do toque (#44): A, B ou C, salvo no aparelho; o endereço (?control=) tem prioridade
-const SCHEMES = ['hold', 'twin'];
+const SCHEMES = ['twin', 'hold'];
 function updateControlButton() {
   screens.el('btn-control').textContent = `TOUCH CONTROL: ${SCHEME_NAMES[PARAMS.touchScheme]}`;
   screens.el('control-help').textContent = `TOUCH · ${TOUCH_HINTS[PARAMS.touchScheme].toLowerCase()}`;

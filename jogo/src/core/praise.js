@@ -9,7 +9,7 @@ import { shipVerts, shipSamples } from './ship.js';
 //   closeCall     passou "tirando um fininho" de uma pedra ou do terreno, rápido, sem bater
 //   greatSave     vinha rápido e ia bater em menos de meio segundo, mas desviou ou freou a tempo
 //   perfectLanding pousou quase parado e quase reto
-//   perfectRun    concluiu uma fase com posto sem abastecer e sem perder vidas (a corrida da D-018)
+//   perfectRun    concluiu uma fase com posto com um só abastecimento e sem perder vidas (D-023)
 
 const LABELS = {
   closeCall: 'CLOSE CALL',

@@ -30,7 +30,7 @@ export function createMatch({ def, seed, getParams, events }) {
     time: 0,             // tempo da partida, para obstáculos móveis
     over: null,          // 'complete' | 'gameOver'
     ship: null,
-    usedStation: false,  // pousou no posto? (a corrida perfeita não abastece)
+    stationLandings: 0,  // pousos no posto (a corrida perfeita abastece uma vez só, D-023)
   };
   const praise = createPraise({ level, events });
 
@@ -97,7 +97,7 @@ export function createMatch({ def, seed, getParams, events }) {
     const pad = c.land;
     const impact = { vx: s.vx, vy: s.vy, angle: s.a };
     settle(s, pad);
-    if (pad.kind === 'fuel') m.usedStation = true;
+    if (pad.kind === 'fuel') m.stationLandings += 1;
     events.emit('land', { pad: pad.kind, impact });
     praise.onLand(impact, s, p);
     if (pad.kind === 'crew' && !m.crewOnBoard) {
@@ -130,8 +130,8 @@ export function createMatch({ def, seed, getParams, events }) {
   function complete() {
     m.over = 'complete';
     m.timerOn = false;
-    // Corrida perfeita: fase com posto concluída sem abastecer e sem perder vidas (D-018)
-    const perfectRun = Boolean(def.generator.fuelStation) && !m.usedStation && m.livesLost === 0;
+    // Corrida perfeita: fase com posto concluída com um só abastecimento e sem perder vidas (D-023)
+    const perfectRun = Boolean(def.generator.fuelStation) && m.stationLandings === 1 && m.livesLost === 0;
     if (perfectRun) praise.perfectRun(m.ship);
     events.emit('complete', {
       def, seed,

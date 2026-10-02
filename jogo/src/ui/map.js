@@ -53,7 +53,7 @@ export function renderMap(container, info, { save, selected, onSelect }) {
     svg += `<text class="num" x="${p.x}" y="${p.y + 6}">★</text>`;
     svg += `<text class="label" x="${p.x}" y="${p.y + 45}">${lv.name}</text>`;
     if (done) svg += `<text class="best" x="${p.x}" y="${p.y + 59}">BEST ${SCORING.format(prog.best)} · ×${prog.rescues}</text>`;
-    else svg += `<text class="best challenge-text" x="${p.x}" y="${p.y + 59}">HARDEST</text>`;
+    else svg += `<text class="best challenge-text" x="${p.x}" y="${p.y + 59}">${lv.random ? 'RANDOM' : 'HARDEST'}</text>`;
     svg += '</g>';
   });
   svg += '</svg>';

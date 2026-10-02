@@ -58,9 +58,9 @@ As fases 1 a 3 são as do MVP (D-009) e já estão no jogo. As fases 4 e 5 vêm 
 
 | Fase | Nome | Novidade | Regras do gerador | Status |
 |---|---|---|---|---|
-| 1 | FIRST FLIGHT | Decolar e pousar, sem obstáculos, com dicas na tela | 1.800 de comprimento, corredor 250, relevo 45, sem posto, tanque 40 s | Definido |
-| 2 | ROCK FIELD | Obstáculos fixos simples | 2.600, corredor 200, relevo 85, 7 pedras com 105 de passagem, tanque 40 s | Definido |
-| 3 | LONG HAUL | Distância que pede o posto, ou uma corrida perfeita sem ele (D-018) | 3.800, corredor 180, relevo 100, posto, 10 pedras com 95 de passagem, tanque da melhor corrida + 6% | Definido |
+| 1 | FIRST FLIGHT | Decolar e pousar, sem obstáculos, com dicas na tela | Cenário fixo (semente 101, D-021); 1.800 de comprimento, corredor 225, relevo 60, sem posto, tanque 40 s | Definido |
+| 2 | ROCK FIELD | Obstáculos fixos simples | Cenário fixo (semente 202); 2.600, corredor 185, relevo 95, 9 pedras com 95 de passagem, tanque 40 s | Definido |
+| 3 | LONG HAUL | Distância que obriga a abastecer uma vez, na ida ou na volta (D-023) | Cenário fixo (semente 303); 3.800, corredor 165, relevo 110, posto, 12 pedras com 85 de passagem, tanque do melhor plano com um abastecimento + 8% | Definido |
 | 4 | — | Passagens estreitas e túneis | — | Proposta (E-12) |
 | 5 | — | Primeiro obstáculo móvel | — | Proposta (E-12; P-011) |
 | 6 a 10 | — | — | — | Em aberto (E-23) |

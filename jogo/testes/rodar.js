@@ -6,7 +6,7 @@ import { PARAMS, DEFAULT_PARAMS, setParams, resetParams, changedParams } from '.
 import { LEVELS, CHALLENGES, TRAINING_LEVEL, findLevel } from '../src/content/worlds.js';
 import { effectiveParams } from '../src/content/modifiers.js';
 import { generateLevel, validateLevel } from '../src/core/generator.js';
-import { bestRunInputs } from '../src/core/autopilot.js';
+import { routeInputs } from '../src/core/autopilot.js';
 import { INTRO_SONG, CHORDS } from '../src/content/songs.js';
 import { createPraise } from '../src/core/praise.js';
 import { createShip, fly, steer, landingForecast } from '../src/core/ship.js';
@@ -95,7 +95,8 @@ test('#37 ↑ e ← ao mesmo tempo: gira e acelera ao mesmo tempo', () => {
   assert.equal(i.turn, -1); assert.equal(i.thrust, true);
 });
 
-test('#38 tocar no direcional acende o propulsor; arrastar aponta a nave', () => {
+test('#38 controle B (um polegar): tocar acende o propulsor; arrastar aponta a nave', () => {
+  PARAMS.touchScheme = 'hold';
   const touching = readIntent({}, { cx: 100, cy: 100, x: 100, y: 100 }, PARAMS);
   assert.equal(touching.thrust, true); assert.equal(touching.targetAngle, null);
   const right = readIntent({}, { cx: 100, cy: 100, x: 160, y: 100 }, PARAMS);
@@ -113,8 +114,8 @@ test('#38 a velocidade de giro até o dedo é um parâmetro de ajuste', () => {
   assert.ok(Math.abs(b.a * 2 - a.a) < 1e-9);
 });
 
-test('#44 esquema C: o polegar esquerdo só aponta; o direito acende o propulsor', () => {
-  PARAMS.touchScheme = 'twin';
+test('D-022 controle A (dois polegares) é o padrão: o esquerdo só aponta; o direito acende o propulsor', () => {
+  assert.equal(DEFAULT_PARAMS.touchScheme, 'twin');
   const aimOnly = readIntent({}, { cx: 0, cy: 0, x: 60, y: 0 }, PARAMS, false);
   const both = readIntent({}, { cx: 0, cy: 0, x: 60, y: 0 }, PARAMS, true);
   assert.equal(aimOnly.thrust, false); assert.ok(aimOnly.targetAngle !== null);
@@ -122,18 +123,18 @@ test('#44 esquema C: o polegar esquerdo só aponta; o direito acende o propulsor
   assert.equal(touchThrust(PARAMS, null, true), true);
 });
 
-test('#44 esquema A continua como antes: encostar já acelera', () => {
-  assert.equal(PARAMS.touchScheme, 'hold');
+test('D-022 controle B (opção): encostar já acelera', () => {
+  PARAMS.touchScheme = 'hold';
   assert.equal(touchThrust(PARAMS, { cx: 0, cy: 0, x: 0, y: 0 }), true);
   assert.equal(touchThrust(PARAMS, null, true), false);
 });
 
 // ===== Parâmetros e modificadores =====
-test('#44 um controle removido (B) e ainda salvo no aparelho volta para o padrão', () => {
+test('#44 um controle removido e ainda salvo no aparelho volta para o padrão', () => {
   setParams({ touchScheme: 'aim' });
-  assert.equal(PARAMS.touchScheme, 'hold');
-  setParams({ touchScheme: 'twin' });
   assert.equal(PARAMS.touchScheme, 'twin');
+  setParams({ touchScheme: 'hold' });
+  assert.equal(PARAMS.touchScheme, 'hold');
 });
 
 test('#36 mudar um parâmetro muda o jogo sem outra alteração', () => {
@@ -326,16 +327,21 @@ test('Regras 7.1 aviso forte ao pousar na tripulação com pouco combustível', 
   assert.ok(log.some((e) => e.name === 'boarding' && e.lowFuel));
 });
 
-// ===== Regra do melhor caminho (D-018) =====
+// ===== Caminho provado (D-018) e abastecer obrigatório (D-023) =====
 const ALL = [...LEVELS, ...CHALLENGES];
 const physics = (def) => effectiveParams({ ...DEFAULT_PARAMS }, def);
 
 for (const def of ALL) {
-  test(`D-018 ${def.key}: todo cenário gerado tem uma corrida sem abastecer provada pelo piloto automático`, () => {
-    for (let k = 1; k <= 12; k++) {
+  test(`D-018 ${def.key}: todo cenário gerado tem caminho provado pelo piloto automático`, () => {
+    for (let k = 1; k <= 8; k++) {
       const lv = generateLevel(def, k * 7907, physics(def));
-      assert.ok(lv.bestRun, `semente ${k * 7907}: sem corrida provada`);
-      assert.ok(lv.tankSeconds >= lv.bestRun.thrustSeconds, 'tanque menor que a melhor corrida');
+      if (def.generator.fuelStation) {
+        assert.ok(lv.refuelPlans, `semente ${k * 7907}: sem plano com abastecimento`);
+        assert.ok(lv.tankSeconds >= lv.refuelPlans.tank, 'tanque menor que o plano com um abastecimento');
+        assert.ok(lv.tankSeconds < lv.refuelPlans.full, 'D-023: deu para concluir sem abastecer');
+      } else {
+        assert.ok(lv.bestRun && lv.tankSeconds >= lv.bestRun.thrustSeconds, `semente ${k * 7907}: sem corrida provada`);
+      }
       // Tentar de novo com a semente final repete o mesmo cenário e o mesmo tanque
       const again = generateLevel(def, lv.seed, physics(def));
       assert.equal(again.seed, lv.seed); assert.equal(again.tankSeconds, lv.tankSeconds);
@@ -343,43 +349,44 @@ for (const def of ALL) {
   });
 }
 
-for (const def of ALL.filter((d) => d.generator.fuelStation)) {
-  test(`D-018 ${def.key}: com posto, o tanque é a melhor corrida mais uma folga pequena`, () => {
-    const margin = def.generator.bestRunMargin;
-    for (let k = 1; k <= 12; k++) {
-      const lv = generateLevel(def, k * 7907, physics(def));
-      assert.ok(Math.abs(lv.tankSeconds / lv.bestRun.thrustSeconds - (1 + margin)) < 1e-9);
-    }
-  });
-
-  test(`D-018 ${def.key}: a melhor corrida, jogada numa partida de verdade, conclui sem abastecer e chega quase sem combustível`, () => {
-    // O piloto gira na velocidade do teclado; a partida usa a mesma velocidade para reproduzir igual
-    PARAMS.touchRotationSpeed = PARAMS.keyRotationSpeed;
-    for (const seed of [11, 222, 3333]) {
-      const events = createEvents();
-      const log = [];
-      events.on('*', (e) => log.push(e));
-      const match = createMatch({ def, seed, getParams: () => PARAMS, events });
-      const m = match.state;
-      const [go, back] = bestRunInputs(m.level, match.params(), m.level.bestRun);
-      const UP_ = { turn: 0, targetAngle: null, thrust: true };
-      match.update(DT, UP_);                                 // decola da base
-      for (const input of go) match.update(DT, input);
-      assert.equal(m.ship.state, 'boarding', `semente ${seed}: não pousou na tripulação`);
-      for (let i = 0; i < 400 && !m.crewOnBoard; i++) match.update(DT, NONE);
-      match.update(DT, UP_);                                 // decola da tripulação
-      for (const input of back) match.update(DT, input);
-      assert.equal(m.over, 'complete', `semente ${seed}: não concluiu (${log.find((e) => e.name === 'crash')?.reason ?? 'sem batida'})`);
-      assert.ok(!log.some((e) => e.name === 'refuel' || (e.name === 'land' && e.pad === 'fuel')), 'abasteceu');
-      const done = log.find((e) => e.name === 'complete');
-      assert.equal(done.run.perfectRun, true, 'corrida perfeita sem o elogio PERFECT RUN');
-      assert.ok(log.some((e) => e.name === 'praise' && e.kind === 'perfectRun'));
-      const left = done.run.fuelLeft;
-      const expected = def.generator.bestRunMargin / (1 + def.generator.bestRunMargin);
-      assert.ok(left > 0 && Math.abs(left - expected) < 0.01, `sobrou ${(left * 100).toFixed(1)}%, esperado ${(expected * 100).toFixed(1)}%`);
-    }
-  });
+// Joga uma rota do piloto numa partida de verdade: decola, voa cada trecho e, ao pousar,
+// espera abastecer (posto) ou embarcar (tripulação) antes de decolar de novo
+function playRoute(match, legs) {
+  const m = match.state;
+  const UP_ = { turn: 0, targetAngle: null, thrust: true };
+  for (const inputs of routeInputs(m.level, match.params(), legs)) {
+    match.update(DT, UP_);
+    for (const input of inputs) match.update(DT, input);
+    if (m.over) return;
+    for (let i = 0; i < 900 && (m.ship.state === 'boarding' || (m.ship.pad?.refuel && m.ship.fuel < 1)); i++) match.update(DT, NONE);
+  }
 }
+
+for (const def of ALL.filter((d) => d.generator.fuelStation)) {
+  for (const plan of ['going', 'back']) {
+    test(`D-023 ${def.key}: abastecendo uma vez ${plan === 'going' ? 'na ida' : 'na volta'}, a partida conclui com PERFECT RUN`, () => {
+      PARAMS.touchRotationSpeed = PARAMS.keyRotationSpeed;   // o piloto gira na velocidade do teclado
+      for (const seed of [11, 222]) {
+        const events = createEvents();
+        const log = [];
+        events.on('*', (e) => log.push(e));
+        const match = createMatch({ def, seed, getParams: () => PARAMS, events });
+        playRoute(match, match.state.level.refuelPlans[plan]);
+        const m = match.state;
+        assert.equal(m.over, 'complete', `semente ${seed}: não concluiu (${log.find((e) => e.name === 'crash')?.reason ?? 'sem batida'})`);
+        assert.equal(m.stationLandings, 1);
+        assert.equal(log.find((e) => e.name === 'complete').run.perfectRun, true);
+        assert.ok(log.some((e) => e.name === 'praise' && e.kind === 'perfectRun'));
+      }
+    });
+  }
+}
+
+test('D-021 as fases da sequência e a PRACTICE têm cenário fixo; só a BONUS é sorteada', () => {
+  for (const def of [...LEVELS, findLevel('practice')]) assert.ok(Number.isInteger(def.seed), def.key);
+  const bonus = findLevel('bonus');
+  assert.ok(bonus && bonus.random && bonus.seed == null && bonus.challenge);
+});
 
 test('PRACTICE é a fase mais difícil: corredor mais estreito, mais pedras e menos espaço para passar', () => {
   const practice = findLevel('practice');
