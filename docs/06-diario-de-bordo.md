@@ -25,7 +25,6 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 
 ### Próximos passos
 
-0. **Ligar o ranking online:** o Fernando cria o Firebase Realtime Database e passa o endereço ([#87](https://github.com/TARNAGS/resgate-espacial/issues/87)).
 1. **O Fernando conta o retorno completo do teste com amigos** e testa as mudanças de hoje no iPhone: cartões em "Em revisão" ([#35](https://github.com/TARNAGS/resgate-espacial/issues/35), [#39](https://github.com/TARNAGS/resgate-espacial/issues/39), [#40](https://github.com/TARNAGS/resgate-espacial/issues/40), [#41](https://github.com/TARNAGS/resgate-espacial/issues/41), [#42](https://github.com/TARNAGS/resgate-espacial/issues/42), [#66](https://github.com/TARNAGS/resgate-espacial/issues/66), [#76](https://github.com/TARNAGS/resgate-espacial/issues/76), [#81](https://github.com/TARNAGS/resgate-espacial/issues/81) e [#82](https://github.com/TARNAGS/resgate-espacial/issues/82) a [#86](https://github.com/TARNAGS/resgate-espacial/issues/86)).
 2. **Fechar o repositório** quando o teste acabar.
 3. Retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)).
@@ -218,6 +217,15 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **Construído:** tela PILOT NAME depois do PLAY (ou ao trocar em Settings → PILOT), botão RANKING no menu com abas por fase, os 10 melhores, o nick de quem joga destacado e o controle usado. Só um tempo melhor substitui o anterior. 68 testes, com um banco online simulado: mesmo nick em dois aparelhos, fila sem rede.
 - **Falta o banco online:** sem ele, cada aparelho tem o seu ranking. Proposta: Firebase Realtime Database (gratuito), criado pelo Fernando; o endereço vai em `jogo/src/config/online.js`.
 - **O que pode quebrar o ranking**, levado ao Fernando: sem banco, nada é compartilhado; sem senha, dá para usar o nick de outro; tempos falsos são possíveis; mudar a fase começa um ranking novo (de propósito); painel de ajuste alterado não envia tempo; a BONUS é sorteada, então mede sorte também; controles diferentes no mesmo ranking.
+
+### 02/10/2026 — Ranking online ligado
+
+- **Firebase criado** a pedido do Fernando, com o Claude conduzindo e o Fernando entrando só com o login do Google e aceitando os termos: projeto `resgate-espacial`, **sem Google Analytics** e sem o programa de desenvolvedores (as opções que compartilham menos dados), Realtime Database em us-central1, no plano gratuito.
+- **Banco:** https://resgate-espacial-default-rtdb.firebaseio.com, ligado em `jogo/src/config/online.js`.
+- **Regras do banco** (em vez do "modo de teste", que expira em 30 dias): qualquer um lê o ranking; só dá para gravar em `scores/<fase>/<NICK>` um tempo válido, de nick válido, e só se for melhor que o anterior; apagar é proibido; o resto do banco fica fechado.
+- **Testado pelo terminal e pelo navegador:** ler, gravar, tempo pior recusado, tempo melhor aceito, nick inválido e campo estranho recusados, apagar recusado. O jogo agora entende a recusa do banco como "não era melhor" e não fica tentando de novo.
+- **Dados de teste:** duas entradas (TESTE e BROWSER) ficaram numa fase falsa, `scores/teste_abc1`, que não aparece no jogo. Não foram apagadas porque apagar dados é com o Fernando (pelo console do Firebase, aba Dados), e as regras proíbem apagar pela internet.
+- 69 testes automáticos.
 
 ## Aprendizados de produto
 

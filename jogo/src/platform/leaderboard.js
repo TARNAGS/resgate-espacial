@@ -25,17 +25,19 @@ export function createLeaderboard({ url = LEADERBOARD_URL, storage = browserStor
     if (!r.ok) throw new Error(`ranking: ${r.status}`);
     return r.json();
   }
+  // Devolve false se o banco recusar (401: as regras só aceitam tempo melhor e dados válidos)
   async function remotePut(path, value) {
     const r = await fetchFn(`${base}/${path}.json`, { method: 'PUT', body: JSON.stringify(value) });
+    if (r.status === 401) return false;
     if (!r.ok) throw new Error(`ranking: ${r.status}`);
+    return true;
   }
 
   // Envia ao banco online só se for melhor que o tempo que já está lá
   async function sendIfBetter({ key, nick, entry }) {
     const current = await remoteGet(`scores/${key}/${nick}`);
     if (current && current.time <= entry.time) return false;
-    await remotePut(`scores/${key}/${nick}`, entry);
-    return true;
+    return remotePut(`scores/${key}/${nick}`, entry);
   }
 
   return {

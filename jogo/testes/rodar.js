@@ -579,8 +579,15 @@ test('#87 sem rede: o tempo fica no aparelho e numa fila, e vai para o banco qua
   assert.equal(srv.db.scores.k.ANA.time, 40);
 });
 
+test('#87 o banco recusou (outro aparelho já tem um tempo melhor): não fica tentando de novo', async () => {
+  const lb = createLeaderboard({ url: 'https://db.test', storage: memoryStorage(), fetchFn: async (url, opts = {}) => (opts.method === 'PUT' ? { ok: false, status: 401, json: async () => null } : { ok: true, status: 200, json: async () => null }) });
+  const r = await lb.submit({ key: 'k', nick: 'ANA', time: 40 });
+  assert.equal(r.online, true); assert.equal(r.improved, false); assert.ok(!r.queued);
+  assert.equal(await lb.flush(), 0);
+});
+
 test('#87 sem banco configurado, o ranking fica só no aparelho', async () => {
-  const lb = createLeaderboard({ url: '', storage: memoryStorage() });
+  const lb = createLeaderboard({ url: '', storage: memoryStorage() });   // url vazia: sem banco
   await lb.submit({ key: 'k', nick: 'ANA', time: 40 });
   const { online, list } = await lb.top('k');
   assert.equal(lb.online, false); assert.equal(online, false); assert.equal(list[0].nick, 'ANA');

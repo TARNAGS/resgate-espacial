@@ -34,7 +34,7 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-020 | Big picture: mundos com 10 fases, cada um com identidade visual própria | 02/10/2026 | Aceita; o MVP segue com 3 fases (D-009) |
 | D-021 | Fases com cenário fixo, iguais para todos; só a fase BONUS é sorteada | 02/10/2026 | Aceita; construída ([#84](https://github.com/TARNAGS/resgate-espacial/issues/84) e [#86](https://github.com/TARNAGS/resgate-espacial/issues/86)) |
 | D-022 | Controle principal: dois polegares (novo A); o de um polegar vira a opção B | 02/10/2026 | Aceita; construída ([#82](https://github.com/TARNAGS/resgate-espacial/issues/82)) |
-| D-024 | Ranking de tempos por fase, com nickname como ID do jogador | 02/10/2026 | Aceita; construída ([#87](https://github.com/TARNAGS/resgate-espacial/issues/87)); banco online a configurar |
+| D-024 | Ranking de tempos por fase, com nickname como ID do jogador | 02/10/2026 | Aceita; construída e online ([#87](https://github.com/TARNAGS/resgate-espacial/issues/87)) |
 | D-023 | Nas fases com posto, abastecer pelo menos uma vez é obrigatório | 02/10/2026 | Aceita; construída ([#83](https://github.com/TARNAGS/resgate-espacial/issues/83)) |
 
 ## D-001 — Sem login e sem contas

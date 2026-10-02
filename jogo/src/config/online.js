@@ -1,6 +1,10 @@
-// Endereço do banco online do ranking (Firebase Realtime Database), por exemplo:
-//   https://resgate-espacial-default-rtdb.firebaseio.com
-// Vazio: o ranking fica só no aparelho. O endereço não é segredo (o navegador precisa dele), mas
-// com as regras abertas do banco qualquer pessoa com ele pode escrever; serve para um grupo pequeno
-// de playtesters, não para o lançamento.
-export const LEADERBOARD_URL = '';
+// Endereço do banco online do ranking (#87, D-024): Firebase Realtime Database do projeto
+// "resgate-espacial", na conta do Fernando, criado em 02/10/2026. Vazio: o ranking fica só no aparelho.
+//
+// O endereço não é segredo (o navegador precisa dele). Quem protege os dados são as regras do banco,
+// publicadas no console do Firebase: qualquer um pode LER o ranking; só dá para GRAVAR em
+// scores/<fase>/<NICK> um tempo válido (número entre 0 e 3600, com "at" e, opcionalmente, "control"),
+// de um nick válido (3 a 12 letras maiúsculas, números ou "_"), e só se for melhor que o anterior.
+// Apagar é proibido. Ainda assim, quem souber o endereço pode mandar um tempo falso: serve para um
+// grupo pequeno de playtesters, não para o lançamento (P-019).
+export const LEADERBOARD_URL = 'https://resgate-espacial-default-rtdb.firebaseio.com';
