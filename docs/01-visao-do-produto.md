@@ -109,7 +109,7 @@ As regras detalhadas ficam no documento 02 (Regras do jogo) e os requisitos, no 
 | Anúncios | Continuam fora (D-003, revista pela D-019) |
 | Lojas de aplicativos e compras **no MVP** | O MVP é testado pelo site; lojas e loja de itens vêm depois (seção 8.3) |
 | Multiplayer | Jogo para um jogador (D-004) |
-| Ranking online e sincronização entre aparelhos | Exigiriam servidor e identificação do jogador |
+| Ranking online e sincronização entre aparelhos **no MVP** | Exigiriam servidor e identificação do jogador. Depois do MVP, o ranking está em estudo (P-019), possivelmente pelos rankings do Game Center e do Google Play Games |
 | Nome, arte e sons de jogos existentes | Identidade própria (D-005) |
 
 ### 8.3 Big picture: o jogo depois do MVP
@@ -124,6 +124,8 @@ O MVP continua com 3 fases (D-009). A visão de longo prazo, descrita pelo Ferna
 | **Abertura** | Antes da primeira fase, telas com imagem e texto (não um filme): a tripulação em apuros, o chamado para o resgate e um fade para a fase 1 | Proposta ([documento 02](02-regras-do-jogo.md), seção 10.1) |
 | **Loja de itens** | Loja no menu, com itens cosméticos e modificadores de jogo e de nave, comprados com dinheiro real ou com moedas do jogo | Em aberto (P-017) |
 | **Cobrança** | Jogo pago, gratuito com loja de itens, ou os dois | Em aberto (P-014) |
+| **Modo Nightmare** | Modo mais difícil: morrer não devolve o combustível | Em aberto (P-018) |
+| **Ranking de tempos** | Comparar os tempos de cada fase, para quem for mais rápido | Em aberto (P-019) |
 
 A ordem em que isso entra está no [Roadmap](04-roadmap.md) (M4 e M5, em proposta).
 

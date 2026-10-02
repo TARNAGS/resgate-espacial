@@ -179,6 +179,13 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
   - Os bipes de SOS em Morse saíram, porque competiam com a música.
   - Link de teste direto: `?intro` abre uma tela "TAP TO START" (o navegador só libera o som depois de um toque) e, em seguida, a abertura, terminando na fase.
 
+### 02/10/2026 — Teste com um amigo e duas ideias novas
+
+- **Janela de teste aberta** para um amigo do Fernando jogar em https://tarnags.github.io/resgate-espacial/jogo/. O Fernando vai contar o retorno depois.
+- **Ideias que vieram do teste**, registradas como descobertas para o Fernando detalhar:
+  - **Modo Nightmare (P-018, [#79](https://github.com/TARNAGS/resgate-espacial/issues/79)):** morrer não devolve o combustível. Catch: a nave reaparece pousada na base, que abastece; o modo precisa dizer o que acontece com a base e o posto.
+  - **Ranking de tempos (P-019, [#80](https://github.com/TARNAGS/resgate-espacial/issues/80)):** catches: sem login nem servidor (D-001), cenários sorteados tornam tempos incomparáveis (D-014) e tempos falsos são fáceis de mandar. Saídas propostas: rankings do Game Center e do Google Play Games, e um desafio do dia com a mesma semente para todos.
+
 ## Aprendizados de produto
 
 - Separar o objetivo do projeto (portfólio) do objetivo do produto (o jogador), com uma regra de desempate: quando os dois brigam, o jogador vence.

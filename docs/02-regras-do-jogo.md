@@ -269,6 +269,8 @@ São os números que definem a "sensação" do jogo. Eles serão calibrados no p
 | P-006 | Como funciona a pontuação? | Seção 8 |
 | P-009 | A fase 1 (tutorial) é aleatória ou fixa? | Seção 10 |
 | P-010 | Ao tentar de novo, o cenário se repete ou muda? | Seção 10 |
+| P-018 | Como funciona o modo Nightmare (morrer não devolve o combustível)? | Seção 7.1 |
+| P-019 | Como funciona um ranking de tempos por fase? | Seção 8 |
 
 ## 15. Ideias para depois
 
