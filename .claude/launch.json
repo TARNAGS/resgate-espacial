@@ -2,6 +2,12 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "jogo",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["jogo/servir.js"],
+      "port": 8081
+    },
+    {
       "name": "prototipo",
       "runtimeExecutable": "node",
       "runtimeArgs": ["prototipos/servir.js"],

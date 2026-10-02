@@ -1,0 +1,10 @@
+{
+  "name": "resgate-espacial",
+  "private": true,
+  "type": "module",
+  "description": "Resgate Espacial (codinome). JavaScript puro com Canvas, sem etapa de build (D-011).",
+  "scripts": {
+    "start": "node servir.js",
+    "test": "node testes/rodar.js"
+  }
+}

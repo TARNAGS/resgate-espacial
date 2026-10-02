@@ -4,7 +4,7 @@
 
 Jogo 2D de nave com gravidade: pilote um pequeno triângulo, dose o propulsor contra o peso da nave, atravesse os obstáculos, resgate a tripulação perdida no espaço e volte para a base antes de o combustível acabar.
 
-**Status:** documentação base aprovada em 01/10/2026 e backlog montado. Marco atual: M0 (fundação técnica). O jogo ainda não começou a ser construído.
+**Status:** documentação base aprovada em 01/10/2026 e backlog montado. Marcos atuais: M0 (só falta a retrospectiva) e M1 (protótipo de controle). O jogo está em construção na pasta [`jogo/`](jogo/README.md), com as histórias do M1 prontas para testar no iPhone.
 
 ## Sobre o projeto
 
@@ -26,6 +26,7 @@ Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável
 | 04 | [Roadmap](docs/04-roadmap.md) | Em que ordem o produto é construído | Aprovado |
 | 05 | [Registro de decisões](docs/05-registro-de-decisoes.md) | Por que escolhemos X e não Y | Contínuo |
 | 06 | [Diário de bordo](docs/06-diario-de-bordo.md) | O que foi feito em cada sessão e onde o projeto parou | Contínuo |
+| 07 | [Roteiro de teste do controle](docs/07-roteiro-de-teste-do-controle.md) | Como testar o controle com pessoas | Proposta |
 
 ## Como o trabalho é organizado
 
@@ -42,6 +43,9 @@ O quadro tem duas trilhas ([D-016](docs/05-registro-de-decisoes.md#d-016--quadro
 Novas issues seguem os modelos de história, tarefa, épico, iniciativa, descoberta e bug, disponíveis ao criar uma issue.
 
 ## Como jogar
+
+O jogo em construção fica em [`jogo/`](jogo/README.md): na pasta do projeto, rode `node jogo/servir.js` e abra `http://localhost:8081`.
+
 
 O [protótipo 01](prototipos/README.md) roda no navegador do computador e do celular, com a tela na horizontal no celular. Ele fica publicado em **https://tarnags.github.io/resgate-espacial/prototipos/01/** só durante as janelas de teste (D-017).
 

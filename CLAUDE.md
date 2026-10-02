@@ -18,11 +18,13 @@ Leia o [diário de bordo](docs/06-diario-de-bordo.md). A seção "Onde paramos" 
 |---|---|
 | Visão, regras do jogo, PRD, roadmap e decisões | `docs/01` a `docs/05` |
 | O que foi feito e onde paramos | `docs/06-diario-de-bordo.md` |
+| O jogo (código, testes e como criar fases e obstáculos) | `jogo/` e [`jogo/README.md`](jogo/README.md); roda com `node jogo/servir.js` em http://localhost:8081 e os testes com `node jogo/testes/rodar.js` |
+| Roteiro de teste com pessoas | `docs/07-roteiro-de-teste-do-controle.md` |
 | Protótipos descartáveis | `prototipos/`; o 01 roda com `node prototipos/servir.js` em http://localhost:8080 |
 | Backlog (iniciativas, épicos, histórias, tarefas e descobertas) | Issues do GitHub, ligadas por sub-issues, com os marcos M0 a M3 |
 | Quadro kanban | GitHub Project "Resgate Espacial — Produto": https://github.com/users/TARNAGS/projects/1 |
 | Modelos de issue | `.github/ISSUE_TEMPLATE/` |
-| Abrir o protótipo pelo navegador do Claude Code | `.claude/launch.json`, configuração "prototipo" |
+| Abrir o jogo ou o protótipo pelo navegador do Claude Code | `.claude/launch.json`, configurações "jogo" e "prototipo" |
 
 ## Como trabalhamos
 
@@ -75,5 +77,7 @@ Fora das janelas, o protótipo roda na rede de casa. Rodar `node prototipos/serv
 - JavaScript puro com Canvas, sem framework e sem etapa de build (D-011).
 - Hospedagem no GitHub Pages, em `tarnags.github.io/resgate-espacial` (D-013), só durante as janelas de teste (D-017). Como o jogo roda nesse subcaminho, manifesto e service worker precisam usar caminhos relativos.
 - Prioridade para o iPhone (D-008). As limitações do iPhone para PWAs estão no PRD, seção 6.
-- Os parâmetros de ajuste da física ficam num lugar só (`PARAMS`, no topo do `game.js` do protótipo).
+- Os parâmetros de ajuste da física ficam num lugar só: `jogo/src/config/params.js`.
+- Conteúdo é dado, não código: mundos e níveis em `jogo/src/content/worlds.js`, obstáculos em `jogo/src/content/obstacles/`, modificadores em `jogo/src/content/modifiers.js`.
+- Antes de cada commit que mexe no jogo, rodar `node jogo/testes/rodar.js`; regra nova ou mudada ganha teste.
 - Fases geradas a partir de uma semente (D-014): a mesma semente gera sempre o mesmo cenário, e todo cenário gerado precisa ter solução.

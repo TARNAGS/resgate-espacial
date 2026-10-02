@@ -8,8 +8,10 @@
 
 Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e de onde o projeto parou. É o ponto de partida para retomar o trabalho, em qualquer máquina.
 
-## Onde paramos (01/10/2026)
+## Onde paramos (02/10/2026)
 
+- **Jogo de verdade em construção** em [`jogo/`](../jogo/README.md), a partir do protótipo 01. As histórias e tarefas do M1 (#32 a #42) estão em "Em revisão": falta o Fernando testar no iPhone. Mundos, níveis, obstáculos e modificadores viraram dados, prontos para receber as definições de P-011 e P-012.
+- **Novo objetivo:** portfólio e renda, nas lojas da Apple e do Google (#63). A pesquisa técnica das lojas é a #65, com o Claude.
 - **Marco atual: M0 — Fundação, só falta a retrospectiva** ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)). As três decisões do M0 estão tomadas (D-011, D-012 e D-013), o jogo foi publicado no GitHub Pages ([#30](https://github.com/TARNAGS/resgate-espacial/issues/30)) e o Fernando o testou no iPhone ([#31](https://github.com/TARNAGS/resgate-espacial/issues/31), concluída).
 - **Repositório e quadro privados (D-017).** O jogo só fica no ar durante as janelas de teste; o passo a passo está no `CLAUDE.md` do projeto. Fora delas, o protótipo roda na rede de casa.
 - **Protótipo 01 pronto** ([`prototipos/`](../prototipos/README.md)): menu com mapa de progresso, fases geradas aleatoriamente, física da nave, direcional virtual e todas as regras do documento 02. O primeiro teste no iPhone foi bom, e o Fernando tem retorno para trazer.
@@ -18,12 +20,13 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 
 ### Próximos passos
 
-1. O Fernando traz o retorno do primeiro teste para a [#50](https://github.com/TARNAGS/resgate-espacial/issues/50): sensação de gravidade, propulsor, giro, tamanho da nave e tolerância do pouso. Com ele, o Claude calibra os `PARAMS`.
-2. Retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)), para fechar o marco.
-3. Decisões rápidas do Fernando: protótipo 01 como base do M1 ([#51](https://github.com/TARNAGS/resgate-espacial/issues/51); a recomendação é que sim), P-009 ([#48](https://github.com/TARNAGS/resgate-espacial/issues/48)) e P-010 ([#49](https://github.com/TARNAGS/resgate-espacial/issues/49)).
-4. As outras descobertas da coluna "A investigar", na ordem do quadro.
-5. M1: roteiro de teste ([#41](https://github.com/TARNAGS/resgate-espacial/issues/41)), testes com 3 a 5 pessoas ([#43](https://github.com/TARNAGS/resgate-espacial/issues/43)), calibragem ([#36](https://github.com/TARNAGS/resgate-espacial/issues/36) e [#42](https://github.com/TARNAGS/resgate-espacial/issues/42)) e variante final do direcional ([#44](https://github.com/TARNAGS/resgate-espacial/issues/44)).
-6. Pesquisas do Claude, para quando o M2 se aproximar: ferramenta de medição ([#56](https://github.com/TARNAGS/resgate-espacial/issues/56)) e som no iPhone ([#57](https://github.com/TARNAGS/resgate-espacial/issues/57)).
+1. O Fernando joga a pasta `jogo/` no iPhone e revisa os cartões em "Em revisão" (#32 a #42). Pelo painel de ajuste, dá para calibrar na hora e copiar os valores.
+2. O Fernando traz o retorno do primeiro teste para a [#50](https://github.com/TARNAGS/resgate-espacial/issues/50): sensação de gravidade, propulsor, giro, tamanho da nave e tolerância do pouso. Com ele, o Claude calibra os `PARAMS`.
+3. Retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)), para fechar o marco.
+4. Decisões rápidas do Fernando: protótipo 01 como base do M1 ([#51](https://github.com/TARNAGS/resgate-espacial/issues/51); a recomendação é que sim), P-009 ([#48](https://github.com/TARNAGS/resgate-espacial/issues/48)) e P-010 ([#49](https://github.com/TARNAGS/resgate-espacial/issues/49)).
+5. As outras descobertas da coluna "A investigar", na ordem do quadro.
+6. M1: roteiro de teste ([#41](https://github.com/TARNAGS/resgate-espacial/issues/41)), testes com 3 a 5 pessoas ([#43](https://github.com/TARNAGS/resgate-espacial/issues/43)), calibragem ([#36](https://github.com/TARNAGS/resgate-espacial/issues/36) e [#42](https://github.com/TARNAGS/resgate-espacial/issues/42)) e variante final do direcional ([#44](https://github.com/TARNAGS/resgate-espacial/issues/44)).
+7. Pesquisas do Claude, para quando o M2 se aproximar: ferramenta de medição ([#56](https://github.com/TARNAGS/resgate-espacial/issues/56)) e som no iPhone ([#57](https://github.com/TARNAGS/resgate-espacial/issues/57)).
 
 ## Sessões
 
@@ -86,6 +89,16 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **Novo objetivo do Fernando:** os testes engajaram e as pessoas gostaram. O jogo continua como portfólio, mas a ideia é avançar até onde der, inclusive publicar na App Store e no Google Play e ganhar dinheiro com ele, seja com compras dentro do jogo, seja com a venda do jogo. O modelo de cobrança ainda está em aberto. Isso foi registrado no [#63](https://github.com/TARNAGS/resgate-espacial/issues/63) e vai revisar o D-002 (fora das lojas) e o D-003 (gratuito).
 - **Cartão novo, com o Claude:** como levar o jogo às lojas ([#65](https://github.com/TARNAGS/resgate-espacial/issues/65)): empacotamento, regras da Apple para apps feitos em web, contas de desenvolvedor e compras dentro do app.
 - **Quadro reordenado de cima para baixo por prioridade**, nas colunas "A investigar" e "Backlog". Critério: primeiro o que destrava a construção (fechar o M0 e o M1), depois as decisões que mudam a base técnica por causa das lojas e da cobrança (P-014, #65, ICP e risco de plágio), depois as regras do jogo do M2 e, por fim, o que só precisa estar pronto perto do lançamento (CNPJ, nome, arte e medição). No Backlog, as histórias do M1 vêm antes dos épicos, e o épico do Android (E-16) subiu para antes dos níveis 4 e 5 (E-12).
+
+### 02/10/2026 — Jogo de verdade e histórias do M1
+
+- **Pedido do Fernando:** construir tudo do Backlog que não precisa de conversa, deixando o jogo pronto para as fases que ainda serão definidas.
+- **Pasta [`jogo/`](../jogo/README.md)**, construída a partir do protótipo 01, mas separada em módulos: regras, conteúdo, controles, desenho, telas e aparelho. O protótipo continua em [`prototipos/`](../prototipos/README.md), como referência.
+- **Conteúdo virou dado:** mundos e níveis numa tabela, catálogo de obstáculos (por enquanto, só a pedra) e modificadores (gravidade, tanque, vento e nave mais pesada na volta), ainda sem uso em nenhum nível até P-011 e P-012 serem decididas.
+- **Pronto para o que está em aberto:** a pontuação (P-006) está num arquivo só e cada partida já guarda tempo, vidas perdidas e combustível; o armazenamento (P-016 e lojas) também está num arquivo só e tem versão; as regras avisam o que acontece por eventos, que a medição (E-17) vai usar.
+- **Histórias e tarefas do M1:** gravidade (#32), propulsor (#33), embalo (#34), cenário de treino (#35), parâmetros num lugar só (#36), teclado (#37), direcional (#38), direcional onde o polegar tocar, na metade esquerda (#39), toque sem rolar nem dar zoom (#40), roteiro de teste (#41, documento 07) e painel de ajuste escondido (#42). O direcional fixo no canto também existe, como variante para o teste (#44).
+- **29 testes automáticos**, com os critérios de aceite e as regras do documento 02, e 1.500 cenários aleatórios conferidos (500 por nível). Conferido no navegador do Claude Code, no tamanho de computador e de celular na horizontal.
+- **Correção:** o título do menu aparecia colado no celular (RESGATEESPACIAL), um defeito que já existia no protótipo.
 
 ## Aprendizados de produto
 

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#05070d">
+<title>Resgate Espacial</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="game" aria-label="Game"></canvas>
+<div id="safe-probe" aria-hidden="true"></div>
+
+<section id="menu" class="screen">
+  <h1 class="title">RESGATE <br>ESPACIAL</h1>
+  <p id="subtitle" class="subtitle">codename · early build</p>
+  <div id="map" class="map" aria-label="Level map"></div>
+  <p id="level-info" class="level-info"></p>
+  <div class="buttons">
+    <button id="btn-play" class="btn primary">PLAY</button>
+    <button id="btn-settings" class="btn">SETTINGS</button>
+  </div>
+  <p class="foot">Every run builds a new random layout.</p>
+</section>
+
+<section id="settings" class="screen hidden">
+  <h2>SETTINGS</h2>
+  <button id="btn-sound" class="btn">SOUND: ON</button>
+  <button id="btn-reset" class="btn">RESET PROGRESS</button>
+  <p class="controls-help">
+    KEYBOARD · ←/→ rotate · ↑ thrust · P pause<br>
+    TOUCH · touch and hold to fire the thruster, drag to point the ship
+  </p>
+  <button id="btn-back" class="btn primary">BACK</button>
+</section>
+
+<section id="overlay" class="screen dim hidden">
+  <h2 id="ov-title"></h2>
+  <p id="ov-text" class="ov-text"></p>
+  <div id="ov-buttons" class="buttons"></div>
+</section>
+
+<aside id="tuning" class="tuning hidden" aria-label="Tuning panel"></aside>
+
+<section id="rotate" class="screen dim hidden">
+  <p>ROTATE YOUR PHONE<br>TO LANDSCAPE</p>
+</section>
+
+<noscript>This game needs JavaScript.</noscript>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
