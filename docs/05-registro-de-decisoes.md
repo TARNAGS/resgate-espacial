@@ -23,11 +23,12 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-009 | MVP com 3 fases | 28/09/2026 | Aceita |
 | D-010 | Sem data-alvo: planejamento por marcos | 28/09/2026 | Aceita |
 | D-011 | Tecnologia: JavaScript puro com Canvas | 01/10/2026 | Aceita |
-| D-012 | Repositório e quadro públicos, sem expor o e-mail pessoal | 01/10/2026 | Aceita |
-| D-013 | Hospedagem: GitHub Pages | 01/10/2026 | Aceita |
+| D-012 | Repositório e quadro públicos, sem expor o e-mail pessoal | 01/10/2026 | Visibilidade substituída pela D-017; o e-mail noreply continua |
+| D-013 | Hospedagem: GitHub Pages | 01/10/2026 | Aceita, só nas janelas de teste (D-017) |
 | D-014 | Fases geradas aleatoriamente (procedurais) | 01/10/2026 | Aceita |
 | D-015 | Menu com Jogar, Configurações e mapa de progresso | 01/10/2026 | Aceita |
 | D-016 | Quadro com duas trilhas: descoberta e entrega | 01/10/2026 | Aceita |
+| D-017 | Repositório e quadro privados; o jogo só fica no ar nas janelas de teste | 01/10/2026 | Aceita |
 
 ## D-001 — Sem login e sem contas
 
@@ -300,6 +301,32 @@ Junto com as trilhas, entraram:
 - No começo de cada sessão, o Claude olha primeiro a coluna "Para conversar".
 
 **Revisitar se** a Caixa de entrada virar um depósito sem triagem, ou se cartões ficarem parados em "Investigando" por mais de uma semana.
+
+## D-017 — Repositório e quadro privados; o jogo só fica no ar nas janelas de teste
+
+**Contexto.** Pedido do Fernando em 01/10/2026, depois do primeiro teste no iPhone: ele não quer que vejam o que está sendo construído. Os cartões de descoberta já incluíam ideias de preço e de como receber dinheiro (P-014 e P-015). Até ali, ninguém tinha visitado nem copiado o repositório: 0 forks, 0 estrelas, 0 visitas e 0 clones nas estatísticas do GitHub.
+
+**Opções consideradas.**
+
+| Opção | A favor | Contra |
+|---|---|---|
+| Manter público (D-012) | Jogo sempre no ar; processo visível para o portfólio | Ideias, decisões e planos de negócio expostos |
+| **Privado, aberto só nas janelas de teste** | Processo fechado quase o tempo todo; custo zero; mesma hospedagem | Durante a janela, tudo fica visível; abrir e fechar é manual |
+| Privado, com hospedagem externa (Cloudflare Pages ou Netlify) | Jogo sempre no ar sem abrir o repositório | Conta nova e mais uma ferramenta |
+| Privado, com GitHub Pro | Jogo sempre no ar pelo GitHub Pages | Plano pago (contraria a D-003) |
+
+**Decisão.** Repositório e quadro privados desde 01/10/2026. Para um teste com o jogo publicado, o repositório é aberto e o GitHub Pages é reativado; no fim do teste, o repositório volta a ser privado. O quadro fica privado o tempo todo, até o lançamento.
+
+**Consequências.**
+
+- No plano gratuito, o GitHub só publica sites de repositórios públicos. Fechado o repositório, o jogo sai do ar e a configuração do GitHub Pages é apagada ([documentação do GitHub](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/setting-repository-visibility)). Cada janela de teste reativa o Pages.
+- Durante a janela, qualquer pessoa pode ver e copiar o repositório inteiro, com documentos e histórico. Uma cópia feita nesse período não pode ser desfeita.
+- Quem joga sempre consegue ler o código do jogo, porque o navegador baixa o JavaScript. Fechar o repositório esconde o processo, não o código do jogo publicado.
+- Fora das janelas, o protótipo roda na rede de casa: o servidor do protótipo aceita aparelhos no mesmo Wi-Fi. Sem HTTPS, não dá para instalar como app.
+- Os commits continuam com o e-mail noreply (D-012), porque o repositório volta a abrir em cada janela.
+- O estudo de caso (E-20) abre o repositório e o quadro no lançamento, como já previsto.
+
+**Revisitar se** as janelas de teste ficarem frequentes (aí a hospedagem externa compensa) ou quando a P-014 (preço e publicação) for decidida.
 
 ## Decisões pendentes
 

@@ -10,17 +10,18 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 
 ## Onde paramos (01/10/2026)
 
-- **Marco atual: M0 — Fundação, quase concluído.** As três decisões do M0 estão tomadas (D-011, D-012 e D-013), e o jogo é publicado sozinho no GitHub Pages a cada envio ([#30](https://github.com/TARNAGS/resgate-espacial/issues/30), concluída). Falta o Fernando abrir no iPhone ([#31](https://github.com/TARNAGS/resgate-espacial/issues/31), em revisão) e a retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)).
-- **Protótipo 01 pronto e publicado** em https://tarnags.github.io/resgate-espacial/prototipos/01/ ([`prototipos/`](../prototipos/README.md)): menu com mapa de progresso, fases geradas aleatoriamente, física da nave, direcional virtual e todas as regras do documento 02. A primeira reação do Fernando foi de muita empolgação com o resultado.
+- **Marco atual: M0 — Fundação, só falta a retrospectiva** ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)). As três decisões do M0 estão tomadas (D-011, D-012 e D-013), o jogo foi publicado no GitHub Pages ([#30](https://github.com/TARNAGS/resgate-espacial/issues/30)) e o Fernando o testou no iPhone ([#31](https://github.com/TARNAGS/resgate-espacial/issues/31), concluída).
+- **Repositório e quadro privados (D-017).** O jogo só fica no ar durante as janelas de teste; o passo a passo está no `CLAUDE.md` do projeto. Fora delas, o protótipo roda na rede de casa.
+- **Protótipo 01 pronto** ([`prototipos/`](../prototipos/README.md)): menu com mapa de progresso, fases geradas aleatoriamente, física da nave, direcional virtual e todas as regras do documento 02. O primeiro teste no iPhone foi bom, e o Fernando tem retorno para trazer.
 - **Pendências abertas:** P-003 (nome final), P-006 (pontuação), P-008 (ferramenta de medição), P-009 (tutorial e fase 1), P-010 (tentar de novo repete o cenário?), P-011 (obstáculos, mundo e fase), P-012 (modificadores), P-013 (ICP), P-014 (preço e publicação), P-015 (como receber dinheiro e CNPJ) e P-016 (o que o jogo guarda e onde). Cada uma tem um cartão de descoberta no quadro.
 - **Quadro com trilha de descoberta (D-016).** O que o Fernando precisa pesquisar e trazer pronto está na coluna "A investigar", em ordem de prioridade, e na visualização "Minha fila". A coluna "Para conversar" é a primeira coisa a olhar em cada sessão.
 
 ### Próximos passos
 
-1. O Fernando adiciona as pesquisas que já tem em mente na Caixa de entrada, com o modelo Descoberta.
-2. O Fernando joga o protótipo no iPhone, o que fecha a [#31](https://github.com/TARNAGS/resgate-espacial/issues/31), e responde a [#50](https://github.com/TARNAGS/resgate-espacial/issues/50): sensação de gravidade, propulsor, giro, tamanho da nave e tolerância do pouso.
+1. O Fernando traz o retorno do primeiro teste para a [#50](https://github.com/TARNAGS/resgate-espacial/issues/50): sensação de gravidade, propulsor, giro, tamanho da nave e tolerância do pouso. Com ele, o Claude calibra os `PARAMS`.
+2. Retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)), para fechar o marco.
 3. Decisões rápidas do Fernando: protótipo 01 como base do M1 ([#51](https://github.com/TARNAGS/resgate-espacial/issues/51); a recomendação é que sim), P-009 ([#48](https://github.com/TARNAGS/resgate-espacial/issues/48)) e P-010 ([#49](https://github.com/TARNAGS/resgate-espacial/issues/49)).
-4. Com a [#31](https://github.com/TARNAGS/resgate-espacial/issues/31) aprovada, fazer a retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)) e fechar o marco.
+4. As outras descobertas da coluna "A investigar", na ordem do quadro.
 5. M1: roteiro de teste ([#41](https://github.com/TARNAGS/resgate-espacial/issues/41)), testes com 3 a 5 pessoas ([#43](https://github.com/TARNAGS/resgate-espacial/issues/43)), calibragem ([#36](https://github.com/TARNAGS/resgate-espacial/issues/36) e [#42](https://github.com/TARNAGS/resgate-espacial/issues/42)) e variante final do direcional ([#44](https://github.com/TARNAGS/resgate-espacial/issues/44)).
 6. Pesquisas do Claude, para quando o M2 se aproximar: ferramenta de medição ([#56](https://github.com/TARNAGS/resgate-espacial/issues/56)) e som no iPhone ([#57](https://github.com/TARNAGS/resgate-espacial/issues/57)).
 
@@ -76,6 +77,8 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
   - Cartões novos: ICP ([#59](https://github.com/TARNAGS/resgate-espacial/issues/59), P-013), obstáculos, mundo e fase ([#60](https://github.com/TARNAGS/resgate-espacial/issues/60), P-011), modificadores ([#61](https://github.com/TARNAGS/resgate-espacial/issues/61), P-012), o que o jogo guarda ([#62](https://github.com/TARNAGS/resgate-espacial/issues/62), P-016), preço e publicação ([#63](https://github.com/TARNAGS/resgate-espacial/issues/63), P-014) e como receber dinheiro e CNPJ ([#64](https://github.com/TARNAGS/resgate-espacial/issues/64), P-015).
   - O modelo Descoberta ganhou o tema "Negócio (público, preço e jurídico)".
   - Um catch: cobrar pelo jogo reabre quatro decisões de uma vez (D-002, D-003, D-012 e D-013). Com o repositório público e o jogo no GitHub Pages, qualquer pessoa joga de graça pelo link.
+- **Primeiro teste no iPhone:** o Fernando achou bom e tem retorno para trazer. A [#31](https://github.com/TARNAGS/resgate-espacial/issues/31) foi fechada.
+- **Repositório e quadro voltaram a ser privados (D-017)**, a pedido do Fernando, para ninguém ver o que está sendo construído. Até ali, ninguém tinha visitado nem copiado o repositório. No plano gratuito, o GitHub Pages só publica repositórios públicos, então o jogo saiu do ar. O repositório é aberto só nas janelas de teste.
 
 ## Aprendizados de produto
 

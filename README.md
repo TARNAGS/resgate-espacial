@@ -43,6 +43,6 @@ Novas issues seguem os modelos de história, tarefa, épico, iniciativa, descobe
 
 ## Como jogar
 
-O [protótipo 01](prototipos/README.md) está publicado e roda no navegador do computador e do celular: **https://tarnags.github.io/resgate-espacial/prototipos/01/** (no celular, use a tela na horizontal).
+O [protótipo 01](prototipos/README.md) roda no navegador do computador e do celular, com a tela na horizontal no celular. Ele fica publicado em **https://tarnags.github.io/resgate-espacial/prototipos/01/** só durante as janelas de teste (D-017).
 
 Para rodar no próprio computador, na pasta do projeto, rode `node prototipos/servir.js` e abra `http://localhost:8080`.

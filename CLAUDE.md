@@ -53,14 +53,27 @@ O campo "Quem" (Fernando ou Claude) diz com quem o cartão está.
 
 ## Git
 
-- O repositório é **público** (D-012). Os commits usam o e-mail noreply do GitHub. Conferir com `git config user.email`; se não for `332717587+TARNAGS@users.noreply.github.com`, configurar antes do primeiro commit.
+- O repositório e o quadro são **privados** (D-017). O repositório só é aberto durante as janelas de teste (ver abaixo); o quadro fica privado até o lançamento.
+- Os commits usam o e-mail noreply do GitHub, porque o repositório abre nas janelas de teste. Conferir com `git config user.email`; se não for `332717587+TARNAGS@users.noreply.github.com`, configurar antes do primeiro commit.
 - O histórico foi reescrito em 01/10/2026 para tirar o e-mail pessoal. Cópias do repositório feitas antes disso precisam ser baixadas de novo.
 - Antes de cada commit, conferir que não vai junto nenhum segredo nem o e-mail pessoal.
+
+## Janela de teste (D-017)
+
+No plano gratuito, o GitHub Pages só publica repositórios públicos. Para o Fernando testar o jogo publicado:
+
+1. Avisar que, enquanto a janela estiver aberta, qualquer pessoa vê e pode copiar o repositório inteiro.
+2. Abrir: `gh repo edit TARNAGS/resgate-espacial --visibility public --accept-visibility-change-consequences`.
+3. Reativar o Pages, que é apagado quando o repositório fecha: `gh api -X POST repos/TARNAGS/resgate-espacial/pages -f "source[branch]=main" -f "source[path]=/"`. Depois do primeiro build, forçar HTTPS: `gh api -X PUT repos/TARNAGS/resgate-espacial/pages -F https_enforced=true`.
+4. Conferir que https://tarnags.github.io/resgate-espacial/prototipos/01/ responde, e passar o link.
+5. No fim do teste, fechar: `gh repo edit TARNAGS/resgate-espacial --visibility private --accept-visibility-change-consequences`. Conferir que o link volta a dar 404.
+
+Fora das janelas, o protótipo roda na rede de casa. Rodar `node prototipos/servir.js` e, no iPhone, no mesmo Wi-Fi, abrir `http://<IP do computador>:8080/01/`. Para achar o IP: `ipconfig` no Windows, `ipconfig getifaddr en0` no Mac. O Windows pode pedir para liberar o Node no firewall. Sem HTTPS, não dá para instalar como app.
 
 ## Tecnologia
 
 - JavaScript puro com Canvas, sem framework e sem etapa de build (D-011).
-- Hospedagem no GitHub Pages, em `tarnags.github.io/resgate-espacial` (D-013): como o jogo roda nesse subcaminho, manifesto e service worker precisam usar caminhos relativos.
+- Hospedagem no GitHub Pages, em `tarnags.github.io/resgate-espacial` (D-013), só durante as janelas de teste (D-017). Como o jogo roda nesse subcaminho, manifesto e service worker precisam usar caminhos relativos.
 - Prioridade para o iPhone (D-008). As limitações do iPhone para PWAs estão no PRD, seção 6.
 - Os parâmetros de ajuste da física ficam num lugar só (`PARAMS`, no topo do `game.js` do protótipo).
 - Fases geradas a partir de uma semente (D-014): a mesma semente gera sempre o mesmo cenário, e todo cenário gerado precisa ter solução.
