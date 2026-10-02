@@ -6,13 +6,14 @@ import { PARAMS, DEFAULT_PARAMS, setParams, resetParams, changedParams } from '.
 import { LEVELS, PRACTICE_LEVEL } from '../src/content/worlds.js';
 import { effectiveParams } from '../src/content/modifiers.js';
 import { generateLevel, validateLevel } from '../src/core/generator.js';
-import { createShip, fly, steer } from '../src/core/ship.js';
+import { createShip, fly, steer, landingForecast } from '../src/core/ship.js';
 import { createMatch } from '../src/core/match.js';
 import { createEvents } from '../src/core/events.js';
 import { readIntent } from '../src/input/controls.js';
 import { emptySave } from '../src/platform/storage.js';
 import { isUnlocked, defaultLevel, recordCompletion, levelState } from '../src/core/progress.js';
 import { SHIP } from '../src/core/constants.js';
+import { mulberry32 } from '../src/core/rng.js';
 
 const results = [];
 function test(name, fn) {
@@ -206,6 +207,38 @@ test('#50 passar da folga da borda explode', () => {
 
 test('#50 o giro no toque ficou um pouco mais lento que no protótipo (480 °/s)', () => {
   assert.ok(DEFAULT_PARAMS.touchRotationSpeed < 480 && DEFAULT_PARAMS.touchRotationSpeed >= 380);
+});
+
+test('#50 aviso de pouso: subindo da base não é pouso (sem verde nem halo)', () => {
+  const s = airShip(); s.vy = -25;
+  assert.equal(landingForecast(s, p(), { x1: 260, x2: 340, y: 400 }), null);
+});
+
+test('#50 aviso de pouso: descer abaixo do limite agora, mas longe da plataforma, não é verde', () => {
+  const s = airShip(); s.vy = PARAMS.landingMaxVy - 5; s.y = 400 - SHIP.base - 100;
+  assert.equal(landingForecast(s, p(), { x1: s.x - 60, x2: s.x + 60, y: 400 }), false);
+});
+
+test('#50 aviso de pouso: deslizando para fora da plataforma, não é verde', () => {
+  const s = airShip(); s.vy = 10; s.vx = 40; s.y = 400 - SHIP.base - 120;
+  assert.equal(landingForecast(s, p(), { x1: s.x - 60, x2: s.x + 30, y: 400 }), false);
+});
+
+test('#50 aviso de pouso: sempre que fica verde, soltar os controles termina em pouso', () => {
+  const r = mulberry32(2026);
+  const rnd = (a, b) => a + r() * (b - a);
+  let greens = 0;
+  for (let i = 0; i < 2000; i++) {
+    const { match, m, log } = newMatch(PRACTICE_LEVEL);
+    const pad = m.level.pads[0];
+    Object.assign(m.ship, { state: 'flying', pad: null, x: rnd(pad.x1 + 10, pad.x2 - 10), y: pad.y - SHIP.base - rnd(1, 160), vx: rnd(-60, 60), vy: rnd(1, 90), a: rnd(-0.45, 0.45) });
+    const green = landingForecast(m.ship, match.params(), pad);
+    if (!green) continue;
+    greens += 1;
+    step(match, NONE, 3);
+    assert.ok(!log.some((e) => e.name === 'crash'), `verde mas explodiu: ${JSON.stringify(log.find((e) => e.name === 'crash'))}`);
+  }
+  assert.ok(greens > 100, `poucos casos verdes sorteados (${greens})`);
 });
 
 test('Regras 3.3 pousar inclinado demais explode', () => {

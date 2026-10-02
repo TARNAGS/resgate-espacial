@@ -75,3 +75,17 @@ export function landingCheck(s, p) {
 }
 
 export const landingSafe = (s, p) => landingCheck(s, p) === null;
+
+// Previsão do pouso (aviso de pouso, #50): a nave está descendo para a plataforma e, se o jogador
+// não fizer mais nada, toca nela devagar, reta e ainda em cima dela? Considera a gravidade e o
+// deslize até o toque, porque a nave continua acelerando: estar abaixo do limite agora não basta.
+export function landingForecast(s, p, pad, { crewOnBoard = false } = {}) {
+  if (s.vy <= 0) return null;   // subindo ou parada: não é pouso
+  const g = p.gravity + (crewOnBoard ? p.crewWeight : 0);
+  const h = Math.max(0, pad.y - (s.y + SHIP.base));
+  const vyAtTouch = Math.sqrt(s.vy * s.vy + 2 * g * h);
+  const t = (vyAtTouch - s.vy) / g;
+  const x = s.x + s.vx * t + (p.windX * t * t) / 2;
+  const onPad = x - SHIP.half >= pad.x1 - p.padMargin && x + SHIP.half <= pad.x2 + p.padMargin;
+  return onPad && landingCheck({ ...s, vy: vyAtTouch }, p) === null;
+}

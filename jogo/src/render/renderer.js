@@ -1,6 +1,6 @@
 import { WORLD_H, STEP, SHIP } from '../core/constants.js';
 import { clamp, lerp, fmtTime } from '../core/math.js';
-import { landingSafe } from '../core/ship.js';
+import { landingSafe, landingForecast } from '../core/ship.js';
 import { OBSTACLES } from '../content/obstacles/index.js';
 
 // Desenho do jogo no Canvas. Lê o estado da partida e nunca o altera.
@@ -83,7 +83,7 @@ export function createRenderer(canvas, view) {
     const m = match.state;
     ctx.setTransform(view.dpr * view.scale, 0, 0, view.dpr * view.scale, -r.camX * view.scale * view.dpr, 0);
     drawCave(m.level, theme);
-    const approach = approachInfo(m.level, m.ship, params);
+    const approach = approachInfo(m, params);
     drawPads(m.level, t, approach);
     drawObstacles(m.level, theme, t);
     if (!m.practice) drawCrew(m, t, params);
@@ -155,11 +155,16 @@ export function createRenderer(canvas, view) {
     }
   }
 
-  // Aviso de pouso (#50): perto de uma plataforma, diz se a velocidade e a inclinação permitem pousar
-  function approachInfo(lv, s, params) {
+  // Aviso de pouso (#50). Perto de uma plataforma, as luzes dela dizem se dá para pousar.
+  // Descendo (landing), o verde usa a previsão da velocidade no toque, para nunca ficar verde e explodir.
+  function approachInfo(m, params) {
+    const s = m.ship;
     if (s.state !== 'flying') return null;
-    const pad = lv.pads.find((p) => s.x >= p.x1 - 30 && s.x <= p.x2 + 30 && p.y - s.y > 0 && p.y - s.y < 170);
-    return pad ? { pad, safe: landingSafe(s, params) } : null;
+    const pad = m.level.pads.find((p) => s.x >= p.x1 - 30 && s.x <= p.x2 + 30 && p.y - s.y > 0 && p.y - s.y < 170);
+    if (!pad) return null;
+    const forecast = landingForecast(s, params, pad, { crewOnBoard: m.crewOnBoard });
+    const landing = forecast !== null;
+    return { pad, landing, safe: landing ? forecast : landingSafe(s, params) };
   }
 
   function drawPads(lv, t, approach) {
@@ -252,13 +257,13 @@ export function createRenderer(canvas, view) {
 
   function drawShip(s, params, approach, t) {
     if (s.state === 'exploding') return;
-    if (approach) {
-      // Halo em volta da nave: verde = pode pousar; vermelho = rápido ou inclinado demais
-      const pulse = 0.55 + 0.45 * Math.sin(t * (approach.safe ? 6 : 14));
-      ctx.lineWidth = 2.5;
-      ctx.strokeStyle = approach.safe ? `rgba(125,255,176,${pulse.toFixed(2)})` : `rgba(255,93,93,${pulse.toFixed(2)})`;
+    if (approach?.landing) {
+      // Halo quase imperceptível, só na descida para a plataforma: uma sugestão, não um aviso
+      const alpha = (0.16 + 0.06 * Math.sin(t * 3)).toFixed(2);
+      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = approach.safe ? `rgba(125,255,176,${alpha})` : `rgba(255,93,93,${alpha})`;
       ctx.beginPath();
-      ctx.arc(s.x, s.y, 19, 0, Math.PI * 2);
+      ctx.arc(s.x, s.y, 17, 0, Math.PI * 2);
       ctx.stroke();
     }
     ctx.save();
@@ -279,8 +284,8 @@ export function createRenderer(canvas, view) {
     ctx.lineTo(0, SHIP.base - 4);
     ctx.lineTo(-SHIP.half, SHIP.base);
     ctx.closePath();
-    // Verde quando a velocidade e a inclinação permitem pousar
-    ctx.fillStyle = s.state === 'flying' && landingSafe(s, params) ? '#7dffb0' : '#eef6ff';
+    // Verde só descendo para uma plataforma, com velocidade e inclinação que garantem o pouso
+    ctx.fillStyle = approach?.landing && approach.safe ? '#7dffb0' : '#eef6ff';
     ctx.fill();
     ctx.lineWidth = 1.2;
     ctx.strokeStyle = '#0b0f17';
