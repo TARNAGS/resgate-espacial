@@ -1,12 +1,14 @@
 // Músicas do jogo, como partitura. O motor que toca fica em platform/music.js.
 //
-// Cada música tem seções. Cada compasso tem 16 passos (semicolcheias). As notas são números MIDI
-// (60 = dó central). Uma nota da melodia é [compasso, passo, nota, duração em passos].
+// Uma música é uma sequência de compassos de 16 passos (semicolcheias). Cada compasso tem dois
+// acordes, um por metade. As notas são números MIDI (60 = dó central). Uma nota da melodia é
+// [compasso, passo, nota, duração em passos].
 //
 // Acompanhamento gerado a partir dos acordes, por compasso:
 //   bass   'pulse' (batida grave espaçada), 'drive' (colcheias em oitavas), 'hit' (uma nota longa)
-//   arp    'slow' (arpejo em colcheias), 'fast' (arpejo em semicolcheias), 'stab' (acorde final)
-//   drums  'none', 'pulse', 'beat', 'roll' (rufar de caixa), 'crash' (prato + batida), 'end' (golpe final)
+//   arp    'slow' (arpejo em colcheias), 'fast' (arpejo em semicolcheias), 'stab' (acorde inteiro)
+//   drums  'pulse', 'beat', 'roll' (meia batida e rufar de caixa), 'end' (golpe final com prato)
+//   lead   onda da melodia naquele compasso: 'p25' (mais suave) ou 'p50' (mais cheia)
 
 export const CHORDS = {
   Am: { arp: [57, 60, 64, 69], bass: 45 },
@@ -18,57 +20,35 @@ export const CHORDS = {
 };
 
 // Abertura (#76): aventura, mistério e, no fim, a sensação de "vamos lá!".
-// Lá menor, com a dominante maior (mi maior) para o suspense, e o final em dó maior.
+// A música é o relógio da abertura: 6 compassos a 120 bpm (12 segundos), 2 por tela.
+//   Compassos 0 e 1: tela 1, mistério em lá menor (Am, F, Dm, E; o mi maior cria suspense)
+//   Compassos 2 e 3: tela 2, a aventura começa (F, G, E, Am), com bateria
+//   Compassos 4 e 5: tela 3, a decolagem: subida rápida com rufar de caixa e o acorde final
+//                    em dó maior, enquanto a tela e a música escurecem até a fase
 export const INTRO_SONG = {
-  bpm: 116,
-  sections: [
-    {
-      name: 'mystery',             // tela 1: a tripulação presa
-      loop: true,
-      chords: ['Am', 'F', 'Dm', 'E'],
-      leadWave: 'p25',
-      bass: ['pulse', 'pulse', 'pulse', 'pulse'],
-      arp: ['slow', 'slow', 'slow', 'slow'],
-      drums: ['pulse', 'pulse', 'pulse', 'pulse'],
-      lead: [
-        [0, 8, 76, 4], [0, 12, 74, 2], [0, 14, 72, 2],
-        [1, 0, 69, 12], [1, 12, 72, 4],
-        [2, 0, 74, 4], [2, 4, 77, 4], [2, 8, 76, 4], [2, 12, 74, 4],
-        [3, 0, 68, 8], [3, 8, 71, 4], [3, 12, 76, 4],
-      ],
-    },
-    {
-      name: 'call',                // tela 2: o chamado para o resgate
-      loop: true,
-      chords: ['F', 'G', 'E', 'Am'],
-      leadWave: 'p50',
-      bass: ['drive', 'drive', 'drive', 'drive'],
-      arp: ['fast', 'fast', 'fast', 'fast'],
-      drums: ['beat', 'beat', 'beat', 'beat'],
-      lead: [
-        [0, 0, 72, 2], [0, 2, 77, 2], [0, 4, 81, 6], [0, 10, 79, 2], [0, 12, 77, 4],
-        [1, 0, 79, 6], [1, 6, 74, 2], [1, 8, 79, 2], [1, 10, 83, 6],
-        [2, 0, 80, 4], [2, 4, 83, 4], [2, 8, 88, 6], [2, 14, 86, 2],
-        [3, 0, 84, 4], [3, 4, 83, 2], [3, 6, 81, 10],
-      ],
-    },
-    {
-      name: 'go',                  // tela 3: a decolagem, "vamos lá!"
-      loop: false,
-      chords: ['F', 'G', 'C', 'C'],
-      leadWave: 'p50',
-      bass: ['drive', 'drive', 'drive', 'hit'],
-      arp: ['fast', 'fast', 'fast', 'stab'],
-      drums: ['beat', 'roll', 'crash', 'end'],
-      lead: [
-        [0, 0, 77, 4], [0, 4, 81, 4], [0, 8, 84, 6], [0, 14, 81, 2],
-        // subida em semicolcheias até o dó agudo
-        [1, 0, 67, 2], [1, 2, 69, 2], [1, 4, 71, 2], [1, 6, 72, 2], [1, 8, 74, 2], [1, 10, 76, 2], [1, 12, 77, 2], [1, 14, 79, 2],
-        [2, 0, 84, 6], [2, 6, 79, 2], [2, 8, 84, 4], [2, 12, 88, 4],
-        [3, 0, 79, 2], [3, 2, 84, 14],
-      ],
-      // segunda voz no final, uma terça abaixo, para o acorde soar cheio
-      harmony: [[2, 0, 76, 6], [2, 8, 76, 4], [2, 12, 84, 4], [3, 2, 76, 14]],
-    },
+  bpm: 120,
+  scenes: [0, 2, 4],     // compasso em que cada tela começa
+  fadeFromBar: 5,        // no último compasso, a tela e a música escurecem juntas
+  bars: [
+    { chords: ['Am', 'F'], bass: 'pulse', arp: 'slow', drums: 'pulse', lead: 'p25' },
+    { chords: ['Dm', 'E'], bass: 'pulse', arp: 'slow', drums: 'pulse', lead: 'p25' },
+    { chords: ['F', 'G'], bass: 'drive', arp: 'fast', drums: 'beat', lead: 'p50' },
+    { chords: ['E', 'Am'], bass: 'drive', arp: 'fast', drums: 'beat', lead: 'p50' },
+    { chords: ['F', 'G'], bass: 'drive', arp: 'fast', drums: 'roll', lead: 'p50' },
+    { chords: ['C', 'C'], bass: 'hit', arp: 'stab', drums: 'end', lead: 'p50' },
   ],
+  lead: [
+    // mistério
+    [0, 0, 76, 4], [0, 4, 74, 2], [0, 6, 72, 2], [0, 8, 69, 6], [0, 14, 72, 2],
+    [1, 0, 74, 4], [1, 4, 77, 4], [1, 8, 68, 4], [1, 12, 71, 2], [1, 14, 76, 2],
+    // o chamado
+    [2, 0, 77, 2], [2, 2, 81, 4], [2, 6, 79, 2], [2, 8, 79, 2], [2, 10, 83, 4], [2, 14, 81, 2],
+    [3, 0, 80, 4], [3, 4, 83, 4], [3, 8, 84, 8],
+    // vamos lá: fanfarra e subida em semicolcheias até o dó agudo
+    [4, 0, 77, 2], [4, 2, 81, 2], [4, 4, 84, 4],
+    [4, 8, 67, 1], [4, 9, 69, 1], [4, 10, 71, 1], [4, 11, 72, 1], [4, 12, 74, 1], [4, 13, 76, 1], [4, 14, 77, 1], [4, 15, 79, 1],
+    [5, 0, 84, 16],
+  ],
+  // vozes extras no acorde final, para soar cheio
+  harmony: [[5, 0, 76, 16], [5, 0, 79, 16]],
 };

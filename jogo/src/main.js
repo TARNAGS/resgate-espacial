@@ -205,20 +205,19 @@ screens.el('btn-control').addEventListener('click', () => {
 });
 
 // ===== Abertura (#76) =====
-const intro = createIntro(canvas, view);
 const music = createMusic();
+const intro = createIntro(canvas, view, { song: INTRO_SONG, music });
 
-// Mostra a abertura e, no fim (ou no SKIP), segue para `then`. A música acompanha as telas:
-// mistério na tela 1, aventura na tela 2 e o final "vamos lá!" na decolagem ou no SKIP.
+// Mostra a abertura e, no fim (ou no SKIP), segue para `then`. A música é o relógio da abertura:
+// as telas trocam com ela, e o fade final leva para a fase junto com o último acorde.
 function playIntro(then) {
   app.screen = 'intro';
   screens.show('intro');
   joystick.reset();
   music.play(INTRO_SONG);
   intro.start({
-    onScene: (i) => music.goTo(i, { quantize: i === 2 ? 'beat' : 'bar' }),
     onDone() {
-      music.goTo(2, { quantize: 'beat' });
+      music.stop(0.3);
       app.save.seen = { ...app.save.seen, intro: true };
       writeSave(app.save);
       then();
@@ -243,7 +242,13 @@ screens.el('btn-play').addEventListener('click', () => {
   if (app.save.seen?.intro) startLevel(lv);
   else playIntro(() => startLevel(lv));
 });
-screens.el('btn-intro').addEventListener('click', () => { Sound.unlock(); click(); playIntro(toMenu); });
+// Rever a abertura: a experiência inteira, terminando na fase escolhida no mapa
+screens.el('btn-intro').addEventListener('click', () => {
+  Sound.unlock();
+  click();
+  const lv = app.selected;
+  playIntro(() => startLevel(lv));
+});
 screens.el('btn-settings').addEventListener('click', () => { Sound.unlock(); click(); showScreen('settings'); });
 screens.el('btn-back').addEventListener('click', () => { click(); toMenu(); });
 screens.el('btn-sound').addEventListener('click', () => {
@@ -386,5 +391,11 @@ if (start && tuning.enabled && findLevel(start)) startLevel(findLevel(start));
 // Acesso para testes automáticos no navegador
 window.__game = { app, PARAMS, LEVELS, startLevel, events, keyboard, joystick, renderer, intro, playIntro, music };
 
-// ?intro no endereço mostra a abertura ao abrir o jogo (para rever e testar)
-if (new URLSearchParams(location.search).has('intro')) playIntro(toMenu);
+// ?intro no endereço abre direto na abertura, para testar. O navegador só libera o som depois de
+// um toque, então a primeira tela pede o toque (TAP TO START) e aí a abertura começa com música.
+if (new URLSearchParams(location.search).has('intro')) {
+  const lv = app.selected;
+  screens.overlay('INTRO', 'Turn the sound on (and the silent switch off on iPhone).', [
+    ['TAP TO START', () => { Sound.unlock(); screens.hideOverlay(); playIntro(() => startLevel(lv)); }, true],
+  ]);
+}

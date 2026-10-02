@@ -210,10 +210,11 @@ Ideia do Fernando (02/10/2026): antes da primeira fase, telas com imagem e texto
 |---|---|
 | Três telas, nessa ordem, antes da primeira fase | Definido (ideia do Fernando) |
 | Dá para pular a abertura a qualquer momento (botão "SKIP"; no teclado, Esc) | Definido (Fernando, 02/10/2026) |
-| Tocar na tela (ou apertar uma tecla) completa o texto ou avança; sem toque, cada tela avança sozinha alguns segundos depois do texto completo | Proposta |
+| Tocar na tela (ou apertar uma tecla) completa o texto; tocar de novo pula para a próxima tela | Proposta |
 | A abertura só aparece sozinha no primeiro PLAY; depois, dá para revê-la em Settings → WATCH INTRO | Proposta |
 | A arte das telas segue a estética do jogo: tripulação de traços e nave triangular | Proposta; arte provisória até a identidade do jogo (E-19) |
-| Música chiptune de estilo 16 bits, que acompanha as telas: mistério (tela 1, lá menor: Am, F, Dm, E), aventura (tela 2: F, G, E, Am) e o final "vamos lá!" na decolagem ou no SKIP (dó maior: F, G, C), que termina sozinho alguns segundos depois | Proposta (pedido do Fernando, 02/10/2026) |
+| Música chiptune de estilo 16 bits, que é o relógio da abertura: 12 segundos, 2 compassos por tela. Mistério na tela 1 (lá menor: Am, F, Dm, E), aventura na tela 2 (F, G, E, Am) e, na tela 3, a subida "vamos lá!" até o acorde final em dó maior, enquanto a tela e a música escurecem e a fase começa. Um toque que pula de tela faz a música pular junto | Proposta (pedido do Fernando, 02/10/2026) |
+| O SKIP para a música na hora e vai direto para a fase | Definido (Fernando, 02/10/2026) |
 
 Uma prévia jogável foi construída em 02/10/2026 (`jogo/src/render/intro.js`): na tela 1, a nave da tripulação cravada no chão e soltando fumaça, um tripulante acenando, um sentado com a mão na cabeça e outro andando de um lado para o outro, com um SOS em código Morse; na tela 2, a base e o sinal de socorro chegando na antena; na tela 3, a nave decola e a tela escurece. História no backlog: [#76](https://github.com/TARNAGS/resgate-espacial/issues/76).
 

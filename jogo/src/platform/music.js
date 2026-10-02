@@ -5,16 +5,21 @@ import { CHORDS } from '../content/songs.js';
 // ondas de pulso (12,5%, 25% e 50%), baixo em onda triangular, bateria de ruído e um eco curto,
 // como nos consoles daquela época. A partitura fica em content/songs.js.
 //
-// Uso: play(song) começa a seção 0; goTo(i) troca de seção (no próximo compasso, ou na próxima
-// batida com { quantize: 'beat' }); stop(fade) para. Respeita o som desligado em Settings.
+//   play(song)        toca a música do começo ao fim, uma vez
+//   position()        em que passo da música estamos agora (pelo relógio do áudio), ou null
+//   jumpTo(step)      pula para outro ponto, na próxima batida (para acompanhar um toque na tela)
+//   stop(fade)        para, com um fade curto
+// Com o som desligado em Settings, não toca nada, e quem usa a música cai no próprio relógio.
 
 const STEPS = 16;          // passos por compasso
 const LOOKAHEAD = 0.15;    // quanto tempo à frente as notas são agendadas (s)
+const VOLUME = 0.55;
 
 export function createMusic() {
   let ctx = null, out = null, waves = null, noise = null;
-  let song = null, events = null, sec = 0, bar = 0, step = 0, nextTime = 0;
-  let pending = null, timer = null, stepDur = 0.13;
+  let song = null, grid = null, total = 0, stepDur = 0.125;
+  let at = 0, nextTime = 0, pendingJump = null, timer = null;
+  let segments = [];         // [{ time, step }]: a partir de `time`, a música está no passo `step`
 
   function setup() {
     ctx = Sound.ctx;
@@ -102,110 +107,117 @@ export function createMusic() {
     if (kind === 's') note('tri', 55, t, 0.06, 0.12);   // corpo da caixa
   }
 
-  // Transforma a partitura de uma seção numa grade [compasso][passo] de funções que tocam
+  // Transforma a partitura numa lista de passos, cada um com as funções que tocam nele
   function compile(s) {
-    const grid = Array.from({ length: s.chords.length }, () => Array.from({ length: STEPS }, () => []));
-    const at = (b, st, fn) => grid[b][st].push(fn);
+    const steps = Array.from({ length: s.bars.length * STEPS }, () => []);
+    const add = (b, st, fn) => steps[b * STEPS + st].push(fn);
     const sd = () => stepDur;
-    s.chords.forEach((name, b) => {
-      const ch = CHORDS[name];
+    s.bars.forEach((bar, b) => {
+      const chordAt = (st) => CHORDS[bar.chords[st < 8 ? 0 : 1]];
       // baixo
-      const bass = s.bass[b];
-      if (bass === 'pulse') {
-        at(b, 0, (t) => note('tri', ch.bass, t, sd() * 6, 0.22));
-        at(b, 10, (t) => note('tri', ch.bass, t, sd() * 2, 0.18));
-        at(b, 12, (t) => note('tri', ch.bass + 7, t, sd() * 4, 0.16));
-      } else if (bass === 'drive') {
-        for (let st = 0; st < STEPS; st += 2) at(b, st, (t) => note('tri', ch.bass + (st % 4 ? 12 : 0), t, sd() * 1.7, 0.22));
-      } else if (bass === 'hit') {
-        at(b, 2, (t) => note('tri', ch.bass, t, sd() * 14, 0.26));
+      if (bar.bass === 'pulse') {
+        for (const h of [0, 8]) add(b, h, (t) => note('tri', chordAt(h).bass, t, sd() * 5, 0.22));
+      } else if (bar.bass === 'drive') {
+        for (let st = 0; st < STEPS; st += 2) add(b, st, (t) => note('tri', chordAt(st).bass + (st % 4 ? 12 : 0), t, sd() * 1.7, 0.22));
+      } else if (bar.bass === 'hit') {
+        add(b, 0, (t) => note('tri', chordAt(0).bass, t, sd() * 16, 0.26));
       }
       // arpejo
-      const arp = s.arp[b];
-      if (arp === 'slow') {
-        [0, 1, 2, 3, 2, 1, 2, 1].forEach((k, i) => at(b, i * 2, (t) => note('p12', ch.arp[k], t, sd() * 1.8, 0.05)));
-      } else if (arp === 'fast') {
-        for (let st = 0; st < STEPS; st++) at(b, st, (t) => note('p25', ch.arp[st % 4] + 12, t, sd() * 0.9, 0.028));
-      } else if (arp === 'stab') {
-        ch.arp.forEach((m) => at(b, 2, (t) => note('p25', m + 12, t, sd() * 14, 0.035)));
+      if (bar.arp === 'slow') {
+        for (let st = 0; st < STEPS; st += 2) add(b, st, (t) => note('p12', chordAt(st).arp[(st / 2) % 4], t, sd() * 1.8, 0.05));
+      } else if (bar.arp === 'fast') {
+        for (let st = 0; st < STEPS; st++) add(b, st, (t) => note('p25', chordAt(st).arp[st % 4] + 12, t, sd() * 0.9, 0.028));
+      } else if (bar.arp === 'stab') {
+        chordAt(0).arp.forEach((m) => add(b, 0, (t) => note('p25', m + 12, t, sd() * 16, 0.035)));
       }
       // bateria
-      const dr = s.drums[b];
-      if (dr === 'pulse') {
-        at(b, 0, (t) => hit('k', t, 0.6));
-        at(b, 10, (t) => hit('k', t, 0.4));
-      } else if (dr === 'beat' || dr === 'crash') {
-        if (dr === 'crash') at(b, 0, (t) => hit('c', t));
-        [0, 8].forEach((st) => at(b, st, (t) => hit('k', t)));
-        [4, 12].forEach((st) => at(b, st, (t) => hit('s', t)));
-        for (let st = 0; st < STEPS; st += 2) at(b, st, (t) => hit(st === 14 ? 'o' : 'h', t));
-      } else if (dr === 'roll') {
-        at(b, 0, (t) => hit('k', t));
-        for (let st = 0; st < STEPS; st++) at(b, st, (t) => hit('s', t, 0.35 + 0.65 * (st / STEPS)));
-      } else if (dr === 'end') {
-        at(b, 2, (t) => { hit('k', t); hit('c', t); });
+      if (bar.drums === 'pulse') {
+        add(b, 0, (t) => hit('k', t, 0.6));
+        add(b, 8, (t) => hit('k', t, 0.45));
+      } else if (bar.drums === 'beat') {
+        [0, 8].forEach((st) => add(b, st, (t) => hit('k', t)));
+        [4, 12].forEach((st) => add(b, st, (t) => hit('s', t)));
+        for (let st = 0; st < STEPS; st += 2) add(b, st, (t) => hit(st === 14 ? 'o' : 'h', t));
+      } else if (bar.drums === 'roll') {
+        add(b, 0, (t) => hit('k', t));
+        add(b, 4, (t) => hit('s', t));
+        [0, 2, 4, 6].forEach((st) => add(b, st, (t) => hit('h', t)));
+        add(b, 8, (t) => hit('k', t));
+        for (let st = 8; st < STEPS; st++) add(b, st, (t) => hit('s', t, 0.35 + 0.65 * ((st - 8) / 8)));
+      } else if (bar.drums === 'end') {
+        add(b, 0, (t) => { hit('k', t); hit('c', t); });
       }
     });
-    for (const [b, st, m, len] of s.lead) at(b, st, (t) => note(s.leadWave, m, t, sd() * len, 0.085));
-    for (const [b, st, m, len] of s.harmony || []) at(b, st, (t) => note('p25', m, t, sd() * len, 0.05));
-    return grid;
-  }
-
-  function enterSection(i) {
-    sec = i;
-    bar = 0;
-    step = 0;
-    pending = null;
+    for (const [b, st, m, len] of s.lead) add(b, st, (t) => note(s.bars[b].lead, m, t, sd() * len, 0.085));
+    for (const [b, st, m, len] of s.harmony || []) add(b, st, (t) => note('p25', m, t, sd() * len, 0.05));
+    // Fade no último trecho: a música escurece junto com a tela
+    if (s.fadeFromBar != null) {
+      add(s.fadeFromBar, 4, (t) => {
+        const end = (s.bars.length - s.fadeFromBar) * STEPS - 4;
+        out.gain.setTargetAtTime(0.0001, t, (end * stepDur) / 4);
+      });
+    }
+    return steps;
   }
 
   function tick() {
     if (!song) return;
     while (nextTime < ctx.currentTime + LOOKAHEAD) {
-      if (pending !== null && step % (pending.quantize === 'beat' ? 4 : STEPS) === 0) enterSection(pending.section);
-      for (const fn of events[sec][bar][step]) fn(nextTime);
-      nextTime += stepDur;
-      step += 1;
-      if (step === STEPS) {
-        step = 0;
-        bar += 1;
-        if (bar === events[sec].length) {
-          if (song.sections[sec].loop) bar = 0;
-          else { finish(); return; }
-        }
+      if (pendingJump !== null && at % 4 === 0) {           // pulo na próxima batida
+        at = pendingJump;
+        pendingJump = null;
+        segments.push({ time: nextTime, step: at });
       }
+      if (at >= total) { stopScheduling(); return; }
+      for (const fn of grid[at]) fn(nextTime);
+      nextTime += stepDur;
+      at += 1;
     }
   }
 
-  function finish() {
+  function stopScheduling() {
     clearInterval(timer);
     timer = null;
-    song = null;
   }
 
   return {
     play(s) {
-      if (!Sound.enabled || !setup()) return;
-      if (timer) finish();
+      if (!Sound.enabled || !setup()) return false;
+      stopScheduling();
       song = s;
       stepDur = 60 / s.bpm / 4;
-      events = s.sections.map(compile);
-      enterSection(0);
-      out.gain.cancelScheduledValues(ctx.currentTime);
-      out.gain.setValueAtTime(0.55, ctx.currentTime);
+      grid = compile(s);
+      total = grid.length;
+      at = 0;
+      pendingJump = null;
       nextTime = ctx.currentTime + 0.06;
+      segments = [{ time: nextTime, step: 0 }];
+      out.gain.cancelScheduledValues(ctx.currentTime);
+      out.gain.setValueAtTime(VOLUME, ctx.currentTime);
       timer = setInterval(tick, 25);
       tick();
+      return true;
     },
-    goTo(section, { quantize = 'bar' } = {}) {
-      if (!song || section === sec || pending?.section === section) return;
-      pending = { section, quantize };
+    position() {
+      if (!song) return null;
+      const now = ctx.currentTime;
+      let seg = segments[0];
+      for (const sg of segments) if (sg.time <= now) seg = sg;
+      return Math.min(total, Math.max(0, seg.step + (now - seg.time) / stepDur));
     },
-    stop(fade = 0.6) {
+    jumpTo(step) {
+      if (!song || step <= at) return;
+      pendingJump = step;
+    },
+    stop(fade = 0.2) {
+      stopScheduling();
+      song = null;
       if (!ctx || !out) return;
+      out.gain.cancelScheduledValues(ctx.currentTime);
+      out.gain.setValueAtTime(out.gain.value, ctx.currentTime);
       out.gain.setTargetAtTime(0, ctx.currentTime, fade / 4);
-      setTimeout(() => { if (!timer) return; finish(); }, fade * 1000 + 50);
     },
-    get playing() { return Boolean(timer); },
-    get section() { return sec; },
+    get playing() { return Boolean(song); },
+    get stepDur() { return stepDur; },
   };
 }

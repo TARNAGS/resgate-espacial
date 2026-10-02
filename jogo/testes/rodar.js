@@ -409,18 +409,23 @@ test('desafios ficam sempre liberados e não têm "próximo nível"', () => {
 
 // ===== Música =====
 test('#76 a partitura da abertura é válida: acordes conhecidos, notas dentro dos compassos', () => {
-  assert.equal(INTRO_SONG.sections.length, 3);   // uma parte por tela: mistério, chamado, "vamos lá!"
-  for (const sec of INTRO_SONG.sections) {
-    const bars = sec.chords.length;
-    for (const key of ['bass', 'arp', 'drums']) assert.equal(sec[key].length, bars, `${sec.name}: ${key}`);
-    for (const c of sec.chords) assert.ok(CHORDS[c], `acorde desconhecido: ${c}`);
-    for (const [b, st, m, len] of [...sec.lead, ...(sec.harmony || [])]) {
-      assert.ok(b >= 0 && b < bars && st >= 0 && st < 16 && len > 0, `${sec.name}: nota fora do compasso`);
-      assert.ok(m >= 36 && m <= 96, `${sec.name}: nota fora da extensão (${m})`);
-    }
+  const bars = INTRO_SONG.bars.length;
+  for (const bar of INTRO_SONG.bars) {
+    assert.equal(bar.chords.length, 2);
+    for (const c of bar.chords) assert.ok(CHORDS[c], `acorde desconhecido: ${c}`);
   }
-  assert.equal(INTRO_SONG.sections[2].loop, false);   // o final toca uma vez só e termina
-  assert.equal(INTRO_SONG.sections[2].chords.at(-1), 'C');   // termina em dó maior: "vamos lá!"
+  for (const [b, st, m, len] of [...INTRO_SONG.lead, ...INTRO_SONG.harmony]) {
+    assert.ok(b >= 0 && b < bars && st >= 0 && st < 16 && len > 0 && st + len <= 16, `nota fora do compasso: ${[b, st, m, len]}`);
+    assert.ok(m >= 36 && m <= 96, `nota fora da extensão (${m})`);
+  }
+});
+
+test('#76 a música cabe na abertura: 12 segundos, uma tela a cada 2 compassos, fade no último e final em dó maior', () => {
+  const barSeconds = (60 / INTRO_SONG.bpm) * 4;
+  assert.equal(INTRO_SONG.bars.length * barSeconds, 12);
+  assert.deepEqual(INTRO_SONG.scenes, [0, 2, 4]);                       // três telas, na ordem
+  assert.equal(INTRO_SONG.fadeFromBar, INTRO_SONG.bars.length - 1);     // fade no último compasso
+  assert.deepEqual(INTRO_SONG.bars.at(-1).chords, ['C', 'C']);          // "vamos lá!" em dó maior
 });
 
 // ===== Resultado =====

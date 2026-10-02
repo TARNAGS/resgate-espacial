@@ -171,6 +171,13 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
   - três partes que acompanham as telas: mistério em lá menor (Am, F, Dm, E), aventura com bateria (F, G, E, Am) e o final em dó maior (F, G, C), com subida rápida, rufar de caixa e prato;
   - o SKIP pula direto para o final, que termina sozinho uns 8 segundos depois;
   - o motor fica em `jogo/src/platform/music.js` e a partitura em `jogo/src/content/songs.js`, para dar para ajustar notas e acordes sem mexer no motor.
+- **Ajuste depois do teste do Fernando:** a música estava longa, não acompanhava as telas e continuava depois do SKIP.
+  - Agora a música é o **relógio da abertura**: uma peça única de 12 segundos (6 compassos a 120 bpm), 2 compassos por tela. A tela troca quando a música troca de parte.
+  - No último compasso, a tela e a música escurecem juntas, e a fase começa quando a música acaba.
+  - Tocar completa o texto; tocar de novo pula de tela, e a música pula junto, na batida seguinte.
+  - O SKIP para a música na hora.
+  - Os bipes de SOS em Morse saíram, porque competiam com a música.
+  - Link de teste direto: `?intro` abre uma tela "TAP TO START" (o navegador só libera o som depois de um toque) e, em seguida, a abertura, terminando na fase.
 
 ## Aprendizados de produto
 

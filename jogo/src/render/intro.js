@@ -1,77 +1,70 @@
 import { clamp, lerp } from '../core/math.js';
-import { Sound } from '../platform/audio.js';
 
 // Abertura (Regras do jogo, seção 10.1; #76): telas com imagem e texto antes da primeira fase.
 // Não é um filme e não conta uma história longa: o jogo não tem enredo.
 //   Tela 1: a tripulação em apuros, presa longe de casa
 //   Tela 2: o chamado para o resgate, na base
 //   Tela 3: a nave decola e a tela escurece até a primeira fase
-// Tocar avança (ou completa o texto que está aparecendo); SKIP pula tudo.
-// Textos em inglês (D-007).
+// A música é o relógio da abertura (content/songs.js, INTRO_SONG): cada tela começa num compasso
+// da música, e a tela escurece junto com o acorde final. Sem som, um relógio próprio segue o mesmo
+// ritmo. Tocar completa o texto; tocar de novo pula para a próxima tela (a música pula junto, na
+// batida seguinte). SKIP para a música e vai direto para a fase. Textos em inglês (D-007).
 
 const FONT = '"Courier New", ui-monospace, monospace';
 const TYPE_SPEED = 32;     // letras por segundo
-const AUTO_NEXT = 3.2;     // segundos depois do texto completo até avançar sozinho
-const FADE = 1.4;          // duração do fade da tela 3
+const STEPS = 16;          // passos por compasso, como na música
 
 const SCENES = [
-  { draw: drawStranded, lines: ['One day, a crew got stranded far from home.'], sound: 'sos' },
-  { draw: drawCall, lines: ['You are the one sent to bring them back.', 'Good luck.'], sound: 'radio' },
-  { draw: drawLaunch, lines: [], fade: true },
+  { draw: drawStranded, lines: ['One day, a crew got stranded far from home.'] },
+  { draw: drawCall, lines: ['You are the one sent to bring them back.', 'Good luck.'] },
+  { draw: drawLaunch, lines: [] },
 ];
 
-export function createIntro(canvas, view) {
+export function createIntro(canvas, view, { song, music }) {
   const ctx = canvas.getContext('2d');
-  const it = { active: false, scene: 0, t: 0, typed: 0, doneT: 0, onDone: null, onScene: null, smoke: [], beeps: [] };
+  const stepDur = 60 / song.bpm / 4;
+  const starts = song.scenes.map((bar) => bar * STEPS);        // passo em que cada tela começa
+  const total = song.bars.length * STEPS;
+  const fadeFrom = song.fadeFromBar * STEPS;
+  const it = { active: false, pos: 0, scene: 0, t: 0, typed: 0, completed: [], onDone: null, smoke: [] };
 
-  // onScene(i) avisa a troca de tela (a música acompanha); onDone, o fim ou o SKIP
-  it.start = ({ onDone, onScene }) => {
-    Object.assign(it, { active: true, scene: 0, onDone, onScene, smoke: [] });
-    enter(0);
+  it.start = ({ onDone }) => {
+    Object.assign(it, { active: true, pos: 0, scene: 0, t: 0, typed: 0, completed: [], onDone, smoke: [] });
   };
-
-  function enter(i) {
-    it.scene = i;
-    it.t = 0;
-    it.typed = 0;
-    it.doneT = 0;
-    playSound(SCENES[i].sound);
-    it.onScene?.(i);
-  }
 
   function finish() {
     if (!it.active) return;
     it.active = false;
-    it.beeps.forEach(clearTimeout);
-    it.beeps = [];
     it.onDone?.();
   }
 
-  const totalChars = () => SCENES[it.scene].lines.reduce((n, l) => n + l.length, 0);
+  const totalChars = (i = it.scene) => SCENES[i].lines.reduce((n, l) => n + l.length, 0);
 
-  // Toque ou tecla: completa o texto; se já está completo, vai para a próxima tela
+  // Toque ou tecla: completa o texto; se já está completo, pula para a próxima tela
   it.next = () => {
-    if (!it.active) return;
-    if (SCENES[it.scene].fade) return;
-    if (it.typed < totalChars()) { it.typed = totalChars(); return; }
-    enter(it.scene + 1);
+    if (!it.active || it.scene >= SCENES.length - 1) return;
+    if (it.typed < totalChars()) { it.completed[it.scene] = true; return; }
+    const target = starts[it.scene + 1];
+    if (music.playing) music.jumpTo(target);
+    else it.pos = target;
   };
 
-  it.skip = () => finish();
+  // SKIP: a música para na hora e a fase começa
+  it.skip = () => {
+    music.stop(0.15);
+    finish();
+  };
 
   it.update = (dt) => {
     if (!it.active) return;
-    it.t += dt;
-    const sc = SCENES[it.scene];
-    if (sc.fade) {
-      if (it.t >= FADE + 0.3) finish();
-      return;
-    }
-    it.typed = Math.min(totalChars(), it.typed + TYPE_SPEED * dt);
-    if (it.typed >= totalChars()) {
-      it.doneT += dt;
-      if (it.doneT >= AUTO_NEXT) enter(it.scene + 1);
-    }
+    it.pos = music.playing ? music.position() : it.pos + dt / stepDur;
+    let scene = 0;
+    starts.forEach((st, i) => { if (it.pos >= st) scene = i; });
+    if (scene !== it.scene) it.smoke = [];
+    it.scene = scene;
+    it.t = (it.pos - starts[scene]) * stepDur;              // segundos desde o começo da tela
+    it.typed = it.completed[scene] ? totalChars() : Math.min(totalChars(), it.t * TYPE_SPEED);
+    if (it.pos >= total) finish();
   };
 
   it.draw = (now) => {
@@ -92,8 +85,10 @@ export function createIntro(canvas, view) {
     SCENES[it.scene].draw(ctx, it, t);
     ctx.restore();
     drawText(ctx, it, W, H, t);
-    if (SCENES[it.scene].fade) {
-      ctx.fillStyle = `rgba(0,0,0,${clamp(it.t / FADE, 0, 1).toFixed(3)})`;
+    // Fade para a fase, junto com o acorde final da música
+    const fade = clamp((it.pos - fadeFrom) / (total - fadeFrom), 0, 1);
+    if (fade > 0) {
+      ctx.fillStyle = `rgba(0,0,0,${fade.toFixed(3)})`;
       ctx.fillRect(0, 0, W, H);
     }
   };
@@ -119,19 +114,6 @@ export function createIntro(canvas, view) {
       c.font = `11px ${FONT}`;
       c.fillStyle = 'rgba(127,140,163,0.9)';
       c.fillText(view.isTouch ? 'TAP TO CONTINUE' : 'PRESS ANY KEY', W / 2, H - 16 - view.safe.bottom);
-    }
-  }
-
-  // SOS em código Morse, baixinho, na tela 1; bipes de rádio na tela 2. Em lá, o tom da música
-  function playSound(kind) {
-    it.beeps.forEach(clearTimeout);
-    it.beeps = [];
-    if (!kind) return;
-    const seq = kind === 'sos' ? [0, 0, 0, 1, 1, 1, 0, 0, 0] : [0, 0, 1];
-    let at = 400;
-    for (const long of seq) {
-      it.beeps.push(setTimeout(() => Sound.tone(880, long ? 0.22 : 0.08, 'square', 0.018), at));
-      at += long ? 330 : 170;
     }
   }
 
@@ -303,7 +285,7 @@ function drawLaunch(c, it, t) {
   ground.draw(c);
   const gy = ground.y;
   base(c, 300, gy(300), t);
-  const lift = Math.pow(it.t, 2) * 90;
+  const lift = Math.pow(it.t, 2) * 45;   // sobe acelerando durante a subida da música
   playerShip(c, 300, gy(300) - 26 - lift, 0, true, t);
 }
 
