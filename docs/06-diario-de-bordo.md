@@ -117,6 +117,7 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **Três controles de toque para comparar (#44):** A, tocar e segurar (o original); B, mirar antes de acelerar (arrasto curto só aponta e o propulsor acende ao passar da linha tracejada do anel); C, dois polegares (esquerdo aponta, direito acelera, com um botão desenhado no canto). Troca em Settings → Touch control ou pelo endereço (`?control=b`). O roteiro de teste ganhou a tarefa 5 e a pergunta 7.
 - **Retorno dos controles:** o Fernando gostou do A e do C e descartou o B, porque o propulsor demorava a responder entre tocar e arrastar. O B saiu do jogo; um B que tenha ficado salvo no aparelho volta sozinho para o A.
 - **C com colunas laterais:** no C, o polegar direito ficava em cima da fase. Agora a fase ocupa a faixa central e cada lado ganha uma coluna de controle (AIM e THRUST), num painel escuro com marcas discretas, como uma cabine. O HUD, as mensagens e a seta do objetivo ficam dentro da faixa da fase. O preço é ver menos da fase na largura: num celular de 740 pontos, a faixa fica com cerca de 490.
+- **C de volta à tela cheia:** com as colunas, a fase ficou pequena demais. O Fernando definiu a regra: o botão pode ficar por cima da fase, mas a nave nunca pode ir para baixo do dedo. As colunas saíram, os botões ficam transparentes por cima da fase, e a câmera mantém a nave na faixa da tela entre os dois polegares, mesmo que precise mostrar um pouco além das pontas da fase.
 
 ## Aprendizados de produto
 

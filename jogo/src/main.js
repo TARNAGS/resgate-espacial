@@ -150,10 +150,9 @@ function drawMap() {
 
 function startLevel(def, seed = randomSeed()) {
   app.match = createMatch({ def, seed, getParams: () => PARAMS, events });
-  view.layout(PARAMS);
   app.paused = false;
   app.thumbHintShown = false;
-  renderer.resetCamera(app.match);
+  renderer.resetCamera(app.match, app.match.params());
   if (!def.practice) app.selected = def;
   showScreen('game');
   screens.hideOverlay();
@@ -290,7 +289,6 @@ let acc = 0;
 function loop(now) {
   const elapsed = Math.min(0.1, (now - last) / 1000);
   last = now;
-  view.layout(PARAMS);   // o controle pode mudar pelo painel ou em Settings
   const m = app.match;
   if (app.screen === 'game' && m && !app.paused && !tuning.open) {
     const p = m.params();
@@ -326,7 +324,6 @@ Sound.enabled = app.save.settings.sound !== false;
 updateSoundButton();
 if (!CONTROL_FROM_URL && SCHEMES.includes(app.save.settings.touchScheme)) PARAMS.touchScheme = app.save.settings.touchScheme;
 updateControlButton();
-view.layout(PARAMS);
 view.resize();
 app.selected = defaultLevel(app.save);
 showScreen('menu');

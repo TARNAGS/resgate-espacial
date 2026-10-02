@@ -39,7 +39,7 @@ Se a tarefa passar do limite, agradecer e seguir para a próxima. Alternar a ord
 Os dois controles de toque (#44):
 
 - **A, tocar e segurar:** encostar o dedo já aciona o propulsor; arrastar aponta. A fase ocupa a tela toda.
-- **C, dois polegares:** a fase fica no meio, com uma coluna de controle de cada lado. O polegar esquerdo aponta, sem acelerar; o direito, em qualquer ponto da metade direita, aciona o propulsor.
+- **C, dois polegares:** o polegar esquerdo aponta, sem acelerar; o direito, em qualquer ponto da metade direita, aciona o propulsor. Os botões ficam por cima da fase, e a câmera nunca deixa a nave ir para baixo dos polegares.
 
 O B (arrasto curto só aponta e o propulsor acende depois) foi descartado pelo Fernando em 02/10: o propulsor demorava a responder.
 

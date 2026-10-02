@@ -26,8 +26,23 @@ export function createRenderer(canvas, view) {
     return [lo, Math.max(lo, hi)];
   }
 
-  r.resetCamera = (match) => {
+  const twinControls = (params) => view.isTouch && params.touchScheme === 'twin';
+
+  // No controle C, os polegares ficam por cima dos cantos de baixo. A nave nunca pode ficar
+  // embaixo deles (#44): a câmera a mantém na faixa da tela entre os dois controles, mesmo que
+  // para isso precise mostrar um pouco além das pontas da fase.
+  function keepShipVisible(s, params) {
+    if (!twinControls(params)) return;
+    const R = params.joystickRadius;
+    const minX = view.safe.left + 24 + 2 * R + 16;
+    const maxX = view.cssW - view.safe.right - 24 - 1.8 * R - 16;
+    if (maxX - minX < 40) return;   // tela estreita demais para a regra
+    r.camX = clamp(r.camX, s.x - maxX / view.scale, s.x - minX / view.scale);
+  }
+
+  r.resetCamera = (match, params) => {
     r.camX = clamp(match.state.ship.x - view.viewW / 2, ...camLimits(match.state.level));
+    keepShipVisible(match.state.ship, params);
     r.particles = [];
     r.messages = [];
   };
@@ -37,6 +52,7 @@ export function createRenderer(canvas, view) {
     const look = clamp(s.vx * 0.6, -view.viewW * 0.25, view.viewW * 0.25);
     const target = clamp(s.x - view.viewW / 2 + look, ...camLimits(match.state.level));
     r.camX += (target - r.camX) * Math.min(1, dt * 4);
+    keepShipVisible(s, params);
     for (const p of r.particles) {
       p.vy += params.gravity * 0.6 * dt;
       p.x += p.vx * dt;
@@ -96,46 +112,12 @@ export function createRenderer(canvas, view) {
     ctx.restore();
 
     ctx.setTransform(view.dpr, 0, 0, view.dpr, 0, 0);
-    if (view.sidePanels) drawSidePanels(t);
-    if (!m.practice) drawObjectiveArrow(m, t);
+    if (!m.practice) drawObjectiveArrow(m, t, params);
     drawHUD(m, t, params, scene);
     drawMessages(t);
     drawJoystick(scene);
     drawButtons(scene);
   };
-
-  // Colunas de controle do esquema de dois polegares (C): painéis escuros, com uma borda que brilha
-  // de leve do lado da fase e o nome do controle embaixo
-  function drawSidePanels(t) {
-    const edges = [[0, view.play.x, view.play.x, 'AIM'], [view.play.x + view.play.w, view.cssW, view.play.x + view.play.w, 'THRUST']];
-    for (const [x1, x2, edgeX, label] of edges) {
-      const g = ctx.createLinearGradient(x1, 0, x2, 0);
-      const inner = label === 'AIM' ? 1 : 0;
-      g.addColorStop(inner, 'rgba(10,14,26,0.97)');
-      g.addColorStop(1 - inner, 'rgba(5,7,13,0.99)');
-      ctx.fillStyle = g;
-      ctx.fillRect(x1, 0, x2 - x1, view.cssH);
-      // Marcas discretas, como num painel de cabine
-      ctx.strokeStyle = 'rgba(70,224,200,0.07)';
-      ctx.lineWidth = 1;
-      for (let y = 18 + view.safe.top; y < view.cssH - 30; y += 22) {
-        const w = (Math.floor(y / 22) % 4 === 0) ? 10 : 5;
-        ctx.beginPath();
-        if (label === 'AIM') { ctx.moveTo(edgeX - 6 - w, y); ctx.lineTo(edgeX - 6, y); }
-        else { ctx.moveTo(edgeX + 6, y); ctx.lineTo(edgeX + 6 + w, y); }
-        ctx.stroke();
-      }
-      ctx.strokeStyle = `rgba(70,224,200,${(0.28 + 0.06 * Math.sin(t * 1.5)).toFixed(2)})`;
-      ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(edgeX, 0); ctx.lineTo(edgeX, view.cssH); ctx.stroke();
-      ctx.font = `700 10px ${FONT}`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'bottom';
-      ctx.fillStyle = 'rgba(127,140,163,0.6)';
-      const cx = label === 'AIM' ? (view.safe.left + view.play.x) / 2 : (edgeX + view.cssW - view.safe.right) / 2;
-      ctx.fillText(label, cx, view.cssH - 8 - view.safe.bottom);
-    }
-  }
 
   function drawStars(t, off) {
     for (const s of STARS) {
@@ -373,14 +355,16 @@ export function createRenderer(canvas, view) {
   }
 
   // Seta na borda da faixa da fase, apontando para o objetivo quando ele está fora da tela
-  function drawObjectiveArrow(m, t) {
+  function drawObjectiveArrow(m, t, params) {
     const target = m.level.pads.find((p) => p.kind === (m.crewOnBoard ? 'base' : 'crew'));
     const sx = view.play.x + ((target.x1 + target.x2) / 2 - r.camX) * view.scale;
     const playRight = view.play.x + view.play.w;
     if (sx >= view.play.x && sx <= playRight) return;
     const right = sx > playRight;
-    const x = right ? playRight - 24 - (view.sidePanels ? 0 : view.safe.right) : view.play.x + 24 + (view.sidePanels ? 0 : view.safe.left);
-    const y = clamp(target.y * view.scale, 110, view.cssH - 50);
+    const x = right ? playRight - 24 - view.safe.right : view.play.x + 24 + view.safe.left;
+    // No controle C, a seta da direita fica acima do botão do propulsor
+    const bottom = right && twinControls(params) ? view.cssH - 70 - params.joystickRadius * 1.8 - view.safe.bottom : view.cssH - 50;
+    const y = clamp(target.y * view.scale, 110, Math.max(110, bottom));
     const pulse = (0.6 + 0.4 * Math.sin(t * 5)).toFixed(2);
     ctx.fillStyle = m.crewOnBoard ? `rgba(124,196,255,${pulse})` : `rgba(255,159,67,${pulse})`;
     ctx.beginPath();

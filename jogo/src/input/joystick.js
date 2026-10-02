@@ -4,8 +4,8 @@
 // Duas variantes de posição, escolhidas em PARAMS.joystickMode, para o teste do M1 comparar (#44):
 //   'follow': o direcional aparece onde o polegar tocar, dentro da área da esquerda (joystickArea)
 //   'fixed':  o direcional fica fixo no canto inferior esquerdo
-// No esquema de dois polegares ('twin'), a metade direita da tela é o botão do propulsor, e o
-// desenho dos controles fica nas colunas laterais (render/view.js), fora da fase.
+// No esquema de dois polegares ('twin'), a metade direita da tela é o botão do propulsor.
+// Os controles ficam por cima da fase; a câmera mantém a nave longe deles (render/renderer.js).
 
 export function createJoystick(canvas, { params, view, isActive, onPress, onAnyTouch }) {
   let joy = null;          // dedo que aponta a nave
@@ -13,13 +13,11 @@ export function createJoystick(canvas, { params, view, isActive, onPress, onAnyT
 
   const twin = () => params.touchScheme === 'twin';
 
-  // Centro de um controle no canto de baixo: no meio da coluna lateral, quando ela existe
+  // Centro de um controle num canto de baixo da tela
   function corner(side) {
     const R = params.joystickRadius;
     const y = view.cssH - 24 - view.safe.bottom - R;
-    if (!view.sidePanels) return side === 'left' ? { x: 24 + view.safe.left + R, y } : { x: view.cssW - 24 - view.safe.right - R * 0.9, y };
-    const x = side === 'left' ? (view.safe.left + view.play.x) / 2 : (view.play.x + view.play.w + view.cssW - view.safe.right) / 2;
-    return { x, y };
+    return side === 'left' ? { x: 24 + view.safe.left + R, y } : { x: view.cssW - 24 - view.safe.right - R * 0.9, y };
   }
 
   const fixedCenter = () => corner('left');
