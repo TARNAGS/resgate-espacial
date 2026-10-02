@@ -5,7 +5,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 01 — Visão do produto |
-| Versão | 1.2 |
+| Versão | 1.3 |
 | Data | 02/10/2026 |
 | Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -87,14 +87,14 @@ Regras de desempate para as decisões de produto:
 4. **Retrô e simples.** Estética 16 bits minimalista (a nave é um triângulo, a tripulação são traços), viável para uma pessoa construir.
 5. **Respeitoso.** Sem anúncios e sem coleta de dados pessoais. Se houver compras, comprar não dá vantagem injusta nem bloqueia a diversão (Proposta; P-017).
 6. **Sem enredo.** Não é um jogo de "lore". A história cabe em duas telas: uma tripulação ficou presa, e você vai buscá-la.
-7. **Replay alto.** Cenários sorteados a cada partida (D-014), muitas fases organizadas em mundos (D-020) e desafios como a PRACTICE.
+7. **Replay alto e competição.** Fases com cenário fixo, iguais para todos, para comparar tempos (D-021); uma fase BONUS sorteada a cada partida para o replay infinito; muitas fases organizadas em mundos (D-020); desafios como a PRACTICE.
 
 ## 8. Escopo
 
 ### 8.1 O que o produto inclui
 
 - **Núcleo do jogo:** nave com gravidade e propulsor, combustível limitado, pousos para abastecer, resgate da tripulação, volta à base e obstáculos entre o ponto A e o ponto B.
-- **Fases:** níveis com dificuldade crescente. O cenário de cada fase é gerado aleatoriamente a cada partida, para o replay ser infinito (D-014), e um menu com mapa de progresso mostra a evolução do jogador (D-015).
+- **Fases:** níveis com dificuldade crescente e cenário fixo, o mesmo para todos (D-021), mais a fase BONUS, sorteada a cada partida. Um menu com mapa de progresso mostra a evolução do jogador (D-015).
 - **Plataformas:** navegador (computador e celular) e instalação como app (PWA), com o iPhone como prioridade e o Android numa etapa seguinte (D-008). Controles de teclado e de toque, com direcional virtual (D-006).
 - **Idioma:** jogo em inglês (D-007).
 - **Progresso:** salvo no próprio aparelho.
@@ -120,7 +120,7 @@ O MVP continua com 3 fases (D-009). A visão de longo prazo, descrita pelo Ferna
 |---|---|---|
 | **Lojas** | O jogo publicado na App Store e no Google Play | Definido (D-019) |
 | **Mundos** | Vários mundos, cada um com 10 fases e identidade visual própria, com um documento de design por mundo ([documento 08](08-design-de-mundos.md)) | Definido (D-020); quantos mundos, em aberto |
-| **Muitas fases e replay alto** | Fases geradas a partir de regras (D-014) tornam barato ter muitas fases; desafios fora da sequência, como a PRACTICE | Definido |
+| **Muitas fases e replay alto** | Fases geradas a partir de regras tornam barato ter muitas fases; as da sequência têm cenário fixo para comparar tempos (D-021), e a BONUS é sorteada a cada partida; desafios fora da sequência, como a PRACTICE | Definido |
 | **Abertura** | Antes da primeira fase, telas com imagem e texto (não um filme): a tripulação em apuros, o chamado para o resgate e um fade para a fase 1 | Proposta ([documento 02](02-regras-do-jogo.md), seção 10.1) |
 | **Loja de itens** | Loja no menu, com itens cosméticos e modificadores de jogo e de nave, comprados com dinheiro real ou com moedas do jogo | Em aberto (P-017) |
 | **Cobrança** | Jogo pago, gratuito com loja de itens, ou os dois | Em aberto (P-014) |
@@ -193,3 +193,4 @@ A documentação base está completa e aprovada. O que vem a seguir está no [Ro
 | 1.0 | 01/10/2026 | Aprovado pelo Fernando como versão de referência |
 | 1.1 | 01/10/2026 | Escopo inclui fases geradas aleatoriamente (D-014) e menu com mapa de progresso (D-015) |
 | 1.2 | 02/10/2026 | Objetivo de negócio e publicação nas lojas (D-019); big picture com mundos de 10 fases (D-020), abertura, loja de itens e cobrança em aberto (P-014 e P-017); princípios "sem enredo" e "replay alto"; hipóteses H4 e H5. O MVP continua com 3 fases |
+| 1.3 | 02/10/2026 | Depois do teste com amigos: fases com cenário fixo e fase BONUS (D-021), para comparar tempos; ideias de modo Nightmare (P-018) e ranking (P-019) no big picture |

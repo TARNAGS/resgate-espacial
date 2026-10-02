@@ -4,7 +4,7 @@
 
 Jogo 2D de nave com gravidade: pilote um pequeno triângulo, dose o propulsor contra o peso da nave, atravesse os obstáculos, resgate a tripulação perdida no espaço e volte para a base antes de o combustível acabar.
 
-**Status:** documentação base aprovada em 01/10/2026 e backlog montado. Marcos atuais: M0 (só falta a retrospectiva) e M1 (protótipo de controle, em testes). O jogo está em construção na pasta [`jogo/`](jogo/README.md): níveis 1 a 3, o desafio PRACTICE e a regra do melhor caminho (D-018).
+**Status:** marcos M0 (só falta a retrospectiva) e M1 (controle, em testes com amigos). O jogo está em construção na pasta [`jogo/`](jogo/README.md): níveis 1 a 3 com cenário fixo, desafios PRACTICE e BONUS, abertura com música, elogios para manobras difíceis e 62 testes automáticos.
 
 ## Sobre o projeto
 
@@ -28,6 +28,7 @@ Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável
 | 05 | [Registro de decisões](docs/05-registro-de-decisoes.md) | Por que escolhemos X e não Y | Contínuo |
 | 06 | [Diário de bordo](docs/06-diario-de-bordo.md) | O que foi feito em cada sessão e onde o projeto parou | Contínuo |
 | 07 | [Roteiro de teste do controle](docs/07-roteiro-de-teste-do-controle.md) | Como testar o controle com pessoas | Proposta |
+| — | [Divulgação](divulgacao/) | Arte para grupos de playtesters | — |
 | 08 | [Design de mundos](docs/08-design-de-mundos.md) | O que é um mundo e como documentar cada um ([Mundo 1](docs/mundos/mundo-01.md)) | Proposta |
 
 ## Como o trabalho é organizado

@@ -10,27 +10,26 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 
 ## Onde paramos (02/10/2026, fim do dia)
 
-- **Objetivo do projeto:** portfólio, aprendizado e negócio. O jogo será publicado na App Store e no Google Play (D-019). Cobrar pelo jogo, vender itens ou os dois está em aberto ([#63](https://github.com/TARNAGS/resgate-espacial/issues/63) e [#78](https://github.com/TARNAGS/resgate-espacial/issues/78)). A pesquisa técnica das lojas é a [#65](https://github.com/TARNAGS/resgate-espacial/issues/65), com o Claude.
-- **Big picture** ([Visão, seção 8.3](01-visao-do-produto.md#83-big-picture-o-jogo-depois-do-mvp)): sem enredo, replay alto, mundos de 10 fases com visual próprio (D-020, [documento 08](08-design-de-mundos.md)), abertura em três telas e loja de itens. O MVP continua com 3 fases. No roadmap, os marcos M4 (lojas) e M5 (mundos e loja) estão em proposta, esperando a aprovação do Fernando.
-- **Marcos:** M0 só falta a retrospectiva ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)). M1 em andamento: física, propulsor, embalo, parâmetros, teclado e direcional concluídos (#32 a #34 e #36 a #38). Em revisão, aguardando o Fernando conferir: treino ([#35](https://github.com/TARNAGS/resgate-espacial/issues/35)), área do direcional ([#39](https://github.com/TARNAGS/resgate-espacial/issues/39)), toque sem zoom ([#40](https://github.com/TARNAGS/resgate-espacial/issues/40)), roteiro de teste ([#41](https://github.com/TARNAGS/resgate-espacial/issues/41)) e painel de ajuste ([#42](https://github.com/TARNAGS/resgate-espacial/issues/42)).
-- **O jogo** fica em [`jogo/`](../jogo/README.md), construído a partir do protótipo 01 (#51). Já tem:
-  - níveis 1 a 3 e o desafio PRACTICE, a fase mais difícil (#68);
-  - a regra do melhor caminho, com um piloto automático que prova a corrida sem abastecer de cada cenário (D-018, #67);
-  - aviso de pouso que nunca fica verde num pouso que vai explodir;
-  - dois controles de toque para comparar: A, tocar e segurar, e C, dois polegares, com a câmera mantendo a nave longe dos dedos (o B foi descartado);
-  - treino (TRAINING), painel de ajuste escondido e 50 testes automáticos.
-- **Como testar:** no PC, `node jogo/servir.js` e http://localhost:8081; no iPhone, no mesmo Wi-Fi, `http://<IP do computador>:8081`. Um beta tester de fora precisa de um endereço público: as opções (janela de teste, Netlify ou Cloudflare Pages, túnel) foram apresentadas, e o Fernando preferiu deixar para depois.
-- **Repositório e quadro privados (D-017). ⚠️ Janela de teste ABERTA desde 02/10/2026, por volta das 16h30:** o repositório está público para um amigo do Fernando testar em https://tarnags.github.io/resgate-espacial/jogo/. Fechar ao fim do teste (passo 5 da janela de teste, no `CLAUDE.md`) e tirar este aviso.
-- **Pendências abertas:** P-003 (nome final), P-006 (pontuação), P-008 (medição), P-009 (tutorial), P-010 (tentar de novo repete o cenário?), P-011 (obstáculos, mundo e fase), P-012 (modificadores), P-013 (ICP), P-014 (pago, loja ou os dois), P-015 (como receber e CNPJ), P-016 (o que o jogo guarda) e P-017 (o que a loja vende). Cada uma tem um cartão na coluna "A investigar".
+- ⚠️ **Janela de teste ABERTA:** o repositório está público para amigos do Fernando testarem em https://tarnags.github.io/resgate-espacial/jogo/. Fechar ao fim do teste (passo 5 da janela de teste, no `CLAUDE.md`) e tirar este aviso.
+- **Objetivo:** portfólio, aprendizado e negócio. O jogo será publicado na App Store e no Google Play (D-019); cobrar ou não segue em aberto (P-014, [#63](https://github.com/TARNAGS/resgate-espacial/issues/63); loja de itens, P-017, [#78](https://github.com/TARNAGS/resgate-espacial/issues/78)).
+- **Marcos:** M0 só falta a retrospectiva ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)). M1 em testes com amigos. Big picture em proposta: M4 (lojas) e M5 (mundos e loja).
+- **O jogo (`jogo/`):**
+  - níveis 1 a 3 com **cenário fixo** (D-021) e mais difíceis; desafios **PRACTICE** (a mais difícil) e **BONUS** (sorteada a cada partida);
+  - nas fases com posto, **abastecer uma vez é obrigatório** (D-023), provado por um piloto automático;
+  - controle principal de **dois polegares (A)**, com o de um polegar (B) como opção (D-022);
+  - **abertura** em três telas com **música chiptune** sincronizada, que dá para pular;
+  - **elogios** discretos para manobras difíceis (CLOSE CALL, GREAT SAVE, PERFECT LANDING, PERFECT RUN);
+  - aviso de pouso, treino (TRAINING), painel de ajuste escondido e **62 testes automáticos**.
+- **Documentos:** Visão 1.3, Regras 1.5, PRD 1.5, Roadmap 1.5, Decisões até a D-023, documento 07 (roteiro de teste) e 08 (design de mundos, com o rascunho do Mundo 1).
+- **Pendências abertas:** P-003 (nome), P-006 (pontuação), P-008 (medição), P-009 (tutorial), P-011 (obstáculos), P-012 (modificadores), P-013 (ICP), P-014 (cobrar ou não), P-015 (CNPJ), P-016 (o que o jogo guarda), P-017 (loja), P-018 (modo Nightmare, [#79](https://github.com/TARNAGS/resgate-espacial/issues/79)) e P-019 (ranking, [#80](https://github.com/TARNAGS/resgate-espacial/issues/80)). Cada uma tem um cartão em "A investigar".
 
 ### Próximos passos
 
-1. **Novos testes do Fernando** com o que existe hoje: controles A e C, aviso de pouso, PRACTICE e a regra do melhor caminho (sobrou combustível demais ou de menos na corrida perfeita?). Conferir também os cartões em revisão (#35, #40, #41 e #42).
-2. Escolher a velocidade de giro no toque ([#66](https://github.com/TARNAGS/resgate-espacial/issues/66)) e, depois do teste com pessoas, o controle final, A ou C ([#44](https://github.com/TARNAGS/resgate-espacial/issues/44)).
+1. **O Fernando conta o retorno completo do teste com amigos** e testa as mudanças de hoje no iPhone: cartões em "Em revisão" ([#35](https://github.com/TARNAGS/resgate-espacial/issues/35), [#39](https://github.com/TARNAGS/resgate-espacial/issues/39), [#40](https://github.com/TARNAGS/resgate-espacial/issues/40), [#41](https://github.com/TARNAGS/resgate-espacial/issues/41), [#42](https://github.com/TARNAGS/resgate-espacial/issues/42), [#66](https://github.com/TARNAGS/resgate-espacial/issues/66), [#76](https://github.com/TARNAGS/resgate-espacial/issues/76), [#81](https://github.com/TARNAGS/resgate-espacial/issues/81) e [#82](https://github.com/TARNAGS/resgate-espacial/issues/82) a [#86](https://github.com/TARNAGS/resgate-espacial/issues/86)).
+2. **Fechar o repositório** quando o teste acabar.
 3. Retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)).
-4. Testes com 3 a 5 pessoas ([#43](https://github.com/TARNAGS/resgate-espacial/issues/43)), com o roteiro do documento 07. Para quem está fora de casa, escolher como publicar o jogo (janela de teste ou hospedagem que publica só a pasta `jogo/`).
-5. Descobertas da coluna "A investigar", na ordem do quadro: pagamento e lojas (#63 e #65), ICP (#59) e risco de plágio (#52) primeiro.
-6. O Fernando aprova ou ajusta o big picture: marcos M4 e M5 do Roadmap (versão 1.4), princípios novos da Visão (versão 1.2) e o documento 08 (versão 0.1).
+4. Decisões do Fernando: Nightmare ([#79](https://github.com/TARNAGS/resgate-espacial/issues/79)), ranking ([#80](https://github.com/TARNAGS/resgate-espacial/issues/80)), loja ([#78](https://github.com/TARNAGS/resgate-espacial/issues/78)) e cobrar ou não ([#63](https://github.com/TARNAGS/resgate-espacial/issues/63)).
+5. Pesquisa do Claude sobre as lojas ([#65](https://github.com/TARNAGS/resgate-espacial/issues/65)): empacotamento, revisão da Apple, compras dentro do app e rankings do Game Center e do Google Play Games.
 
 ## Sessões
 
@@ -206,6 +205,11 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **[#86](https://github.com/TARNAGS/resgate-espacial/issues/86) BONUS (D-021):** quinta fase, sorteada a cada partida, com posto e recorde separado, no mapa ao lado da PRACTICE.
 - **62 testes automáticos**, incluindo a reprodução numa partida de verdade dos dois planos com um abastecimento (na ida e na volta), nas fases com posto.
 - Os cartões foram para "Em revisão": falta o Fernando jogar e aprovar a dificuldade nova.
+
+### 02/10/2026 — Sincronização e documentação
+
+- Documentos revistos com as decisões do dia: Visão 1.3, PRD 1.5, Roadmap 1.5, `CLAUDE.md` e README do projeto. "Onde paramos" reescrito.
+- A arte de divulgação para os playtesters (`resgate-espacial-playtest.jpg`) tinha entrado sem querer no commit 48f0a98 (o `git add -A` pegou o arquivo). Como não tem nada sensível, ficou no repositório, movida para a pasta `divulgacao/`.
 
 ## Aprendizados de produto
 

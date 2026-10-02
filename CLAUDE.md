@@ -81,5 +81,5 @@ Fora das janelas, o protótipo roda na rede de casa. Rodar `node prototipos/serv
 - Os parâmetros de ajuste da física ficam num lugar só: `jogo/src/config/params.js`.
 - Conteúdo é dado, não código: mundos e níveis em `jogo/src/content/worlds.js`, obstáculos em `jogo/src/content/obstacles/`, modificadores em `jogo/src/content/modifiers.js`.
 - Antes de cada commit que mexe no jogo, rodar `node jogo/testes/rodar.js`; regra nova ou mudada ganha teste.
-- Fases geradas a partir de uma semente (D-014): a mesma semente gera sempre o mesmo cenário, e todo cenário gerado precisa ter solução.
-- Regra do melhor caminho (D-018): o piloto automático (`jogo/src/core/autopilot.js`) joga cada cenário gerado; o tanque das fases com posto sai da melhor corrida dele mais uma folga pequena. Mudou a física, um obstáculo ou o contato? Rodar os testes, que reproduzem a melhor corrida numa partida de verdade.
+- Fases geradas a partir de uma semente (D-014): a mesma semente gera sempre o mesmo cenário, e todo cenário precisa ter solução. As fases da sequência e a PRACTICE usam semente fixa (D-021); só a BONUS sorteia.
+- Caminho provado (D-018) e abastecer obrigatório (D-023): o piloto automático (`jogo/src/core/autopilot.js`) joga cada cenário; nas fases com posto, o tanque permite concluir abastecendo uma vez (na ida ou na volta), mas não sem abastecer. Mudou a física, um obstáculo ou o contato? Rodar os testes, que reproduzem essas rotas numa partida de verdade.

@@ -5,7 +5,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 03 — PRD (requisitos do produto) |
-| Versão | 1.4 |
+| Versão | 1.5 |
 | Data | 02/10/2026 |
 | Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -92,7 +92,7 @@ Prioridade: **MVP** (entra na primeira versão pública) ou **Depois** (etapas s
 | RF-14 | Sobre o projeto | MVP | Créditos, link para o repositório do projeto e explicação do que é medido ([seção 7](#7-medição)) |
 | RF-15 | Medição anônima de uso | MVP | Os eventos da seção 7 chegam à ferramenta de medição, sem dados pessoais |
 | RF-16 | Botão "Instalar" no Android e no computador, usando o convite do navegador | Depois | Nos navegadores que oferecem o convite (como o Chrome), o botão instala o jogo (D-008) |
-| RF-17 | Fases geradas aleatoriamente (D-014) | MVP | Cada partida gera um cenário novo, seguindo as regras do nível; todo cenário gerado tem solução; a mesma semente gera sempre o mesmo cenário |
+| RF-17 | Fases geradas a partir de regras, com cenário fixo (D-014, revista pela D-021) | MVP | Cada fase da sequência e a PRACTICE têm sempre o mesmo cenário, igual para todos; a fase BONUS gera um cenário novo a cada partida; todo cenário tem solução provada pelo piloto automático, e nas fases com posto é obrigatório abastecer uma vez (D-023) |
 | RF-18 | Abertura em telas antes da primeira fase ([documento 02, seção 10.1](02-regras-do-jogo.md#101-abertura--proposta-depois-do-mvp)) | Depois | Na primeira vez, três telas: tripulação em apuros, o chamado para o resgate e um fade para a fase 1; dá para pular e rever pelo menu |
 | RF-19 | Loja de itens no menu (P-017) | Depois | O jogador vê os itens, o preço (dinheiro real ou moedas) e o que já comprou; um item comprado continua com ele depois de fechar o jogo |
 | RF-20 | Moedas do jogo (P-017) | Depois | O jogador ganha moedas jogando, conforme a regra da P-017, e vê o saldo no menu |
@@ -237,3 +237,4 @@ Os próximos passos estão no [Roadmap](04-roadmap.md) e no [quadro kanban](http
 | 1.2 | 01/10/2026 | Pendências P-001 e P-005 resolvidas: repositório público (D-012) e hospedagem no GitHub Pages (D-013) |
 | 1.3 | 01/10/2026 | Fases geradas aleatoriamente (D-014, novo RF-17) e menu com mapa de progresso (D-015, RF-02 e RF-05 revistos) |
 | 1.4 | 02/10/2026 | Big picture com prioridade "Depois": abertura (RF-18), loja de itens (RF-19), moedas (RF-20), publicação nas lojas (RF-21, D-019) e mundos com 10 fases (RF-22, D-020). O MVP não muda |
+| 1.5 | 02/10/2026 | RF-17 revisto: fases com cenário fixo, fase BONUS sorteada (D-021) e abastecer obrigatório uma vez (D-023) |
