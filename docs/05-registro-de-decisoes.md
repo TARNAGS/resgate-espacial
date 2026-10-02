@@ -35,6 +35,7 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-021 | Fases com cenário fixo, iguais para todos; só a fase BONUS é sorteada | 02/10/2026 | Aceita; construída ([#84](https://github.com/TARNAGS/resgate-espacial/issues/84) e [#86](https://github.com/TARNAGS/resgate-espacial/issues/86)) |
 | D-022 | Controle principal: dois polegares (novo A); o de um polegar vira a opção B | 02/10/2026 | Aceita; construída ([#82](https://github.com/TARNAGS/resgate-espacial/issues/82)) |
 | D-024 | Ranking de tempos por fase, com nickname como ID do jogador | 02/10/2026 | Aceita; construída e online ([#87](https://github.com/TARNAGS/resgate-espacial/issues/87)) |
+| D-025 | Telemetria das partidas no playtest, no mesmo banco do ranking, com o nickname | 02/10/2026 | Aceita; construída e online ([#88](https://github.com/TARNAGS/resgate-espacial/issues/88)) |
 | D-023 | Nas fases com posto, abastecer pelo menos uma vez é obrigatório | 02/10/2026 | Aceita; construída ([#83](https://github.com/TARNAGS/resgate-espacial/issues/83)) |
 
 ## D-001 — Sem login e sem contas
@@ -440,6 +441,29 @@ Junto com as trilhas, entraram:
 
 **Revisitar se** o grupo de testes crescer além de amigos, ou no lançamento nas lojas (P-019).
 
+## D-025 — Telemetria das partidas no playtest
+
+**Contexto.** Com o banco do ranking no ar (D-024), o Fernando pediu para guardar informações que ajudem a melhorar o jogo e a experiência: o que acontece em cada partida e em cada fase do protótipo. Até aqui, o retorno vinha só do que os amigos contavam.
+
+**Decisão.** Durante o playtest, o jogo registra as partidas no mesmo Firebase, em `telemetry/<dia>/<id>`:
+
+- **sessão:** tipo de aparelho (iPhone, iPad, Android ou PC), tela, controle, som, tempo de carregamento e se está instalado;
+- **cada tentativa de fase:** resultado (concluiu, fim de jogo ou desistiu), mortes, abastecimentos, elogios, tempo, vidas, combustível que sobrou e, de performance, quadros por segundo, engasgos e o pior quadro;
+- **cada morte:** motivo e posição, para achar os trechos difíceis demais;
+- **abertura** (pulou e em que tela), **ranking aberto** e **saída do app** no meio de uma fase.
+
+Os eventos levam o **nickname**, e a tela do nick avisa que, no playtest, essas informações são salvas online. Um relatório no terminal resume tudo por fase e por aparelho (`node jogo/ferramentas/relatorio-telemetria.mjs`).
+
+**Consequências.**
+
+- É uma exceção de playtest à RNF-06 (nada que identifique a pessoa sai do aparelho): o nick vai junto, com aviso, para um grupo de amigos. Nada além disso identifica o jogador ou o aparelho.
+- Responde a P-008 para o playtest (ferramenta: o próprio Firebase, sem cookies e sem Google Analytics). Para o lançamento, a P-008 continua aberta: a medição precisa ser anônima.
+- O Firebase não deixa o jogo mais rápido (o jogo roda no aparelho); ele mede a performance para sabermos onde melhorar.
+- O banco só aceita eventos novos, planos e curtos; não dá para apagar nem reescrever. Qualquer pessoa com o endereço pode ler a telemetria (como o ranking), e é por isso que ela não guarda nada além do nick.
+- Testes no computador (localhost) não entram no ranking real e ficam fora do relatório.
+
+**Revisitar se** o grupo de testes crescer além de amigos, e antes do lançamento nas lojas (P-008, RNF-06).
+
 ## Decisões pendentes
 
 | ID | Pergunta | Quando decidir | Observação |
@@ -448,7 +472,7 @@ Junto com as trilhas, entraram:
 | P-006 | Como funciona a pontuação? | Antes de construir a tela de resultado | Já definido: sem limite de tempo; resgate mais rápido faz mais pontos. Com cenários aleatórios (D-014), comparar tempos de cenários diferentes pode ser injusto. Perguntas no [documento 02, seção 8](02-regras-do-jogo.md#8-tempo-e-pontuação). Cartão [#53](https://github.com/TARNAGS/resgate-espacial/issues/53) |
 | P-009 | Como o jogo ensina a jogar: há um tutorial, e a fase 1 é aleatória ou fixa e desenhada à mão? | Antes do M2 | No protótipo 01, ela é aleatória, com regras bem fáceis. Ampliada em 01/10/2026 com a pergunta do Fernando sobre ter um tutorial. Cartão [#48](https://github.com/TARNAGS/resgate-espacial/issues/48) |
 | P-010 | Ao tentar de novo depois de perder as 3 vidas, o cenário se repete ou muda? Resolvida pela D-021: as fases fixas repetem sempre o mesmo cenário (na BONUS, "Try again" também repete). | Antes do M2 | No protótipo 01, "Try again" repete o mesmo cenário. Cartão [#49](https://github.com/TARNAGS/resgate-espacial/issues/49) |
-| P-008 | Qual ferramenta de medição anônima usar, e que eventos medir? | No M2, antes de construir a medição (E-17) | Precisa ser gratuita, dispensar cookies e aceitar eventos personalizados ([PRD, seção 7](03-prd.md#7-medição)). O Fernando revisa a lista de eventos. Cartão [#56](https://github.com/TARNAGS/resgate-espacial/issues/56) |
+| P-008 | Qual ferramenta de medição anônima usar, e que eventos medir? Para o playtest, respondida pela D-025 (Firebase, com o nick); para o lançamento, continua em aberto. | No M2, antes de construir a medição (E-17) | Precisa ser gratuita, dispensar cookies e aceitar eventos personalizados ([PRD, seção 7](03-prd.md#7-medição)). O Fernando revisa a lista de eventos. Cartão [#56](https://github.com/TARNAGS/resgate-espacial/issues/56) |
 | P-011 | Que obstáculos o jogo tem, e como ele se organiza em mundos e fases? | Antes de construir o gerador de fases (E-09) | A parte "mundo e fase" foi respondida pela D-020 (mundos com 10 fases). Falta o catálogo de obstáculos e o que cada mundo apresenta de novo. Cartão [#60](https://github.com/TARNAGS/resgate-espacial/issues/60) |
 | P-012 | Haverá modificadores de jogo e de fase (gravidade, vento, escuridão etc.)? | Antes de construir o gerador de fases (E-09) | Afeta a pontuação (P-006) e o mapa de progresso. Cartão [#61](https://github.com/TARNAGS/resgate-espacial/issues/61) |
 | P-013 | Quem é o jogador ideal do jogo (ICP)? | Antes dos testes com pessoas ([#43](https://github.com/TARNAGS/resgate-espacial/issues/43)) | Aprofunda a persona primária da Visão (seção 4). Cartão [#59](https://github.com/TARNAGS/resgate-espacial/issues/59) |

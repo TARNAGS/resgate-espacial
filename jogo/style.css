@@ -230,3 +230,5 @@ html, body { touch-action: manipulation; }
 .rank-list .pos { color: var(--dim); }
 .rank-list .ctrl { color: var(--dim); font-size: 11px; align-self: center; }
 @media (max-height: 520px) { .rank-list { font-size: 13px; } .rank-list li { padding: 2px 8px; } }
+.controls-help.privacy { max-width: 460px; font-size: 11px; opacity: 0.8; }
+@media (max-height: 520px) { .controls-help.privacy { font-size: 10px; } }

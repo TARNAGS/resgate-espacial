@@ -20,6 +20,7 @@ import { createMusic } from './platform/music.js';
 import { createLeaderboard } from './platform/leaderboard.js';
 import { rankKey, normalizeNick, validNick } from './core/ranking.js';
 import { createRankingScreen } from './ui/ranking.js';
+import { createTelemetry, createFrameStats, deviceKind } from './platform/telemetry.js';
 import { INTRO_SONG } from './content/songs.js';
 
 // Resgate Espacial — ponto de entrada. Liga as partes: regras (core), conteúdo (content),
@@ -30,6 +31,10 @@ const view = createView(canvas, document.getElementById('safe-probe'));
 const renderer = createRenderer(canvas, view);
 const events = createEvents();
 connectSound(events);
+
+// ===== Telemetria do playtest (#88, D-025) =====
+const telemetry = createTelemetry({ getNick: () => app.save?.nick || null });
+const attempts = {};        // tentativas por fase nesta sessão
 
 const app = {
   screen: 'menu',      // 'menu' | 'settings' | 'game'
@@ -108,7 +113,20 @@ events.on('boarding', ({ lowFuel }) => {
   else renderer.message('CREW BOARDING...', 2);
 });
 events.on('crewOnBoard', () => renderer.message('CREW ON BOARD · BACK TO BASE!', 3));
-events.on('praise', ({ label, x, y }) => renderer.praise(`${label}!`, x, y));
+events.on('praise', ({ kind, label, x, y }) => {
+  renderer.praise(`${label}!`, x, y);
+  if (app.run) app.run.praise[kind] = (app.run.praise[kind] || 0) + 1;
+});
+events.on('land', ({ pad }) => { if (app.run && pad === 'fuel') app.run.refuels += 1; });
+events.on('crash', ({ reason, x, y }) => {
+  const r = app.run;
+  if (!r) return;
+  r.crashes += 1;
+  const m = app.match.state;
+  telemetry.track('crash', { level: r.level, attempt: r.attempt, reason, x: Math.round(x), y: Math.round(y), crew: m.crewOnBoard, timer: m.timer });
+});
+events.on('complete', ({ run }) => endRun('complete', { time: run.time, livesLost: run.livesLost, fuelLeft: run.fuelLeft, perfect: run.perfectRun }));
+events.on('gameOver', () => endRun('gameover'));
 events.on('outOfFuel', () => renderer.message('OUT OF FUEL', 2, true));
 events.on('crash', ({ reason, x, y }) => {
   renderer.explosion(x, y);
@@ -140,6 +158,31 @@ events.on('gameOver', ({ def, seed }) => {
   ]);
 });
 
+function startRun(def, m, genMs) {
+  if (def.training) { app.run = null; return; }
+  attempts[def.key] = (attempts[def.key] || 0) + 1;
+  app.run = {
+    level: def.key, attempt: attempts[def.key], t0: performance.now(),
+    crashes: 0, refuels: 0, praise: {}, frames: createFrameStats(),
+  };
+  telemetry.track('level_start', { level: def.key, seed: m.level.seed, attempt: app.run.attempt, genMs, tank: m.level.tankSeconds, control: app.ranControl });
+}
+
+// Fim de uma tentativa: concluiu, perdeu as vidas ou desistiu. Resume a partida num evento só.
+function endRun(outcome, extra = {}) {
+  const r = app.run;
+  if (!r) return;
+  app.run = null;
+  const m = app.match?.state;
+  const praise = Object.fromEntries(Object.entries(r.praise).map(([k, n]) => [`p_${k}`, n]));
+  telemetry.track('level_end', {
+    level: r.level, attempt: r.attempt, outcome, durS: (performance.now() - r.t0) / 1000,
+    timer: m?.timer ?? 0, crashes: r.crashes, refuels: r.refuels, control: app.ranControl,
+    crew: m?.crewOnBoard ?? false, tuned: tuning.isTuned(), ...r.frames.summary(), ...praise, ...extra,
+  });
+  telemetry.flush();
+}
+
 // ===== Fluxo =====
 function showScreen(name) {
   app.screen = name;
@@ -159,9 +202,12 @@ function drawMap() {
 }
 
 function startLevel(def, seed = randomSeed()) {
+  endRun('quit');   // se uma fase estava em andamento (recomeçar, próxima fase), ela conta como desistência
   app.ranControl = view.isTouch ? PARAMS.touchScheme : 'keys';
   if (def.seed != null) seed = def.seed;   // fases fixas: o mesmo cenário para todos (D-021)
+  const t0 = performance.now();
   app.match = createMatch({ def, seed, getParams: () => PARAMS, events });
+  startRun(def, app.match.state, Math.round(performance.now() - t0));
   app.paused = false;
   app.thumbHintShown = false;
   renderer.resetCamera(app.match, app.match.params());
@@ -189,6 +235,7 @@ function togglePause(force) {
 }
 
 function toMenu() {
+  endRun('quit');
   app.match = null;
   app.selected = defaultLevel(app.save);
   showScreen('menu');
@@ -226,6 +273,7 @@ function playIntro(then) {
   music.play(INTRO_SONG);
   intro.start({
     onDone() {
+      if (intro.pos >= 96) telemetry.track('intro', { skipped: false });
       music.stop(0.3);
       app.save.seen = { ...app.save.seen, intro: true };
       writeSave(app.save);
@@ -235,7 +283,12 @@ function playIntro(then) {
 }
 
 screens.el('intro').addEventListener('click', () => intro.next());
-screens.el('btn-skip').addEventListener('click', (e) => { e.stopPropagation(); click(); intro.skip(); });
+screens.el('btn-skip').addEventListener('click', (e) => {
+  e.stopPropagation();
+  click();
+  telemetry.track('intro', { skipped: true, scene: intro.scene + 1 });
+  intro.skip();
+});
 window.addEventListener('keydown', (e) => {
   if (app.screen !== 'intro') return;
   e.preventDefault();
@@ -257,7 +310,10 @@ screens.el('btn-play').addEventListener('click', () => {
 // ===== Nickname e ranking (#87) =====
 // O nick é o ID do jogador no ranking. Fica salvo no aparelho; quem limpar os dados ou trocar de
 // aparelho digita o mesmo nick e continua atualizando as mesmas linhas do ranking.
-const leaderboard = createLeaderboard();
+// Rodando localmente (testes no computador), o ranking fica só no aparelho, para testes nunca
+// entrarem no ranking real dos jogadores. ?online no endereço liga o banco mesmo assim.
+const LOCAL_HOST = /^(localhost|127.0.0.1)$/.test(location.hostname);
+const leaderboard = createLeaderboard(LOCAL_HOST && !new URLSearchParams(location.search).has('online') ? { url: '' } : {});
 const rankOf = (lv) => rankKey(lv, DEFAULT_PARAMS);
 const RANKED = [...LEVELS, ...CHALLENGES];
 const rankingScreen = createRankingScreen({
@@ -312,6 +368,7 @@ screens.el('btn-ranking').addEventListener('click', () => {
   click();
   showScreen('ranking');
   leaderboard.flush();   // reenvia tempos que ficaram na fila sem internet
+  telemetry.track('ranking_open', {});
   rankingScreen.show(RANKED.find((l) => l.key === app.selected.key) || RANKED[0]);
 });
 screens.el('btn-rank-back').addEventListener('click', () => { click(); toMenu(); });
@@ -431,6 +488,7 @@ function loop(now) {
       acc -= DT;
     }
     Sound.setThrust(m.state.ship.thrusting);
+    app.run?.frames.add(elapsed);
     if (keyboard.keys.left || keyboard.keys.right || keyboard.keys.thrust) app.ranControl = 'keys';
     checkThumbHint(m.state);
   } else {
@@ -465,6 +523,21 @@ if (!CONTROL_FROM_URL && SCHEMES.includes(app.save.settings.touchScheme)) PARAMS
 updateControlButton();
 updateNickButton();
 leaderboard.flush();
+telemetry.track('session', {
+  host: location.hostname,   // separa os testes locais (localhost) das partidas dos jogadores
+  device: deviceKind(), touch: view.isTouch, w: window.innerWidth, h: window.innerHeight,
+  dpr: window.devicePixelRatio || 1, control: PARAMS.touchScheme, sound: Sound.enabled,
+  loadMs: Math.round(performance.now()), installed: window.matchMedia('(display-mode: standalone)').matches,
+});
+telemetry.flush();
+setInterval(() => telemetry.flush(), 20000);
+// Saiu do app (o jogo pausa): registra e envia a fila; a tentativa continua se ele voltar
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) return;
+  if (app.run) telemetry.track('hidden', { level: app.run.level, attempt: app.run.attempt, timer: app.match?.state.timer ?? 0 });
+  telemetry.flush({ keepalive: true });
+});
+window.addEventListener('online', () => telemetry.flush());
 window.addEventListener('online', () => leaderboard.flush());   // a internet voltou: envia a fila
 view.resize();
 app.selected = defaultLevel(app.save);
@@ -478,7 +551,7 @@ const start = new URLSearchParams(location.search).get('level');
 if (start && tuning.enabled && findLevel(start)) startLevel(findLevel(start));
 
 // Acesso para testes automáticos no navegador
-window.__game = { app, PARAMS, LEVELS, startLevel, events, keyboard, joystick, renderer, intro, playIntro, music, leaderboard, rankOf };
+window.__game = { app, PARAMS, LEVELS, startLevel, events, keyboard, joystick, renderer, intro, playIntro, music, leaderboard, rankOf, telemetry };
 
 // ?intro no endereço abre direto na abertura, para testar. O navegador só libera o som depois de
 // um toque, então a primeira tela pede o toque (TAP TO START) e aí a abertura começa com música.

@@ -19,17 +19,20 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
   - controle principal de **dois polegares (A)**, com o de um polegar (B) como opção (D-022);
   - **abertura** em três telas com **música chiptune** sincronizada, que dá para pular;
   - **elogios** discretos para manobras difíceis (CLOSE CALL, GREAT SAVE, PERFECT LANDING, PERFECT RUN);
-  - aviso de pouso, treino (TRAINING), painel de ajuste escondido e **62 testes automáticos**.
-- **Documentos:** Visão 1.3, Regras 1.5, PRD 1.5, Roadmap 1.5, Decisões até a D-023, documento 07 (roteiro de teste) e 08 (design de mundos, com o rascunho do Mundo 1).
+  - **nickname e ranking online** por fase (D-024) e **telemetria das partidas** no Firebase (D-025), com relatório no terminal;
+  - aviso de pouso, treino (TRAINING), painel de ajuste escondido e **75 testes automáticos**.
+- **Documentos:** Visão 1.3, Regras 1.5, PRD 1.6, Roadmap 1.5, Decisões até a D-025, documento 07 (roteiro de teste) e 08 (design de mundos, com o rascunho do Mundo 1).
 - **Pendências abertas:** P-003 (nome), P-006 (pontuação), P-008 (medição), P-009 (tutorial), P-011 (obstáculos), P-012 (modificadores), P-013 (ICP), P-014 (cobrar ou não), P-015 (CNPJ), P-016 (o que o jogo guarda), P-017 (loja), P-018 (modo Nightmare, [#79](https://github.com/TARNAGS/resgate-espacial/issues/79)) e P-019 (ranking, [#80](https://github.com/TARNAGS/resgate-espacial/issues/80)). Cada uma tem um cartão em "A investigar".
 
 ### Próximos passos
 
-1. **O Fernando conta o retorno completo do teste com amigos** e testa as mudanças de hoje no iPhone: cartões em "Em revisão" ([#35](https://github.com/TARNAGS/resgate-espacial/issues/35), [#39](https://github.com/TARNAGS/resgate-espacial/issues/39), [#40](https://github.com/TARNAGS/resgate-espacial/issues/40), [#41](https://github.com/TARNAGS/resgate-espacial/issues/41), [#42](https://github.com/TARNAGS/resgate-espacial/issues/42), [#66](https://github.com/TARNAGS/resgate-espacial/issues/66), [#76](https://github.com/TARNAGS/resgate-espacial/issues/76), [#81](https://github.com/TARNAGS/resgate-espacial/issues/81) e [#82](https://github.com/TARNAGS/resgate-espacial/issues/82) a [#86](https://github.com/TARNAGS/resgate-espacial/issues/86)).
-2. **Fechar o repositório** quando o teste acabar.
-3. Retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)).
-4. Decisões do Fernando: Nightmare ([#79](https://github.com/TARNAGS/resgate-espacial/issues/79)), ranking ([#80](https://github.com/TARNAGS/resgate-espacial/issues/80)), loja ([#78](https://github.com/TARNAGS/resgate-espacial/issues/78)) e cobrar ou não ([#63](https://github.com/TARNAGS/resgate-espacial/issues/63)).
-5. Pesquisa do Claude sobre as lojas ([#65](https://github.com/TARNAGS/resgate-espacial/issues/65)): empacotamento, revisão da Apple, compras dentro do app e rankings do Game Center e do Google Play Games.
+1. **Apagar a linha de teste CLAUDETEST do ranking real** (só o Fernando pode, pelo console do Firebase): Realtime Database → Dados → `scores` → `w1-2_1wyelcg` → `CLAUDETEST` → lixeira. Se quiser, também `scores/teste_abc1` e `telemetry/1999-01-01`.
+2. **Ler o relatório da telemetria** depois que os amigos jogarem (`node jogo/ferramentas/relatorio-telemetria.mjs`) e ajustar as fases com os dados.
+3. **O Fernando conta o retorno completo do teste com amigos** e testa as mudanças de hoje no iPhone: cartões em "Em revisão" ([#35](https://github.com/TARNAGS/resgate-espacial/issues/35), [#39](https://github.com/TARNAGS/resgate-espacial/issues/39), [#40](https://github.com/TARNAGS/resgate-espacial/issues/40), [#41](https://github.com/TARNAGS/resgate-espacial/issues/41), [#42](https://github.com/TARNAGS/resgate-espacial/issues/42), [#66](https://github.com/TARNAGS/resgate-espacial/issues/66), [#76](https://github.com/TARNAGS/resgate-espacial/issues/76), [#81](https://github.com/TARNAGS/resgate-espacial/issues/81) e [#82](https://github.com/TARNAGS/resgate-espacial/issues/82) a [#88](https://github.com/TARNAGS/resgate-espacial/issues/88)).
+4. **Fechar o repositório** quando o teste acabar.
+5. Retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)).
+6. Decisões do Fernando: Nightmare ([#79](https://github.com/TARNAGS/resgate-espacial/issues/79)), ranking ([#80](https://github.com/TARNAGS/resgate-espacial/issues/80)), loja ([#78](https://github.com/TARNAGS/resgate-espacial/issues/78)) e cobrar ou não ([#63](https://github.com/TARNAGS/resgate-espacial/issues/63)).
+7. Pesquisa do Claude sobre as lojas ([#65](https://github.com/TARNAGS/resgate-espacial/issues/65)): empacotamento, revisão da Apple, compras dentro do app e rankings do Game Center e do Google Play Games.
 
 ## Sessões
 
@@ -235,6 +238,17 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **Tela de nickname** com BACK (volta ao menu ou a Settings).
 - **Chaves dos rankings** (mudam se a fase mudar): w1-1_1ariu3i, w1-2_1wyelcg, w1-3_a8xzz6, além da PRACTICE e da BONUS.
 - 70 testes. Conferido no site público: ranking online, vazio, pronto para os playtesters.
+
+### 02/10/2026 — Telemetria das partidas ([#88](https://github.com/TARNAGS/resgate-espacial/issues/88), D-025)
+
+- **Pedido do Fernando:** com o Firebase no ar, guardar o que ajuda a melhorar o jogo e registrar as partidas e as fases do protótipo.
+- **O que o Firebase faz e o que não faz:** o jogo roda inteiro no aparelho, então o banco não o deixa mais rápido. Ele serve para **medir**: quadros por segundo, engasgos e o pior quadro em cada tentativa, tempo de carregamento e tempo para abrir a fase, por tipo de aparelho.
+- **Construído:** fila de eventos no aparelho, envio em lotes (um pedido a cada 40 eventos, a cada 20 s, ao fim de cada tentativa e ao sair do app), com a fila guardada sem internet. Eventos de sessão, início e fim de cada tentativa, cada morte (motivo e posição), abertura (pulou e em que tela), ranking aberto e saída no meio da fase.
+- **Aviso na tela do nick:** no playtest, o nick, os tempos e como cada partida acontece são salvos online.
+- **Regras do banco** ampliadas: em `telemetry`, só entram eventos novos, planos e com os campos certos; reescrever, apagar e ler a raiz do banco continuam proibidos. Conferido pelo terminal.
+- **Relatório** no terminal, por fase: tentativas, % de conclusão, fim de jogo e desistência, tempo mediano e melhor, mortes por tentativa, abastecimentos, corridas perfeitas, motivos e trechos das mortes e elogios; por aparelho: quadros por segundo e engasgos; e quantos pulam a abertura e em que tela.
+- **Bug pego no teste:** o teste de ponta a ponta no computador gravou um tempo de teste (CLAUDETEST, 47,3 s no nível 2) no ranking real. O Claude não apaga dados; o Fernando apaga pelo console. Para não repetir, o jogo rodando em `localhost` não manda tempos ao ranking real (`?online` liga, se precisar), e o relatório ignora as sessões locais.
+- 75 testes automáticos.
 
 ## Aprendizados de produto
 

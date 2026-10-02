@@ -7,7 +7,10 @@ O jogo de verdade, construído a partir do [protótipo 01](../prototipos/README.
 Na pasta do projeto:
 
 - Jogo: `node jogo/servir.js` e abrir http://localhost:8081. No celular, no mesmo Wi-Fi: `http://<IP do computador>:8081`.
+- Relatório da telemetria do playtest (#88): `node jogo/ferramentas/relatorio-telemetria.mjs`, com `--desde AAAA-MM-DD` para um período e `--incluir-local` para ver também os testes no computador.
 - Testes automáticos: `node jogo/testes/rodar.js`. Eles conferem os critérios de aceite das histórias do M1, as regras do documento 02 e 500 cenários aleatórios de cada nível.
+
+Rodando em `localhost`, o ranking fica só no computador, para os testes não entrarem no ranking real dos jogadores; `http://localhost:8081/?online` liga o banco mesmo assim.
 
 Os módulos do navegador não abrem com dois cliques no `index.html` (`file://`): o jogo precisa de um servidor, como o `servir.js`.
 
@@ -22,6 +25,8 @@ Os módulos do navegador não abrem com dois cliques no `index.html` (`file://`)
 | `src/core/` | Regras: física da nave, contato e pouso, partida, gerador, pontuação e progresso | Uma regra do documento 02 muda |
 | `src/core/ranking.js`, `src/platform/leaderboard.js` e `src/ui/ranking.js` | Nickname e ranking por fase (#87): regras, banco (no aparelho e online) e tela | O banco online ou as regras do ranking mudam |
 | `src/config/online.js` | Endereço do banco online do ranking (Firebase `resgate-espacial`) e o resumo das regras do banco; vazio = ranking só no aparelho | O banco é trocado |
+| `src/platform/telemetry.js` | Telemetria do playtest (#88, D-025): fila de eventos no aparelho, envio em lotes ao Firebase e medidor de quadros por segundo | Um evento novo é medido, ou a P-008 é decidida para o lançamento |
+| `ferramentas/relatorio-telemetria.mjs` | Relatório da telemetria no terminal: por fase (tentativas, conclusões, mortes e onde), por aparelho (quadros por segundo) e a abertura | Um evento novo precisa aparecer no relatório |
 | `src/core/praise.js` | Detecta manobras difíceis e avisa o elogio (#81): fininho, freada no limite, pouso perfeito e corrida perfeita | Os critérios dos elogios mudam |
 | `src/core/autopilot.js` | Piloto automático que joga cada cenário gerado e prova a melhor corrida sem abastecer (D-018) | A física ou um obstáculo novo mudam |
 | `src/core/scoring.js` | Pontuação: hoje só o tempo | P-006 é decidida |

@@ -5,7 +5,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 03 — PRD (requisitos do produto) |
-| Versão | 1.5 |
+| Versão | 1.6 |
 | Data | 02/10/2026 |
 | Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -94,6 +94,7 @@ Prioridade: **MVP** (entra na primeira versão pública) ou **Depois** (etapas s
 | RF-16 | Botão "Instalar" no Android e no computador, usando o convite do navegador | Depois | Nos navegadores que oferecem o convite (como o Chrome), o botão instala o jogo (D-008) |
 | RF-17 | Fases geradas a partir de regras, com cenário fixo (D-014, revista pela D-021) | MVP | Cada fase da sequência e a PRACTICE têm sempre o mesmo cenário, igual para todos; a fase BONUS gera um cenário novo a cada partida; todo cenário tem solução provada pelo piloto automático, e nas fases com posto é obrigatório abastecer uma vez (D-023) |
 | RF-23 | Nickname e ranking por fase (D-024) | MVP (playtest) | Depois do PLAY, o jogo pede um nick (3 a 12 letras ou números); cada fase tem ranking com o melhor tempo de cada nick, compartilhado pelo banco online; o mesmo nick em outro aparelho atualiza a mesma linha |
+| RF-24 | Telemetria das partidas no playtest (D-025) | MVP (playtest) | Cada sessão, tentativa de fase e morte vira um evento no banco online, com o nick e a performance do aparelho (quadros por segundo e engasgos); a tela do nick avisa; um relatório resume por fase e por aparelho |
 | RF-18 | Abertura em telas antes da primeira fase ([documento 02, seção 10.1](02-regras-do-jogo.md#101-abertura--proposta-depois-do-mvp)) | Depois | Na primeira vez, três telas: tripulação em apuros, o chamado para o resgate e um fade para a fase 1; dá para pular e rever pelo menu |
 | RF-19 | Loja de itens no menu (P-017) | Depois | O jogador vê os itens, o preço (dinheiro real ou moedas) e o que já comprou; um item comprado continua com ele depois de fechar o jogo |
 | RF-20 | Moedas do jogo (P-017) | Depois | O jogador ganha moedas jogando, conforme a regra da P-017, e vê o saldo no menu |
@@ -109,7 +110,7 @@ Prioridade: **MVP** (entra na primeira versão pública) ou **Depois** (etapas s
 | RNF-03 | Funciona sem internet | MVP | Depois de aberto uma vez, o jogo abre e funciona completo sem conexão (em PWAs, isso é feito por um *service worker*) |
 | RNF-04 | Compatibilidade no MVP | MVP | iPhone com a versão atual do iOS e a anterior (hoje, 27 e 26), no Safari e instalado; no computador, versões atuais de Chrome, Safari, Edge e Firefox |
 | RNF-05 | Compatibilidade com Android | Depois | Chrome no Android, testado em aparelho real (D-008) |
-| RNF-06 | Privacidade | MVP | Nenhum dado pessoal coletado; nenhum cookie; nada que identifique a pessoa ou o aparelho sai do aparelho |
+| RNF-06 | Privacidade | MVP | Nenhum dado pessoal coletado; nenhum cookie; nada que identifique a pessoa ou o aparelho sai do aparelho. Exceção do playtest (D-024 e D-025): o nickname vai junto com os tempos e a telemetria, com aviso na tela |
 | RNF-07 | Custo zero | MVP | Hospedagem e ferramentas gratuitas (D-003) |
 | RNF-08 | Segurança | MVP | Site servido por HTTPS; nenhum segredo (chave, token) no código |
 | RNF-09 | Áreas seguras da tela | MVP | Na horizontal, nada importante fica sob o entalhe ou a Dynamic Island, e o direcional fica longe das bordas, para o polegar não acionar gestos do sistema |
@@ -166,6 +167,8 @@ Objetivo: acompanhar as métricas da Visão (seção 6) sem identificar ninguém
 
 O tempo entre o link e o controle da nave (RNF-01) é medido em teste, não pela ferramenta.
 
+**No playtest (D-025):** enquanto a P-008 não é decidida para o lançamento, os amigos que testam mandam eventos para o Firebase do ranking, com o nick: sessão (aparelho, tela, controle, carregamento), início e fim de cada tentativa de fase (resultado, mortes, abastecimentos, elogios, tempo e quadros por segundo), cada morte (motivo e posição), a abertura (pulou ou não), o ranking aberto e a saída do app no meio da fase. O relatório é `node jogo/ferramentas/relatorio-telemetria.mjs`. Os eventos desta seção para o lançamento continuam valendo, e anônimos.
+
 ## 8. Critérios de aceite do lançamento
 
 - [ ] No iPhone, o jogo abre pelo link no Safari e dá para jogar sem instalar.
@@ -206,7 +209,7 @@ O tempo entre o link e o controle da nave (RNF-01) é medido em teste, não pela
 |---|---|---|
 | P-003 | Qual será o nome final do jogo? | Tela de abertura, ícone e nome na Tela de Início |
 | P-006 | Como funciona a pontuação? | Telas de resultado e de seleção de fases (RF-05 e RF-07) |
-| P-008 | Qual ferramenta de medição anônima usar? | RF-15 e seção 7 |
+| P-008 | Qual ferramenta de medição anônima usar? Para o playtest, D-025 | RF-15 e seção 7 |
 | P-014 | O jogo será pago, gratuito com loja de itens, ou os dois? | RF-19 a RF-21 |
 | P-017 | O que a loja vende, com que moeda, e como evitar vantagem injusta? | RF-19 e RF-20 |
 
@@ -239,3 +242,4 @@ Os próximos passos estão no [Roadmap](04-roadmap.md) e no [quadro kanban](http
 | 1.3 | 01/10/2026 | Fases geradas aleatoriamente (D-014, novo RF-17) e menu com mapa de progresso (D-015, RF-02 e RF-05 revistos) |
 | 1.4 | 02/10/2026 | Big picture com prioridade "Depois": abertura (RF-18), loja de itens (RF-19), moedas (RF-20), publicação nas lojas (RF-21, D-019) e mundos com 10 fases (RF-22, D-020). O MVP não muda |
 | 1.5 | 02/10/2026 | RF-17 revisto: fases com cenário fixo, fase BONUS sorteada (D-021) e abastecer obrigatório uma vez (D-023) |
+| 1.6 | 02/10/2026 | Playtest: nickname e ranking por fase (RF-23, D-024) e telemetria das partidas (RF-24, D-025); RNF-06 e seção 7 ganham a exceção do playtest |

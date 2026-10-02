@@ -19,7 +19,7 @@ Leia o [diário de bordo](docs/06-diario-de-bordo.md). A seção "Onde paramos" 
 | Visão, regras do jogo, PRD, roadmap e decisões | `docs/01` a `docs/05` |
 | Design de cada mundo (modelo e documentos) | `docs/08-design-de-mundos.md` e `docs/mundos/` |
 | O que foi feito e onde paramos | `docs/06-diario-de-bordo.md` |
-| O jogo (código, testes e como criar fases e obstáculos) | `jogo/` e [`jogo/README.md`](jogo/README.md); roda com `node jogo/servir.js` em http://localhost:8081 e os testes com `node jogo/testes/rodar.js` |
+| O jogo (código, testes e como criar fases e obstáculos) | `jogo/` e [`jogo/README.md`](jogo/README.md); roda com `node jogo/servir.js` em http://localhost:8081 e os testes com `node jogo/testes/rodar.js`; telemetria do playtest com `node jogo/ferramentas/relatorio-telemetria.mjs` |
 | Roteiro de teste com pessoas | `docs/07-roteiro-de-teste-do-controle.md` |
 | Protótipos descartáveis | `prototipos/`; o 01 roda com `node prototipos/servir.js` em http://localhost:8080 |
 | Backlog (iniciativas, épicos, histórias, tarefas e descobertas) | Issues do GitHub, ligadas por sub-issues, com os marcos M0 a M3 |
