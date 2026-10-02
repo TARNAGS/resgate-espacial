@@ -80,6 +80,7 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **Primeiro teste no iPhone:** o Fernando achou bom e tem retorno para trazer. A [#31](https://github.com/TARNAGS/resgate-espacial/issues/31) foi fechada.
 - **Repositório e quadro voltaram a ser privados (D-017)**, a pedido do Fernando, para ninguém ver o que está sendo construído. Até ali, ninguém tinha visitado nem copiado o repositório. No plano gratuito, o GitHub Pages só publica repositórios públicos, então o jogo saiu do ar. O repositório é aberto só nas janelas de teste.
 
+
 ## Aprendizados de produto
 
 - Separar o objetivo do projeto (portfólio) do objetivo do produto (o jogador), com uma regra de desempate: quando os dois brigam, o jogador vence.
