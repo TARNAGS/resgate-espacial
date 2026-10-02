@@ -1,7 +1,10 @@
 import { pointInPoly } from '../../core/math.js';
 
 // Pedra flutuante: fixa, explode a nave ao encostar. O gerador sempre deixa passagem ao lado.
-// Opções no nível: { type: 'rock', count: 7, passGap: 105 }
+// Opções no nível: { type: 'rock', count: 7, passGap: 105, spacing: 170 }
+//   count    quantas pedras, no máximo
+//   passGap  espaço mínimo livre acima ou abaixo de cada pedra
+//   spacing  distância mínima entre pedras (padrão 170)
 
 export const rock = {
   type: 'rock',
@@ -14,7 +17,7 @@ export const rock = {
       const r = 15 + rnd() * 19;
       const x = 300 + rnd() * (length - 600);
       if (busy.some(([a, b]) => x + r > a && x - r < b)) continue;
-      if (out.some((o) => Math.abs(o.x - x) < 170)) continue;
+      if (out.some((o) => Math.abs(o.x - x) < (spec.spacing ?? 170))) continue;
       const ceilY = top(x - r, x + r), floorY = bottom(x - r, x + r);
       const yMin = ceilY + r + 10, yMax = floorY - r - 10;
       if (yMax <= yMin) continue;
@@ -33,6 +36,16 @@ export const rock = {
   },
 
   bounds: (o) => ({ x1: o.x - o.r, x2: o.x + o.r }),
+
+  // Faixa vertical que a pedra ocupa na posição x, com folga (para o piloto automático).
+  // As pontas da pedra chegam a 1,1 vez o raio.
+  blockedAt(o, x, margin) {
+    const R = o.r * 1.1 + margin;
+    const dx = x - o.x;
+    if (Math.abs(dx) >= R) return null;
+    const h = Math.sqrt(R * R - dx * dx);
+    return [o.y - h, o.y + h];
+  },
 
   hits(o, ship) {
     if (Math.abs(o.x - ship.x) > o.r + 16 || Math.abs(o.y - ship.y) > o.r + 16) return false;

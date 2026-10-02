@@ -2,11 +2,45 @@ import { WORLD_H, STEP } from './constants.js';
 import { clamp, lerp, sampleLine } from './math.js';
 import { mulberry32 } from './rng.js';
 import { OBSTACLES } from '../content/obstacles/index.js';
+import { bestRun } from './autopilot.js';
 
 // Gerador de fases (D-014): o nível define as regras, a semente define o cenário.
 // Mesma semente, mesmo cenário; todo cenário gerado precisa ter solução (validateLevel).
+//
+// Regra do melhor caminho (D-018): com os parâmetros da física, o gerador também joga o cenário
+// com o piloto automático (core/autopilot.js), sem abastecer. Se o piloto não conseguir concluir,
+// a semente é trocada até sair um cenário com caminho provado. O tanque sai da melhor corrida:
+//   - fase com posto: o tanque é a melhor corrida mais uma folga pequena (bestRunMargin), então
+//     quem faz a corrida perfeita conclui sem abastecer e chega quase sem combustível;
+//   - fase sem posto: o tanque do nível, ou a melhor corrida mais 25%, o que for maior.
 
-export function generateLevel(def, seed) {
+const MAX_ATTEMPTS = 25;
+const nextSeed = (s) => (Math.imul(s ^ 0x5bd1e995, 2654435761) >>> 0) % 1000000000;
+
+export function generateLevel(def, seed, params = null) {
+  if (!params || def.generator.kind === 'training') return buildLayout(def, seed);
+  let s = seed;
+  for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+    const level = buildLayout(def, s);
+    const run = bestRun(level, params);
+    if (run) {
+      level.bestRun = run;
+      level.tankSeconds = tankFor(def.generator, run.thrustSeconds);
+      return level;
+    }
+    s = nextSeed(s);
+  }
+  // Nenhum cenário provado (não deve acontecer; os testes vigiam): fica com o primeiro
+  return buildLayout(def, seed);
+}
+
+function tankFor(g, best) {
+  if (g.fuelStation) return best * (1 + (g.bestRunMargin ?? 0.05));
+  return Math.max(g.tankSeconds ?? 40, best * 1.25);
+}
+
+// Terreno, plataformas e obstáculos de uma semente
+function buildLayout(def, seed) {
   const g = def.generator;
   const rnd = mulberry32(seed);
   const L = g.length;
@@ -15,7 +49,7 @@ export function generateLevel(def, seed) {
   const ceil = new Array(n);
   const pads = [];
 
-  if (g.kind === 'practice') {
+  if (g.kind === 'training') {
     floor.fill(WORLD_H - 90);
     ceil.fill(40);
     pads.push({ kind: 'base', x1: L / 2 - 70, x2: L / 2 + 70, y: WORLD_H - 90, refuel: true });
@@ -99,7 +133,7 @@ function finish({ def, seed, L, n, floor, ceil, pads, rnd, g }) {
 export function validateLevel(level) {
   const problems = [];
   const g = level.def.generator;
-  if (g.kind !== 'practice') {
+  if (g.kind !== 'training') {
     for (let i = 0; i < level.n; i++) {
       if (level.floor[i] - level.ceil[i] < g.minGap - 0.5) problems.push(`corridor too narrow at x=${i * STEP}`);
     }

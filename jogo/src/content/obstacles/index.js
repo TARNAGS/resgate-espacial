@@ -9,6 +9,9 @@ import { rock } from './rock.js';
 //   draw(ctx, o, theme, t)
 //   update(o, time)      → opcional; obstáculos móveis mudam de posição com o tempo da partida
 //   validate(o, level)   → opcional; texto do problema se o cenário ficar sem solução, ou null
+//   blockedAt(o, x, m)   → faixa [y1, y2] que o obstáculo ocupa em x, com folga m, ou null; é o que o
+//                          piloto automático usa para planejar a melhor rota (core/autopilot.js).
+//                          Obstáculos móveis vão precisar de uma versão que considere o tempo.
 
 export const OBSTACLES = {
   [rock.type]: rock,

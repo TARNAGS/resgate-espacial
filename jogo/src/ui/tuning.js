@@ -10,7 +10,7 @@ import { loadTuning, writeTuning } from '../platform/storage.js';
 // Os valores mudam na hora e ficam salvos no aparelho; "COPY VALUES" copia o que mudou,
 // para levar a calibragem para config/params.js.
 
-export async function createTuning({ panel, onOpenChange, onPractice }) {
+export async function createTuning({ panel, onOpenChange, onTraining }) {
   const stored = await loadTuning();
   setParams(stored.values);
   const t = { enabled: stored.enabled || new URLSearchParams(location.search).has('tuning'), open: false };
@@ -62,7 +62,7 @@ export async function createTuning({ panel, onOpenChange, onPractice }) {
       return b;
     };
     add('CLOSE', () => t.toggle(false));
-    add('PRACTICE', () => { t.toggle(false); onPractice(); });
+    add('TRAINING', () => { t.toggle(false); onTraining(); });
     add('RESET', () => { resetParams(); persist(); build(); });
     const copy = add('COPY VALUES', async () => {
       const text = JSON.stringify(changedParams(), null, 2);

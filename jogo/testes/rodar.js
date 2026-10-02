@@ -3,15 +3,16 @@
 
 import assert from 'node:assert/strict';
 import { PARAMS, DEFAULT_PARAMS, setParams, resetParams, changedParams } from '../src/config/params.js';
-import { LEVELS, PRACTICE_LEVEL } from '../src/content/worlds.js';
+import { LEVELS, CHALLENGES, TRAINING_LEVEL, findLevel } from '../src/content/worlds.js';
 import { effectiveParams } from '../src/content/modifiers.js';
 import { generateLevel, validateLevel } from '../src/core/generator.js';
+import { bestRunInputs } from '../src/core/autopilot.js';
 import { createShip, fly, steer, landingForecast } from '../src/core/ship.js';
 import { createMatch } from '../src/core/match.js';
 import { createEvents } from '../src/core/events.js';
 import { readIntent, touchThrust } from '../src/input/controls.js';
 import { emptySave } from '../src/platform/storage.js';
-import { isUnlocked, defaultLevel, recordCompletion, levelState } from '../src/core/progress.js';
+import { isUnlocked, defaultLevel, recordCompletion, levelState, nextLevel } from '../src/core/progress.js';
 import { SHIP } from '../src/core/constants.js';
 import { mulberry32 } from '../src/core/rng.js';
 
@@ -155,7 +156,7 @@ test('D-014 a mesma semente gera o mesmo cenário; outra semente gera outro', ()
   assert.notDeepEqual(a.floor, c.floor);
 });
 
-for (const def of LEVELS) {
+for (const def of [...LEVELS, ...CHALLENGES]) {
   test(`${def.key} 500 cenários aleatórios têm solução (corredor, plataformas planas, passagem nas pedras)`, () => {
     for (let seed = 1; seed <= 500; seed++) {
       const lv = generateLevel(def, seed * 7919);
@@ -183,14 +184,14 @@ function hover(m, kind, vy = 20, a = 0) {
 const step = (match, input, seconds) => { for (let t = 0; t < seconds; t += DT) match.update(DT, input); };
 
 test('#35 treino: encostar devagar na plataforma deixa a nave pousada', () => {
-  const { match, m } = newMatch(PRACTICE_LEVEL);
+  const { match, m } = newMatch(TRAINING_LEVEL);
   step(match, UP, 0.2); assert.equal(m.ship.state, 'flying');
   hover(m, 'base', 20); step(match, NONE, 0.1);
   assert.equal(m.ship.state, 'landed');
 });
 
 test('#35 treino: encostar rápido demais explode e reaparece pousada na plataforma, sem perder vida', () => {
-  const { match, m, log } = newMatch(PRACTICE_LEVEL);
+  const { match, m, log } = newMatch(TRAINING_LEVEL);
   hover(m, 'base', PARAMS.landingMaxVy + 30); step(match, NONE, 0.1);
   assert.equal(m.ship.state, 'exploding');
   assert.ok(log.some((e) => e.name === 'crash' && e.reason === 'LANDED TOO FAST'));
@@ -199,7 +200,7 @@ test('#35 treino: encostar rápido demais explode e reaparece pousada na platafo
 });
 
 test('#35 treino: encostar fora da plataforma explode', () => {
-  const { match, m, log } = newMatch(PRACTICE_LEVEL);
+  const { match, m, log } = newMatch(TRAINING_LEVEL);
   Object.assign(m.ship, { state: 'flying', pad: null, x: 200, y: m.level.floor[10] - SHIP.base - 1, vy: 10 });
   step(match, NONE, 0.1);
   assert.ok(log.some((e) => e.name === 'crash' && e.reason === 'TOUCHED THE GROUND'));
@@ -207,13 +208,13 @@ test('#35 treino: encostar fora da plataforma explode', () => {
 
 test('#35 o limite de velocidade de pouso é um parâmetro de ajuste', () => {
   PARAMS.landingMaxVy = 200;
-  const { match, m } = newMatch(PRACTICE_LEVEL);
+  const { match, m } = newMatch(TRAINING_LEVEL);
   hover(m, 'base', 150); step(match, NONE, 0.05);
   assert.equal(m.ship.state, 'landed');
 });
 
 test('#50 pousar com a nave um pouco além da borda da plataforma ainda conta (padMargin)', () => {
-  const { match, m } = newMatch(PRACTICE_LEVEL);
+  const { match, m } = newMatch(TRAINING_LEVEL);
   const pad = m.level.pads[0];
   hover(m, 'base'); m.ship.x = pad.x2 - SHIP.half + PARAMS.padMargin - 1;   // a ponta da asa passa da borda
   step(match, NONE, 0.1);
@@ -221,7 +222,7 @@ test('#50 pousar com a nave um pouco além da borda da plataforma ainda conta (p
 });
 
 test('#50 passar da folga da borda explode', () => {
-  const { match, m, log } = newMatch(PRACTICE_LEVEL);
+  const { match, m, log } = newMatch(TRAINING_LEVEL);
   const pad = m.level.pads[0];
   hover(m, 'base'); m.ship.x = pad.x2 - SHIP.half + PARAMS.padMargin + 4; step(match, NONE, 0.1);
   assert.ok(log.some((e) => e.name === 'crash'));
@@ -251,7 +252,7 @@ test('#50 aviso de pouso: sempre que fica verde, soltar os controles termina em 
   const rnd = (a, b) => a + r() * (b - a);
   let greens = 0;
   for (let i = 0; i < 2000; i++) {
-    const { match, m, log } = newMatch(PRACTICE_LEVEL);
+    const { match, m, log } = newMatch(TRAINING_LEVEL);
     const pad = m.level.pads[0];
     Object.assign(m.ship, { state: 'flying', pad: null, x: rnd(pad.x1 + 10, pad.x2 - 10), y: pad.y - SHIP.base - rnd(1, 160), vx: rnd(-60, 60), vy: rnd(1, 90), a: rnd(-0.45, 0.45) });
     const green = landingForecast(m.ship, match.params(), pad);
@@ -264,7 +265,7 @@ test('#50 aviso de pouso: sempre que fica verde, soltar os controles termina em 
 });
 
 test('Regras 3.3 pousar inclinado demais explode', () => {
-  const { match, m, log } = newMatch(PRACTICE_LEVEL);
+  const { match, m, log } = newMatch(TRAINING_LEVEL);
   hover(m, 'base', 20, 0.6); step(match, NONE, 0.1);
   assert.ok(log.some((e) => e.name === 'crash' && e.reason === 'LANDED TILTED'));
 });
@@ -323,6 +324,68 @@ test('Regras 7.1 aviso forte ao pousar na tripulação com pouco combustível', 
   assert.ok(log.some((e) => e.name === 'boarding' && e.lowFuel));
 });
 
+// ===== Regra do melhor caminho (D-018) =====
+const ALL = [...LEVELS, ...CHALLENGES];
+const physics = (def) => effectiveParams({ ...DEFAULT_PARAMS }, def);
+
+for (const def of ALL) {
+  test(`D-018 ${def.key}: todo cenário gerado tem uma corrida sem abastecer provada pelo piloto automático`, () => {
+    for (let k = 1; k <= 12; k++) {
+      const lv = generateLevel(def, k * 7907, physics(def));
+      assert.ok(lv.bestRun, `semente ${k * 7907}: sem corrida provada`);
+      assert.ok(lv.tankSeconds >= lv.bestRun.thrustSeconds, 'tanque menor que a melhor corrida');
+      // Tentar de novo com a semente final repete o mesmo cenário e o mesmo tanque
+      const again = generateLevel(def, lv.seed, physics(def));
+      assert.equal(again.seed, lv.seed); assert.equal(again.tankSeconds, lv.tankSeconds);
+    }
+  });
+}
+
+for (const def of ALL.filter((d) => d.generator.fuelStation)) {
+  test(`D-018 ${def.key}: com posto, o tanque é a melhor corrida mais uma folga pequena`, () => {
+    const margin = def.generator.bestRunMargin;
+    for (let k = 1; k <= 12; k++) {
+      const lv = generateLevel(def, k * 7907, physics(def));
+      assert.ok(Math.abs(lv.tankSeconds / lv.bestRun.thrustSeconds - (1 + margin)) < 1e-9);
+    }
+  });
+
+  test(`D-018 ${def.key}: a melhor corrida, jogada numa partida de verdade, conclui sem abastecer e chega quase sem combustível`, () => {
+    // O piloto gira na velocidade do teclado; a partida usa a mesma velocidade para reproduzir igual
+    PARAMS.touchRotationSpeed = PARAMS.keyRotationSpeed;
+    for (const seed of [11, 222, 3333]) {
+      const events = createEvents();
+      const log = [];
+      events.on('*', (e) => log.push(e));
+      const match = createMatch({ def, seed, getParams: () => PARAMS, events });
+      const m = match.state;
+      const [go, back] = bestRunInputs(m.level, match.params(), m.level.bestRun);
+      const UP_ = { turn: 0, targetAngle: null, thrust: true };
+      match.update(DT, UP_);                                 // decola da base
+      for (const input of go) match.update(DT, input);
+      assert.equal(m.ship.state, 'boarding', `semente ${seed}: não pousou na tripulação`);
+      for (let i = 0; i < 400 && !m.crewOnBoard; i++) match.update(DT, NONE);
+      match.update(DT, UP_);                                 // decola da tripulação
+      for (const input of back) match.update(DT, input);
+      assert.equal(m.over, 'complete', `semente ${seed}: não concluiu (${log.find((e) => e.name === 'crash')?.reason ?? 'sem batida'})`);
+      assert.ok(!log.some((e) => e.name === 'refuel' || (e.name === 'land' && e.pad === 'fuel')), 'abasteceu');
+      const left = log.find((e) => e.name === 'complete').run.fuelLeft;
+      const expected = def.generator.bestRunMargin / (1 + def.generator.bestRunMargin);
+      assert.ok(left > 0 && Math.abs(left - expected) < 0.01, `sobrou ${(left * 100).toFixed(1)}%, esperado ${(expected * 100).toFixed(1)}%`);
+    }
+  });
+}
+
+test('PRACTICE é a fase mais difícil: corredor mais estreito, mais pedras e menos espaço para passar', () => {
+  const practice = findLevel('practice');
+  for (const def of LEVELS) {
+    assert.ok(practice.generator.minGap < def.generator.minGap);
+    const rocks = (d) => d.generator.obstacles.find((o) => o.type === 'rock') ?? { count: 0, passGap: Infinity };
+    assert.ok(rocks(practice).count > rocks(def).count);
+    assert.ok(rocks(practice).passGap < rocks(def).passGap);
+  }
+});
+
 // ===== Progresso =====
 test('Regras 10 concluir um nível libera o próximo; o melhor tempo fica salvo', () => {
   const save = emptySave();
@@ -333,6 +396,14 @@ test('Regras 10 concluir um nível libera o próximo; o melhor tempo fica salvo'
   assert.equal(recordCompletion(save, LEVELS[0].key, { time: 60 }).isBest, false);
   assert.equal(recordCompletion(save, LEVELS[0].key, { time: 40 }).isBest, true);
   assert.equal(save.levels[LEVELS[0].key].best.time, 40); assert.equal(save.levels[LEVELS[0].key].rescues, 3);
+});
+
+test('desafios ficam sempre liberados e não têm "próximo nível"', () => {
+  const save = emptySave();
+  const practice = findLevel('practice');
+  assert.ok(isUnlocked(save, practice));
+  assert.equal(nextLevel('practice'), null);
+  assert.equal(nextLevel(LEVELS[0].key).key, LEVELS[1].key);
 });
 
 // ===== Resultado =====

@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 05 — Registro de decisões |
-| Última atualização | 01/10/2026 |
+| Última atualização | 02/10/2026 |
 | Responsável | Fernando Nunes (Product Manager) |
 
 Cada decisão relevante de produto fica registrada aqui, com o contexto e o motivo. Assim ela não é rediscutida sem necessidade e pode ser revista quando o contexto mudar.
@@ -29,6 +29,7 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-015 | Menu com Jogar, Configurações e mapa de progresso | 01/10/2026 | Aceita |
 | D-016 | Quadro com duas trilhas: descoberta e entrega | 01/10/2026 | Aceita |
 | D-017 | Repositório e quadro privados; o jogo só fica no ar nas janelas de teste | 01/10/2026 | Aceita |
+| D-018 | Regra do melhor caminho: toda fase com posto pode ser concluída sem abastecer | 02/10/2026 | Aceita |
 
 ## D-001 — Sem login e sem contas
 
@@ -327,6 +328,33 @@ Junto com as trilhas, entraram:
 - O estudo de caso (E-20) abre o repositório e o quadro no lançamento, como já previsto.
 
 **Revisitar se** as janelas de teste ficarem frequentes (aí a hospedagem externa compensa) ou quando a P-014 (preço e publicação) for decidida.
+
+## D-018 — Regra do melhor caminho: toda fase com posto pode ser concluída sem abastecer
+
+**Contexto.** Regra de jogo definida pelo Fernando em 02/10/2026: em toda fase que tem posto de abastecimento, quem faz a melhor corrida possível precisa conseguir concluir sem abastecer, e chegar ao fim quase sem combustível, com a sensação de ser um piloto muito bom. Até ali, o tanque era um número fixo por nível (26 segundos de propulsor no nível 3) e ninguém sabia se dava para concluir sem o posto. Medido depois, a melhor corrida do nível 3 gasta em média 31 segundos: quase nenhum cenário era possível sem abastecer.
+
+**Opções consideradas.**
+
+| Opção | A favor | Contra |
+|---|---|---|
+| Tanque fixo por nível, ajustado à mão | Simples | Cada cenário é sorteado (D-014): um número só não garante a regra em nenhum deles |
+| Tanque estimado por fórmula (distância, gravidade) | Rápido | Não prova que o caminho existe; pedras e corredor mudam tudo |
+| **Piloto automático joga cada cenário gerado e o tanque sai da melhor corrida dele** | A regra vira prova: a corrida foi jogada com a física e as regras do jogo | O tanque depende de quão bem o piloto voa; um jogador melhor que ele chega com um pouco mais de combustível |
+
+**Decisão.** Ao gerar um cenário, o jogo roda um piloto automático ([`jogo/src/core/autopilot.js`](../jogo/src/core/autopilot.js)) que vai da base até a tripulação e volta, sem abastecer, em várias velocidades de cruzeiro, e fica com a corrida que gastou menos combustível. Ele gira na velocidade do teclado, a mais lenta dos controles, para a corrida valer para todos.
+
+- **Fase com posto:** o tanque é a melhor corrida mais uma folga pequena (`bestRunMargin`: 6% no nível 3 e 4% na PRACTICE). Quem repete a melhor corrida chega com cerca de 4% a 6% do tanque.
+- **Fase sem posto:** o tanque do nível ou a melhor corrida mais 25%, o que for maior.
+- **Cenário sem caminho provado:** se o piloto não conseguir concluir, o gerador troca a semente até sair um cenário que ele conclua. "Tentar de novo" repete o mesmo cenário.
+
+**Consequências.**
+
+- Toda fase gerada tem um caminho que conclui sem abastecer, provado jogando. Um teste automático grava a melhor corrida e a reproduz numa partida de verdade, com o tanque real.
+- O tanque do nível 3 ficou maior (cerca de 32 segundos, contra 26): quem abastece no posto tem mais folga do que antes.
+- Gerar um cenário passou a levar de 15 a 150 milissegundos no computador, por causa do piloto.
+- Obstáculos móveis, quando existirem (P-011), vão precisar de um piloto que leve o tempo em conta.
+
+**Revisitar se** os testes mostrarem que bons jogadores chegam com muito combustível (o piloto está fraco; diminuir a folga ou melhorar o piloto) ou que ninguém consegue concluir sem abastecer (a folga está curta).
 
 ## Decisões pendentes
 

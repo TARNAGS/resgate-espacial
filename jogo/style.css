@@ -188,3 +188,8 @@ html, body { touch-action: manipulation; }
 .tuning-row output { text-align: right; color: var(--teal); }
 .tuning-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .btn.small { min-width: 0; padding: 6px 10px; font-size: 12px; box-shadow: 2px 2px 0 #000; }
+
+/* Desafios no mapa (PRACTICE): planeta vermelho, sempre liberado */
+.node.challenge .planet { fill: #3a0f16; stroke: var(--red); }
+.node.challenge.done .planet { fill: #3a0f16; stroke: var(--teal); }
+.map .challenge-text { fill: var(--red); }

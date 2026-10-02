@@ -1,5 +1,5 @@
 import { PARAMS } from './config/params.js';
-import { LEVELS, WORLDS, PRACTICE_LEVEL, findLevel } from './content/worlds.js';
+import { LEVELS, WORLDS, TRAINING_LEVEL, findLevel } from './content/worlds.js';
 import { createEvents } from './core/events.js';
 import { createMatch } from './core/match.js';
 import { randomSeed } from './core/rng.js';
@@ -75,7 +75,7 @@ const tuning = await createTuning({
     if (open && isPlaying() && app.paused) screens.hideOverlay();
     if (!open && isPlaying() && app.paused) showPause();
   },
-  onPractice: () => startLevel(PRACTICE_LEVEL),
+  onTraining: () => startLevel(TRAINING_LEVEL),
 });
 
 // Esquema do toque pelo endereço, para comparar sem abrir o painel (#44): ?control=a ou c
@@ -84,16 +84,16 @@ if (CONTROL_FROM_URL) PARAMS.touchScheme = CONTROL_FROM_URL;
 
 // ===== Mensagens e efeitos ligados aos eventos da partida =====
 events.on('start', ({ def }) => {
-  if (def.practice) renderer.message('PRACTICE · LAND ON THE PAD', 4);
+  if (def.training) renderer.message('TRAINING · LAND ON THE PAD', 4);
   else {
-    renderer.message(`LEVEL ${def.number} · ${def.name}`, 3);
+    renderer.message(def.challenge ? `CHALLENGE · ${def.name}` : `LEVEL ${def.number} · ${def.name}`, 3);
     renderer.message(def.goal, 5);
   }
   if (def.hint) renderer.message(view.isTouch ? TOUCH_HINTS[PARAMS.touchScheme] : 'HOLD ↑ TO THRUST · ←/→ TO ROTATE', 7);
 });
 events.on('land', ({ pad }) => {
   const m = app.match.state;
-  if (m.practice) renderer.message('NICE LANDING!', 2);
+  if (m.training) renderer.message('NICE LANDING!', 2);
   else if (pad === 'base' && !m.crewOnBoard) renderer.message('REFUELED · GO GET THE CREW →', 2.5);
   else if (pad === 'fuel') renderer.message('REFUELING...', 2);
 });
@@ -108,7 +108,7 @@ events.on('crash', ({ reason, x, y }) => {
   renderer.message(reason, 2, true);
 });
 events.on('respawn', ({ lives }) => {
-  if (!app.match.state.practice) renderer.message(`${lives} ${lives === 1 ? 'LIFE' : 'LIVES'} LEFT`, 2);
+  if (!app.match.state.training) renderer.message(`${lives} ${lives === 1 ? 'LIFE' : 'LIVES'} LEFT`, 2);
 });
 events.on('complete', ({ def, run }) => {
   Sound.setThrust(false);
@@ -153,7 +153,7 @@ function startLevel(def, seed = randomSeed()) {
   app.paused = false;
   app.thumbHintShown = false;
   renderer.resetCamera(app.match, app.match.params());
-  if (!def.practice) app.selected = def;
+  if (!def.training) app.selected = def;
   showScreen('game');
   screens.hideOverlay();
   events.emit('start', { def, seed });
@@ -162,7 +162,7 @@ function startLevel(def, seed = randomSeed()) {
 function showPause() {
   const { def, seed } = app.match.state;
   const buttons = [['RESUME', () => togglePause(false), true]];
-  if (!def.practice) buttons.push(['RESTART', () => startLevel(def, seed)]);
+  if (!def.training) buttons.push(['RESTART', () => startLevel(def, seed)]);
   buttons.push(['MENU', toMenu]);
   screens.overlay('PAUSED', '', buttons);
 }
@@ -269,7 +269,7 @@ function checkOrientation() {
 function checkThumbHint(m) {
   const joy = joystick.state;
   if (app.thumbHintShown || !joy || m.ship.state !== 'flying' || PARAMS.joystickMode !== 'follow') return;
-  const target = m.level.pads.find((p) => p.kind === (m.practice ? 'base' : m.crewOnBoard ? 'base' : 'crew'));
+  const target = m.level.pads.find((p) => p.kind === (m.training ? 'base' : m.crewOnBoard ? 'base' : 'crew'));
   const sx = view.play.x + ((target.x1 + target.x2) / 2 - renderer.camX) * view.scale;
   const sy = target.y * view.scale;
   const covered = Math.abs(joy.cx - sx) < (target.x2 - target.x1) * view.scale / 2 + PARAMS.joystickRadius
@@ -331,7 +331,7 @@ checkOrientation();
 window.addEventListener('resize', () => { view.resize(); checkOrientation(); });
 requestAnimationFrame(loop);
 
-// Atalho para testes, só com o painel de ajuste liberado: ?level=w1-2 ou ?level=practice
+// Atalho para testes, só com o painel de ajuste liberado: ?level=w1-2, ?level=training ou ?level=practice
 const start = new URLSearchParams(location.search).get('level');
 if (start && tuning.enabled && findLevel(start)) startLevel(findLevel(start));
 

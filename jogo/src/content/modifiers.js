@@ -28,10 +28,11 @@ export const MODIFIERS = {
   },
 };
 
-// Junta os parâmetros de ajuste, o tanque do nível e os modificadores do nível num objeto só,
-// que é o que a física usa a cada passo.
-export function effectiveParams(base, levelDef) {
-  const p = { ...base, tankSeconds: levelDef.generator.tankSeconds ?? 40, windX: 0, crewWeight: 0 };
+// Junta os parâmetros de ajuste, o tanque e os modificadores do nível num objeto só, que é o que a
+// física usa a cada passo. O tanque vem do cenário gerado (regra do melhor caminho, D-018), quando
+// houver, ou do nível. Um modificador de tanque age por cima disso.
+export function effectiveParams(base, levelDef, level = null) {
+  const p = { ...base, tankSeconds: level?.tankSeconds ?? levelDef.generator.tankSeconds ?? 40, windX: 0, crewWeight: 0 };
   for (const m of levelDef.modifiers || []) {
     const kind = MODIFIERS[m.type];
     if (!kind) throw new Error(`Unknown modifier: ${m.type}`);

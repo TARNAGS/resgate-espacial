@@ -28,10 +28,10 @@ Não explicar os controles. As dicas que aparecem na tela fazem parte do teste.
 
 | # | Tarefa | Onde | Limite | O que anotar |
 |---|---|---|---|---|
-| 1 | "Decole e pouse de volta na plataforma." | Treino (painel → PRACTICE) | 3 min | Tempo até o primeiro pouso; número de explosões |
+| 1 | "Decole e pouse de volta na plataforma." | Treino (painel → TRAINING) | 3 min | Tempo até o primeiro pouso; número de explosões |
 | 2 | "Resgate a tripulação e volte para a base." | Nível 1, pelo menu | 5 min | Concluiu? Tempo; vidas perdidas; onde explodiu |
 | 3 | "Agora a fase 2." | Nível 2 | 5 min | Igual à tarefa 2 |
-| 4 | Repetir a tarefa 1 com o direcional fixo no canto | Painel → Joystick: fixed → PRACTICE | 3 min | Igual à tarefa 1; qual preferiu |
+| 4 | Repetir a tarefa 1 com o direcional fixo no canto | Painel → Joystick: fixed → TRAINING | 3 min | Igual à tarefa 1; qual preferiu |
 | 5 | Repetir a tarefa 2 com o controle C | Settings → Touch control (A ou C) | 5 min | Igual à tarefa 2; qual dos dois preferiu |
 
 Se a tarefa passar do limite, agradecer e seguir para a próxima. Alternar a ordem das variantes entre testadores (metade começa pelo fixo; metade começa pelo C) para que o aprendizado não favoreça a última.

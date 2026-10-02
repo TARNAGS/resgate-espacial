@@ -106,13 +106,13 @@ export function createRenderer(canvas, view) {
     const approach = approachInfo(m, params);
     drawPads(m.level, t, approach);
     drawObstacles(m.level, theme, t);
-    if (!m.practice) drawCrew(m, t, params);
+    if (!m.training) drawCrew(m, t, params);
     drawShip(m.ship, params, approach, t);
     drawParticles();
     ctx.restore();
 
     ctx.setTransform(view.dpr, 0, 0, view.dpr, 0, 0);
-    if (!m.practice) drawObjectiveArrow(m, t, params);
+    if (!m.training) drawObjectiveArrow(m, t, params);
     drawHUD(m, t, params, scene);
     drawMessages(t);
     drawJoystick(scene);
@@ -385,7 +385,7 @@ export function createRenderer(canvas, view) {
     ctx.textBaseline = 'top';
     ctx.font = `700 13px ${FONT}`;
     ctx.fillStyle = '#46e0c8';
-    ctx.fillText(m.practice ? 'PRACTICE' : `LEVEL ${m.def.number} · ${m.def.name}`, left, top);
+    ctx.fillText(m.training ? 'TRAINING' : m.def.challenge ? `CHALLENGE · ${m.def.name}` : `LEVEL ${m.def.number} · ${m.def.name}`, left, top);
 
     ctx.fillStyle = '#e8f1ff';
     ctx.fillText('FUEL', left, top + 22);
@@ -399,7 +399,7 @@ export function createRenderer(canvas, view) {
       ctx.fillRect(bx + 2, by + 2, (bw - 4) * s.fuel, 7);
     }
 
-    if (!m.practice) {
+    if (!m.training) {
       ctx.fillStyle = '#e8f1ff';
       ctx.fillText('LIVES', left, top + 42);
       for (let i = 0; i < params.lives; i++) {
@@ -427,7 +427,7 @@ export function createRenderer(canvas, view) {
     ctx.textBaseline = 'bottom';
     ctx.font = `11px ${FONT}`;
     ctx.fillStyle = 'rgba(127,140,163,0.85)';
-    let foot = m.practice ? 'crash freely · land on the pad' : `random layout #${m.seed}`;
+    let foot = m.training ? 'crash freely · land on the pad' : `random layout #${m.seed}`;
     if (view.isTouch) foot += ` · control ${scene.schemeName}`;
     if (scene.tuned) foot += ' · TUNED';
     ctx.fillText(foot, left, view.cssH - 10 - view.safe.bottom);

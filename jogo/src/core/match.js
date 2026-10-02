@@ -1,7 +1,6 @@
-import { SHIP, STEP } from './constants.js';
-import { sampleLine } from './math.js';
 import { generateLevel } from './generator.js';
-import { createShip, fly, shipVerts, shipSamples, landingCheck } from './ship.js';
+import { createShip, fly } from './ship.js';
+import { contact, settle, takeOff } from './collision.js';
 import { effectiveParams } from '../content/modifiers.js';
 import { OBSTACLES } from '../content/obstacles/index.js';
 
@@ -12,11 +11,13 @@ import { OBSTACLES } from '../content/obstacles/index.js';
 //          lowFuelAtCrew, refuel, respawn, complete, gameOver
 
 export function createMatch({ def, seed, getParams, events }) {
-  const level = generateLevel(def, seed);
-  const practice = Boolean(def.practice);
-  const params = () => effectiveParams(getParams(), def);
+  // O gerador pode trocar a semente, se o cenário sorteado não tiver um caminho provado (D-018)
+  const level = generateLevel(def, seed, effectiveParams(getParams(), def));
+  seed = level.seed;
+  const training = Boolean(def.training);   // treino: sem vidas, sem cronômetro e sem tripulação
+  const params = () => effectiveParams(getParams(), def, level);
   const m = {
-    def, seed, level, practice,
+    def, seed, level, training,
     lives: params().lives,
     livesLost: 0,
     crewOnBoard: false,
@@ -43,7 +44,7 @@ export function createMatch({ def, seed, getParams, events }) {
     s.thrusting = false;
     s.resetCrew = resetCrew;
     m.outOfFuelT = 0;
-    if (!practice) { m.lives -= 1; m.livesLost += 1; }
+    if (!training) { m.lives -= 1; m.livesLost += 1; }
     events.emit('crash', { reason, x: s.x, y: s.y, lives: m.lives });
   }
 
@@ -63,11 +64,8 @@ export function createMatch({ def, seed, getParams, events }) {
       return;
     }
     if (input.thrust) {
-      s.state = 'flying';
-      s.pad = null;
-      s.y -= 2;
-      s.vy = -25;
-      if (!m.timerOn && !practice) m.timerOn = true;
+      takeOff(s);
+      if (!m.timerOn && !training) m.timerOn = true;
       events.emit('takeoff');
     }
   }
@@ -89,30 +87,12 @@ export function createMatch({ def, seed, getParams, events }) {
   }
 
   function checkCollisions(s, p) {
-    const verts = shipVerts(s);
-    const samples = shipSamples(verts);
-    const onFloor = [];
-    for (const pt of samples) {
-      if (pt.x <= 0 || pt.x >= level.L) return explode('HIT THE WALL');
-      if (pt.y <= sampleLine(level.ceil, pt.x, STEP)) return explode('HIT THE CEILING');
-      if (pt.y >= sampleLine(level.floor, pt.x, STEP)) onFloor.push(pt);
-    }
-    const body = { x: s.x, y: s.y, verts, samples };
-    for (const o of level.obstacles) {
-      if (OBSTACLES[o.type].hits(o, body)) return explode(`HIT A ${OBSTACLES[o.type].label.toUpperCase()}`);
-    }
-    if (onFloor.length) tryLanding(s, p, onFloor);
-  }
-
-  function tryLanding(s, p, contacts) {
-    const pad = level.pads.find((q) => contacts.every((c) => c.x >= q.x1 - p.padMargin && c.x <= q.x2 + p.padMargin));
-    if (!pad) return explode('TOUCHED THE GROUND');
-    if (s.vy < 0) return;   // subindo de uma plataforma: só raspou, não é pouso nem batida
-    const bad = landingCheck(s, p);
-    if (bad === 'tilted') return explode('LANDED TILTED');
-    if (bad === 'fast') return explode('LANDED TOO FAST');
+    const c = contact(level, s, p);
+    if (!c) return;
+    if (c.crash) return explode(c.crash);
+    const pad = c.land;
     const impact = { vx: s.vx, vy: s.vy, angle: s.a };
-    Object.assign(s, { state: 'landed', pad, vx: 0, vy: 0, a: 0, y: pad.y - SHIP.base, thrusting: false });
+    settle(s, pad);
     events.emit('land', { pad: pad.kind, impact });
     if (pad.kind === 'crew' && !m.crewOnBoard) {
       s.state = 'boarding';

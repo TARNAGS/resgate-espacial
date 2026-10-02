@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 02 — Regras do jogo |
-| Versão | 1.2 |
+| Versão | 1.3 |
 | Data | 02/10/2026 |
 | Status | Aprovado; pendentes: pontuação (P-006), fase 1 fixa ou aleatória (P-009) e repetição do cenário (P-010) |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -55,6 +55,7 @@ Base (A) → voo com obstáculos → [posto: abastecer] → plataforma da tripul
 | O combustível é limitado e é reabastecido nos postos e na base | Definido |
 | Só o propulsor gasta combustível; girar não gasta | Proposta |
 | Pousada num lugar que abastece, a nave enche o tanque em poucos segundos, com a barra subindo na tela | Proposta |
+| **Regra do melhor caminho:** em toda fase com posto, a melhor corrida possível conclui sem abastecer e chega ao fim quase sem combustível. O tanque de cada cenário sai da melhor corrida de um piloto automático, mais uma folga pequena ([D-018](05-registro-de-decisoes.md#d-018--regra-do-melhor-caminho-toda-fase-com-posto-pode-ser-concluída-sem-abastecer)) | Definido |
 
 O que acontece quando o combustível acaba está na [seção 7](#7-vidas-derrota-e-vitória).
 
@@ -178,7 +179,8 @@ Perguntas a responder para fechar a pontuação:
 | O MVP tem as fases 1 a 3; as fases 4 e 5 entram na V1 (D-009) | Definido |
 | O cenário de cada fase é gerado aleatoriamente a cada partida, para o replay ser infinito (D-014) | Definido |
 | Cada nível define as regras do gerador: comprimento, largura mínima do corredor, quantidade de pedras, posto de abastecimento e tamanho do tanque | Proposta |
-| Todo cenário gerado tem solução: corredor mínimo, passagem ao lado de toda pedra e combustível suficiente | Proposta |
+| Todo cenário gerado tem solução: corredor mínimo, passagem ao lado de toda pedra e combustível suficiente | Definido: o piloto automático conclui cada cenário antes de ele ser jogado (D-018) |
+| Além dos níveis, há desafios fora da sequência, sempre liberados no mapa. O primeiro é a PRACTICE, a fase mais difícil do jogo: corredor mais estreito, mais pedras e menos espaço para passar por elas | Definido |
 | A fase 1 (tutorial) é aleatória ou fixa (P-009); ao tentar de novo, o cenário se repete ou muda (P-010) | Em aberto |
 
 Curva de dificuldade:
@@ -271,3 +273,4 @@ Registradas para não se perderem. **Não são compromisso**: só entram se o Ro
 | 1.0 | 01/10/2026 | Aprovado pelo Fernando como versão de referência; a pontuação (P-006) segue em aberto |
 | 1.1 | 01/10/2026 | Fases geradas aleatoriamente (D-014) e menu com mapa de progresso (D-015); novas pendências P-009 e P-010 |
 | 1.2 | 02/10/2026 | Retorno do primeiro teste no iPhone (#50): parâmetro novo de folga na borda da plataforma e direcional aceitando toque na tela inteira |
+| 1.3 | 02/10/2026 | Regra do melhor caminho (D-018) e desafio PRACTICE, a fase mais difícil do jogo |

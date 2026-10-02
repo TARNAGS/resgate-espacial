@@ -81,3 +81,4 @@ Fora das janelas, o protótipo roda na rede de casa. Rodar `node prototipos/serv
 - Conteúdo é dado, não código: mundos e níveis em `jogo/src/content/worlds.js`, obstáculos em `jogo/src/content/obstacles/`, modificadores em `jogo/src/content/modifiers.js`.
 - Antes de cada commit que mexe no jogo, rodar `node jogo/testes/rodar.js`; regra nova ou mudada ganha teste.
 - Fases geradas a partir de uma semente (D-014): a mesma semente gera sempre o mesmo cenário, e todo cenário gerado precisa ter solução.
+- Regra do melhor caminho (D-018): o piloto automático (`jogo/src/core/autopilot.js`) joga cada cenário gerado; o tanque das fases com posto sai da melhor corrida dele mais uma folga pequena. Mudou a física, um obstáculo ou o contato? Rodar os testes, que reproduzem a melhor corrida numa partida de verdade.
