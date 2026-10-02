@@ -3,12 +3,13 @@ import { createShip, fly } from './ship.js';
 import { contact, settle, takeOff } from './collision.js';
 import { effectiveParams } from '../content/modifiers.js';
 import { OBSTACLES } from '../content/obstacles/index.js';
+import { createPraise } from './praise.js';
 
 // Regras de uma partida (Regras do jogo, seções 2 a 7): plataformas, combustível, embarque,
 // vidas e pontos de retorno. Não desenha nada e não toca som: avisa pelo canal de eventos.
 //
 // Eventos (start sai de quem cria a partida): takeoff, land, crash, outOfFuel, boarding, boardStep, crewOnBoard,
-//          lowFuelAtCrew, refuel, respawn, complete, gameOver
+//          lowFuelAtCrew, refuel, respawn, complete, gameOver, praise (elogio, #81)
 
 export function createMatch({ def, seed, getParams, events }) {
   // O gerador pode trocar a semente, se o cenário sorteado não tiver um caminho provado (D-018)
@@ -29,7 +30,9 @@ export function createMatch({ def, seed, getParams, events }) {
     time: 0,             // tempo da partida, para obstáculos móveis
     over: null,          // 'complete' | 'gameOver'
     ship: null,
+    usedStation: false,  // pousou no posto? (a corrida perfeita não abastece)
   };
+  const praise = createPraise({ level, events });
 
   function spawnAt(kind, fuel) {
     const pad = level.pads.find((p) => p.kind === kind);
@@ -45,6 +48,7 @@ export function createMatch({ def, seed, getParams, events }) {
     s.resetCrew = resetCrew;
     m.outOfFuelT = 0;
     if (!training) { m.lives -= 1; m.livesLost += 1; }
+    praise.reset();
     events.emit('crash', { reason, x: s.x, y: s.y, lives: m.lives });
   }
 
@@ -93,7 +97,9 @@ export function createMatch({ def, seed, getParams, events }) {
     const pad = c.land;
     const impact = { vx: s.vx, vy: s.vy, angle: s.a };
     settle(s, pad);
+    if (pad.kind === 'fuel') m.usedStation = true;
     events.emit('land', { pad: pad.kind, impact });
+    praise.onLand(impact, s, p);
     if (pad.kind === 'crew' && !m.crewOnBoard) {
       s.state = 'boarding';
       m.boardingT = 0;
@@ -124,9 +130,12 @@ export function createMatch({ def, seed, getParams, events }) {
   function complete() {
     m.over = 'complete';
     m.timerOn = false;
+    // Corrida perfeita: fase com posto concluída sem abastecer e sem perder vidas (D-018)
+    const perfectRun = Boolean(def.generator.fuelStation) && !m.usedStation && m.livesLost === 0;
+    if (perfectRun) praise.perfectRun(m.ship);
     events.emit('complete', {
       def, seed,
-      run: { time: Number(m.timer.toFixed(1)), livesLost: m.livesLost, fuelLeft: m.ship.fuel },
+      run: { time: Number(m.timer.toFixed(1)), livesLost: m.livesLost, fuelLeft: m.ship.fuel, perfectRun },
     });
   }
 
@@ -148,6 +157,7 @@ export function createMatch({ def, seed, getParams, events }) {
       else if (s.state === 'flying') {
         if (fly(s, input, p, dt, { crewOnBoard: m.crewOnBoard })) events.emit('outOfFuel', { landed: false });
         checkCollisions(s, p);
+        if (s.state === 'flying') praise.update(s, p, dt);
       }
     },
   };

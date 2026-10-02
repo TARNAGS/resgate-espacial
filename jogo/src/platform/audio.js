@@ -70,6 +70,11 @@ export const Sound = {
   win() { [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => this.tone(f, 0.14, 'square', 0.05), i * 110)); },
   warn() { this.tone(300, 0.16, 'square', 0.05); setTimeout(() => this.tone(300, 0.16, 'square', 0.05), 220); },
   click() { this.tone(900, 0.04, 'square', 0.03); },
+  // Elogio (#81): uma nota só, curta e baixa, diferente para cada manobra
+  praise(kind) {
+    const f = { closeCall: 1047, greatSave: 1319, perfectLanding: 784, perfectRun: 1568 }[kind] || 1047;
+    this.tone(f, 0.14, 'triangle', 0.045);
+  },
 };
 
 // Liga os sons aos eventos da partida
@@ -79,4 +84,5 @@ export function connectSound(events) {
   events.on('boardStep', ({ index }) => Sound.board(index));
   events.on('complete', () => Sound.win());
   events.on('lowFuelAtCrew', () => Sound.warn());
+  events.on('praise', ({ kind }) => Sound.praise(kind));
 }

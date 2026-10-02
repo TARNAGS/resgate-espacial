@@ -105,6 +105,7 @@ events.on('boarding', ({ lowFuel }) => {
   else renderer.message('CREW BOARDING...', 2);
 });
 events.on('crewOnBoard', () => renderer.message('CREW ON BOARD · BACK TO BASE!', 3));
+events.on('praise', ({ label, x, y }) => renderer.praise(`${label}!`, x, y));
 events.on('outOfFuel', () => renderer.message('OUT OF FUEL', 2, true));
 events.on('crash', ({ reason, x, y }) => {
   renderer.explosion(x, y);
@@ -123,7 +124,8 @@ events.on('complete', ({ def, run }) => {
   buttons.push(['PLAY AGAIN', () => startLevel(def), !next]);
   buttons.push(['MENU', toMenu]);
   const best = isBest ? 'NEW BEST!' : `best ${SCORING.format(prevBest)}`;
-  screens.overlay('RESCUE COMPLETE', `Time ${SCORING.format(run)} · ${best} · The next run builds a new layout.`, buttons);
+  const perfect = run.perfectRun ? 'PERFECT RUN: no refuel! · ' : '';
+  screens.overlay('RESCUE COMPLETE', `${perfect}Time ${SCORING.format(run)} · ${best} · The next run builds a new layout.`, buttons);
 });
 events.on('gameOver', ({ def, seed }) => {
   Sound.setThrust(false);

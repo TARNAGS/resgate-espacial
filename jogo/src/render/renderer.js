@@ -45,6 +45,7 @@ export function createRenderer(canvas, view) {
     keepShipVisible(match.state.ship, params);
     r.particles = [];
     r.messages = [];
+    r.praiseText = null;
   };
 
   r.update = (dt, match, params) => {
@@ -61,9 +62,13 @@ export function createRenderer(canvas, view) {
       p.life -= dt;
     }
     r.particles = r.particles.filter((p) => p.life > 0);
+    if (r.praiseText) { r.praiseText.t += dt; if (r.praiseText.t > 1.3) r.praiseText = null; }
     for (const m of r.messages) m.t += dt;
     r.messages = r.messages.filter((m) => m.t < m.dur);
   };
+
+  // Elogio (#81): texto pequeno que nasce perto da nave, sobe um pouco e some. Um de cada vez.
+  r.praise = (text, x, y) => { r.praiseText = { text, x, y, t: 0 }; };
 
   r.message = (text, dur = 2.5, warn = false) => {
     r.messages.push({ text, t: 0, dur, warn });
@@ -115,6 +120,7 @@ export function createRenderer(canvas, view) {
     if (!m.training) drawObjectiveArrow(m, t, params);
     drawHUD(m, t, params, scene);
     drawMessages(t);
+    drawPraise();
     drawJoystick(scene);
     drawButtons(scene);
   };
@@ -431,6 +437,19 @@ export function createRenderer(canvas, view) {
     if (view.isTouch) foot += ` · control ${scene.schemeName}`;
     if (scene.tuned) foot += ' · TUNED';
     ctx.fillText(foot, left, view.cssH - 10 - view.safe.bottom);
+  }
+
+  function drawPraise() {
+    const p = r.praiseText;
+    if (!p) return;
+    const alpha = clamp(Math.min(p.t / 0.12, (1.3 - p.t) / 0.4), 0, 1) * 0.9;
+    const sx = view.play.x + (p.x - r.camX) * view.scale;
+    const sy = p.y * view.scale - 22 - p.t * 18;
+    ctx.font = `700 12px ${FONT}`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = `rgba(125,255,176,${alpha.toFixed(2)})`;
+    ctx.fillText(p.text, clamp(sx, 60, view.cssW - 60), clamp(sy, 24, view.cssH - 24));
   }
 
   function drawMessages(t) {

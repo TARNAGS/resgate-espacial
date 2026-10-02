@@ -230,7 +230,7 @@ Os textos do jogo são em inglês ([D-007](05-registro-de-decisoes.md#d-007--jog
 | Cronômetro | Tempo da fase, que define a pontuação |
 | Seta de direção | Apontar para o objetivo (tripulação ou base) quando ele está fora da tela |
 | Botão de pausa | Pausar no celular; no teclado, P ou Esc |
-| Elogios na tela | Reforço rápido quando o jogador faz uma manobra difícil sem bater: passar "tirando um fininho" de uma pedra ou do terreno ("CLOSE CALL!"), frear no limite antes de bater ("GREAT SAVE!"), pouso perfeito e corrida perfeita sem abastecer. Ideia do Fernando, 02/10/2026; critérios na [#81](https://github.com/TARNAGS/resgate-espacial/issues/81) |
+| Elogios na tela | Reforço rápido quando o jogador faz uma manobra difícil sem bater: passar "tirando um fininho" de uma pedra ou do terreno ("CLOSE CALL!"), frear no limite antes de bater ("GREAT SAVE!"), pouso perfeito e corrida perfeita sem abastecer. Discretos: texto pequeno perto da nave e uma nota só, com intervalo mínimo entre elogios. Ideia do Fernando, 02/10/2026; critérios na [#81](https://github.com/TARNAGS/resgate-espacial/issues/81); limites no painel de ajuste |
 
 O jogo também pausa sozinho quando o jogador sai do app ou recebe uma ligação.
 

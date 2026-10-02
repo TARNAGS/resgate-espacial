@@ -16,6 +16,12 @@ export const DEFAULT_PARAMS = Object.freeze({
   boardingSeconds: 2,       // duração do embarque
   lowFuel: 0.2,             // abaixo disso, aviso de combustível baixo
   lives: 3,
+  // Elogios para manobras difíceis (#81)
+  praiseNear: 6,            // "fininho": distância máxima de uma pedra ou do terreno (unidades)
+  praiseMinSpeed: 70,       // velocidade mínima para o fininho contar
+  praiseSaveSpeed: 130,     // "freada no limite": velocidade mínima indo para uma batida
+  praiseSaveHorizon: 0.45,  // a batida estava a menos destes segundos
+  praiseCooldown: 2.5,      // intervalo mínimo entre elogios (s)
   // Direcional virtual (D-006). As variantes existem para o teste do M1 (#43 e #44) comparar.
   // Esquema do toque (#44): no celular, como apontar e acelerar se combinam
   //   'hold' (A): tocar acelera e arrastar aponta, com um polegar só (o original)
@@ -44,6 +50,8 @@ export const TUNABLE = [
   { key: 'landingMaxVx', label: 'Landing max slide', min: 5, max: 150, step: 1 },
   { key: 'landingMaxAngle', label: 'Landing max tilt °', min: 2, max: 60, step: 1 },
   { key: 'padMargin', label: 'Pad edge margin', min: 0, max: 20, step: 1 },
+  { key: 'praiseNear', label: 'Praise: close call gap', min: 2, max: 20, step: 1 },
+  { key: 'praiseSaveSpeed', label: 'Praise: save speed', min: 60, max: 250, step: 5 },
   { key: 'joystickRadius', label: 'Joystick size', min: 30, max: 110, step: 1 },
   { key: 'joystickDeadzone', label: 'Joystick dead zone', min: 0, max: 40, step: 1 },
   { key: 'joystickArea', label: 'Joystick area', min: 0.25, max: 1, step: 0.05 },

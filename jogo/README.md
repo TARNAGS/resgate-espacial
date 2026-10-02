@@ -20,6 +20,7 @@ Os módulos do navegador não abrem com dois cliques no `index.html` (`file://`)
 | `src/content/obstacles/` | Catálogo de obstáculos; um arquivo por tipo | Um obstáculo novo é definido (P-011) |
 | `src/content/modifiers.js` | Modificadores: gravidade, tanque, vento e nave mais pesada na volta | Os modificadores são decididos (P-012) |
 | `src/core/` | Regras: física da nave, contato e pouso, partida, gerador, pontuação e progresso | Uma regra do documento 02 muda |
+| `src/core/praise.js` | Detecta manobras difíceis e avisa o elogio (#81): fininho, freada no limite, pouso perfeito e corrida perfeita | Os critérios dos elogios mudam |
 | `src/core/autopilot.js` | Piloto automático que joga cada cenário gerado e prova a melhor corrida sem abastecer (D-018) | A física ou um obstáculo novo mudam |
 | `src/core/scoring.js` | Pontuação: hoje só o tempo | P-006 é decidida |
 | `src/platform/storage.js` | O que fica salvo no aparelho e onde | P-016 é decidida, ou o jogo vai para as lojas (#65) |
