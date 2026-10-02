@@ -115,6 +115,8 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **Pontas da fase mais bonitas:** além da base e da tripulação, a caverna continua só como cenário, apagada e sem colisão, e uma barreira de energia tracejada marca o limite. Antes era um bloco liso e vazio. O cronômetro também saiu de baixo do botão T do painel de ajuste.
 - **Gravidade no PC e no celular:** o valor é o mesmo (55). A diferença de sensação vem do controle: no toque, o mesmo dedo aponta e acelera, então não dá para virar a nave sem acionar o propulsor. As opções foram levadas ao Fernando.
 - **Três controles de toque para comparar (#44):** A, tocar e segurar (o original); B, mirar antes de acelerar (arrasto curto só aponta e o propulsor acende ao passar da linha tracejada do anel); C, dois polegares (esquerdo aponta, direito acelera, com um botão desenhado no canto). Troca em Settings → Touch control ou pelo endereço (`?control=b`). O roteiro de teste ganhou a tarefa 5 e a pergunta 7.
+- **Retorno dos controles:** o Fernando gostou do A e do C e descartou o B, porque o propulsor demorava a responder entre tocar e arrastar. O B saiu do jogo; um B que tenha ficado salvo no aparelho volta sozinho para o A.
+- **C com colunas laterais:** no C, o polegar direito ficava em cima da fase. Agora a fase ocupa a faixa central e cada lado ganha uma coluna de controle (AIM e THRUST), num painel escuro com marcas discretas, como uma cabine. O HUD, as mensagens e a seta do objetivo ficam dentro da faixa da fase. O preço é ver menos da fase na largura: num celular de 740 pontos, a faixa fica com cerca de 490.
 
 ## Aprendizados de produto
 

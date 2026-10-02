@@ -9,7 +9,7 @@ import { Sound, connectSound } from './platform/audio.js';
 import { loadSave, writeSave, emptySave } from './platform/storage.js';
 import { createKeyboard } from './input/keyboard.js';
 import { createJoystick } from './input/joystick.js';
-import { readIntent, touchThrust, TOUCH_HINTS, SCHEME_NAMES } from './input/controls.js';
+import { readIntent, TOUCH_HINTS, SCHEME_NAMES } from './input/controls.js';
 import { createView } from './render/view.js';
 import { createRenderer } from './render/renderer.js';
 import { createScreens } from './ui/screens.js';
@@ -78,8 +78,8 @@ const tuning = await createTuning({
   onPractice: () => startLevel(PRACTICE_LEVEL),
 });
 
-// Esquema do toque pelo endereço, para comparar sem abrir o painel (#44): ?control=a, b ou c
-const CONTROL_FROM_URL = { a: 'hold', b: 'aim', c: 'twin' }[(new URLSearchParams(location.search).get('control') || '').toLowerCase()];
+// Esquema do toque pelo endereço, para comparar sem abrir o painel (#44): ?control=a ou c
+const CONTROL_FROM_URL = { a: 'hold', c: 'twin' }[(new URLSearchParams(location.search).get('control') || '').toLowerCase()];
 if (CONTROL_FROM_URL) PARAMS.touchScheme = CONTROL_FROM_URL;
 
 // ===== Mensagens e efeitos ligados aos eventos da partida =====
@@ -150,6 +150,7 @@ function drawMap() {
 
 function startLevel(def, seed = randomSeed()) {
   app.match = createMatch({ def, seed, getParams: () => PARAMS, events });
+  view.layout(PARAMS);
   app.paused = false;
   app.thumbHintShown = false;
   renderer.resetCamera(app.match);
@@ -188,7 +189,7 @@ function updateSoundButton() {
 }
 
 // Esquema do toque (#44): A, B ou C, salvo no aparelho; o endereço (?control=) tem prioridade
-const SCHEMES = ['hold', 'aim', 'twin'];
+const SCHEMES = ['hold', 'twin'];
 function updateControlButton() {
   screens.el('btn-control').textContent = `TOUCH CONTROL: ${SCHEME_NAMES[PARAMS.touchScheme]}`;
   screens.el('control-help').textContent = `TOUCH · ${TOUCH_HINTS[PARAMS.touchScheme].toLowerCase()}`;
@@ -270,7 +271,7 @@ function checkThumbHint(m) {
   const joy = joystick.state;
   if (app.thumbHintShown || !joy || m.ship.state !== 'flying' || PARAMS.joystickMode !== 'follow') return;
   const target = m.level.pads.find((p) => p.kind === (m.practice ? 'base' : m.crewOnBoard ? 'base' : 'crew'));
-  const sx = ((target.x1 + target.x2) / 2 - renderer.camX) * view.scale;
+  const sx = view.play.x + ((target.x1 + target.x2) / 2 - renderer.camX) * view.scale;
   const sy = target.y * view.scale;
   const covered = Math.abs(joy.cx - sx) < (target.x2 - target.x1) * view.scale / 2 + PARAMS.joystickRadius
     && Math.abs(joy.cy - sy) < PARAMS.joystickRadius + 40;
@@ -289,6 +290,7 @@ let acc = 0;
 function loop(now) {
   const elapsed = Math.min(0.1, (now - last) / 1000);
   last = now;
+  view.layout(PARAMS);   // o controle pode mudar pelo painel ou em Settings
   const m = app.match;
   if (app.screen === 'game' && m && !app.paused && !tuning.open) {
     const p = m.params();
@@ -310,7 +312,6 @@ function loop(now) {
     joy: joystick.state,
     joystick,
     thrustHeld: joystick.thrustHeld,
-    touchThrusting: touchThrust(PARAMS, joystick.state, joystick.thrustHeld),
     schemeName: SCHEME_NAMES[PARAMS.touchScheme],
     idle: isIdle(),
     buttons: app.screen === 'game' ? hudButtons() : [],
@@ -325,6 +326,7 @@ Sound.enabled = app.save.settings.sound !== false;
 updateSoundButton();
 if (!CONTROL_FROM_URL && SCHEMES.includes(app.save.settings.touchScheme)) PARAMS.touchScheme = app.save.settings.touchScheme;
 updateControlButton();
+view.layout(PARAMS);
 view.resize();
 app.selected = defaultLevel(app.save);
 showScreen('menu');

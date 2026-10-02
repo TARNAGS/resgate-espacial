@@ -81,7 +81,11 @@ export function createRenderer(canvas, view) {
     if (!match) return;
 
     const m = match.state;
-    ctx.setTransform(view.dpr * view.scale, 0, 0, view.dpr * view.scale, -r.camX * view.scale * view.dpr, 0);
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(view.play.x, 0, view.play.w, view.cssH);   // a fase só aparece na faixa dela
+    ctx.clip();
+    ctx.setTransform(view.dpr * view.scale, 0, 0, view.dpr * view.scale, (view.play.x - r.camX * view.scale) * view.dpr, 0);
     drawCave(m.level, theme, t);
     const approach = approachInfo(m, params);
     drawPads(m.level, t, approach);
@@ -89,14 +93,49 @@ export function createRenderer(canvas, view) {
     if (!m.practice) drawCrew(m, t, params);
     drawShip(m.ship, params, approach, t);
     drawParticles();
+    ctx.restore();
 
     ctx.setTransform(view.dpr, 0, 0, view.dpr, 0, 0);
-    if (!m.practice) drawObjectiveArrow(m, t, params);
+    if (view.sidePanels) drawSidePanels(t);
+    if (!m.practice) drawObjectiveArrow(m, t);
     drawHUD(m, t, params, scene);
     drawMessages(t);
     drawJoystick(scene);
     drawButtons(scene);
   };
+
+  // Colunas de controle do esquema de dois polegares (C): painéis escuros, com uma borda que brilha
+  // de leve do lado da fase e o nome do controle embaixo
+  function drawSidePanels(t) {
+    const edges = [[0, view.play.x, view.play.x, 'AIM'], [view.play.x + view.play.w, view.cssW, view.play.x + view.play.w, 'THRUST']];
+    for (const [x1, x2, edgeX, label] of edges) {
+      const g = ctx.createLinearGradient(x1, 0, x2, 0);
+      const inner = label === 'AIM' ? 1 : 0;
+      g.addColorStop(inner, 'rgba(10,14,26,0.97)');
+      g.addColorStop(1 - inner, 'rgba(5,7,13,0.99)');
+      ctx.fillStyle = g;
+      ctx.fillRect(x1, 0, x2 - x1, view.cssH);
+      // Marcas discretas, como num painel de cabine
+      ctx.strokeStyle = 'rgba(70,224,200,0.07)';
+      ctx.lineWidth = 1;
+      for (let y = 18 + view.safe.top; y < view.cssH - 30; y += 22) {
+        const w = (Math.floor(y / 22) % 4 === 0) ? 10 : 5;
+        ctx.beginPath();
+        if (label === 'AIM') { ctx.moveTo(edgeX - 6 - w, y); ctx.lineTo(edgeX - 6, y); }
+        else { ctx.moveTo(edgeX + 6, y); ctx.lineTo(edgeX + 6 + w, y); }
+        ctx.stroke();
+      }
+      ctx.strokeStyle = `rgba(70,224,200,${(0.28 + 0.06 * Math.sin(t * 1.5)).toFixed(2)})`;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(edgeX, 0); ctx.lineTo(edgeX, view.cssH); ctx.stroke();
+      ctx.font = `700 10px ${FONT}`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'bottom';
+      ctx.fillStyle = 'rgba(127,140,163,0.6)';
+      const cx = label === 'AIM' ? (view.safe.left + view.play.x) / 2 : (edgeX + view.cssW - view.safe.right) / 2;
+      ctx.fillText(label, cx, view.cssH - 8 - view.safe.bottom);
+    }
+  }
 
   function drawStars(t, off) {
     for (const s of STARS) {
@@ -333,15 +372,15 @@ export function createRenderer(canvas, view) {
     }
   }
 
-  function drawObjectiveArrow(m, t, params) {
+  // Seta na borda da faixa da fase, apontando para o objetivo quando ele está fora da tela
+  function drawObjectiveArrow(m, t) {
     const target = m.level.pads.find((p) => p.kind === (m.crewOnBoard ? 'base' : 'crew'));
-    const sx = ((target.x1 + target.x2) / 2 - r.camX) * view.scale;
-    if (sx >= 0 && sx <= view.cssW) return;
-    const right = sx > view.cssW;
-    const x = right ? view.cssW - 24 - view.safe.right : 24 + view.safe.left;
-    // No esquema de dois polegares, a seta da direita fica acima do botão do propulsor
-    const bottom = right && view.isTouch && params.touchScheme === 'twin' ? view.cssH - 60 - params.joystickRadius * 1.8 - view.safe.bottom : view.cssH - 50;
-    const y = clamp(target.y * view.scale, 110, Math.max(110, bottom));
+    const sx = view.play.x + ((target.x1 + target.x2) / 2 - r.camX) * view.scale;
+    const playRight = view.play.x + view.play.w;
+    if (sx >= view.play.x && sx <= playRight) return;
+    const right = sx > playRight;
+    const x = right ? playRight - 24 - (view.sidePanels ? 0 : view.safe.right) : view.play.x + 24 + (view.sidePanels ? 0 : view.safe.left);
+    const y = clamp(target.y * view.scale, 110, view.cssH - 50);
     const pulse = (0.6 + 0.4 * Math.sin(t * 5)).toFixed(2);
     ctx.fillStyle = m.crewOnBoard ? `rgba(124,196,255,${pulse})` : `rgba(255,159,67,${pulse})`;
     ctx.beginPath();
@@ -357,7 +396,7 @@ export function createRenderer(canvas, view) {
 
   function drawHUD(m, t, params, scene) {
     const s = m.ship;
-    const left = 16 + view.safe.left, top = 14 + view.safe.top;
+    const left = Math.max(view.play.x, view.safe.left) + 16, top = 14 + view.safe.top;
     ctx.textAlign = 'left';
     ctx.textBaseline = 'top';
     ctx.font = `700 13px ${FONT}`;
@@ -397,7 +436,7 @@ export function createRenderer(canvas, view) {
       ctx.font = `700 16px ${FONT}`;
       ctx.fillStyle = '#e8f1ff';
       // o cronômetro fica à esquerda dos botões da tela (pausa e, nas sessões de teste, o T)
-      ctx.fillText(fmtTime(m.timer), view.cssW - 22 - 48 * scene.buttons.length - view.safe.right, top + 6);
+      ctx.fillText(fmtTime(m.timer), Math.min(view.cssW - 22 - 48 * scene.buttons.length - view.safe.right, view.play.x + view.play.w - 14), top + 6);
     }
 
     ctx.textAlign = 'left';
@@ -418,48 +457,35 @@ export function createRenderer(canvas, view) {
       const alpha = clamp(Math.min(m.t / 0.2, (m.dur - m.t) / 0.4), 0, 1).toFixed(2);
       ctx.font = `700 ${m.warn ? 18 : 15}px ${FONT}`;
       ctx.fillStyle = m.warn ? `rgba(255,93,93,${alpha})` : `rgba(232,241,255,${alpha})`;
-      ctx.fillText(m.text, view.cssW / 2, view.cssH * 0.24 + i * 26);
+      ctx.fillText(m.text, view.play.x + view.play.w / 2, view.cssH * 0.24 + i * 26);
     });
   }
 
   // Direcional e, no esquema de dois polegares, o botão do propulsor (#44)
-  function drawJoystick({ joy, joystick, params, idle, touchThrusting, thrustHeld }) {
+  function drawJoystick({ joy, joystick, params, idle, thrustHeld }) {
     const R = params.joystickRadius;
-    const twin = params.touchScheme === 'twin';
-    if (view.isTouch && twin && (idle || thrustHeld)) drawThrustButton(joystick.thrustButton(), thrustHeld);
+    const twin = view.isTouch && params.touchScheme === 'twin';
+    if (twin) drawThrustButton(joystick.thrustButton(), thrustHeld);
     if (!joy) {
-      if (!view.isTouch || !idle) return;
-      // Dica discreta de onde o direcional aparece
-      const c = params.joystickMode === 'fixed' ? joystick.fixedCenter() : { x: 24 + view.safe.left + R, y: view.cssH - 24 - view.safe.bottom - R };
-      ctx.strokeStyle = params.joystickMode === 'fixed' ? 'rgba(255,93,93,0.45)' : 'rgba(255,93,93,0.25)';
-      ctx.lineWidth = 2;
+      if (!view.isTouch || !(idle || twin)) return;
+      // Dica discreta de onde o direcional aparece; nas colunas do C, do mesmo tamanho do botão
+      const c = joystick.fixedCenter();
+      ctx.strokeStyle = params.joystickMode === 'fixed' || twin ? 'rgba(255,93,93,0.45)' : 'rgba(255,93,93,0.25)';
+      ctx.lineWidth = twin ? 3 : 2;
       ctx.beginPath();
-      ctx.arc(c.x, c.y, R, 0, Math.PI * 2);
+      ctx.arc(c.x, c.y, twin ? R * 0.9 : R, 0, Math.PI * 2);
       ctx.stroke();
       return;
     }
     let dx = joy.x - joy.cx, dy = joy.y - joy.cy;
     const d = Math.hypot(dx, dy);
     if (d > R) { dx *= R / d; dy *= R / d; }   // a bola acompanha o dedo até a borda do anel
-    // No esquema B, o anel fica laranja quando o propulsor acende
-    const hot = params.touchScheme === 'aim' && touchThrusting;
     ctx.lineWidth = 4;
-    ctx.strokeStyle = hot ? 'rgba(255,159,67,0.95)' : 'rgba(255,93,93,0.9)';
+    ctx.strokeStyle = 'rgba(255,93,93,0.9)';
     ctx.beginPath();
     ctx.arc(joy.cx, joy.cy, R, 0, Math.PI * 2);
     ctx.stroke();
-    if (params.touchScheme === 'aim') {
-      // Linha a partir da qual o propulsor acende: dentro dela, o dedo só aponta
-      ctx.save();
-      ctx.setLineDash([4, 5]);
-      ctx.lineWidth = 1.5;
-      ctx.strokeStyle = hot ? 'rgba(255,159,67,0.8)' : 'rgba(232,241,255,0.45)';
-      ctx.beginPath();
-      ctx.arc(joy.cx, joy.cy, R * params.aimThrustAt, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.restore();
-    }
-    ctx.fillStyle = hot ? 'rgba(255,209,102,0.9)' : 'rgba(232,241,255,0.85)';
+    ctx.fillStyle = 'rgba(232,241,255,0.85)';
     ctx.beginPath();
     ctx.arc(joy.cx + dx, joy.cy + dy, 18, 0, Math.PI * 2);
     ctx.fill();

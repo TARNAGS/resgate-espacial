@@ -4,7 +4,8 @@
 // Duas variantes de posição, escolhidas em PARAMS.joystickMode, para o teste do M1 comparar (#44):
 //   'follow': o direcional aparece onde o polegar tocar, dentro da área da esquerda (joystickArea)
 //   'fixed':  o direcional fica fixo no canto inferior esquerdo
-// No esquema de dois polegares ('twin'), a metade direita da tela é o botão do propulsor.
+// No esquema de dois polegares ('twin'), a metade direita da tela é o botão do propulsor, e o
+// desenho dos controles fica nas colunas laterais (render/view.js), fora da fase.
 
 export function createJoystick(canvas, { params, view, isActive, onPress, onAnyTouch }) {
   let joy = null;          // dedo que aponta a nave
@@ -12,16 +13,19 @@ export function createJoystick(canvas, { params, view, isActive, onPress, onAnyT
 
   const twin = () => params.touchScheme === 'twin';
 
-  const fixedCenter = () => ({
-    x: 24 + view.safe.left + params.joystickRadius,
-    y: view.cssH - 24 - view.safe.bottom - params.joystickRadius,
-  });
+  // Centro de um controle no canto de baixo: no meio da coluna lateral, quando ela existe
+  function corner(side) {
+    const R = params.joystickRadius;
+    const y = view.cssH - 24 - view.safe.bottom - R;
+    if (!view.sidePanels) return side === 'left' ? { x: 24 + view.safe.left + R, y } : { x: view.cssW - 24 - view.safe.right - R * 0.9, y };
+    const x = side === 'left' ? (view.safe.left + view.play.x) / 2 : (view.play.x + view.play.w + view.cssW - view.safe.right) / 2;
+    return { x, y };
+  }
 
-  // Botão do propulsor desenhado no canto inferior direito (esquema 'twin')
-  const thrustButton = () => {
-    const r = params.joystickRadius * 0.9;
-    return { x: view.cssW - 24 - view.safe.right - r, y: view.cssH - 24 - view.safe.bottom - r, r };
-  };
+  const fixedCenter = () => corner('left');
+
+  // Botão do propulsor (esquema 'twin')
+  const thrustButton = () => ({ ...corner('right'), r: params.joystickRadius * 0.9 });
 
   function localPoint(e) {
     const r = canvas.getBoundingClientRect();

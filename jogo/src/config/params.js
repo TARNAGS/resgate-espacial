@@ -19,10 +19,10 @@ export const DEFAULT_PARAMS = Object.freeze({
   // Direcional virtual (D-006). As variantes existem para o teste do M1 (#43 e #44) comparar.
   // Esquema do toque (#44): no celular, como apontar e acelerar se combinam
   //   'hold' (A): tocar acelera e arrastar aponta, com um polegar só (o original)
-  //   'aim'  (B): arrasto curto só aponta; o propulsor acende quando o dedo passa de aimThrustAt do anel
-  //   'twin' (C): dois polegares; o da esquerda aponta sem acelerar e o da direita aciona o propulsor
+  //   'twin' (C): dois polegares; o da esquerda aponta sem acelerar e o da direita aciona o propulsor,
+  //               cada um numa coluna lateral, com a fase no meio
+  // O B (arrasto curto só aponta) foi testado e descartado pelo Fernando: o propulsor demorava a responder.
   touchScheme: 'hold',
-  aimThrustAt: 0.5,         // B: fração do raio do anel a partir da qual o propulsor acende
   joystickMode: 'follow',   // 'follow': aparece onde o polegar tocar (#39); 'fixed': fixo no canto
   joystickArea: 1,          // fração da largura da tela, a partir da esquerda, que aceita o direcional;
                             // 1 = a tela inteira, como no protótipo testado (#50); a #39 propunha 0.5
@@ -47,14 +47,17 @@ export const TUNABLE = [
   { key: 'joystickRadius', label: 'Joystick size', min: 30, max: 110, step: 1 },
   { key: 'joystickDeadzone', label: 'Joystick dead zone', min: 0, max: 40, step: 1 },
   { key: 'joystickArea', label: 'Joystick area', min: 0.25, max: 1, step: 0.05 },
-  { key: 'touchScheme', label: 'Touch control', options: [['hold', 'A · hold'], ['aim', 'B · aim'], ['twin', 'C · two thumbs']] },
-  { key: 'aimThrustAt', label: 'B: thrust from ring %', min: 0.2, max: 0.9, step: 0.05 },
+  { key: 'touchScheme', label: 'Touch control', options: [['hold', 'A · hold'], ['twin', 'C · two thumbs']] },
   { key: 'joystickMode', label: 'Joystick', options: ['follow', 'fixed'] },
 ];
 
+// Ignora o que não existe mais (por exemplo, uma opção removida e ainda salva no aparelho)
 export function setParams(overrides) {
   for (const [k, v] of Object.entries(overrides || {})) {
-    if (k in DEFAULT_PARAMS && typeof v === typeof DEFAULT_PARAMS[k]) PARAMS[k] = v;
+    if (!(k in DEFAULT_PARAMS) || typeof v !== typeof DEFAULT_PARAMS[k]) continue;
+    const opts = TUNABLE.find((item) => item.key === k)?.options;
+    if (opts && !opts.some((o) => (Array.isArray(o) ? o[0] : o) === v)) continue;
+    PARAMS[k] = v;
   }
 }
 

@@ -32,15 +32,16 @@ Não explicar os controles. As dicas que aparecem na tela fazem parte do teste.
 | 2 | "Resgate a tripulação e volte para a base." | Nível 1, pelo menu | 5 min | Concluiu? Tempo; vidas perdidas; onde explodiu |
 | 3 | "Agora a fase 2." | Nível 2 | 5 min | Igual à tarefa 2 |
 | 4 | Repetir a tarefa 1 com o direcional fixo no canto | Painel → Joystick: fixed → PRACTICE | 3 min | Igual à tarefa 1; qual preferiu |
-| 5 | Repetir a tarefa 2 com os controles B e C | Settings → Touch control (A, B, C) | 5 min cada | Igual à tarefa 2; qual dos três preferiu |
+| 5 | Repetir a tarefa 2 com o controle C | Settings → Touch control (A ou C) | 5 min | Igual à tarefa 2; qual dos dois preferiu |
 
-Se a tarefa passar do limite, agradecer e seguir para a próxima. Alternar a ordem das variantes entre testadores (metade começa pelo fixo; a ordem de A, B e C também muda) para que o aprendizado não favoreça a última.
+Se a tarefa passar do limite, agradecer e seguir para a próxima. Alternar a ordem das variantes entre testadores (metade começa pelo fixo; metade começa pelo C) para que o aprendizado não favoreça a última.
 
-Os três controles de toque (#44):
+Os dois controles de toque (#44):
 
-- **A, tocar e segurar:** encostar o dedo já aciona o propulsor; arrastar aponta.
-- **B, mirar antes de acelerar:** arrasto curto só aponta; o propulsor acende quando o dedo passa da linha tracejada do anel.
-- **C, dois polegares:** o polegar esquerdo aponta, sem acelerar; o direito, em qualquer ponto da metade direita, aciona o propulsor.
+- **A, tocar e segurar:** encostar o dedo já aciona o propulsor; arrastar aponta. A fase ocupa a tela toda.
+- **C, dois polegares:** a fase fica no meio, com uma coluna de controle de cada lado. O polegar esquerdo aponta, sem acelerar; o direito, em qualquer ponto da metade direita, aciona o propulsor.
+
+O B (arrasto curto só aponta e o propulsor acende depois) foi descartado pelo Fernando em 02/10: o propulsor demorava a responder.
 
 ## 5. O que observar
 
@@ -60,7 +61,7 @@ Os três controles de toque (#44):
 | Tarefa 3: concluiu? tempo / vidas perdidas | |
 | Tarefa 4: tempo até o primeiro pouso / explosões | |
 | Direcional preferido: onde o polegar toca ou fixo | |
-| Controle de toque preferido: A, B ou C | |
+| Controle de toque preferido: A ou C | |
 | Observações | |
 
 ## 7. Perguntas do fim
@@ -71,7 +72,7 @@ Os três controles de toque (#44):
 4. O que mais irritou?
 5. Você jogaria de novo? Por quê?
 6. Qual direcional você prefere, e por quê?
-7. Qual controle de toque você prefere (A, B ou C), e por quê?
+7. Qual controle de toque você prefere (A ou C), e por quê?
 
 ## 8. Depois do teste
 

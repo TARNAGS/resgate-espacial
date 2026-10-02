@@ -4,11 +4,7 @@
 // Quando o toque aciona o propulsor, conforme o esquema escolhido (PARAMS.touchScheme, #44)
 export function touchThrust(params, joy, thrustHeld = false) {
   if (params.touchScheme === 'twin') return thrustHeld;
-  if (!joy) return false;
-  if (params.touchScheme === 'aim') {
-    return Math.hypot(joy.x - joy.cx, joy.y - joy.cy) >= params.joystickRadius * params.aimThrustAt;
-  }
-  return true;   // 'hold': encostar o dedo já acelera
+  return Boolean(joy);   // 'hold': encostar o dedo já acelera
 }
 
 export function readIntent(keys, joy, params, thrustHeld = false) {
@@ -26,8 +22,7 @@ export function readIntent(keys, joy, params, thrustHeld = false) {
 // Textos de ajuda de cada esquema (em inglês, D-007)
 export const TOUCH_HINTS = {
   hold: 'TOUCH AND HOLD TO THRUST · DRAG TO STEER',
-  aim: 'DRAG A LITTLE TO AIM · DRAG FURTHER TO THRUST',
   twin: 'LEFT THUMB: AIM · RIGHT THUMB: THRUST',
 };
 
-export const SCHEME_NAMES = { hold: 'A', aim: 'B', twin: 'C' };
+export const SCHEME_NAMES = { hold: 'A', twin: 'C' };
