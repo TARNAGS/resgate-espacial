@@ -6,18 +6,20 @@ export const DEFAULT_PARAMS = Object.freeze({
   gravity: 55,              // puxa a nave para baixo (unidades/s²)
   thrust: 125,              // força do propulsor (~2,3 vezes a gravidade)
   keyRotationSpeed: 210,    // giro no teclado (graus/s)
-  touchRotationSpeed: 480,  // giro até a direção do dedo (graus/s)
+  touchRotationSpeed: 420,  // giro até a direção do dedo (graus/s); era 480, rápido demais no celular (#50)
   maxSpeed: 260,            // velocidade máxima (unidades/s)
   landingMaxVy: 65,         // descida máxima para pousar (unidades/s)
   landingMaxVx: 45,         // deslize lateral máximo para pousar
   landingMaxAngle: 20,      // inclinação máxima no pouso (graus)
+  padMargin: 8,             // folga além da borda da plataforma que ainda conta como pouso (#50)
   refuelPerSecond: 0.6,     // fração do tanque abastecida por segundo
   boardingSeconds: 2,       // duração do embarque
   lowFuel: 0.2,             // abaixo disso, aviso de combustível baixo
   lives: 3,
   // Direcional virtual (D-006). As variantes existem para o teste do M1 (#43 e #44) comparar.
   joystickMode: 'follow',   // 'follow': aparece onde o polegar tocar (#39); 'fixed': fixo no canto
-  joystickArea: 0.5,        // fração da largura da tela, a partir da esquerda, que aceita o direcional
+  joystickArea: 1,          // fração da largura da tela, a partir da esquerda, que aceita o direcional;
+                            // 1 = a tela inteira, como no protótipo testado (#50); a #39 propunha 0.5
   joystickRadius: 56,       // raio do direcional (px de tela)
   joystickDeadzone: 10,     // abaixo disso, o arrasto não muda a direção
 });
@@ -35,6 +37,7 @@ export const TUNABLE = [
   { key: 'landingMaxVy', label: 'Landing max fall', min: 10, max: 200, step: 1 },
   { key: 'landingMaxVx', label: 'Landing max slide', min: 5, max: 150, step: 1 },
   { key: 'landingMaxAngle', label: 'Landing max tilt °', min: 2, max: 60, step: 1 },
+  { key: 'padMargin', label: 'Pad edge margin', min: 0, max: 20, step: 1 },
   { key: 'joystickRadius', label: 'Joystick size', min: 30, max: 110, step: 1 },
   { key: 'joystickDeadzone', label: 'Joystick dead zone', min: 0, max: 40, step: 1 },
   { key: 'joystickArea', label: 'Joystick area', min: 0.25, max: 1, step: 0.05 },

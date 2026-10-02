@@ -29,6 +29,7 @@ const app = {
   screen: 'menu',      // 'menu' | 'settings' | 'game'
   match: null,
   paused: false,
+  thumbHintShown: false,   // a dica do polegar aparece uma vez por partida
   selected: LEVELS[0],
   save: emptySave(),
 };
@@ -146,6 +147,7 @@ function drawMap() {
 function startLevel(def, seed = randomSeed()) {
   app.match = createMatch({ def, seed, getParams: () => PARAMS, events });
   app.paused = false;
+  app.thumbHintShown = false;
   renderer.resetCamera(app.match);
   if (!def.practice) app.selected = def;
   showScreen('game');
@@ -244,6 +246,23 @@ function checkOrientation() {
   if (view.portrait && isPlaying() && !app.paused) togglePause(true);
 }
 
+// Dica do polegar (#50): no celular, se o dedo do direcional estiver em cima da plataforma
+// para onde a nave vai, ensina que dá para tocar em qualquer lugar da tela.
+function checkThumbHint(m) {
+  const joy = joystick.state;
+  if (app.thumbHintShown || !joy || m.ship.state !== 'flying' || PARAMS.joystickMode !== 'follow') return;
+  const target = m.level.pads.find((p) => p.kind === (m.practice ? 'base' : m.crewOnBoard ? 'base' : 'crew'));
+  const sx = ((target.x1 + target.x2) / 2 - renderer.camX) * view.scale;
+  const sy = target.y * view.scale;
+  const covered = Math.abs(joy.cx - sx) < (target.x2 - target.x1) * view.scale / 2 + PARAMS.joystickRadius
+    && Math.abs(joy.cy - sy) < PARAMS.joystickRadius + 40;
+  if (covered) {
+    app.thumbHintShown = true;
+    renderer.message('TIP: YOUR THUMB WORKS ANYWHERE ON SCREEN', 4);
+    renderer.message('LIFT IT AND TOUCH AWAY FROM THE PAD', 4);
+  }
+}
+
 // ===== Laço principal (passo fixo de física) =====
 const DT = 1 / 120;
 let last = performance.now();
@@ -262,6 +281,7 @@ function loop(now) {
       acc -= DT;
     }
     Sound.setThrust(m.state.ship.thrusting);
+    checkThumbHint(m.state);
   } else {
     acc = 0;
   }
@@ -294,4 +314,4 @@ const start = new URLSearchParams(location.search).get('level');
 if (start && tuning.enabled && findLevel(start)) startLevel(findLevel(start));
 
 // Acesso para testes automáticos no navegador
-window.__game = { app, PARAMS, LEVELS, startLevel, events, keyboard, joystick };
+window.__game = { app, PARAMS, LEVELS, startLevel, events, keyboard, joystick, renderer };

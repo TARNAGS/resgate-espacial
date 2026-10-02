@@ -3,8 +3,8 @@
 | Campo | Valor |
 |---|---|
 | Documento | 02 — Regras do jogo |
-| Versão | 1.1 |
-| Data | 01/10/2026 |
+| Versão | 1.2 |
+| Data | 02/10/2026 |
 | Status | Aprovado; pendentes: pontuação (P-006), fase 1 fixa ou aleatória (P-009) e repetição do cenário (P-010) |
 | Responsável | Fernando Nunes (Product Manager) |
 
@@ -226,9 +226,10 @@ São os números que definem a "sensação" do jogo. Eles serão calibrados no p
 | Força do propulsor | Quanto a nave acelera ao acionar | Vencer a gravidade com folga (ex.: 2 vezes mais forte) |
 | Velocidade de giro no teclado | Quão rápido a nave vira ao segurar a seta | Calibrar no protótipo |
 | Velocidade de giro no toque | Quão rápido a nave vira para a direção do dedo: na hora ou aos poucos | Calibrar no protótipo |
-| Direcional | Posição (fixa ou onde o polegar tocar) e tamanho | Testar no protótipo |
+| Direcional | Posição (fixa ou onde o polegar tocar), área da tela que aceita o toque e tamanho | Onde o polegar tocar, na tela inteira (#50); variante final na #44 |
 | Velocidade máxima de pouso | Limite para pousar sem explodir | Tolerante: o pouso "não é tão delicado" |
 | Inclinação máxima de pouso | Quanto a nave pode estar torta ao pousar | Ex.: 20° |
+| Folga na borda da plataforma | Quanto a nave pode passar da borda da plataforma e ainda pousar | 8 unidades, pouco menos que meia nave (#50) |
 | Tanque e consumo | Quanto tempo de propulsor cabe num tanque cheio | Varia por fase |
 | Combustível baixo | A partir de quanto o jogo avisa que o combustível está acabando | Calibrar no protótipo (ex.: 20% do tanque) |
 | Duração do embarque | Tempo da animação da tripulação | Cerca de 2 segundos |
@@ -269,3 +270,4 @@ Registradas para não se perderem. **Não são compromisso**: só entram se o Ro
 | 0.3 | 28/09/2026 | Efeito colateral do ponto de retorno aceito, com aviso forte de combustível baixo na plataforma da tripulação; MVP com as fases 1 a 3 (D-009) |
 | 1.0 | 01/10/2026 | Aprovado pelo Fernando como versão de referência; a pontuação (P-006) segue em aberto |
 | 1.1 | 01/10/2026 | Fases geradas aleatoriamente (D-014) e menu com mapa de progresso (D-015); novas pendências P-009 e P-010 |
+| 1.2 | 02/10/2026 | Retorno do primeiro teste no iPhone (#50): parâmetro novo de folga na borda da plataforma e direcional aceitando toque na tela inteira |

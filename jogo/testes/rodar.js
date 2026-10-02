@@ -189,6 +189,25 @@ test('#35 o limite de velocidade de pouso é um parâmetro de ajuste', () => {
   assert.equal(m.ship.state, 'landed');
 });
 
+test('#50 pousar com a nave um pouco além da borda da plataforma ainda conta (padMargin)', () => {
+  const { match, m } = newMatch(PRACTICE_LEVEL);
+  const pad = m.level.pads[0];
+  hover(m, 'base'); m.ship.x = pad.x2 - SHIP.half + PARAMS.padMargin - 1;   // a ponta da asa passa da borda
+  step(match, NONE, 0.1);
+  assert.equal(m.ship.state, 'landed');
+});
+
+test('#50 passar da folga da borda explode', () => {
+  const { match, m, log } = newMatch(PRACTICE_LEVEL);
+  const pad = m.level.pads[0];
+  hover(m, 'base'); m.ship.x = pad.x2 - SHIP.half + PARAMS.padMargin + 4; step(match, NONE, 0.1);
+  assert.ok(log.some((e) => e.name === 'crash'));
+});
+
+test('#50 o giro no toque ficou um pouco mais lento que no protótipo (480 °/s)', () => {
+  assert.ok(DEFAULT_PARAMS.touchRotationSpeed < 480 && DEFAULT_PARAMS.touchRotationSpeed >= 380);
+});
+
 test('Regras 3.3 pousar inclinado demais explode', () => {
   const { match, m, log } = newMatch(PRACTICE_LEVEL);
   hover(m, 'base', 20, 0.6); step(match, NONE, 0.1);

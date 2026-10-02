@@ -105,7 +105,7 @@ export function createMatch({ def, seed, getParams, events }) {
   }
 
   function tryLanding(s, p, contacts) {
-    const pad = level.pads.find((q) => contacts.every((c) => c.x >= q.x1 && c.x <= q.x2));
+    const pad = level.pads.find((q) => contacts.every((c) => c.x >= q.x1 - p.padMargin && c.x <= q.x2 + p.padMargin));
     if (!pad) return explode('TOUCHED THE GROUND');
     if (s.vy < 0) return;   // subindo de uma plataforma: só raspou, não é pouso nem batida
     const bad = landingCheck(s, p);

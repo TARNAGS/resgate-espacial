@@ -21,7 +21,7 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 ### Próximos passos
 
 1. O Fernando joga a pasta `jogo/` no iPhone e revisa os cartões em "Em revisão" (#32 a #42). Pelo painel de ajuste, dá para calibrar na hora e copiar os valores.
-2. O Fernando traz o retorno do primeiro teste para a [#50](https://github.com/TARNAGS/resgate-espacial/issues/50): sensação de gravidade, propulsor, giro, tamanho da nave e tolerância do pouso. Com ele, o Claude calibra os `PARAMS`.
+2. O Fernando escolhe a velocidade de giro no toque ([#66](https://github.com/TARNAGS/resgate-espacial/issues/66)) e confere no iPhone as correções do retorno do primeiro teste (#50).
 3. Retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)), para fechar o marco.
 4. Decisões rápidas do Fernando: protótipo 01 como base do M1 ([#51](https://github.com/TARNAGS/resgate-espacial/issues/51); a recomendação é que sim), P-009 ([#48](https://github.com/TARNAGS/resgate-espacial/issues/48)) e P-010 ([#49](https://github.com/TARNAGS/resgate-espacial/issues/49)).
 5. As outras descobertas da coluna "A investigar", na ordem do quadro.
@@ -99,6 +99,15 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **Histórias e tarefas do M1:** gravidade (#32), propulsor (#33), embalo (#34), cenário de treino (#35), parâmetros num lugar só (#36), teclado (#37), direcional (#38), direcional onde o polegar tocar, na metade esquerda (#39), toque sem rolar nem dar zoom (#40), roteiro de teste (#41, documento 07) e painel de ajuste escondido (#42). O direcional fixo no canto também existe, como variante para o teste (#44).
 - **29 testes automáticos**, com os critérios de aceite e as regras do documento 02, e 1.500 cenários aleatórios conferidos (500 por nível). Conferido no navegador do Claude Code, no tamanho de computador e de celular na horizontal.
 - **Correção:** o título do menu aparecia colado no celular (RESGATEESPACIAL), um defeito que já existia no protótipo.
+
+### 02/10/2026 — Retorno do primeiro teste no iPhone (#50)
+
+- **Ficou como está:** gravidade, força do propulsor (inclusive a freada apontando para o lado oposto) e tempo de abastecimento. Abastecer não pode ficar lento, porque a velocidade para concluir a fase é o desafio de quem joga muito.
+- **Giro no toque:** 480 → 420 °/s, um pouco mais lento só no celular. A escolha final entre 3 opções virou a história [#66](https://github.com/TARNAGS/resgate-espacial/issues/66).
+- **Pouso no celular:** folga de 8 unidades além da borda da plataforma (parâmetro novo, `padMargin`).
+- **Aviso de pouso mais evidente:** perto de uma plataforma, a nave ganha um halo e as luzes da plataforma acendem, verdes quando dá para pousar e vermelhas quando a nave está rápida ou inclinada demais.
+- **Dedo em cima da plataforma:** a câmera agora passa das pontas da fase, para a base e a tripulação ficarem no meio da tela, longe do polegar. O direcional volta a aceitar toque na tela inteira, como no protótipo testado; a #39 propunha só a metade esquerda. Quando o polegar cobre a plataforma de destino, o jogo ensina uma vez que dá para tocar em qualquer lugar.
+- **Regras do jogo v1.2:** folga na borda da plataforma e área do direcional na seção 13.
 
 ## Aprendizados de produto
 

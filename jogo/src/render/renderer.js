@@ -17,8 +17,17 @@ export function createRenderer(canvas, view) {
   const r = { camX: 0, particles: [], messages: [] };
 
   // ===== Câmera, partículas e mensagens =====
+  // A câmera pode passar das pontas da fase para que as plataformas das pontas (base e tripulação)
+  // fiquem no meio da tela, longe do polegar que controla o direcional (#50).
+  function camLimits(level) {
+    const centers = level.pads.map((p) => (p.x1 + p.x2) / 2);
+    const lo = Math.min(0, Math.min(...centers) - view.viewW / 2);
+    const hi = Math.max(level.L - view.viewW, Math.max(...centers) - view.viewW / 2);
+    return [lo, Math.max(lo, hi)];
+  }
+
   r.resetCamera = (match) => {
-    r.camX = clamp(match.state.ship.x - view.viewW / 2, 0, Math.max(0, match.state.level.L - view.viewW));
+    r.camX = clamp(match.state.ship.x - view.viewW / 2, ...camLimits(match.state.level));
     r.particles = [];
     r.messages = [];
   };
@@ -26,7 +35,7 @@ export function createRenderer(canvas, view) {
   r.update = (dt, match, params) => {
     const s = match.state.ship;
     const look = clamp(s.vx * 0.6, -view.viewW * 0.25, view.viewW * 0.25);
-    const target = clamp(s.x - view.viewW / 2 + look, 0, Math.max(0, match.state.level.L - view.viewW));
+    const target = clamp(s.x - view.viewW / 2 + look, ...camLimits(match.state.level));
     r.camX += (target - r.camX) * Math.min(1, dt * 4);
     for (const p of r.particles) {
       p.vy += params.gravity * 0.6 * dt;
@@ -74,10 +83,11 @@ export function createRenderer(canvas, view) {
     const m = match.state;
     ctx.setTransform(view.dpr * view.scale, 0, 0, view.dpr * view.scale, -r.camX * view.scale * view.dpr, 0);
     drawCave(m.level, theme);
-    drawPads(m.level, t);
+    const approach = approachInfo(m.level, m.ship, params);
+    drawPads(m.level, t, approach);
     drawObstacles(m.level, theme, t);
     if (!m.practice) drawCrew(m, t, params);
-    drawShip(m.ship, params);
+    drawShip(m.ship, params, approach, t);
     drawParticles();
 
     ctx.setTransform(view.dpr, 0, 0, view.dpr, 0, 0);
@@ -136,16 +146,23 @@ export function createRenderer(canvas, view) {
     // Paredes nas pontas da fase
     ctx.fillStyle = theme.terrainFill;
     if (x0 <= 0) {
-      ctx.fillRect(-80, -20, 80, WORLD_H + 40);
+      ctx.fillRect(-view.viewW - 80, -20, view.viewW + 80, WORLD_H + 40);
       ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, WORLD_H); ctx.stroke();
     }
     if (x1 >= lv.L - STEP) {
-      ctx.fillRect(lv.L, -20, 80, WORLD_H + 40);
+      ctx.fillRect(lv.L, -20, view.viewW + 80, WORLD_H + 40);
       ctx.beginPath(); ctx.moveTo(lv.L, 0); ctx.lineTo(lv.L, WORLD_H); ctx.stroke();
     }
   }
 
-  function drawPads(lv, t) {
+  // Aviso de pouso (#50): perto de uma plataforma, diz se a velocidade e a inclinação permitem pousar
+  function approachInfo(lv, s, params) {
+    if (s.state !== 'flying') return null;
+    const pad = lv.pads.find((p) => s.x >= p.x1 - 30 && s.x <= p.x2 + 30 && p.y - s.y > 0 && p.y - s.y < 170);
+    return pad ? { pad, safe: landingSafe(s, params) } : null;
+  }
+
+  function drawPads(lv, t, approach) {
     ctx.font = `700 11px ${FONT}`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'alphabetic';
@@ -159,9 +176,11 @@ export function createRenderer(canvas, view) {
       ctx.fillStyle = '#2a3348';
       ctx.fillRect(p.x1 + 6, p.y + 6, 4, 18);
       ctx.fillRect(p.x2 - 10, p.y + 6, 4, 18);
-      ctx.fillStyle = blink ? colors[0] : '#333a4a';
-      ctx.fillRect(p.x1 - 2, p.y - 4, 4, 4);
-      ctx.fillRect(p.x2 - 2, p.y - 4, 4, 4);
+      const near = approach?.pad === p;
+      ctx.fillStyle = near ? (approach.safe ? '#7dffb0' : '#ff5d5d') : blink ? colors[0] : '#333a4a';
+      const lamp = near ? 7 : 4;
+      ctx.fillRect(p.x1 - lamp / 2, p.y - lamp, lamp, lamp);
+      ctx.fillRect(p.x2 - lamp / 2, p.y - lamp, lamp, lamp);
       ctx.fillStyle = colors[0];
       ctx.fillText(PAD_LABELS[p.kind], (p.x1 + p.x2) / 2, p.y - 32);
       if (p.kind === 'base') {
@@ -231,8 +250,17 @@ export function createRenderer(canvas, view) {
     }
   }
 
-  function drawShip(s, params) {
+  function drawShip(s, params, approach, t) {
     if (s.state === 'exploding') return;
+    if (approach) {
+      // Halo em volta da nave: verde = pode pousar; vermelho = rápido ou inclinado demais
+      const pulse = 0.55 + 0.45 * Math.sin(t * (approach.safe ? 6 : 14));
+      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = approach.safe ? `rgba(125,255,176,${pulse.toFixed(2)})` : `rgba(255,93,93,${pulse.toFixed(2)})`;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, 19, 0, Math.PI * 2);
+      ctx.stroke();
+    }
     ctx.save();
     ctx.translate(s.x, s.y);
     ctx.rotate(s.a);
