@@ -227,6 +227,15 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **Dados de teste:** duas entradas (TESTE e BROWSER) ficaram numa fase falsa, `scores/teste_abc1`, que não aparece no jogo. Não foram apagadas porque apagar dados é com o Fernando (pelo console do Firebase, aba Dados), e as regras proíbem apagar pela internet.
 - 69 testes automáticos.
 
+### 02/10/2026 — Revisão do ranking antes dos playtesters
+
+- **Bug evitado:** as fases fixas rodavam o piloto automático no aparelho de cada jogador para calcular o tanque. Navegadores diferentes (Safari e Chrome) podem arredondar seno e cosseno de jeitos levemente diferentes, e numa simulação longa isso poderia mudar o tanque ou até trocar o cenário num aparelho e não no outro, misturando tempos de fases diferentes no mesmo ranking. **Correção:** o tanque das fases fixas foi calculado uma vez e gravado (); o jogo não roda mais o piloto nelas (a fase abre em 2 ms). Um teste confere que o cenário rápido é idêntico ao provado pelo piloto. Só a BONUS, sorteada, ainda roda o piloto no aparelho.
+- **Fila sem internet:** os tempos também são reenviados quando a internet volta e ao abrir o RANKING (antes, só ao reabrir o jogo).
+- **Aviso NEW BEST** só aparece na tela de resultado da fase certa, mesmo se a rede demorar.
+- **Tela de nickname** com BACK (volta ao menu ou a Settings).
+- **Chaves dos rankings** (mudam se a fase mudar): w1-1_1ariu3i, w1-2_1wyelcg, w1-3_a8xzz6, além da PRACTICE e da BONUS.
+- 70 testes. Conferido no site público: ranking online, vazio, pronto para os playtesters.
+
 ## Aprendizados de produto
 
 - Separar o objetivo do projeto (portfólio) do objetivo do produto (o jogador), com uma regra de desempate: quando os dois brigam, o jogador vence.
