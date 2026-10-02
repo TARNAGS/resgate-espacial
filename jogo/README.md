@@ -24,6 +24,7 @@ Os módulos do navegador não abrem com dois cliques no `index.html` (`file://`)
 | `src/core/scoring.js` | Pontuação: hoje só o tempo | P-006 é decidida |
 | `src/platform/storage.js` | O que fica salvo no aparelho e onde | P-016 é decidida, ou o jogo vai para as lojas (#65) |
 | `src/platform/audio.js` | Efeitos sonoros | A pesquisa de som no iPhone (#57) volta |
+| `src/platform/music.js` e `src/content/songs.js` | Motor de música chiptune (Web Audio, sem arquivos) e as partituras | Uma música nova ou mudança na da abertura |
 | `src/input/` | Teclado, direcional virtual e a junção dos dois | A variante final do direcional é escolhida (#44) |
 | `src/render/` | Desenho no Canvas | A identidade visual chega (E-19) |
 | `src/ui/` | Menu, mapa de progresso, avisos e painel de ajuste | — |

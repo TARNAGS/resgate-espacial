@@ -7,6 +7,7 @@ import { LEVELS, CHALLENGES, TRAINING_LEVEL, findLevel } from '../src/content/wo
 import { effectiveParams } from '../src/content/modifiers.js';
 import { generateLevel, validateLevel } from '../src/core/generator.js';
 import { bestRunInputs } from '../src/core/autopilot.js';
+import { INTRO_SONG, CHORDS } from '../src/content/songs.js';
 import { createShip, fly, steer, landingForecast } from '../src/core/ship.js';
 import { createMatch } from '../src/core/match.js';
 import { createEvents } from '../src/core/events.js';
@@ -404,6 +405,22 @@ test('desafios ficam sempre liberados e não têm "próximo nível"', () => {
   assert.ok(isUnlocked(save, practice));
   assert.equal(nextLevel('practice'), null);
   assert.equal(nextLevel(LEVELS[0].key).key, LEVELS[1].key);
+});
+
+// ===== Música =====
+test('#76 a partitura da abertura é válida: acordes conhecidos, notas dentro dos compassos', () => {
+  assert.equal(INTRO_SONG.sections.length, 3);   // uma parte por tela: mistério, chamado, "vamos lá!"
+  for (const sec of INTRO_SONG.sections) {
+    const bars = sec.chords.length;
+    for (const key of ['bass', 'arp', 'drums']) assert.equal(sec[key].length, bars, `${sec.name}: ${key}`);
+    for (const c of sec.chords) assert.ok(CHORDS[c], `acorde desconhecido: ${c}`);
+    for (const [b, st, m, len] of [...sec.lead, ...(sec.harmony || [])]) {
+      assert.ok(b >= 0 && b < bars && st >= 0 && st < 16 && len > 0, `${sec.name}: nota fora do compasso`);
+      assert.ok(m >= 36 && m <= 96, `${sec.name}: nota fora da extensão (${m})`);
+    }
+  }
+  assert.equal(INTRO_SONG.sections[2].loop, false);   // o final toca uma vez só e termina
+  assert.equal(INTRO_SONG.sections[2].chords.at(-1), 'C');   // termina em dó maior: "vamos lá!"
 });
 
 // ===== Resultado =====

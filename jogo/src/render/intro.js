@@ -22,10 +22,11 @@ const SCENES = [
 
 export function createIntro(canvas, view) {
   const ctx = canvas.getContext('2d');
-  const it = { active: false, scene: 0, t: 0, typed: 0, doneT: 0, onDone: null, smoke: [], beeps: [] };
+  const it = { active: false, scene: 0, t: 0, typed: 0, doneT: 0, onDone: null, onScene: null, smoke: [], beeps: [] };
 
-  it.start = ({ onDone }) => {
-    Object.assign(it, { active: true, scene: 0, onDone, smoke: [] });
+  // onScene(i) avisa a troca de tela (a música acompanha); onDone, o fim ou o SKIP
+  it.start = ({ onDone, onScene }) => {
+    Object.assign(it, { active: true, scene: 0, onDone, onScene, smoke: [] });
     enter(0);
   };
 
@@ -35,6 +36,7 @@ export function createIntro(canvas, view) {
     it.typed = 0;
     it.doneT = 0;
     playSound(SCENES[i].sound);
+    it.onScene?.(i);
   }
 
   function finish() {
@@ -120,7 +122,7 @@ export function createIntro(canvas, view) {
     }
   }
 
-  // SOS em código Morse, baixinho, na tela 1; bipes de rádio na tela 2
+  // SOS em código Morse, baixinho, na tela 1; bipes de rádio na tela 2. Em lá, o tom da música
   function playSound(kind) {
     it.beeps.forEach(clearTimeout);
     it.beeps = [];
@@ -128,7 +130,7 @@ export function createIntro(canvas, view) {
     const seq = kind === 'sos' ? [0, 0, 0, 1, 1, 1, 0, 0, 0] : [0, 0, 1];
     let at = 400;
     for (const long of seq) {
-      it.beeps.push(setTimeout(() => Sound.tone(kind === 'sos' ? 740 : 980, long ? 0.22 : 0.08, 'square', 0.025), at));
+      it.beeps.push(setTimeout(() => Sound.tone(880, long ? 0.22 : 0.08, 'square', 0.018), at));
       at += long ? 330 : 170;
     }
   }

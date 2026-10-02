@@ -166,6 +166,11 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
   - tela 3: a nave decola e a tela escurece até a fase.
 - **Como funciona:** os textos aparecem letra por letra; tocar completa o texto ou avança; SKIP (ou Esc) pula tudo. Ela aparece sozinha só no primeiro PLAY e pode ser revista em Settings → WATCH INTRO, ou com `?intro` no endereço.
 - **Na regra (documento 02, seção 10.1):** "dá para pular" passou a Definido; o resto segue em Proposta.
+- **Música da abertura**, a pedido do Fernando (aventura, mistério e, no fim, "vamos lá!"):
+  - chiptune de estilo 16 bits, sintetizada no navegador, sem arquivos de áudio: ondas de pulso, baixo em onda triangular, bateria de ruído e eco curto;
+  - três partes que acompanham as telas: mistério em lá menor (Am, F, Dm, E), aventura com bateria (F, G, E, Am) e o final em dó maior (F, G, C), com subida rápida, rufar de caixa e prato;
+  - o SKIP pula direto para o final, que termina sozinho uns 8 segundos depois;
+  - o motor fica em `jogo/src/platform/music.js` e a partitura em `jogo/src/content/songs.js`, para dar para ajustar notas e acordes sem mexer no motor.
 
 ## Aprendizados de produto
 

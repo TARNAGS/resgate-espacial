@@ -16,6 +16,8 @@ import { createScreens } from './ui/screens.js';
 import { renderMap } from './ui/map.js';
 import { createTuning } from './ui/tuning.js';
 import { createIntro } from './render/intro.js';
+import { createMusic } from './platform/music.js';
+import { INTRO_SONG } from './content/songs.js';
 
 // Resgate Espacial — ponto de entrada. Liga as partes: regras (core), conteúdo (content),
 // controles (input), desenho (render), telas (ui) e aparelho (platform).
@@ -204,14 +206,19 @@ screens.el('btn-control').addEventListener('click', () => {
 
 // ===== Abertura (#76) =====
 const intro = createIntro(canvas, view);
+const music = createMusic();
 
-// Mostra a abertura e, no fim (ou no SKIP), segue para `then`
+// Mostra a abertura e, no fim (ou no SKIP), segue para `then`. A música acompanha as telas:
+// mistério na tela 1, aventura na tela 2 e o final "vamos lá!" na decolagem ou no SKIP.
 function playIntro(then) {
   app.screen = 'intro';
   screens.show('intro');
   joystick.reset();
+  music.play(INTRO_SONG);
   intro.start({
+    onScene: (i) => music.goTo(i, { quantize: i === 2 ? 'beat' : 'bar' }),
     onDone() {
+      music.goTo(2, { quantize: 'beat' });
       app.save.seen = { ...app.save.seen, intro: true };
       writeSave(app.save);
       then();
@@ -377,7 +384,7 @@ const start = new URLSearchParams(location.search).get('level');
 if (start && tuning.enabled && findLevel(start)) startLevel(findLevel(start));
 
 // Acesso para testes automáticos no navegador
-window.__game = { app, PARAMS, LEVELS, startLevel, events, keyboard, joystick, renderer, intro, playIntro };
+window.__game = { app, PARAMS, LEVELS, startLevel, events, keyboard, joystick, renderer, intro, playIntro, music };
 
 // ?intro no endereço mostra a abertura ao abrir o jogo (para rever e testar)
 if (new URLSearchParams(location.search).has('intro')) playIntro(toMenu);
