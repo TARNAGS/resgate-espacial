@@ -82,7 +82,7 @@ export function createRenderer(canvas, view) {
 
     const m = match.state;
     ctx.setTransform(view.dpr * view.scale, 0, 0, view.dpr * view.scale, -r.camX * view.scale * view.dpr, 0);
-    drawCave(m.level, theme);
+    drawCave(m.level, theme, t);
     const approach = approachInfo(m, params);
     drawPads(m.level, t, approach);
     drawObstacles(m.level, theme, t);
@@ -108,51 +108,79 @@ export function createRenderer(canvas, view) {
     }
   }
 
+  // Altura do terreno no ponto i. Fora da fase (i < 0 ou i >= n), o terreno continua só como
+  // cenário, a partir da altura da ponta, com um relevo suave e fixo (sem colisão).
+  function terrainAt(arr, i) {
+    if (i >= 0 && i < arr.length) return arr[i];
+    const edge = i < 0 ? arr[0] : arr[arr.length - 1];
+    const k = i < 0 ? -i : i - arr.length + 1;
+    const fade = Math.min(1, k / 6);   // começa igual à ponta e ganha relevo aos poucos
+    return edge + fade * (16 * Math.sin(k * 0.33) + 9 * Math.sin(k * 0.87 + 1.3));
+  }
+
   function strokeLine(arr, i0, i1, dy) {
     ctx.beginPath();
     for (let i = i0; i <= i1; i++) {
-      if (i === i0) ctx.moveTo(i * STEP, arr[i] + dy);
-      else ctx.lineTo(i * STEP, arr[i] + dy);
+      if (i === i0) ctx.moveTo(i * STEP, terrainAt(arr, i) + dy);
+      else ctx.lineTo(i * STEP, terrainAt(arr, i) + dy);
     }
     ctx.stroke();
   }
 
-  function drawCave(lv, theme) {
-    const i0 = Math.max(0, Math.floor(r.camX / STEP) - 1);
-    const i1 = Math.min(lv.n - 1, Math.ceil((r.camX + view.viewW) / STEP) + 1);
-    const x0 = i0 * STEP, x1 = i1 * STEP;
+  function fillTerrain(arr, i0, i1, edgeY) {
+    ctx.beginPath();
+    ctx.moveTo(i0 * STEP, edgeY);
+    for (let i = i0; i <= i1; i++) ctx.lineTo(i * STEP, terrainAt(arr, i));
+    ctx.lineTo(i1 * STEP, edgeY);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  function drawCave(lv, theme, t) {
+    const i0 = Math.floor(r.camX / STEP) - 1;
+    const i1 = Math.ceil((r.camX + view.viewW) / STEP) + 1;
     ctx.fillStyle = theme.terrainFill;
-    ctx.beginPath();
-    ctx.moveTo(x0, -20);
-    for (let i = i0; i <= i1; i++) ctx.lineTo(i * STEP, lv.ceil[i]);
-    ctx.lineTo(x1, -20);
-    ctx.closePath();
-    ctx.fill();
-    ctx.beginPath();
-    ctx.moveTo(x0, WORLD_H + 20);
-    for (let i = i0; i <= i1; i++) ctx.lineTo(i * STEP, lv.floor[i]);
-    ctx.lineTo(x1, WORLD_H + 20);
-    ctx.closePath();
-    ctx.fill();
+    fillTerrain(lv.ceil, i0, i1, -20);
+    fillTerrain(lv.floor, i0, i1, WORLD_H + 20);
     ctx.lineJoin = 'round';
-    ctx.lineWidth = 2;
+    // Dentro da fase: contorno forte. Fora: o mesmo terreno, apagado, como fundo.
+    const inside = [Math.max(0, i0), Math.min(lv.n - 1, i1)];
+    const parts = [[i0, Math.min(i1, 0), 0.32], [inside[0], inside[1], 1], [Math.max(i0, lv.n - 1), i1, 0.32]];
+    for (const [a, b, alpha] of parts) {
+      if (b <= a) continue;
+      ctx.globalAlpha = alpha;
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = theme.terrainGlow;
+      strokeLine(lv.ceil, a, b, -9);
+      strokeLine(lv.floor, a, b, 9);
+      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = theme.terrain;
+      strokeLine(lv.ceil, a, b, 0);
+      strokeLine(lv.floor, a, b, 0);
+    }
+    ctx.globalAlpha = 1;
+    // Fora da fase, um véu escurece o cenário; na ponta, uma barreira de energia marca o limite
+    ctx.fillStyle = 'rgba(3,5,10,0.45)';
+    if (r.camX < 0) ctx.fillRect(r.camX - 10, -20, -r.camX + 10, WORLD_H + 40);
+    if (r.camX + view.viewW > lv.L) ctx.fillRect(lv.L, -20, r.camX + view.viewW - lv.L + 10, WORLD_H + 40);
+    if (i0 <= 0) drawBarrier(0, lv.ceil[0], lv.floor[0], theme, t);
+    if (i1 >= lv.n - 1) drawBarrier(lv.L, lv.ceil[lv.n - 1], lv.floor[lv.n - 1], theme, t);
+  }
+
+  // Barreira de energia: linha tracejada que corre devagar, com brilho suave
+  function drawBarrier(x, top, bottom, theme, t) {
+    ctx.save();
+    ctx.lineCap = 'round';
     ctx.strokeStyle = theme.terrainGlow;
-    strokeLine(lv.ceil, i0, i1, -9);
-    strokeLine(lv.floor, i0, i1, 9);
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = 8;
+    ctx.beginPath(); ctx.moveTo(x, top); ctx.lineTo(x, bottom); ctx.stroke();
     ctx.strokeStyle = theme.terrain;
-    strokeLine(lv.ceil, i0, i1, 0);
-    strokeLine(lv.floor, i0, i1, 0);
-    // Paredes nas pontas da fase
-    ctx.fillStyle = theme.terrainFill;
-    if (x0 <= 0) {
-      ctx.fillRect(-view.viewW - 80, -20, view.viewW + 80, WORLD_H + 40);
-      ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, WORLD_H); ctx.stroke();
-    }
-    if (x1 >= lv.L - STEP) {
-      ctx.fillRect(lv.L, -20, view.viewW + 80, WORLD_H + 40);
-      ctx.beginPath(); ctx.moveTo(lv.L, 0); ctx.lineTo(lv.L, WORLD_H); ctx.stroke();
-    }
+    ctx.globalAlpha = 0.55 + 0.25 * Math.sin(t * 2);
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([10, 8]);
+    ctx.lineDashOffset = -t * 18;
+    ctx.beginPath(); ctx.moveTo(x, top); ctx.lineTo(x, bottom); ctx.stroke();
+    ctx.restore();
   }
 
   // Aviso de pouso (#50). Perto de uma plataforma, as luzes dela dizem se dá para pousar.
@@ -366,7 +394,8 @@ export function createRenderer(canvas, view) {
       ctx.textAlign = 'right';
       ctx.font = `700 16px ${FONT}`;
       ctx.fillStyle = '#e8f1ff';
-      ctx.fillText(fmtTime(m.timer), view.cssW - 66 - view.safe.right, top + 6);
+      // o cronômetro fica à esquerda dos botões da tela (pausa e, nas sessões de teste, o T)
+      ctx.fillText(fmtTime(m.timer), view.cssW - 22 - 48 * scene.buttons.length - view.safe.right, top + 6);
     }
 
     ctx.textAlign = 'left';

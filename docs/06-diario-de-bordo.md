@@ -112,6 +112,8 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
   - O halo e a nave verde aparecem só na descida para uma plataforma, não mais na decolagem. As luzes da plataforma, aprovadas, ficaram como estavam.
   - O halo ficou quase imperceptível (fino, transparente e pulsando devagar): uma sugestão, não um aviso obrigatório.
   - O verde agora é uma promessa. Antes, ele olhava a velocidade do momento, mas a gravidade continuava acelerando a nave até o toque, então dava para ficar verde e explodir. Agora ele prevê a velocidade e o ponto de toque se o jogador soltar os controles. Um teste com 2.000 descidas sorteadas confere que nenhum verde termina em explosão.
+- **Pontas da fase mais bonitas:** além da base e da tripulação, a caverna continua só como cenário, apagada e sem colisão, e uma barreira de energia tracejada marca o limite. Antes era um bloco liso e vazio. O cronômetro também saiu de baixo do botão T do painel de ajuste.
+- **Gravidade no PC e no celular:** o valor é o mesmo (55). A diferença de sensação vem do controle: no toque, o mesmo dedo aponta e acelera, então não dá para virar a nave sem acionar o propulsor. As opções foram levadas ao Fernando.
 
 ## Aprendizados de produto
 
