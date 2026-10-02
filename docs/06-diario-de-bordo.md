@@ -8,25 +8,27 @@
 
 Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e de onde o projeto parou. É o ponto de partida para retomar o trabalho, em qualquer máquina.
 
-## Onde paramos (02/10/2026)
+## Onde paramos (02/10/2026, fim do dia)
 
-- **Jogo de verdade em construção** em [`jogo/`](../jogo/README.md), a partir do protótipo 01. As histórias e tarefas do M1 (#32 a #42) estão em "Em revisão": falta o Fernando testar no iPhone. Mundos, níveis, obstáculos e modificadores viraram dados, prontos para receber as definições de P-011 e P-012.
-- **Novo objetivo:** portfólio e renda, nas lojas da Apple e do Google (#63). A pesquisa técnica das lojas é a #65, com o Claude.
-- **Marco atual: M0 — Fundação, só falta a retrospectiva** ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)). As três decisões do M0 estão tomadas (D-011, D-012 e D-013), o jogo foi publicado no GitHub Pages ([#30](https://github.com/TARNAGS/resgate-espacial/issues/30)) e o Fernando o testou no iPhone ([#31](https://github.com/TARNAGS/resgate-espacial/issues/31), concluída).
-- **Repositório e quadro privados (D-017).** O jogo só fica no ar durante as janelas de teste; o passo a passo está no `CLAUDE.md` do projeto. Fora delas, o protótipo roda na rede de casa.
-- **Protótipo 01 pronto** ([`prototipos/`](../prototipos/README.md)): menu com mapa de progresso, fases geradas aleatoriamente, física da nave, direcional virtual e todas as regras do documento 02. O primeiro teste no iPhone foi bom, e o Fernando tem retorno para trazer.
-- **Pendências abertas:** P-003 (nome final), P-006 (pontuação), P-008 (ferramenta de medição), P-009 (tutorial e fase 1), P-010 (tentar de novo repete o cenário?), P-011 (obstáculos, mundo e fase), P-012 (modificadores), P-013 (ICP), P-014 (preço e publicação), P-015 (como receber dinheiro e CNPJ) e P-016 (o que o jogo guarda e onde). Cada uma tem um cartão de descoberta no quadro.
-- **Quadro com trilha de descoberta (D-016).** O que o Fernando precisa pesquisar e trazer pronto está na coluna "A investigar", em ordem de prioridade, e na visualização "Minha fila". A coluna "Para conversar" é a primeira coisa a olhar em cada sessão.
+- **Objetivo do projeto:** portfólio e renda. A ideia é publicar na App Store e no Google Play, com compras dentro do jogo ou venda do jogo, ainda em aberto ([#63](https://github.com/TARNAGS/resgate-espacial/issues/63)). A pesquisa técnica das lojas é a [#65](https://github.com/TARNAGS/resgate-espacial/issues/65), com o Claude.
+- **Marcos:** M0 só falta a retrospectiva ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)). M1 em andamento: física, propulsor, embalo, parâmetros, teclado e direcional concluídos (#32 a #34 e #36 a #38). Em revisão, aguardando o Fernando conferir: treino ([#35](https://github.com/TARNAGS/resgate-espacial/issues/35)), área do direcional ([#39](https://github.com/TARNAGS/resgate-espacial/issues/39)), toque sem zoom ([#40](https://github.com/TARNAGS/resgate-espacial/issues/40)), roteiro de teste ([#41](https://github.com/TARNAGS/resgate-espacial/issues/41)) e painel de ajuste ([#42](https://github.com/TARNAGS/resgate-espacial/issues/42)).
+- **O jogo** fica em [`jogo/`](../jogo/README.md), construído a partir do protótipo 01 (#51). Já tem:
+  - níveis 1 a 3 e o desafio PRACTICE, a fase mais difícil (#68);
+  - a regra do melhor caminho, com um piloto automático que prova a corrida sem abastecer de cada cenário (D-018, #67);
+  - aviso de pouso que nunca fica verde num pouso que vai explodir;
+  - dois controles de toque para comparar: A, tocar e segurar, e C, dois polegares, com a câmera mantendo a nave longe dos dedos (o B foi descartado);
+  - treino (TRAINING), painel de ajuste escondido e 50 testes automáticos.
+- **Como testar:** no PC, `node jogo/servir.js` e http://localhost:8081; no iPhone, no mesmo Wi-Fi, `http://<IP do computador>:8081`. Um beta tester de fora precisa de um endereço público: as opções (janela de teste, Netlify ou Cloudflare Pages, túnel) foram apresentadas, e o Fernando preferiu deixar para depois.
+- **Repositório e quadro privados (D-017).**
+- **Pendências abertas:** P-003 (nome final), P-006 (pontuação), P-008 (medição), P-009 (tutorial), P-010 (tentar de novo repete o cenário?), P-011 (obstáculos, mundo e fase), P-012 (modificadores), P-013 (ICP), P-014 (preço e publicação), P-015 (como receber e CNPJ) e P-016 (o que o jogo guarda). Cada uma tem um cartão na coluna "A investigar".
 
 ### Próximos passos
 
-1. O Fernando joga a pasta `jogo/` no iPhone e revisa os cartões em "Em revisão" (#32 a #42). Pelo painel de ajuste, dá para calibrar na hora e copiar os valores.
-2. O Fernando escolhe a velocidade de giro no toque ([#66](https://github.com/TARNAGS/resgate-espacial/issues/66)) e confere no iPhone as correções do retorno do primeiro teste (#50).
-3. Retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)), para fechar o marco.
-4. Decisões rápidas do Fernando: protótipo 01 como base do M1 ([#51](https://github.com/TARNAGS/resgate-espacial/issues/51); a recomendação é que sim), P-009 ([#48](https://github.com/TARNAGS/resgate-espacial/issues/48)) e P-010 ([#49](https://github.com/TARNAGS/resgate-espacial/issues/49)).
-5. As outras descobertas da coluna "A investigar", na ordem do quadro.
-6. M1: roteiro de teste ([#41](https://github.com/TARNAGS/resgate-espacial/issues/41)), testes com 3 a 5 pessoas ([#43](https://github.com/TARNAGS/resgate-espacial/issues/43)), calibragem ([#36](https://github.com/TARNAGS/resgate-espacial/issues/36) e [#42](https://github.com/TARNAGS/resgate-espacial/issues/42)) e variante final do direcional ([#44](https://github.com/TARNAGS/resgate-espacial/issues/44)).
-7. Pesquisas do Claude, para quando o M2 se aproximar: ferramenta de medição ([#56](https://github.com/TARNAGS/resgate-espacial/issues/56)) e som no iPhone ([#57](https://github.com/TARNAGS/resgate-espacial/issues/57)).
+1. **Novos testes do Fernando** com o que existe hoje: controles A e C, aviso de pouso, PRACTICE e a regra do melhor caminho (sobrou combustível demais ou de menos na corrida perfeita?). Conferir também os cartões em revisão (#35, #40, #41 e #42).
+2. Escolher a velocidade de giro no toque ([#66](https://github.com/TARNAGS/resgate-espacial/issues/66)) e, depois do teste com pessoas, o controle final, A ou C ([#44](https://github.com/TARNAGS/resgate-espacial/issues/44)).
+3. Retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)).
+4. Testes com 3 a 5 pessoas ([#43](https://github.com/TARNAGS/resgate-espacial/issues/43)), com o roteiro do documento 07. Para quem está fora de casa, escolher como publicar o jogo (janela de teste ou hospedagem que publica só a pasta `jogo/`).
+5. Descobertas da coluna "A investigar", na ordem do quadro: pagamento e lojas (#63 e #65), ICP (#59) e risco de plágio (#52) primeiro.
 
 ## Sessões
 

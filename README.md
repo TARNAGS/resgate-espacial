@@ -4,15 +4,15 @@
 
 Jogo 2D de nave com gravidade: pilote um pequeno triângulo, dose o propulsor contra o peso da nave, atravesse os obstáculos, resgate a tripulação perdida no espaço e volte para a base antes de o combustível acabar.
 
-**Status:** documentação base aprovada em 01/10/2026 e backlog montado. Marcos atuais: M0 (só falta a retrospectiva) e M1 (protótipo de controle). O jogo está em construção na pasta [`jogo/`](jogo/README.md), com as histórias do M1 prontas para testar no iPhone.
+**Status:** documentação base aprovada em 01/10/2026 e backlog montado. Marcos atuais: M0 (só falta a retrospectiva) e M1 (protótipo de controle, em testes). O jogo está em construção na pasta [`jogo/`](jogo/README.md): níveis 1 a 3, o desafio PRACTICE e a regra do melhor caminho (D-018).
 
 ## Sobre o projeto
 
 Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável, levado da ideia ao lançamento, com documentação, backlog e construção com apoio de IA (Claude Code).
 
-- **Plataformas:** navegador e celular, instalável direto do site, sem loja. iPhone primeiro; Android numa etapa seguinte.
+- **Plataformas:** navegador e celular, iPhone primeiro. A publicação na App Store e no Google Play está em estudo ([#63](https://github.com/TARNAGS/resgate-espacial/issues/63) e [#65](https://github.com/TARNAGS/resgate-espacial/issues/65)), o que revisaria a D-002 (fora das lojas).
 - **Idioma do jogo:** inglês.
-- **Modelo:** gratuito, sem cadastro e sem anúncios.
+- **Modelo:** sem cadastro e sem anúncios. Hoje é gratuito; cobrar pelo jogo ou por compras dentro dele está em estudo (P-014), o que revisaria a D-003.
 - **Tecnologia:** JavaScript puro com Canvas, sem framework.
 - **Fases:** geradas aleatoriamente a cada partida, para o replay ser infinito, com um mapa de progresso no menu.
 
