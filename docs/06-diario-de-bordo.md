@@ -25,6 +25,7 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 
 ### Próximos passos
 
+0. **Construir as decisões do teste com amigos** (D-021 a D-023), na ordem das histórias [#82](https://github.com/TARNAGS/resgate-espacial/issues/82), [#83](https://github.com/TARNAGS/resgate-espacial/issues/83), [#84](https://github.com/TARNAGS/resgate-espacial/issues/84), [#85](https://github.com/TARNAGS/resgate-espacial/issues/85) e [#86](https://github.com/TARNAGS/resgate-espacial/issues/86). Elas estão em "Pronto", com o Claude.
 1. **Novos testes do Fernando** com o que existe hoje: controles A e C, aviso de pouso, PRACTICE e a regra do melhor caminho (sobrou combustível demais ou de menos na corrida perfeita?). Conferir também os cartões em revisão (#35, #40, #41 e #42).
 2. Escolher a velocidade de giro no toque ([#66](https://github.com/TARNAGS/resgate-espacial/issues/66)) e, depois do teste com pessoas, o controle final, A ou C ([#44](https://github.com/TARNAGS/resgate-espacial/issues/44)).
 3. Retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)).
@@ -186,6 +187,16 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
   - **Modo Nightmare (P-018, [#79](https://github.com/TARNAGS/resgate-espacial/issues/79)):** morrer não devolve o combustível. Catch: a nave reaparece pousada na base, que abastece; o modo precisa dizer o que acontece com a base e o posto.
   - **Elogios na tela ([#81](https://github.com/TARNAGS/resgate-espacial/issues/81), história no E-10, M2):** "CLOSE CALL!" ao passar raspando de um obstáculo, "GREAT SAVE!" ao frear no limite antes de bater, além de pouso perfeito e corrida perfeita. Critérios em Proposta; falta decidir se o elogio também dá pontos ou moedas. **Construído no mesmo dia**, a pedido do Fernando, discreto (texto pequeno verde perto da nave, que sobe e some) e com uma nota só por elogio (`jogo/src/core/praise.js`). A corrida perfeita também aparece na tela de resultado. Limites no painel de ajuste ("Praise: ...").
   - **Ranking de tempos (P-019, [#80](https://github.com/TARNAGS/resgate-espacial/issues/80)):** catches: sem login nem servidor (D-001), cenários sorteados tornam tempos incomparáveis (D-014) e tempos falsos são fáceis de mandar. Saídas propostas: rankings do Game Center e do Google Play Games, e um desafio do dia com a mesma semente para todos.
+
+### 02/10/2026 — Decisões do teste com amigos, para construir depois
+
+- **Contexto:** os créditos do Fernando estavam acabando; tudo foi registrado como decisão e história, sem construir.
+- **D-021:** fases com cenário fixo, iguais para todos (os jogadores gostaram de comparar tempos); fase **BONUS** nova, sorteada a cada partida.
+- **D-022:** o controle de dois polegares vira o principal (**A**); o de um polegar vira a opção **B**. Fecha a #44.
+- **D-023:** nas fases com posto, abastecer pelo menos uma vez é obrigatório (na ida ou na volta). Revê a D-018.
+- **Dificuldade:** com o controle novo, o jogo ficou mais fácil; subir um pouco os níveis 1 a 3 e mais a PRACTICE.
+- **Histórias em "Pronto", com o Claude, nesta ordem:** [#82](https://github.com/TARNAGS/resgate-espacial/issues/82) controle, [#83](https://github.com/TARNAGS/resgate-espacial/issues/83) abastecer obrigatório, [#84](https://github.com/TARNAGS/resgate-espacial/issues/84) fases fixas, [#85](https://github.com/TARNAGS/resgate-espacial/issues/85) dificuldade (depende das três anteriores) e [#86](https://github.com/TARNAGS/resgate-espacial/issues/86) fase BONUS.
+- **Documentos 01 a 04 ainda não foram atualizados** com essas decisões; cada história lista o que atualizar.
 
 ## Aprendizados de produto
 

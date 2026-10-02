@@ -25,13 +25,16 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-011 | Tecnologia: JavaScript puro com Canvas | 01/10/2026 | Aceita |
 | D-012 | Repositório e quadro públicos, sem expor o e-mail pessoal | 01/10/2026 | Visibilidade substituída pela D-017; o e-mail noreply continua |
 | D-013 | Hospedagem: GitHub Pages | 01/10/2026 | Aceita, só nas janelas de teste (D-017) |
-| D-014 | Fases geradas aleatoriamente (procedurais) | 01/10/2026 | Aceita |
+| D-014 | Fases geradas aleatoriamente (procedurais) | 01/10/2026 | Revista pela D-021: só a fase BONUS continua sorteada |
 | D-015 | Menu com Jogar, Configurações e mapa de progresso | 01/10/2026 | Aceita |
 | D-016 | Quadro com duas trilhas: descoberta e entrega | 01/10/2026 | Aceita |
 | D-017 | Repositório e quadro privados; o jogo só fica no ar nas janelas de teste | 01/10/2026 | Aceita |
-| D-018 | Regra do melhor caminho: toda fase com posto pode ser concluída sem abastecer | 02/10/2026 | Aceita |
+| D-018 | Regra do melhor caminho: toda fase com posto pode ser concluída sem abastecer | 02/10/2026 | Revista pela D-023: abastecer passa a ser obrigatório uma vez |
 | D-019 | O jogo será publicado na App Store e no Google Play | 02/10/2026 | Aceita |
 | D-020 | Big picture: mundos com 10 fases, cada um com identidade visual própria | 02/10/2026 | Aceita; o MVP segue com 3 fases (D-009) |
+| D-021 | Fases com cenário fixo, iguais para todos; só a fase BONUS é sorteada | 02/10/2026 | Aceita; a construir ([#84](https://github.com/TARNAGS/resgate-espacial/issues/84) e [#86](https://github.com/TARNAGS/resgate-espacial/issues/86)) |
+| D-022 | Controle principal: dois polegares (novo A); o de um polegar vira a opção B | 02/10/2026 | Aceita; a construir ([#82](https://github.com/TARNAGS/resgate-espacial/issues/82)) |
+| D-023 | Nas fases com posto, abastecer pelo menos uma vez é obrigatório | 02/10/2026 | Aceita; a construir ([#83](https://github.com/TARNAGS/resgate-espacial/issues/83)) |
 
 ## D-001 — Sem login e sem contas
 
@@ -407,6 +410,18 @@ Junto com as trilhas, entraram:
 - Desafios fora da sequência, como a PRACTICE, continuam existindo à parte.
 
 **Revisitar se** os testes mostrarem que 10 fases por mundo ficam repetitivas, ou que o custo de arte de cada mundo é alto demais para uma pessoa.
+
+## D-021, D-022 e D-023 — Mudanças depois do teste com amigos
+
+**Contexto.** Em 02/10/2026, depois de amigos testarem o jogo publicado, o Fernando trouxe três mudanças. Os créditos dele estavam no fim, então elas foram registradas como decisões e histórias, para construir depois.
+
+**D-021 — Fases com cenário fixo.** Os jogadores gostaram de comparar tempos entre eles, num ranking de quem foi mais rápido. Com cenário sorteado (D-014), os tempos não são comparáveis. **Decisão:** os níveis da sequência e a PRACTICE passam a ter um cenário fixo, o mesmo para todos. Uma fase nova, **BONUS**, continua sorteada a cada partida, para o replay infinito. Consequências: revê a D-014; resolve a P-010 (tentar de novo repete o cenário); abre caminho para o ranking (P-019). Histórias [#84](https://github.com/TARNAGS/resgate-espacial/issues/84) e [#86](https://github.com/TARNAGS/resgate-espacial/issues/86).
+
+**D-022 — Controle principal de dois polegares.** No teste, o controle de dois polegares (até então "C") foi o preferido. **Decisão:** ele passa a se chamar **A** e é o padrão; o de um polegar (até então "A") vira a opção **B**. Consequências: fecha a escolha da variante do direcional (#44); o jogo ficou mais fácil, e a dificuldade das fases sobe ([#85](https://github.com/TARNAGS/resgate-espacial/issues/85)). História [#82](https://github.com/TARNAGS/resgate-espacial/issues/82).
+
+**D-023 — Abastecer pelo menos uma vez.** "Pelos testes, ficou fácil não precisar abastecer." **Decisão:** em fases com posto, concluir sem abastecer fica impossível, e concluir abastecendo uma vez, na ida ou na volta, fica possível. O tanque continua calculado pelo piloto automático. Consequências: revê a D-018; o elogio PERFECT RUN passa a ser "um só abastecimento e nenhuma vida perdida". História [#83](https://github.com/TARNAGS/resgate-espacial/issues/83).
+
+**Revisitar se** os próximos testes mostrarem que o ranking não importa tanto quanto o replay (D-021), ou que abastecer obrigatório deixou o jogo chato (D-023).
 
 ## Decisões pendentes
 
