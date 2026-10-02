@@ -32,7 +32,10 @@ export async function createTuning({ panel, onOpenChange, onPractice }) {
       let input;
       if (item.options) {
         input = document.createElement('select');
-        for (const o of item.options) input.add(new Option(o, o, false, PARAMS[item.key] === o));
+        for (const o of item.options) {
+          const [v, label] = Array.isArray(o) ? o : [o, o];
+          input.add(new Option(label, v, false, PARAMS[item.key] === v));
+        }
         value.textContent = '';
       } else {
         input = document.createElement('input');
@@ -78,6 +81,7 @@ export async function createTuning({ panel, onOpenChange, onPractice }) {
     panel.classList.toggle('hidden', !t.open);
     onOpenChange(t.open);
   };
-  t.isTuned = () => Object.keys(changedParams()).length > 0;
+  // O esquema do toque aparece à parte no rodapé ("control A/B/C"); não conta como ajuste
+  t.isTuned = () => Object.keys(changedParams()).some((k) => k !== 'touchScheme');
   return t;
 }

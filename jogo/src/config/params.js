@@ -17,6 +17,12 @@ export const DEFAULT_PARAMS = Object.freeze({
   lowFuel: 0.2,             // abaixo disso, aviso de combustível baixo
   lives: 3,
   // Direcional virtual (D-006). As variantes existem para o teste do M1 (#43 e #44) comparar.
+  // Esquema do toque (#44): no celular, como apontar e acelerar se combinam
+  //   'hold' (A): tocar acelera e arrastar aponta, com um polegar só (o original)
+  //   'aim'  (B): arrasto curto só aponta; o propulsor acende quando o dedo passa de aimThrustAt do anel
+  //   'twin' (C): dois polegares; o da esquerda aponta sem acelerar e o da direita aciona o propulsor
+  touchScheme: 'hold',
+  aimThrustAt: 0.5,         // B: fração do raio do anel a partir da qual o propulsor acende
   joystickMode: 'follow',   // 'follow': aparece onde o polegar tocar (#39); 'fixed': fixo no canto
   joystickArea: 1,          // fração da largura da tela, a partir da esquerda, que aceita o direcional;
                             // 1 = a tela inteira, como no protótipo testado (#50); a #39 propunha 0.5
@@ -41,6 +47,8 @@ export const TUNABLE = [
   { key: 'joystickRadius', label: 'Joystick size', min: 30, max: 110, step: 1 },
   { key: 'joystickDeadzone', label: 'Joystick dead zone', min: 0, max: 40, step: 1 },
   { key: 'joystickArea', label: 'Joystick area', min: 0.25, max: 1, step: 0.05 },
+  { key: 'touchScheme', label: 'Touch control', options: [['hold', 'A · hold'], ['aim', 'B · aim'], ['twin', 'C · two thumbs']] },
+  { key: 'aimThrustAt', label: 'B: thrust from ring %', min: 0.2, max: 0.9, step: 0.05 },
   { key: 'joystickMode', label: 'Joystick', options: ['follow', 'fixed'] },
 ];
 

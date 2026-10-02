@@ -9,7 +9,7 @@ import { generateLevel, validateLevel } from '../src/core/generator.js';
 import { createShip, fly, steer, landingForecast } from '../src/core/ship.js';
 import { createMatch } from '../src/core/match.js';
 import { createEvents } from '../src/core/events.js';
-import { readIntent } from '../src/input/controls.js';
+import { readIntent, touchThrust } from '../src/input/controls.js';
 import { emptySave } from '../src/platform/storage.js';
 import { isUnlocked, defaultLevel, recordCompletion, levelState } from '../src/core/progress.js';
 import { SHIP } from '../src/core/constants.js';
@@ -108,6 +108,32 @@ test('#38 a velocidade de giro até o dedo é um parâmetro de ajuste', () => {
   PARAMS.touchRotationSpeed = DEFAULT_PARAMS.touchRotationSpeed / 2;
   const b = airShip(); steer(b, right, p(), 0.05);
   assert.ok(Math.abs(b.a * 2 - a.a) < 1e-9);
+});
+
+test('#44 esquema B: arrasto curto só aponta; passar da linha do anel acende o propulsor', () => {
+  PARAMS.touchScheme = 'aim';
+  const R = PARAMS.joystickRadius;
+  const short = readIntent({}, { cx: 0, cy: 0, x: R * PARAMS.aimThrustAt - 5, y: 0 }, PARAMS);
+  const long = readIntent({}, { cx: 0, cy: 0, x: R * PARAMS.aimThrustAt + 5, y: 0 }, PARAMS);
+  const touch = readIntent({}, { cx: 0, cy: 0, x: 0, y: 0 }, PARAMS);
+  assert.equal(short.thrust, false); assert.ok(Math.abs(short.targetAngle - Math.PI / 2) < 1e-9);
+  assert.equal(long.thrust, true);
+  assert.equal(touch.thrust, false);
+});
+
+test('#44 esquema C: o polegar esquerdo só aponta; o direito acende o propulsor', () => {
+  PARAMS.touchScheme = 'twin';
+  const aimOnly = readIntent({}, { cx: 0, cy: 0, x: 60, y: 0 }, PARAMS, false);
+  const both = readIntent({}, { cx: 0, cy: 0, x: 60, y: 0 }, PARAMS, true);
+  assert.equal(aimOnly.thrust, false); assert.ok(aimOnly.targetAngle !== null);
+  assert.equal(both.thrust, true);
+  assert.equal(touchThrust(PARAMS, null, true), true);
+});
+
+test('#44 esquema A continua como antes: encostar já acelera', () => {
+  assert.equal(PARAMS.touchScheme, 'hold');
+  assert.equal(touchThrust(PARAMS, { cx: 0, cy: 0, x: 0, y: 0 }), true);
+  assert.equal(touchThrust(PARAMS, null, true), false);
 });
 
 // ===== Parâmetros e modificadores =====

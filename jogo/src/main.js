@@ -9,7 +9,7 @@ import { Sound, connectSound } from './platform/audio.js';
 import { loadSave, writeSave, emptySave } from './platform/storage.js';
 import { createKeyboard } from './input/keyboard.js';
 import { createJoystick } from './input/joystick.js';
-import { readIntent } from './input/controls.js';
+import { readIntent, touchThrust, TOUCH_HINTS, SCHEME_NAMES } from './input/controls.js';
 import { createView } from './render/view.js';
 import { createRenderer } from './render/renderer.js';
 import { createScreens } from './ui/screens.js';
@@ -78,6 +78,10 @@ const tuning = await createTuning({
   onPractice: () => startLevel(PRACTICE_LEVEL),
 });
 
+// Esquema do toque pelo endereço, para comparar sem abrir o painel (#44): ?control=a, b ou c
+const CONTROL_FROM_URL = { a: 'hold', b: 'aim', c: 'twin' }[(new URLSearchParams(location.search).get('control') || '').toLowerCase()];
+if (CONTROL_FROM_URL) PARAMS.touchScheme = CONTROL_FROM_URL;
+
 // ===== Mensagens e efeitos ligados aos eventos da partida =====
 events.on('start', ({ def }) => {
   if (def.practice) renderer.message('PRACTICE · LAND ON THE PAD', 4);
@@ -85,7 +89,7 @@ events.on('start', ({ def }) => {
     renderer.message(`LEVEL ${def.number} · ${def.name}`, 3);
     renderer.message(def.goal, 5);
   }
-  if (def.hint) renderer.message(view.isTouch ? 'TOUCH AND HOLD TO THRUST · DRAG TO STEER' : 'HOLD ↑ TO THRUST · ←/→ TO ROTATE', 7);
+  if (def.hint) renderer.message(view.isTouch ? TOUCH_HINTS[PARAMS.touchScheme] : 'HOLD ↑ TO THRUST · ←/→ TO ROTATE', 7);
 });
 events.on('land', ({ pad }) => {
   const m = app.match.state;
@@ -183,6 +187,20 @@ function updateSoundButton() {
   screens.el('btn-sound').textContent = `SOUND: ${Sound.enabled ? 'ON' : 'OFF'}`;
 }
 
+// Esquema do toque (#44): A, B ou C, salvo no aparelho; o endereço (?control=) tem prioridade
+const SCHEMES = ['hold', 'aim', 'twin'];
+function updateControlButton() {
+  screens.el('btn-control').textContent = `TOUCH CONTROL: ${SCHEME_NAMES[PARAMS.touchScheme]}`;
+  screens.el('control-help').textContent = `TOUCH · ${TOUCH_HINTS[PARAMS.touchScheme].toLowerCase()}`;
+}
+screens.el('btn-control').addEventListener('click', () => {
+  click();
+  PARAMS.touchScheme = SCHEMES[(SCHEMES.indexOf(PARAMS.touchScheme) + 1) % SCHEMES.length];
+  app.save.settings.touchScheme = PARAMS.touchScheme;
+  writeSave(app.save);
+  updateControlButton();
+});
+
 screens.el('btn-play').addEventListener('click', () => { Sound.unlock(); click(); startLevel(app.selected); });
 screens.el('btn-settings').addEventListener('click', () => { Sound.unlock(); click(); showScreen('settings'); });
 screens.el('btn-back').addEventListener('click', () => { click(); toMenu(); });
@@ -258,7 +276,7 @@ function checkThumbHint(m) {
     && Math.abs(joy.cy - sy) < PARAMS.joystickRadius + 40;
   if (covered) {
     app.thumbHintShown = true;
-    renderer.message('TIP: YOUR THUMB WORKS ANYWHERE ON SCREEN', 4);
+    renderer.message(PARAMS.touchScheme === 'twin' ? 'TIP: AIM FROM ANYWHERE ON THE LEFT HALF' : 'TIP: YOUR THUMB WORKS ANYWHERE ON SCREEN', 4);
     renderer.message('LIFT IT AND TOUCH AWAY FROM THE PAD', 4);
   }
 }
@@ -276,7 +294,7 @@ function loop(now) {
     const p = m.params();
     acc += elapsed;
     while (acc >= DT) {
-      m.update(DT, readIntent(keyboard.keys, joystick.state, p));
+      m.update(DT, readIntent(keyboard.keys, joystick.state, p, joystick.thrustHeld));
       renderer.update(DT, m, p);
       acc -= DT;
     }
@@ -291,6 +309,9 @@ function loop(now) {
     params: m ? m.params() : PARAMS,
     joy: joystick.state,
     joystick,
+    thrustHeld: joystick.thrustHeld,
+    touchThrusting: touchThrust(PARAMS, joystick.state, joystick.thrustHeld),
+    schemeName: SCHEME_NAMES[PARAMS.touchScheme],
     idle: isIdle(),
     buttons: app.screen === 'game' ? hudButtons() : [],
     tuned: tuning.isTuned(),
@@ -302,6 +323,8 @@ function loop(now) {
 app.save = await loadSave();
 Sound.enabled = app.save.settings.sound !== false;
 updateSoundButton();
+if (!CONTROL_FROM_URL && SCHEMES.includes(app.save.settings.touchScheme)) PARAMS.touchScheme = app.save.settings.touchScheme;
+updateControlButton();
 view.resize();
 app.selected = defaultLevel(app.save);
 showScreen('menu');

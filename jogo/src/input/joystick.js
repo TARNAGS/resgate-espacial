@@ -1,16 +1,27 @@
 // Direcional virtual (D-006; Regras do jogo, seção 4.2; #38 e #39).
-// Tocar aciona o propulsor; arrastar aponta a ponta da nave para a direção do dedo.
-// Duas variantes, escolhidas em PARAMS.joystickMode, para o teste do M1 comparar (#44):
+// Arrastar aponta a ponta da nave para a direção do dedo. Quando o propulsor acende depende do
+// esquema do toque (PARAMS.touchScheme, ver input/controls.js).
+// Duas variantes de posição, escolhidas em PARAMS.joystickMode, para o teste do M1 comparar (#44):
 //   'follow': o direcional aparece onde o polegar tocar, dentro da área da esquerda (joystickArea)
 //   'fixed':  o direcional fica fixo no canto inferior esquerdo
+// No esquema de dois polegares ('twin'), a metade direita da tela é o botão do propulsor.
 
 export function createJoystick(canvas, { params, view, isActive, onPress, onAnyTouch }) {
-  let joy = null;
+  let joy = null;          // dedo que aponta a nave
+  let thrustId = null;     // dedo no botão do propulsor (só no esquema 'twin')
+
+  const twin = () => params.touchScheme === 'twin';
 
   const fixedCenter = () => ({
     x: 24 + view.safe.left + params.joystickRadius,
     y: view.cssH - 24 - view.safe.bottom - params.joystickRadius,
   });
+
+  // Botão do propulsor desenhado no canto inferior direito (esquema 'twin')
+  const thrustButton = () => {
+    const r = params.joystickRadius * 0.9;
+    return { x: view.cssW - 24 - view.safe.right - r, y: view.cssH - 24 - view.safe.bottom - r, r };
+  };
 
   function localPoint(e) {
     const r = canvas.getBoundingClientRect();
@@ -23,17 +34,23 @@ export function createJoystick(canvas, { params, view, isActive, onPress, onAnyT
     e.preventDefault();
     const p = localPoint(e);
     if (onPress?.(p)) return;   // o toque foi num botão da tela (pausa, ajuste)
-    if (joy) return;
-    let center;
-    if (params.joystickMode === 'fixed') {
-      const c = fixedCenter();
-      if (Math.hypot(p.x - c.x, p.y - c.y) > params.joystickRadius * 1.8) return;
-      center = c;
+    if (twin() && p.x >= view.cssW / 2) {
+      // Metade direita inteira vale como botão, para o polegar não precisar acertar o desenho
+      if (thrustId === null) thrustId = e.pointerId;
     } else {
-      if (p.x > view.cssW * params.joystickArea) return;
-      center = p;
+      if (joy) return;
+      let center;
+      if (params.joystickMode === 'fixed') {
+        const c = fixedCenter();
+        if (Math.hypot(p.x - c.x, p.y - c.y) > params.joystickRadius * 1.8) return;
+        center = c;
+      } else {
+        const area = twin() ? Math.min(params.joystickArea, 0.5) : params.joystickArea;
+        if (p.x > view.cssW * area) return;
+        center = p;
+      }
+      joy = { id: e.pointerId, cx: center.x, cy: center.y, x: p.x, y: p.y };
     }
-    joy = { id: e.pointerId, cx: center.x, cy: center.y, x: p.x, y: p.y };
     try { canvas.setPointerCapture(e.pointerId); } catch (_) { /* nada */ }
   });
 
@@ -44,13 +61,18 @@ export function createJoystick(canvas, { params, view, isActive, onPress, onAnyT
     joy.y = p.y;
   });
 
-  const end = (e) => { if (joy && e.pointerId === joy.id) joy = null; };
+  const end = (e) => {
+    if (joy && e.pointerId === joy.id) joy = null;
+    if (e.pointerId === thrustId) thrustId = null;
+  };
   canvas.addEventListener('pointerup', end);
   canvas.addEventListener('pointercancel', end);
 
   return {
     get state() { return joy; },
+    get thrustHeld() { return thrustId !== null; },
     fixedCenter,
-    reset() { joy = null; },
+    thrustButton,
+    reset() { joy = null; thrustId = null; },
   };
 }

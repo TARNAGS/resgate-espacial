@@ -114,6 +114,7 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
   - O verde agora é uma promessa. Antes, ele olhava a velocidade do momento, mas a gravidade continuava acelerando a nave até o toque, então dava para ficar verde e explodir. Agora ele prevê a velocidade e o ponto de toque se o jogador soltar os controles. Um teste com 2.000 descidas sorteadas confere que nenhum verde termina em explosão.
 - **Pontas da fase mais bonitas:** além da base e da tripulação, a caverna continua só como cenário, apagada e sem colisão, e uma barreira de energia tracejada marca o limite. Antes era um bloco liso e vazio. O cronômetro também saiu de baixo do botão T do painel de ajuste.
 - **Gravidade no PC e no celular:** o valor é o mesmo (55). A diferença de sensação vem do controle: no toque, o mesmo dedo aponta e acelera, então não dá para virar a nave sem acionar o propulsor. As opções foram levadas ao Fernando.
+- **Três controles de toque para comparar (#44):** A, tocar e segurar (o original); B, mirar antes de acelerar (arrasto curto só aponta e o propulsor acende ao passar da linha tracejada do anel); C, dois polegares (esquerdo aponta, direito acelera, com um botão desenhado no canto). Troca em Settings → Touch control ou pelo endereço (`?control=b`). O roteiro de teste ganhou a tarefa 5 e a pergunta 7.
 
 ## Aprendizados de produto
 

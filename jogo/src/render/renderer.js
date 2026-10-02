@@ -91,7 +91,7 @@ export function createRenderer(canvas, view) {
     drawParticles();
 
     ctx.setTransform(view.dpr, 0, 0, view.dpr, 0, 0);
-    if (!m.practice) drawObjectiveArrow(m, t);
+    if (!m.practice) drawObjectiveArrow(m, t, params);
     drawHUD(m, t, params, scene);
     drawMessages(t);
     drawJoystick(scene);
@@ -333,13 +333,15 @@ export function createRenderer(canvas, view) {
     }
   }
 
-  function drawObjectiveArrow(m, t) {
+  function drawObjectiveArrow(m, t, params) {
     const target = m.level.pads.find((p) => p.kind === (m.crewOnBoard ? 'base' : 'crew'));
     const sx = ((target.x1 + target.x2) / 2 - r.camX) * view.scale;
     if (sx >= 0 && sx <= view.cssW) return;
     const right = sx > view.cssW;
     const x = right ? view.cssW - 24 - view.safe.right : 24 + view.safe.left;
-    const y = clamp(target.y * view.scale, 110, view.cssH - 50);
+    // No esquema de dois polegares, a seta da direita fica acima do botão do propulsor
+    const bottom = right && view.isTouch && params.touchScheme === 'twin' ? view.cssH - 60 - params.joystickRadius * 1.8 - view.safe.bottom : view.cssH - 50;
+    const y = clamp(target.y * view.scale, 110, Math.max(110, bottom));
     const pulse = (0.6 + 0.4 * Math.sin(t * 5)).toFixed(2);
     ctx.fillStyle = m.crewOnBoard ? `rgba(124,196,255,${pulse})` : `rgba(255,159,67,${pulse})`;
     ctx.beginPath();
@@ -402,8 +404,10 @@ export function createRenderer(canvas, view) {
     ctx.textBaseline = 'bottom';
     ctx.font = `11px ${FONT}`;
     ctx.fillStyle = 'rgba(127,140,163,0.85)';
-    const foot = m.practice ? 'crash freely · land on the pad' : `random layout #${m.seed}`;
-    ctx.fillText(scene.tuned ? `${foot} · TUNED` : foot, left, view.cssH - 10 - view.safe.bottom);
+    let foot = m.practice ? 'crash freely · land on the pad' : `random layout #${m.seed}`;
+    if (view.isTouch) foot += ` · control ${scene.schemeName}`;
+    if (scene.tuned) foot += ' · TUNED';
+    ctx.fillText(foot, left, view.cssH - 10 - view.safe.bottom);
   }
 
   function drawMessages(t) {
@@ -418,8 +422,11 @@ export function createRenderer(canvas, view) {
     });
   }
 
-  function drawJoystick({ joy, joystick, params, idle }) {
+  // Direcional e, no esquema de dois polegares, o botão do propulsor (#44)
+  function drawJoystick({ joy, joystick, params, idle, touchThrusting, thrustHeld }) {
     const R = params.joystickRadius;
+    const twin = params.touchScheme === 'twin';
+    if (view.isTouch && twin && (idle || thrustHeld)) drawThrustButton(joystick.thrustButton(), thrustHeld);
     if (!joy) {
       if (!view.isTouch || !idle) return;
       // Dica discreta de onde o direcional aparece
@@ -434,14 +441,45 @@ export function createRenderer(canvas, view) {
     let dx = joy.x - joy.cx, dy = joy.y - joy.cy;
     const d = Math.hypot(dx, dy);
     if (d > R) { dx *= R / d; dy *= R / d; }   // a bola acompanha o dedo até a borda do anel
+    // No esquema B, o anel fica laranja quando o propulsor acende
+    const hot = params.touchScheme === 'aim' && touchThrusting;
     ctx.lineWidth = 4;
-    ctx.strokeStyle = 'rgba(255,93,93,0.9)';
+    ctx.strokeStyle = hot ? 'rgba(255,159,67,0.95)' : 'rgba(255,93,93,0.9)';
     ctx.beginPath();
     ctx.arc(joy.cx, joy.cy, R, 0, Math.PI * 2);
     ctx.stroke();
-    ctx.fillStyle = 'rgba(232,241,255,0.85)';
+    if (params.touchScheme === 'aim') {
+      // Linha a partir da qual o propulsor acende: dentro dela, o dedo só aponta
+      ctx.save();
+      ctx.setLineDash([4, 5]);
+      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = hot ? 'rgba(255,159,67,0.8)' : 'rgba(232,241,255,0.45)';
+      ctx.beginPath();
+      ctx.arc(joy.cx, joy.cy, R * params.aimThrustAt, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.restore();
+    }
+    ctx.fillStyle = hot ? 'rgba(255,209,102,0.9)' : 'rgba(232,241,255,0.85)';
     ctx.beginPath();
     ctx.arc(joy.cx + dx, joy.cy + dy, 18, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function drawThrustButton(b, pressed) {
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = pressed ? 'rgba(255,159,67,0.95)' : 'rgba(255,159,67,0.4)';
+    ctx.fillStyle = pressed ? 'rgba(255,159,67,0.25)' : 'rgba(255,159,67,0.06)';
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    // Chama estilizada no meio do botão
+    const k = b.r / 50;
+    ctx.fillStyle = pressed ? 'rgba(255,209,102,0.95)' : 'rgba(255,209,102,0.45)';
+    ctx.beginPath();
+    ctx.moveTo(b.x, b.y - 18 * k);
+    ctx.quadraticCurveTo(b.x + 13 * k, b.y + 2 * k, b.x, b.y + 16 * k);
+    ctx.quadraticCurveTo(b.x - 13 * k, b.y + 2 * k, b.x, b.y - 18 * k);
     ctx.fill();
   }
 
