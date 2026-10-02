@@ -20,7 +20,7 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
   - dois controles de toque para comparar: A, tocar e segurar, e C, dois polegares, com a câmera mantendo a nave longe dos dedos (o B foi descartado);
   - treino (TRAINING), painel de ajuste escondido e 50 testes automáticos.
 - **Como testar:** no PC, `node jogo/servir.js` e http://localhost:8081; no iPhone, no mesmo Wi-Fi, `http://<IP do computador>:8081`. Um beta tester de fora precisa de um endereço público: as opções (janela de teste, Netlify ou Cloudflare Pages, túnel) foram apresentadas, e o Fernando preferiu deixar para depois.
-- **Repositório e quadro privados (D-017).**
+- **Repositório e quadro privados (D-017). ⚠️ Janela de teste ABERTA desde 02/10/2026, por volta das 16h30:** o repositório está público para um amigo do Fernando testar em https://tarnags.github.io/resgate-espacial/jogo/. Fechar ao fim do teste (passo 5 da janela de teste, no `CLAUDE.md`) e tirar este aviso.
 - **Pendências abertas:** P-003 (nome final), P-006 (pontuação), P-008 (medição), P-009 (tutorial), P-010 (tentar de novo repete o cenário?), P-011 (obstáculos, mundo e fase), P-012 (modificadores), P-013 (ICP), P-014 (pago, loja ou os dois), P-015 (como receber e CNPJ), P-016 (o que o jogo guarda) e P-017 (o que a loja vende). Cada uma tem um cartão na coluna "A investigar".
 
 ### Próximos passos
