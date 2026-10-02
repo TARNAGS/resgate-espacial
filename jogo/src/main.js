@@ -264,9 +264,12 @@ const rankingScreen = createRankingScreen({
   el: screens.el, leaderboard, levels: RANKED, keyOf: rankOf, getNick: () => app.save.nick, onClick: click,
 });
 let afterNick = null;
+let nickBack = null;
 
-function askNick(then) {
+// back: para onde o BACK leva (o menu, se veio do PLAY; Settings, se veio de lá)
+function askNick(then, back = toMenu) {
   afterNick = then;
+  nickBack = back;
   app.screen = 'nick';
   screens.show('nick');
   const input = screens.el('nick-input');
@@ -301,12 +304,14 @@ function updateNickButton() {
 }
 
 screens.el('btn-nick-ok').addEventListener('click', confirmNick);
+screens.el('btn-nick-back').addEventListener('click', () => { click(); screens.el('nick-input').blur(); (nickBack || toMenu)(); });
 screens.el('nick-input').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); confirmNick(); } });
-screens.el('btn-nickname').addEventListener('click', () => { click(); askNick(() => showScreen('settings')); });
+screens.el('btn-nickname').addEventListener('click', () => { click(); askNick(() => showScreen('settings'), () => showScreen('settings')); });
 screens.el('btn-ranking').addEventListener('click', () => {
   Sound.unlock();
   click();
   showScreen('ranking');
+  leaderboard.flush();   // reenvia tempos que ficaram na fila sem internet
   rankingScreen.show(RANKED.find((l) => l.key === app.selected.key) || RANKED[0]);
 });
 screens.el('btn-rank-back').addEventListener('click', () => { click(); toMenu(); });
@@ -314,7 +319,10 @@ screens.el('btn-rank-back').addEventListener('click', () => { click(); toMenu();
 // Ao concluir uma fase, o tempo vai para o ranking se for o melhor daquele nick naquela fase
 async function submitRanking(def, run) {
   if (def.training || !app.save.nick) return;
-  const note = (text) => { const ov = screens.el('ov-text'); if (ov) ov.textContent += ` · ${text}`; };
+  // O aviso só vai para a tela de resultado desta fase (a rede pode demorar e o jogador já ter seguido)
+  const ov = screens.el('ov-text');
+  const shown = ov.textContent;
+  const note = (text) => { if (ov.textContent === shown && !screens.el('overlay').classList.contains('hidden')) ov.textContent += ` · ${text}`; };
   if (tuning.isTuned()) { note('Ranking off: tuning panel values changed'); return; }
   const r = await leaderboard.submit({ key: rankOf(def), nick: app.save.nick, time: run.time, control: app.ranControl });
   if (r.improved) note(r.online ? 'NEW BEST on the online ranking!' : r.queued ? 'New best saved; it goes online when the connection comes back' : 'New best on the ranking!');
@@ -457,6 +465,7 @@ if (!CONTROL_FROM_URL && SCHEMES.includes(app.save.settings.touchScheme)) PARAMS
 updateControlButton();
 updateNickButton();
 leaderboard.flush();
+window.addEventListener('online', () => leaderboard.flush());   // a internet voltou: envia a fila
 view.resize();
 app.selected = defaultLevel(app.save);
 showScreen('menu');

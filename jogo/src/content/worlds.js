@@ -12,6 +12,9 @@
 //              opções de cada tipo do catálogo, content/obstacles). Tanque, em segundos de propulsor:
 //              - fase com posto: refuelMargin, a folga sobre o melhor plano com um abastecimento (D-023)
 //              - fase sem posto: tankSeconds, o mínimo (o gerador aumenta se a melhor corrida pedir)
+//              tank (fases fixas): o tanque já calculado pelo piloto automático para a semente fixa.
+//              O jogo usa este valor sem rodar o piloto no aparelho, para o cenário e o tanque serem
+//              idênticos em todos os navegadores (o ranking depende disso). Os testes conferem o valor.
 //   modifiers  lista de modificadores (content/modifiers.js); vazia até P-012 ser decidida
 
 const SPACE_THEME = {
@@ -36,7 +39,7 @@ export const WORLDS = [
         name: 'FIRST FLIGHT',
         goal: 'Take off, fly to the crew and bring them back.',
         hint: true,
-        generator: { length: 1800, minGap: 225, roughness: 60, fuelStation: false, tankSeconds: 40, obstacles: [] },
+        generator: { length: 1800, minGap: 225, roughness: 60, fuelStation: false, tankSeconds: 40, tank: 40, obstacles: [] },
         modifiers: [],
       },
       {
@@ -44,7 +47,7 @@ export const WORLDS = [
         seed: 202,
         name: 'ROCK FIELD',
         goal: 'Rocks ahead. Touching anything explodes the ship.',
-        generator: { length: 2600, minGap: 185, roughness: 95, fuelStation: false, tankSeconds: 40, obstacles: [{ type: 'rock', count: 9, passGap: 95 }] },
+        generator: { length: 2600, minGap: 185, roughness: 95, fuelStation: false, tankSeconds: 40, tank: 40, obstacles: [{ type: 'rock', count: 9, passGap: 95 }] },
         modifiers: [],
       },
       {
@@ -52,7 +55,7 @@ export const WORLDS = [
         seed: 303,
         name: 'LONG HAUL',
         goal: 'Too far for one tank: refuel once, on the way there or back.',
-        generator: { length: 3800, minGap: 165, roughness: 110, fuelStation: true, refuelMargin: 0.08, obstacles: [{ type: 'rock', count: 12, passGap: 85 }] },
+        generator: { length: 3800, minGap: 165, roughness: 110, fuelStation: true, refuelMargin: 0.08, tank: 33.43, obstacles: [{ type: 'rock', count: 12, passGap: 85 }] },
         modifiers: [],
       },
     ],
@@ -81,7 +84,7 @@ export const CHALLENGES = [
     goal: 'The hardest run in the game. Plan your one refuel well.',
     challenge: true,
     generator: {
-      length: 4400, minGap: 125, roughness: 135, fuelStation: true, refuelMargin: 0.05,
+      length: 4400, minGap: 125, roughness: 135, fuelStation: true, refuelMargin: 0.05, tank: 32.71,
       obstacles: [{ type: 'rock', count: 26, passGap: 56, spacing: 105 }],
     },
     modifiers: [],

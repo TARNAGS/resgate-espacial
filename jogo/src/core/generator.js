@@ -17,8 +17,17 @@ import { bestRun, refuelPlans } from './autopilot.js';
 const MAX_ATTEMPTS = 25;
 const nextSeed = (s) => (Math.imul(s ^ 0x5bd1e995, 2654435761) >>> 0) % 1000000000;
 
-export function generateLevel(def, seed, params = null) {
+// Fases fixas (D-021) com o tanque já calculado (generator.tank): o jogo não roda o piloto automático
+// no aparelho. Navegadores diferentes podem arredondar seno e cosseno de jeitos levemente diferentes, e
+// numa simulação longa isso pode mudar o resultado; sem o piloto no aparelho, o cenário e o tanque são
+// iguais para todos (o ranking depende disso). prove: true força o piloto, para os testes conferirem.
+export function generateLevel(def, seed, params = null, { prove = false } = {}) {
   if (!params || def.generator.kind === 'training') return buildLayout(def, seed);
+  if (!prove && def.seed != null && seed === def.seed && def.generator.tank != null) {
+    const level = buildLayout(def, seed);
+    level.tankSeconds = def.generator.tank;
+    return level;
+  }
   let s = seed;
   for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
     const level = buildLayout(def, s);

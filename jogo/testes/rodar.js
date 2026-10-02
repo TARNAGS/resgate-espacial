@@ -384,6 +384,18 @@ for (const def of ALL.filter((d) => d.generator.fuelStation)) {
   }
 }
 
+test('#87 fases fixas: o cenário e o tanque gravados são os mesmos que o piloto automático prova (iguais em todo navegador)', () => {
+  for (const def of [...LEVELS, ...CHALLENGES].filter((d) => d.seed != null)) {
+    const fast = generateLevel(def, def.seed, physics(def));                     // o que o jogo usa
+    const proven = generateLevel(def, def.seed, physics(def), { prove: true });  // com o piloto
+    assert.equal(proven.seed, def.seed, `${def.key}: a semente fixa não tem caminho provado`);
+    assert.deepEqual(fast.floor, proven.floor, `${def.key}: chão diferente`);
+    assert.deepEqual(fast.obstacles, proven.obstacles, `${def.key}: pedras diferentes`);
+    assert.ok(Math.abs(fast.tankSeconds - proven.tankSeconds) < 0.01, `${def.key}: tanque gravado ${fast.tankSeconds}, provado ${proven.tankSeconds.toFixed(2)}; atualize generator.tank`);
+    if (def.generator.fuelStation) assert.ok(fast.tankSeconds < proven.refuelPlans.full, `${def.key}: D-023 quebrada`);
+  }
+});
+
 test('D-021 as fases da sequência e a PRACTICE têm cenário fixo; só a BONUS é sorteada', () => {
   for (const def of [...LEVELS, findLevel('practice')]) assert.ok(Number.isInteger(def.seed), def.key);
   const bonus = findLevel('bonus');
