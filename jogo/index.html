@@ -18,9 +18,26 @@
   <p id="level-info" class="level-info"></p>
   <div class="buttons">
     <button id="btn-play" class="btn primary">PLAY</button>
+    <button id="btn-ranking" class="btn">RANKING</button>
     <button id="btn-settings" class="btn">SETTINGS</button>
   </div>
   <p class="foot">Same layout for everyone: race your friends' times.</p>
+</section>
+
+<section id="nick" class="screen hidden" aria-label="Pilot name">
+  <h2>PILOT NAME</h2>
+  <p class="controls-help">Your nickname is your ID on the ranking.<br>Use the same one every time you play.</p>
+  <input id="nick-input" class="nick-input" maxlength="12" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="NICKNAME" aria-label="Nickname">
+  <p id="nick-error" class="nick-error"></p>
+  <button id="btn-nick-ok" class="btn primary">OK</button>
+</section>
+
+<section id="ranking" class="screen hidden" aria-label="Ranking">
+  <h2>RANKING</h2>
+  <div id="rank-tabs" class="rank-tabs"></div>
+  <p id="rank-status" class="controls-help"></p>
+  <ol id="rank-list" class="rank-list"></ol>
+  <button id="btn-rank-back" class="btn primary">BACK</button>
 </section>
 
 <section id="settings" class="screen hidden">
@@ -28,6 +45,7 @@
   <button id="btn-sound" class="btn">SOUND: ON</button>
   <button id="btn-control" class="btn">TOUCH CONTROL: A</button>
   <p id="control-help" class="controls-help"></p>
+  <button id="btn-nickname" class="btn">PILOT: —</button>
   <button id="btn-intro" class="btn">WATCH INTRO</button>
   <button id="btn-reset" class="btn">RESET PROGRESS</button>
   <p class="controls-help">

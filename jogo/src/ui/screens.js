@@ -3,7 +3,7 @@
 const el = (id) => document.getElementById(id);
 
 export function createScreens({ onClick }) {
-  const screens = { menu: el('menu'), settings: el('settings'), intro: el('intro') };
+  const screens = { menu: el('menu'), settings: el('settings'), intro: el('intro'), nick: el('nick'), ranking: el('ranking') };
   const overlay = el('overlay');
 
   return {

@@ -9,6 +9,8 @@ import { generateLevel, validateLevel } from '../src/core/generator.js';
 import { routeInputs } from '../src/core/autopilot.js';
 import { INTRO_SONG, CHORDS } from '../src/content/songs.js';
 import { createPraise } from '../src/core/praise.js';
+import { rankKey, normalizeNick, validNick } from '../src/core/ranking.js';
+import { createLeaderboard } from '../src/platform/leaderboard.js';
 import { createShip, fly, steer, landingForecast } from '../src/core/ship.js';
 import { createMatch } from '../src/core/match.js';
 import { createEvents } from '../src/core/events.js';
@@ -18,10 +20,10 @@ import { isUnlocked, defaultLevel, recordCompletion, levelState, nextLevel } fro
 import { SHIP } from '../src/core/constants.js';
 import { mulberry32 } from '../src/core/rng.js';
 
+// Os testes rodam um de cada vez, no fim do arquivo, e podem ser assíncronos (ranking online)
+const tasks = [];
 const results = [];
-function test(name, fn) {
-  try { resetParams(); fn(); results.push([true, name]); } catch (e) { results.push([false, name, e]); }
-}
+function test(name, fn) { tasks.push([name, fn]); }
 
 const DT = 1 / 120;
 const NONE = { turn: 0, targetAngle: null, thrust: false };
@@ -499,7 +501,95 @@ test('#76 a música cabe na abertura: 12 segundos, uma tela a cada 2 compassos, 
   assert.deepEqual(INTRO_SONG.bars.at(-1).chords, ['C', 'C']);          // "vamos lá!" em dó maior
 });
 
+// ===== Ranking por nickname (#87) =====
+function memoryStorage() {
+  const m = new Map();
+  return { getItem: (k) => (m.has(k) ? m.get(k) : null), setItem: (k, v) => m.set(k, String(v)) };
+}
+// Banco online de mentira, no formato do Firebase (GET e PUT em <caminho>.json)
+function fakeServer({ down = false } = {}) {
+  const db = {};
+  const srv = {
+    db, down,
+    fetch: async (url, opts = {}) => {
+      if (srv.down) throw new Error('sem rede');
+      const path = url.replace('https://db.test/', '').replace(/\.json$/, '').split('/');
+      if (opts.method === 'PUT') {
+        let node = db;
+        for (const k of path.slice(0, -1)) node = node[k] ??= {};
+        node[path.at(-1)] = JSON.parse(opts.body);
+        return { ok: true, json: async () => null };
+      }
+      let node = db;
+      for (const k of path) node = node?.[k];
+      return { ok: true, json: async () => node ?? null };
+    },
+  };
+  return srv;
+}
+
+test('#87 nickname: 3 a 12 letras ou números, sem diferença entre maiúsculas e minúsculas', () => {
+  assert.equal(normalizeNick('  fer_13 '), 'FER_13');
+  assert.equal(normalizeNick('Fer Nando!'), 'FERNANDO');
+  assert.equal(normalizeNick('abcdefghijklmnop'), 'ABCDEFGHIJKL');
+  assert.ok(validNick('Fer')); assert.ok(!validNick('Fe')); assert.ok(!validNick('!!'));
+});
+
+test('#87 a chave do ranking muda quando a fase muda, e não muda à toa', () => {
+  const lv = LEVELS[2];
+  assert.equal(rankKey(lv, DEFAULT_PARAMS), rankKey(lv, { ...DEFAULT_PARAMS }));
+  assert.notEqual(rankKey(lv, DEFAULT_PARAMS), rankKey({ ...lv, seed: lv.seed + 1 }, DEFAULT_PARAMS));
+  assert.notEqual(rankKey(lv, DEFAULT_PARAMS), rankKey({ ...lv, generator: { ...lv.generator, minGap: 1 } }, DEFAULT_PARAMS));
+  assert.notEqual(rankKey(lv, DEFAULT_PARAMS), rankKey(lv, { ...DEFAULT_PARAMS, gravity: 60 }));
+  assert.equal(rankKey(lv, DEFAULT_PARAMS), rankKey(lv, { ...DEFAULT_PARAMS, touchScheme: 'hold' }));  // o controle não muda a fase
+  assert.match(rankKey(lv, DEFAULT_PARAMS), /^[A-Za-z0-9_-]+$/);   // seguro como caminho no banco
+});
+
+test('#87 só um tempo melhor substitui o do mesmo nick; o ranking vem do mais rápido ao mais lento', async () => {
+  const srv = fakeServer();
+  const lb = createLeaderboard({ url: 'https://db.test', storage: memoryStorage(), fetchFn: srv.fetch });
+  assert.equal((await lb.submit({ key: 'k', nick: 'ANA', time: 40, control: 'twin' })).improved, true);
+  assert.equal((await lb.submit({ key: 'k', nick: 'ANA', time: 45, control: 'twin' })).improved, false);
+  await lb.submit({ key: 'k', nick: 'BRUNO', time: 38, control: 'hold' });
+  assert.equal((await lb.submit({ key: 'k', nick: 'ANA', time: 36, control: 'twin' })).improved, true);
+  const { online, list } = await lb.top('k');
+  assert.equal(online, true);
+  assert.deepEqual(list.map((r) => [r.nick, r.time]), [['ANA', 36], ['BRUNO', 38]]);
+});
+
+test('#87 o mesmo nick em outro aparelho atualiza a mesma linha do ranking', async () => {
+  const srv = fakeServer();
+  const phone = createLeaderboard({ url: 'https://db.test', storage: memoryStorage(), fetchFn: srv.fetch });
+  const pc = createLeaderboard({ url: 'https://db.test', storage: memoryStorage(), fetchFn: srv.fetch });
+  await phone.submit({ key: 'k', nick: 'ANA', time: 50 });
+  assert.equal((await pc.submit({ key: 'k', nick: 'ANA', time: 55 })).improved, false);   // o banco já tem 50
+  await pc.submit({ key: 'k', nick: 'ANA', time: 42 });
+  const { list } = await phone.top('k');
+  assert.deepEqual(list.map((r) => [r.nick, r.time]), [['ANA', 42]]);
+});
+
+test('#87 sem rede: o tempo fica no aparelho e numa fila, e vai para o banco quando a rede volta', async () => {
+  const srv = fakeServer({ down: true });
+  const lb = createLeaderboard({ url: 'https://db.test', storage: memoryStorage(), fetchFn: srv.fetch });
+  const r = await lb.submit({ key: 'k', nick: 'ANA', time: 40 });
+  assert.equal(r.queued, true);
+  assert.equal((await lb.top('k')).online, false);
+  srv.down = false;
+  assert.equal(await lb.flush(), 1);
+  assert.equal(srv.db.scores.k.ANA.time, 40);
+});
+
+test('#87 sem banco configurado, o ranking fica só no aparelho', async () => {
+  const lb = createLeaderboard({ url: '', storage: memoryStorage() });
+  await lb.submit({ key: 'k', nick: 'ANA', time: 40 });
+  const { online, list } = await lb.top('k');
+  assert.equal(lb.online, false); assert.equal(online, false); assert.equal(list[0].nick, 'ANA');
+});
+
 // ===== Resultado =====
+for (const [name, fn] of tasks) {
+  try { resetParams(); await fn(); results.push([true, name]); } catch (e) { results.push([false, name, e]); }
+}
 const failed = results.filter((r) => !r[0]);
 for (const [ok, name, err] of results) {
   console.log(`${ok ? '✓' : '✗'} ${name}`);

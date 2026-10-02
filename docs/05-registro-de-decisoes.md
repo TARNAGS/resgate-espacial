@@ -34,6 +34,7 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-020 | Big picture: mundos com 10 fases, cada um com identidade visual própria | 02/10/2026 | Aceita; o MVP segue com 3 fases (D-009) |
 | D-021 | Fases com cenário fixo, iguais para todos; só a fase BONUS é sorteada | 02/10/2026 | Aceita; construída ([#84](https://github.com/TARNAGS/resgate-espacial/issues/84) e [#86](https://github.com/TARNAGS/resgate-espacial/issues/86)) |
 | D-022 | Controle principal: dois polegares (novo A); o de um polegar vira a opção B | 02/10/2026 | Aceita; construída ([#82](https://github.com/TARNAGS/resgate-espacial/issues/82)) |
+| D-024 | Ranking de tempos por fase, com nickname como ID do jogador | 02/10/2026 | Aceita; construída ([#87](https://github.com/TARNAGS/resgate-espacial/issues/87)); banco online a configurar |
 | D-023 | Nas fases com posto, abastecer pelo menos uma vez é obrigatório | 02/10/2026 | Aceita; construída ([#83](https://github.com/TARNAGS/resgate-espacial/issues/83)) |
 
 ## D-001 — Sem login e sem contas
@@ -423,6 +424,22 @@ Junto com as trilhas, entraram:
 
 **Revisitar se** os próximos testes mostrarem que o ranking não importa tanto quanto o replay (D-021), ou que abastecer obrigatório deixou o jogo chato (D-023).
 
+## D-024 — Ranking de tempos por fase, com nickname
+
+**Contexto.** Com até 10 playtesters (hoje, uns 6), o Fernando quer um ranking de cada fase, para quem for mais rápido. Os jogadores já gostavam de comparar tempos (D-021).
+
+**Decisão.** Depois do PLAY e antes da abertura, o jogador digita um **nickname**, que é o ID dele no ranking (sem senha). Cada fase (níveis 1 a 3, PRACTICE e BONUS) tem um ranking com o melhor tempo de cada nick; só um tempo melhor substitui o anterior. O ranking fica no menu, no botão RANKING. Para ser compartilhado entre os jogadores, os tempos vão para um banco online simples (**Firebase Realtime Database**, plano gratuito); sem ele, cada aparelho tem o seu ranking.
+
+**Consequências.**
+
+- Revê, para o protótipo, a D-001 (sem login): o nick é uma identificação leve, sem senha e sem dado pessoal.
+- Precisa de um serviço externo, criado pelo Fernando; o endereço fica em `jogo/src/config/online.js`.
+- Riscos aceitos para um grupo pequeno: qualquer um pode usar o nick de outro e mandar um tempo falso. Para o lançamento, a P-019 continua valendo (rankings do Game Center e do Google Play Games, ou um servidor que valide).
+- A chave de cada ranking inclui a semente, as regras do gerador e a física padrão: se a fase mudar, começa um ranking novo.
+- Com o painel de ajuste alterado, o tempo não vai para o ranking.
+
+**Revisitar se** o grupo de testes crescer além de amigos, ou no lançamento nas lojas (P-019).
+
 ## Decisões pendentes
 
 | ID | Pergunta | Quando decidir | Observação |
@@ -437,7 +454,7 @@ Junto com as trilhas, entraram:
 | P-013 | Quem é o jogador ideal do jogo (ICP)? | Antes dos testes com pessoas ([#43](https://github.com/TARNAGS/resgate-espacial/issues/43)) | Aprofunda a persona primária da Visão (seção 4). Cartão [#59](https://github.com/TARNAGS/resgate-espacial/issues/59) |
 | P-014 | O jogo será pago, gratuito com loja de itens, ou os dois? | Antes da publicação nas lojas (M4) | Ir para as lojas já foi decidido (D-019); falta decidir se e como cobrar. Cartão [#63](https://github.com/TARNAGS/resgate-espacial/issues/63) |
 | P-018 | Como funciona o modo Nightmare, em que morrer não devolve o combustível? | Antes de construir o modo (M5) | Ideia do Fernando depois do teste com um amigo (02/10/2026). A nave reaparece pousada na base, que abastece: o modo precisa dizer se base e posto continuam abastecendo. Conversa com P-012 (modificadores) e P-017 (loja). Cartão [#79](https://github.com/TARNAGS/resgate-espacial/issues/79) |
-| P-019 | Como funciona um ranking de tempos por fase? | Antes da publicação nas lojas (M4) | Ideia do Fernando depois do teste com um amigo. Ranking entre jogadores esbarra em D-001 (sem login) e no cenário sorteado (D-014); saídas: rankings do Game Center e do Google Play Games e um desafio do dia com a mesma semente para todos. Cartão [#80](https://github.com/TARNAGS/resgate-espacial/issues/80) |
+| P-019 | Como funciona um ranking de tempos por fase? Para os playtesters, resolvida pela D-024 (nickname e banco simples); para o lançamento, continua em aberto. | Antes da publicação nas lojas (M4) | Ideia do Fernando depois do teste com um amigo. Ranking entre jogadores esbarra em D-001 (sem login) e no cenário sorteado (D-014); saídas: rankings do Game Center e do Google Play Games e um desafio do dia com a mesma semente para todos. Cartão [#80](https://github.com/TARNAGS/resgate-espacial/issues/80) |
 | P-017 | O que a loja de itens vende, com que moeda, e como evitar vantagem injusta? | Antes de construir a loja (E-24) | Ideia do Fernando: itens de jogo e de nave, com dinheiro real ou moedas do jogo. Itens que facilitem o jogo afetam recordes e a regra do melhor caminho (D-018). Cartão [#78](https://github.com/TARNAGS/resgate-espacial/issues/78) |
 | P-015 | Como receber dinheiro, e é preciso CNPJ? | Só se a P-014 decidir cobrar ou aceitar doações | Cartão [#64](https://github.com/TARNAGS/resgate-espacial/issues/64) |
 | P-016 | O que o jogo guarda, e onde: só no aparelho ou também num servidor? | Antes de construir o progresso salvo (E-14) | Hoje tudo fica no aparelho; um servidor reabre D-001, D-003 e D-004. Cartão [#62](https://github.com/TARNAGS/resgate-espacial/issues/62) |

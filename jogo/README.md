@@ -20,6 +20,8 @@ Os módulos do navegador não abrem com dois cliques no `index.html` (`file://`)
 | `src/content/obstacles/` | Catálogo de obstáculos; um arquivo por tipo | Um obstáculo novo é definido (P-011) |
 | `src/content/modifiers.js` | Modificadores: gravidade, tanque, vento e nave mais pesada na volta | Os modificadores são decididos (P-012) |
 | `src/core/` | Regras: física da nave, contato e pouso, partida, gerador, pontuação e progresso | Uma regra do documento 02 muda |
+| `src/core/ranking.js`, `src/platform/leaderboard.js` e `src/ui/ranking.js` | Nickname e ranking por fase (#87): regras, banco (no aparelho e online) e tela | O banco online ou as regras do ranking mudam |
+| `src/config/online.js` | Endereço do banco online do ranking (Firebase); vazio = ranking só no aparelho | O banco é criado ou trocado |
 | `src/core/praise.js` | Detecta manobras difíceis e avisa o elogio (#81): fininho, freada no limite, pouso perfeito e corrida perfeita | Os critérios dos elogios mudam |
 | `src/core/autopilot.js` | Piloto automático que joga cada cenário gerado e prova a melhor corrida sem abastecer (D-018) | A física ou um obstáculo novo mudam |
 | `src/core/scoring.js` | Pontuação: hoje só o tempo | P-006 é decidida |

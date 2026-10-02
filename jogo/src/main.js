@@ -1,5 +1,5 @@
-import { PARAMS } from './config/params.js';
-import { LEVELS, WORLDS, TRAINING_LEVEL, findLevel } from './content/worlds.js';
+import { PARAMS, DEFAULT_PARAMS } from './config/params.js';
+import { LEVELS, WORLDS, CHALLENGES, TRAINING_LEVEL, findLevel } from './content/worlds.js';
 import { createEvents } from './core/events.js';
 import { createMatch } from './core/match.js';
 import { randomSeed } from './core/rng.js';
@@ -17,6 +17,9 @@ import { renderMap } from './ui/map.js';
 import { createTuning } from './ui/tuning.js';
 import { createIntro } from './render/intro.js';
 import { createMusic } from './platform/music.js';
+import { createLeaderboard } from './platform/leaderboard.js';
+import { rankKey, normalizeNick, validNick } from './core/ranking.js';
+import { createRankingScreen } from './ui/ranking.js';
 import { INTRO_SONG } from './content/songs.js';
 
 // Resgate Espacial — ponto de entrada. Liga as partes: regras (core), conteúdo (content),
@@ -116,6 +119,7 @@ events.on('respawn', ({ lives }) => {
 });
 events.on('complete', ({ def, run }) => {
   Sound.setThrust(false);
+  submitRanking(def, run);
   const { isBest, prevBest } = recordCompletion(app.save, def.key, run);
   writeSave(app.save);
   const next = nextLevel(def.key);
@@ -155,6 +159,7 @@ function drawMap() {
 }
 
 function startLevel(def, seed = randomSeed()) {
+  app.ranControl = view.isTouch ? PARAMS.touchScheme : 'keys';
   if (def.seed != null) seed = def.seed;   // fases fixas: o mesmo cenário para todos (D-021)
   app.match = createMatch({ def, seed, getParams: () => PARAMS, events });
   app.paused = false;
@@ -243,9 +248,77 @@ screens.el('btn-play').addEventListener('click', () => {
   Sound.unlock();
   click();
   const lv = app.selected;
-  if (app.save.seen?.intro) startLevel(lv);
-  else playIntro(() => startLevel(lv));
+  withNick(() => {
+    if (app.save.seen?.intro) startLevel(lv);
+    else playIntro(() => startLevel(lv));
+  });
 });
+
+// ===== Nickname e ranking (#87) =====
+// O nick é o ID do jogador no ranking. Fica salvo no aparelho; quem limpar os dados ou trocar de
+// aparelho digita o mesmo nick e continua atualizando as mesmas linhas do ranking.
+const leaderboard = createLeaderboard();
+const rankOf = (lv) => rankKey(lv, DEFAULT_PARAMS);
+const RANKED = [...LEVELS, ...CHALLENGES];
+const rankingScreen = createRankingScreen({
+  el: screens.el, leaderboard, levels: RANKED, keyOf: rankOf, getNick: () => app.save.nick, onClick: click,
+});
+let afterNick = null;
+
+function askNick(then) {
+  afterNick = then;
+  app.screen = 'nick';
+  screens.show('nick');
+  const input = screens.el('nick-input');
+  input.value = app.save.nick || '';
+  screens.el('nick-error').textContent = '';
+  setTimeout(() => input.focus(), 50);
+}
+
+function withNick(then) {
+  if (app.save.nick) then();
+  else askNick(then);
+}
+
+function confirmNick() {
+  const input = screens.el('nick-input');
+  if (!validNick(input.value)) {
+    screens.el('nick-error').textContent = 'Use 3 to 12 letters or numbers.';
+    return;
+  }
+  click();
+  app.save.nick = normalizeNick(input.value);
+  writeSave(app.save);
+  updateNickButton();
+  input.blur();
+  const then = afterNick;
+  afterNick = null;
+  then?.();
+}
+
+function updateNickButton() {
+  screens.el('btn-nickname').textContent = `PILOT: ${app.save.nick || '—'}`;
+}
+
+screens.el('btn-nick-ok').addEventListener('click', confirmNick);
+screens.el('nick-input').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); confirmNick(); } });
+screens.el('btn-nickname').addEventListener('click', () => { click(); askNick(() => showScreen('settings')); });
+screens.el('btn-ranking').addEventListener('click', () => {
+  Sound.unlock();
+  click();
+  showScreen('ranking');
+  rankingScreen.show(RANKED.find((l) => l.key === app.selected.key) || RANKED[0]);
+});
+screens.el('btn-rank-back').addEventListener('click', () => { click(); toMenu(); });
+
+// Ao concluir uma fase, o tempo vai para o ranking se for o melhor daquele nick naquela fase
+async function submitRanking(def, run) {
+  if (def.training || !app.save.nick) return;
+  const note = (text) => { const ov = screens.el('ov-text'); if (ov) ov.textContent += ` · ${text}`; };
+  if (tuning.isTuned()) { note('Ranking off: tuning panel values changed'); return; }
+  const r = await leaderboard.submit({ key: rankOf(def), nick: app.save.nick, time: run.time, control: app.ranControl });
+  if (r.improved) note(r.online ? 'NEW BEST on the online ranking!' : r.queued ? 'New best saved; it goes online when the connection comes back' : 'New best on the ranking!');
+}
 // Rever a abertura: a experiência inteira, terminando na fase escolhida no mapa
 screens.el('btn-intro').addEventListener('click', () => {
   Sound.unlock();
@@ -350,6 +423,7 @@ function loop(now) {
       acc -= DT;
     }
     Sound.setThrust(m.state.ship.thrusting);
+    if (keyboard.keys.left || keyboard.keys.right || keyboard.keys.thrust) app.ranControl = 'keys';
     checkThumbHint(m.state);
   } else {
     acc = 0;
@@ -381,6 +455,8 @@ Sound.enabled = app.save.settings.sound !== false;
 updateSoundButton();
 if (!CONTROL_FROM_URL && SCHEMES.includes(app.save.settings.touchScheme)) PARAMS.touchScheme = app.save.settings.touchScheme;
 updateControlButton();
+updateNickButton();
+leaderboard.flush();
 view.resize();
 app.selected = defaultLevel(app.save);
 showScreen('menu');
@@ -393,13 +469,13 @@ const start = new URLSearchParams(location.search).get('level');
 if (start && tuning.enabled && findLevel(start)) startLevel(findLevel(start));
 
 // Acesso para testes automáticos no navegador
-window.__game = { app, PARAMS, LEVELS, startLevel, events, keyboard, joystick, renderer, intro, playIntro, music };
+window.__game = { app, PARAMS, LEVELS, startLevel, events, keyboard, joystick, renderer, intro, playIntro, music, leaderboard, rankOf };
 
 // ?intro no endereço abre direto na abertura, para testar. O navegador só libera o som depois de
 // um toque, então a primeira tela pede o toque (TAP TO START) e aí a abertura começa com música.
 if (new URLSearchParams(location.search).has('intro')) {
   const lv = app.selected;
   screens.overlay('INTRO', 'Turn the sound on (and the silent switch off on iPhone).', [
-    ['TAP TO START', () => { Sound.unlock(); screens.hideOverlay(); playIntro(() => startLevel(lv)); }, true],
+    ['TAP TO START', () => { Sound.unlock(); screens.hideOverlay(); withNick(() => playIntro(() => startLevel(lv))); }, true],
   ]);
 }

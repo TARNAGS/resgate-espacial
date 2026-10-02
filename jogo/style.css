@@ -202,3 +202,31 @@ html, body { touch-action: manipulation; }
   cursor: pointer;
 }
 .btn.skip { min-width: 0; opacity: 0.85; }
+
+/* Nickname (#87) */
+.nick-input {
+  width: min(320px, 80vw);
+  padding: 10px 14px;
+  border: 2px solid var(--teal);
+  background: #05070d;
+  color: var(--ink);
+  font: inherit;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-align: center;
+  text-transform: uppercase;
+  outline: none;
+}
+.nick-error { margin: 0; min-height: 1.2em; color: var(--red); font-size: 13px; }
+
+/* Ranking (#87) */
+.rank-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.rank-tabs .btn { min-width: 0; padding: 5px 10px; font-size: 12px; box-shadow: 2px 2px 0 #000; }
+.rank-tabs .btn.active { background: var(--teal); color: var(--bg); border-color: var(--teal); }
+.rank-list { margin: 0; padding: 0; list-style: none; width: min(420px, 92vw); font-size: 15px; }
+.rank-list li { display: grid; grid-template-columns: 2.2em 1fr auto 1.6em; gap: 8px; padding: 4px 8px; border-bottom: 1px solid #1b2333; }
+.rank-list li.me { color: var(--teal); font-weight: 700; }
+.rank-list .pos { color: var(--dim); }
+.rank-list .ctrl { color: var(--dim); font-size: 11px; align-self: center; }
+@media (max-height: 520px) { .rank-list { font-size: 13px; } .rank-list li { padding: 2px 8px; } }

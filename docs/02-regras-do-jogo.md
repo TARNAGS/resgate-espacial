@@ -148,6 +148,7 @@ A fase tem dois pontos de retorno: a base e a plataforma da tripulação. Os pos
 | Regra | Status |
 |---|---|
 | Não há limite de tempo para concluir a fase | Definido |
+| **Ranking (D-024):** cada fase tem um ranking com o melhor tempo de cada nickname, do mais rápido ao mais lento, no menu (RANKING). O nick é pedido depois do PLAY, antes da abertura | Definido para os playtesters |
 | Quem conclui o resgate mais rápido faz mais pontos | Definido |
 | O sistema de pontuação ainda será pensado (P-006) | Em aberto |
 

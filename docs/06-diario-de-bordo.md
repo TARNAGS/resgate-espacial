@@ -25,6 +25,7 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 
 ### Próximos passos
 
+0. **Ligar o ranking online:** o Fernando cria o Firebase Realtime Database e passa o endereço ([#87](https://github.com/TARNAGS/resgate-espacial/issues/87)).
 1. **O Fernando conta o retorno completo do teste com amigos** e testa as mudanças de hoje no iPhone: cartões em "Em revisão" ([#35](https://github.com/TARNAGS/resgate-espacial/issues/35), [#39](https://github.com/TARNAGS/resgate-espacial/issues/39), [#40](https://github.com/TARNAGS/resgate-espacial/issues/40), [#41](https://github.com/TARNAGS/resgate-espacial/issues/41), [#42](https://github.com/TARNAGS/resgate-espacial/issues/42), [#66](https://github.com/TARNAGS/resgate-espacial/issues/66), [#76](https://github.com/TARNAGS/resgate-espacial/issues/76), [#81](https://github.com/TARNAGS/resgate-espacial/issues/81) e [#82](https://github.com/TARNAGS/resgate-espacial/issues/82) a [#86](https://github.com/TARNAGS/resgate-espacial/issues/86)).
 2. **Fechar o repositório** quando o teste acabar.
 3. Retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)).
@@ -210,6 +211,13 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 
 - Documentos revistos com as decisões do dia: Visão 1.3, PRD 1.5, Roadmap 1.5, `CLAUDE.md` e README do projeto. "Onde paramos" reescrito.
 - A arte de divulgação para os playtesters (`resgate-espacial-playtest.jpg`) tinha entrado sem querer no commit 48f0a98 (o `git add -A` pegou o arquivo). Como não tem nada sensível, ficou no repositório, movida para a pasta `divulgacao/`.
+
+### 02/10/2026 — Nickname e ranking ([#87](https://github.com/TARNAGS/resgate-espacial/issues/87), D-024)
+
+- **Pedido do Fernando:** com até 10 playtesters, um nickname antes da abertura, salvo como ID do jogador, e um ranking de todas as fases no menu, sempre atualizado quando o jogador fizer um tempo melhor, inclusive voltando com o mesmo nick.
+- **Construído:** tela PILOT NAME depois do PLAY (ou ao trocar em Settings → PILOT), botão RANKING no menu com abas por fase, os 10 melhores, o nick de quem joga destacado e o controle usado. Só um tempo melhor substitui o anterior. 68 testes, com um banco online simulado: mesmo nick em dois aparelhos, fila sem rede.
+- **Falta o banco online:** sem ele, cada aparelho tem o seu ranking. Proposta: Firebase Realtime Database (gratuito), criado pelo Fernando; o endereço vai em `jogo/src/config/online.js`.
+- **O que pode quebrar o ranking**, levado ao Fernando: sem banco, nada é compartilhado; sem senha, dá para usar o nick de outro; tempos falsos são possíveis; mudar a fase começa um ranking novo (de propósito); painel de ajuste alterado não envia tempo; a BONUS é sorteada, então mede sorte também; controles diferentes no mesmo ranking.
 
 ## Aprendizados de produto
 
