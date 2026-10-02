@@ -229,7 +229,7 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 
 ### 02/10/2026 — Revisão do ranking antes dos playtesters
 
-- **Bug evitado:** as fases fixas rodavam o piloto automático no aparelho de cada jogador para calcular o tanque. Navegadores diferentes (Safari e Chrome) podem arredondar seno e cosseno de jeitos levemente diferentes, e numa simulação longa isso poderia mudar o tanque ou até trocar o cenário num aparelho e não no outro, misturando tempos de fases diferentes no mesmo ranking. **Correção:** o tanque das fases fixas foi calculado uma vez e gravado (); o jogo não roda mais o piloto nelas (a fase abre em 2 ms). Um teste confere que o cenário rápido é idêntico ao provado pelo piloto. Só a BONUS, sorteada, ainda roda o piloto no aparelho.
+- **Bug evitado:** as fases fixas rodavam o piloto automático no aparelho de cada jogador para calcular o tanque. Navegadores diferentes (Safari e Chrome) podem arredondar seno e cosseno de jeitos levemente diferentes, e numa simulação longa isso poderia mudar o tanque ou até trocar o cenário num aparelho e não no outro, misturando tempos de fases diferentes no mesmo ranking. **Correção:** o tanque das fases fixas foi calculado uma vez e gravado (`generator.tank`, em `jogo/src/content/worlds.js`); o jogo não roda mais o piloto nelas (a fase abre em 2 ms). Um teste confere que o cenário rápido é idêntico ao provado pelo piloto. Só a BONUS, sorteada, ainda roda o piloto no aparelho.
 - **Fila sem internet:** os tempos também são reenviados quando a internet volta e ao abrir o RANKING (antes, só ao reabrir o jogo).
 - **Aviso NEW BEST** só aparece na tela de resultado da fase certa, mesmo se a rede demorar.
 - **Tela de nickname** com BACK (volta ao menu ou a Settings).
