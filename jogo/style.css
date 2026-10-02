@@ -193,3 +193,12 @@ html, body { touch-action: manipulation; }
 .node.challenge .planet { fill: #3a0f16; stroke: var(--red); }
 .node.challenge.done .planet { fill: #3a0f16; stroke: var(--teal); }
 .map .challenge-text { fill: var(--red); }
+
+/* Abertura (#76): camada transparente que recebe os toques, com o SKIP no canto */
+.screen.intro {
+  justify-content: flex-start;
+  align-items: flex-end;
+  background: transparent;
+  cursor: pointer;
+}
+.btn.skip { min-width: 0; opacity: 0.85; }

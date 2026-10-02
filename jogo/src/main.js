@@ -15,6 +15,7 @@ import { createRenderer } from './render/renderer.js';
 import { createScreens } from './ui/screens.js';
 import { renderMap } from './ui/map.js';
 import { createTuning } from './ui/tuning.js';
+import { createIntro } from './render/intro.js';
 
 // Resgate Espacial — ponto de entrada. Liga as partes: regras (core), conteúdo (content),
 // controles (input), desenho (render), telas (ui) e aparelho (platform).
@@ -201,7 +202,41 @@ screens.el('btn-control').addEventListener('click', () => {
   updateControlButton();
 });
 
-screens.el('btn-play').addEventListener('click', () => { Sound.unlock(); click(); startLevel(app.selected); });
+// ===== Abertura (#76) =====
+const intro = createIntro(canvas, view);
+
+// Mostra a abertura e, no fim (ou no SKIP), segue para `then`
+function playIntro(then) {
+  app.screen = 'intro';
+  screens.show('intro');
+  joystick.reset();
+  intro.start({
+    onDone() {
+      app.save.seen = { ...app.save.seen, intro: true };
+      writeSave(app.save);
+      then();
+    },
+  });
+}
+
+screens.el('intro').addEventListener('click', () => intro.next());
+screens.el('btn-skip').addEventListener('click', (e) => { e.stopPropagation(); click(); intro.skip(); });
+window.addEventListener('keydown', (e) => {
+  if (app.screen !== 'intro') return;
+  e.preventDefault();
+  if (e.code === 'Escape') intro.skip();
+  else intro.next();
+});
+
+// No primeiro PLAY, a abertura vem antes da fase; depois, só pelo botão em Settings
+screens.el('btn-play').addEventListener('click', () => {
+  Sound.unlock();
+  click();
+  const lv = app.selected;
+  if (app.save.seen?.intro) startLevel(lv);
+  else playIntro(() => startLevel(lv));
+});
+screens.el('btn-intro').addEventListener('click', () => { Sound.unlock(); click(); playIntro(toMenu); });
 screens.el('btn-settings').addEventListener('click', () => { Sound.unlock(); click(); showScreen('settings'); });
 screens.el('btn-back').addEventListener('click', () => { click(); toMenu(); });
 screens.el('btn-sound').addEventListener('click', () => {
@@ -303,6 +338,12 @@ function loop(now) {
   } else {
     acc = 0;
   }
+  if (app.screen === 'intro') {
+    intro.update(elapsed);
+    intro.draw(now);
+    requestAnimationFrame(loop);
+    return;
+  }
   renderer.draw(now, {
     match: app.screen === 'game' ? m : null,
     theme: WORLDS[0].theme,
@@ -336,4 +377,7 @@ const start = new URLSearchParams(location.search).get('level');
 if (start && tuning.enabled && findLevel(start)) startLevel(findLevel(start));
 
 // Acesso para testes automáticos no navegador
-window.__game = { app, PARAMS, LEVELS, startLevel, events, keyboard, joystick, renderer };
+window.__game = { app, PARAMS, LEVELS, startLevel, events, keyboard, joystick, renderer, intro, playIntro };
+
+// ?intro no endereço mostra a abertura ao abrir o jogo (para rever e testar)
+if (new URLSearchParams(location.search).has('intro')) playIntro(toMenu);

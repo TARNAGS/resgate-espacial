@@ -209,11 +209,12 @@ Ideia do Fernando (02/10/2026): antes da primeira fase, telas com imagem e texto
 | Regra | Status |
 |---|---|
 | Três telas, nessa ordem, antes da primeira fase | Definido (ideia do Fernando) |
-| Tocar na tela (ou apertar uma tecla) avança; um botão "Skip" pula tudo | Proposta |
-| A abertura só aparece sozinha na primeira vez; depois, dá para revê-la pelo menu | Proposta |
-| A arte das telas segue a estética do jogo: tripulação de traços e nave triangular | Proposta; depende da identidade do jogo (E-19) |
+| Dá para pular a abertura a qualquer momento (botão "SKIP"; no teclado, Esc) | Definido (Fernando, 02/10/2026) |
+| Tocar na tela (ou apertar uma tecla) completa o texto ou avança; sem toque, cada tela avança sozinha alguns segundos depois do texto completo | Proposta |
+| A abertura só aparece sozinha no primeiro PLAY; depois, dá para revê-la em Settings → WATCH INTRO | Proposta |
+| A arte das telas segue a estética do jogo: tripulação de traços e nave triangular | Proposta; arte provisória até a identidade do jogo (E-19) |
 
-História no backlog: [#76](https://github.com/TARNAGS/resgate-espacial/issues/76).
+Uma prévia jogável foi construída em 02/10/2026 (`jogo/src/render/intro.js`): na tela 1, a nave da tripulação cravada no chão e soltando fumaça, um tripulante acenando, um sentado com a mão na cabeça e outro andando de um lado para o outro, com um SOS em código Morse; na tela 2, a base e o sinal de socorro chegando na antena; na tela 3, a nave decola e a tela escurece. História no backlog: [#76](https://github.com/TARNAGS/resgate-espacial/issues/76).
 
 ## 11. Interface durante o jogo — Proposta
 

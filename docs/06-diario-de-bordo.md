@@ -157,6 +157,16 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
   - Sem login, moedas e compras ficam no aparelho.
   - A ordem "lojas antes de mundos" é uma proposta, e a decisão é dele.
 
+### 02/10/2026 — Prévia da abertura (#76)
+
+- **Pedido do Fernando:** ver a abertura funcionando, e ela precisa poder ser pulada.
+- **Construída** em `jogo/src/render/intro.js`, desenhada no Canvas no estilo do jogo, com arte provisória:
+  - tela 1: a nave da tripulação cravada no chão, com fumaça e faíscas, a tripulação em apuros, uma bandeira de SOS e um SOS em código Morse baixinho;
+  - tela 2: a base, a nave do jogador e o sinal de socorro chegando na antena;
+  - tela 3: a nave decola e a tela escurece até a fase.
+- **Como funciona:** os textos aparecem letra por letra; tocar completa o texto ou avança; SKIP (ou Esc) pula tudo. Ela aparece sozinha só no primeiro PLAY e pode ser revista em Settings → WATCH INTRO, ou com `?intro` no endereço.
+- **Na regra (documento 02, seção 10.1):** "dá para pular" passou a Definido; o resto segue em Proposta.
+
 ## Aprendizados de produto
 
 - Separar o objetivo do projeto (portfólio) do objetivo do produto (o jogador), com uma regra de desempate: quando os dois brigam, o jogador vence.
