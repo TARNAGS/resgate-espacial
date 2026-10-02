@@ -4,7 +4,7 @@
 
 ## O que é este projeto
 
-Projeto de treino de Product Management e peça de portfólio do Fernando: recriar um jogo de nave 2D da juventude (gravidade, combustível, resgate de tripulação) como um PWA gratuito, levado da ideia ao lançamento. O Claude atua como parceiro de PM: organiza o processo, faz as perguntas, rascunha e constrói. **As decisões de produto são do Fernando.**
+Projeto de treino de Product Management, peça de portfólio e, desde 02/10/2026, aposta de negócio do Fernando: recriar um jogo de nave 2D da juventude (gravidade, combustível, resgate de tripulação), levado da ideia até a publicação na App Store e no Google Play (D-019). O MVP tem 3 fases e roda no navegador; o big picture (mundos de 10 fases, abertura, loja de itens) está na Visão, seção 8.3. O Claude atua como parceiro de PM: organiza o processo, faz as perguntas, rascunha e constrói. **As decisões de produto são do Fernando.**
 
 "Resgate Espacial" é um codinome; o nome final é a pendência P-003.
 
@@ -17,6 +17,7 @@ Leia o [diário de bordo](docs/06-diario-de-bordo.md). A seção "Onde paramos" 
 | O quê | Onde |
 |---|---|
 | Visão, regras do jogo, PRD, roadmap e decisões | `docs/01` a `docs/05` |
+| Design de cada mundo (modelo e documentos) | `docs/08-design-de-mundos.md` e `docs/mundos/` |
 | O que foi feito e onde paramos | `docs/06-diario-de-bordo.md` |
 | O jogo (código, testes e como criar fases e obstáculos) | `jogo/` e [`jogo/README.md`](jogo/README.md); roda com `node jogo/servir.js` em http://localhost:8081 e os testes com `node jogo/testes/rodar.js` |
 | Roteiro de teste com pessoas | `docs/07-roteiro-de-teste-do-controle.md` |

@@ -5,8 +5,8 @@
 | Campo | Valor |
 |---|---|
 | Documento | 03 — PRD (requisitos do produto) |
-| Versão | 1.3 |
-| Data | 01/10/2026 |
+| Versão | 1.4 |
+| Data | 02/10/2026 |
 | Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
 
@@ -21,8 +21,10 @@ Decisões que moldam os requisitos ([registro de decisões](05-registro-de-decis
 | Decisão | O que implica para o produto |
 |---|---|
 | D-001 Sem login | Progresso guardado no aparelho; nenhum servidor de contas |
-| D-002 PWA, fora das lojas | Instalação pelo navegador; o jogo precisa funcionar sem internet |
-| D-003 Gratuito | Hospedagem e ferramentas sem custo |
+| D-002 PWA, fora das lojas (substituída pela D-019) | No MVP, o jogo continua pelo navegador e precisa funcionar sem internet |
+| D-019 Publicação nas lojas | Depois do MVP, o jogo vai para a App Store e o Google Play (RF-21) |
+| D-003 Gratuito (revista pela D-019) | MVP gratuito, com ferramentas sem custo; cobrar depois está em aberto (P-014 e P-017) |
+| D-020 Mundos com 10 fases | O mapa de progresso agrupa as fases por mundo, cada um com visual próprio (RF-22) |
 | D-004 Um jogador | Tudo roda no aparelho |
 | D-006 Direcional virtual | Controle por toque com um polegar só |
 | D-007 Jogo em inglês | Todos os textos do jogo em inglês |
@@ -91,6 +93,11 @@ Prioridade: **MVP** (entra na primeira versão pública) ou **Depois** (etapas s
 | RF-15 | Medição anônima de uso | MVP | Os eventos da seção 7 chegam à ferramenta de medição, sem dados pessoais |
 | RF-16 | Botão "Instalar" no Android e no computador, usando o convite do navegador | Depois | Nos navegadores que oferecem o convite (como o Chrome), o botão instala o jogo (D-008) |
 | RF-17 | Fases geradas aleatoriamente (D-014) | MVP | Cada partida gera um cenário novo, seguindo as regras do nível; todo cenário gerado tem solução; a mesma semente gera sempre o mesmo cenário |
+| RF-18 | Abertura em telas antes da primeira fase ([documento 02, seção 10.1](02-regras-do-jogo.md#101-abertura--proposta-depois-do-mvp)) | Depois | Na primeira vez, três telas: tripulação em apuros, o chamado para o resgate e um fade para a fase 1; dá para pular e rever pelo menu |
+| RF-19 | Loja de itens no menu (P-017) | Depois | O jogador vê os itens, o preço (dinheiro real ou moedas) e o que já comprou; um item comprado continua com ele depois de fechar o jogo |
+| RF-20 | Moedas do jogo (P-017) | Depois | O jogador ganha moedas jogando, conforme a regra da P-017, e vê o saldo no menu |
+| RF-21 | Publicação na App Store e no Google Play (D-019) | Depois | O jogo instala pelas duas lojas; as compras, quando existirem, usam o sistema de compras de cada loja e podem ser restauradas sem login (a confirmar na [#65](https://github.com/TARNAGS/resgate-espacial/issues/65)) |
+| RF-22 | Mundos com 10 fases (D-020) | Depois | O mapa de progresso mostra os mundos, cada um com as suas 10 fases e o seu visual; concluir a fase 10 libera o próximo mundo |
 
 ## 5. Requisitos não funcionais
 
@@ -185,8 +192,9 @@ O tempo entre o link e o controle da nave (RNF-01) é medido em teste, não pela
 ## 10. Fora do escopo
 
 - Login, contas, ranking online e sincronização entre aparelhos (D-001).
-- Publicação na App Store e no Google Play (D-002).
-- Anúncios e compras (D-003).
+- Publicação na App Store e no Google Play **no MVP**: vem depois (D-019; RF-21).
+- Compras **no MVP**: a loja de itens e a cobrança vêm depois (RF-19 e RF-20; P-014 e P-017).
+- Anúncios (D-003, revista pela D-019).
 - Multiplayer (D-004).
 - Testes e ajustes para Android nesta etapa (D-008).
 - Idiomas além do inglês (D-007).
@@ -198,6 +206,8 @@ O tempo entre o link e o controle da nave (RNF-01) é medido em teste, não pela
 | P-003 | Qual será o nome final do jogo? | Tela de abertura, ícone e nome na Tela de Início |
 | P-006 | Como funciona a pontuação? | Telas de resultado e de seleção de fases (RF-05 e RF-07) |
 | P-008 | Qual ferramenta de medição anônima usar? | RF-15 e seção 7 |
+| P-014 | O jogo será pago, gratuito com loja de itens, ou os dois? | RF-19 a RF-21 |
+| P-017 | O que a loja vende, com que moeda, e como evitar vantagem injusta? | RF-19 e RF-20 |
 
 ## 12. Próximos passos
 
@@ -226,3 +236,4 @@ Os próximos passos estão no [Roadmap](04-roadmap.md) e no [quadro kanban](http
 | 1.1 | 01/10/2026 | Pendência P-004 resolvida: JavaScript puro com Canvas (D-011) |
 | 1.2 | 01/10/2026 | Pendências P-001 e P-005 resolvidas: repositório público (D-012) e hospedagem no GitHub Pages (D-013) |
 | 1.3 | 01/10/2026 | Fases geradas aleatoriamente (D-014, novo RF-17) e menu com mapa de progresso (D-015, RF-02 e RF-05 revistos) |
+| 1.4 | 02/10/2026 | Big picture com prioridade "Depois": abertura (RF-18), loja de itens (RF-19), moedas (RF-20), publicação nas lojas (RF-21, D-019) e mundos com 10 fases (RF-22, D-020). O MVP não muda |

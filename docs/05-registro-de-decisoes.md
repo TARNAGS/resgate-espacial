@@ -13,8 +13,8 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | ID | Decisão | Data | Status |
 |---|---|---|---|
 | D-001 | Sem login e sem contas | 28/09/2026 | Aceita |
-| D-002 | Distribuição como PWA, fora das lojas | 28/09/2026 | Aceita |
-| D-003 | Gratuito, sem anúncios e sem compras | 28/09/2026 | Aceita |
+| D-002 | Distribuição como PWA, fora das lojas | 28/09/2026 | Substituída pela D-019 |
+| D-003 | Gratuito, sem anúncios e sem compras | 28/09/2026 | Revista pela D-019: cobrar ou não está em aberto (P-014); sem anúncios continua |
 | D-004 | Apenas um jogador | 28/09/2026 | Aceita |
 | D-005 | Identidade própria, inspirada no gênero | 28/09/2026 | Aceita |
 | D-006 | Controle por toque: direcional virtual | 28/09/2026 | Aceita |
@@ -30,6 +30,8 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-016 | Quadro com duas trilhas: descoberta e entrega | 01/10/2026 | Aceita |
 | D-017 | Repositório e quadro privados; o jogo só fica no ar nas janelas de teste | 01/10/2026 | Aceita |
 | D-018 | Regra do melhor caminho: toda fase com posto pode ser concluída sem abastecer | 02/10/2026 | Aceita |
+| D-019 | O jogo será publicado na App Store e no Google Play | 02/10/2026 | Aceita |
+| D-020 | Big picture: mundos com 10 fases, cada um com identidade visual própria | 02/10/2026 | Aceita; o MVP segue com 3 fases (D-009) |
 
 ## D-001 — Sem login e sem contas
 
@@ -69,6 +71,8 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 
 **Revisitar se** houver interesse em estar nas lojas. Um PWA pode ser empacotado como app depois.
 
+**Substituída pela [D-019](#d-019--o-jogo-será-publicado-na-app-store-e-no-google-play) em 02/10/2026.**
+
 ## D-003 — Gratuito, sem anúncios e sem compras
 
 **Contexto.** Projeto de portfólio e aprendizado.
@@ -78,6 +82,8 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 **Consequências.** O custo de operação precisa ser zero: hospedagem gratuita e nenhum serviço pago.
 
 **Revisitar se** o projeto deixar de ser apenas portfólio.
+
+**Revista pela [D-019](#d-019--o-jogo-será-publicado-na-app-store-e-no-google-play) em 02/10/2026:** o projeto deixou de ser só portfólio. Cobrar pelo jogo, vender itens ou os dois está em aberto (P-014 e P-017). "Sem anúncios" continua valendo.
 
 ## D-004 — Apenas um jogador
 
@@ -356,6 +362,52 @@ Junto com as trilhas, entraram:
 
 **Revisitar se** os testes mostrarem que bons jogadores chegam com muito combustível (o piloto está fraco; diminuir a folga ou melhorar o piloto) ou que ninguém consegue concluir sem abastecer (a folga está curta).
 
+## D-019 — O jogo será publicado na App Store e no Google Play
+
+**Contexto.** Em 02/10/2026, depois dos primeiros testes, o Fernando contou que as pessoas se divertiram jogando e que ele viu oportunidade de negócio, tanto na venda de itens numa loja dentro do jogo quanto na venda do próprio jogo. Nas palavras dele: "meu projeto vai até publicar e botar nos celulares". Até ali, a D-002 mantinha o jogo fora das lojas, e a D-003 o mantinha gratuito e sem compras.
+
+**Opções consideradas.**
+
+| Opção | A favor | Contra |
+|---|---|---|
+| Continuar só como PWA (D-002) | Custo zero, um código só, sem revisão das lojas | Sem as lojas, não há como vender o jogo nem itens pelos meios que os jogadores de celular usam; no iPhone, a instalação é manual |
+| **Publicar na App Store e no Google Play** | O jogo chega aos celulares pelo caminho normal; abre a possibilidade de cobrar | Contas de desenvolvedor pagas, revisão de cada versão e regras das lojas para compras dentro do app |
+
+**Decisão.** O jogo será publicado na App Store e no Google Play. Se ele será pago, gratuito com loja de itens, ou os dois, continua em aberto (P-014 e P-017).
+
+**Consequências.**
+
+- Substitui a D-002. Revê a D-003: cobrar passa a ser possível, e "sem anúncios" continua valendo.
+- O MVP não muda: 3 fases (D-009), testado pelo site. A publicação nas lojas vira um marco próprio, depois da V1 (Roadmap, M4 — proposta).
+- A premissa de custo zero deixa de valer: as contas de desenvolvedor são pagas (valores de referência da D-002: Apple, US$ 99 por ano; Google, US$ 25 uma única vez; confirmar na [#65](https://github.com/TARNAGS/resgate-espacial/issues/65)).
+- Como empacotar o jogo, feito em JavaScript com Canvas (D-011), o risco de a Apple recusar um app feito em web e as regras de compras dentro do app são a pesquisa [#65](https://github.com/TARNAGS/resgate-espacial/issues/65).
+- Sem login (D-001), compras e moedas ficam ligadas ao aparelho e à conta da loja. Como restaurar compras e o que acontece ao trocar de celular entram na #65 e na P-016.
+- O site continua servindo para testes, nas janelas da D-017.
+
+**Revisitar se** a #65 mostrar que publicar exige mudanças grandes demais na tecnologia (D-011), ou se o custo das contas não se justificar antes de haver jogadores.
+
+## D-020 — Big picture: mundos com 10 fases, cada um com identidade visual própria
+
+**Contexto.** Em 02/10/2026, o Fernando descreveu o jogo de longo prazo: sem enredo ("não é um jogo para ter lore"), com fator de replay alto e grande quantidade de fases, organizadas em vários mundos de 10 fases, cada um com características visuais próprias. Ele também pediu um documento de design para cada mundo. Até ali, os documentos usavam "fase" e "nível" como sinônimos, e "mundo" não existia (P-011).
+
+**Opções consideradas.**
+
+| Opção | A favor | Contra |
+|---|---|---|
+| Uma sequência única de fases | Simples | Pouca variedade visual; difícil mostrar progresso em dezenas de fases |
+| **Mundos com 10 fases, cada um com identidade visual própria** | Variedade e marcos claros de progresso; cada mundo apresenta novidades; combina com fases geradas a partir de regras (D-014), que barateiam ter muitas fases | Cada mundo pede arte, regras do gerador e um documento de design |
+
+**Decisão.** O jogo se organiza em mundos. Cada mundo tem 10 fases e identidade visual própria (paleta, cenário e obstáculos), descrita num documento de design ([documento 08](08-design-de-mundos.md)). As 3 fases do MVP (D-009) são as fases 1 a 3 do Mundo 1. Quantos mundos o jogo terá no lançamento nas lojas fica em aberto.
+
+**Consequências.**
+
+- Responde a parte "mundo e fase" da P-011: mundo é o conjunto de 10 fases com visual próprio; fase (ou nível) é um conjunto de regras do gerador dentro do mundo. O catálogo de obstáculos continua em aberto.
+- O E-12 (níveis 4 e 5, M3) passa a ser parte do Mundo 1; as fases 6 a 10 e os mundos seguintes ficam no E-23 (M5 — proposta).
+- O mapa de progresso vai precisar agrupar as fases por mundo. O código já tem mundos com tema visual próprio (`jogo/src/content/worlds.js`).
+- Desafios fora da sequência, como a PRACTICE, continuam existindo à parte.
+
+**Revisitar se** os testes mostrarem que 10 fases por mundo ficam repetitivas, ou que o custo de arte de cada mundo é alto demais para uma pessoa.
+
 ## Decisões pendentes
 
 | ID | Pergunta | Quando decidir | Observação |
@@ -365,10 +417,11 @@ Junto com as trilhas, entraram:
 | P-009 | Como o jogo ensina a jogar: há um tutorial, e a fase 1 é aleatória ou fixa e desenhada à mão? | Antes do M2 | No protótipo 01, ela é aleatória, com regras bem fáceis. Ampliada em 01/10/2026 com a pergunta do Fernando sobre ter um tutorial. Cartão [#48](https://github.com/TARNAGS/resgate-espacial/issues/48) |
 | P-010 | Ao tentar de novo depois de perder as 3 vidas, o cenário se repete ou muda? | Antes do M2 | No protótipo 01, "Try again" repete o mesmo cenário. Cartão [#49](https://github.com/TARNAGS/resgate-espacial/issues/49) |
 | P-008 | Qual ferramenta de medição anônima usar, e que eventos medir? | No M2, antes de construir a medição (E-17) | Precisa ser gratuita, dispensar cookies e aceitar eventos personalizados ([PRD, seção 7](03-prd.md#7-medição)). O Fernando revisa a lista de eventos. Cartão [#56](https://github.com/TARNAGS/resgate-espacial/issues/56) |
-| P-011 | Que obstáculos o jogo tem, e como ele se organiza em mundos e fases? | Antes de construir o gerador de fases (E-09) | Os documentos usam "fase" e "nível" como sinônimos, e "mundo" ainda não existe. Afeta D-009 e D-015. Cartão [#60](https://github.com/TARNAGS/resgate-espacial/issues/60) |
+| P-011 | Que obstáculos o jogo tem, e como ele se organiza em mundos e fases? | Antes de construir o gerador de fases (E-09) | A parte "mundo e fase" foi respondida pela D-020 (mundos com 10 fases). Falta o catálogo de obstáculos e o que cada mundo apresenta de novo. Cartão [#60](https://github.com/TARNAGS/resgate-espacial/issues/60) |
 | P-012 | Haverá modificadores de jogo e de fase (gravidade, vento, escuridão etc.)? | Antes de construir o gerador de fases (E-09) | Afeta a pontuação (P-006) e o mapa de progresso. Cartão [#61](https://github.com/TARNAGS/resgate-espacial/issues/61) |
 | P-013 | Quem é o jogador ideal do jogo (ICP)? | Antes dos testes com pessoas ([#43](https://github.com/TARNAGS/resgate-espacial/issues/43)) | Aprofunda a persona primária da Visão (seção 4). Cartão [#59](https://github.com/TARNAGS/resgate-espacial/issues/59) |
-| P-014 | O jogo continua gratuito e fora das lojas? | Antes do lançamento | Cobrar ou ir para as lojas reabre D-002, D-003, D-012 e D-013. Cartão [#63](https://github.com/TARNAGS/resgate-espacial/issues/63) |
+| P-014 | O jogo será pago, gratuito com loja de itens, ou os dois? | Antes da publicação nas lojas (M4) | Ir para as lojas já foi decidido (D-019); falta decidir se e como cobrar. Cartão [#63](https://github.com/TARNAGS/resgate-espacial/issues/63) |
+| P-017 | O que a loja de itens vende, com que moeda, e como evitar vantagem injusta? | Antes de construir a loja (E-24) | Ideia do Fernando: itens de jogo e de nave, com dinheiro real ou moedas do jogo. Itens que facilitem o jogo afetam recordes e a regra do melhor caminho (D-018). Cartão [#78](https://github.com/TARNAGS/resgate-espacial/issues/78) |
 | P-015 | Como receber dinheiro, e é preciso CNPJ? | Só se a P-014 decidir cobrar ou aceitar doações | Cartão [#64](https://github.com/TARNAGS/resgate-espacial/issues/64) |
 | P-016 | O que o jogo guarda, e onde: só no aparelho ou também num servidor? | Antes de construir o progresso salvo (E-14) | Hoje tudo fica no aparelho; um servidor reabre D-001, D-003 e D-004. Cartão [#62](https://github.com/TARNAGS/resgate-espacial/issues/62) |
 

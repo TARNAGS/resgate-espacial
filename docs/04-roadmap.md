@@ -3,8 +3,8 @@
 | Campo | Valor |
 |---|---|
 | Documento | 04 — Roadmap |
-| Versão | 1.3 |
-| Data | 01/10/2026 |
+| Versão | 1.4 |
+| Data | 02/10/2026 |
 | Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
 
@@ -16,7 +16,7 @@ O backlog está no GitHub: [issues](https://github.com/TARNAGS/resgate-espacial/
 
 ```mermaid
 flowchart LR
-    M0["M0 · Fundação"] --> M1["M1 · Protótipo de controle"] --> M2["M2 · MVP (3 fases)"] --> M3["M3 · V1"] --> D["Depois"]
+    M0["M0 · Fundação"] --> M1["M1 · Protótipo de controle"] --> M2["M2 · MVP (3 fases)"] --> M3["M3 · V1"] --> M4["M4 · Lojas (proposta)"] --> M5["M5 · Mundos e loja (proposta)"] --> D["Depois"]
 ```
 
 | Marco | Objetivo | O que entra | Critério de saída |
@@ -25,7 +25,11 @@ flowchart LR
 | **M1 — Protótipo de controle** | Validar o maior risco: o controle é divertido no iPhone? | Física da nave, teclado, direcional virtual e um cenário de teste com uma plataforma | Pelo menos 4 de 5 testadores decolam, voam e pousam em poucos minutos e aprovam a sensação (meta proposta); parâmetros de ajuste calibrados |
 | **M2 — MVP** | Lançar o ciclo completo do jogo e começar a medir | Níveis 1 a 3, com cenários gerados aleatoriamente (D-009 e D-014), menu com mapa de progresso (D-015), requisitos MVP do PRD, pontuação, nome final e medição | Checklist de lançamento do PRD (seção 8) completo e jogo divulgado no portfólio |
 | **M3 — V1** | Mais conteúdo e mais aparelhos, guiados pelos dados | Níveis 4 e 5, Android e ajustes a partir das métricas | Níveis 4 e 5 no ar, instalação testada num Android e metas da Visão revistas com dados reais |
-| **Depois** | Guardar ideias sem compromisso | Ideias do documento 02, seção 15 | — |
+| **M4 — Lojas** (proposta) | Levar o jogo aos celulares pelas lojas (D-019) | Empacotar o jogo como app, contas de desenvolvedor, revisão da Apple e do Google, com o conteúdo da V1. Cobrar ou não já decidido (P-014) | Jogo aprovado e disponível na App Store e no Google Play |
+| **M5 — Mundos e loja** (proposta) | O big picture: replay alto, muitas fases e o teste do negócio | Mundo 1 completo (fases 6 a 10), documento de design de cada mundo (D-020), abertura em telas, loja de itens e moedas (P-017) | Mundo 1 com 10 fases e loja no ar nas lojas |
+| **Depois** | Guardar ideias sem compromisso | Mundos seguintes e ideias do documento 02, seção 15 | — |
+
+**Por que lojas antes de mundos e loja (proposta):** publicar cedo, com pouco conteúdo, testa o caminho até as lojas (empacotamento e revisão, o maior risco técnico da [#65](https://github.com/TARNAGS/resgate-espacial/issues/65)) antes de investir em mundos. E a loja de itens depende do sistema de compras das lojas. A alternativa é publicar só quando o Mundo 1 estiver completo; essa ordem é decisão do Fernando.
 
 **Se o M1 reprovar o controle, o projeto não avança para as fases.** Primeiro testa-se a variante do direcional (D-006); se ainda assim não ficar divertido, o design do controle é revisto. Falhar no protótipo é barato; falhar depois de construir as fases, não.
 
@@ -39,6 +43,8 @@ flowchart LR
 | [I-04](https://github.com/TARNAGS/resgate-espacial/issues/4) | Instalável e confiável no celular | Acesso sem atrito e instalação (seção 6.2) | M2 e M3 |
 | [I-05](https://github.com/TARNAGS/resgate-espacial/issues/5) | Aprender com os jogadores | Métricas e hipóteses H1 a H3 (seções 3 e 6) | M2 e M3 |
 | [I-06](https://github.com/TARNAGS/resgate-espacial/issues/6) | Portfólio: contar a história | Mostrar o processo de produto (seção 6.3) | M2 |
+| [I-07](https://github.com/TARNAGS/resgate-espacial/issues/69) | Publicar nas lojas e testar o negócio | Publicar o jogo e testar o negócio (seções 2, 6.3 e 8.3) | M4 e M5 |
+| [I-08](https://github.com/TARNAGS/resgate-espacial/issues/70) | Mais jogo: mundos, abertura e conteúdo | Princípios "sem enredo" e "replay alto" (seções 7 e 8.3) | M5 |
 
 ## 3. Épicos
 
@@ -92,6 +98,21 @@ flowchart LR
 | [E-19](https://github.com/TARNAGS/resgate-espacial/issues/25) | Identidade do jogo | Nome final, ícone e arte próprios | P-003; D-005 |
 | [E-20](https://github.com/TARNAGS/resgate-espacial/issues/26) | Estudo de caso | README contando a história do projeto, com decisões, métricas e aprendizados; abertura do repositório, se ainda for privado | P-001; Visão, seção 6.3 |
 
+### I-07 — Publicar nas lojas e testar o negócio (M4 e M5)
+
+| ID | Épico | O que inclui | Referências |
+|---|---|---|---|
+| [E-24](https://github.com/TARNAGS/resgate-espacial/issues/74) | Loja de itens e moedas (M5) | Loja no menu, itens cosméticos e de jogo, dinheiro real e moedas do jogo, sem "pague para ganhar" | P-014, P-017; RF-19, RF-20 |
+| [E-25](https://github.com/TARNAGS/resgate-espacial/issues/75) | Publicação na App Store e no Google Play (M4) | Empacotamento, contas, revisão das lojas, compras dentro do app e restauração de compras sem login | D-019; [#65](https://github.com/TARNAGS/resgate-espacial/issues/65); RF-21 |
+
+### I-08 — Mais jogo: mundos, abertura e conteúdo (M5)
+
+| ID | Épico | O que inclui | Referências |
+|---|---|---|---|
+| [E-21](https://github.com/TARNAGS/resgate-espacial/issues/71) | Abertura em telas | Três telas antes da primeira fase, que dá para pular e rever | Doc 02, seção 10.1; RF-18 |
+| [E-22](https://github.com/TARNAGS/resgate-espacial/issues/72) | Design dos mundos | Um documento de design por mundo, no modelo do documento 08 | D-020; documento 08 |
+| [E-23](https://github.com/TARNAGS/resgate-espacial/issues/73) | Mundos com 10 fases | Fases 6 a 10 do Mundo 1 (4 e 5 estão no E-12), mundos seguintes e mapa de progresso agrupado por mundo | D-020; RF-22 |
+
 ## 4. Decisões pendentes por marco
 
 | Antes de | Decidir | ID |
@@ -100,6 +121,9 @@ flowchart LR
 | Construir as telas de resultado (M2) | Sistema de pontuação | P-006 |
 | Construir a medição (M2) | Ferramenta de medição anônima | P-008 |
 | Lançar o MVP (M2) | Nome final do jogo | P-003 |
+| Publicar nas lojas (M4) | Jogo pago, gratuito com loja, ou os dois; como empacotar e o risco de recusa | P-014; [#65](https://github.com/TARNAGS/resgate-espacial/issues/65) |
+| Construir a loja (M5) | O que a loja vende, com que moeda e a regra de itens justos | P-017 |
+| Fechar o M5 | Quantos mundos no lançamento e a novidade de cada um | P-011 |
 
 A hospedagem deixou de ser um detalhe do fim do projeto: para testar o controle no iPhone (M1), o protótipo precisa estar publicado num endereço. Por isso as pendências P-001 e P-005 subiram para o M0.
 
@@ -109,6 +133,7 @@ A hospedagem deixou de ser um detalhe do fim do projeto: para testar o controle 
 - Os marcos são *milestones* do GitHub.
 - Além de histórias, o backlog tem **tarefas**: trabalho técnico, decisões e atividades de produto que habilitam as histórias, mas não são percebidas pelo jogador (ex.: decidir a hospedagem).
 - **Histórias só para os próximos marcos.** Só o M0 e o M1 têm histórias e tarefas escritas. As dos marcos seguintes são escritas quando eles se aproximarem, já com o que o protótipo ensinar. Escrever tudo agora seria detalhar suposições que o M1 ainda pode mudar.
+- **Exceção registrada em 02/10/2026:** para guardar o big picture, o M5 já tem a história da abertura ([#76](https://github.com/TARNAGS/resgate-espacial/issues/76)) e a descoberta da loja ([#78](https://github.com/TARNAGS/resgate-espacial/issues/78)). Elas serão revistas quando o M5 se aproximar.
 - Ao fim de cada marco, uma retrospectiva curta: o que funcionou, o que não funcionou e o que foi aprendido construindo com IA.
 
 ## 6. Riscos do plano
@@ -117,7 +142,7 @@ A hospedagem deixou de ser um detalhe do fim do projeto: para testar o controle 
 |---|---|---|
 | Sem prazo, o projeto se arrastar ou parar no meio | Média | Marcos pequenos, cada um com uma entrega que dá para mostrar; o protótipo do M1 já é jogável |
 | O protótipo reprovar o controle | Média | Falha barata, antes das fases; variante do direcional (D-006) e revisão do design |
-| O escopo crescer | Média | Fases 4 e 5 e as ideias já estão fora do MVP; ideia nova entra em "Depois" |
+| O escopo crescer | Média | O MVP continua com 3 fases (D-009); o big picture tem marcos próprios (M4 e M5) e só começa depois da V1; ideia nova entra em "Depois" |
 
 ## Histórico de versões
 
@@ -128,3 +153,4 @@ A hospedagem deixou de ser um detalhe do fim do projeto: para testar o controle 
 | 1.1 | 01/10/2026 | Tecnologia decidida: JavaScript puro com Canvas (D-011) |
 | 1.2 | 01/10/2026 | Repositório e quadro públicos (D-012) e hospedagem no GitHub Pages (D-013): as decisões do M0 estão fechadas |
 | 1.3 | 01/10/2026 | Fases geradas aleatoriamente (D-014) e menu com mapa de progresso (D-015): E-09 vira "Gerador de fases e níveis 1 a 3", E-12 vira "Níveis 4 e 5" e E-10 inclui o menu com mapa |
+| 1.4 | 02/10/2026 | Big picture do Fernando: marcos M4 (lojas) e M5 (mundos e loja) em proposta, iniciativas I-07 e I-08 e épicos E-21 a E-25. Publicação nas lojas decidida (D-019) e mundos com 10 fases (D-020). O MVP continua com 3 fases |

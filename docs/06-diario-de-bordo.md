@@ -3,14 +3,15 @@
 | Campo | Valor |
 |---|---|
 | Documento | 06 — Diário de bordo |
-| Última atualização | 01/10/2026 |
+| Última atualização | 02/10/2026 |
 | Responsável | Fernando Nunes (Product Manager) |
 
 Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e de onde o projeto parou. É o ponto de partida para retomar o trabalho, em qualquer máquina.
 
 ## Onde paramos (02/10/2026, fim do dia)
 
-- **Objetivo do projeto:** portfólio e renda. A ideia é publicar na App Store e no Google Play, com compras dentro do jogo ou venda do jogo, ainda em aberto ([#63](https://github.com/TARNAGS/resgate-espacial/issues/63)). A pesquisa técnica das lojas é a [#65](https://github.com/TARNAGS/resgate-espacial/issues/65), com o Claude.
+- **Objetivo do projeto:** portfólio, aprendizado e negócio. O jogo será publicado na App Store e no Google Play (D-019). Cobrar pelo jogo, vender itens ou os dois está em aberto ([#63](https://github.com/TARNAGS/resgate-espacial/issues/63) e [#78](https://github.com/TARNAGS/resgate-espacial/issues/78)). A pesquisa técnica das lojas é a [#65](https://github.com/TARNAGS/resgate-espacial/issues/65), com o Claude.
+- **Big picture** ([Visão, seção 8.3](01-visao-do-produto.md#83-big-picture-o-jogo-depois-do-mvp)): sem enredo, replay alto, mundos de 10 fases com visual próprio (D-020, [documento 08](08-design-de-mundos.md)), abertura em três telas e loja de itens. O MVP continua com 3 fases. No roadmap, os marcos M4 (lojas) e M5 (mundos e loja) estão em proposta, esperando a aprovação do Fernando.
 - **Marcos:** M0 só falta a retrospectiva ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)). M1 em andamento: física, propulsor, embalo, parâmetros, teclado e direcional concluídos (#32 a #34 e #36 a #38). Em revisão, aguardando o Fernando conferir: treino ([#35](https://github.com/TARNAGS/resgate-espacial/issues/35)), área do direcional ([#39](https://github.com/TARNAGS/resgate-espacial/issues/39)), toque sem zoom ([#40](https://github.com/TARNAGS/resgate-espacial/issues/40)), roteiro de teste ([#41](https://github.com/TARNAGS/resgate-espacial/issues/41)) e painel de ajuste ([#42](https://github.com/TARNAGS/resgate-espacial/issues/42)).
 - **O jogo** fica em [`jogo/`](../jogo/README.md), construído a partir do protótipo 01 (#51). Já tem:
   - níveis 1 a 3 e o desafio PRACTICE, a fase mais difícil (#68);
@@ -20,7 +21,7 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
   - treino (TRAINING), painel de ajuste escondido e 50 testes automáticos.
 - **Como testar:** no PC, `node jogo/servir.js` e http://localhost:8081; no iPhone, no mesmo Wi-Fi, `http://<IP do computador>:8081`. Um beta tester de fora precisa de um endereço público: as opções (janela de teste, Netlify ou Cloudflare Pages, túnel) foram apresentadas, e o Fernando preferiu deixar para depois.
 - **Repositório e quadro privados (D-017).**
-- **Pendências abertas:** P-003 (nome final), P-006 (pontuação), P-008 (medição), P-009 (tutorial), P-010 (tentar de novo repete o cenário?), P-011 (obstáculos, mundo e fase), P-012 (modificadores), P-013 (ICP), P-014 (preço e publicação), P-015 (como receber e CNPJ) e P-016 (o que o jogo guarda). Cada uma tem um cartão na coluna "A investigar".
+- **Pendências abertas:** P-003 (nome final), P-006 (pontuação), P-008 (medição), P-009 (tutorial), P-010 (tentar de novo repete o cenário?), P-011 (obstáculos, mundo e fase), P-012 (modificadores), P-013 (ICP), P-014 (pago, loja ou os dois), P-015 (como receber e CNPJ), P-016 (o que o jogo guarda) e P-017 (o que a loja vende). Cada uma tem um cartão na coluna "A investigar".
 
 ### Próximos passos
 
@@ -29,6 +30,7 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 3. Retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)).
 4. Testes com 3 a 5 pessoas ([#43](https://github.com/TARNAGS/resgate-espacial/issues/43)), com o roteiro do documento 07. Para quem está fora de casa, escolher como publicar o jogo (janela de teste ou hospedagem que publica só a pasta `jogo/`).
 5. Descobertas da coluna "A investigar", na ordem do quadro: pagamento e lojas (#63 e #65), ICP (#59) e risco de plágio (#52) primeiro.
+6. O Fernando aprova ou ajusta o big picture: marcos M4 e M5 do Roadmap (versão 1.4), princípios novos da Visão (versão 1.2) e o documento 08 (versão 0.1).
 
 ## Sessões
 
@@ -123,6 +125,37 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **Regra do melhor caminho (D-018), definida pelo Fernando:** em toda fase com posto, a melhor corrida conclui sem abastecer e chega quase sem combustível. Para isso existe um **piloto automático** que joga cada cenário gerado com a física e as regras do jogo (mapa do espaço livre, rota mais suave e com folga, voo em várias velocidades de cruzeiro) e fica com a corrida mais econômica. O tanque é essa corrida mais uma folga pequena (6% no nível 3, 4% na PRACTICE). Se o piloto não conclui, o gerador troca a semente. Achado no caminho: com o tanque antigo de 26 segundos, quase nenhum cenário do nível 3 dava para fazer sem abastecer (a melhor corrida gastava cerca de 31).
 - **PRACTICE, a fase mais difícil do jogo:** desafio fora da sequência, sempre liberado no mapa (planeta vermelho). Corredor de 140, 22 pedras com 64 de passagem e posto no meio. O treino simples de decolar e pousar, que se chamava PRACTICE, virou **TRAINING**.
 - **50 testes automáticos**, entre eles a reprodução da melhor corrida numa partida de verdade, com o tanque real: conclui sem abastecer e sobra o esperado (cerca de 5,7% no nível 3 e 3,8% na PRACTICE).
+- **Regularização:** cartões validados pelo Fernando fechados (#32 a #34, #36 a #38 e #51), cartões novos para a D-018 (#67) e a PRACTICE (#68), e "Onde paramos" reescrito.
+
+### 02/10/2026 — Big picture do jogo
+
+- **O que o Fernando trouxe:**
+  - O jogo não tem enredo, mas precisa de replay alto e muitas fases.
+  - Vários mundos de 10 fases, cada um com visual próprio e um documento de design.
+  - Loja de itens no menu, com modificadores de jogo e de nave, comprados com dinheiro real ou com moedas do jogo.
+  - Abertura em três telas antes da primeira fase.
+  - O jogo vai ser publicado nas lojas; ainda não decidiu se vai cobrar.
+  - O MVP continua com 3 fases: tudo isso é o big picture.
+- **Decisões:**
+  - D-019: publicar na App Store e no Google Play. Substitui a D-002 e revê a D-003 ("sem anúncios" continua).
+  - D-020: mundos de 10 fases com identidade visual própria. Responde a parte "mundo e fase" da P-011.
+- **Pendência nova:** P-017, o que a loja vende, com que moeda e como evitar "pague para ganhar" ([#78](https://github.com/TARNAGS/resgate-espacial/issues/78)). A P-014 passou a ser só "cobrar ou não".
+- **Documentos:**
+  - Visão 1.2: objetivo de negócio, princípios "sem enredo" e "replay alto", hipóteses H4 e H5, seção 8.3 de big picture.
+  - Regras 1.4: mundos, curva do Mundo 1 e abertura na seção 10.1.
+  - PRD 1.4: RF-18 a RF-22, todos com prioridade "Depois".
+  - Roadmap 1.4: M4 e M5 em proposta.
+  - Documento novo, o 08 (Design de mundos), com o modelo e o rascunho do Mundo 1.
+- **Backlog:**
+  - Marcos M4 e M5.
+  - Iniciativas I-07 (#69) e I-08 (#70).
+  - Épicos E-21 a E-25 (#71 a #75).
+  - História da abertura (#76), tarefa do design de mundos (#77, concluída) e descoberta da loja (#78).
+  - A pesquisa das lojas (#65) virou sub-issue do E-25.
+- **Catches levados ao Fernando:**
+  - Itens que facilitam o jogo afetam os recordes e a regra do melhor caminho, que calcula o tanque com a nave básica.
+  - Sem login, moedas e compras ficam no aparelho.
+  - A ordem "lojas antes de mundos" é uma proposta, e a decisão é dele.
 
 ## Aprendizados de produto
 

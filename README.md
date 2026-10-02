@@ -10,9 +10,10 @@ Jogo 2D de nave com gravidade: pilote um pequeno triângulo, dose o propulsor co
 
 Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável, levado da ideia ao lançamento, com documentação, backlog e construção com apoio de IA (Claude Code).
 
-- **Plataformas:** navegador e celular, iPhone primeiro. A publicação na App Store e no Google Play está em estudo ([#63](https://github.com/TARNAGS/resgate-espacial/issues/63) e [#65](https://github.com/TARNAGS/resgate-espacial/issues/65)), o que revisaria a D-002 (fora das lojas).
+- **Plataformas:** o MVP roda no navegador e no celular, iPhone primeiro. Depois, o jogo será publicado na App Store e no Google Play (D-019); como empacotar é a pesquisa [#65](https://github.com/TARNAGS/resgate-espacial/issues/65).
 - **Idioma do jogo:** inglês.
-- **Modelo:** sem cadastro e sem anúncios. Hoje é gratuito; cobrar pelo jogo ou por compras dentro dele está em estudo (P-014), o que revisaria a D-003.
+- **Modelo:** sem cadastro e sem anúncios. O MVP é gratuito; depois, jogo pago, loja de itens ou os dois estão em aberto (P-014 e P-017).
+- **Big picture:** sem enredo, replay alto e muitas fases, em mundos de 10 fases com visual próprio (D-020), abertura em telas e loja de itens. O MVP continua com 3 fases (D-009).
 - **Tecnologia:** JavaScript puro com Canvas, sem framework.
 - **Fases:** geradas aleatoriamente a cada partida, para o replay ser infinito, com um mapa de progresso no menu.
 
@@ -27,6 +28,7 @@ Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável
 | 05 | [Registro de decisões](docs/05-registro-de-decisoes.md) | Por que escolhemos X e não Y | Contínuo |
 | 06 | [Diário de bordo](docs/06-diario-de-bordo.md) | O que foi feito em cada sessão e onde o projeto parou | Contínuo |
 | 07 | [Roteiro de teste do controle](docs/07-roteiro-de-teste-do-controle.md) | Como testar o controle com pessoas | Proposta |
+| 08 | [Design de mundos](docs/08-design-de-mundos.md) | O que é um mundo e como documentar cada um ([Mundo 1](docs/mundos/mundo-01.md)) | Proposta |
 
 ## Como o trabalho é organizado
 

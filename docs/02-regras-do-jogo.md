@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 02 — Regras do jogo |
-| Versão | 1.3 |
+| Versão | 1.4 |
 | Data | 02/10/2026 |
 | Status | Aprovado; pendentes: pontuação (P-006), fase 1 fixa ou aleatória (P-009) e repetição do cenário (P-010) |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -182,16 +182,38 @@ Perguntas a responder para fechar a pontuação:
 | Todo cenário gerado tem solução: corredor mínimo, passagem ao lado de toda pedra e combustível suficiente | Definido: o piloto automático conclui cada cenário antes de ele ser jogado (D-018) |
 | Além dos níveis, há desafios fora da sequência, sempre liberados no mapa. O primeiro é a PRACTICE, a fase mais difícil do jogo: corredor mais estreito, mais pedras e menos espaço para passar por elas | Definido |
 | A fase 1 (tutorial) é aleatória ou fixa (P-009); ao tentar de novo, o cenário se repete ou muda (P-010) | Em aberto |
+| **Big picture:** o jogo se organiza em mundos, cada um com 10 fases e identidade visual própria, descrita num documento de design por mundo ([documento 08](08-design-de-mundos.md)). As fases 1 a 3 do MVP são as do Mundo 1 | Definido (D-020) |
+| Concluir a fase 10 de um mundo libera a fase 1 do próximo | Proposta |
+| Quantos mundos o jogo terá no lançamento nas lojas | Em aberto |
 
-Curva de dificuldade:
+Curva de dificuldade do Mundo 1 (as fases 6 a 10 estão em aberto; ver o [documento do Mundo 1](mundos/mundo-01.md)):
 
 | Fase | Novidade |
 |---|---|
 | 1 | Decolar e pousar, sem obstáculos, com dicas na tela |
 | 2 | Obstáculos fixos simples |
-| 3 | Distância que obriga a abastecer no posto |
+| 3 | Distância que pede o posto, ou uma corrida perfeita sem ele (D-018) |
 | 4 | Passagens estreitas e túneis |
 | 5 | Primeiro obstáculo móvel |
+
+### 10.1 Abertura — Proposta, depois do MVP
+
+Ideia do Fernando (02/10/2026): antes da primeira fase, telas com imagem e texto na tela. Não é um filme e não conta uma história longa: o jogo não tem enredo (Visão, princípio 6).
+
+| Tela | O que mostra | Texto (proposta, em inglês, D-007) |
+|---|---|---|
+| 1 | Imagem da tripulação em apuros, presa longe de casa | "One day, a crew got stranded far from home." |
+| 2 | O chamado para o resgate | "You are the one sent to bring them back. Good luck." |
+| 3 | Fade para a primeira fase | — |
+
+| Regra | Status |
+|---|---|
+| Três telas, nessa ordem, antes da primeira fase | Definido (ideia do Fernando) |
+| Tocar na tela (ou apertar uma tecla) avança; um botão "Skip" pula tudo | Proposta |
+| A abertura só aparece sozinha na primeira vez; depois, dá para revê-la pelo menu | Proposta |
+| A arte das telas segue a estética do jogo: tripulação de traços e nave triangular | Proposta; depende da identidade do jogo (E-19) |
+
+História no backlog: [#76](https://github.com/TARNAGS/resgate-espacial/issues/76).
 
 ## 11. Interface durante o jogo — Proposta
 
@@ -216,6 +238,7 @@ O jogo também pausa sozinho quando o jogador sai do app ou recebe uma ligação
 |---|---|
 | Estética 16 bits minimalista: a nave é um triângulo do tamanho de um cursor de mouse e os tripulantes são traços | Definido |
 | Cenários com estética interplanetária | Definido |
+| Cada mundo tem identidade visual própria (paleta, cenário e obstáculos); base, posto e tripulação mantêm as mesmas cores em todos os mundos | Definido (D-020); cores fixas das plataformas em Proposta ([documento 08](08-design-de-mundos.md), seção 3) |
 | Efeitos sonoros simples: propulsor, explosão, embarque e abastecimento | Proposta |
 
 ## 13. Parâmetros de ajuste
@@ -248,7 +271,8 @@ São os números que definem a "sensação" do jogo. Eles serão calibrados no p
 
 Registradas para não se perderem. **Não são compromisso**: só entram se o Roadmap decidir.
 
-- Gravidade diferente em cada planeta.
+- Gravidade diferente em cada planeta. Agora pode ser uma característica de mundo (D-020; P-012).
+- Itens da loja que mudam o visual da nave, do propulsor e das explosões (P-017).
 - Suporte a controle de videogame (gamepad).
 - "Fantasma" do melhor tempo, para o jogador competir contra si mesmo.
 - Compartilhar o recorde com um link ou uma imagem.
@@ -274,3 +298,4 @@ Registradas para não se perderem. **Não são compromisso**: só entram se o Ro
 | 1.1 | 01/10/2026 | Fases geradas aleatoriamente (D-014) e menu com mapa de progresso (D-015); novas pendências P-009 e P-010 |
 | 1.2 | 02/10/2026 | Retorno do primeiro teste no iPhone (#50): parâmetro novo de folga na borda da plataforma e direcional aceitando toque na tela inteira |
 | 1.3 | 02/10/2026 | Regra do melhor caminho (D-018) e desafio PRACTICE, a fase mais difícil do jogo |
+| 1.4 | 02/10/2026 | Big picture: mundos com 10 fases e visual próprio (D-020), abertura em três telas (seção 10.1, Proposta) e curva de dificuldade passa a ser a do Mundo 1. O MVP continua com 3 fases |
