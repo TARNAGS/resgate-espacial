@@ -30,6 +30,7 @@ Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável
 | 07 | [Roteiro de teste do controle](docs/07-roteiro-de-teste-do-controle.md) | Como testar o controle com pessoas | Proposta |
 | — | [Divulgação](divulgacao/) | Arte para grupos de playtesters | — |
 | 08 | [Design de mundos](docs/08-design-de-mundos.md) | O que é um mundo e como documentar cada um ([Mundo 1](docs/mundos/mundo-01.md)) | Proposta |
+| 09 | [Resultados dos playtests](docs/09-resultados-dos-playtests.md) | O que cada rodada de testes mostrou, com os dados da telemetria | Contínuo |
 
 ## Como o trabalho é organizado
 

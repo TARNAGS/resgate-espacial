@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 05 — Registro de decisões |
-| Última atualização | 02/10/2026 |
+| Última atualização | 03/10/2026 |
 | Responsável | Fernando Nunes (Product Manager) |
 
 Cada decisão relevante de produto fica registrada aqui, com o contexto e o motivo. Assim ela não é rediscutida sem necessidade e pode ser revista quando o contexto mudar.
@@ -36,7 +36,7 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-022 | Controle principal: dois polegares (novo A); o de um polegar vira a opção B | 02/10/2026 | Aceita; construída ([#82](https://github.com/TARNAGS/resgate-espacial/issues/82)) |
 | D-024 | Ranking de tempos por fase, com nickname como ID do jogador | 02/10/2026 | Aceita; construída e online ([#87](https://github.com/TARNAGS/resgate-espacial/issues/87)) |
 | D-025 | Telemetria das partidas no playtest, no mesmo banco do ranking, com o nickname | 02/10/2026 | Aceita; construída e online ([#88](https://github.com/TARNAGS/resgate-espacial/issues/88)) |
-| D-023 | Nas fases com posto, abastecer pelo menos uma vez é obrigatório | 02/10/2026 | Aceita; construída ([#83](https://github.com/TARNAGS/resgate-espacial/issues/83)) |
+| D-023 | Nas fases com posto, abastecer pelo menos uma vez é obrigatório | 02/10/2026 | Aceita; construída ([#83](https://github.com/TARNAGS/resgate-espacial/issues/83)). Em revisão: os jogadores reais concluem sem abastecer (P-020, [#89](https://github.com/TARNAGS/resgate-espacial/issues/89)) |
 
 ## D-001 — Sem login e sem contas
 
@@ -425,6 +425,8 @@ Junto com as trilhas, entraram:
 
 **Revisitar se** os próximos testes mostrarem que o ranking não importa tanto quanto o replay (D-021), ou que abastecer obrigatório deixou o jogo chato (D-023).
 
+**Atualização (03/10/2026).** A telemetria do primeiro playtest (D-025) mostrou que a D-023 não se sustenta com jogadores reais: no nível 3, 5 das 9 conclusões não abasteceram (3 sem morrer), e o melhor tempo foi sem abastecer. As pessoas voam bem mais econômico que o piloto automático que calcula o tanque. Como garantir a regra, ou se ela muda, é a P-020 ([#89](https://github.com/TARNAGS/resgate-espacial/issues/89)). Detalhes no [documento 09](09-resultados-dos-playtests.md).
+
 ## D-024 — Ranking de tempos por fase, com nickname
 
 **Contexto.** Com até 10 playtesters (hoje, uns 6), o Fernando quer um ranking de cada fase, para quem for mais rápido. Os jogadores já gostavam de comparar tempos (D-021).
@@ -479,6 +481,8 @@ Os eventos levam o **nickname**, e a tela do nick avisa que, no playtest, essas 
 | P-014 | O jogo será pago, gratuito com loja de itens, ou os dois? | Antes da publicação nas lojas (M4) | Ir para as lojas já foi decidido (D-019); falta decidir se e como cobrar. Cartão [#63](https://github.com/TARNAGS/resgate-espacial/issues/63) |
 | P-018 | Como funciona o modo Nightmare, em que morrer não devolve o combustível? | Antes de construir o modo (M5) | Ideia do Fernando depois do teste com um amigo (02/10/2026). A nave reaparece pousada na base, que abastece: o modo precisa dizer se base e posto continuam abastecendo. Conversa com P-012 (modificadores) e P-017 (loja). Cartão [#79](https://github.com/TARNAGS/resgate-espacial/issues/79) |
 | P-019 | Como funciona um ranking de tempos por fase? Para os playtesters, resolvida pela D-024 (nickname e banco simples); para o lançamento, continua em aberto. | Antes da publicação nas lojas (M4) | Ideia do Fernando depois do teste com um amigo. Ranking entre jogadores esbarra em D-001 (sem login) e no cenário sorteado (D-014); saídas: rankings do Game Center e do Google Play Games e um desafio do dia com a mesma semente para todos. Cartão [#80](https://github.com/TARNAGS/resgate-espacial/issues/80) |
+| P-020 | Abastecer obrigatório (D-023) não segura os jogadores reais: como garantir, ou a regra muda? | Antes da próxima rodada de playtest | Opções: piloto mais econômico e tanques recalculados, tanque calibrado pelos jogadores, posto como parada obrigatória, ou aceitar abastecer opcional. Mudar a fase recomeça o ranking dela. Dados no [documento 09](09-resultados-dos-playtests.md). Cartão [#89](https://github.com/TARNAGS/resgate-espacial/issues/89) |
+| P-021 | O pouso na tripulação é a maior dificuldade e o nível 1 travou um jogador: o que mudar? | Antes da próxima rodada de playtest | Opções: afastar a plataforma da parede do fim, nível 1 mais tolerante, dica depois de mortes no pouso e oferecer o TRAINING. Conversa com P-009. Cartão [#90](https://github.com/TARNAGS/resgate-espacial/issues/90) |
 | P-017 | O que a loja de itens vende, com que moeda, e como evitar vantagem injusta? | Antes de construir a loja (E-24) | Ideia do Fernando: itens de jogo e de nave, com dinheiro real ou moedas do jogo. Itens que facilitem o jogo afetam recordes e a regra do melhor caminho (D-018). Cartão [#78](https://github.com/TARNAGS/resgate-espacial/issues/78) |
 | P-015 | Como receber dinheiro, e é preciso CNPJ? | Só se a P-014 decidir cobrar ou aceitar doações | Cartão [#64](https://github.com/TARNAGS/resgate-espacial/issues/64) |
 | P-016 | O que o jogo guarda, e onde: só no aparelho ou também num servidor? | Antes de construir o progresso salvo (E-14) | Hoje tudo fica no aparelho; um servidor reabre D-001, D-003 e D-004. Cartão [#62](https://github.com/TARNAGS/resgate-espacial/issues/62) |
