@@ -9,7 +9,9 @@ import { createPraise } from './praise.js';
 // vidas e pontos de retorno. Não desenha nada e não toca som: avisa pelo canal de eventos.
 //
 // Eventos (start sai de quem cria a partida): takeoff, land, crash, outOfFuel, boarding, boardStep, crewOnBoard,
-//          lowFuelAtCrew, refuel, respawn, complete, gameOver, praise (elogio, #81)
+//          lowFuelAtCrew, refuel, respawn, complete, gameOver, praise (elogio, #81),
+//          lowFuel ({ level: 'low' | 'critical' }: o combustível passou de 20% ou de 10% em voo, #94),
+//          noFuel (apertou o propulsor sem combustível, ou pousou sem combustível onde não abastece, #94)
 
 export function createMatch({ def, seed, getParams, events }) {
   // O gerador pode trocar a semente, se o cenário sorteado não tiver um caminho provado (D-018)
@@ -31,6 +33,8 @@ export function createMatch({ def, seed, getParams, events }) {
     over: null,          // 'complete' | 'gameOver'
     ship: null,
     stationLandings: 0,  // pousos no posto (a corrida perfeita abastece uma vez só, D-023)
+    fuelWarned: { low: false, critical: false },   // avisos de combustível já dados (#94)
+    thrustHeld: false,   // o jogador já estava apertando o propulsor no passo anterior
   };
   const praise = createPraise({ level, events });
 
@@ -59,9 +63,11 @@ export function createMatch({ def, seed, getParams, events }) {
       if (s.fuel === 1) events.emit('refuel', { pad: s.pad.kind });
     }
     if (!s.pad.refuel && s.fuel <= 0) {
-      // Sem combustível numa plataforma que não abastece: explode e volta à base sem a tripulação
+      // Sem combustível numa plataforma que não abastece: avisa NO FUEL e, depois de alguns segundos,
+      // explode e volta à base sem a tripulação (#94)
+      if (m.outOfFuelT === 0) events.emit('noFuel', { landed: true });
       m.outOfFuelT += dt;
-      if (m.outOfFuelT > 1.2) {
+      if (m.outOfFuelT > p.noFuelLandedSeconds) {
         events.emit('outOfFuel', { landed: true });
         explode('OUT OF FUEL', true);
       }
@@ -87,6 +93,15 @@ export function createMatch({ def, seed, getParams, events }) {
       m.checkpointFuel = s.fuel;
       s.state = 'landed';
       events.emit('crewOnBoard');
+    }
+  }
+
+  // Avisos de combustível baixo (#94): um aviso a cada vez que o tanque passa de 20% e de 10% em voo.
+  // Ao abastecer acima do limite, o aviso volta a valer.
+  function warnFuel(s, p) {
+    for (const [level, limit] of [['low', p.lowFuel], ['critical', p.criticalFuel]]) {
+      if (s.fuel > limit) m.fuelWarned[level] = false;
+      else if (!m.fuelWarned[level] && s.fuel > 0) { m.fuelWarned[level] = true; events.emit('lowFuel', { level }); }
     }
   }
 
@@ -149,13 +164,18 @@ export function createMatch({ def, seed, getParams, events }) {
       const p = params();
       m.time += dt;
       if (m.timerOn) m.timer += dt;
+      const pressed = Boolean(input.thrust) && !m.thrustHeld;   // acabou de apertar o propulsor
+      m.thrustHeld = Boolean(input.thrust);
       for (const o of level.obstacles) OBSTACLES[o.type].update?.(o, m.time);
       const s = m.ship;
       if (s.state === 'landed') updateLanded(s, p, dt, input);
       else if (s.state === 'boarding') updateBoarding(s, p, dt);
       else if (s.state === 'exploding') updateExploding(s, dt);
       else if (s.state === 'flying') {
+        // Apertou o propulsor sem combustível: o aviso NO FUEL aparece de novo (#94)
+        if (pressed && s.fuel <= 0) events.emit('noFuel', { landed: false });
         if (fly(s, input, p, dt, { crewOnBoard: m.crewOnBoard })) events.emit('outOfFuel', { landed: false });
+        warnFuel(s, p);
         checkCollisions(s, p);
         if (s.state === 'flying') praise.update(s, p, dt);
       }

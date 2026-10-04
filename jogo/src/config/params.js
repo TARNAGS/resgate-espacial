@@ -14,7 +14,9 @@ export const DEFAULT_PARAMS = Object.freeze({
   padMargin: 8,             // folga além da borda da plataforma que ainda conta como pouso (#50)
   refuelPerSecond: 0.6,     // fração do tanque abastecida por segundo
   boardingSeconds: 2,       // duração do embarque
-  lowFuel: 0.2,             // abaixo disso, aviso de combustível baixo
+  lowFuel: 0.2,             // abaixo disso, aviso de combustível baixo (amarelo, rápido e sutil, #94)
+  criticalFuel: 0.1,        // abaixo disso, aviso vermelho piscando (#94)
+  noFuelLandedSeconds: 2,   // pousada sem combustível onde não abastece: avisa NO FUEL e explode depois disso (#94)
   lives: 3,
   // Elogios para manobras difíceis (#81)
   praiseNear: 6,            // "fininho": distância máxima de uma pedra ou do terreno (unidades)

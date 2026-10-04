@@ -127,7 +127,10 @@ events.on('crash', ({ reason, x, y }) => {
 });
 events.on('complete', ({ run }) => endRun('complete', { time: run.time, livesLost: run.livesLost, fuelLeft: run.fuelLeft, perfect: run.perfectRun }));
 events.on('gameOver', () => endRun('gameover'));
-events.on('outOfFuel', () => renderer.message('OUT OF FUEL', 2, true));
+// Avisos de combustível (#94): pequenos, sem cobrir a fase. A nave sem combustível só para de impulsionar.
+events.on('outOfFuel', ({ landed }) => { if (!landed) renderer.noFuel(); });
+events.on('noFuel', ({ landed }) => renderer.noFuel(landed ? (app.match?.params().noFuelLandedSeconds ?? 2) : 1.6));
+events.on('lowFuel', ({ level }) => { if (level === 'low') renderer.lowFuel(); });
 events.on('crash', ({ reason, x, y }) => {
   renderer.explosion(x, y);
   renderer.message(reason, 2, true);

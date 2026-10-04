@@ -11,10 +11,11 @@ const STARS = Array.from({ length: 140 }, () => ({
 }));
 const PAD_COLORS = { base: ['#7cc4ff', '#e8f1ff'], fuel: ['#ffd166', '#2b2b2b'], crew: ['#ff9f43', '#2b1a0a'] };
 const PAD_LABELS = { base: 'BASE', fuel: 'FUEL', crew: 'SOS' };
+const LOW_FUEL_FLASH = 1.1;   // segundos do aviso amarelo de combustível baixo (#94)
 
 export function createRenderer(canvas, view) {
   const ctx = canvas.getContext('2d');
-  const r = { camX: 0, particles: [], messages: [] };
+  const r = { camX: 0, particles: [], messages: [], noFuelT: 0, lowFuelT: 0 };
 
   // ===== Câmera, partículas e mensagens =====
   // A câmera pode passar das pontas da fase para que as plataformas das pontas (base e tripulação)
@@ -46,6 +47,8 @@ export function createRenderer(canvas, view) {
     r.particles = [];
     r.messages = [];
     r.praiseText = null;
+    r.noFuelT = 0;
+    r.lowFuelT = 0;
   };
 
   r.update = (dt, match, params) => {
@@ -65,7 +68,14 @@ export function createRenderer(canvas, view) {
     if (r.praiseText) { r.praiseText.t += dt; if (r.praiseText.t > 1.3) r.praiseText = null; }
     for (const m of r.messages) m.t += dt;
     r.messages = r.messages.filter((m) => m.t < m.dur);
+    r.noFuelT = Math.max(0, r.noFuelT - dt);
+    r.lowFuelT = Math.max(0, r.lowFuelT - dt);
   };
+
+  // Avisos de combustível (#94). NO FUEL: pequeno, piscando perto da nave, como os elogios.
+  // LOW FUEL: ao lado da barra de combustível, fora da frente da nave e das plataformas.
+  r.noFuel = (seconds = 1.6) => { r.noFuelT = Math.max(r.noFuelT, seconds); };
+  r.lowFuel = () => { r.lowFuelT = LOW_FUEL_FLASH; };
 
   // Elogio (#81): texto pequeno que nasce perto da nave, sobe um pouco e some. Um de cada vez.
   r.praise = (text, x, y) => { r.praiseText = { text, x, y, t: 0 }; };
@@ -121,6 +131,7 @@ export function createRenderer(canvas, view) {
     drawHUD(m, t, params, scene);
     drawMessages(t);
     drawPraise();
+    drawNoFuel(m.ship, t);
     drawJoystick(scene);
     drawButtons(scene);
   };
@@ -404,6 +415,7 @@ export function createRenderer(canvas, view) {
       ctx.fillStyle = s.fuel > 0.5 ? '#46e0c8' : low ? '#ff5d5d' : '#ffd166';
       ctx.fillRect(bx + 2, by + 2, (bw - 4) * s.fuel, 7);
     }
+    drawFuelWarning(s, t, params, bx + bw + 12, by + 6);
 
     if (!m.training) {
       ctx.fillStyle = '#e8f1ff';
@@ -437,6 +449,38 @@ export function createRenderer(canvas, view) {
     if (view.isTouch) foot += ` · control ${scene.schemeName}`;
     if (scene.tuned) foot += ' · TUNED';
     ctx.fillText(foot, left, view.cssH - 10 - view.safe.bottom);
+  }
+
+  // Ao lado da barra: aos 20%, LOW FUEL amarelo, rápido e sutil; abaixo de 10%, vermelho piscando
+  function drawFuelWarning(s, t, params, x, y) {
+    const critical = s.state === 'flying' && s.fuel > 0 && s.fuel <= params.criticalFuel;
+    let color;
+    if (critical) {
+      if (Math.sin(t * 9) < -0.1) return;
+      color = 'rgba(255,93,93,1)';
+    } else if (r.lowFuelT > 0) {
+      const age = LOW_FUEL_FLASH - r.lowFuelT;
+      color = `rgba(255,209,102,${(clamp(Math.min(age / 0.15, r.lowFuelT / 0.4), 0, 1) * 0.75).toFixed(2)})`;
+    } else return;
+    ctx.save();
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.font = `700 ${critical ? 13 : 11}px ${FONT}`;
+    ctx.fillStyle = color;
+    ctx.fillText(critical ? 'LOW FUEL!' : 'LOW FUEL', x, y);
+    ctx.restore();
+  }
+
+  // NO FUEL: pisca logo acima da nave enquanto o aviso durar
+  function drawNoFuel(s, t) {
+    if (r.noFuelT <= 0 || s.state === 'exploding' || Math.sin(t * 12) < -0.2) return;
+    const sx = view.play.x + (s.x - r.camX) * view.scale;
+    const sy = s.y * view.scale - 22;
+    ctx.font = `700 12px ${FONT}`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = 'rgba(255,93,93,0.95)';
+    ctx.fillText('NO FUEL', clamp(sx, 60, view.cssW - 60), clamp(sy, 24, view.cssH - 24));
   }
 
   function drawPraise() {

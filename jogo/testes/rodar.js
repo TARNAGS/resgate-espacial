@@ -303,14 +303,57 @@ test('Regras 7.1 depois de chegar à tripulação, explodir faz reaparecer nela 
   assert.equal(m.lives, PARAMS.lives - 1);
 });
 
-test('Regras 7.1 sem combustível na plataforma da tripulação: explode, volta à base e perde o resgate', () => {
+test('Regras 7.1 e #94 sem combustível na plataforma da tripulação: avisa NO FUEL, explode depois de 2 s, volta à base e perde o resgate', () => {
   const { match, m, log } = newMatch(LEVELS[0], 5);
   hover(m, 'crew'); step(match, NONE, 0.05);
   step(match, NONE, PARAMS.boardingSeconds + 0.1);
   m.ship.fuel = 0;
-  step(match, NONE, 3);
+  step(match, NONE, PARAMS.noFuelLandedSeconds - 0.1);
+  assert.ok(log.some((e) => e.name === 'noFuel' && e.landed), 'avisou NO FUEL');
+  assert.ok(!log.some((e) => e.name === 'crash'), 'explodiu antes do aviso terminar');
+  step(match, NONE, 2);
   assert.ok(log.some((e) => e.name === 'crash' && e.reason === 'OUT OF FUEL'));
   assert.equal(m.ship.pad.kind, 'base'); assert.equal(m.crewOnBoard, false); assert.equal(m.ship.fuel, 1);
+});
+
+// Gasta combustível com o propulsor aceso, segurando a nave parada no ar (sem bater no teto)
+function burn(match, seconds) {
+  for (let t = 0; t < seconds; t += DT) { match.update(DT, UP); Object.assign(match.state.ship, { x: 600, y: 200, vx: 0, vy: 0, a: 0 }); }
+}
+
+test('#94 em voo: avisa aos 20% e aos 10%, uma vez cada; sem combustível, para de impulsionar e não explode por isso', () => {
+  const { match, m, log } = newMatch(LEVELS[0], 5);
+  Object.assign(m.ship, { state: 'flying', pad: null, x: 600, y: 200, vx: 0, vy: 0, a: 0, fuel: 0.25 });
+  const tank = match.params().tankSeconds;
+  const count = (name, level) => log.filter((e) => e.name === name && (level === undefined || e.level === level)).length;
+  burn(match, 0.07 * tank);                         // 25% → 18%
+  assert.equal(count('lowFuel', 'low'), 1); assert.equal(count('lowFuel', 'critical'), 0);
+  burn(match, 0.1 * tank);                          // → 8%
+  assert.equal(count('lowFuel', 'low'), 1); assert.equal(count('lowFuel', 'critical'), 1);
+  burn(match, 0.1 * tank);                          // acaba
+  assert.equal(count('outOfFuel'), 1);
+  assert.equal(m.ship.fuel, 0);
+  Object.assign(m.ship, { y: 200, vy: 0 });
+  step(match, UP, 0.2);
+  assert.ok(m.ship.vy > 0, 'apertando sem combustível, a nave cai');
+  assert.ok(!log.some((e) => e.name === 'crash'), 'ficar sem combustível no ar não explode');
+});
+
+test('#94 apertar o propulsor sem combustível avisa NO FUEL de novo, a cada toque', () => {
+  const { match, m, log } = newMatch(LEVELS[0], 5);
+  Object.assign(m.ship, { state: 'flying', pad: null, x: 600, y: 150, vx: 0, vy: 0, a: 0, fuel: 0 });
+  step(match, UP, 0.1); step(match, NONE, 0.1); step(match, UP, 0.1);
+  assert.equal(log.filter((e) => e.name === 'noFuel' && !e.landed).length, 2);
+});
+
+test('#94 depois de abastecer acima de 20%, o aviso vale de novo', () => {
+  const { match, m, log } = newMatch(LEVELS[0], 5);
+  Object.assign(m.ship, { state: 'flying', pad: null, x: 600, y: 200, vx: 0, vy: 0, a: 0, fuel: 0.21 });
+  const tank = match.params().tankSeconds;
+  burn(match, 0.02 * tank);
+  m.ship.fuel = 0.5;                                // como se tivesse abastecido
+  burn(match, 0.31 * tank);
+  assert.equal(log.filter((e) => e.name === 'lowFuel' && e.level === 'low').length, 2);
 });
 
 test('Regras 7 ao perder a terceira vida é fim de jogo', () => {
