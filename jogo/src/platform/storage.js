@@ -9,7 +9,8 @@ const TUNING_KEY = 'resgate-espacial:tuning';
 const SAVE_VERSION = 1;
 
 // seen: telas que o jogador já viu (por exemplo, a abertura), para não repetir sozinhas
-export const emptySave = () => ({ version: SAVE_VERSION, levels: {}, settings: { sound: true }, seen: {} });
+// praise: quantos elogios de cada tipo o jogador já fez (#102)
+export const emptySave = () => ({ version: SAVE_VERSION, levels: {}, settings: { sound: true }, seen: {}, praise: {} });
 
 function migrate(data) {
   if (!data || typeof data !== 'object' || data.version !== SAVE_VERSION) return emptySave();

@@ -19,6 +19,7 @@ import { createTuning } from './ui/tuning.js';
 import { createIntro } from './render/intro.js';
 import { createMusic } from './platform/music.js';
 import { createLeaderboard } from './platform/leaderboard.js';
+import { createProfileSync, mergeIntoSave } from './platform/profile.js';
 import { rankKey, normalizeNick, validNick } from './core/ranking.js';
 import { createRankingScreen } from './ui/ranking.js';
 import { createTelemetry, createFrameStats, createRunTracker, deviceKind } from './platform/telemetry.js';
@@ -214,6 +215,10 @@ function endRun(outcome, extra = {}) {
   // A trajetória da tentativa, em pedaços curtos (#91, D-029)
   r.tracker.pathChunks().forEach((p, i) => telemetry.track('path', { level: r.level, attempt: r.attempt, i, p }));
   telemetry.flush();
+  // Elogios do jogador, somados no perfil (#102); o perfil vai para o banco depois do resultado da fase
+  for (const [kind, n] of Object.entries(r.praise)) app.save.praise[kind] = (app.save.praise[kind] || 0) + n;
+  writeSave(app.save);
+  pushProfile();
 }
 
 // ===== Fluxo =====
@@ -463,6 +468,26 @@ function updateAttract(elapsed) {
 // entrarem no ranking real dos jogadores. ?online no endereço liga o banco mesmo assim.
 const LOCAL_HOST = /^(localhost|127.0.0.1)$/.test(location.hostname);
 const leaderboard = createLeaderboard(LOCAL_HOST && !new URLSearchParams(location.search).has('online') ? { url: '' } : {});
+
+// Perfil do jogador no banco (#102, D-029): progresso, configurações, telas vistas e elogios, ligados ao
+// nick. Como o ranking, fica fora do banco real nos testes no computador (?online liga).
+const profileSync = createProfileSync(LOCAL_HOST && !new URLSearchParams(location.search).has('online') ? { url: '' } : {});
+async function syncProfile() {
+  const nick = app.save.nick;
+  if (!nick || !profileSync.online) return;
+  const remote = await profileSync.pull(nick);
+  if (remote && app.save.nick === nick) {
+    app.save = mergeIntoSave(app.save, remote);
+    writeSave(app.save);
+    Sound.enabled = app.save.settings.sound !== false;
+    updateSoundButton();
+    if (!CONTROL_FROM_URL && SCHEMES.includes(app.save.settings.touchScheme)) PARAMS.touchScheme = app.save.settings.touchScheme;
+    updateControlButton();
+    if (app.screen === 'menu') { app.selected = defaultLevel(app.save); drawMap(); }
+  }
+  await profileSync.push(nick, app.save);
+}
+const pushProfile = () => { if (app.save.nick) setTimeout(() => profileSync.push(app.save.nick, app.save), 0); };
 const rankOf = (lv) => rankKey(lv, DEFAULT_PARAMS);
 const RANKED = [...LEVELS, ...CHALLENGES];
 const rankingScreen = createRankingScreen({
@@ -498,6 +523,7 @@ function confirmNick() {
   app.save.nick = normalizeNick(input.value);
   writeSave(app.save);
   updateNickButton();
+  syncProfile();   // traz o progresso desse nick de outro aparelho e envia o deste
   input.blur();
   const then = afterNick;
   afterNick = null;
@@ -682,6 +708,7 @@ if (!CONTROL_FROM_URL && SCHEMES.includes(app.save.settings.touchScheme)) PARAMS
 updateControlButton();
 updateNickButton();
 leaderboard.flush();
+syncProfile();   // perfil do nick salvo neste aparelho (#102)
 telemetry.track('session', {
   host: location.hostname,   // separa os testes locais (localhost) das partidas dos jogadores
   device: deviceKind(), touch: view.isTouch, w: window.innerWidth, h: window.innerHeight,
@@ -698,7 +725,7 @@ document.addEventListener('visibilitychange', () => {
 });
 // Fechou o app no meio da fase: a tentativa termina como "fechou" (#91)
 window.addEventListener('pagehide', () => { endRun('close'); telemetry.flush({ keepalive: true }); });
-window.addEventListener('online', () => telemetry.flush());
+window.addEventListener('online', () => { telemetry.flush(); syncProfile(); });
 window.addEventListener('online', () => leaderboard.flush());   // a internet voltou: envia a fila
 view.resize();
 app.selected = defaultLevel(app.save);
