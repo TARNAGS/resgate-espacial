@@ -92,6 +92,9 @@ const tuning = await createTuning({
 // Esquema do toque pelo endereço (D-022): ?control=a (dois polegares) ou b (um polegar)
 const CONTROL_FROM_URL = { a: 'twin', b: 'hold' }[(new URLSearchParams(location.search).get('control') || '').toLowerCase()];
 if (CONTROL_FROM_URL) PARAMS.touchScheme = CONTROL_FROM_URL;
+// Câmera mais próxima para testar (#95): ?zoom=1.3 (de 1 a 1.6)
+const ZOOM_FROM_URL = Number(new URLSearchParams(location.search).get('zoom'));
+if (ZOOM_FROM_URL >= 1 && ZOOM_FROM_URL <= 1.6) PARAMS.cameraZoom = ZOOM_FROM_URL;
 
 // ===== Mensagens e efeitos ligados aos eventos da partida =====
 events.on('start', ({ def }) => {
@@ -464,9 +467,8 @@ function checkThumbHint(m) {
   const joy = joystick.state;
   if (app.thumbHintShown || !joy || m.ship.state !== 'flying' || PARAMS.joystickMode !== 'follow') return;
   const target = m.level.pads.find((p) => p.kind === (m.training ? 'base' : m.crewOnBoard ? 'base' : 'crew'));
-  const sx = view.play.x + ((target.x1 + target.x2) / 2 - renderer.camX) * view.scale;
-  const sy = target.y * view.scale;
-  const covered = Math.abs(joy.cx - sx) < (target.x2 - target.x1) * view.scale / 2 + PARAMS.joystickRadius
+  const { x: sx, y: sy } = renderer.toScreen((target.x1 + target.x2) / 2, target.y);
+  const covered = Math.abs(joy.cx - sx) < (target.x2 - target.x1) * renderer.scale() / 2 + PARAMS.joystickRadius
     && Math.abs(joy.cy - sy) < PARAMS.joystickRadius + 40;
   if (covered) {
     app.thumbHintShown = true;

@@ -15,17 +15,27 @@ const LOW_FUEL_FLASH = 1.1;   // segundos do aviso amarelo de combustível baixo
 
 export function createRenderer(canvas, view) {
   const ctx = canvas.getContext('2d');
-  const r = { camX: 0, particles: [], messages: [], noFuelT: 0, lowFuelT: 0 };
+  const r = { camX: 0, camY: 0, zoom: 1, particles: [], messages: [], noFuelT: 0, lowFuelT: 0 };
+
+  // Escala e tamanho visível do mundo com o zoom da câmera (#95). Com zoom 1, a tela mostra a altura
+  // inteira da fase e a câmera só anda para os lados; acima de 1, ela também segue a nave na vertical.
+  r.scale = () => view.scale * r.zoom;
+  const viewW = () => view.play.w / r.scale();
+  const viewH = () => view.cssH / r.scale();
+  r.toScreen = (x, y) => ({ x: view.play.x + (x - r.camX) * r.scale(), y: (y - r.camY) * r.scale() });
 
   // ===== Câmera, partículas e mensagens =====
-  // A câmera pode passar das pontas da fase para que as plataformas das pontas (base e tripulação)
-  // fiquem no meio da tela, longe do polegar que controla o direcional (#50).
-  function camLimits(level) {
+  // Limites da câmera. Padrão (#96): para nas pontas da fase, e os controles ficam por cima dela.
+  // No modo 'thumbs' (o de antes, #50), a câmera pode passar das pontas para que as plataformas das
+  // pontas (base e tripulação) fiquem no meio da tela, longe do polegar do direcional.
+  function camLimits(level, params) {
+    if (params.cameraMode !== 'thumbs') return [0, Math.max(0, level.L - viewW())];
     const centers = level.pads.map((p) => (p.x1 + p.x2) / 2);
-    const lo = Math.min(0, Math.min(...centers) - view.viewW / 2);
-    const hi = Math.max(level.L - view.viewW, Math.max(...centers) - view.viewW / 2);
+    const lo = Math.min(0, Math.min(...centers) - viewW() / 2);
+    const hi = Math.max(level.L - viewW(), Math.max(...centers) - viewW() / 2);
     return [lo, Math.max(lo, hi)];
   }
+  const camYTarget = (s) => clamp(s.y - viewH() / 2, 0, Math.max(0, WORLD_H - viewH()));
 
   const twinControls = (params) => view.isTouch && params.touchScheme === 'twin';
 
@@ -33,16 +43,18 @@ export function createRenderer(canvas, view) {
   // embaixo deles (#44): a câmera a mantém na faixa da tela entre os dois controles, mesmo que
   // para isso precise mostrar um pouco além das pontas da fase.
   function keepShipVisible(s, params) {
-    if (!twinControls(params)) return;
+    if (!twinControls(params) || params.cameraMode !== 'thumbs') return;
     const R = params.joystickRadius;
     const minX = view.safe.left + 24 + 2 * R + 16;
     const maxX = view.cssW - view.safe.right - 24 - 1.8 * R - 16;
     if (maxX - minX < 40) return;   // tela estreita demais para a regra
-    r.camX = clamp(r.camX, s.x - maxX / view.scale, s.x - minX / view.scale);
+    r.camX = clamp(r.camX, s.x - maxX / r.scale(), s.x - minX / r.scale());
   }
 
   r.resetCamera = (match, params) => {
-    r.camX = clamp(match.state.ship.x - view.viewW / 2, ...camLimits(match.state.level));
+    r.zoom = params.cameraZoom ?? 1;
+    r.camX = clamp(match.state.ship.x - viewW() / 2, ...camLimits(match.state.level, params));
+    r.camY = camYTarget(match.state.ship);
     keepShipVisible(match.state.ship, params);
     r.particles = [];
     r.messages = [];
@@ -53,9 +65,11 @@ export function createRenderer(canvas, view) {
 
   r.update = (dt, match, params) => {
     const s = match.state.ship;
-    const look = clamp(s.vx * 0.6, -view.viewW * 0.25, view.viewW * 0.25);
-    const target = clamp(s.x - view.viewW / 2 + look, ...camLimits(match.state.level));
+    r.zoom = params.cameraZoom ?? 1;
+    const look = clamp(s.vx * 0.6, -viewW() * 0.25, viewW() * 0.25);
+    const target = clamp(s.x - viewW() / 2 + look, ...camLimits(match.state.level, params));
     r.camX += (target - r.camX) * Math.min(1, dt * 4);
+    r.camY += (camYTarget(s) - r.camY) * Math.min(1, dt * 4);
     keepShipVisible(s, params);
     for (const p of r.particles) {
       p.vy += params.gravity * 0.6 * dt;
@@ -108,7 +122,7 @@ export function createRenderer(canvas, view) {
     g.addColorStop(1, theme.sky[1]);
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, view.cssW, view.cssH);
-    drawStars(t, match ? r.camX * view.scale : t * 12);
+    drawStars(t, match ? r.camX * r.scale() : t * 12);
     if (!match) return;
 
     const m = match.state;
@@ -116,7 +130,7 @@ export function createRenderer(canvas, view) {
     ctx.beginPath();
     ctx.rect(view.play.x, 0, view.play.w, view.cssH);   // a fase só aparece na faixa dela
     ctx.clip();
-    ctx.setTransform(view.dpr * view.scale, 0, 0, view.dpr * view.scale, (view.play.x - r.camX * view.scale) * view.dpr, 0);
+    ctx.setTransform(view.dpr * r.scale(), 0, 0, view.dpr * r.scale(), (view.play.x - r.camX * r.scale()) * view.dpr, -r.camY * r.scale() * view.dpr);
     drawCave(m.level, theme, t);
     const approach = approachInfo(m, params);
     drawPads(m.level, t, approach);
@@ -176,7 +190,7 @@ export function createRenderer(canvas, view) {
 
   function drawCave(lv, theme, t) {
     const i0 = Math.floor(r.camX / STEP) - 1;
-    const i1 = Math.ceil((r.camX + view.viewW) / STEP) + 1;
+    const i1 = Math.ceil((r.camX + viewW()) / STEP) + 1;
     ctx.fillStyle = theme.terrainFill;
     fillTerrain(lv.ceil, i0, i1, -20);
     fillTerrain(lv.floor, i0, i1, WORLD_H + 20);
@@ -200,7 +214,7 @@ export function createRenderer(canvas, view) {
     // Fora da fase, um véu escurece o cenário; na ponta, uma barreira de energia marca o limite
     ctx.fillStyle = 'rgba(3,5,10,0.45)';
     if (r.camX < 0) ctx.fillRect(r.camX - 10, -20, -r.camX + 10, WORLD_H + 40);
-    if (r.camX + view.viewW > lv.L) ctx.fillRect(lv.L, -20, r.camX + view.viewW - lv.L + 10, WORLD_H + 40);
+    if (r.camX + viewW() > lv.L) ctx.fillRect(lv.L, -20, r.camX + viewW() - lv.L + 10, WORLD_H + 40);
     if (i0 <= 0) drawBarrier(0, lv.ceil[0], lv.floor[0], theme, t);
     if (i1 >= lv.n - 1) drawBarrier(lv.L, lv.ceil[lv.n - 1], lv.floor[lv.n - 1], theme, t);
   }
@@ -286,7 +300,7 @@ export function createRenderer(canvas, view) {
     for (const o of lv.obstacles) {
       const kind = OBSTACLES[o.type];
       const b = kind.bounds(o);
-      if (b.x2 < r.camX - 10 || b.x1 > r.camX + view.viewW + 10) continue;
+      if (b.x2 < r.camX - 10 || b.x1 > r.camX + viewW() + 10) continue;
       kind.draw(ctx, o, theme, t);
     }
   }
@@ -374,14 +388,14 @@ export function createRenderer(canvas, view) {
   // Seta na borda da faixa da fase, apontando para o objetivo quando ele está fora da tela
   function drawObjectiveArrow(m, t, params) {
     const target = m.level.pads.find((p) => p.kind === (m.crewOnBoard ? 'base' : 'crew'));
-    const sx = view.play.x + ((target.x1 + target.x2) / 2 - r.camX) * view.scale;
+    const sx = r.toScreen((target.x1 + target.x2) / 2, 0).x;
     const playRight = view.play.x + view.play.w;
     if (sx >= view.play.x && sx <= playRight) return;
     const right = sx > playRight;
     const x = right ? playRight - 24 - view.safe.right : view.play.x + 24 + view.safe.left;
     // No controle A (dois polegares), a seta da direita fica acima do botão do propulsor
     const bottom = right && twinControls(params) ? view.cssH - 70 - params.joystickRadius * 1.8 - view.safe.bottom : view.cssH - 50;
-    const y = clamp(target.y * view.scale, 110, Math.max(110, bottom));
+    const y = clamp(r.toScreen(0, target.y).y, 110, Math.max(110, bottom));
     const pulse = (0.6 + 0.4 * Math.sin(t * 5)).toFixed(2);
     ctx.fillStyle = m.crewOnBoard ? `rgba(124,196,255,${pulse})` : `rgba(255,159,67,${pulse})`;
     ctx.beginPath();
@@ -474,8 +488,8 @@ export function createRenderer(canvas, view) {
   // NO FUEL: pisca logo acima da nave enquanto o aviso durar
   function drawNoFuel(s, t) {
     if (r.noFuelT <= 0 || s.state === 'exploding' || Math.sin(t * 12) < -0.2) return;
-    const sx = view.play.x + (s.x - r.camX) * view.scale;
-    const sy = s.y * view.scale - 22;
+    const { x: sx, y } = r.toScreen(s.x, s.y);
+    const sy = y - 22;
     ctx.font = `700 12px ${FONT}`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
@@ -487,8 +501,8 @@ export function createRenderer(canvas, view) {
     const p = r.praiseText;
     if (!p) return;
     const alpha = clamp(Math.min(p.t / 0.12, (1.3 - p.t) / 0.4), 0, 1) * 0.9;
-    const sx = view.play.x + (p.x - r.camX) * view.scale;
-    const sy = p.y * view.scale - 22 - p.t * 18;
+    const { x: sx, y } = r.toScreen(p.x, p.y);
+    const sy = y - 22 - p.t * 18;
     ctx.font = `700 12px ${FONT}`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
@@ -520,8 +534,7 @@ export function createRenderer(canvas, view) {
     if (timerLeft - x1 < 220) x1 = left + 190;         // tela estreita: só depois do nome da fase
     const width = Math.max(140, timerLeft - x1);
     const cx = x1 + width / 2;
-    const sx = ship ? view.play.x + (ship.x - r.camX) * view.scale : -1e9;
-    const sy = ship ? ship.y * view.scale : -1e9;
+    const { x: sx, y: sy } = ship ? r.toScreen(ship.x, ship.y) : { x: -1e9, y: -1e9 };
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
     let y = top + 1;
@@ -541,10 +554,33 @@ export function createRenderer(canvas, view) {
   }
 
   // Direcional e, no esquema de dois polegares, o botão do propulsor (#44)
-  function drawJoystick({ joy, joystick, params, idle, thrustHeld }) {
+  // Os controles ficam por cima da fase (#96). Se a nave passar por baixo de um deles, ele fica
+  // transparente, para a nave nunca sumir embaixo do polegar.
+  function overShip(match, x, y, radius) {
+    const s = match?.state.ship;
+    if (!s || s.state === 'exploding') return false;
+    const p = r.toScreen(s.x, s.y);
+    return Math.hypot(p.x - x, p.y - y) < radius + 28;
+  }
+
+  function drawJoystick({ joy, joystick, params, idle, thrustHeld, match }) {
     const R = params.joystickRadius;
     const twin = view.isTouch && params.touchScheme === 'twin';
-    if (twin) drawThrustButton(joystick.thrustButton(), thrustHeld);
+    if (twin) {
+      const b = joystick.thrustButton();
+      ctx.save();
+      if (overShip(match, b.x, b.y, b.r)) ctx.globalAlpha = 0.3;
+      drawThrustButton(b, thrustHeld);
+      ctx.restore();
+    }
+    const c = joy ? { x: joy.cx, y: joy.cy } : joystick?.fixedCenter();
+    ctx.save();
+    if (c && overShip(match, c.x, c.y, R)) ctx.globalAlpha = 0.3;
+    drawStick(joy, joystick, params, idle, twin, R);
+    ctx.restore();
+  }
+
+  function drawStick(joy, joystick, params, idle, twin, R) {
     if (!joy) {
       if (!view.isTouch || !(idle || twin)) return;
       // Dica discreta de onde o direcional aparece; nas colunas do C, do mesmo tamanho do botão

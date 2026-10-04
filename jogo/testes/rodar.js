@@ -2,7 +2,7 @@
 // Cada bloco cita a história (#) ou a regra que verifica.
 
 import assert from 'node:assert/strict';
-import { PARAMS, DEFAULT_PARAMS, setParams, resetParams, changedParams } from '../src/config/params.js';
+import { PARAMS, DEFAULT_PARAMS, VIEW_ONLY, setParams, resetParams, changedParams } from '../src/config/params.js';
 import { LEVELS, CHALLENGES, TRAINING_LEVEL, findLevel } from '../src/content/worlds.js';
 import { effectiveParams } from '../src/content/modifiers.js';
 import { generateLevel, validateLevel } from '../src/core/generator.js';
@@ -154,6 +154,16 @@ test('modificadores alteram a física e tipos desconhecidos dão erro', () => {
   assert.throws(() => effectiveParams(PARAMS, { ...def, modifiers: [{ type: 'nope' }] }));
   const s = airShip(); run(s, NONE, 1, e);
   assert.ok(s.vx > 0);
+});
+
+test('#95 #96 câmera: zoom e modo aceitam só valores válidos e não contam como ajuste da física', () => {
+  setParams({ cameraZoom: 1.3, cameraMode: 'thumbs' });
+  assert.equal(PARAMS.cameraZoom, 1.3); assert.equal(PARAMS.cameraMode, 'thumbs');
+  setParams({ cameraMode: 'zoomzoom' });
+  assert.equal(PARAMS.cameraMode, 'thumbs');
+  assert.ok(Object.keys(changedParams()).every((k) => VIEW_ONLY.includes(k)), 'mudar a câmera não deve tirar o tempo do ranking');
+  assert.equal(DEFAULT_PARAMS.cameraZoom, 1); assert.equal(DEFAULT_PARAMS.cameraMode, 'stage');
+  resetParams();
 });
 
 // ===== Gerador de fases =====

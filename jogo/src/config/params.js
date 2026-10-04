@@ -36,7 +36,14 @@ export const DEFAULT_PARAMS = Object.freeze({
                             // 1 = a tela inteira, como no protótipo testado (#50); a #39 propunha 0.5
   joystickRadius: 56,       // raio do direcional (px de tela)
   joystickDeadzone: 10,     // abaixo disso, o arrasto não muda a direção
+  // Câmera. Não mudam a dificuldade: mexer nelas não tira o tempo do ranking.
+  cameraZoom: 1,            // aproximação (#95): 1 mostra a altura inteira da fase; acima de 1, aproxima e segue a nave na vertical
+  cameraMode: 'stage',      // #96: 'stage' para nas pontas da fase, com os controles por cima dela;
+                            // 'thumbs' (o de antes, #44 e #50) afasta a nave e as plataformas dos polegares
 });
+
+// Parâmetros que só mudam a imagem, não a dificuldade
+export const VIEW_ONLY = ['touchScheme', 'cameraZoom', 'cameraMode'];
 
 // Valores em uso. Começam iguais aos padrões e podem ser alterados pelo painel de ajuste.
 export const PARAMS = { ...DEFAULT_PARAMS };
@@ -59,6 +66,8 @@ export const TUNABLE = [
   { key: 'joystickArea', label: 'Joystick area', min: 0.25, max: 1, step: 0.05 },
   { key: 'touchScheme', label: 'Touch control', options: [['twin', 'A · two thumbs'], ['hold', 'B · one thumb']] },
   { key: 'joystickMode', label: 'Joystick', options: ['follow', 'fixed'] },
+  { key: 'cameraZoom', label: 'Camera zoom', min: 1, max: 1.6, step: 0.05 },
+  { key: 'cameraMode', label: 'Camera', options: [['stage', 'whole stage · controls on top'], ['thumbs', 'avoid thumbs (old)']] },
 ];
 
 // Ignora o que não existe mais (por exemplo, uma opção removida e ainda salva no aparelho)

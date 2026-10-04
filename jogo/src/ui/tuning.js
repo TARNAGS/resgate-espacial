@@ -1,4 +1,4 @@
-import { PARAMS, TUNABLE, setParams, resetParams, changedParams } from '../config/params.js';
+import { PARAMS, TUNABLE, VIEW_ONLY, setParams, resetParams, changedParams } from '../config/params.js';
 import { loadTuning, writeTuning } from '../platform/storage.js';
 
 // Painel de ajuste para as sessões de teste (#42). Fica escondido de quem joga normalmente.
@@ -82,6 +82,6 @@ export async function createTuning({ panel, onOpenChange, onTraining }) {
     onOpenChange(t.open);
   };
   // O esquema do toque aparece à parte no rodapé ("control A/B/C"); não conta como ajuste
-  t.isTuned = () => Object.keys(changedParams()).some((k) => k !== 'touchScheme');
+  t.isTuned = () => Object.keys(changedParams()).some((k) => !VIEW_ONLY.includes(k));
   return t;
 }
