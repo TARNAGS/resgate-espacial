@@ -11,31 +11,35 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 ## Onde paramos (04/10/2026)
 
 - ⚠️ **Janela de teste ABERTA:** o repositório está público para amigos do Fernando testarem em https://tarnags.github.io/resgate-espacial/jogo/. Fechar ao fim do teste (passo 5 da janela de teste, no `CLAUDE.md`) e tirar este aviso.
-- **Objetivo:** portfólio, aprendizado e negócio. O jogo será publicado na App Store e no Google Play (D-019); cobrar ou não segue em aberto (P-014, [#63](https://github.com/TARNAGS/resgate-espacial/issues/63); loja de itens, P-017, [#78](https://github.com/TARNAGS/resgate-espacial/issues/78)).
-- **Marcos:** M0 só falta a retrospectiva ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)). M1 em testes com amigos. Big picture em proposta: M4 (lojas) e M5 (mundos e loja).
+- **Objetivo:** portfólio, aprendizado e negócio. O jogo será publicado na App Store e no Google Play (D-019); cobrar ou não segue em aberto (P-014, na pesquisa de lojas e dinheiro [#98](https://github.com/TARNAGS/resgate-espacial/issues/98); loja de itens, P-017, [#78](https://github.com/TARNAGS/resgate-espacial/issues/78)).
+- **Público (D-028):** o jogador casual de celular, o mesmo de Jetpack Joyride, Subway Surfers, Candy Crush Saga, Plants vs. Zombies e Temple Run, com o fã da estética retrô dentro dele. Esses jogos viram benchmark ([#98](https://github.com/TARNAGS/resgate-espacial/issues/98) e [#99](https://github.com/TARNAGS/resgate-espacial/issues/99)).
+- **Marcos:** M0 só falta a retrospectiva ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)). M1: critério de saída atendido em 04/10 (5 de 6 concluíram o nível 1, e o Fernando aprovou a sensação; [#43](https://github.com/TARNAGS/resgate-espacial/issues/43) fechado). Big picture em proposta: M4 (lojas) e M5 (mundos e loja).
 - **O jogo (`jogo/`):**
   - níveis 1 a 3 com **cenário fixo** (D-021) e mais difíceis; desafios **PRACTICE** (a mais difícil) e **BONUS** (sorteada a cada partida);
-  - nas fases com posto, **abastecer uma vez é obrigatório** (D-023), provado por um piloto automático;
+  - nas fases com posto, o tanque pede **um abastecimento** (D-023), mas os melhores jogadores terminam sem ele; a D-026 recalcula o tanque com um piloto mais econômico ([#92](https://github.com/TARNAGS/resgate-espacial/issues/92) e [#93](https://github.com/TARNAGS/resgate-espacial/issues/93));
   - controle principal de **dois polegares (A)**, com o de um polegar (B) como opção (D-022);
   - **abertura** em três telas com **música chiptune** sincronizada, que dá para pular;
   - **elogios** discretos para manobras difíceis (CLOSE CALL, GREAT SAVE, PERFECT LANDING, PERFECT RUN);
   - **nickname e ranking online** por fase (D-024) e **telemetria das partidas** no Firebase (D-025), com relatório no terminal;
   - **primeiro playtest medido** (6 amigos, 229 tentativas): resultados no [documento 09](09-resultados-dos-playtests.md);
   - aviso de pouso, treino (TRAINING), painel de ajuste escondido e **75 testes automáticos**.
-- **Documentos:** Visão 1.3, Regras 1.5, PRD 1.6, Roadmap 1.5, Decisões até a D-027, documento 07 (roteiro de teste), 08 (design de mundos, com o rascunho do Mundo 1) e 09 (resultados dos playtests).
-- **Pendências abertas:** P-003 (nome), P-006 (pontuação), P-008 (medição), P-009 (tutorial), P-011 (obstáculos), P-012 (modificadores), P-013 (ICP), P-014 (cobrar ou não), P-015 (CNPJ), P-016 (o que o jogo guarda), P-017 (loja), P-018 (modo Nightmare, [#79](https://github.com/TARNAGS/resgate-espacial/issues/79)), P-019 (ranking, [#80](https://github.com/TARNAGS/resgate-espacial/issues/80)), todas em "A investigar". P-020 e P-021 foram decididas em 04/10 (D-026 e D-027).
+- **Documentos:** Visão 1.4, Regras 1.5, PRD 1.6, Roadmap 1.5, Decisões até a D-028, documento 07 (roteiro de teste), 08 (design de mundos, com o rascunho do Mundo 1) e 09 (resultados dos playtests, v0.2).
+- **Pendências abertas:** P-003 (nome), P-006 (pontuação), P-008 (medição), P-009 (como ensinar, [#48](https://github.com/TARNAGS/resgate-espacial/issues/48)), P-011 (obstáculos), P-012 (modificadores), P-014 (cobrar ou não, [#98](https://github.com/TARNAGS/resgate-espacial/issues/98)), P-015 (CNPJ), P-017 (loja), P-018 (modo Nightmare, [#79](https://github.com/TARNAGS/resgate-espacial/issues/79)), P-019 (ranking no lançamento, [#101](https://github.com/TARNAGS/resgate-espacial/issues/101)) e P-022 (o que salvar no banco online, [#100](https://github.com/TARNAGS/resgate-espacial/issues/100), em "Para conversar"). Decididas em 04/10: P-013 (D-028), P-020 (D-026) e P-021 (D-027); P-016 respondida em parte pela arquitetura.
 
 ### Próximos passos
 
-1. **Fernando responde as duas perguntas da [#93](https://github.com/TARNAGS/resgate-espacial/issues/93):** onde fica o posto (no meio, como hoje, ou mais perto da tripulação) e as folgas do tanque.
-2. **Claude constrói o piloto automático econômico** ([#92](https://github.com/TARNAGS/resgate-espacial/issues/92), em "Pronto"), que voa combinando propulsor e gravidade e precisa gastar no máximo 22,6 s no nível 3 e 25,1 s na PRACTICE. Depois vem o tanque novo ([#93](https://github.com/TARNAGS/resgate-espacial/issues/93)), com as respostas do item 1, e os rankings do nível 3, da PRACTICE e da BONUS recomeçam.
-3. **Apagar a linha de teste CLAUDETEST do ranking real** (só o Fernando pode, pelo console do Firebase): Realtime Database → Dados → `scores` → `w1-2_1wyelcg` → `CLAUDETEST` → lixeira. Se quiser, também `scores/teste_abc1` e `telemetry/1999-01-01`.
-4. Melhorar a medição para a próxima rodada ([#91](https://github.com/TARNAGS/resgate-espacial/issues/91), Claude), agora com o combustível de cada trecho e o ranking no relatório.
-5. **O Fernando conta o retorno completo do teste com amigos** e testa as mudanças de hoje no iPhone: cartões em "Em revisão" ([#35](https://github.com/TARNAGS/resgate-espacial/issues/35), [#39](https://github.com/TARNAGS/resgate-espacial/issues/39), [#40](https://github.com/TARNAGS/resgate-espacial/issues/40), [#41](https://github.com/TARNAGS/resgate-espacial/issues/41), [#42](https://github.com/TARNAGS/resgate-espacial/issues/42), [#66](https://github.com/TARNAGS/resgate-espacial/issues/66), [#76](https://github.com/TARNAGS/resgate-espacial/issues/76), [#81](https://github.com/TARNAGS/resgate-espacial/issues/81) e [#82](https://github.com/TARNAGS/resgate-espacial/issues/82) a [#88](https://github.com/TARNAGS/resgate-espacial/issues/88)).
-6. **Fechar o repositório** quando o teste acabar.
-7. Retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)).
-8. Decisões do Fernando: como ensinar o propulsor (P-009, [#48](https://github.com/TARNAGS/resgate-espacial/issues/48)), Nightmare ([#79](https://github.com/TARNAGS/resgate-espacial/issues/79)), ranking ([#80](https://github.com/TARNAGS/resgate-espacial/issues/80)), loja ([#78](https://github.com/TARNAGS/resgate-espacial/issues/78)) e cobrar ou não ([#63](https://github.com/TARNAGS/resgate-espacial/issues/63)).
-9. Pesquisa do Claude sobre as lojas ([#65](https://github.com/TARNAGS/resgate-espacial/issues/65)): empacotamento, revisão da Apple, compras dentro do app e rankings do Game Center e do Google Play Games.
+1. **Fernando responde:**
+   - [#93](https://github.com/TARNAGS/resgate-espacial/issues/93): onde fica o posto (no meio, como hoje, ou mais perto da tripulação) e as folgas do tanque;
+   - [#100](https://github.com/TARNAGS/resgate-espacial/issues/100) (P-022, em "Para conversar"): o que salvar no banco online, ligado ao nick;
+   - [#94](https://github.com/TARNAGS/resgate-espacial/issues/94): se a nave pousada na tripulação sem combustível continua explodindo, e se aceita o "LOW FUEL" pequeno perto da nave.
+2. **Claude constrói, nesta ordem** (tudo em "Pronto"): [#92](https://github.com/TARNAGS/resgate-espacial/issues/92) piloto econômico, que destrava o tanque ([#93](https://github.com/TARNAGS/resgate-espacial/issues/93)); [#94](https://github.com/TARNAGS/resgate-espacial/issues/94) NO FUEL perto da nave; [#97](https://github.com/TARNAGS/resgate-espacial/issues/97) mensagens fora da frente da nave; [#95](https://github.com/TARNAGS/resgate-espacial/issues/95) câmera mais próxima e [#96](https://github.com/TARNAGS/resgate-espacial/issues/96) direcional por cima da fase, que dá para fazer juntas. Depois, [#93](https://github.com/TARNAGS/resgate-espacial/issues/93), com as respostas do item 1.
+3. **Claude pesquisa** (em "A investigar", no máximo 2 por vez em "Investigando"): [#57](https://github.com/TARNAGS/resgate-espacial/issues/57) som no iPhone e [#48](https://github.com/TARNAGS/resgate-espacial/issues/48) como os jogos de referência ensinam e a corrida gravada; depois [#99](https://github.com/TARNAGS/resgate-espacial/issues/99) benchmark dos casuais, [#98](https://github.com/TARNAGS/resgate-espacial/issues/98) lojas e dinheiro, com uma sugestão para cada resposta, e [#52](https://github.com/TARNAGS/resgate-espacial/issues/52) achar o jogo original.
+4. Melhorar a medição antes da próxima rodada ([#91](https://github.com/TARNAGS/resgate-espacial/issues/91), Claude): combustível por trecho e ranking no relatório.
+5. **Apagar a linha de teste CLAUDETEST do ranking real** (só o Fernando pode, pelo console do Firebase): Realtime Database → Dados → `scores` → `w1-2_1wyelcg` → `CLAUDETEST` → lixeira. Se quiser, também `scores/teste_abc1` e `telemetry/1999-01-01`.
+6. **O Fernando testa no iPhone** e aprova o que está em "Em revisão".
+7. **Fechar o repositório** quando o teste acabar.
+8. Retrospectivas do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)) e do M1 ([#46](https://github.com/TARNAGS/resgate-espacial/issues/46)).
+9. Decisões do Fernando: Nightmare ([#79](https://github.com/TARNAGS/resgate-espacial/issues/79)) e loja ([#78](https://github.com/TARNAGS/resgate-espacial/issues/78)).
 
 ## Sessões
 
@@ -268,7 +272,7 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **Relatório melhorado:** separa o recomeço depois de morrer, mostra tentativas até a primeira conclusão por jogador e as conclusões sem abastecer.
 - **Cartões novos:** P-020 ([#89](https://github.com/TARNAGS/resgate-espacial/issues/89)) e P-021 ([#90](https://github.com/TARNAGS/resgate-espacial/issues/90)) em "Para conversar", para o Fernando; tarefa de medição ([#91](https://github.com/TARNAGS/resgate-espacial/issues/91)) no Backlog, para o Claude.
 
-### 04/10/2026 — Decisões do playtest: o posto como salvação (D-026) e o pouso mantido (D-027)
+### 04/10/2026 — Decisões do playtest (D-026 a D-028) e revisão da raia "Para conversar"
 
 - **Mac sincronizado com o Windows:** e-mail noreply nos commits, projeto clonado e `gh` com o escopo `project`.
 - **Ranking analisado com a telemetria:** TARNAG (o Fernando) é o 1º nos níveis 1 a 3 e na PRACTICE. As duas corridas sem abastecer que derrubaram a D-023 são dele: nível 3 em 40,3 s, com 32% do tanque no fim (22,6 s de propulsor), e PRACTICE em 48,5 s, com 23% no fim (25,1 s).
@@ -278,6 +282,17 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **Cartões:** #89 e #90 fechados com as decisões; #92 em "Pronto" e #93 no "Backlog", com o Claude; #91 ganhou o combustível por trecho e o ranking no relatório; comentários na #48 e na #83.
 - **CLAUDETEST:** continua no ranking do nível 2. O Claude não apaga dados; o Fernando apaga pelo console do Firebase.
 - `CLAUDE.md` do projeto: nova seção "Análise dos playtests" (sempre olhar o ranking; o nick do Fernando é TARNAG).
+- **Como voa o mais rápido (TARNAG):** acelera forte apontando para a tripulação, deixa a nave ir, vira e freia no sentido contrário; no pouso, toques curtos e solta tudo quando a nave fica verde. "Não me importei com o combustível": ele ficou irrelevante. Isso virou o jeito de voar do piloto novo ([#92](https://github.com/TARNAGS/resgate-espacial/issues/92)) e o aviso NO FUEL perto da nave ([#94](https://github.com/TARNAGS/resgate-espacial/issues/94)).
+- **Raia "Para conversar" revisada com as respostas do Fernando nos cartões:**
+  - [#43](https://github.com/TARNAGS/resgate-espacial/issues/43) teste com 6 pessoas: divertido, replay alto e apelo casual; o ranking faz diferença; a abertura funcionou. **Critério de saída do M1 atendido.** Saíram [#97](https://github.com/TARNAGS/resgate-espacial/issues/97) (mensagens na frente do voo), [#95](https://github.com/TARNAGS/resgate-espacial/issues/95) (câmera mais próxima) e [#96](https://github.com/TARNAGS/resgate-espacial/issues/96) (direcional por cima da fase). Fechado.
+  - [#59](https://github.com/TARNAGS/resgate-espacial/issues/59) ICP → **D-028**: o casual de celular, com o fã do retrô dentro dele; Jetpack Joyride, Subway Surfers, Candy Crush Saga, Plants vs. Zombies e Temple Run viram benchmark ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)). Visão 1.4. Fechado.
+  - [#49](https://github.com/TARNAGS/resgate-espacial/issues/49) já resolvida pela D-021; o Fernando resumiu o núcleo do jogo (dominar a nave e bater tempos), registrado na D-028. Fechado.
+  - [#63](https://github.com/TARNAGS/resgate-espacial/issues/63) e [#65](https://github.com/TARNAGS/resgate-espacial/issues/65) juntadas numa pesquisa só de lojas e dinheiro, com sugestão para cada resposta: [#98](https://github.com/TARNAGS/resgate-espacial/issues/98). Fechados.
+  - [#62](https://github.com/TARNAGS/resgate-espacial/issues/62): a arquitetura respondeu a maior parte; o pedido "salvar no banco que temos" virou a P-022 ([#100](https://github.com/TARNAGS/resgate-espacial/issues/100), em "Para conversar", com recomendação). Fechado.
+  - [#80](https://github.com/TARNAGS/resgate-espacial/issues/80): respondida para o playtest pela D-024; o ranking do lançamento virou a história [#101](https://github.com/TARNAGS/resgate-espacial/issues/101) (M4). Fechado.
+  - [#48](https://github.com/TARNAGS/resgate-espacial/issues/48): sem tutorial; a ideia é uma corrida gravada antes de jogar, para mostrar o objetivo. O Claude pesquisa os jogos de referência. Voltou para "A investigar".
+  - [#52](https://github.com/TARNAGS/resgate-espacial/issues/52): o Fernando não lembra o nome do jogo (revista dos anos 2000, CD ou disquete, menu com vários jogos, talvez uma demo). O Claude pesquisa. Voltou para "A investigar".
+  - [#57](https://github.com/TARNAGS/resgate-espacial/issues/57): o jogo já tem som e música; o Claude confere o iPhone com fontes. Voltou para "A investigar".
 
 ## Aprendizados de produto
 

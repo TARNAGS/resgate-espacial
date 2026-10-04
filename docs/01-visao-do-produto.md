@@ -5,8 +5,8 @@
 | Campo | Valor |
 |---|---|
 | Documento | 01 — Visão do produto |
-| Versão | 1.3 |
-| Data | 02/10/2026 |
+| Versão | 1.4 |
+| Data | 04/10/2026 |
 | Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
 
@@ -42,8 +42,13 @@ Não houve pesquisa de mercado. As afirmações abaixo são **hipóteses** para 
 
 | Persona | Quem é | O que precisa | O que isso exige do produto |
 |---|---|---|---|
-| **Nostálgico** (primária) | Adulto que jogava jogos de PC nos anos 2000 | Partidas curtas no celular, controle preciso, clima retrô | Controle fiel à sensação original, inclusive na tela de toque |
+| **Casual de celular** (primária) | Joga na fila, no transporte ou para passar o tempo, e se diverte tentando passar as fases. O mesmo público de Jetpack Joyride, Subway Surfers, Candy Crush Saga, Plants vs. Zombies e Temple Run | Partidas curtas, entender o objetivo na hora, vontade de passar a fase e de melhorar o próprio tempo | Fase que cabe numa fila; objetivo claro desde a primeira partida; ranking para comparar tempos |
+| **Fã do retrô** (dentro da primária) | Adulto de 30 a 40 anos que jogava jogos de PC nos anos 2000, e jovem de 15 a 25 que gosta da estética retrô | Clima e estética dos anos 2000, controle preciso | Identidade visual e sonora retrô; controle fiel à sensação original, inclusive na tela de toque |
 | **Avaliador de portfólio** (secundária) | Recrutador ou gestor de produto que abre o link do portfólio | Ver o jogo funcionando e entender o processo por trás em poucos minutos | Jogar a partir do link em segundos; um README que conte a história do projeto |
+
+**ICP numa frase (D-028):** o jogador casual de celular que quer uma partida curta e desafiadora, e que volta para dominar a nave e bater o próprio tempo e o dos outros. A estética retrô dos anos 2000 atrai, em especial, quem tem de 30 a 40 anos e de 15 a 25.
+
+**Núcleo do jogo**, nas palavras do Fernando (04/10/2026): "o desafio pessoal de passar a fase, controlar a nave, ficar proficiente na experiência de controlar a nave e tentar melhorar isso para jogar mais e mais rápido e bater o tempo dos outros".
 
 ## 5. Proposta de valor
 
@@ -194,3 +199,4 @@ A documentação base está completa e aprovada. O que vem a seguir está no [Ro
 | 1.1 | 01/10/2026 | Escopo inclui fases geradas aleatoriamente (D-014) e menu com mapa de progresso (D-015) |
 | 1.2 | 02/10/2026 | Objetivo de negócio e publicação nas lojas (D-019); big picture com mundos de 10 fases (D-020), abertura, loja de itens e cobrança em aberto (P-014 e P-017); princípios "sem enredo" e "replay alto"; hipóteses H4 e H5. O MVP continua com 3 fases |
 | 1.3 | 02/10/2026 | Depois do teste com amigos: fases com cenário fixo e fase BONUS (D-021), para comparar tempos; ideias de modo Nightmare (P-018) e ranking (P-019) no big picture |
+| 1.4 | 04/10/2026 | ICP decidido (D-028): o casual de celular vira a persona primária, com o fã do retrô dentro dela; núcleo do jogo nas palavras do Fernando |

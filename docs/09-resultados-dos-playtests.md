@@ -3,8 +3,8 @@
 | Campo | Valor |
 |---|---|
 | Documento | 09 — Resultados dos playtests |
-| Versão | 0.1 |
-| Data | 03/10/2026 |
+| Versão | 0.2 |
+| Data | 04/10/2026 |
 | Status | Contínuo |
 | Responsável | Fernando Nunes (Product Manager) |
 
@@ -134,12 +134,26 @@ Um PERFECT LANDING em 229 tentativas indica um critério estrito demais para ser
 
 Tudo isso está na tarefa [#91](https://github.com/TARNAGS/resgate-espacial/issues/91).
 
+### Retorno do Fernando (04/10/2026)
+
+O Fernando jogou e assistiu aos outros 5 jogadores ([#43](https://github.com/TARNAGS/resgate-espacial/issues/43)).
+
+- **Veredito:** "um jogo com alto fator de replay, divertido de jogar. Difícil o suficiente para o jogador querer aprender mais sobre como jogar, mas simples o suficiente para que a dificuldade não impeça que o jogador se divirta". Tem apelo para jogadores casuais.
+- **Critério de saída do M1** (Roadmap: pelo menos 4 de 5 decolam, voam, pousam e aprovam a sensação): **atendido**. 5 de 6 jogadores concluíram o nível 1 em 1 a 5 tentativas, e o Fernando aprova a sensação.
+- **O ranking faz toda a diferença:** os jogadores comparam quem faz a fase mais rápido.
+- **A abertura cumpriu a função** de apresentar o jogo.
+- **Problemas vistos:** as mensagens do início da fase ficam na frente do voo e do pouso ([#97](https://github.com/TARNAGS/resgate-espacial/issues/97)); a câmera está um pouco distante ([#95](https://github.com/TARNAGS/resgate-espacial/issues/95)); o direcional deixa uma faixa vazia à esquerda ([#96](https://github.com/TARNAGS/resgate-espacial/issues/96)).
+- **O jogador que travou no nível 1 (achado 3):** o pouso não era o problema, e sim entender quando soltar e quando apertar o propulsor (D-027). Os jogadores também não entendiam o objetivo: ir até o fim, resgatar, voltar e pousar (P-009, [#48](https://github.com/TARNAGS/resgate-espacial/issues/48)).
+- **Como voa o jogador mais rápido (achado 1),** que é o próprio Fernando: acelera forte apontando para a tripulação, deixa a nave ir, vira e freia no sentido contrário, e no pouso dá toques curtos e solta tudo quando a nave fica verde. Objetivo: "fazer o mais rápido que consigo, forçar a nave e não me importar com combustível". O combustível "se tornou um item irrelevante para a fase" ([#92](https://github.com/TARNAGS/resgate-espacial/issues/92), [#93](https://github.com/TARNAGS/resgate-espacial/issues/93) e [#94](https://github.com/TARNAGS/resgate-espacial/issues/94)).
+
 ### O que decidir e o que observar no próximo playtest
 
 | Assunto | Cartão | O que observar depois da mudança |
 |---|---|---|
-| Abastecer obrigatório (D-023) | P-020, [#89](https://github.com/TARNAGS/resgate-espacial/issues/89) | Conclusões sem abastecer no nível 3 e na PRACTICE: devem ir a zero |
-| Pouso na tripulação e nível 1 | P-021, [#90](https://github.com/TARNAGS/resgate-espacial/issues/90) | Mortes perto da tripulação no nível 1 (hoje 66%) e jogadores que não passam do nível 1 (hoje 1 de 6) |
+| O posto como salvação (D-026, revê a D-023) | [#92](https://github.com/TARNAGS/resgate-espacial/issues/92) e [#93](https://github.com/TARNAGS/resgate-espacial/issues/93) | Conclusões sem abastecer no nível 3 e na PRACTICE: devem ir a zero, sem cair a taxa de conclusão |
+| Aviso de combustível perto da nave | [#94](https://github.com/TARNAGS/resgate-espacial/issues/94) | Jogadores que ficam sem combustível e conseguem voltar ao posto ou à base |
+| Pouso mantido; ensinar o propulsor e o objetivo (D-027) | P-009, [#48](https://github.com/TARNAGS/resgate-espacial/issues/48) | Mortes perto da tripulação no nível 1 (hoje 66%) e jogadores que não passam do nível 1 (hoje 1 de 6) |
+| Mensagens, câmera e direcional | [#97](https://github.com/TARNAGS/resgate-espacial/issues/97), [#95](https://github.com/TARNAGS/resgate-espacial/issues/95) e [#96](https://github.com/TARNAGS/resgate-espacial/issues/96) | Mortes nos primeiros segundos de cada fase e o que os jogadores dizem |
 | Recomeço rápido e uma vida só | P-006, [#53](https://github.com/TARNAGS/resgate-espacial/issues/53) | Recomeços logo depois de morrer (hoje 120 de 128) |
 | Medição | [#91](https://github.com/TARNAGS/resgate-espacial/issues/91) | — |
 
@@ -148,3 +162,4 @@ Tudo isso está na tarefa [#91](https://github.com/TARNAGS/resgate-espacial/issu
 | Versão | Data | O que mudou |
 |---|---|---|
 | 0.1 | 03/10/2026 | Primeira versão, com o playtest de 02/10/2026 |
+| 0.2 | 04/10/2026 | Retorno do Fernando, critério do M1 atendido e próximos passos depois das decisões D-026, D-027 e D-028 |
