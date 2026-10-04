@@ -21,7 +21,7 @@ import { createMusic } from './platform/music.js';
 import { createLeaderboard } from './platform/leaderboard.js';
 import { rankKey, normalizeNick, validNick } from './core/ranking.js';
 import { createRankingScreen } from './ui/ranking.js';
-import { createTelemetry, createFrameStats, deviceKind } from './platform/telemetry.js';
+import { createTelemetry, createFrameStats, createRunTracker, deviceKind } from './platform/telemetry.js';
 import { INTRO_SONG } from './content/songs.js';
 
 // Resgate Espacial — ponto de entrada. Liga as partes: regras (core), conteúdo (content),
@@ -120,15 +120,35 @@ events.on('boarding', ({ lowFuel }) => {
 events.on('crewOnBoard', () => renderer.message('CREW ON BOARD · BACK TO BASE!', 3));
 events.on('praise', ({ kind, label, x, y }) => {
   renderer.praise(`${label}!`, x, y);
-  if (app.run) app.run.praise[kind] = (app.run.praise[kind] || 0) + 1;
+  const r = app.run;
+  if (!r) return;
+  r.praise[kind] = (r.praise[kind] || 0) + 1;
+  telemetry.track('praise', { level: r.level, attempt: r.attempt, kind, x: Math.round(x), y: Math.round(y) });
 });
-events.on('land', ({ pad }) => { if (app.run && pad === 'fuel') app.run.refuels += 1; });
-events.on('crash', ({ reason, x, y }) => {
+const deg = (a) => Math.round((a * 180) / Math.PI);
+// Cada pouso (#91, D-029): plataforma, combustível que sobrou, propulsor e tempo do trecho, e o impacto
+events.on('land', ({ pad, impact }) => {
+  const r = app.run;
+  if (!r) return;
+  if (pad === 'fuel') r.refuels += 1;
+  const m = app.match.state;
+  telemetry.track('land', {
+    level: r.level, attempt: r.attempt, pad, fuel: m.ship.fuel, crew: m.crewOnBoard, timer: m.timer,
+    ...r.tracker.land(), vx: impact.vx, vy: impact.vy, angle: deg(impact.angle),
+  });
+});
+events.on('crash', ({ reason, x, y, vx, vy, a }) => {
   const r = app.run;
   if (!r) return;
   r.crashes += 1;
+  r.tracker.land();   // o trecho acaba na batida
   const m = app.match.state;
-  telemetry.track('crash', { level: r.level, attempt: r.attempt, reason, x: Math.round(x), y: Math.round(y), crew: m.crewOnBoard, timer: m.timer });
+  telemetry.track('crash', {
+    level: r.level, attempt: r.attempt, reason, x: Math.round(x), y: Math.round(y), crew: m.crewOnBoard, timer: m.timer,
+    vx, vy, angle: deg(a), fuel: m.ship.fuel,
+    // a previsão de pouso estava verde no último quadro? (só quando a nave descia para uma plataforma)
+    ...(renderer.approach?.landing ? { green: renderer.approach.safe } : {}),
+  });
 });
 events.on('complete', ({ run }) => endRun('complete', { time: run.time, livesLost: run.livesLost, fuelLeft: run.fuelLeft, perfect: run.perfectRun }));
 events.on('gameOver', () => endRun('gameover'));
@@ -171,9 +191,12 @@ function startRun(def, m, genMs) {
   attempts[def.key] = (attempts[def.key] || 0) + 1;
   app.run = {
     level: def.key, attempt: attempts[def.key], t0: performance.now(),
-    crashes: 0, refuels: 0, praise: {}, frames: createFrameStats(),
+    crashes: 0, refuels: 0, praise: {}, frames: createFrameStats(), tracker: createRunTracker(),
   };
-  telemetry.track('level_start', { level: def.key, seed: m.level.seed, attempt: app.run.attempt, genMs, tank: m.level.tankSeconds, control: app.ranControl });
+  telemetry.track('level_start', {
+    level: def.key, seed: m.level.seed, attempt: app.run.attempt, genMs, tank: m.level.tankSeconds, control: app.ranControl,
+    w: window.innerWidth, h: window.innerHeight,   // a tela durante a fase, não só ao carregar o jogo
+  });
 }
 
 // Fim de uma tentativa: concluiu, perdeu as vidas ou desistiu. Resume a partida num evento só.
@@ -186,8 +209,10 @@ function endRun(outcome, extra = {}) {
   telemetry.track('level_end', {
     level: r.level, attempt: r.attempt, outcome, durS: (performance.now() - r.t0) / 1000,
     timer: m?.timer ?? 0, crashes: r.crashes, refuels: r.refuels, control: app.ranControl,
-    crew: m?.crewOnBoard ?? false, tuned: tuning.isTuned(), ...r.frames.summary(), ...praise, ...extra,
+    crew: m?.crewOnBoard ?? false, tuned: tuning.isTuned(), ...r.frames.summary(), ...r.tracker.summary(), ...praise, ...extra,
   });
+  // A trajetória da tentativa, em pedaços curtos (#91, D-029)
+  r.tracker.pathChunks().forEach((p, i) => telemetry.track('path', { level: r.level, attempt: r.attempt, i, p }));
   telemetry.flush();
 }
 
@@ -210,7 +235,8 @@ function drawMap() {
 }
 
 function startLevel(def, seed = randomSeed()) {
-  endRun('quit');   // se uma fase estava em andamento (recomeçar, próxima fase), ela conta como desistência
+  // Se uma fase estava em andamento, ela termina como recomeço (a mesma fase) ou troca de fase (#91)
+  endRun(app.run?.level === def.key ? 'restart' : 'switch');
   app.ranControl = view.isTouch ? PARAMS.touchScheme : 'keys';
   if (def.seed != null) seed = def.seed;   // fases fixas: o mesmo cenário para todos (D-021)
   const t0 = performance.now();
@@ -243,7 +269,7 @@ function togglePause(force) {
 }
 
 function toMenu() {
-  endRun('quit');
+  endRun('menu');
   app.match = null;
   app.selected = defaultLevel(app.save);
   showScreen('menu');
@@ -599,19 +625,22 @@ let last = performance.now();
 let acc = 0;
 
 function loop(now) {
-  const elapsed = Math.min(0.1, (now - last) / 1000);
+  const raw = (now - last) / 1000;              // o quadro de verdade, para medir engasgos (#91)
+  const elapsed = Math.min(0.1, raw);
   last = now;
   const m = app.match;
   if (app.screen === 'game' && m && !app.paused && !tuning.open) {
     const p = m.params();
     acc += elapsed;
     while (acc >= DT) {
-      m.update(DT, readIntent(keyboard.keys, joystick.state, p, joystick.thrustHeld));
+      const intent = readIntent(keyboard.keys, joystick.state, p, joystick.thrustHeld);
+      m.update(DT, intent);
+      app.run?.tracker.step(DT, m.state.ship, intent.thrust);
       renderer.update(DT, m, p);
       acc -= DT;
     }
     Sound.setThrust(m.state.ship.thrusting);
-    app.run?.frames.add(elapsed);
+    app.run?.frames.add(raw);
     if (keyboard.keys.left || keyboard.keys.right || keyboard.keys.thrust) app.ranControl = 'keys';
     checkThumbHint(m.state);
   } else {
@@ -667,6 +696,8 @@ document.addEventListener('visibilitychange', () => {
   if (app.run) telemetry.track('hidden', { level: app.run.level, attempt: app.run.attempt, timer: app.match?.state.timer ?? 0 });
   telemetry.flush({ keepalive: true });
 });
+// Fechou o app no meio da fase: a tentativa termina como "fechou" (#91)
+window.addEventListener('pagehide', () => { endRun('close'); telemetry.flush({ keepalive: true }); });
 window.addEventListener('online', () => telemetry.flush());
 window.addEventListener('online', () => leaderboard.flush());   // a internet voltou: envia a fila
 view.resize();

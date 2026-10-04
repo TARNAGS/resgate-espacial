@@ -12,7 +12,7 @@ import { INTRO_SONG, CHORDS } from '../src/content/songs.js';
 import { createPraise } from '../src/core/praise.js';
 import { rankKey, normalizeNick, validNick } from '../src/core/ranking.js';
 import { createLeaderboard } from '../src/platform/leaderboard.js';
-import { createTelemetry, cleanFields, createFrameStats } from '../src/platform/telemetry.js';
+import { createTelemetry, cleanFields, createFrameStats, createRunTracker, encodePoint, decodePath } from '../src/platform/telemetry.js';
 import { createShip, fly, steer, landingForecast } from '../src/core/ship.js';
 import { createMatch } from '../src/core/match.js';
 import { Sound } from '../src/platform/audio.js';
@@ -803,6 +803,48 @@ test('#88 medidor de quadros: quadros por segundo, engasgos e o pior quadro', ()
   assert.ok(s.fps >= 55 && s.fps <= 60, `fps ${s.fps}`);
   assert.equal(s.worstMs, 50);
   assert.ok(Math.abs(s.jankPct - 1.7) < 0.1, `engasgos ${s.jankPct}%`);
+});
+
+test('#91 telemetria: se o banco recusar um lote, reenvia um a um e perde só o evento recusado', async () => {
+  const stored = {};
+  const fetchFn = async (url, { body }) => {
+    const events = JSON.parse(body);
+    if (Object.values(events).some((e) => e.ev === 'ruim')) return { ok: false, status: 401 };
+    Object.assign(stored, events);
+    return { ok: true, status: 200 };
+  };
+  const warn = console.warn; console.warn = () => {};
+  const tel = createTelemetry({ url: 'https://exemplo.test', storage: null, fetchFn, now: () => Date.UTC(2026, 9, 4) });
+  tel.track('session', {}); tel.track('ruim', {}); tel.track('level_start', {});
+  await tel.flush();
+  console.warn = warn;
+  assert.deepEqual(Object.values(stored).map((e) => e.ev).sort(), ['level_start', 'session']);
+  assert.equal(tel.pending, 0);
+});
+
+test('#91 medidor da tentativa: toques no propulsor, propulsor por trecho e o maior tempo voando solto', () => {
+  const tr = createRunTracker();
+  const ship = { state: 'flying', x: 500, y: 300, fuel: 0.8, thrusting: false };
+  const run = (secs, thrust) => { for (let t = 0; t < secs - 1e-9; t += DT) { ship.thrusting = thrust; tr.step(DT, ship, thrust); } };
+  run(1, true); run(2, false); run(0.5, true); run(0.5, false);
+  const leg = tr.land();
+  assert.ok(Math.abs(leg.legThrustS - 1.5) < 0.02 && Math.abs(leg.legS - 4) < 0.02);
+  const sum = tr.summary();
+  assert.equal(sum.presses, 2);
+  assert.ok(Math.abs(sum.maxCoastS - 2) < 0.02 && Math.abs(sum.thrustS - 1.5) < 0.02);
+  assert.equal(tr.land().legThrustS, 0, 'o trecho seguinte começa do zero');
+});
+
+test('#91 trajetória: pontos a cada 0,5 s, em textos de até 80 caracteres que voltam ao original', () => {
+  const tr = createRunTracker();
+  const ship = { state: 'flying', x: 0, y: 450, fuel: 1, thrusting: false };
+  for (let t = 0; t < 30; t += DT) { ship.x = 4400 * (t / 30); ship.fuel = 1 - t / 30; tr.step(DT, ship, false); }
+  const chunks = tr.pathChunks();
+  assert.ok(chunks.length >= 5 && chunks.every((c) => c.length <= 80 && cleanFields({ p: c }).p === c));
+  const pts = chunks.flatMap(decodePath);
+  assert.ok(pts.length >= 59 && pts.length <= 61);
+  assert.ok(pts.every((q, i) => i === 0 || q.x >= pts[i - 1].x));
+  assert.deepEqual(decodePath(encodePoint({ x: 4321, y: 588, fuel: 0.37 })), [{ x: 4321, y: 588, fuel: 0.37 }]);
 });
 
 // ===== Som (#103, D-030) =====

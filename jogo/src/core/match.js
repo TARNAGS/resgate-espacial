@@ -53,7 +53,7 @@ export function createMatch({ def, seed, getParams, events }) {
     m.outOfFuelT = 0;
     if (!training) { m.lives -= 1; m.livesLost += 1; }
     praise.reset();
-    events.emit('crash', { reason, x: s.x, y: s.y, lives: m.lives });
+    events.emit('crash', { reason, x: s.x, y: s.y, vx: s.vx, vy: s.vy, a: s.a, lives: m.lives });
   }
 
   function updateLanded(s, p, dt, input) {

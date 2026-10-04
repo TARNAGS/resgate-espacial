@@ -69,10 +69,22 @@ export function createTelemetry({
         const batch = queue.slice(0, BATCH);
         const byDay = {};
         for (const [day, id, e] of batch) (byDay[day] ??= {})[id] = e;
+        const send = (day, events) => fetchFn(`${base}/telemetry/${day}.json`, { method: 'PATCH', body: JSON.stringify(events), keepalive });
         for (const [day, events] of Object.entries(byDay)) {
-          const r = await fetchFn(`${base}/telemetry/${day}.json`, { method: 'PATCH', body: JSON.stringify(events), keepalive });
+          const r = await send(day, events);
           if (!r.ok && r.status !== 401) throw new Error(`telemetria: ${r.status}`);
-          // 401: o banco recusou o lote (formato inválido); descarta para não travar a fila
+          // 401: o banco recusou o lote. Um evento recusado derruba o lote inteiro, então reenvia um a um
+          // e descarta só o que o banco recusar, sem travar a fila nem perder os outros (#91)
+          if (r.status === 401 && Object.keys(events).length > 1) {
+            for (const [id, e] of Object.entries(events)) {
+              const one = await send(day, { [id]: e });
+              if (!one.ok && one.status !== 401) throw new Error(`telemetria: ${one.status}`);
+              if (one.status === 401) console.warn('telemetria recusada pelo banco:', e.ev, Object.keys(e).join(','));
+              queue = queue.filter(([d, qid]) => d !== day || qid !== id);
+              sent += 1;
+            }
+            continue;
+          }
           const ids = new Set(Object.keys(events));
           queue = queue.filter(([d, id]) => d !== day || !ids.has(id));
           sent += ids.size;
@@ -89,6 +101,51 @@ export function createTelemetry({
     get pending() { return queue.length; },
   };
   return t;
+}
+
+// Medidas de uma tentativa, passo a passo (#91, D-029): uso do propulsor, combustível de cada trecho
+// e a trajetória da nave. A trajetória vai em pedaços curtos, porque o banco só aceita textos curtos.
+const PATH_EVERY = 0.5;          // segundos entre dois pontos da trajetória
+const PATH_PER_CHUNK = 11;       // pontos por evento (7 caracteres cada, até 80 por texto)
+const b36 = (n, width) => Math.max(0, Math.min(36 ** width - 1, Math.round(n))).toString(36).padStart(width, '0');
+// Um ponto: x (3 caracteres), y (2) e combustível em % (2), em base 36
+export const encodePoint = (s) => b36(s.x, 3) + b36(s.y, 2) + b36(s.fuel * 100, 2);
+export function decodePath(text) {
+  const out = [];
+  for (let i = 0; i + 7 <= text.length; i += 7) {
+    out.push({ x: parseInt(text.slice(i, i + 3), 36), y: parseInt(text.slice(i + 3, i + 5), 36), fuel: parseInt(text.slice(i + 5, i + 7), 36) / 100 });
+  }
+  return out;
+}
+
+export function createRunTracker() {
+  let thrustS = 0, presses = 0, coast = 0, maxCoast = 0, held = false;
+  let legThrust = 0, legT = 0, sampleT = 0;
+  const points = [];
+  return {
+    // Um passo de física: a nave depois do passo e se o jogador estava apertando o propulsor
+    step(dt, ship, thrustInput) {
+      if (thrustInput && !held) presses += 1;
+      held = Boolean(thrustInput);
+      if (ship.state !== 'flying') return;
+      legT += dt;
+      if (ship.thrusting) { thrustS += dt; legThrust += dt; coast = 0; } else { coast += dt; maxCoast = Math.max(maxCoast, coast); }
+      sampleT += dt;
+      if (sampleT >= PATH_EVERY) { sampleT -= PATH_EVERY; points.push(encodePoint(ship)); }
+    },
+    // Pousou: devolve o propulsor e o tempo do trecho, e começa outro
+    land() {
+      const leg = { legThrustS: legThrust, legS: legT };
+      legThrust = 0; legT = 0; coast = 0;
+      return leg;
+    },
+    summary: () => ({ thrustS, presses, maxCoastS: maxCoast }),
+    pathChunks() {
+      const out = [];
+      for (let i = 0; i < points.length; i += PATH_PER_CHUNK) out.push(points.slice(i, i + PATH_PER_CHUNK).join(''));
+      return out;
+    },
+  };
 }
 
 // Medidor de quadros: quantos quadros por segundo, quantos engasgos (quadros acima de 33 ms, que o

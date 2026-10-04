@@ -133,6 +133,7 @@ export function createRenderer(canvas, view) {
     ctx.setTransform(view.dpr * r.scale(), 0, 0, view.dpr * r.scale(), (view.play.x - r.camX * r.scale()) * view.dpr, -r.camY * r.scale() * view.dpr);
     drawCave(m.level, theme, t);
     const approach = approachInfo(m, params);
+    r.approach = approach;   // a telemetria usa: a previsão de pouso estava verde? (#91)
     drawPads(m.level, t, approach);
     drawObstacles(m.level, theme, t);
     if (!m.training) drawCrew(m, t, params);

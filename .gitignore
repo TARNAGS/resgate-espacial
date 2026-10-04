@@ -15,3 +15,6 @@ build/
 
 # Configurações locais do Claude Code (específicas de cada máquina)
 .claude/settings.local.json
+
+# Saída das ferramentas de análise (mapas do playtest), gerada a cada vez
+jogo/ferramentas/saida/
