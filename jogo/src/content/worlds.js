@@ -11,6 +11,8 @@
 //   generator  regras do cenário: comprimento, corredor mínimo, relevo, posto e obstacles (lista com as
 //              opções de cada tipo do catálogo, content/obstacles). Tanque, em segundos de propulsor:
 //              - fase com posto: refuelMargin, a folga sobre o melhor plano com um abastecimento (D-023)
+//              fuelAt (opcional): onde fica o posto, como fração do caminho da base até a tripulação;
+//              sem ele, o posto fica no meio da fase
 //              - fase sem posto: tankSeconds, o mínimo (o gerador aumenta se a melhor corrida pedir)
 //              tank (fases fixas): o tanque já calculado pelo piloto automático para a semente fixa.
 //              O jogo usa este valor sem rodar o piloto no aparelho, para o cenário e o tanque serem

@@ -111,7 +111,8 @@ function buildLayout(def, seed) {
     pads.push({ kind, x1: cx - half, x2: cx + half, y, refuel: kind !== 'crew' });
   }
   addPad('base', 130, 120);
-  if (g.fuelStation) addPad('fuel', L / 2, 110);
+  // Posto: no meio da fase, ou em fuelAt, a fração do caminho da base até a tripulação (D-026, #92)
+  if (g.fuelStation) addPad('fuel', g.fuelAt == null ? L / 2 : 130 + g.fuelAt * (L - 150 - 130), 110);
   addPad('crew', L - 150, 120);
 
   return finish({ def, seed, L, n, floor, ceil, pads, rnd, g });

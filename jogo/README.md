@@ -28,7 +28,7 @@ Os módulos do navegador não abrem com dois cliques no `index.html` (`file://`)
 | `src/platform/telemetry.js` | Telemetria do playtest (#88, D-025): fila de eventos no aparelho, envio em lotes ao Firebase e medidor de quadros por segundo | Um evento novo é medido, ou a P-008 é decidida para o lançamento |
 | `ferramentas/relatorio-telemetria.mjs` | Relatório da telemetria no terminal: por fase (tentativas, conclusões, mortes e onde), por aparelho (quadros por segundo) e a abertura | Um evento novo precisa aparecer no relatório |
 | `src/core/praise.js` | Detecta manobras difíceis e avisa o elogio (#81): fininho, freada no limite, pouso perfeito e corrida perfeita | Os critérios dos elogios mudam |
-| `src/core/autopilot.js` | Piloto automático que joga cada cenário gerado e prova a melhor corrida sem abastecer (D-018) | A física ou um obstáculo novo mudam |
+| `src/core/autopilot.js` | Piloto automático com dois jeitos de voar: o cauteloso, que prova cada cenário e calcula o tanque (D-018), e o expert, que voa como os melhores jogadores e mede o melhor que dá para fazer (D-026) | A física ou um obstáculo novo mudam |
 | `src/core/scoring.js` | Pontuação: hoje só o tempo | P-006 é decidida |
 | `src/platform/storage.js` | O que fica salvo no aparelho e onde | P-016 é decidida, ou o jogo vai para as lojas (#65) |
 | `src/platform/audio.js` | Efeitos sonoros | A pesquisa de som no iPhone (#57) volta |
@@ -47,6 +47,7 @@ Ao gerar um cenário, o piloto automático joga a fase inteira, ida e volta, sem
 - **Fase com posto** (`fuelStation: true`): o piloto também voa as rotas com o posto (abastecendo na ida ou na volta). O tanque é o maior desses dois planos mais `refuelMargin` (por exemplo, 0.08 = 8%) e precisa ser menor que a corrida sem abastecer (D-023): é obrigatório abastecer uma vez.
 - **Fase sem posto:** o tanque é `tankSeconds` ou a melhor corrida mais 25%, o que for maior.
 - Se o piloto não conseguir concluir um cenário, o gerador troca a semente. Toda fase jogada tem caminho provado.
+- **Piloto expert** (D-026): voa como os melhores jogadores (acelera forte, deixa a nave ir, freia forte e deixa cair no pouso) e mede o melhor que dá para fazer. Para ver os números do tanque das fases com posto, inclusive com o posto em outro lugar (`fuelAt`): `node jogo/ferramentas/medir-tanque.mjs hoje,0.75`. Por enquanto, o tanque continua saindo do piloto cauteloso (#93).
 
 Os testes reproduzem a melhor corrida numa partida de verdade, com o tanque real, e conferem que ela conclui sem abastecer e com a sobra esperada.
 
