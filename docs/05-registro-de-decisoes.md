@@ -40,6 +40,7 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-026 | O posto é uma salvação, não uma obrigação: tanque calculado por um piloto que voa como os melhores jogadores | 04/10/2026 | Aceita; a construir ([#92](https://github.com/TARNAGS/resgate-espacial/issues/92) e [#93](https://github.com/TARNAGS/resgate-espacial/issues/93)) |
 | D-027 | As regras de pouso ficam como estão; o que trava é entender o propulsor | 04/10/2026 | Aceita; o ensino do propulsor vai para a P-009 ([#48](https://github.com/TARNAGS/resgate-espacial/issues/48)) |
 | D-028 | ICP: o jogador casual de celular, com o fã da estética retrô dos anos 2000; os grandes casuais viram benchmark | 04/10/2026 | Aceita; benchmark em [#98](https://github.com/TARNAGS/resgate-espacial/issues/98) e [#99](https://github.com/TARNAGS/resgate-espacial/issues/99) |
+| D-029 | Salvar no banco online tudo o que der para medir: perfil do jogador ligado ao nick e medição ampliada | 04/10/2026 | Aceita; a construir ([#102](https://github.com/TARNAGS/resgate-espacial/issues/102) e [#91](https://github.com/TARNAGS/resgate-espacial/issues/91)) |
 
 ## D-001 — Sem login e sem contas
 
@@ -469,7 +470,7 @@ Os eventos levam o **nickname**, e a tela do nick avisa que, no playtest, essas 
 
 **Revisitar se** o grupo de testes crescer além de amigos, e antes do lançamento nas lojas (P-008, RNF-06).
 
-## D-026, D-027 e D-028 — Decisões da primeira análise do playtest
+## D-026 a D-029 — Decisões da primeira análise do playtest
 
 **Contexto.** A telemetria do primeiro playtest (D-025, [documento 09](09-resultados-dos-playtests.md)) levantou duas perguntas para o Fernando: a P-020 (abastecer obrigatório não segurou os jogadores reais, [#89](https://github.com/TARNAGS/resgate-espacial/issues/89)) e a P-021 (o pouso na tripulação parecia a maior dificuldade, e um jogador travou no nível 1, [#90](https://github.com/TARNAGS/resgate-espacial/issues/90)). Em 04/10/2026, com o ranking ao lado, ficou claro que as corridas sem abastecer mais rápidas do nível 3 e da PRACTICE eram do próprio Fernando (nick TARNAG).
 
@@ -507,6 +508,8 @@ Os eventos levam o **nickname**, e a tela do nick avisa que, no playtest, essas 
 
 **Revisitar a D-028 se** os dados do próximo playtest ou do benchmark mostrarem um público diferente do esperado.
 
+**D-029 — Salvar no banco tudo o que der para medir.** Resposta do Fernando à P-022 ([#100](https://github.com/TARNAGS/resgate-espacial/issues/100)): "tudo o que servir para coleta de dados, inclusive locais onde o jogador mais morreu, mais bateu, elogios... tudo que der para medir". **Decisão:** o Firebase passa a guardar, além do ranking e da telemetria, o **perfil de cada jogador** ligado ao nick (progresso, configurações, telas vistas e elogios), que só pode crescer, como o ranking ([#102](https://github.com/TARNAGS/resgate-espacial/issues/102)). A telemetria passa a medir também a trajetória de cada tentativa, o uso do propulsor, cada pouso e os elogios com posição, e o relatório desenha mapas de calor por fase ([#91](https://github.com/TARNAGS/resgate-espacial/issues/91)). **Consequências:** quem trocar de aparelho continua de onde parou digitando o mesmo nick; continua só o nick, sem dado pessoal (D-025); quem digitar o nick de outra pessoa vê o progresso dela (risco aceito, como na D-024); o volume no banco precisa ser acompanhado no plano gratuito. **Revisitar** antes do lançamento (P-008, medição anônima, e [#101](https://github.com/TARNAGS/resgate-espacial/issues/101)).
+
 **Revisitar a D-026 e a D-027 se** o próximo playtest mostrar conclusões sem abastecer no nível 3 ou na PRACTICE (o piloto ainda está atrás dos jogadores), queda na taxa de conclusão (a folga ficou curta), ou mortes no pouso que persistam depois de o jogo ensinar o propulsor (D-027).
 
 ## Decisões pendentes
@@ -528,7 +531,7 @@ Os eventos levam o **nickname**, e a tela do nick avisa que, no playtest, essas 
 | P-021 | O pouso na tripulação é a maior dificuldade e o nível 1 travou um jogador: o que mudar? Resolvida pela D-027 (04/10/2026): o pouso fica como está; ensinar o propulsor vai para a P-009. | Antes da próxima rodada de playtest | Opções: afastar a plataforma da parede do fim, nível 1 mais tolerante, dica depois de mortes no pouso e oferecer o TRAINING. Conversa com P-009. Cartão [#90](https://github.com/TARNAGS/resgate-espacial/issues/90) |
 | P-017 | O que a loja de itens vende, com que moeda, e como evitar vantagem injusta? | Antes de construir a loja (E-24) | Ideia do Fernando: itens de jogo e de nave, com dinheiro real ou moedas do jogo. Itens que facilitem o jogo afetam recordes e a regra do melhor caminho (D-018). Cartão [#78](https://github.com/TARNAGS/resgate-espacial/issues/78) |
 | P-015 | Como receber dinheiro, e é preciso CNPJ? | Só se a P-014 decidir cobrar ou aceitar doações | Cartão [#64](https://github.com/TARNAGS/resgate-espacial/issues/64) |
-| P-022 | Que informações do jogador o jogo salva no banco online (Firebase), além do ranking e da telemetria, e como protegê-las sem login? | Antes do próximo playtest | Pedido do Fernando (04/10/2026): "quero que salve informações no banco de dados que temos". Recomendação do Claude: progresso de cada fase ligado ao nick, com regras que só deixam o progresso crescer. Cartão [#100](https://github.com/TARNAGS/resgate-espacial/issues/100) |
+| P-022 | Que informações do jogador o jogo salva no banco online (Firebase), além do ranking e da telemetria, e como protegê-las sem login? Resolvida pela D-029 (04/10/2026). | Antes do próximo playtest | Pedido do Fernando (04/10/2026): "quero que salve informações no banco de dados que temos". Recomendação do Claude: progresso de cada fase ligado ao nick, com regras que só deixam o progresso crescer. Cartão [#100](https://github.com/TARNAGS/resgate-espacial/issues/100) |
 | P-016 | O que o jogo guarda, e onde: só no aparelho ou também num servidor? Respondida em parte pela arquitetura (progresso no aparelho; ranking e telemetria no Firebase); o que falta virou a P-022. | Antes de construir o progresso salvo (E-14) | Hoje tudo fica no aparelho; um servidor reabre D-001, D-003 e D-004. Cartão [#62](https://github.com/TARNAGS/resgate-espacial/issues/62) |
 
 ## Modelo para novas decisões
