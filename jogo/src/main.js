@@ -97,8 +97,7 @@ if (CONTROL_FROM_URL) PARAMS.touchScheme = CONTROL_FROM_URL;
 events.on('start', ({ def }) => {
   if (def.training) renderer.message('TRAINING · LAND ON THE PAD', 4);
   else {
-    renderer.message(def.challenge ? `CHALLENGE · ${def.name}` : `LEVEL ${def.number} · ${def.name}`, 3);
-    renderer.message(def.goal, 5);
+    renderer.message(def.goal, 5);   // o nome da fase já fica no painel (#97)
   }
   if (def.hint) renderer.message(view.isTouch ? TOUCH_HINTS[PARAMS.touchScheme] : 'HOLD ↑ TO THRUST · ←/→ TO ROTATE', 7);
 });
