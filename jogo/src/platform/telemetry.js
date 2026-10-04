@@ -10,7 +10,7 @@ import { LEADERBOARD_URL } from '../config/online.js';
 //     esperam; a fila tem limite, para não crescer sem fim.
 //   - Sem banco configurado (LEADERBOARD_URL vazio), nada sai do aparelho.
 
-export const BUILD = '2026-10-02b';       // versão do jogo, para separar os dados por versão
+export const BUILD = '2026-10-04a';       // versão do jogo, para separar os dados por versão
 const QUEUE_KEY = 'resgate-espacial:telemetry';
 const MAX_QUEUE = 400;
 const BATCH = 40;

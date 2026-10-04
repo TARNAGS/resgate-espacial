@@ -141,6 +141,12 @@ export function createRenderer(canvas, view) {
     ctx.restore();
 
     ctx.setTransform(view.dpr, 0, 0, view.dpr, 0, 0);
+    if (scene.attract) {
+      // Attract mode (#105): a corrida passa escurecida atrás do menu, sem painel nem controles
+      ctx.fillStyle = 'rgba(3,5,10,0.62)';
+      ctx.fillRect(0, 0, view.cssW, view.cssH);
+      return;
+    }
     if (!m.training) drawObjectiveArrow(m, t, params);
     drawHUD(m, t, params, scene);
     drawMessages(t, m.ship, scene);
@@ -148,7 +154,37 @@ export function createRenderer(canvas, view) {
     drawNoFuel(m.ship, t);
     drawJoystick(scene);
     drawButtons(scene);
+    if (scene.demo) drawDemo(scene.demo, t);
   };
+
+  // DEMO (#104): selo "DEMO" o tempo todo, o rótulo da vez na faixa do alto e, sem o controle de dois
+  // polegares, a tecla do propulsor acendendo junto com a chama
+  function drawDemo({ label, thrust, twin }, t) {
+    const top = 14 + view.safe.top;
+    const right = view.cssW - 16 - view.safe.right;
+    ctx.textBaseline = 'top';
+    ctx.textAlign = 'right';
+    ctx.font = `700 13px ${FONT}`;
+    ctx.fillStyle = Math.sin(t * 4) > -0.6 ? 'rgba(255,209,102,0.95)' : 'rgba(255,209,102,0.55)';
+    ctx.fillText('● DEMO', right - 104, top + 8);   // à esquerda do botão SKIP
+    ctx.textAlign = 'center';
+    ctx.font = `700 14px ${FONT}`;
+    ctx.fillStyle = 'rgba(232,241,255,0.95)';
+    ctx.fillText(label, view.play.x + view.play.w / 2, top + 30);
+    if (twin) return;
+    const x = right - 30, y = view.cssH - 46 - view.safe.bottom;
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = thrust ? 'rgba(255,159,67,0.95)' : 'rgba(255,159,67,0.4)';
+    ctx.fillStyle = thrust ? 'rgba(255,159,67,0.3)' : 'rgba(255,159,67,0.05)';
+    ctx.beginPath();
+    ctx.rect(x - 22, y - 22, 44, 44);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = thrust ? 'rgba(255,209,102,1)' : 'rgba(255,209,102,0.5)';
+    ctx.textBaseline = 'middle';
+    ctx.font = `700 20px ${FONT}`;
+    ctx.fillText('↑', x, y);
+  }
 
   function drawStars(t, off) {
     for (const s of STARS) {
@@ -450,7 +486,7 @@ export function createRenderer(canvas, view) {
 
       ctx.textAlign = 'right';
       ctx.font = `700 16px ${FONT}`;
-      ctx.fillStyle = '#e8f1ff';
+      ctx.fillStyle = scene.demo ? 'rgba(0,0,0,0)' : '#e8f1ff';   // na DEMO, o lugar é do selo
       // o cronômetro fica à esquerda dos botões da tela (pausa e, nas sessões de teste, o T)
       ctx.fillText(fmtTime(m.timer), Math.min(view.cssW - 22 - 48 * scene.buttons.length - view.safe.right, view.play.x + view.play.w - 14), top + 6);
     }

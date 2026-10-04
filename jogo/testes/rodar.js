@@ -7,6 +7,7 @@ import { LEVELS, CHALLENGES, TRAINING_LEVEL, findLevel } from '../src/content/wo
 import { effectiveParams } from '../src/content/modifiers.js';
 import { generateLevel, validateLevel } from '../src/core/generator.js';
 import { routeInputs, expertRun, expertPlans } from '../src/core/autopilot.js';
+import { createDemoPilot, DEMO_LABELS, DEMO_SPEED } from '../src/core/demo.js';
 import { INTRO_SONG, CHORDS } from '../src/content/songs.js';
 import { createPraise } from '../src/core/praise.js';
 import { rankKey, normalizeNick, validNick } from '../src/core/ranking.js';
@@ -500,6 +501,26 @@ test('#92 fuelAt muda o posto de lugar; sem ele, o posto continua no meio da fas
   assert.equal(fuelX(generateLevel(def, def.seed, null)), def.generator.length / 2);
   const moved = generateLevel({ ...def, generator: { ...def.generator, fuelAt: 0.75 } }, def.seed, null);
   assert.equal(fuelX(moved), 130 + 0.75 * (def.generator.length - 150 - 130));
+});
+
+// ===== DEMO (#104, D-031) =====
+test('#104 a DEMO joga o nível 1 inteiro numa partida de verdade, em uns 10 segundos, com os três rótulos em ordem', () => {
+  resetParams();
+  const def = LEVELS[0];
+  const match = createMatch({ def, seed: def.seed, getParams: () => PARAMS, events: createEvents() });
+  const pilot = createDemoPilot(match);
+  const labels = [];
+  let steps = 0;
+  while (!pilot.done && steps < 120 * 60) {
+    match.update(DT, pilot.next());
+    if (labels[labels.length - 1] !== pilot.label) labels.push(pilot.label);
+    steps += 1;
+  }
+  assert.equal(match.state.over, 'complete');
+  assert.deepEqual(labels, [0, 1, 2]);
+  const seconds = steps * DT / DEMO_SPEED;
+  assert.ok(seconds > 6 && seconds < 14, `a DEMO dura ${seconds.toFixed(1)} s na tela`);
+  assert.ok(DEMO_LABELS.every((l) => l.split(' ').length <= 8), 'no máximo oito palavras na tela');
 });
 
 test('D-021 as fases da sequência e a PRACTICE têm cenário fixo; só a BONUS é sorteada', () => {
