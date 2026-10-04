@@ -42,6 +42,10 @@ Leia o [diário de bordo](docs/06-diario-de-bordo.md). A seção "Onde paramos" 
 - **O nick do Fernando é TARNAG.** Se ele aparecer como o mais rápido, ou numa corrida que chame a atenção, identificar as corridas dele e perguntar o que ele achou: ele é um dos playtesters e explica o que os números não mostram.
 - Nos documentos versionados, não escrever o nick dos outros playtesters (o repositório abre nas janelas de teste).
 
+## Portfólio de PM
+
+O projeto é a peça de portfólio do Fernando como Product Manager. A narrativa (decisões, orientações, métricas, viradas de rumo e citações dele, escrita para uma IA montar o estudo de caso) fica **fora deste repositório**, no `context-directory` privado: `me/14-Portfolio-de-Produto/resgate-espacial.md`. Ela é alimentada a cada "boa noite" (regra no CLAUDE.md global). Ao tomar ou registrar uma decisão importante aqui, lembrar que ela vai para lá no fechamento do dia.
+
 ## Quadro e issues
 
 O quadro tem duas trilhas (D-016):
