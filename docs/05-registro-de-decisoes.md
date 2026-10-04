@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 05 — Registro de decisões |
-| Última atualização | 03/10/2026 |
+| Última atualização | 04/10/2026 |
 | Responsável | Fernando Nunes (Product Manager) |
 
 Cada decisão relevante de produto fica registrada aqui, com o contexto e o motivo. Assim ela não é rediscutida sem necessidade e pode ser revista quando o contexto mudar.
@@ -36,7 +36,9 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-022 | Controle principal: dois polegares (novo A); o de um polegar vira a opção B | 02/10/2026 | Aceita; construída ([#82](https://github.com/TARNAGS/resgate-espacial/issues/82)) |
 | D-024 | Ranking de tempos por fase, com nickname como ID do jogador | 02/10/2026 | Aceita; construída e online ([#87](https://github.com/TARNAGS/resgate-espacial/issues/87)) |
 | D-025 | Telemetria das partidas no playtest, no mesmo banco do ranking, com o nickname | 02/10/2026 | Aceita; construída e online ([#88](https://github.com/TARNAGS/resgate-espacial/issues/88)) |
-| D-023 | Nas fases com posto, abastecer pelo menos uma vez é obrigatório | 02/10/2026 | Aceita; construída ([#83](https://github.com/TARNAGS/resgate-espacial/issues/83)). Em revisão: os jogadores reais concluem sem abastecer (P-020, [#89](https://github.com/TARNAGS/resgate-espacial/issues/89)) |
+| D-023 | Nas fases com posto, abastecer pelo menos uma vez é obrigatório | 02/10/2026 | Construída ([#83](https://github.com/TARNAGS/resgate-espacial/issues/83)); revista pela D-026: nenhuma regra obriga, o tanque é que faz o posto ser necessário |
+| D-026 | O posto é uma salvação, não uma obrigação: tanque calculado por um piloto que voa como os melhores jogadores | 04/10/2026 | Aceita; a construir ([#92](https://github.com/TARNAGS/resgate-espacial/issues/92) e [#93](https://github.com/TARNAGS/resgate-espacial/issues/93)) |
+| D-027 | As regras de pouso ficam como estão; o que trava é entender o propulsor | 04/10/2026 | Aceita; o ensino do propulsor vai para a P-009 ([#48](https://github.com/TARNAGS/resgate-espacial/issues/48)) |
 
 ## D-001 — Sem login e sem contas
 
@@ -466,13 +468,43 @@ Os eventos levam o **nickname**, e a tela do nick avisa que, no playtest, essas 
 
 **Revisitar se** o grupo de testes crescer além de amigos, e antes do lançamento nas lojas (P-008, RNF-06).
 
+## D-026 e D-027 — Decisões da primeira análise do playtest
+
+**Contexto.** A telemetria do primeiro playtest (D-025, [documento 09](09-resultados-dos-playtests.md)) levantou duas perguntas para o Fernando: a P-020 (abastecer obrigatório não segurou os jogadores reais, [#89](https://github.com/TARNAGS/resgate-espacial/issues/89)) e a P-021 (o pouso na tripulação parecia a maior dificuldade, e um jogador travou no nível 1, [#90](https://github.com/TARNAGS/resgate-espacial/issues/90)). Em 04/10/2026, com o ranking ao lado, ficou claro que as corridas sem abastecer mais rápidas do nível 3 e da PRACTICE eram do próprio Fernando (nick TARNAG).
+
+**D-026 — O posto é uma salvação, não uma obrigação.** O Fernando explicou por que não precisou abastecer: a física deixa economizar combustível. Você acende o propulsor e deixa a gravidade levar a nave, sem acender de novo. "Isso é uma das partes fodas do jogo e é parte da diversão." O piloto automático voa pairando e gasta muito mais que as pessoas (39,4 s de propulsor no nível 3, contra 22,6 s da melhor corrida), então o tanque calculado por ele ficou grande demais.
+
+| Opção (da P-020) | Resultado |
+|---|---|
+| **A. Piloto mais econômico e tanques recalculados** | **Escolhida** |
+| B. Tanque calibrado só pelos jogadores | Fica como fonte de dados para a folga, não como regra |
+| C. Posto como parada obrigatória | Descartada: nenhuma regra deve obrigar a abastecer |
+| D. Aceitar abastecer opcional | Descartada: o posto precisa fazer falta |
+
+**Decisão.** Nenhuma regra obriga a pousar no posto. O posto deve ser um alívio: "graças a Deus tem esse posto aqui, senão eu não conseguiria terminar a fase". Para isso:
+
+1. o piloto automático aprende a voar como os melhores jogadores, combinando propulsor e gravidade ([#92](https://github.com/TARNAGS/resgate-espacial/issues/92));
+2. o tanque de cada fase com posto fica abaixo da corrida sem abastecer desse piloto, para que nem quem voa perfeito termine sem abastecer, e acima do que é preciso entre um abastecimento e outro, com folga para quem não voa perfeito ([#93](https://github.com/TARNAGS/resgate-espacial/issues/93)).
+
+**Consequências.**
+
+- Revê a D-023: a fase continua pedindo o posto, mas pela física do tanque, não por uma regra. O que o #83 construiu (rotas com posto provadas pelo piloto) continua valendo.
+- A D-018 muda de papel: o piloto deixa de ser só uma prova de que a fase tem solução e passa a medir o melhor que dá para fazer.
+- Os rankings do nível 3, da PRACTICE e da BONUS recomeçam quando o tanque mudar.
+- Com o posto no meio do caminho, quem abastece uma vez ainda faz de 72% a 79% da rota com um tanque. Por isso, a janela entre "sem abastecer não dá" e "abastecendo dá" é estreita. A posição do posto e as duas folgas ficam para o Fernando decidir na [#93](https://github.com/TARNAGS/resgate-espacial/issues/93).
+- A telemetria passa a medir o combustível de cada trecho ([#91](https://github.com/TARNAGS/resgate-espacial/issues/91)), para calibrar a folga com dados de jogadores.
+
+**D-027 — As regras de pouso ficam como estão.** O Fernando assistiu ao jogador que travou no nível 1. O problema não era o pouso, e sim entender a dinâmica do jogo: quando soltar e quando apertar o propulsor. O halo, as luzes da plataforma, o tamanho e a tolerância quando a nave pousa meio fora, meio dentro estão adequados. **Decisão:** as opções da P-021 que mexiam no pouso (afastar a plataforma da parede do fim e nível 1 mais tolerante) estão descartadas. Ensinar a dinâmica do propulsor vai para a P-009 ([#48](https://github.com/TARNAGS/resgate-espacial/issues/48)), com as ideias de dica e de oferecer o TRAINING.
+
+**Revisitar se** o próximo playtest mostrar conclusões sem abastecer no nível 3 ou na PRACTICE (o piloto ainda está atrás dos jogadores), queda na taxa de conclusão (a folga ficou curta), ou mortes no pouso que persistam depois de o jogo ensinar o propulsor (D-027).
+
 ## Decisões pendentes
 
 | ID | Pergunta | Quando decidir | Observação |
 |---|---|---|---|
 | P-003 | Qual será o nome final do jogo? | Antes do lançamento | Cartão [#54](https://github.com/TARNAGS/resgate-espacial/issues/54) |
 | P-006 | Como funciona a pontuação? | Antes de construir a tela de resultado | Já definido: sem limite de tempo; resgate mais rápido faz mais pontos. Com cenários aleatórios (D-014), comparar tempos de cenários diferentes pode ser injusto. Perguntas no [documento 02, seção 8](02-regras-do-jogo.md#8-tempo-e-pontuação). Cartão [#53](https://github.com/TARNAGS/resgate-espacial/issues/53) |
-| P-009 | Como o jogo ensina a jogar: há um tutorial, e a fase 1 é aleatória ou fixa e desenhada à mão? | Antes do M2 | No protótipo 01, ela é aleatória, com regras bem fáceis. Ampliada em 01/10/2026 com a pergunta do Fernando sobre ter um tutorial. Cartão [#48](https://github.com/TARNAGS/resgate-espacial/issues/48) |
+| P-009 | Como o jogo ensina a jogar: há um tutorial, e a fase 1 é aleatória ou fixa e desenhada à mão? | Antes do M2 | No protótipo 01, ela é aleatória, com regras bem fáceis. Ampliada em 01/10/2026 com a pergunta do Fernando sobre ter um tutorial e em 04/10/2026 com o ensino da dinâmica do propulsor, quando soltar e quando apertar (D-027). Cartão [#48](https://github.com/TARNAGS/resgate-espacial/issues/48) |
 | P-010 | Ao tentar de novo depois de perder as 3 vidas, o cenário se repete ou muda? Resolvida pela D-021: as fases fixas repetem sempre o mesmo cenário (na BONUS, "Try again" também repete). | Antes do M2 | No protótipo 01, "Try again" repete o mesmo cenário. Cartão [#49](https://github.com/TARNAGS/resgate-espacial/issues/49) |
 | P-008 | Qual ferramenta de medição anônima usar, e que eventos medir? Para o playtest, respondida pela D-025 (Firebase, com o nick); para o lançamento, continua em aberto. | No M2, antes de construir a medição (E-17) | Precisa ser gratuita, dispensar cookies e aceitar eventos personalizados ([PRD, seção 7](03-prd.md#7-medição)). O Fernando revisa a lista de eventos. Cartão [#56](https://github.com/TARNAGS/resgate-espacial/issues/56) |
 | P-011 | Que obstáculos o jogo tem, e como ele se organiza em mundos e fases? | Antes de construir o gerador de fases (E-09) | A parte "mundo e fase" foi respondida pela D-020 (mundos com 10 fases). Falta o catálogo de obstáculos e o que cada mundo apresenta de novo. Cartão [#60](https://github.com/TARNAGS/resgate-espacial/issues/60) |
@@ -481,8 +513,8 @@ Os eventos levam o **nickname**, e a tela do nick avisa que, no playtest, essas 
 | P-014 | O jogo será pago, gratuito com loja de itens, ou os dois? | Antes da publicação nas lojas (M4) | Ir para as lojas já foi decidido (D-019); falta decidir se e como cobrar. Cartão [#63](https://github.com/TARNAGS/resgate-espacial/issues/63) |
 | P-018 | Como funciona o modo Nightmare, em que morrer não devolve o combustível? | Antes de construir o modo (M5) | Ideia do Fernando depois do teste com um amigo (02/10/2026). A nave reaparece pousada na base, que abastece: o modo precisa dizer se base e posto continuam abastecendo. Conversa com P-012 (modificadores) e P-017 (loja). Cartão [#79](https://github.com/TARNAGS/resgate-espacial/issues/79) |
 | P-019 | Como funciona um ranking de tempos por fase? Para os playtesters, resolvida pela D-024 (nickname e banco simples); para o lançamento, continua em aberto. | Antes da publicação nas lojas (M4) | Ideia do Fernando depois do teste com um amigo. Ranking entre jogadores esbarra em D-001 (sem login) e no cenário sorteado (D-014); saídas: rankings do Game Center e do Google Play Games e um desafio do dia com a mesma semente para todos. Cartão [#80](https://github.com/TARNAGS/resgate-espacial/issues/80) |
-| P-020 | Abastecer obrigatório (D-023) não segura os jogadores reais: como garantir, ou a regra muda? | Antes da próxima rodada de playtest | Opções: piloto mais econômico e tanques recalculados, tanque calibrado pelos jogadores, posto como parada obrigatória, ou aceitar abastecer opcional. Mudar a fase recomeça o ranking dela. Dados no [documento 09](09-resultados-dos-playtests.md). Cartão [#89](https://github.com/TARNAGS/resgate-espacial/issues/89) |
-| P-021 | O pouso na tripulação é a maior dificuldade e o nível 1 travou um jogador: o que mudar? | Antes da próxima rodada de playtest | Opções: afastar a plataforma da parede do fim, nível 1 mais tolerante, dica depois de mortes no pouso e oferecer o TRAINING. Conversa com P-009. Cartão [#90](https://github.com/TARNAGS/resgate-espacial/issues/90) |
+| P-020 | Abastecer obrigatório (D-023) não segura os jogadores reais: como garantir, ou a regra muda? Resolvida pela D-026 (04/10/2026): piloto mais econômico e tanque recalculado, sem regra que obrigue. | Antes da próxima rodada de playtest | Opções: piloto mais econômico e tanques recalculados, tanque calibrado pelos jogadores, posto como parada obrigatória, ou aceitar abastecer opcional. Mudar a fase recomeça o ranking dela. Dados no [documento 09](09-resultados-dos-playtests.md). Cartão [#89](https://github.com/TARNAGS/resgate-espacial/issues/89) |
+| P-021 | O pouso na tripulação é a maior dificuldade e o nível 1 travou um jogador: o que mudar? Resolvida pela D-027 (04/10/2026): o pouso fica como está; ensinar o propulsor vai para a P-009. | Antes da próxima rodada de playtest | Opções: afastar a plataforma da parede do fim, nível 1 mais tolerante, dica depois de mortes no pouso e oferecer o TRAINING. Conversa com P-009. Cartão [#90](https://github.com/TARNAGS/resgate-espacial/issues/90) |
 | P-017 | O que a loja de itens vende, com que moeda, e como evitar vantagem injusta? | Antes de construir a loja (E-24) | Ideia do Fernando: itens de jogo e de nave, com dinheiro real ou moedas do jogo. Itens que facilitem o jogo afetam recordes e a regra do melhor caminho (D-018). Cartão [#78](https://github.com/TARNAGS/resgate-espacial/issues/78) |
 | P-015 | Como receber dinheiro, e é preciso CNPJ? | Só se a P-014 decidir cobrar ou aceitar doações | Cartão [#64](https://github.com/TARNAGS/resgate-espacial/issues/64) |
 | P-016 | O que o jogo guarda, e onde: só no aparelho ou também num servidor? | Antes de construir o progresso salvo (E-14) | Hoje tudo fica no aparelho; um servidor reabre D-001, D-003 e D-004. Cartão [#62](https://github.com/TARNAGS/resgate-espacial/issues/62) |

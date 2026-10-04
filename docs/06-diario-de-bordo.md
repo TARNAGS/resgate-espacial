@@ -3,12 +3,12 @@
 | Campo | Valor |
 |---|---|
 | Documento | 06 — Diário de bordo |
-| Última atualização | 03/10/2026 |
+| Última atualização | 04/10/2026 |
 | Responsável | Fernando Nunes (Product Manager) |
 
 Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e de onde o projeto parou. É o ponto de partida para retomar o trabalho, em qualquer máquina.
 
-## Onde paramos (03/10/2026, fim do dia)
+## Onde paramos (04/10/2026)
 
 - ⚠️ **Janela de teste ABERTA:** o repositório está público para amigos do Fernando testarem em https://tarnags.github.io/resgate-espacial/jogo/. Fechar ao fim do teste (passo 5 da janela de teste, no `CLAUDE.md`) e tirar este aviso.
 - **Objetivo:** portfólio, aprendizado e negócio. O jogo será publicado na App Store e no Google Play (D-019); cobrar ou não segue em aberto (P-014, [#63](https://github.com/TARNAGS/resgate-espacial/issues/63); loja de itens, P-017, [#78](https://github.com/TARNAGS/resgate-espacial/issues/78)).
@@ -22,19 +22,20 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
   - **nickname e ranking online** por fase (D-024) e **telemetria das partidas** no Firebase (D-025), com relatório no terminal;
   - **primeiro playtest medido** (6 amigos, 229 tentativas): resultados no [documento 09](09-resultados-dos-playtests.md);
   - aviso de pouso, treino (TRAINING), painel de ajuste escondido e **75 testes automáticos**.
-- **Documentos:** Visão 1.3, Regras 1.5, PRD 1.6, Roadmap 1.5, Decisões até a D-025, documento 07 (roteiro de teste), 08 (design de mundos, com o rascunho do Mundo 1) e 09 (resultados dos playtests).
-- **Pendências abertas:** P-003 (nome), P-006 (pontuação), P-008 (medição), P-009 (tutorial), P-011 (obstáculos), P-012 (modificadores), P-013 (ICP), P-014 (cobrar ou não), P-015 (CNPJ), P-016 (o que o jogo guarda), P-017 (loja), P-018 (modo Nightmare, [#79](https://github.com/TARNAGS/resgate-espacial/issues/79)), P-019 (ranking, [#80](https://github.com/TARNAGS/resgate-espacial/issues/80)), P-020 (abastecer obrigatório, [#89](https://github.com/TARNAGS/resgate-espacial/issues/89)) e P-021 (pouso na tripulação e nível 1, [#90](https://github.com/TARNAGS/resgate-espacial/issues/90)). P-020 e P-021 estão em "Para conversar"; as outras, em "A investigar".
+- **Documentos:** Visão 1.3, Regras 1.5, PRD 1.6, Roadmap 1.5, Decisões até a D-027, documento 07 (roteiro de teste), 08 (design de mundos, com o rascunho do Mundo 1) e 09 (resultados dos playtests).
+- **Pendências abertas:** P-003 (nome), P-006 (pontuação), P-008 (medição), P-009 (tutorial), P-011 (obstáculos), P-012 (modificadores), P-013 (ICP), P-014 (cobrar ou não), P-015 (CNPJ), P-016 (o que o jogo guarda), P-017 (loja), P-018 (modo Nightmare, [#79](https://github.com/TARNAGS/resgate-espacial/issues/79)), P-019 (ranking, [#80](https://github.com/TARNAGS/resgate-espacial/issues/80)), todas em "A investigar". P-020 e P-021 foram decididas em 04/10 (D-026 e D-027).
 
 ### Próximos passos
 
-1. **Decidir P-020 e P-021** (cartões [#89](https://github.com/TARNAGS/resgate-espacial/issues/89) e [#90](https://github.com/TARNAGS/resgate-espacial/issues/90), em "Para conversar"), com os dados do [documento 09](09-resultados-dos-playtests.md). Se as duas mexerem nas fases, fazer as mudanças juntas, para o ranking recomeçar uma vez só.
-2. **Apagar a linha de teste CLAUDETEST do ranking real** (só o Fernando pode, pelo console do Firebase): Realtime Database → Dados → `scores` → `w1-2_1wyelcg` → `CLAUDETEST` → lixeira. Se quiser, também `scores/teste_abc1` e `telemetry/1999-01-01`.
-3. Melhorar a medição para a próxima rodada ([#91](https://github.com/TARNAGS/resgate-espacial/issues/91), Claude).
-4. **O Fernando conta o retorno completo do teste com amigos** e testa as mudanças de hoje no iPhone: cartões em "Em revisão" ([#35](https://github.com/TARNAGS/resgate-espacial/issues/35), [#39](https://github.com/TARNAGS/resgate-espacial/issues/39), [#40](https://github.com/TARNAGS/resgate-espacial/issues/40), [#41](https://github.com/TARNAGS/resgate-espacial/issues/41), [#42](https://github.com/TARNAGS/resgate-espacial/issues/42), [#66](https://github.com/TARNAGS/resgate-espacial/issues/66), [#76](https://github.com/TARNAGS/resgate-espacial/issues/76), [#81](https://github.com/TARNAGS/resgate-espacial/issues/81) e [#82](https://github.com/TARNAGS/resgate-espacial/issues/82) a [#88](https://github.com/TARNAGS/resgate-espacial/issues/88)).
-5. **Fechar o repositório** quando o teste acabar.
-6. Retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)).
-7. Decisões do Fernando: Nightmare ([#79](https://github.com/TARNAGS/resgate-espacial/issues/79)), ranking ([#80](https://github.com/TARNAGS/resgate-espacial/issues/80)), loja ([#78](https://github.com/TARNAGS/resgate-espacial/issues/78)) e cobrar ou não ([#63](https://github.com/TARNAGS/resgate-espacial/issues/63)).
-8. Pesquisa do Claude sobre as lojas ([#65](https://github.com/TARNAGS/resgate-espacial/issues/65)): empacotamento, revisão da Apple, compras dentro do app e rankings do Game Center e do Google Play Games.
+1. **Fernando responde as duas perguntas da [#93](https://github.com/TARNAGS/resgate-espacial/issues/93):** onde fica o posto (no meio, como hoje, ou mais perto da tripulação) e as folgas do tanque.
+2. **Claude constrói o piloto automático econômico** ([#92](https://github.com/TARNAGS/resgate-espacial/issues/92), em "Pronto"), que voa combinando propulsor e gravidade e precisa gastar no máximo 22,6 s no nível 3 e 25,1 s na PRACTICE. Depois vem o tanque novo ([#93](https://github.com/TARNAGS/resgate-espacial/issues/93)), com as respostas do item 1, e os rankings do nível 3, da PRACTICE e da BONUS recomeçam.
+3. **Apagar a linha de teste CLAUDETEST do ranking real** (só o Fernando pode, pelo console do Firebase): Realtime Database → Dados → `scores` → `w1-2_1wyelcg` → `CLAUDETEST` → lixeira. Se quiser, também `scores/teste_abc1` e `telemetry/1999-01-01`.
+4. Melhorar a medição para a próxima rodada ([#91](https://github.com/TARNAGS/resgate-espacial/issues/91), Claude), agora com o combustível de cada trecho e o ranking no relatório.
+5. **O Fernando conta o retorno completo do teste com amigos** e testa as mudanças de hoje no iPhone: cartões em "Em revisão" ([#35](https://github.com/TARNAGS/resgate-espacial/issues/35), [#39](https://github.com/TARNAGS/resgate-espacial/issues/39), [#40](https://github.com/TARNAGS/resgate-espacial/issues/40), [#41](https://github.com/TARNAGS/resgate-espacial/issues/41), [#42](https://github.com/TARNAGS/resgate-espacial/issues/42), [#66](https://github.com/TARNAGS/resgate-espacial/issues/66), [#76](https://github.com/TARNAGS/resgate-espacial/issues/76), [#81](https://github.com/TARNAGS/resgate-espacial/issues/81) e [#82](https://github.com/TARNAGS/resgate-espacial/issues/82) a [#88](https://github.com/TARNAGS/resgate-espacial/issues/88)).
+6. **Fechar o repositório** quando o teste acabar.
+7. Retrospectiva do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)).
+8. Decisões do Fernando: como ensinar o propulsor (P-009, [#48](https://github.com/TARNAGS/resgate-espacial/issues/48)), Nightmare ([#79](https://github.com/TARNAGS/resgate-espacial/issues/79)), ranking ([#80](https://github.com/TARNAGS/resgate-espacial/issues/80)), loja ([#78](https://github.com/TARNAGS/resgate-espacial/issues/78)) e cobrar ou não ([#63](https://github.com/TARNAGS/resgate-espacial/issues/63)).
+9. Pesquisa do Claude sobre as lojas ([#65](https://github.com/TARNAGS/resgate-espacial/issues/65)): empacotamento, revisão da Apple, compras dentro do app e rankings do Game Center e do Google Play Games.
 
 ## Sessões
 
@@ -267,6 +268,17 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **Relatório melhorado:** separa o recomeço depois de morrer, mostra tentativas até a primeira conclusão por jogador e as conclusões sem abastecer.
 - **Cartões novos:** P-020 ([#89](https://github.com/TARNAGS/resgate-espacial/issues/89)) e P-021 ([#90](https://github.com/TARNAGS/resgate-espacial/issues/90)) em "Para conversar", para o Fernando; tarefa de medição ([#91](https://github.com/TARNAGS/resgate-espacial/issues/91)) no Backlog, para o Claude.
 
+### 04/10/2026 — Decisões do playtest: o posto como salvação (D-026) e o pouso mantido (D-027)
+
+- **Mac sincronizado com o Windows:** e-mail noreply nos commits, projeto clonado e `gh` com o escopo `project`.
+- **Ranking analisado com a telemetria:** TARNAG (o Fernando) é o 1º nos níveis 1 a 3 e na PRACTICE. As duas corridas sem abastecer que derrubaram a D-023 são dele: nível 3 em 40,3 s, com 32% do tanque no fim (22,6 s de propulsor), e PRACTICE em 48,5 s, com 23% no fim (25,1 s).
+- **P-020 → D-026:** a física deixa economizar combustível, acendendo o propulsor e deixando a gravidade levar a nave, e isso é parte da diversão. Nenhuma regra obriga a abastecer; o posto tem que ser uma salvação. O piloto automático vai aprender a voar assim ([#92](https://github.com/TARNAGS/resgate-espacial/issues/92)), e o tanque vai ser recalculado ([#93](https://github.com/TARNAGS/resgate-espacial/issues/93)).
+- **Achado da conta dos trechos:** com o posto no meio, quem abastece uma vez ainda faz de 72% a 79% da rota com um tanque (abastecendo na ida e na volta, de 44% a 56%). A janela para o tanque fica estreita; a posição do posto e as folgas são perguntas para o Fernando na #93.
+- **P-021 → D-027:** o Fernando assistiu ao jogador que travou e viu que o problema era entender quando soltar e quando apertar o propulsor, não o pouso. As regras de pouso ficam como estão; o ensino do propulsor foi para a P-009 ([#48](https://github.com/TARNAGS/resgate-espacial/issues/48)).
+- **Cartões:** #89 e #90 fechados com as decisões; #92 em "Pronto" e #93 no "Backlog", com o Claude; #91 ganhou o combustível por trecho e o ranking no relatório; comentários na #48 e na #83.
+- **CLAUDETEST:** continua no ranking do nível 2. O Claude não apaga dados; o Fernando apaga pelo console do Firebase.
+- `CLAUDE.md` do projeto: nova seção "Análise dos playtests" (sempre olhar o ranking; o nick do Fernando é TARNAG).
+
 ## Aprendizados de produto
 
 - Separar o objetivo do projeto (portfólio) do objetivo do produto (o jogador), com uma regra de desempate: quando os dois brigam, o jogador vence.
@@ -277,4 +289,5 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - Um protótipo rápido e descartável alinha a visão antes de investir na construção.
 - Privacidade também é requisito: antes de abrir o repositório, o e-mail pessoal foi tirado de todo o histórico.
 - Medir mostra o que ninguém conta: os amigos não falaram que pulavam o posto nem que recomeçavam a cada morte, mas os dados mostraram as duas coisas na primeira noite. E uma regra provada por um piloto automático só vale se o piloto jogar tão bem quanto as pessoas.
+- O ranking explica a telemetria: as corridas que derrubaram a regra do posto eram do próprio PM. Perguntar a quem jogou mostrou a causa (propulsor com gravidade) que os números sozinhos não davam.
 - Descoberta e entrega são trilhas diferentes. Separar as duas mostrou que boa parte do M1 (testes com pessoas e escolha do direcional) é pergunta a responder, e não código a escrever.

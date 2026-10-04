@@ -36,6 +36,12 @@ Leia o [diário de bordo](docs/06-diario-de-bordo.md). A seção "Onde paramos" 
 - Antes de afirmar algo sobre plataforma (iOS, navegadores, GitHub), conferir numa fonte primária (MDN, WebKit, documentação oficial) e citar a fonte.
 - Documentação em português. **Textos do jogo em inglês** (D-007). No código, nomes em inglês e comentários em português.
 
+## Análise dos playtests
+
+- **Sempre analisar o ranking** (`scores/` no Firebase) junto com a telemetria. O ranking mostra quem foi mais rápido e com que controle; a telemetria mostra como (abastecimentos, combustível que sobrou, mortes).
+- **O nick do Fernando é TARNAG.** Se ele aparecer como o mais rápido, ou numa corrida que chame a atenção, identificar as corridas dele e perguntar o que ele achou: ele é um dos playtesters e explica o que os números não mostram.
+- Nos documentos versionados, não escrever o nick dos outros playtesters (o repositório abre nas janelas de teste).
+
 ## Quadro e issues
 
 O quadro tem duas trilhas (D-016):
