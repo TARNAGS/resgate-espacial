@@ -247,6 +247,8 @@ function toMenu() {
 // ===== Menu e configurações =====
 function updateSoundButton() {
   screens.el('btn-sound').textContent = `SOUND: ${Sound.enabled ? 'ON' : 'OFF'}`;
+  // No iPhone e no iPad, o modo silencioso também cala o jogo (D-030): avisa, para ninguém achar que o som quebrou
+  screens.el('sound-help').classList.toggle('hidden', !['iphone', 'ipad'].includes(deviceKind()));
 }
 
 // Esquema do toque (#44): A, B ou C, salvo no aparelho; o endereço (?control=) tem prioridade
@@ -449,6 +451,7 @@ document.addEventListener('touchmove', (e) => {
 window.addEventListener('blur', () => { keyboard.reset(); joystick.reset(); });
 document.addEventListener('visibilitychange', () => {
   if (document.hidden && isPlaying() && !app.paused) togglePause(true);
+  if (!document.hidden) Sound.wake();   // voltou ao jogo: retoma o som, se o navegador deixar (#103)
 });
 
 function checkOrientation() {

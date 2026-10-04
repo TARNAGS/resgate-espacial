@@ -14,6 +14,7 @@ import { createLeaderboard } from '../src/platform/leaderboard.js';
 import { createTelemetry, cleanFields, createFrameStats } from '../src/platform/telemetry.js';
 import { createShip, fly, steer, landingForecast } from '../src/core/ship.js';
 import { createMatch } from '../src/core/match.js';
+import { Sound } from '../src/platform/audio.js';
 import { createEvents } from '../src/core/events.js';
 import { readIntent, touchThrust } from '../src/input/controls.js';
 import { emptySave } from '../src/platform/storage.js';
@@ -771,6 +772,17 @@ test('#88 medidor de quadros: quadros por segundo, engasgos e o pior quadro', ()
   assert.ok(s.fps >= 55 && s.fps <= 60, `fps ${s.fps}`);
   assert.equal(s.worstMs, 50);
   assert.ok(Math.abs(s.jankPct - 1.7) < 0.1, `engasgos ${s.jankPct}%`);
+});
+
+// ===== Som (#103, D-030) =====
+test('#103 o som volta depois de uma interrupção do iPhone (interrupted) e antes do primeiro toque (suspended)', () => {
+  const calls = [];
+  for (const state of ['interrupted', 'suspended', 'running', 'closed']) {
+    Sound.ctx = { state, resume: () => { calls.push(state); return Promise.resolve(); } };
+    Sound.wake();
+  }
+  Sound.ctx = null;
+  assert.deepEqual(calls, ['interrupted', 'suspended']);
 });
 
 // ===== Resultado =====

@@ -1,5 +1,7 @@
 // Efeitos sonoros sintetizados com Web Audio (Regras do jogo, seção 12). O som só começa depois
-// da primeira interação do jogador (unlock). O que o iPhone exige ainda vai ser pesquisado (#57).
+// da primeira interação do jogador (unlock), regra dos navegadores (MDN, Web Audio best practices).
+// No iPhone (#57, D-030), o jogo respeita a chave de silencioso e deixa a música de outros apps
+// tocar junto (sessão de áudio `ambient`, o padrão do Web Audio).
 
 export const Sound = {
   ctx: null,
@@ -9,8 +11,15 @@ export const Sound = {
   unlock() {
     try {
       if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-      if (this.ctx.state === 'suspended') this.ctx.resume();
+      this.wake();
     } catch (_) { /* sem som neste navegador */ }
+  },
+
+  // Retoma o áudio se ele não estiver tocando: 'suspended' (antes do primeiro toque) ou 'interrupted'
+  // (ligação, Siri ou alarme no iPhone, #103). O navegador pode exigir um toque para isso.
+  wake() {
+    const c = this.ctx;
+    if (c && c.state !== 'running' && c.state !== 'closed') c.resume().catch(() => {});
   },
 
   tone(freq, dur, type = 'square', vol = 0.05, slide = 0) {
