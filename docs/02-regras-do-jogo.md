@@ -3,9 +3,9 @@
 | Campo | Valor |
 |---|---|
 | Documento | 02 — Regras do jogo |
-| Versão | 1.5 |
-| Data | 02/10/2026 |
-| Status | Aprovado; pendentes: pontuação (P-006), fase 1 fixa ou aleatória (P-009) e repetição do cenário (P-010) |
+| Versão | 1.6 |
+| Data | 04/10/2026 |
+| Status | Aprovado; pendente: pontuação (P-006) |
 | Responsável | Fernando Nunes (Product Manager) |
 
 Este documento descreve **como o jogo funciona**. O que o produto precisa ter em volta do jogo (instalação, salvamento, medição) fica no [PRD](03-prd.md).
@@ -182,7 +182,7 @@ Perguntas a responder para fechar a pontuação:
 | Cada nível define as regras do gerador: comprimento, largura mínima do corredor, quantidade de pedras, posto de abastecimento e tamanho do tanque | Proposta |
 | Todo cenário gerado tem solução: corredor mínimo, passagem ao lado de toda pedra e combustível suficiente | Definido: o piloto automático conclui cada cenário antes de ele ser jogado (D-018) |
 | Além dos níveis, há desafios fora da sequência, sempre liberados no mapa: a **PRACTICE**, a fase mais difícil do jogo (corredor mais estreito, mais pedras e menos espaço para passar), e a **BONUS**, com cenário novo a cada partida e recorde separado | Definido |
-| A fase 1 (tutorial) é aleatória ou fixa (P-009); ao tentar de novo, o cenário se repete ou muda (P-010) | Em aberto |
+| **Como o jogo ensina (D-031, resolve a P-009):** sem tutorial nem tela de instruções. Antes da primeira partida, uma **DEMO** de uns 10 segundos, jogada pelo piloto automático no cenário do nível 1, mostra o objetivo (ir até o SOS, pousar, embarcar, voltar e pousar na base) e a dinâmica do propulsor, com no máximo oito palavras na tela. Dá para pular, e ela fica num botão DEMO no mapa. Com o menu parado, a DEMO passa ao fundo (attract mode). Não há oferta de ajuda depois de fins de jogo seguidos. A fase 1 é fixa, e tentar de novo repete o cenário (D-021) | Definido ([#104](https://github.com/TARNAGS/resgate-espacial/issues/104) e [#105](https://github.com/TARNAGS/resgate-espacial/issues/105)) |
 | **Big picture:** o jogo se organiza em mundos, cada um com 10 fases e identidade visual própria, descrita num documento de design por mundo ([documento 08](08-design-de-mundos.md)). As fases 1 a 3 do MVP são as do Mundo 1 | Definido (D-020) |
 | Concluir a fase 10 de um mundo libera a fase 1 do próximo | Proposta |
 | Quantos mundos o jogo terá no lançamento nas lojas | Em aberto |
@@ -191,7 +191,7 @@ Curva de dificuldade do Mundo 1 (as fases 6 a 10 estão em aberto; ver o [docume
 
 | Fase | Novidade |
 |---|---|
-| 1 | Decolar e pousar, sem obstáculos, com dicas na tela |
+| 1 | Decolar, voar e pousar, sem obstáculos, depois da DEMO (D-031) |
 | 2 | Obstáculos fixos simples |
 | 3 | Distância que pede o posto, ou uma corrida perfeita sem ele (D-018) |
 | 4 | Passagens estreitas e túneis |
@@ -245,6 +245,7 @@ O jogo também pausa sozinho quando o jogador sai do app ou recebe uma ligação
 | Cenários com estética interplanetária | Definido |
 | Cada mundo tem identidade visual própria (paleta, cenário e obstáculos); base, posto e tripulação mantêm as mesmas cores em todos os mundos | Definido (D-020); cores fixas das plataformas em Proposta ([documento 08](08-design-de-mundos.md), seção 3) |
 | Efeitos sonoros simples: propulsor, explosão, embarque e abastecimento | Proposta |
+| **Silencioso do iPhone (D-030):** o jogo respeita a chave de silencioso e deixa a música do jogador tocar junto. Uma linha em Settings avisa que o modo silencioso também cala o jogo | Definido ([#103](https://github.com/TARNAGS/resgate-espacial/issues/103)) |
 
 ## 13. Parâmetros de ajuste
 
@@ -269,8 +270,6 @@ São os números que definem a "sensação" do jogo. Eles serão calibrados no p
 | ID | Pergunta | Onde |
 |---|---|---|
 | P-006 | Como funciona a pontuação? | Seção 8 |
-| P-009 | A fase 1 (tutorial) é aleatória ou fixa? | Seção 10 |
-| P-010 | Ao tentar de novo, o cenário se repete ou muda? | Seção 10 |
 | P-018 | Como funciona o modo Nightmare (morrer não devolve o combustível)? | Seção 7.1 |
 | P-019 | Como funciona um ranking de tempos por fase? | Seção 8 |
 
@@ -307,3 +306,4 @@ Registradas para não se perderem. **Não são compromisso**: só entram se o Ro
 | 1.3 | 02/10/2026 | Regra do melhor caminho (D-018) e desafio PRACTICE, a fase mais difícil do jogo |
 | 1.5 | 02/10/2026 | Depois do teste com amigos: fases fixas e fase BONUS (D-021), controle de dois polegares como principal (D-022) e abastecer pelo menos uma vez (D-023) |
 | 1.4 | 02/10/2026 | Big picture: mundos com 10 fases e visual próprio (D-020), abertura em três telas (seção 10.1, Proposta) e curva de dificuldade passa a ser a do Mundo 1. O MVP continua com 3 fases |
+| 1.6 | 04/10/2026 | Como o jogo ensina: DEMO e attract mode, sem tutorial (D-031, resolve a P-009); P-010 resolvida pela D-021; silencioso do iPhone (D-030) |

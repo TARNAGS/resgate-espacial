@@ -41,6 +41,8 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-027 | As regras de pouso ficam como estão; o que trava é entender o propulsor | 04/10/2026 | Aceita; o ensino do propulsor vai para a P-009 ([#48](https://github.com/TARNAGS/resgate-espacial/issues/48)) |
 | D-028 | ICP: o jogador casual de celular, com o fã da estética retrô dos anos 2000; os grandes casuais viram benchmark | 04/10/2026 | Aceita; benchmark em [#98](https://github.com/TARNAGS/resgate-espacial/issues/98) e [#99](https://github.com/TARNAGS/resgate-espacial/issues/99) |
 | D-029 | Salvar no banco online tudo o que der para medir: perfil do jogador ligado ao nick e medição ampliada | 04/10/2026 | Aceita; a construir ([#102](https://github.com/TARNAGS/resgate-espacial/issues/102) e [#91](https://github.com/TARNAGS/resgate-espacial/issues/91)) |
+| D-030 | O jogo respeita a chave de silencioso do iPhone e deixa a música do jogador tocar junto | 04/10/2026 | Aceita; aviso em Settings em [#103](https://github.com/TARNAGS/resgate-espacial/issues/103) |
+| D-031 | Sem tutorial: uma DEMO jogada pelo próprio jogo antes da primeira partida e attract mode no menu | 04/10/2026 | Aceita; a construir ([#104](https://github.com/TARNAGS/resgate-espacial/issues/104) e [#105](https://github.com/TARNAGS/resgate-espacial/issues/105)) |
 
 ## D-001 — Sem login e sem contas
 
@@ -512,13 +514,29 @@ Os eventos levam o **nickname**, e a tela do nick avisa que, no playtest, essas 
 
 **Revisitar a D-026 e a D-027 se** o próximo playtest mostrar conclusões sem abastecer no nível 3 ou na PRACTICE (o piloto ainda está atrás dos jogadores), queda na taxa de conclusão (a folga ficou curta), ou mortes no pouso que persistam depois de o jogo ensinar o propulsor (D-027).
 
+## D-030 e D-031 — Som no iPhone e como o jogo ensina
+
+**Contexto.** Duas pesquisas do Claude em 04/10/2026, pedidas pelo Fernando: o que o iPhone exige para o som ([#57](https://github.com/TARNAGS/resgate-espacial/issues/57)) e como os jogos de referência do ICP ensinam a jogar ([#48](https://github.com/TARNAGS/resgate-espacial/issues/48), P-009). Os achados, com fontes, estão nos comentários dos dois cartões.
+
+**D-030 — Respeitar o silencioso e misturar com a música do jogador.** No iPhone, o Web Audio usa a sessão `ambient`, que a chave de silencioso e o bloqueio de tela calam, e que deixa o áudio de outros apps tocar junto (MDN; Apple, AVAudioSession). Opções: respeitar e misturar (como hoje), tocar sempre (`playback`, que para a música do jogador) ou deixar o jogador escolher. **Decisão:** respeitar e misturar, com uma linha em Settings avisando que o silencioso também cala o jogo. **Consequências:** combina com o casual que joga na fila ouvindo música (D-028); no app das lojas, é preciso pedir a categoria `ambient`, porque a padrão do iPhone interrompe a música de outros apps ([#98](https://github.com/TARNAGS/resgate-espacial/issues/98)). Achado junto: depois de uma ligação ou da Siri, o áudio fica `interrupted` e o jogo não o retomava ([#103](https://github.com/TARNAGS/resgate-espacial/issues/103)).
+
+**D-031 — Sem tutorial: DEMO e attract mode.** Nenhum dos 5 jogos de referência usa tela de instruções; todos deixam o objetivo óbvio desde a primeira imagem e ensinam no momento certo, com poucas palavras. No playtest, o que faltou foi entender o objetivo e a dinâmica do propulsor (D-027). **Decisão:**
+
+- antes da primeira partida, uma **DEMO** de uns 10 segundos, jogada pelo piloto automático no nível 1, com três rótulos curtos e um polegar fantasma no propulsor; dá para pular, e ela fica num botão DEMO no mapa ([#104](https://github.com/TARNAGS/resgate-espacial/issues/104));
+- **attract mode** já no MVP: com o menu parado, a DEMO passa ao fundo, como nos arcades ([#105](https://github.com/TARNAGS/resgate-espacial/issues/105));
+- **sem oferta de ajuda** depois de fins de jogo seguidos (nem DEMO, nem TRAINING).
+
+**Consequências:** resolve a P-009; a DEMO depende do piloto econômico ([#92](https://github.com/TARNAGS/resgate-espacial/issues/92)), para voar como um bom jogador; as mensagens do início da fase podem encolher ([#97](https://github.com/TARNAGS/resgate-espacial/issues/97)).
+
+**Revisitar se** o próximo playtest mostrar jogadores que ainda não entendem o objetivo depois da DEMO (D-031), ou reclamações de som (D-030).
+
 ## Decisões pendentes
 
 | ID | Pergunta | Quando decidir | Observação |
 |---|---|---|---|
 | P-003 | Qual será o nome final do jogo? | Antes do lançamento | Cartão [#54](https://github.com/TARNAGS/resgate-espacial/issues/54) |
 | P-006 | Como funciona a pontuação? | Antes de construir a tela de resultado | Já definido: sem limite de tempo; resgate mais rápido faz mais pontos. Com cenários aleatórios (D-014), comparar tempos de cenários diferentes pode ser injusto. Perguntas no [documento 02, seção 8](02-regras-do-jogo.md#8-tempo-e-pontuação). Cartão [#53](https://github.com/TARNAGS/resgate-espacial/issues/53) |
-| P-009 | Como o jogo ensina a jogar: há um tutorial, e a fase 1 é aleatória ou fixa e desenhada à mão? | Antes do M2 | No protótipo 01, ela é aleatória, com regras bem fáceis. Ampliada em 01/10/2026 com a pergunta do Fernando sobre ter um tutorial e em 04/10/2026 com o ensino da dinâmica do propulsor, quando soltar e quando apertar (D-027). Direção do Fernando (04/10/2026): sem tutorial, porque o jogo é simples e intuitivo; o que falta é mostrar o objetivo (ir até o fim, resgatar, voltar e pousar), talvez com uma corrida gravada antes de jogar. Cartão [#48](https://github.com/TARNAGS/resgate-espacial/issues/48) |
+| P-009 | Como o jogo ensina a jogar: há um tutorial, e a fase 1 é aleatória ou fixa e desenhada à mão? Resolvida pela D-031 (04/10/2026): sem tutorial; DEMO antes da primeira partida e attract mode. | Antes do M2 | No protótipo 01, ela é aleatória, com regras bem fáceis. Ampliada em 01/10/2026 com a pergunta do Fernando sobre ter um tutorial e em 04/10/2026 com o ensino da dinâmica do propulsor, quando soltar e quando apertar (D-027). Direção do Fernando (04/10/2026): sem tutorial, porque o jogo é simples e intuitivo; o que falta é mostrar o objetivo (ir até o fim, resgatar, voltar e pousar), talvez com uma corrida gravada antes de jogar. Cartão [#48](https://github.com/TARNAGS/resgate-espacial/issues/48) |
 | P-010 | Ao tentar de novo depois de perder as 3 vidas, o cenário se repete ou muda? Resolvida pela D-021: as fases fixas repetem sempre o mesmo cenário (na BONUS, "Try again" também repete). | Antes do M2 | No protótipo 01, "Try again" repete o mesmo cenário. Cartão [#49](https://github.com/TARNAGS/resgate-espacial/issues/49) |
 | P-008 | Qual ferramenta de medição anônima usar, e que eventos medir? Para o playtest, respondida pela D-025 (Firebase, com o nick); para o lançamento, continua em aberto. | No M2, antes de construir a medição (E-17) | Precisa ser gratuita, dispensar cookies e aceitar eventos personalizados ([PRD, seção 7](03-prd.md#7-medição)). O Fernando revisa a lista de eventos. Cartão [#56](https://github.com/TARNAGS/resgate-espacial/issues/56) |
 | P-011 | Que obstáculos o jogo tem, e como ele se organiza em mundos e fases? | Antes de construir o gerador de fases (E-09) | A parte "mundo e fase" foi respondida pela D-020 (mundos com 10 fases). Falta o catálogo de obstáculos e o que cada mundo apresenta de novo. Cartão [#60](https://github.com/TARNAGS/resgate-espacial/issues/60) |
