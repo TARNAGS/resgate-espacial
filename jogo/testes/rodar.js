@@ -159,12 +159,12 @@ test('modificadores alteram a física e tipos desconhecidos dão erro', () => {
 });
 
 test('#95 #96 câmera: zoom e modo aceitam só valores válidos e não contam como ajuste da física', () => {
-  setParams({ cameraZoom: 1.3, cameraMode: 'thumbs' });
-  assert.equal(PARAMS.cameraZoom, 1.3); assert.equal(PARAMS.cameraMode, 'thumbs');
+  setParams({ cameraZoom: 1.3, cameraMode: 'stage' });
+  assert.equal(PARAMS.cameraZoom, 1.3); assert.equal(PARAMS.cameraMode, 'stage');
   setParams({ cameraMode: 'zoomzoom' });
-  assert.equal(PARAMS.cameraMode, 'thumbs');
+  assert.equal(PARAMS.cameraMode, 'stage');
   assert.ok(Object.keys(changedParams()).every((k) => VIEW_ONLY.includes(k)), 'mudar a câmera não deve tirar o tempo do ranking');
-  assert.equal(DEFAULT_PARAMS.cameraZoom, 1); assert.equal(DEFAULT_PARAMS.cameraMode, 'stage');
+  assert.equal(DEFAULT_PARAMS.cameraZoom, 1); assert.equal(DEFAULT_PARAMS.cameraMode, 'thumbs');
   resetParams();
 });
 

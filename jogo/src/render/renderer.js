@@ -25,9 +25,9 @@ export function createRenderer(canvas, view) {
   r.toScreen = (x, y) => ({ x: view.play.x + (x - r.camX) * r.scale(), y: (y - r.camY) * r.scale() });
 
   // ===== Câmera, partículas e mensagens =====
-  // Limites da câmera. Padrão (#96): para nas pontas da fase, e os controles ficam por cima dela.
-  // No modo 'thumbs' (o de antes, #50), a câmera pode passar das pontas para que as plataformas das
-  // pontas (base e tripulação) fiquem no meio da tela, longe do polegar do direcional.
+  // Limites da câmera. Padrão ('thumbs', #50): a câmera pode passar das pontas da fase para que as
+  // plataformas das pontas (base e tripulação) fiquem no meio da tela, longe dos polegares. Na opção
+  // 'stage' (#96), ela para nas pontas da fase, e os controles ficam por cima dela.
   function camLimits(level, params) {
     if (params.cameraMode !== 'thumbs') return [0, Math.max(0, level.L - viewW())];
     const centers = level.pads.map((p) => (p.x1 + p.x2) / 2);

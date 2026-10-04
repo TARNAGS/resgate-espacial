@@ -38,8 +38,10 @@ export const DEFAULT_PARAMS = Object.freeze({
   joystickDeadzone: 10,     // abaixo disso, o arrasto não muda a direção
   // Câmera. Não mudam a dificuldade: mexer nelas não tira o tempo do ranking.
   cameraZoom: 1,            // aproximação (#95): 1 mostra a altura inteira da fase; acima de 1, aproxima e segue a nave na vertical
-  cameraMode: 'stage',      // #96: 'stage' para nas pontas da fase, com os controles por cima dela;
-                            // 'thumbs' (o de antes, #44 e #50) afasta a nave e as plataformas dos polegares
+  cameraMode: 'thumbs',     // 'thumbs' (o padrão, #44 e #50): a câmera mantém a nave longe dos polegares e pode
+                            // passar das pontas da fase, deixando uma área ao lado para os controles no início e no
+                            // fim; 'stage' (#96, opção): para nas pontas, com os controles por cima da fase. O Fernando
+                            // testou o 'stage' com zoom e os controles ficavam sobre a nave e a plataforma (04/10/2026)
 });
 
 // Parâmetros que só mudam a imagem, não a dificuldade
@@ -67,7 +69,7 @@ export const TUNABLE = [
   { key: 'touchScheme', label: 'Touch control', options: [['twin', 'A · two thumbs'], ['hold', 'B · one thumb']] },
   { key: 'joystickMode', label: 'Joystick', options: ['follow', 'fixed'] },
   { key: 'cameraZoom', label: 'Camera zoom', min: 1, max: 1.6, step: 0.05 },
-  { key: 'cameraMode', label: 'Camera', options: [['stage', 'whole stage · controls on top'], ['thumbs', 'avoid thumbs (old)']] },
+  { key: 'cameraMode', label: 'Camera', options: [['thumbs', 'avoid thumbs'], ['stage', 'whole stage · controls on top']] },
 ];
 
 // Ignora o que não existe mais (por exemplo, uma opção removida e ainda salva no aparelho)
