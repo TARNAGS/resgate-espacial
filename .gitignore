@@ -30,3 +30,6 @@ docs/benchmark/gravitron/ferramentas/saida/
 
 # Saída das ferramentas do benchmark do Jetpack Joyride, gerada a cada vez
 docs/benchmark/jetpack-joyride/ferramentas/saida/
+
+# Saída das ferramentas do benchmark do Temple Run, gerada a cada vez
+docs/benchmark/temple-run/ferramentas/saida/

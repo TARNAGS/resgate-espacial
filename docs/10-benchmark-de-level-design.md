@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 10 — Benchmark de level design |
-| Versão | 0.4 |
+| Versão | 0.5 |
 | Data | 06/10/2026 |
 | Status | Em construção |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -25,7 +25,9 @@ O que os jogos de referência fazem com fases, obstáculos, dificuldade e ritmo,
 | Outros jogos de nave com gravidade | Seção 3 deste documento | Pronto (resumo) |
 | Jetpack Joyride (2011), o primeiro casual do ICP | [benchmark/jetpack-joyride.md](benchmark/jetpack-joyride.md): como um jogo infinito funciona, contado pelo criador ([#107](https://github.com/TARNAGS/resgate-espacial/issues/107)) | Pronto (v1.0) |
 | Página de leitura do Jetpack Joyride | [claude.ai/artifact/TjsQe83tBnQbYzsddenUcb](https://claude.ai/artifact/TjsQe83tBnQbYzsddenUcb) (privada) e a cópia [benchmark/jetpack-joyride/pagina-de-leitura.html](benchmark/jetpack-joyride/pagina-de-leitura.html) | Publicada |
-| Outros casuais do ICP (Subway Surfers, Candy Crush Saga, Plants vs. Zombies, Temple Run) | Seção 4 deste documento | A pesquisar ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)) |
+| Temple Run (2011), o segundo casual do ICP | [benchmark/temple-run.md](benchmark/temple-run.md): a corrida infinita em 3D, com perseguição, e a comparação com o Jetpack Joyride ([#108](https://github.com/TARNAGS/resgate-espacial/issues/108)) | Pronto (v1.0) |
+| Página de leitura do Temple Run | [claude.ai/artifact/DatT92pPFFCnnDwG3vLoBZ](https://claude.ai/artifact/DatT92pPFFCnnDwG3vLoBZ) (privada) e a cópia [benchmark/temple-run/pagina-de-leitura.html](benchmark/temple-run/pagina-de-leitura.html) | Publicada |
+| Outros casuais do ICP (Subway Surfers, Candy Crush Saga, Plants vs. Zombies) | Seção 4 deste documento | A pesquisar ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)) |
 
 ## 2. O jogo original: Crazy Gravity (1996)
 
@@ -100,14 +102,14 @@ O benchmark completo, com as regras do Gravitron 2 lidas no código e 45 fases m
 
 Jetpack Joyride, Subway Surfers, Candy Crush Saga, Plants vs. Zombies e Temple Run. A pesquisa está no cartão [#99](https://github.com/TARNAGS/resgate-espacial/issues/99). Cada jogo responde às mesmas perguntas feitas ao Crazy Gravity, para comparar lado a lado. O Fernando, em 06/10/2026: os jogos de nave com gravidade são muito parecidos com o que ele pensa em level design (artefatos de gameplay, obstáculos, incremento de fase); os modernos são inspiração menos direta, mas ajudam a entender como jogos infinitos funcionam.
 
-| Pergunta de level design | O que olhar nos casuais | Jetpack Joyride ([benchmark](benchmark/jetpack-joyride.md), [#107](https://github.com/TARNAGS/resgate-espacial/issues/107)) |
-|---|---|---|
-| Como a fase é organizada | Fases fixas e numeradas (Candy Crush, Plants vs. Zombies) ou corrida sem fim (Jetpack Joyride, Subway Surfers, Temple Run) | Sem fases: uma corrida sem fim, montada na hora por intervalos (entre um mínimo e um máximo) com probabilidades por tipo de objeto |
-| Como a dificuldade sobe | Rampa, serrote, fases de respiro, fases-chefe | Com a distância; os veículos quebram a intensidade em serrote |
-| Como um elemento novo é apresentado | Fase dedicada, primeira aparição segura, combinação depois | Avisos antes do perigo; câmera lenta, tela limpa e trilhas de moedas para cada veículo; missões que pedem para experimentar |
-| Metas por fase | Estrelas, missões, recordes | Três missões ao mesmo tempo (1 a 3 estrelas), recorde de distância e ranking dos amigos |
-| Duração de uma fase | Quanto cabe numa fila de 2 minutos | A "jogada do intervalo comercial" |
-| O que faz voltar | Recordes, colecionáveis, eventos | Missões que se renovam, níveis e insígnias, loja, roleta, desafio diário, eventos, bônus ao voltar |
+| Pergunta de level design | O que olhar nos casuais | Jetpack Joyride ([benchmark](benchmark/jetpack-joyride.md), [#107](https://github.com/TARNAGS/resgate-espacial/issues/107)) | Temple Run ([benchmark](benchmark/temple-run.md), [#108](https://github.com/TARNAGS/resgate-espacial/issues/108)) |
+|---|---|---|---|
+| Como a fase é organizada | Fases fixas e numeradas (Candy Crush, Plants vs. Zombies) ou corrida sem fim (Jetpack Joyride, Subway Surfers, Temple Run) | Sem fases: uma corrida sem fim, montada na hora por intervalos (entre um mínimo e um máximo) com probabilidades por tipo de objeto | Sem fases: um caminho único gerado na hora, com curvas de 90°; no 2, mapas temáticos |
+| Como a dificuldade sobe | Rampa, serrote, fases de respiro, fases-chefe | Com a distância; os veículos quebram a intensidade em serrote | Com a velocidade, que cresce com a distância; perseguidores sempre atrás |
+| Como um elemento novo é apresentado | Fase dedicada, primeira aparição segura, combinação depois | Avisos antes do perigo; câmera lenta, tela limpa e trilhas de moedas para cada veículo; missões que pedem para experimentar | Cada obstáculo pede um gesto que se entende pela forma; testado com pessoas sem nenhuma explicação |
+| Metas por fase | Estrelas, missões, recordes | Três missões ao mesmo tempo (1 a 3 estrelas), recorde de distância e ranking dos amigos | 56 objetivos que aumentam o multiplicador (no 2, três por vez e níveis), recorde e ranking |
+| Duração de uma fase | Quanto cabe numa fila de 2 minutos | A "jogada do intervalo comercial" | De 30 segundos a alguns minutos |
+| O que faz voltar | Recordes, colecionáveis, eventos | Missões que se renovam, níveis e insígnias, loja, roleta, desafio diário, eventos, bônus ao voltar | Multiplicador, melhorias de poderes, personagens, amigos; no 2, desafios diários com sequência, mapas novos e eventos |
 
 ## 5. Primeiras lições (Proposta)
 
@@ -135,6 +137,14 @@ Do Jetpack Joyride ([benchmark, seção 12](benchmark/jetpack-joyride.md#12-o-qu
 14. **Três missões que se renovam**, de durações diferentes: metas que fazem voltar sem mexer no ranking; os elogios que já temos viram missões.
 15. **O serrote dentro da fase:** os pousos no posto e na tripulação são os nossos momentos de alívio; não encher uma fase sem eles.
 16. **Intervalos entre um mínimo e um máximo** para a BONUS e fases geradas: o piloto automático garante que é possível; o mínimo regula se é justo.
+
+Do Temple Run ([benchmark, seção 14](benchmark/temple-run.md#14-o-que-levar-para-o-resgate-espacial)):
+
+17. **Dois tipos de erro:** um toque leve vira susto e só o segundo, ou uma batida forte, explode a nave; candidato a modificador ou modo mais fácil, junto com o "casco" dos Gravitron.
+18. **Controle feito para o aparelho:** o fracasso anterior da Imangi veio de dois controles virtuais; testar o nosso com quem nunca viu o jogo, sem explicar.
+19. **Um motivo para seguir em frente:** em fases especiais, uma ameaça visível que avança, sem inimigo que atira.
+20. **O progresso no placar é o oposto do Jetpack Joyride:** o multiplicador do Temple Run mistura progresso (e, no 2, compras) com habilidade; reforça o ranking por tempo puro.
+21. **Regras do mundo:** poucos "mandamentos" de identidade, no documento 08, que todo mundo do jogo respeita.
 
 ## 6. Como a busca do jogo original foi feita
 
@@ -196,3 +206,4 @@ A lista que levou ao reconhecimento, na ordem em que foi apresentada (da mais pr
 | 0.2 | 06/10/2026 | Registro completo da busca (candidatos mostrados e fontes procuradas) e a página de leitura do Crazy Gravity |
 | 0.3 | 06/10/2026 | Benchmark do GraviTron e do Gravitron 2 ([benchmark/gravitron.md](benchmark/gravitron.md), [#106](https://github.com/TARNAGS/resgate-espacial/issues/106)), com a página de leitura; seção 3.1 corrigida com o que o código mostrou; lições 7 a 11 |
 | 0.4 | 06/10/2026 | Benchmark do Jetpack Joyride ([benchmark/jetpack-joyride.md](benchmark/jetpack-joyride.md), [#107](https://github.com/TARNAGS/resgate-espacial/issues/107)), com a página de leitura; seção 4 com a coluna do Jetpack Joyride e a observação do Fernando; lições 12 a 16 |
+| 0.5 | 06/10/2026 | Benchmark do Temple Run ([benchmark/temple-run.md](benchmark/temple-run.md), [#108](https://github.com/TARNAGS/resgate-espacial/issues/108)), com a página de leitura; coluna do Temple Run na seção 4; lições 17 a 21 |
