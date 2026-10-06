@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 10 — Benchmark de level design |
-| Versão | 0.2 |
+| Versão | 0.3 |
 | Data | 06/10/2026 |
 | Status | Em construção |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -20,6 +20,8 @@ O que os jogos de referência fazem com fases, obstáculos, dificuldade e ritmo,
 |---|---|---|
 | Crazy Gravity (1996), o jogo original | [benchmark/crazy-gravity.md](benchmark/crazy-gravity.md): as 18 fases mapeadas, com imagens | Pronto (v1.1) |
 | Página de leitura do Crazy Gravity, para inspiração | [claude.ai/artifact/UfYWNwM15P6jd2YPDnReh4](https://claude.ai/artifact/UfYWNwM15P6jd2YPDnReh4) (privada, fixada na barra lateral) e a cópia [benchmark/crazy-gravity/pagina-de-leitura.html](benchmark/crazy-gravity/pagina-de-leitura.html) | Publicada |
+| GraviTron (2006) e Gravitron 2 (2008), a origem do resgate de pessoas | [benchmark/gravitron.md](benchmark/gravitron.md): regras do 2 lidas no código, 22 fases do 2 e 23 do 1 mapeadas, com imagens ([#106](https://github.com/TARNAGS/resgate-espacial/issues/106)) | Pronto (v1.0) |
+| Página de leitura dos Gravitron | [claude.ai/artifact/8yu4nX63Xoix8VneHU59bv](https://claude.ai/artifact/8yu4nX63Xoix8VneHU59bv) (privada) e a cópia [benchmark/gravitron/pagina-de-leitura.html](benchmark/gravitron/pagina-de-leitura.html) | Publicada |
 | Outros jogos de nave com gravidade | Seção 3 deste documento | Pronto (resumo) |
 | Casuais de celular do ICP | Seção 4 deste documento | A pesquisar ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)) |
 
@@ -69,13 +71,15 @@ O jogo da juventude do Fernando é o **Crazy Gravity**, de Axel Meierhöfer (XLM
 | | GraviTron (2006) | Gravitron 2 (2008) |
 |---|---|---|
 | Autor | Dark Castle Software | Dark Castle Software |
-| Plataforma | Windows, gratuito | Windows (Steam), com demo |
-| Objetivo da fase | Destruir os reatores do planeta | Destruir o núcleo do reator e fugir para a atmosfera antes da explosão |
-| Resgate | Astronautas andam pela superfície; pousar perto deles resgata e dá pontos | Cientistas presos na superfície; resgatar pousando repara a nave |
-| Combustível | Não confirmado | Gasta com o propulsor e o escudo; recarrega voando perto de células de combustível |
-| Tamanho | Editor de fases e modo multiplayer | Mais de 40 fases, gráficos vetoriais neon |
+| Plataforma | Windows, gratuito | Windows: US$ 5 no site do autor e no Steam, com demo de 5 fases |
+| Objetivo da fase | Destruir os reatores do setor | Destruir todos os reatores e fugir para o espaço em 60 segundos, antes de o planeta explodir |
+| Resgate | Space-men andam pela superfície; resgatá-los dá pontos | Cientistas andam pela plataforma; quando a nave pousa nela, **eles andam até a nave**. Cada um conserta 15 de energia e vale pontos. É opcional |
+| Combustível | Itens de combustível nas plataformas | Tanque gasto pelo motor e pelo escudo; o posto abastece quem paira ou pousa perto |
+| Tamanho | 23 fases de campanha, 3 de multijogador e o editor GravED | Mais de 40 fases na campanha principal e 14 na extra (v1.8) |
 
-**Lição de design:** no Gravitron, o resgate é recompensa secundária (pontos ou reparo); no Resgate Espacial, ele é o objetivo da fase. O Gravitron mostra como dar ao resgate um papel extra, por exemplo um bônus por resgatar sem pausa.
+O benchmark completo, com as regras do Gravitron 2 lidas no código e 45 fases mapeadas, está em [benchmark/gravitron.md](benchmark/gravitron.md) (D-033, [#106](https://github.com/TARNAGS/resgate-espacial/issues/106)).
+
+**Lição de design:** nos Gravitron, o resgate é missão secundária, e a recompensa é útil (conserto e pontos); no Resgate Espacial, ele é o objetivo da fase. Os tripulantes andando até a nave pousada são a imagem que ficou na memória do Fernando.
 
 ### 3.2 O gênero ("cave flyers")
 
@@ -113,6 +117,14 @@ As ideias detalhadas, com a ligação a cada decisão e pendência, estão no [b
 4. **Ensinar pela estrutura:** circuitos de mão única e recompensas dentro do perigo ensinam sem texto, combinando com a D-031.
 5. **Validações:** a DEMO das primeiras fases (D-031) e o recorde por fase (D-024) já existiam no jogo original.
 6. **Escala:** o Crazy Gravity tem fases de vários minutos; o nosso jogador quer partidas curtas (D-028). Levar as ideias, não o tamanho.
+
+Dos Gravitron ([benchmark, seção 11](benchmark/gravitron.md#11-o-que-levar-para-o-resgate-espacial)):
+
+7. **Os tripulantes andam até a nave** quando ela pousa: deixa claro o que é o resgate e dá um segundo de tensão no pouso.
+8. **A volta como clímax:** uma fuga cronometrada depois do objetivo, em fases especiais ou como modificador.
+9. **Terreno que gira e que anda, e perigos com ritmo** (lasers e jatos que ligam e desligam): confirmam a lista de obstáculos móveis da P-011, sem tiro.
+10. **Primeira experiência:** a fase 1 com tudo à vista confirma a D-031, mas o Gravitron 2 precisou acrescentar instruções depois do lançamento, e a campanha difícil selecionada por padrão espantou jogadores. Medir se a DEMO basta.
+11. **Placar em servidor próprio morre:** no lançamento, preferir os rankings das plataformas (P-019).
 
 ## 6. Como a busca do jogo original foi feita
 
@@ -172,3 +184,4 @@ A lista que levou ao reconhecimento, na ordem em que foi apresentada (da mais pr
 |---|---|---|
 | 0.1 | 06/10/2026 | Primeira versão: o jogo original identificado (Crazy Gravity), a comparação com o nosso, o Gravitron e o gênero; espaço para os casuais da #99 |
 | 0.2 | 06/10/2026 | Registro completo da busca (candidatos mostrados e fontes procuradas) e a página de leitura do Crazy Gravity |
+| 0.3 | 06/10/2026 | Benchmark do GraviTron e do Gravitron 2 ([benchmark/gravitron.md](benchmark/gravitron.md), [#106](https://github.com/TARNAGS/resgate-espacial/issues/106)), com a página de leitura; seção 3.1 corrigida com o que o código mostrou; lições 7 a 11 |

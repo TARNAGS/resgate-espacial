@@ -1,0 +1,487 @@
+<title>Gravitron 1 e 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: coluna de leitura de 46rem com mapas em largura cheia; mesma família da página do Crazy Gravity, com o neon vetorial dos Gravitron como destaque */
+:root {
+  --bg: #f2f4f8; --surface: #ffffff; --fg: #111827; --muted: #4e5a6e; --line: #d5dbe5;
+  --accent: #0e7490; --neon: #a21caf; --map: #0d1322;
+  --reator: #c9302c; --trip: #a16207; --comb: #16884a;
+  --s1: #d9581f; --s2: #2a6fd0;
+  --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #090d16; --surface: #101827; --fg: #e6ebf3; --muted: #9aa7bc; --line: #222f46;
+  --accent: #5fd4ee; --neon: #e879f9; --map: #0d1322;
+  --reator: #ff6b66; --trip: #facc15; --comb: #3fd081;
+  --s1: #f0782f; --s2: #4f8fe8; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #090d16; --surface: #101827; --fg: #e6ebf3; --muted: #9aa7bc; --line: #222f46;
+  --accent: #5fd4ee; --neon: #e879f9; --map: #0d1322;
+  --reator: #ff6b66; --trip: #facc15; --comb: #3fd081;
+  --s1: #f0782f; --s2: #4f8fe8; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 1rem; line-height: 1.6; padding-inline: 16px; padding-block: 0 4rem; }
+.wrap { max-width: 46rem; margin-inline: auto; }
+.wide { max-width: 64rem; margin-inline: auto; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; line-height: 1.05; margin: 0; letter-spacing: 0.01em; }
+h2 { font-size: clamp(1.9rem, 4vw, 2.4rem); margin-block: 3.5rem 0.75rem; }
+h2 + .sub { margin-top: -0.4rem; }
+p { margin: 0 0 0.9rem; }
+a { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.eyebrow { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.mono { font-family: var(--mono); font-size: 0.85em; }
+header.hero { padding-block: 3rem 1.5rem; display: grid; gap: 1rem; }
+.hero h1 { font-size: clamp(3.2rem, 11vw, 6.5rem); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; }
+.hero h1 span { color: var(--neon); }
+.lede { font-size: 1.15rem; color: var(--muted); max-width: 40rem; }
+.facts { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-family: var(--mono); font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.facts b { color: var(--fg); font-weight: 500; }
+.map { display: block; background: var(--map); border-radius: 6px; overflow: hidden; border: 1px solid var(--line); }
+.map img { display: block; width: 100%; height: auto; }
+figcaption, .caption { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-block: 1rem; }
+.chips a { font-family: var(--mono); font-size: 0.8rem; text-decoration: none; color: var(--fg); border: 1px solid var(--line); background: var(--surface); padding: 0.15rem 0.45rem; border-radius: 4px; }
+.chips a:hover { border-color: var(--accent); color: var(--accent); }
+.table-wrap { overflow-x: auto; margin-block: 1rem 1.5rem; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+thead th { white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+.num td:nth-child(n+4) { text-align: right; }
+.chart-box { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 1rem; margin-block: 1rem; overflow-x: auto; }
+.legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
+.legend i { display: inline-block; width: 0.8rem; height: 0.8rem; border-radius: 2px; margin-right: 0.4rem; vertical-align: -0.05rem; }
+.chart { width: 100%; min-width: 34rem; height: auto; display: block; }
+.chart .grid { stroke: var(--line); } .chart .axis { stroke: var(--muted); }
+.chart .tick { fill: var(--muted); font: 11px var(--mono); } .chart .peak { fill: var(--fg); font: 600 11px var(--mono); }
+.chart .ptitle { fill: var(--fg); font: 600 13px var(--body); }
+.chart .s1 { fill: var(--s1); } .chart .s2 { fill: var(--s2); }
+.chart .bar:hover rect { opacity: 0.8; }
+ul.points { padding-left: 1.2rem; margin: 0 0 1rem; } ul.points li { margin-bottom: 0.45rem; }
+.fase { margin-block: 2.75rem; display: grid; gap: 0.9rem; }
+.fase-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.4rem 0.9rem; }
+.fase-num { font-family: var(--display); font-weight: 700; font-size: 2.6rem; line-height: 1; color: var(--muted); font-variant-numeric: tabular-nums; }
+.fase-head h3 { font-size: 1.8rem; }
+.fase-tag { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--neon); }
+.fase-body { display: grid; grid-template-columns: minmax(0, 14rem) minmax(0, 1fr); gap: 1.5rem; }
+.ficha { margin: 0; display: grid; gap: 0.45rem; align-content: start; font-size: 0.88rem; }
+.ficha div { display: grid; gap: 0.05rem; border-bottom: 1px solid var(--line); padding-bottom: 0.4rem; }
+.ficha dt { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.ficha dd { margin: 0; font-variant-numeric: tabular-nums; }
+.notes { min-width: 0; }
+.idea { border-left: 3px solid var(--neon); padding-left: 0.8rem; }
+.mini { margin-block: 2.25rem; display: grid; gap: 0.7rem; }
+.mini .fase-num { font-size: 2rem; } .mini h3 { font-size: 1.5rem; }
+.g1grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); gap: 1.4rem 1.2rem; margin-block: 1.2rem; }
+.g1 { margin: 0; min-width: 0; }
+.g1 figcaption { font-size: 0.85rem; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.two > div { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 1rem 1.1rem; }
+.two h3 { font-size: 1.35rem; margin-bottom: 0.5rem; }
+.two ul { padding-left: 1.1rem; margin: 0; } .two li { margin-bottom: 0.5rem; }
+.rescue { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 1.1rem 1.2rem; display: grid; gap: 0.6rem; }
+.rescue ol { margin: 0; padding-left: 1.3rem; } .rescue li { margin-bottom: 0.35rem; }
+.note { font-size: 0.9rem; color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 0.8rem 1rem; }
+footer { margin-top: 4rem; font-size: 0.85rem; color: var(--muted); }
+@media (max-width: 640px) { .fase-body, .two { grid-template-columns: 1fr; } .fase-num { font-size: 2.1rem; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <span class="eyebrow">Benchmark de level design e gameplay · Resgate Espacial · 06/10/2026</span>
+  <h1>Gravi<span>tron</span> 1 e 2</h1>
+  <p class="lede">A outra metade da memória: o jogo de onde vem o resgate de pessoas. Os dois Gravitron abertos por inteiro, com 22 fases do Gravitron 2 e 23 do GraviTron lidas direto dos arquivos e redesenhadas como mapas, e as regras tiradas do código que o próprio autor publicou.</p>
+  <div class="facts"><span><b>2006</b> grátis · <b>2008</b> US$ 5</span><span><b>Dark Castle Software</b></span><span><b>73</b> reatores</span><span><b>98</b> cientistas</span><span><b>1.123</b> torres</span><span><b>174</b> lasers</span><span><b>99</b> partes que giram ou andam</span></div>
+</header>
+</div>
+<div class="wide"><a class="map" href="g2-principal-04-quintus.png" target="_blank" rel="noopener"><img src="g2-principal-04-quintus.png" alt="Mapa esquemático da fase 4 do Gravitron 2, com a caverna que gira" loading="lazy"></a></div>
+<div class="wrap">
+  <p class="caption">Gravitron 2, fase 4 (Quintus): a caverna inteira gira em volta do reator, a tracejado. Os mapas não são capturas de tela: são redesenhos esquemáticos, feitos a partir dos arquivos de fase, com uma cor por função. Toque num mapa para abrir em tamanho cheio.</p>
+  <figure style="margin:1rem 0 0"><a class="map" href="legenda.png" target="_blank" rel="noopener"><img src="legenda.png" alt="Legenda dos mapas: cor e símbolo de cada elemento" loading="lazy"></a><figcaption>Legenda dos mapas.</figcaption></figure>
+
+  <nav aria-label="Seções" class="chips"><a href="#resumo">Resumo</a><a href="#resgate">O resgate</a><a href="#regras">Regras</a><a href="#mudou">1 → 2</a><a href="#curva">Curva</a><a href="#principal">Campanha principal</a><a href="#extra">Campanha extra</a><a href="#g1">GraviTron</a><a href="#padroes">Padrões</a><a href="#jogadores">Jogadores</a><a href="#levar">O que levar</a></nav>
+
+  <h2 id="resumo">Em uma página</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th></th><th>GraviTron (2006)</th><th>Gravitron 2 (2008)</th></tr></thead>
+    <tbody>
+    <tr><th>Proposta</th><td>Destruir os reatores de cada setor, pegar combustível e resgatar os space-men</td><td>Destruir todos os reatores e fugir para o espaço em 60 segundos; resgatar cientistas é opcional</td></tr>
+    <tr><th>Negócio</th><td>Grátis</td><td>US$ 5, com demo de 5 fases e expansões grátis; no Steam desde 31/08/2008</td></tr>
+    <tr><th>Tamanho</th><td>23 fases de campanha, 3 de multijogador e o editor GravED</td><td>Mais de 40 fases na campanha principal e 14 na extra</td></tr>
+    <tr><th>Diversão</th><td>Pilotar com inércia, atirar, planejar a ordem dos reatores</td><td>A fuga cronometrada, pousar em qualquer superfície plana, terreno que gira e anda</td></tr>
+    <tr><th>Dificuldade</th><td>Torres em todas as paredes, enxames no ar, campos de força</td><td>Lasers que matam na hora, o relógio da fuga, o quique nos corredores, os controles</td></tr>
+    <tr><th>Recepção</th><td>Pouca crítica registrada</td><td>27 de 32 avaliações positivas no Steam (84%); 3,5 de 5 na GamesRadar</td></tr>
+    </tbody></table></div>
+
+  <h2 id="resgate">O resgate, em detalhe</h2>
+  <div class="rescue">
+    <p>É a parte que ficou na memória do Fernando. No Gravitron 2, do jeito que o código faz:</p>
+    <ol>
+      <li>Os cientistas ficam andando de um lado para o outro na plataforma deles, e mudam de direção sozinhos de tempos em tempos.</li>
+      <li>Quando a nave <b>pousa na mesma plataforma</b>, eles se viram para ela e <b>andam até a nave</b>, mais depressa.</li>
+      <li>Ao chegar perto, embarcam: cada um conserta 15 de energia da nave e vale 250 pontos, e mais 100 no fim da fase.</li>
+      <li>O resgate é <b>opcional</b>: o objetivo da fase são os reatores. Dá para terminar sem resgatar ninguém.</li>
+      <li>No código existe um inimigo, o lander, que procura um cientista, voa até ele e o transforma num mutante.</li>
+    </ol>
+    <p>No GraviTron, os space-men andam pela superfície e o resgate vale pontos.</p>
+  </div>
+
+  <h2 id="regras">Como o Gravitron 2 funciona</h2>
+  <ul class="points">
+    <li><b>Física:</b> a gravidade puxa para baixo e o motor empurra com cinco vezes essa força; o ar freia a nave aos poucos. O mapa dá a volta na horizontal, e a nave nasce no espaço, acima do terreno.</li>
+    <li><b>Combustível:</b> tanque de 300, que o motor gasta em 48 segundos de aceleração contínua. O escudo gasta do mesmo tanque. Para abastecer, basta <b>pairar ou pousar perto</b> de um posto.</li>
+    <li><b>Batidas:</b> bater na parede <b>não mata</b>: a nave quica e perde energia proporcional à velocidade. Laser, esmagamento e qualquer dano sem combustível matam na hora.</li>
+    <li><b>Pouso:</b> em qualquer superfície plana, até no teto, se a nave estiver alinhada. <b>A velocidade não importa.</b></li>
+    <li><b>Fim da fase:</b> destruído o último reator (5 tiros, e ele se recupera se você parar de atirar), toca a sirene e começam <b>60 segundos</b> para subir até o espaço.</li>
+    <li><b>Pontos:</b> um relógio de bônus começa em 1.000 × o número da fase e cai 25 por segundo; no fim, somam-se o bônus, o combustível e a energia que sobraram e os cientistas. 3 vidas, mais uma a cada 20.000 pontos; checkpoints desde a v1.2.</li>
+  </ul>
+
+  <h2 id="mudou">Do GraviTron para o Gravitron 2</h2>
+  <div class="table-wrap"><table><tbody>
+    <tr><th>Resgate</th><td>Space-men por pontos → cientistas que também consertam a nave</td></tr>
+    <tr><th>Fim da fase</th><td>Destruir os reatores → destruir e fugir em 60 segundos</td></tr>
+    <tr><th>Progresso</th><td>Senha por fase (EASY1, PARTY, SMOKE…) → checkpoints dentro da fase</td></tr>
+    <tr><th>Elementos novos</th><td>Lasers com tempo, jatos, blocos destrutíveis, minas, mísseis, pulgas, varredores e landers</td></tr>
+    <tr><th>Depois do lançamento</th><td>Checkpoints, menos consumo, postos mais fortes, relógio menor no começo e uma página de instruções: quase tudo facilitou ou esclareceu o jogo</td></tr>
+  </tbody></table></div>
+
+  <h2 id="curva">A curva do Gravitron 2</h2>
+  <div class="chart-box">
+    <div class="legend"><span><i style="background:var(--s1)"></i>Perigos (torres, tanques, no ar, lasers)</span><span><i style="background:var(--s2)"></i>Mecanismos (jatos, blocos, botões, partes que giram ou andam)</span></div>
+    <svg class="chart" viewBox="0 0 960 330" role="img" aria-label="Perigos e mecanismos por fase no Gravitron 2, em dois painéis com escalas diferentes"><text x="44" y="22" class="ptitle">Campanha principal</text><line x1="44" x2="330" y1="270" y2="270" class="grid"/><text x="38" y="274" class="tick" text-anchor="end">0</text><line x1="44" x2="330" y1="212.5" y2="212.5" class="grid"/><text x="38" y="216.5" class="tick" text-anchor="end">10</text><line x1="44" x2="330" y1="155" y2="155" class="grid"/><text x="38" y="159" class="tick" text-anchor="end">20</text><line x1="44" x2="330" y1="97.5" y2="97.5" class="grid"/><text x="38" y="101.5" class="tick" text-anchor="end">30</text><line x1="44" x2="330" y1="40" y2="40" class="grid"/><text x="38" y="44" class="tick" text-anchor="end">40</text><g class="bar"><title>Fase 1 (Ediruma 5): 1 perigos e 0 mecanismos</title><rect x="53.53333333333333" y="264.25" width="28.599999999999998" height="5.75" class="s1"/><text x="67.83333333333333" y="259.25" class="peak" text-anchor="middle">1</text><text x="67.83333333333333" y="286" class="tick" text-anchor="middle">1</text></g><g class="bar"><title>Fase 2 (Goruwabi): 3 perigos e 0 mecanismos</title><rect x="101.19999999999999" y="252.75" width="28.599999999999998" height="17.25" class="s1"/><text x="115.49999999999999" y="247.75" class="peak" text-anchor="middle">3</text><text x="115.49999999999999" y="286" class="tick" text-anchor="middle">2</text></g><g class="bar"><title>Fase 3 (Wojunew): 6 perigos e 1 mecanismos</title><rect x="148.86666666666665" y="235.5" width="28.599999999999998" height="34.5" class="s1"/><rect x="148.86666666666665" y="229.75" width="28.599999999999998" height="5.75" class="s2"/><text x="163.16666666666666" y="224.75" class="peak" text-anchor="middle">7</text><text x="163.16666666666666" y="286" class="tick" text-anchor="middle">3</text></g><g class="bar"><title>Fase 4 (Quintus): 10 perigos e 1 mecanismos</title><rect x="196.53333333333333" y="212.5" width="28.599999999999998" height="57.5" class="s1"/><rect x="196.53333333333333" y="206.75" width="28.599999999999998" height="5.75" class="s2"/><text x="210.83333333333334" y="201.75" class="peak" text-anchor="middle">11</text><text x="210.83333333333334" y="286" class="tick" text-anchor="middle">4</text></g><g class="bar"><title>Fase 5 (Kyaomh): 6 perigos e 1 mecanismos</title><rect x="244.2" y="235.5" width="28.599999999999998" height="34.5" class="s1"/><rect x="244.2" y="229.75" width="28.599999999999998" height="5.75" class="s2"/><text x="258.5" y="224.75" class="peak" text-anchor="middle">7</text><text x="258.5" y="286" class="tick" text-anchor="middle">5</text></g><g class="bar"><title>Fase 10 (Ebayano): 8 perigos e 0 mecanismos</title><rect x="291.8666666666667" y="224" width="28.599999999999998" height="46" class="s1"/><text x="306.1666666666667" y="219" class="peak" text-anchor="middle">8</text><text x="306.1666666666667" y="286" class="tick" text-anchor="middle">10</text></g><line x1="44" x2="330" y1="270" y2="270" class="axis"/><text x="392" y="22" class="ptitle">Campanha extra</text><line x1="392" x2="948" y1="270" y2="270" class="grid"/><text x="386" y="274" class="tick" text-anchor="end">0</text><line x1="392" x2="948" y1="212.5" y2="212.5" class="grid"/><text x="386" y="216.5" class="tick" text-anchor="end">100</text><line x1="392" x2="948" y1="155" y2="155" class="grid"/><text x="386" y="159" class="tick" text-anchor="end">200</text><line x1="392" x2="948" y1="97.5" y2="97.5" class="grid"/><text x="386" y="101.5" class="tick" text-anchor="end">300</text><line x1="392" x2="948" y1="40" y2="40" class="grid"/><text x="386" y="44" class="tick" text-anchor="end">400</text><g class="bar"><title>Fase 1 (Vlea-Ealiu): 9 perigos e 2 mecanismos</title><rect x="399.9428571428571" y="264.825" width="23.82857142857143" height="5.175000000000011" class="s1"/><rect x="399.9428571428571" y="263.675" width="23.82857142857143" height="1.1499999999999773" class="s2"/><text x="411.85714285714283" y="258.675" class="peak" text-anchor="middle">11</text><text x="411.85714285714283" y="286" class="tick" text-anchor="middle">1</text></g><g class="bar"><title>Fase 2 (Inui): 22 perigos e 2 mecanismos</title><rect x="439.65714285714284" y="257.35" width="23.82857142857143" height="12.649999999999977" class="s1"/><rect x="439.65714285714284" y="256.2" width="23.82857142857143" height="1.150000000000034" class="s2"/><text x="451.57142857142856" y="251.2" class="peak" text-anchor="middle">24</text><text x="451.57142857142856" y="286" class="tick" text-anchor="middle">2</text></g><g class="bar"><title>Fase 3 (Uworu): 47 perigos e 3 mecanismos</title><rect x="479.37142857142857" y="242.975" width="23.82857142857143" height="27.025000000000006" class="s1"/><rect x="479.37142857142857" y="241.25" width="23.82857142857143" height="1.7249999999999943" class="s2"/><text x="491.2857142857143" y="236.25" class="peak" text-anchor="middle">50</text><text x="491.2857142857143" y="286" class="tick" text-anchor="middle">3</text></g><g class="bar"><title>Fase 4 (Eizyia): 28 perigos e 1 mecanismos</title><rect x="519.0857142857143" y="253.9" width="23.82857142857143" height="16.099999999999994" class="s1"/><rect x="519.0857142857143" y="253.325" width="23.82857142857143" height="0.575000000000017" class="s2"/><text x="531" y="248.325" class="peak" text-anchor="middle">29</text><text x="531" y="286" class="tick" text-anchor="middle">4</text></g><g class="bar"><title>Fase 5 (Sewari): 28 perigos e 2 mecanismos</title><rect x="558.8000000000001" y="253.9" width="23.82857142857143" height="16.099999999999994" class="s1"/><rect x="558.8000000000001" y="252.75" width="23.82857142857143" height="1.1500000000000057" class="s2"/><text x="570.7142857142858" y="247.75" class="peak" text-anchor="middle">30</text><text x="570.7142857142858" y="286" class="tick" text-anchor="middle">5</text></g><g class="bar"><title>Fase 6 (Aomaic II): 80 perigos e 11 mecanismos</title><rect x="598.5142857142857" y="224" width="23.82857142857143" height="46" class="s1"/><rect x="598.5142857142857" y="217.675" width="23.82857142857143" height="6.324999999999989" class="s2"/><text x="610.4285714285714" y="212.675" class="peak" text-anchor="middle">91</text><text x="610.4285714285714" y="286" class="tick" text-anchor="middle">6</text></g><g class="bar"><title>Fase 7 (Tethia): 73 perigos e 3 mecanismos</title><rect x="638.2285714285714" y="228.025" width="23.82857142857143" height="41.974999999999994" class="s1"/><rect x="638.2285714285714" y="226.3" width="23.82857142857143" height="1.7249999999999943" class="s2"/><text x="650.1428571428571" y="221.3" class="peak" text-anchor="middle">76</text><text x="650.1428571428571" y="286" class="tick" text-anchor="middle">7</text></g><g class="bar"><title>Fase 8 (Asylum): 199 perigos e 22 mecanismos</title><rect x="677.9428571428572" y="155.575" width="23.82857142857143" height="114.42500000000001" class="s1"/><rect x="677.9428571428572" y="142.925" width="23.82857142857143" height="12.649999999999977" class="s2"/><text x="689.8571428571429" y="137.925" class="peak" text-anchor="middle">221</text><text x="689.8571428571429" y="286" class="tick" text-anchor="middle">8</text></g><g class="bar"><title>Fase 9 (Tuvip): 96 perigos e 10 mecanismos</title><rect x="717.657142857143" y="214.8" width="23.82857142857143" height="55.19999999999999" class="s1"/><rect x="717.657142857143" y="209.05" width="23.82857142857143" height="5.75" class="s2"/><text x="729.5714285714287" y="204.05" class="peak" text-anchor="middle">106</text><text x="729.5714285714287" y="286" class="tick" text-anchor="middle">9</text></g><g class="bar"><title>Fase 10 (Ura 4): 100 perigos e 9 mecanismos</title><rect x="757.3714285714286" y="212.5" width="23.82857142857143" height="57.5" class="s1"/><rect x="757.3714285714286" y="207.325" width="23.82857142857143" height="5.175000000000011" class="s2"/><text x="769.2857142857143" y="202.325" class="peak" text-anchor="middle">109</text><text x="769.2857142857143" y="286" class="tick" text-anchor="middle">10</text></g><g class="bar"><title>Fase 11 (Gohine): 197 perigos e 41 mecanismos</title><rect x="797.0857142857143" y="156.72500000000002" width="23.82857142857143" height="113.27499999999998" class="s1"/><rect x="797.0857142857143" y="133.15" width="23.82857142857143" height="23.575000000000017" class="s2"/><text x="809" y="128.15" class="peak" text-anchor="middle">238</text><text x="809" y="286" class="tick" text-anchor="middle">11</text></g><g class="bar"><title>Fase 12 (Zebes): 155 perigos e 21 mecanismos</title><rect x="836.8000000000001" y="180.875" width="23.82857142857143" height="89.125" class="s1"/><rect x="836.8000000000001" y="168.8" width="23.82857142857143" height="12.074999999999989" class="s2"/><text x="848.7142857142858" y="163.8" class="peak" text-anchor="middle">176</text><text x="848.7142857142858" y="286" class="tick" text-anchor="middle">12</text></g><g class="bar"><title>Fase 13 (Garajida): 358 perigos e 16 mecanismos</title><rect x="876.5142857142857" y="64.15" width="23.82857142857143" height="205.85" class="s1"/><rect x="876.5142857142857" y="54.94999999999999" width="23.82857142857143" height="9.200000000000017" class="s2"/><text x="888.4285714285714" y="49.94999999999999" class="peak" text-anchor="middle">374</text><text x="888.4285714285714" y="286" class="tick" text-anchor="middle">13</text></g><g class="bar"><title>Fase 14 (Suon X): 246 perigos e 3 mecanismos</title><rect x="916.2285714285715" y="128.55" width="23.82857142857143" height="141.45" class="s1"/><rect x="916.2285714285715" y="126.82499999999999" width="23.82857142857143" height="1.7250000000000227" class="s2"/><text x="928.1428571428572" y="121.82499999999999" class="peak" text-anchor="middle">249</text><text x="928.1428571428572" y="286" class="tick" text-anchor="middle">14</text></g><line x1="392" x2="948" y1="270" y2="270" class="axis"/><text x="187" y="320" class="tick" text-anchor="middle">fase (1 a 5 = demo)</text><text x="670" y="320" class="tick" text-anchor="middle">fase (ordem do pacote)</text></svg>
+  </div>
+  <p class="caption">As escalas dos dois painéis são diferentes (até 40 e até 400). Passe o mouse ou toque numa barra para ver o nome da fase.</p>
+  <ul class="points">
+    <li><b>Rampa suave, uma novidade por fase:</b> terreno aberto, primeira descida, laser e elevador, caverna que gira, três lasers seguidos. Os perigos sobem de 1 para 3, 7 e 11, e a fase 5 baixa para 7.</li>
+    <li><b>A campanha extra é um serrote em outra escala:</b> picos nas fases 8, 11 e 13, com respiros depois de cada um.</li>
+    <li><b>As fases ficam mais fundas do que largas</b>, e a fuga de 60 segundos fica mais apertada.</li>
+  </ul>
+
+  <h2 id="principal">Campanha principal</h2>
+  <p class="sub">As 5 fases da demo, a fase 10 e duas outras da campanha (Alece e Vesea), cuja posição não está nos arquivos. As outras ficam só no jogo pago.</p>
+</div>
+<div class="wide">
+<article class="fase" id="g2-g2-principal-01-ediruma-5">
+  <div class="fase-head"><span class="fase-num">01</span><h3>Ediruma 5</h3><span class="fase-tag">demo</span></div>
+  <a class="map" href="g2-principal-01-ediruma-5.png" target="_blank" rel="noopener"><img src="g2-principal-01-ediruma-5.png" alt="Mapa esquemático da fase Ediruma 5 do Gravitron 2" loading="lazy"></a>
+  <div class="fase-body"><dl class="ficha">
+  <div><dt>Tamanho</dt><dd>1.104 × 120</dd></div>
+  <div><dt>Reatores · cientistas</dt><dd>1 · 2</dd></div>
+  <div><dt>Combustível · checkpoints</dt><dd>1 · 0</dd></div>
+  <div><dt>Torres · tanques</dt><dd>1 · 0</dd></div>
+  <div><dt>Lasers · no ar</dt><dd>0 · 0</dd></div>
+  <div><dt>Gira · anda</dt><dd>0 · 0</dd></div>
+  <div><dt>Profundidade</dt><dd>0</dd></div>
+</dl><div class="notes"><p><b>Objetivo e rota.</b> Terreno aberto, sem caverna: reator no alto de um morro, dois cientistas no vale, um posto e uma torre.</p><p><b>Desafio.</b> Só pilotar, pousar para resgatar, atirar no reator e subir.</p><p class="idea"><b>Ideia de design.</b> A primeira fase põe os quatro elementos do jogo à vista, cada um numa parte do terreno.</p></div></div>
+</article>
+<article class="fase" id="g2-g2-principal-02-goruwabi">
+  <div class="fase-head"><span class="fase-num">02</span><h3>Goruwabi</h3><span class="fase-tag">demo</span></div>
+  <a class="map" href="g2-principal-02-goruwabi.png" target="_blank" rel="noopener"><img src="g2-principal-02-goruwabi.png" alt="Mapa esquemático da fase Goruwabi do Gravitron 2" loading="lazy"></a>
+  <div class="fase-body"><dl class="ficha">
+  <div><dt>Tamanho</dt><dd>1.384 × 504</dd></div>
+  <div><dt>Reatores · cientistas</dt><dd>1 · 3</dd></div>
+  <div><dt>Combustível · checkpoints</dt><dd>1 · 1</dd></div>
+  <div><dt>Torres · tanques</dt><dd>3 · 0</dd></div>
+  <div><dt>Lasers · no ar</dt><dd>0 · 0</dd></div>
+  <div><dt>Gira · anda</dt><dd>0 · 0</dd></div>
+  <div><dt>Profundidade</dt><dd>440</dd></div>
+</dl><div class="notes"><p><b>Objetivo e rota.</b> Um poço desce até o reator, com dois cientistas no fundo; o posto e um checkpoint ficam na superfície.</p><p><b>Desafio.</b> A primeira descida, com duas torres nas paredes do poço. A fuga é subir pelo mesmo caminho.</p><p class="idea"><b>Ideia de design.</b> O primeiro "ir e voltar" vertical, o desenho básico de todas as fases seguintes.</p></div></div>
+</article>
+<article class="fase" id="g2-g2-principal-03-wojunew">
+  <div class="fase-head"><span class="fase-num">03</span><h3>Wojunew</h3><span class="fase-tag">demo</span></div>
+  <a class="map" href="g2-principal-03-wojunew.png" target="_blank" rel="noopener"><img src="g2-principal-03-wojunew.png" alt="Mapa esquemático da fase Wojunew do Gravitron 2" loading="lazy"></a>
+  <div class="fase-body"><dl class="ficha">
+  <div><dt>Tamanho</dt><dd>1.072 × 920</dd></div>
+  <div><dt>Reatores · cientistas</dt><dd>1 · 2</dd></div>
+  <div><dt>Combustível · checkpoints</dt><dd>1 · 0</dd></div>
+  <div><dt>Torres · tanques</dt><dd>4 · 1</dd></div>
+  <div><dt>Lasers · no ar</dt><dd>1 · 0</dd></div>
+  <div><dt>Gira · anda</dt><dd>0 · 1</dd></div>
+  <div><dt>Profundidade</dt><dd>528</dd></div>
+</dl><div class="notes"><p><b>Objetivo e rota.</b> O reator fica numa câmara lateral, atrás de um laser vertical; o combustível está numa plataforma que sobe e desce.</p><p><b>Desafio.</b> Atravessar o laser na hora em que ele desliga e lidar com o primeiro tanque.</p><p class="idea"><b>Ideia de design.</b> Duas novidades com tempo (laser e elevador), apresentadas sem pressa, numa fase pequena.</p></div></div>
+</article>
+<article class="fase" id="g2-g2-principal-04-quintus">
+  <div class="fase-head"><span class="fase-num">04</span><h3>Quintus</h3><span class="fase-tag">demo</span></div>
+  <a class="map" href="g2-principal-04-quintus.png" target="_blank" rel="noopener"><img src="g2-principal-04-quintus.png" alt="Mapa esquemático da fase Quintus do Gravitron 2" loading="lazy"></a>
+  <div class="fase-body"><dl class="ficha">
+  <div><dt>Tamanho</dt><dd>1.120 × 720</dd></div>
+  <div><dt>Reatores · cientistas</dt><dd>1 · 3</dd></div>
+  <div><dt>Combustível · checkpoints</dt><dd>2 · 1</dd></div>
+  <div><dt>Torres · tanques</dt><dd>9 · 0</dd></div>
+  <div><dt>Lasers · no ar</dt><dd>1 · 0</dd></div>
+  <div><dt>Gira · anda</dt><dd>1 · 0</dd></div>
+  <div><dt>Profundidade</dt><dd>376</dd></div>
+</dl><div class="notes"><p><b>Objetivo e rota.</b> A caverna central inteira gira em volta do reator, levando junto torres e um laser.</p><p><b>Desafio.</b> Entrar e pousar num terreno que se move.</p><p class="idea"><b>Ideia de design.</b> Uma mecânica nova, que muda o jeito de pilotar, logo na quarta fase.</p></div></div>
+</article>
+<article class="fase" id="g2-g2-principal-05-kyaomh">
+  <div class="fase-head"><span class="fase-num">05</span><h3>Kyaomh</h3><span class="fase-tag">demo</span></div>
+  <a class="map" href="g2-principal-05-kyaomh.png" target="_blank" rel="noopener"><img src="g2-principal-05-kyaomh.png" alt="Mapa esquemático da fase Kyaomh do Gravitron 2" loading="lazy"></a>
+  <div class="fase-body"><dl class="ficha">
+  <div><dt>Tamanho</dt><dd>2.040 × 752</dd></div>
+  <div><dt>Reatores · cientistas</dt><dd>1 · 3</dd></div>
+  <div><dt>Combustível · checkpoints</dt><dd>1 · 1</dd></div>
+  <div><dt>Torres · tanques</dt><dd>3 · 0</dd></div>
+  <div><dt>Lasers · no ar</dt><dd>3 · 0</dd></div>
+  <div><dt>Gira · anda</dt><dd>0 · 1</dd></div>
+  <div><dt>Profundidade</dt><dd>744</dd></div>
+</dl><div class="notes"><p><b>Objetivo e rota.</b> Um corredor com três lasers em sequência leva ao reator; três cientistas espalhados pela superfície.</p><p><b>Desafio.</b> Ritmo: passar pelos três lasers no tempo certo, na ida e na fuga.</p><p class="idea"><b>Ideia de design.</b> Repetir o laser da fase 3 em série cria um trecho com identidade. É a última fase da demo.</p></div></div>
+</article>
+<article class="fase" id="g2-g2-principal-10-ebayano">
+  <div class="fase-head"><span class="fase-num">10</span><h3>Ebayano</h3></div>
+  <a class="map" href="g2-principal-10-ebayano.png" target="_blank" rel="noopener"><img src="g2-principal-10-ebayano.png" alt="Mapa esquemático da fase Ebayano do Gravitron 2" loading="lazy"></a>
+  <div class="fase-body"><dl class="ficha">
+  <div><dt>Tamanho</dt><dd>1.200 × 984</dd></div>
+  <div><dt>Reatores · cientistas</dt><dd>1 · 2</dd></div>
+  <div><dt>Combustível · checkpoints</dt><dd>1 · 1</dd></div>
+  <div><dt>Torres · tanques</dt><dd>5 · 3</dd></div>
+  <div><dt>Lasers · no ar</dt><dd>0 · 0</dd></div>
+  <div><dt>Gira · anda</dt><dd>0 · 0</dd></div>
+  <div><dt>Profundidade</dt><dd>848</dd></div>
+</dl><div class="notes"><p><b>Objetivo e rota.</b> Um poço em zigue-zague desce até o reator, com dois cientistas no meio do caminho.</p><p><b>Desafio.</b> Três tanques patrulham os patamares, e a fuga é uma subida longa.</p><p class="idea"><b>Ideia de design.</b> A dificuldade vem da distância e da patrulha, sem elemento novo.</p></div></div>
+</article>
+<article class="fase" id="g2-g2-principal-alece">
+  <div class="fase-head"><span class="fase-num">?</span><h3>Alece</h3><span class="fase-tag">posição desconhecida</span></div>
+  <a class="map" href="g2-principal-alece.png" target="_blank" rel="noopener"><img src="g2-principal-alece.png" alt="Mapa esquemático da fase Alece do Gravitron 2" loading="lazy"></a>
+  <div class="fase-body"><dl class="ficha">
+  <div><dt>Tamanho</dt><dd>1.512 × 776</dd></div>
+  <div><dt>Reatores · cientistas</dt><dd>1 · 2</dd></div>
+  <div><dt>Combustível · checkpoints</dt><dd>1 · 0</dd></div>
+  <div><dt>Torres · tanques</dt><dd>23 · 4</dd></div>
+  <div><dt>Lasers · no ar</dt><dd>2 · 0</dd></div>
+  <div><dt>Gira · anda</dt><dd>1 · 0</dd></div>
+  <div><dt>Profundidade</dt><dd>656</dd></div>
+</dl><div class="notes"><p><b>Objetivo e rota.</b> Um anel giratório no meio do mapa, com torres e um cientista dentro; o reator fica na caverna da direita, atrás de um laser.</p><p><b>Desafio.</b> 23 torres e quatro tanques. O botão que controla o laser fica dentro do anel que gira.</p><p class="idea"><b>Ideia de design.</b> O interruptor está num lugar difícil, e a recompensa (o cientista) fica no mesmo lugar.</p></div></div>
+</article>
+<article class="fase" id="g2-g2-principal-vesea">
+  <div class="fase-head"><span class="fase-num">?</span><h3>Vesea</h3><span class="fase-tag">posição desconhecida</span></div>
+  <a class="map" href="g2-principal-vesea.png" target="_blank" rel="noopener"><img src="g2-principal-vesea.png" alt="Mapa esquemático da fase Vesea do Gravitron 2" loading="lazy"></a>
+  <div class="fase-body"><dl class="ficha">
+  <div><dt>Tamanho</dt><dd>1.976 × 2.008</dd></div>
+  <div><dt>Reatores · cientistas</dt><dd>3 · 6</dd></div>
+  <div><dt>Combustível · checkpoints</dt><dd>2 · 1</dd></div>
+  <div><dt>Torres · tanques</dt><dd>21 · 4</dd></div>
+  <div><dt>Lasers · no ar</dt><dd>4 · 2</dd></div>
+  <div><dt>Gira · anda</dt><dd>0 · 3</dd></div>
+  <div><dt>Profundidade</dt><dd>1.936</dd></div>
+</dl><div class="notes"><p><b>Objetivo e rota.</b> Três reatores no fundo; três grandes blocos de terreno sobem e descem em poços verticais, como elevadores.</p><p><b>Desafio.</b> Fileiras de torres no teto dos corredores, pares de lasers e dois mísseis na superfície.</p><p class="idea"><b>Ideia de design.</b> O terreno que anda muda o caminho: o mesmo poço está aberto ou fechado conforme o elevador.</p></div></div>
+</article>
+</div>
+<div class="wrap">
+  <h2 id="extra">Campanha extra</h2>
+  <p class="sub">As 14 fases da atualização 1.8 (OfficialPack1), na ordem do pacote.</p>
+</div>
+<div class="wide">
+<article class="mini" id="g2-g2-extra-01-vlea-ealiu">
+  <div class="fase-head"><span class="fase-num">01</span><h3>Vlea-Ealiu</h3><span class="fase-tag">9 perigos · 1 reator</span></div>
+  <a class="map" href="g2-extra-01-vlea-ealiu.png" target="_blank" rel="noopener"><img src="g2-extra-01-vlea-ealiu.png" alt="Mapa esquemático da fase Vlea-Ealiu do Gravitron 2" loading="lazy"></a>
+  <p class="idea">O reator fica numa ilha flutuante, protegido por dois jatos que empurram a nave para baixo. Um jato serve de escudo.</p>
+</article>
+<article class="mini" id="g2-g2-extra-02-inui">
+  <div class="fase-head"><span class="fase-num">02</span><h3>Inui</h3><span class="fase-tag">22 perigos · 2 reatores</span></div>
+  <a class="map" href="g2-extra-02-inui.png" target="_blank" rel="noopener"><img src="g2-extra-02-inui.png" alt="Mapa esquemático da fase Inui do Gravitron 2" loading="lazy"></a>
+  <p class="idea">Dois reatores em dois poços separados; os cientistas ficam no fundo de um deles, ao lado de um laser.</p>
+</article>
+<article class="mini" id="g2-g2-extra-03-uworu">
+  <div class="fase-head"><span class="fase-num">03</span><h3>Uworu</h3><span class="fase-tag">47 perigos · 2 reatores</span></div>
+  <a class="map" href="g2-extra-03-uworu.png" target="_blank" rel="noopener"><img src="g2-extra-03-uworu.png" alt="Mapa esquemático da fase Uworu do Gravitron 2" loading="lazy"></a>
+  <p class="idea">Os dois reatores ficam numa gaiola que anda, forrada de torres por dentro, atrás de uma parede de blocos destrutíveis.</p>
+</article>
+<article class="mini" id="g2-g2-extra-04-eizyia">
+  <div class="fase-head"><span class="fase-num">04</span><h3>Eizyia</h3><span class="fase-tag">28 perigos · 1 reator</span></div>
+  <a class="map" href="g2-extra-04-eizyia.png" target="_blank" rel="noopener"><img src="g2-extra-04-eizyia.png" alt="Mapa esquemático da fase Eizyia do Gravitron 2" loading="lazy"></a>
+  <p class="idea">Superfície longa, com torres no alto de pilares e pulgas; um túnel leva a um tambor giratório com tanques, e o reator fica atrás dele.</p>
+</article>
+<article class="mini" id="g2-g2-extra-05-sewari">
+  <div class="fase-head"><span class="fase-num">05</span><h3>Sewari</h3><span class="fase-tag">28 perigos · 2 reatores</span></div>
+  <a class="map" href="g2-extra-05-sewari.png" target="_blank" rel="noopener"><img src="g2-extra-05-sewari.png" alt="Mapa esquemático da fase Sewari do Gravitron 2" loading="lazy"></a>
+  <p class="idea">Um poço aberto; no fundo, uma gaiola que sobe e desce com dois reatores e 14 tanques. O alvo se move.</p>
+</article>
+<article class="mini" id="g2-g2-extra-06-aomaic-ii">
+  <div class="fase-head"><span class="fase-num">06</span><h3>Aomaic II</h3><span class="fase-tag">80 perigos · 3 reatores</span></div>
+  <a class="map" href="g2-extra-06-aomaic-ii.png" target="_blank" rel="noopener"><img src="g2-extra-06-aomaic-ii.png" alt="Mapa esquemático da fase Aomaic II do Gravitron 2" loading="lazy"></a>
+  <p class="idea">Um poço de 4.768 unidades de altura, com minas, pulgas, jatos de lado e ilhas giratórias; os cientistas estão numa delas.</p>
+</article>
+<article class="mini" id="g2-g2-extra-07-tethia">
+  <div class="fase-head"><span class="fase-num">07</span><h3>Tethia</h3><span class="fase-tag">73 perigos · 2 reatores</span></div>
+  <a class="map" href="g2-extra-07-tethia.png" target="_blank" rel="noopener"><img src="g2-extra-07-tethia.png" alt="Mapa esquemático da fase Tethia do Gravitron 2" loading="lazy"></a>
+  <p class="idea">Labirinto de lasers: 42 deles forrando os túneis e uma caverna giratória com lasers dentro. Ilhas que andam no céu levam cientistas.</p>
+</article>
+<article class="mini" id="g2-g2-extra-08-asylum">
+  <div class="fase-head"><span class="fase-num">08</span><h3>Asylum</h3><span class="fase-tag">199 perigos · 3 reatores</span></div>
+  <a class="map" href="g2-extra-08-asylum.png" target="_blank" rel="noopener"><img src="g2-extra-08-asylum.png" alt="Mapa esquemático da fase Asylum do Gravitron 2" loading="lazy"></a>
+  <p class="idea">Fortaleza simétrica com 17 caixas de torres que andam e 160 torres; os três reatores ficam numa gaiola giratória no fundo. Primeiro grande pico.</p>
+</article>
+<article class="mini" id="g2-g2-extra-09-tuvip">
+  <div class="fase-head"><span class="fase-num">09</span><h3>Tuvip</h3><span class="fase-tag">96 perigos · 3 reatores</span></div>
+  <a class="map" href="g2-extra-09-tuvip.png" target="_blank" rel="noopener"><img src="g2-extra-09-tuvip.png" alt="Mapa esquemático da fase Tuvip do Gravitron 2" loading="lazy"></a>
+  <p class="idea">Três anéis giratórios, cada um com um reator e minas por dentro; uma cerca de 15 lasers e elevadores longos.</p>
+</article>
+<article class="mini" id="g2-g2-extra-10-ura-4">
+  <div class="fase-head"><span class="fase-num">10</span><h3>Ura 4</h3><span class="fase-tag">100 perigos · 2 reatores</span></div>
+  <a class="map" href="g2-extra-10-ura-4.png" target="_blank" rel="noopener"><img src="g2-extra-10-ura-4.png" alt="Mapa esquemático da fase Ura 4 do Gravitron 2" loading="lazy"></a>
+  <p class="idea">Cinco discos enormes que giram, encaixados; lasers girando dentro deles e cientistas presos lá dentro.</p>
+</article>
+<article class="mini" id="g2-g2-extra-11-gohine">
+  <div class="fase-head"><span class="fase-num">11</span><h3>Gohine</h3><span class="fase-tag">197 perigos · 3 reatores</span></div>
+  <a class="map" href="g2-extra-11-gohine.png" target="_blank" rel="noopener"><img src="g2-extra-11-gohine.png" alt="Mapa esquemático da fase Gohine do Gravitron 2" loading="lazy"></a>
+  <p class="idea">O miolo do mapa é uma floresta de blocos destrutíveis, abertos a tiro; 137 torres, 31 tanques e um campo de minas.</p>
+</article>
+<article class="mini" id="g2-g2-extra-12-zebes">
+  <div class="fase-head"><span class="fase-num">12</span><h3>Zebes</h3><span class="fase-tag">155 perigos · 4 reatores</span></div>
+  <a class="map" href="g2-extra-12-zebes.png" target="_blank" rel="noopener"><img src="g2-extra-12-zebes.png" alt="Mapa esquemático da fase Zebes do Gravitron 2" loading="lazy"></a>
+  <p class="idea">Uma teia de lasers cruzados com minas, e um anel de 16 casulos de torres girando em volta de quatro reatores.</p>
+</article>
+<article class="mini" id="g2-g2-extra-13-garajida">
+  <div class="fase-head"><span class="fase-num">13</span><h3>Garajida</h3><span class="fase-tag">358 perigos · 32 reatores</span></div>
+  <a class="map" href="g2-extra-13-garajida.png" target="_blank" rel="noopener"><img src="g2-extra-13-garajida.png" alt="Mapa esquemático da fase Garajida do Gravitron 2" loading="lazy"></a>
+  <p class="idea">O planeta inteiro gira. Oito cruzes giratórias carregam 32 reatores. A maior fase: 5.024 × 6.040 e 1.172 segmentos.</p>
+</article>
+<article class="mini" id="g2-g2-extra-14-suon-x">
+  <div class="fase-head"><span class="fase-num">14</span><h3>Suon X</h3><span class="fase-tag">246 perigos · 3 reatores</span></div>
+  <a class="map" href="g2-extra-14-suon-x.png" target="_blank" rel="noopener"><img src="g2-extra-14-suon-x.png" alt="Mapa esquemático da fase Suon X do Gravitron 2" loading="lazy"></a>
+  <p class="idea">Um labirinto quadrado dentro de uma peça que gira, com 58 lasers nos corredores e os reatores num núcleo guardado por lasers.</p>
+</article>
+<article class="mini" id="g2-instrucoes"><div class="fase-head"><h3>Fase de instruções</h3><span class="fase-tag">v1.7</span></div><a class="map" href="g2-instruction.png" target="_blank" rel="noopener"><img src="g2-instruction.png" alt="Mapa esquemático da fase de instruções do Gravitron 2" loading="lazy"></a><p class="idea">Uma vitrine, sem perigo: cada elemento numa plataforma (reator, cientistas, combustível e checkpoint). Entrou depois do lançamento.</p></article>
+</div>
+<div class="wrap">
+  <h2 id="g1">GraviTron (2006)</h2>
+  <p>A ordem original não está nos arquivos: as senhas EASY1 e EASY2 indicam as duas primeiras, e as outras estão em ordem de quantidade de objetos. O código do jogo se perdeu, então o significado de alguns objetos foi deduzido pela posição: reatores, space-men, combustível e torres com segurança; os objetos no ar e alguns do chão, não.</p>
+  <div class="table-wrap"><table class="num"><thead><tr><th>#</th><th>Fase</th><th>Senha</th><th>Reatores</th><th>Space-men</th><th>Comb.</th><th>Torres</th><th>No ar</th><th>Campos</th><th>Gira / anda</th></tr></thead><tbody><tr><td>1</td><td>CAENTHAE</td><td class="mono">EASY1</td><td>1</td><td>2</td><td>1</td><td>3</td><td>0</td><td>0</td><td>0 / 0</td></tr><tr><td>2</td><td>KRIAR</td><td class="mono">EASY2</td><td>1</td><td>4</td><td>1</td><td>3</td><td>0</td><td>2</td><td>0 / 0</td></tr><tr><td>3</td><td>YCARON</td><td class="mono">SEKME</td><td>2</td><td>4</td><td>2</td><td>7</td><td>8</td><td>4</td><td>0 / 0</td></tr><tr><td>4</td><td>KEWURUI</td><td class="mono">SMOKE</td><td>3</td><td>2</td><td>2</td><td>13</td><td>4</td><td>0</td><td>0 / 1</td></tr><tr><td>5</td><td>JUKIRI</td><td class="mono">OMEGA</td><td>2</td><td>3</td><td>2</td><td>12</td><td>4</td><td>4</td><td>1 / 0</td></tr><tr><td>6</td><td>ABOTEMU</td><td class="mono">PARTY</td><td>1</td><td>7</td><td>0</td><td>19</td><td>2</td><td>2</td><td>1 / 0</td></tr><tr><td>7</td><td>IGEA PRIME</td><td class="mono">ASE55</td><td>2</td><td>5</td><td>3</td><td>19</td><td>8</td><td>2</td><td>1 / 0</td></tr><tr><td>8</td><td>EOPPON 8</td><td class="mono">SPICE</td><td>1</td><td>4</td><td>1</td><td>24</td><td>12</td><td>2</td><td>0 / 0</td></tr><tr><td>9</td><td>KLENDARTH</td><td class="mono">CROSS</td><td>1</td><td>7</td><td>4</td><td>32</td><td>11</td><td>11</td><td>2 / 0</td></tr><tr><td>10</td><td>EXCAVATION</td><td class="mono">DEEP</td><td>2</td><td>5</td><td>5</td><td>30</td><td>11</td><td>19</td><td>2 / 0</td></tr><tr><td>11</td><td>CLOCKWORK</td><td class="mono">PUNKY</td><td>3</td><td>10</td><td>4</td><td>31</td><td>12</td><td>6</td><td>4 / 0</td></tr><tr><td>12</td><td>CHRONOK</td><td class="mono">UHOHS</td><td>1</td><td>4</td><td>2</td><td>42</td><td>22</td><td>6</td><td>4 / 0</td></tr><tr><td>13</td><td>CASTLE</td><td class="mono">PALAS</td><td>3</td><td>3</td><td>1</td><td>54</td><td>13</td><td>8</td><td>4 / 0</td></tr><tr><td>14</td><td>UNDECIMUS</td><td class="mono">BACCA</td><td>1</td><td>2</td><td>2</td><td>70</td><td>0</td><td>6</td><td>6 / 1</td></tr><tr><td>15</td><td>KA-HU ALPHA</td><td class="mono">RAISE</td><td>2</td><td>4</td><td>3</td><td>45</td><td>0</td><td>12</td><td>2 / 9</td></tr><tr><td>16</td><td>BERG</td><td class="mono">ICICL</td><td>3</td><td>13</td><td>3</td><td>25</td><td>14</td><td>6</td><td>0 / 0</td></tr><tr><td>17</td><td>QUARTUS</td><td class="mono">BRICK</td><td>2</td><td>8</td><td>2</td><td>55</td><td>48</td><td>2</td><td>1 / 1</td></tr><tr><td>18</td><td>ARACHON</td><td class="mono">SISSY</td><td>4</td><td>5</td><td>2</td><td>67</td><td>12</td><td>7</td><td>7 / 7</td></tr><tr><td>19</td><td>ANDROS</td><td class="mono">BAMBI</td><td>3</td><td>4</td><td>4</td><td>75</td><td>35</td><td>17</td><td>1 / 0</td></tr><tr><td>20</td><td>LECEROA</td><td class="mono">SLERP</td><td>1</td><td>8</td><td>4</td><td>98</td><td>1</td><td>6</td><td>12 / 3</td></tr><tr><td>21</td><td>FIVIUM</td><td class="mono">ROTOR</td><td>3</td><td>5</td><td>5</td><td>93</td><td>26</td><td>0</td><td>6 / 3</td></tr><tr><td>22</td><td>TERTIUS</td><td class="mono">WHEEL</td><td>2</td><td>4</td><td>2</td><td>77</td><td>46</td><td>16</td><td>2 / 1</td></tr><tr><td>23</td><td>SIGMA</td><td class="mono">RASEL</td><td>3</td><td>2</td><td>2</td><td>55</td><td>59</td><td>4</td><td>11 / 6</td></tr></tbody></table></div>
+</div>
+<div class="wide"><div class="g1grid">
+<figure class="g1">
+  <a class="map" href="g1-01-caenthae.png" target="_blank" rel="noopener"><img src="g1-01-caenthae.png" alt="Mapa esquemático da fase CAENTHAE do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">01 · CAENTHAE · senha EASY1</span><br>Um vale aberto: reator no fundo, dois space-men numa encosta, um combustível e três torres.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-02-kriar.png" target="_blank" rel="noopener"><img src="g1-02-kriar.png" alt="Mapa esquemático da fase KRIAR do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">02 · KRIAR · senha EASY2</span><br>A primeira caverna, fechada por um campo de força que se desliga com um botão; os space-men estão no fundo, junto do reator.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-03-ycaron.png" target="_blank" rel="noopener"><img src="g1-03-ycaron.png" alt="Mapa esquemático da fase YCARON do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">03 · YCARON · senha SEKME</span><br>Duas câmaras, um reator em cada, com enxames no ar e campos de força entre elas.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-04-kewurui.png" target="_blank" rel="noopener"><img src="g1-04-kewurui.png" alt="Mapa esquemático da fase KEWURUI do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">04 · KEWURUI · senha SMOKE</span><br>Uma caverna em U com três reatores e uma estrutura em forma de foguete que se move.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-05-jukiri.png" target="_blank" rel="noopener"><img src="g1-05-jukiri.png" alt="Mapa esquemático da fase JUKIRI do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">05 · JUKIRI · senha OMEGA</span><br>Uma plataforma que gira na entrada e quatro botões para os campos de força.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-06-abotemu.png" target="_blank" rel="noopener"><img src="g1-06-abotemu.png" alt="Mapa esquemático da fase ABOTEMU do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">06 · ABOTEMU · senha PARTY</span><br>Um anel giratório com torres e um space-man dentro; sete space-men espalhados e nenhum combustível.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-07-igea-prime.png" target="_blank" rel="noopener"><img src="g1-07-igea-prime.png" alt="Mapa esquemático da fase IGEA PRIME do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">07 · IGEA PRIME · senha ASE55</span><br>Duas cavernas, cada uma com um reator no fundo e um enxame no meio.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-08-eoppon-8.png" target="_blank" rel="noopener"><img src="g1-08-eoppon-8.png" alt="Mapa esquemático da fase EOPPON 8 do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">08 · EOPPON 8 · senha SPICE</span><br>Superfície com 19 árvores; caverna em serpentina com objetos flutuantes e um campo de força com botão.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-09-klendarth.png" target="_blank" rel="noopener"><img src="g1-09-klendarth.png" alt="Mapa esquemático da fase KLENDARTH do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">09 · KLENDARTH · senha CROSS</span><br>Um portão giratório no meio, três campos de força em sequência e um leque de três lasers saindo de um ponto.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-10-excavation.png" target="_blank" rel="noopener"><img src="g1-10-excavation.png" alt="Mapa esquemático da fase EXCAVATION do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">10 · EXCAVATION · senha DEEP</span><br>Andaimes de mina: um poço central com oito campos de força em escada e um anel giratório.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-11-clockwork.png" target="_blank" rel="noopener"><img src="g1-11-clockwork.png" alt="Mapa esquemático da fase CLOCKWORK do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">11 · CLOCKWORK · senha PUNKY</span><br>Engrenagens: duas rodas giratórias empilhadas e uma ampulheta cheia de inimigos sobre o reator; dez space-men.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-12-chronok.png" target="_blank" rel="noopener"><img src="g1-12-chronok.png" alt="Mapa esquemático da fase CHRONOK do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">12 · CHRONOK · senha UHOHS</span><br>Uma torre com três caixas giratórias de torres; o reator fica no alto, cercado por 22 inimigos no ar.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-13-castle.png" target="_blank" rel="noopener"><img src="g1-13-castle.png" alt="Mapa esquemático da fase CASTLE do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">13 · CASTLE · senha PALAS</span><br>O terreno desenha um castelo. Um túnel com quatro campos de força leva às masmorras, com três reatores em rodas giratórias.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-14-undecimus.png" target="_blank" rel="noopener"><img src="g1-14-undecimus.png" alt="Mapa esquemático da fase UNDECIMUS do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">14 · UNDECIMUS · senha BACCA</span><br>Uma bússola gigante que gira, com o reator no centro, e uma balança giratória cheia de torres.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-15-ka-hu-alpha.png" target="_blank" rel="noopener"><img src="g1-15-ka-hu-alpha.png" alt="Mapa esquemático da fase KA-HU ALPHA do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">15 · KA-HU ALPHA · senha RAISE</span><br>Torres que sobem e descem, um corredor com seis campos de força e dois reatores em berços giratórios.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-16-berg.png" target="_blank" rel="noopener"><img src="g1-16-berg.png" alt="Mapa esquemático da fase BERG do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">16 · BERG · senha ICICL</span><br>Uma montanha com 47 árvores e cavernas com 13 space-men e três reatores.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-17-quartus.png" target="_blank" rel="noopener"><img src="g1-17-quartus.png" alt="Mapa esquemático da fase QUARTUS do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">17 · QUARTUS · senha BRICK</span><br>Um poço vertical com uma coluna de 48 inimigos no ar; um anel giratório com dois reatores e um laser atravessado.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-18-arachon.png" target="_blank" rel="noopener"><img src="g1-18-arachon.png" alt="Mapa esquemático da fase ARACHON do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">18 · ARACHON · senha SISSY</span><br>Quatro reatores, cada um dentro de uma pequena caixa giratória de torres; elevadores e plataformas giratórias.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-19-andros.png" target="_blank" rel="noopener"><img src="g1-19-andros.png" alt="Mapa esquemático da fase ANDROS do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">19 · ANDROS · senha BAMBI</span><br>Uma roda gigante com a caverna dentro (a ideia da fase 4 do Gravitron 2), três reatores e 17 campos de força.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-20-leceroa.png" target="_blank" rel="noopener"><img src="g1-20-leceroa.png" alt="Mapa esquemático da fase LECEROA do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">20 · LECEROA · senha SLERP</span><br>A maior fase: quatro rodas de torres, uma coluna de seis casulos giratórios e um disco giratório com o reator.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-21-fivium.png" target="_blank" rel="noopener"><img src="g1-21-fivium.png" alt="Mapa esquemático da fase FIVIUM do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">21 · FIVIUM · senha ROTOR</span><br>Três grandes rodas giratórias encostadas, cada uma com um reator no centro.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-22-tertius.png" target="_blank" rel="noopener"><img src="g1-22-tertius.png" alt="Mapa esquemático da fase TERTIUS do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">22 · TERTIUS · senha WHEEL</span><br>Uma roda gigante de dois anéis com dois reatores, e um corredor de inimigos no ar.</figcaption>
+</figure>
+<figure class="g1">
+  <a class="map" href="g1-23-sigma.png" target="_blank" rel="noopener"><img src="g1-23-sigma.png" alt="Mapa esquemático da fase SIGMA do GraviTron" loading="lazy"></a>
+  <figcaption><span class="mono">23 · SIGMA · senha RASEL</span><br>Onze discos giratórios, um enxame de inimigos dentro de um disco e estruturas em forma de foguete.</figcaption>
+</figure>
+</div></div>
+<div class="wrap">
+  <h2 id="padroes">Padrões de design</h2>
+  <ul class="points">
+    <li><b>Uma ideia por fase</b>, apresentada pequena e depois repetida em escala.</li>
+    <li><b>Primeira fase com tudo à vista</b>, cada elemento num pedaço do terreno.</li>
+    <li><b>Ida e volta vertical:</b> descer até o objetivo e fugir subindo.</li>
+    <li><b>Fuga cronometrada</b> depois do objetivo: a volta vira o clímax.</li>
+    <li><b>Resgate opcional com recompensa útil</b> (conserto e pontos).</li>
+    <li><b>Recompensa dentro do perigo:</b> cientistas e botões dentro de anéis que giram ou ao lado de lasers.</li>
+    <li><b>Terreno que se move</b> como mecânica principal, e <b>o alvo que se move</b> (reatores em gaiolas e cruzes).</li>
+    <li><b>Perigo com ritmo:</b> lasers e jatos que ligam e desligam.</li>
+    <li><b>Fase com tema no desenho do terreno</b> (castelo, relógio, mina), no GraviTron.</li>
+    <li><b>Serrote:</b> pico, respiro e pico maior.</li>
+  </ul>
+
+  <h2>Diversão e dificuldade</h2>
+  <div class="two">
+    <div><h3>Onde estava a diversão</h3><ul><li>O quique: bater não mata, e a GamesRadar diz que isso deixa o jogo divertido.</li><li>A fuga de 60 segundos, com sirene e tela tremendo.</li><li>Pousar em qualquer lugar plano para resgatar.</li><li>Uma curva suave, mas firme.</li><li>Fases para jogar 10 minutos por vez e voltar depois.</li></ul></div>
+    <div><h3>Onde estava a dificuldade</h3><ul><li>O mesmo quique, nos corredores: a nave bate de parede em parede.</li><li>Lasers que matam na hora.</li><li>Controles: mouse sensível demais, teclado pouco confortável.</li><li>A campanha extra, mais difícil, selecionada por padrão.</li><li>Escudo e motor no mesmo tanque.</li></ul></div>
+  </div>
+
+  <h2 id="jogadores">O que os jogadores diziam</h2>
+  <ul class="points">
+    <li><b>Steam:</b> 27 de 32 avaliações positivas, de 2010 a 2026. Elogiam o desafio justo, o desenho das fases, o visual neon e a fuga; criticam os controles, o quique nos corredores, o laser que mata na hora e o placar online fora do ar.</li>
+    <li><b>GamesRadar:</b> 3,5 de 5. Uma ideia muito usada, executada de um jeito mais divertido do que deveria; o preço de US$ 5 é justo.</li>
+    <li><b>VidaExtra (2008):</b> lembra o GraviTron como o jogo grátis que levou ao 2, e acha que o 2 muda pouco além de mais fases, da barra de energia e do mapa na tela.</li>
+  </ul>
+
+  <h2 id="levar">O que levar para o Resgate Espacial</h2>
+  <p>Tudo aqui é <b>Proposta</b> para o Fernando decidir. Inspirar, nunca copiar: as ideias entram traduzidas para fases curtas, horizontais e sem tiros.</p>
+  <div class="table-wrap"><table><thead><tr><th>Ideia dos Gravitron</th><th>Como poderia entrar</th><th>Ligado a</th></tr></thead><tbody><tr><td>Os tripulantes andam até a nave quando ela pousa na plataforma deles</td><td>Hoje os três embarcam ao pousar. Eles poderiam sair andando até a nave, um a um: deixa claro o que é o resgate e dá um segundo de tensão no pouso.</td><td class="mono">Regras, seção 6; D-031</td></tr><tr><td>Resgate que conserta a nave ou vale pontos</td><td>Tripulantes extras, opcionais, fora da rota principal, que valem pontos ou uma estrela.</td><td class="mono">P-006 (#53)</td></tr><tr><td>Fuga cronometrada depois do objetivo</td><td>Em fases especiais, a volta para a base vira uma corrida contra o relógio.</td><td class="mono">P-012 (#61), P-018 (#79)</td></tr><tr><td>Uma ameaça que vem buscar a tripulação</td><td>Pressa no resgate sem inimigo que atira: um prazo para chegar à tripulação.</td><td class="mono">P-011 (#60)</td></tr><tr><td>Terreno que gira e que anda</td><td>É a nossa lista de obstáculos móveis em proposta. Os Gravitron mostram uma fase inteira em volta de uma peça que gira.</td><td class="mono">P-011; regras, seção 9</td></tr><tr><td>Lasers e jatos que ligam e desligam</td><td>Barreiras com ritmo, e jatos que empurram a nave, com ciclo de liga e desliga.</td><td class="mono">P-011, P-012</td></tr><tr><td>Botões acionados com tiro</td><td>Não serve, porque não temos tiro. A versão nossa: pousar num botão ou passar por uma área.</td><td class="mono">P-011</td></tr><tr><td>Pairar perto do posto já abastece</td><td>Alternativa ao pouso no posto: abastecer exige ficar parado no ar.</td><td class="mono">D-023, D-026 (#93)</td></tr><tr><td>Bater não mata: a nave quica e perde energia</td><td>Um modo "casco reforçado" para o jogador casual, com quique fraco para não virar caos nos corredores.</td><td class="mono">D-027, D-028, P-012</td></tr><tr><td>Relógio de bônus que encolhe, mais o que sobrou</td><td>Referência para a pontuação: tempo mais recursos. O relógio cresce com o tamanho da fase.</td><td class="mono">P-006 (#53)</td></tr><tr><td>Uma novidade por fase, pequena e depois em série</td><td>Confirma o padrão do Crazy Gravity para a curva de cada mundo.</td><td class="mono">Documento 08</td></tr><tr><td>Fase 1 com tudo à vista; instruções acrescentadas depois</td><td>Valida a D-031, com um alerta: o Gravitron 2 precisou pôr uma página de instruções na v1.7. Medir se a DEMO basta.</td><td class="mono">D-031 (#104)</td></tr><tr><td>Placar num servidor próprio, que morreu</td><td>Para o lançamento, preferir os rankings do Game Center e do Google Play Games.</td><td class="mono">P-019 (#101), #98</td></tr><tr><td>O 1 grátis, o 2 por US$ 5, demo de 5 fases, expansões grátis</td><td>Mais um caso do modelo lite: algumas fases grátis e o resto pago.</td><td class="mono">P-014 (#98)</td></tr><tr><td>A campanha difícil selecionada por padrão</td><td>O padrão do menu precisa ser o caminho mais fácil.</td><td class="mono">D-028, D-031</td></tr><tr><td>O controle é a maior reclamação</td><td>Valida o tempo investido no controle de toque.</td><td class="mono">D-006, D-022</td></tr></tbody></table></div>
+  <p class="note"><b>Diferença importante:</b> os Gravitron são jogos de tiro, com fases cheias de torres e o objetivo de destruir. O nosso não tem tiro, e as fases são corredores curtos da esquerda para a direita, para partidas de 2 minutos. Valem as ideias de resgate, de fuga, de terreno que se move e de perigo com ritmo; o combate e o tamanho das fases finais não.</p>
+
+  <h2>Como este material foi feito</h2>
+  <p>O site do autor está preservado no Internet Archive, com o GraviTron completo, a demo e a atualização 1.8 do Gravitron 2 e o código-fonte do 2, publicado pelo próprio autor em 2012. Só arquivos de dados e de código foram lidos: nenhum programa foi executado ou descompilado. O formato do Gravitron 2 vem do código; o do GraviTron foi deduzido dos arquivos, até as 26 fases fecharem exatamente. O documento completo, com a especificação dos formatos e as fontes, está no repositório, em <span class="mono">docs/benchmark/gravitron.md</span>.</p>
+  <footer>GraviTron e Gravitron 2 © Dark Castle Software. Mapas esquemáticos redesenhados para estudo, sem copiar desenho de fase, arte ou som. Benchmark feito para o Resgate Espacial em 06/10/2026.</footer>
+</div>
