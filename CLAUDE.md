@@ -27,6 +27,7 @@ Leia o [diário de bordo](docs/06-diario-de-bordo.md). A seção "Onde paramos" 
 | Quadro kanban | GitHub Project "Resgate Espacial — Produto": https://github.com/users/TARNAGS/projects/1 |
 | Modelos de issue | `.github/ISSUE_TEMPLATE/` |
 | Abrir o jogo ou o protótipo pelo navegador do Claude Code | `.claude/launch.json`, configurações "jogo" e "prototipo" |
+| Benchmarks de jogos de referência | `docs/10-benchmark-de-level-design.md` (índice) e `docs/benchmark/`; todo discovery novo segue a skill global `discovery-de-jogos` (fica no `context-directory`, em `setup/claude-global/skills/`) |
 
 ## Como trabalhamos
 
