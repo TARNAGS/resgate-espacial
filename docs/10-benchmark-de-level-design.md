@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 10 — Benchmark de level design |
-| Versão | 0.3 |
+| Versão | 0.4 |
 | Data | 06/10/2026 |
 | Status | Em construção |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -23,7 +23,9 @@ O que os jogos de referência fazem com fases, obstáculos, dificuldade e ritmo,
 | GraviTron (2006) e Gravitron 2 (2008), a origem do resgate de pessoas | [benchmark/gravitron.md](benchmark/gravitron.md): regras do 2 lidas no código, 22 fases do 2 e 23 do 1 mapeadas, com imagens ([#106](https://github.com/TARNAGS/resgate-espacial/issues/106)) | Pronto (v1.0) |
 | Página de leitura dos Gravitron | [claude.ai/artifact/8yu4nX63Xoix8VneHU59bv](https://claude.ai/artifact/8yu4nX63Xoix8VneHU59bv) (privada) e a cópia [benchmark/gravitron/pagina-de-leitura.html](benchmark/gravitron/pagina-de-leitura.html) | Publicada |
 | Outros jogos de nave com gravidade | Seção 3 deste documento | Pronto (resumo) |
-| Casuais de celular do ICP | Seção 4 deste documento | A pesquisar ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)) |
+| Jetpack Joyride (2011), o primeiro casual do ICP | [benchmark/jetpack-joyride.md](benchmark/jetpack-joyride.md): como um jogo infinito funciona, contado pelo criador ([#107](https://github.com/TARNAGS/resgate-espacial/issues/107)) | Pronto (v1.0) |
+| Página de leitura do Jetpack Joyride | [claude.ai/artifact/TjsQe83tBnQbYzsddenUcb](https://claude.ai/artifact/TjsQe83tBnQbYzsddenUcb) (privada) e a cópia [benchmark/jetpack-joyride/pagina-de-leitura.html](benchmark/jetpack-joyride/pagina-de-leitura.html) | Publicada |
+| Outros casuais do ICP (Subway Surfers, Candy Crush Saga, Plants vs. Zombies, Temple Run) | Seção 4 deste documento | A pesquisar ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)) |
 
 ## 2. O jogo original: Crazy Gravity (1996)
 
@@ -96,16 +98,16 @@ O benchmark completo, com as regras do Gravitron 2 lidas no código e 45 fases m
 
 ## 4. Os casuais de celular do ICP (D-028)
 
-Jetpack Joyride, Subway Surfers, Candy Crush Saga, Plants vs. Zombies e Temple Run. A pesquisa está no cartão [#99](https://github.com/TARNAGS/resgate-espacial/issues/99), ainda em "A investigar". Quando for feita, ela preenche aqui as mesmas perguntas feitas ao Crazy Gravity, para comparar lado a lado:
+Jetpack Joyride, Subway Surfers, Candy Crush Saga, Plants vs. Zombies e Temple Run. A pesquisa está no cartão [#99](https://github.com/TARNAGS/resgate-espacial/issues/99). Cada jogo responde às mesmas perguntas feitas ao Crazy Gravity, para comparar lado a lado. O Fernando, em 06/10/2026: os jogos de nave com gravidade são muito parecidos com o que ele pensa em level design (artefatos de gameplay, obstáculos, incremento de fase); os modernos são inspiração menos direta, mas ajudam a entender como jogos infinitos funcionam.
 
-| Pergunta de level design | O que olhar nos casuais |
-|---|---|
-| Como a fase é organizada | Fases fixas e numeradas (Candy Crush, Plants vs. Zombies) ou corrida sem fim (Jetpack Joyride, Subway Surfers, Temple Run) |
-| Como a dificuldade sobe | Rampa, serrote, fases de respiro, fases-chefe |
-| Como um elemento novo é apresentado | Fase dedicada, primeira aparição segura, combinação depois |
-| Metas por fase | Estrelas, missões, recordes |
-| Duração de uma fase | Quanto cabe numa fila de 2 minutos |
-| O que faz voltar | Recordes, colecionáveis, eventos |
+| Pergunta de level design | O que olhar nos casuais | Jetpack Joyride ([benchmark](benchmark/jetpack-joyride.md), [#107](https://github.com/TARNAGS/resgate-espacial/issues/107)) |
+|---|---|---|
+| Como a fase é organizada | Fases fixas e numeradas (Candy Crush, Plants vs. Zombies) ou corrida sem fim (Jetpack Joyride, Subway Surfers, Temple Run) | Sem fases: uma corrida sem fim, montada na hora por intervalos (entre um mínimo e um máximo) com probabilidades por tipo de objeto |
+| Como a dificuldade sobe | Rampa, serrote, fases de respiro, fases-chefe | Com a distância; os veículos quebram a intensidade em serrote |
+| Como um elemento novo é apresentado | Fase dedicada, primeira aparição segura, combinação depois | Avisos antes do perigo; câmera lenta, tela limpa e trilhas de moedas para cada veículo; missões que pedem para experimentar |
+| Metas por fase | Estrelas, missões, recordes | Três missões ao mesmo tempo (1 a 3 estrelas), recorde de distância e ranking dos amigos |
+| Duração de uma fase | Quanto cabe numa fila de 2 minutos | A "jogada do intervalo comercial" |
+| O que faz voltar | Recordes, colecionáveis, eventos | Missões que se renovam, níveis e insígnias, loja, roleta, desafio diário, eventos, bônus ao voltar |
 
 ## 5. Primeiras lições (Proposta)
 
@@ -125,6 +127,14 @@ Dos Gravitron ([benchmark, seção 11](benchmark/gravitron.md#11-o-que-levar-par
 9. **Terreno que gira e que anda, e perigos com ritmo** (lasers e jatos que ligam e desligam): confirmam a lista de obstáculos móveis da P-011, sem tiro.
 10. **Primeira experiência:** a fase 1 com tudo à vista confirma a D-031, mas o Gravitron 2 precisou acrescentar instruções depois do lançamento, e a campanha difícil selecionada por padrão espantou jogadores. Medir se a DEMO basta.
 11. **Placar em servidor próprio morre:** no lançamento, preferir os rankings das plataformas (P-019).
+
+Do Jetpack Joyride ([benchmark, seção 12](benchmark/jetpack-joyride.md#12-o-que-levar-para-o-resgate-espacial)):
+
+12. **O placar fica puro:** o ranking de cada fase continua só tempo; estrelas, missões e moedas, se vierem, ficam fora dele.
+13. **O custo de perder em três partes** (tempo perdido, custo emocional, atrito para recomeçar): revisar o fim de corrida com essas lentes.
+14. **Três missões que se renovam**, de durações diferentes: metas que fazem voltar sem mexer no ranking; os elogios que já temos viram missões.
+15. **O serrote dentro da fase:** os pousos no posto e na tripulação são os nossos momentos de alívio; não encher uma fase sem eles.
+16. **Intervalos entre um mínimo e um máximo** para a BONUS e fases geradas: o piloto automático garante que é possível; o mínimo regula se é justo.
 
 ## 6. Como a busca do jogo original foi feita
 
@@ -185,3 +195,4 @@ A lista que levou ao reconhecimento, na ordem em que foi apresentada (da mais pr
 | 0.1 | 06/10/2026 | Primeira versão: o jogo original identificado (Crazy Gravity), a comparação com o nosso, o Gravitron e o gênero; espaço para os casuais da #99 |
 | 0.2 | 06/10/2026 | Registro completo da busca (candidatos mostrados e fontes procuradas) e a página de leitura do Crazy Gravity |
 | 0.3 | 06/10/2026 | Benchmark do GraviTron e do Gravitron 2 ([benchmark/gravitron.md](benchmark/gravitron.md), [#106](https://github.com/TARNAGS/resgate-espacial/issues/106)), com a página de leitura; seção 3.1 corrigida com o que o código mostrou; lições 7 a 11 |
+| 0.4 | 06/10/2026 | Benchmark do Jetpack Joyride ([benchmark/jetpack-joyride.md](benchmark/jetpack-joyride.md), [#107](https://github.com/TARNAGS/resgate-espacial/issues/107)), com a página de leitura; seção 4 com a coluna do Jetpack Joyride e a observação do Fernando; lições 12 a 16 |
