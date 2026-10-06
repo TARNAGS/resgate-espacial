@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 10 — Benchmark de level design |
-| Versão | 0.5 |
+| Versão | 0.6 |
 | Data | 06/10/2026 |
 | Status | Em construção |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -18,6 +18,7 @@ O que os jogos de referência fazem com fases, obstáculos, dificuldade e ritmo,
 
 | Benchmark | Documento | Status |
 |---|---|---|
+| **Guia dos benchmarks: comece por aqui** | [benchmark/README.md](benchmark/README.md): os estudos lidos juntos, com insights, divergências, validações e decisões pendentes; página de leitura em [claude.ai/artifact/TSGis8FXKTXWWgdQUJH9ar](https://claude.ai/artifact/TSGis8FXKTXWWgdQUJH9ar) (privada) e a cópia [benchmark/pagina-de-leitura.html](benchmark/pagina-de-leitura.html) | Pronto (v1.0) |
 | Crazy Gravity (1996), o jogo original | [benchmark/crazy-gravity.md](benchmark/crazy-gravity.md): as 18 fases mapeadas, com imagens | Pronto (v1.1) |
 | Página de leitura do Crazy Gravity, para inspiração | [claude.ai/artifact/UfYWNwM15P6jd2YPDnReh4](https://claude.ai/artifact/UfYWNwM15P6jd2YPDnReh4) (privada, fixada na barra lateral) e a cópia [benchmark/crazy-gravity/pagina-de-leitura.html](benchmark/crazy-gravity/pagina-de-leitura.html) | Publicada |
 | GraviTron (2006) e Gravitron 2 (2008), a origem do resgate de pessoas | [benchmark/gravitron.md](benchmark/gravitron.md): regras do 2 lidas no código, 22 fases do 2 e 23 do 1 mapeadas, com imagens ([#106](https://github.com/TARNAGS/resgate-espacial/issues/106)) | Pronto (v1.0) |
@@ -207,3 +208,4 @@ A lista que levou ao reconhecimento, na ordem em que foi apresentada (da mais pr
 | 0.3 | 06/10/2026 | Benchmark do GraviTron e do Gravitron 2 ([benchmark/gravitron.md](benchmark/gravitron.md), [#106](https://github.com/TARNAGS/resgate-espacial/issues/106)), com a página de leitura; seção 3.1 corrigida com o que o código mostrou; lições 7 a 11 |
 | 0.4 | 06/10/2026 | Benchmark do Jetpack Joyride ([benchmark/jetpack-joyride.md](benchmark/jetpack-joyride.md), [#107](https://github.com/TARNAGS/resgate-espacial/issues/107)), com a página de leitura; seção 4 com a coluna do Jetpack Joyride e a observação do Fernando; lições 12 a 16 |
 | 0.5 | 06/10/2026 | Benchmark do Temple Run ([benchmark/temple-run.md](benchmark/temple-run.md), [#108](https://github.com/TARNAGS/resgate-espacial/issues/108)), com a página de leitura; coluna do Temple Run na seção 4; lições 17 a 21 |
+| 0.6 | 06/10/2026 | O [guia dos benchmarks](benchmark/README.md), com a página de leitura, entra no topo da tabela de estudos |

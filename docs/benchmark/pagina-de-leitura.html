@@ -1,0 +1,312 @@
+<title>Guia dos Benchmarks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: uma coluna de leitura; os quatro estudos em grade no topo; cada insight com evidências por jogo e a leitura para o nosso jogo. Mesma família visual das páginas de cada estudo. */
+:root {
+  --bg: #f3f4ef; --surface: #fdfdf9; --fg: #141711; --muted: #555b4c; --line: #d8dccd;
+  --accent: #2f6b3a; --gold: #9a6a08;
+  --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0c0e0a; --surface: #171a14; --fg: #e8ebe1; --muted: #a2a995; --line: #2c3226;
+  --accent: #86d394; --gold: #e3b54d; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0c0e0a; --surface: #171a14; --fg: #e8ebe1; --muted: #a2a995; --line: #2c3226;
+  --accent: #86d394; --gold: #e3b54d; color-scheme: dark; }
+
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 1rem; line-height: 1.6; padding-inline: 16px; padding-block: 0 4rem; }
+main { max-width: 52rem; margin-inline: auto; }
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; line-height: 1.05; margin: 0; letter-spacing: 0.01em; }
+h2 { font-size: clamp(1.9rem, 4vw, 2.4rem); margin-block: 3.5rem 0.75rem; }
+h3 { font-size: 1.45rem; }
+p { margin-block: 0.6rem; max-width: 65ch; }
+.eyebrow { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.hero { padding-block: 3rem 1rem; display: grid; gap: 0.8rem; }
+.hero h1 { font-size: clamp(3rem, 10vw, 6rem); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; }
+.lede { font-size: 1.15rem; color: var(--muted); max-width: 42rem; margin: 0; }
+.facts { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-family: var(--mono); font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.facts b { color: var(--fg); font-weight: 500; }
+.note { font-size: 0.92rem; color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 0.8rem 1rem; max-width: none; }
+
+.estudos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 0.9rem; }
+.estudo { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 1rem 1.1rem; display: grid; gap: 0.4rem; align-content: start; min-width: 0; }
+.estudo h3 { font-size: 1.6rem; }
+.estudo .ano { font-family: var(--mono); font-size: 0.8rem; color: var(--gold); }
+.estudo p { margin: 0; font-size: 0.93rem; }
+.estudo .links { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; font-family: var(--mono); font-size: 0.8rem; margin-top: 0.3rem; }
+
+.familias { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 1.5rem; }
+.familias > div { border-top: 3px solid var(--accent); padding-top: 0.6rem; min-width: 0; }
+.familias h3 { font-size: 1.3rem; }
+.familias p { font-size: 0.95rem; }
+blockquote { margin: 1rem 0; padding-left: 1rem; border-left: 3px solid var(--gold); font-size: 1.05rem; max-width: 60ch; }
+blockquote cite { display: block; font-style: normal; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem; }
+
+.insights { display: grid; gap: 2.2rem; counter-reset: ins; }
+.insight { display: grid; gap: 0.5rem; }
+.insight h3 { display: flex; gap: 0.7rem; align-items: baseline; }
+.insight h3 .n { font-family: var(--mono); font-size: 0.85rem; color: var(--gold); font-weight: 500; flex: none; }
+.insight ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
+.insight li { display: grid; grid-template-columns: 9.5rem 1fr; gap: 0.8rem; font-size: 0.94rem; }
+.insight li > span:first-child { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); padding-top: 0.2rem; }
+.insight li > span:last-child { min-width: 0; }
+.para-nos { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 0.7rem 1rem; font-size: 0.94rem; }
+.para-nos b { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 500; display: block; margin-bottom: 0.15rem; }
+@media (max-width: 560px) { .insight li { grid-template-columns: 1fr; gap: 0; } }
+
+.tabela { overflow-x: auto; margin-block: 0.8rem; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; vertical-align: top; padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--line); }
+th { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+td:first-child { font-weight: 600; }
+.mono { font-family: var(--mono); font-size: 0.85em; }
+
+ol.tres { list-style: none; margin: 1rem 0; padding: 0; display: grid; gap: 0.7rem; counter-reset: t; }
+ol.tres li { counter-increment: t; position: relative; padding: 0.7rem 1rem 0.7rem 3.2rem; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+ol.tres li::before { content: counter(t); position: absolute; left: 1rem; top: 0.45rem; font-family: var(--display); font-weight: 700; font-size: 1.7rem; color: var(--gold); }
+
+.tempo { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+.tempo li { display: grid; grid-template-columns: 6.5rem 1fr; gap: 0.8rem; font-size: 0.94rem; }
+.tempo li > span:first-child { font-family: var(--mono); font-size: 0.8rem; color: var(--gold); padding-top: 0.15rem; font-variant-numeric: tabular-nums; }
+footer { margin-top: 4rem; font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 1rem; }
+</style>
+
+<main>
+<header class="hero">
+  <span class="eyebrow">Resgate Espacial · benchmark de level design e gameplay</span>
+  <h1>Guia dos Benchmarks</h1>
+  <p class="lede">Quatro estudos de jogos, lidos juntos: o que ensinam, onde discordam, o que confirmam no nosso jogo e o que espera a sua decisão.</p>
+  <div class="facts"><span><b>4</b> estudos</span><span><b>5</b> jogos</span><span><b>12</b> insights</span><span><b>12</b> recomendações em 3 cartões</span><span>05 e 06/10/2026</span></div>
+  <p class="note">Tudo o que aparece como "para nós" é <b>Proposta</b>: interpretação para o Fernando decidir. Os detalhes e as fontes estão no documento de cada jogo; este guia está em <span class="mono">docs/benchmark/README.md</span>.</p>
+</header>
+
+<h2 id="estudos">Os quatro estudos</h2>
+<div class="estudos">
+  <article class="estudo">
+    <span class="ano">1996 · Windows 95 · shareware</span>
+    <h3>Crazy Gravity</h3>
+    <p>O jogo original da memória. As 18 fases lidas dos arquivos do jogo e redesenhadas, com catálogo de obstáculos, curva em serrote e recepção.</p>
+    <div class="links"><a href="https://claude.ai/artifact/UfYWNwM15P6jd2YPDnReh4">Página de leitura</a><a href="https://github.com/TARNAGS/resgate-espacial/blob/main/docs/benchmark/crazy-gravity.md">Documento</a><a href="https://github.com/TARNAGS/resgate-espacial/issues/52">#52</a></div>
+  </article>
+  <article class="estudo">
+    <span class="ano">2006 e 2008 · Windows</span>
+    <h3>GraviTron e Gravitron 2</h3>
+    <p>A origem do resgate de pessoas. Regras do 2 lidas no código que o autor publicou; 45 fases mapeadas; a fuga de 60 segundos.</p>
+    <div class="links"><a href="https://claude.ai/artifact/8yu4nX63Xoix8VneHU59bv">Página de leitura</a><a href="https://github.com/TARNAGS/resgate-espacial/blob/main/docs/benchmark/gravitron.md">Documento</a><a href="https://github.com/TARNAGS/resgate-espacial/issues/106">#106</a></div>
+  </article>
+  <article class="estudo">
+    <span class="ano">2011 · iOS, depois tudo</span>
+    <h3>Jetpack Joyride</h3>
+    <p>Como um jogo infinito funciona, contado pelo criador: a corrida montada por intervalos, o serrote dos veículos, o custo de perder e as missões.</p>
+    <div class="links"><a href="https://claude.ai/artifact/TjsQe83tBnQbYzsddenUcb">Página de leitura</a><a href="https://github.com/TARNAGS/resgate-espacial/blob/main/docs/benchmark/jetpack-joyride.md">Documento</a><a href="https://github.com/TARNAGS/resgate-espacial/issues/107">#107</a></div>
+  </article>
+  <article class="estudo">
+    <span class="ano">2011 · iOS, depois tudo</span>
+    <h3>Temple Run</h3>
+    <p>A corrida infinita com perseguição: controle nascido de um fracasso, dois tipos de erro, placar com multiplicador e a virada para o grátis.</p>
+    <div class="links"><a href="https://claude.ai/artifact/DatT92pPFFCnnDwG3vLoBZ">Página de leitura</a><a href="https://github.com/TARNAGS/resgate-espacial/blob/main/docs/benchmark/temple-run.md">Documento</a><a href="https://github.com/TARNAGS/resgate-espacial/issues/108">#108</a></div>
+  </article>
+</div>
+
+<h2 id="familias">Duas famílias, duas perguntas</h2>
+<blockquote>Esses jogos são muito semelhantes ao que eu penso enquanto level design: possibilidades de artefatos para gameplay, obstáculos e incrementos de fase. Os mais modernos são inspirações menos diretas, mas dá para entender um pouco sobre como jogos "infinitos" funcionam.<cite>Fernando, 06/10/2026, depois do estudo dos Gravitron</cite></blockquote>
+<div class="familias">
+  <div><span class="eyebrow">Naves com gravidade · D-032</span><h3>Level design</h3><p>Crazy Gravity, GraviTron e Gravitron 2. Que obstáculos e objetos uma fase pode ter, como a dificuldade sobe de fase em fase, como uma novidade é apresentada.</p></div>
+  <div><span class="eyebrow">Casuais do ICP · D-028</span><h3>Produto</h3><p>Jetpack Joyride e Temple Run. Como o jogador aprende, quanto custa perder, o que faz voltar, como a pontuação e o negócio funcionam.</p></div>
+</div>
+
+<h2 id="insights">O que os quatro jogos ensinam juntos</h2>
+<div class="insights">
+
+<section class="insight"><h3><span class="n">01</span>O controle é o produto, e o maior risco</h3>
+<ul>
+<li><span>Temple Run</span><span>Nasceu de um fracasso: o jogo anterior do estúdio usava dois controles virtuais, e a maioria não entendia como jogar. O protótipo seguinte, de um dia, usava só gestos.</span></li>
+<li><span>Jetpack Joyride</span><span>Um botão só. O protótipo de um dia serviu para acertar o equilíbrio entre flutuar e responder.</span></li>
+<li><span>Gravitron 2</span><span>O controle é a reclamação mais comum no Steam.</span></li>
+<li><span>Crazy Gravity</span><span>A inércia "bem simulada" é o centro da diversão, segundo a crítica.</span></li>
+</ul>
+<p class="para-nos"><b>Para nós</b>Confirma a D-006, a D-022 e o M1 como portão. Próximo passo barato: testar o controle com quem nunca viu o jogo, sem explicar nada (#44, documento 07).</p></section>
+
+<section class="insight"><h3><span class="n">02</span>Ensinar sem texto funciona, mas precisa ser medido</h3>
+<ul>
+<li><span>Crazy Gravity</span><span>A fase 1 é um circuito de mão única; a versão de teste mostrava as fases 1 a 3 numa demonstração.</span></li>
+<li><span>Gravitron 2</span><span>Fase 1 com tudo à vista. Mesmo assim, o autor acrescentou instruções na versão 1.7, e a campanha difícil, selecionada por padrão, espantou jogadores.</span></li>
+<li><span>Jetpack Joyride</span><span>Avisos antes do perigo e trilhas de moedas em seta, acrescentadas porque as pessoas morriam logo depois de entrar num veículo, quando o controle muda.</span></li>
+<li><span>Temple Run</span><span>A forma do obstáculo diz o gesto. O teste era entregar o celular sem explicar nada.</span></li>
+</ul>
+<p class="para-nos"><b>Para nós</b>A DEMO e o attract mode (D-031) estão do lado certo; o risco é achar que bastam. Medir no próximo playtest se quem vê a DEMO entende "ir, resgatar e voltar", e garantir que o padrão de qualquer menu seja o caminho mais fácil.</p></section>
+
+<section class="insight"><h3><span class="n">03</span>Placar: os dois casuais fizeram escolhas opostas</h3>
+<ul>
+<li><span>Jetpack Joyride</span><span>Só a distância, de propósito: o criador recusou um multiplicador para o jogador se comparar com os amigos.</span></li>
+<li><span>Temple Run</span><span>Distância e moedas, vezes um multiplicador que cresce com os objetivos (no 2, também com compras).</span></li>
+<li><span>Crazy Gravity</span><span>Os 3 melhores tempos de cada fase.</span></li>
+<li><span>Gravitron 2</span><span>Pontos que premiam pressa e economia; o placar online morreu com o servidor do autor.</span></li>
+</ul>
+<p class="para-nos"><b>Para nós</b>O ranking por tempo (D-024) fica de pé, agora com um contraexemplo claro. Estrelas e missões, se vierem, ficam fora do ranking. No lançamento, rankings das plataformas (P-019).</p></section>
+
+<section class="insight"><h3><span class="n">04</span>Intensidade constante cansa: o serrote aparece em toda escala</h3>
+<ul>
+<li><span>Entre fases</span><span>Crazy Gravity: picos nas fases 3, 14 e 18 e respiros nas 4, 6 e 8. Campanha extra do Gravitron 2: picos nas fases 8, 11 e 13.</span></li>
+<li><span>Jetpack Joyride</span><span>A primeira versão foi chamada de "chata": a intensidade ficava sempre no alto. Os veículos criaram o serrote, a decisão mais importante do jogo para o criador.</span></li>
+<li><span>Temple Run</span><span>A velocidade sobe sem parar; o tropeço é um pico curto de tensão.</span></li>
+</ul>
+<p class="para-nos"><b>Para nós</b>Já temos um serrote natural: voo tenso, pouso no posto ou na tripulação, voo de novo. Os pousos são os nossos "veículos". Em cada mundo, um respiro por volta da fase 5 e uma fase-chefe na 10; nenhuma fase sem ponto de alívio.</p></section>
+
+<section class="insight"><h3><span class="n">05</span>Quanto custa errar é uma decisão de design</h3>
+<ul>
+<li><span>Erro fatal</span><span>Crazy Gravity (encostar explode e a carga volta), Jetpack Joyride (um golpe acaba a corrida) e o nosso jogo hoje.</span></li>
+<li><span>Gravitron</span><span>Bater faz quicar e perder energia: divertido, mas vira caos em corredores; o laser que mata na hora é criticado por destoar.</span></li>
+<li><span>Temple Run</span><span>Dois tipos de erro: o tropeço avisa; o segundo tropeço logo depois, ou um erro grande, encerra.</span></li>
+<li><span>Jetpack Joyride</span><span>O custo de perder em três partes: tempo perdido, custo emocional e atrito para recomeçar.</span></li>
+</ul>
+<p class="para-nos"><b>Para nós</b>O atrito já é baixo: no primeiro playtest, o recomeço teve mediana de 0,9 segundo. Falta olhar o custo emocional (o que a tela de fim mostra). O "casco" ou o "tropeço" podem virar modificador ou modo mais fácil para o casual, sem mexer no modo padrão.</p></section>
+
+<section class="insight"><h3><span class="n">06</span>Pressão sem tiro: repertório de sobra</h3>
+<ul>
+<li><span>Crazy Gravity</span><span>O adversário é a caverna: ventiladores, ímãs, correntes de ar e hastes que abrem e fecham.</span></li>
+<li><span>Gravitron 2</span><span>A fuga de 60 segundos e o "lander" que vem sequestrar os cientistas.</span></li>
+<li><span>Temple Run</span><span>Perseguidores que nunca atacam com armas: existem para responder "por que o personagem não para?".</span></li>
+<li><span>Jetpack Joyride</span><span>Os mísseis, o que mais se aproxima de um inimigo que atira.</span></li>
+</ul>
+<p class="para-nos"><b>Para nós</b>"Sem inimigos que atiram" não empobrece o jogo: forças, perigos com ritmo, terreno que gira e anda e ameaças que avançam (tempestade, água subindo, fuga cronometrada) cobrem a P-011 e a P-012.</p></section>
+
+<section class="insight"><h3><span class="n">07</span>Uma ideia por fase, apresentada pequena e depois repetida</h3>
+<ul>
+<li><span>Crazy Gravity</span><span>Cada fase tem um destaque que cabe numa frase (o porão, a cadeia de chaves, a fase vertical); obstáculos em série formam trechos com identidade.</span></li>
+<li><span>Gravitron 2</span><span>Fases 1 a 5, uma novidade cada: terreno aberto, poço, laser e elevador, caverna que gira, três lasers seguidos.</span></li>
+<li><span>Jetpack Joyride</span><span>Cada veículo entra com câmera lenta, tela limpa e uma trilha que ensina.</span></li>
+</ul>
+<p class="para-nos"><b>Para nós</b>No documento 08, cada fase do mundo com uma frase de destaque; a novidade primeiro numa fase curta e segura, combinada só depois.</p></section>
+
+<section class="insight"><h3><span class="n">08</span>A mecânica primeiro, o tema depois, e o conteúdo feito para crescer</h3>
+<ul>
+<li><span>Temple Run</span><span>O templo nasceu das paredes de caixas do protótipo. O 2 foi reescrito do zero para crescer sem mexer no que as pessoas gostavam.</span></li>
+<li><span>Jetpack Joyride</span><span>Loja e conteúdo pensados para atualizações: 13 nos dois primeiros anos.</span></li>
+<li><span>Crazy Gravity e GraviTron</span><span>Editores de fases que estenderam a vida dos jogos.</span></li>
+</ul>
+<p class="para-nos"><b>Para nós</b>Valida o caminho: controle antes da arte (M1) e conteúdo como dado (D-011). O editor de fases fica para depois do lançamento.</p></section>
+
+<section class="insight"><h3><span class="n">09</span>Times minúsculos fizeram estes jogos</h3>
+<ul>
+<li><span>Crazy Gravity</span><span>Uma pessoa.</span></li>
+<li><span>Gravitron</span><span>Um estúdio de uma pessoa só.</span></li>
+<li><span>Temple Run</span><span>Três pessoas, cerca de cinco meses.</span></li>
+<li><span>Jetpack Joyride</span><span>Núcleo pequeno nos créditos (criador, programador, arte e música); dez meses dentro da Halfbrick.</span></li>
+</ul>
+<p class="para-nos"><b>Para nós</b>A "squad de uma pessoa e uma máquina" não é uma escala estranha para este gênero; a diferença está no tempo de um projeto paralelo. Bom ângulo para o portfólio.</p></section>
+
+<section class="insight"><h3><span class="n">10</span>Negócio: grátis sem barreira venceu em 2011; demo com fases era o modelo do PC</h3>
+<ul>
+<li><span>Crazy Gravity</span><span>Shareware com 3 fases de teste (fácil, média e difícil); US$ 30 pela versão completa.</span></li>
+<li><span>Gravitron</span><span>O 1 grátis; o 2 por US$ 5, com demo de 5 fases e expansões grátis.</span></li>
+<li><span>Jetpack Joyride</span><span>Pago, depois grátis em dezembro de 2011, rendendo mais. Hoje os anúncios são a reclamação mais comum.</span></li>
+<li><span>Temple Run</span><span>US$ 0,99, grátis "por um fim de semana", rendeu mais e nunca mais voltou a ser pago. 1º lugar sem marketing, com 1% pagando.</span></li>
+</ul>
+<p class="para-nos"><b>Para nós</b>Insumo direto para a P-014 (#98): o modelo "lite" (algumas fases grátis mostrando a curva e o resto pago) contra o grátis com compras. Os casos são do começo da App Store; se ainda valem em 2026 é pergunta para a #98. Os anúncios do Jetpack Joyride reforçam a D-003.</p></section>
+
+<section class="insight"><h3><span class="n">11</span>Diagnosticar o retorno antes de reagir</h3>
+<ul>
+<li><span>Jetpack Joyride</span><span>Diante do "chato", semanas de poderes novos (o diagnóstico errado) até achar a intensidade constante.</span></li>
+<li><span>Gravitron 2</span><span>Quase todas as atualizações deixaram o jogo mais fácil ou mais claro: o autor calibrou difícil demais para quem chegava.</span></li>
+<li><span>Nosso projeto</span><span>A D-027 já ensinou isso: as mortes no pouso eram falta de entender o propulsor.</span></li>
+</ul>
+<p class="para-nos"><b>Para nós</b>Ao ler o próximo playtest, perguntar o que a pessoa quis dizer antes de construir a resposta.</p></section>
+
+<section class="insight"><h3><span class="n">12</span>Cada jogo tem um momento que fica na memória</h3>
+<ul>
+<li><span>Gravitron 2</span><span>Os cientistas andando até a nave pousada, a imagem que ficou na memória do Fernando, e a fuga de 60 segundos.</span></li>
+<li><span>Crazy Gravity</span><span>Jogadores procuraram o jogo por 20 anos depois de uma demo de revista.</span></li>
+<li><span>Casuais</span><span>Os veículos do Jetpack Joyride; a fuga com os macacos do Temple Run.</span></li>
+</ul>
+<p class="para-nos"><b>Para nós (interpretação)</b>O momento marcante nasce da mecânica principal. O nosso candidato é o pouso do resgate, com os tripulantes andando até a nave (#106, item 1): pequeno de construir e reforça a DEMO.</p></section>
+</div>
+
+<h2 id="divergencias">Onde os estudos discordam</h2>
+<div class="tabela"><table>
+<thead><tr><th>Tema</th><th>De um lado</th><th>Do outro</th><th>Onde estamos</th></tr></thead>
+<tbody>
+<tr><td>Placar</td><td>Só a distância (Jetpack Joyride)</td><td>Multiplicador com progresso e compras (Temple Run)</td><td>Tempo puro por fase (D-024)</td></tr>
+<tr><td>Justiça</td><td>Caminho provado pelo piloto automático (D-018)</td><td>Um trecho mais difícil, de propósito, de vez em quando (Jetpack Joyride)</td><td>Proposta: continuar provando e usar os mapas de calor para achar trechos injustos (#91)</td></tr>
+<tr><td>Erro</td><td>Fatal (Crazy Gravity, Jetpack Joyride, o nosso)</td><td>Com perdão (quique do Gravitron, tropeço do Temple Run)</td><td>Fatal no padrão; perdão como modificador (Proposta)</td></tr>
+<tr><td>Tamanho da fase</td><td>Longas, com chaves (Crazy Gravity); enormes no fim (Gravitron)</td><td>30 segundos a minutos (Jetpack Joyride, Temple Run)</td><td>Partidas curtas (D-028): as ideias, não a escala</td></tr>
+<tr><td>Fases</td><td>Desenhadas e fixas (Crazy Gravity, Gravitron)</td><td>Geradas na hora (Jetpack Joyride, Temple Run)</td><td>Fixas (D-021); BONUS com intervalos entre mínimo e máximo (Proposta)</td></tr>
+<tr><td>Cobrança</td><td>Pago com demo (Crazy Gravity, Gravitron 2)</td><td>Grátis com compras (Jetpack Joyride, Temple Run)</td><td>Em aberto (P-014, #98)</td></tr>
+</tbody></table></div>
+
+<h2 id="validacoes">O que os estudos confirmam</h2>
+<p>Decisões tomadas antes dos estudos, sem conhecer estes jogos, e que eles confirmam:</p>
+<div class="tabela"><table>
+<thead><tr><th>Decisão nossa</th><th>Quem confirma</th></tr></thead>
+<tbody>
+<tr><td>Controle como maior risco (D-006, D-022)</td><td>Os quatro</td></tr>
+<tr><td>Fases fixas e ranking por fase (D-021, D-024)</td><td>Crazy Gravity, Gravitron, Jetpack Joyride</td></tr>
+<tr><td>DEMO no lugar de tutorial (D-031)</td><td>Crazy Gravity, Gravitron 2, Temple Run; com o alerta das instruções acrescentadas no Gravitron 2</td></tr>
+<tr><td>Partidas curtas (D-028)</td><td>Jetpack Joyride, Gravitron, Temple Run</td></tr>
+<tr><td>Sem anúncios (D-003)</td><td>Jetpack Joyride: os anúncios são a maior reclamação hoje</td></tr>
+<tr><td>Conteúdo como dado (D-011)</td><td>Temple Run 2, Jetpack Joyride</td></tr>
+<tr><td>Teste com pessoas cedo e sempre (documentos 07 e 09)</td><td>Jetpack Joyride (a empresa inteira jogando), Temple Run (sem explicar)</td></tr>
+<tr><td>Pontos de retorno (regras, 7.1)</td><td>Gravitron 2: checkpoints na versão 1.2</td></tr>
+<tr><td>Ler o dado com contexto (D-027)</td><td>Jetpack Joyride: "chato" não queria dizer "falta conteúdo"</td></tr>
+</tbody></table></div>
+
+<h2 id="decisoes">O que espera a sua decisão</h2>
+<p>Os cartões <a href="https://github.com/TARNAGS/resgate-espacial/issues/106">#106</a>, <a href="https://github.com/TARNAGS/resgate-espacial/issues/107">#107</a> e <a href="https://github.com/TARNAGS/resgate-espacial/issues/108">#108</a> estão em "Para conversar", com quatro recomendações cada.</p>
+<div class="tabela"><table>
+<thead><tr><th>Cartão</th><th>Recomendação</th><th>Ligado a</th></tr></thead>
+<tbody>
+<tr><td>#106 Gravitron</td><td>Tripulantes que andam até a nave quando ela pousa, no MVP</td><td>Regras 6; D-031</td></tr>
+<tr><td></td><td>Terreno que gira e anda; lasers e jatos que ligam e desligam</td><td>P-011</td></tr>
+<tr><td></td><td>Fuga cronometrada como modificador ou fase especial</td><td>P-012; #79</td></tr>
+<tr><td></td><td>Rankings do Game Center e do Google Play Games no lançamento</td><td>P-019</td></tr>
+<tr><td>#107 Jetpack Joyride</td><td>Placar puro: ranking só com tempo</td><td>D-024; P-006</td></tr>
+<tr><td></td><td>Revisar a tela de fim com as três lentes do custo de perder</td><td>Doc. 09; D-031</td></tr>
+<tr><td></td><td>Três missões que se renovam, com os elogios (depois do MVP)</td><td>P-006; #81</td></tr>
+<tr><td></td><td>Intervalos entre mínimo e máximo para a BONUS</td><td>D-018; D-021</td></tr>
+<tr><td>#108 Temple Run</td><td>Dois tipos de erro como modificador ou modo mais fácil</td><td>P-012; D-027; D-028</td></tr>
+<tr><td></td><td>Testar o controle com quem nunca viu o jogo, sem explicar</td><td>D-022; #44; doc. 07</td></tr>
+<tr><td></td><td>Escrever as "regras do mundo" no documento 08</td><td>Doc. 08; D-005</td></tr>
+<tr><td></td><td>Ranking por tempo puro (o mesmo da #107)</td><td>D-024; P-006</td></tr>
+<tr><td>Crazy Gravity</td><td>Serrote em cada mundo, uma ideia por fase, forças em vez de inimigos, ensinar pela estrutura</td><td>Doc. 10, lições 1 a 6</td></tr>
+</tbody></table></div>
+<h3>Se for decidir só três agora</h3>
+<ol class="tres">
+<li><b>Testar o controle sem explicar no próximo playtest</b> (#108). Custa pouco e ataca o maior risco do produto.</li>
+<li><b>Tripulantes que andam até a nave</b> (#106). Pequeno, deixa claro o objetivo e pode virar o momento marcante do jogo.</li>
+<li><b>Registrar o ranking como tempo puro</b> (#107 e #108). Fecha parte da P-006 com dois exemplos opostos.</li>
+</ol>
+<p class="note">Recomendação do Claude. A decisão é sua.</p>
+
+<h2 id="lacunas">Lacunas e grau de confiança</h2>
+<div class="tabela"><table>
+<thead><tr><th>Estudo</th><th>Sólido</th><th>Aproximado ou faltou</th></tr></thead>
+<tbody>
+<tr><td>Crazy Gravity</td><td>As 18 fases, lidas dos arquivos do jogo; o manual original</td><td>Pouca crítica da época além da nota da PC Player (80%)</td></tr>
+<tr><td>Gravitron</td><td>Regras do Gravitron 2, lidas no código publicado pelo autor</td><td>Só 8 das mais de 40 fases da campanha principal; no GraviTron, código perdido: ordem das fases e alguns objetos deduzidos</td></tr>
+<tr><td>Jetpack Joyride</td><td>Falas do criador (vídeo de 2023, slides da GDC 2012)</td><td>Transcrição da GDC não carregou; números da wiki são da versão atual</td></tr>
+<tr><td>Temple Run</td><td>Falas dos criadores (GDC 2014, Vice 2021, TechCrunch 2012)</td><td>Transcrição da Shacknews falhou; GameSpot, Wired, Polygon e VentureBeat bloqueadas ou fora do ar; público feminino só pelo título de uma matéria da The Verge</td></tr>
+</tbody></table></div>
+<p>Em todos: nenhum programa de jogo foi executado, os downloads tiveram a sua permissão, e as imagens são redesenhos com crédito.</p>
+
+<h2 id="falta">O que falta estudar</h2>
+<p>Subway Surfers, Candy Crush Saga e Plants vs. Zombies (<a href="https://github.com/TARNAGS/resgate-espacial/issues/99">#99</a>). Os dois casuais estudados são corridas infinitas, e o nosso jogo tem fases fixas e mundos. <b>Proposta de ordem:</b> Candy Crush Saga e Plants vs. Zombies primeiro, porque têm fases fixas e numeradas, o formato mais próximo do nosso; o Subway Surfers depois, como comparativo rápido com os outros dois corredores.</p>
+
+<h2 id="tempo">Linha do tempo</h2>
+<ul class="tempo">
+<li><span>05/10/2026</span><span>Busca do jogo original (#52): o Fernando reconhece o Crazy Gravity e percebe que a memória misturou dois jogos. Os achados viram benchmark de level design (D-032).</span></li>
+<li><span>06/10/2026</span><span>As 18 fases do Crazy Gravity mapeadas; a página é guardada para inspiração.</span></li>
+<li><span>06/10/2026</span><span>O método vira a skill <span class="mono">discovery-de-jogos</span>, e entra a regra de consultar os estudos antes de construir (D-033).</span></li>
+<li><span>06/10/2026</span><span>GraviTron e Gravitron 2 (#106), Jetpack Joyride (#107) e Temple Run (#108).</span></li>
+<li><span>06/10/2026</span><span>Este guia.</span></li>
+</ul>
+
+<h2 id="como">Como pedir o próximo estudo</h2>
+<p>Peça "estude o &lt;jogo&gt;" ou digite <span class="mono">/discovery-de-jogos</span>. A skill tem três tamanhos: completo (como estes quatro), comparativo (vários jogos lado a lado) e consulta rápida, usada antes de construir qualquer mecânica, fase ou obstáculo (D-033). Inspirar, nunca copiar.</p>
+
+<footer>Resgate Espacial (codinome) · guia dos benchmarks, versão 1.0, 06/10/2026 · fonte: <span class="mono">docs/benchmark/README.md</span> no repositório TARNAGS/resgate-espacial · os jogos citados pertencem aos seus autores; este material serve para estudar ideias, sem copiar (D-005).</footer>
+</main>
