@@ -5,8 +5,8 @@
 | Campo | Valor |
 |---|---|
 | Documento | 01 — Visão do produto |
-| Versão | 1.4 |
-| Data | 04/10/2026 |
+| Versão | 1.5 |
+| Data | 06/10/2026 |
 | Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
 
@@ -156,10 +156,12 @@ A ordem em que isso entra está no [Roadmap](04-roadmap.md) (M4 e M5, em propost
 
 ## 11. Referências do gênero
 
-O jogo original que inspirou o projeto não foi identificado. Estes clássicos são do mesmo gênero e servem de referência:
+O jogo original que inspirou o projeto é o **Crazy Gravity** (1996), de Axel Meierhöfer (XLM Software), identificado em 05/10/2026 ([#52](https://github.com/TARNAGS/resgate-espacial/issues/52)); a memória do Fernando o misturou com o Gravitron 2 (2008), de onde vem o resgate de pessoas. O estudo completo, com as 18 fases do original, está no [benchmark de level design](10-benchmark-de-level-design.md) (D-032). Estes jogos servem de referência:
 
 | Jogo | Ano | O que observar |
 |---|---|---|
+| **Crazy Gravity** (XLM Software), o original | 1996 | Cargas levadas à base por cavernas, postos de combustível por barril, ventiladores, ímãs, correntes de ar, chaves e portões ([benchmark](benchmark/crazy-gravity.md)) |
+| Gravitron 2 (Dark Castle Software) | 2008 | Cientistas resgatados ao pousar perto deles; células de combustível |
 | Lunar Lander (Atari) | 1979 | Pouso suave com combustível limitado |
 | Choplifter (Brøderbund) | 1982 | Reféns que correm até o veículo; ida e volta até a base |
 | Gravitar (Atari) | 1982 | Gravidade e gestão de combustível |
@@ -200,3 +202,4 @@ A documentação base está completa e aprovada. O que vem a seguir está no [Ro
 | 1.2 | 02/10/2026 | Objetivo de negócio e publicação nas lojas (D-019); big picture com mundos de 10 fases (D-020), abertura, loja de itens e cobrança em aberto (P-014 e P-017); princípios "sem enredo" e "replay alto"; hipóteses H4 e H5. O MVP continua com 3 fases |
 | 1.3 | 02/10/2026 | Depois do teste com amigos: fases com cenário fixo e fase BONUS (D-021), para comparar tempos; ideias de modo Nightmare (P-018) e ranking (P-019) no big picture |
 | 1.4 | 04/10/2026 | ICP decidido (D-028): o casual de celular vira a persona primária, com o fã do retrô dentro dela; núcleo do jogo nas palavras do Fernando |
+| 1.5 | 06/10/2026 | Jogo original identificado (Crazy Gravity, 1996) e benchmark de level design (D-032) nas referências do gênero |

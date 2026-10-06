@@ -3,12 +3,12 @@
 | Campo | Valor |
 |---|---|
 | Documento | 06 — Diário de bordo |
-| Última atualização | 04/10/2026 |
+| Última atualização | 06/10/2026 |
 | Responsável | Fernando Nunes (Product Manager) |
 
 Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e de onde o projeto parou. É o ponto de partida para retomar o trabalho, em qualquer máquina.
 
-## Onde paramos (04/10/2026, fim do dia)
+## Onde paramos (06/10/2026)
 
 - ⚠️ **Janela de teste ABERTA:** o repositório está público para amigos do Fernando testarem em https://tarnags.github.io/resgate-espacial/jogo/. Fechar ao fim do teste (passo 5 da janela de teste, no `CLAUDE.md`) e tirar este aviso.
 - **Objetivo:** portfólio, aprendizado e negócio. O jogo será publicado na App Store e no Google Play (D-019); cobrar ou não segue em aberto (P-014, na pesquisa de lojas e dinheiro [#98](https://github.com/TARNAGS/resgate-espacial/issues/98); loja de itens, P-017, [#78](https://github.com/TARNAGS/resgate-espacial/issues/78)).
@@ -23,7 +23,8 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
   - **nickname e ranking online** por fase (D-024) e **telemetria das partidas** no Firebase (D-025), com relatório no terminal;
   - **primeiro playtest medido** (6 amigos, 229 tentativas): resultados no [documento 09](09-resultados-dos-playtests.md);
   - aviso de pouso, treino (TRAINING), painel de ajuste escondido e **75 testes automáticos**.
-- **Documentos:** Visão 1.4, Regras 1.6, PRD 1.6, Roadmap 1.5, Decisões até a D-031, documento 07 (roteiro de teste), 08 (design de mundos, com o rascunho do Mundo 1) e 09 (resultados dos playtests, v0.2).
+- **Jogo original identificado (05/10):** o **Crazy Gravity** (1996), de Axel Meierhöfer; a memória do Fernando o misturou com o Gravitron 2 (2008). Virou benchmark de level design (D-032).
+- **Documentos:** Visão 1.5, Regras 1.6, PRD 1.6, Roadmap 1.5, Decisões até a D-032, documento 07 (roteiro de teste), 08 (design de mundos, com o rascunho do Mundo 1), 09 (resultados dos playtests, v0.2) e 10 (benchmark de level design, com as [18 fases do Crazy Gravity](benchmark/crazy-gravity.md) mapeadas).
 - **Pendências abertas:** P-003 (nome), P-006 (pontuação), P-008 (medição), P-011 (obstáculos), P-012 (modificadores), P-014 (cobrar ou não, [#98](https://github.com/TARNAGS/resgate-espacial/issues/98)), P-015 (CNPJ), P-017 (loja), P-018 (modo Nightmare, [#79](https://github.com/TARNAGS/resgate-espacial/issues/79)), P-019 (ranking no lançamento, [#101](https://github.com/TARNAGS/resgate-espacial/issues/101)). Decididas em 04/10: P-009 (D-031), P-013 (D-028), P-020 (D-026), P-021 (D-027) e P-022 (D-029); P-016 respondida em parte pela arquitetura.
 
 ### Próximos passos
@@ -31,12 +32,13 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 1. **Fernando testa no iPhone** o que foi construído em 04/10, tudo em "Em revisão" e já no site do playtest (versão `2026-10-04a`): avisos de combustível ([#94](https://github.com/TARNAGS/resgate-espacial/issues/94)), som depois de ligação ou Siri e aviso do silencioso ([#103](https://github.com/TARNAGS/resgate-espacial/issues/103)), mensagens no alto ([#97](https://github.com/TARNAGS/resgate-espacial/issues/97)), zoom da câmera, para escolher o valor ([#95](https://github.com/TARNAGS/resgate-espacial/issues/95); a câmera com área ao lado da fase para os controles voltou a ser o padrão, e a [#96](https://github.com/TARNAGS/resgate-espacial/issues/96) foi descartada), DEMO ([#104](https://github.com/TARNAGS/resgate-espacial/issues/104)) e attract mode ([#105](https://github.com/TARNAGS/resgate-espacial/issues/105)).
 2. **Fernando publica a regra do perfil** no console do Firebase ([#102](https://github.com/TARNAGS/resgate-espacial/issues/102), arquivo `jogo/firebase/regras-players.json`); o Claude confere pelo terminal.
 3. **Fernando decide o tanque** ([#93](https://github.com/TARNAGS/resgate-espacial/issues/93)): onde fica o posto e as folgas, com os números do piloto expert ([#92](https://github.com/TARNAGS/resgate-espacial/issues/92)). Depois, o Claude constrói, e os rankings do nível 3, da PRACTICE e da BONUS recomeçam.
-4. **Claude pesquisa** (em "A investigar"): [#99](https://github.com/TARNAGS/resgate-espacial/issues/99) benchmark dos casuais, [#98](https://github.com/TARNAGS/resgate-espacial/issues/98) lojas e dinheiro, com uma sugestão para cada resposta, e [#52](https://github.com/TARNAGS/resgate-espacial/issues/52) achar o jogo original.
-5. **Apagar a linha de teste CLAUDETEST do ranking real** (só o Fernando pode, pelo console do Firebase): Realtime Database → Dados → `scores` → `w1-2_1wyelcg` → `CLAUDETEST` → lixeira. Se quiser, também `scores/teste_abc1` e `telemetry/1999-01-01`.
-6. **Próxima rodada de playtest**, com a telemetria nova ([#91](https://github.com/TARNAGS/resgate-espacial/issues/91)): relatório com `node jogo/ferramentas/relatorio-telemetria.mjs` e mapas de calor com `node jogo/ferramentas/mapas-telemetria.mjs`.
-7. **Fechar o repositório** quando o teste acabar.
-8. Retrospectivas do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)) e do M1 ([#46](https://github.com/TARNAGS/resgate-espacial/issues/46)).
-9. Decisões do Fernando: Nightmare ([#79](https://github.com/TARNAGS/resgate-espacial/issues/79)) e loja ([#78](https://github.com/TARNAGS/resgate-espacial/issues/78)).
+4. **Fernando lê o [benchmark do Crazy Gravity](benchmark/crazy-gravity.md)** e escolhe, da seção 9, que ideias viram decisão: catálogo de obstáculos (P-011, [#60](https://github.com/TARNAGS/resgate-espacial/issues/60)), modificadores (P-012, [#61](https://github.com/TARNAGS/resgate-espacial/issues/61)) e ritmo dos mundos (documento 08).
+5. **Claude pesquisa** (em "A investigar"): [#99](https://github.com/TARNAGS/resgate-espacial/issues/99) benchmark dos casuais, agora também com as perguntas de level design do [documento 10](10-benchmark-de-level-design.md), seção 4, e [#98](https://github.com/TARNAGS/resgate-espacial/issues/98) lojas e dinheiro, com uma sugestão para cada resposta.
+6. **Apagar a linha de teste CLAUDETEST do ranking real** (só o Fernando pode, pelo console do Firebase): Realtime Database → Dados → `scores` → `w1-2_1wyelcg` → `CLAUDETEST` → lixeira. Se quiser, também `scores/teste_abc1` e `telemetry/1999-01-01`.
+7. **Próxima rodada de playtest**, com a telemetria nova ([#91](https://github.com/TARNAGS/resgate-espacial/issues/91)): relatório com `node jogo/ferramentas/relatorio-telemetria.mjs` e mapas de calor com `node jogo/ferramentas/mapas-telemetria.mjs`.
+8. **Fechar o repositório** quando o teste acabar.
+9. Retrospectivas do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)) e do M1 ([#46](https://github.com/TARNAGS/resgate-espacial/issues/46)).
+10. Decisões do Fernando: Nightmare ([#79](https://github.com/TARNAGS/resgate-espacial/issues/79)) e loja ([#78](https://github.com/TARNAGS/resgate-espacial/issues/78)).
 
 ## Sessões
 
@@ -313,6 +315,16 @@ O Fernando pediu "pode codar todas as melhorias". Construído, testado (92 teste
 - **Câmera, revisto no mesmo dia:** testando o zoom, o Fernando viu os controles sobre a nave e a plataforma. Voltou o esquema anterior, com uma área ao lado da fase para os controles no início e no fim; a câmera "controles por cima" ficou só como opção no painel, e a [#96](https://github.com/TARNAGS/resgate-espacial/issues/96) foi fechada como descartada.
 - **No ar:** com a janela de teste aberta, o GitHub Pages publica cada envio; os amigos passam a jogar esta versão. Os rankings não mudaram, porque nenhuma fase mudou.
 
+### 05/10 e 06/10/2026 — O jogo original e o benchmark de level design (D-032)
+
+- **Busca do jogo original ([#52](https://github.com/TARNAGS/resgate-espacial/issues/52)):** o Claude varreu a lista do gênero na MobyGames (54 jogos), uns 3.400 jogos Flash do Flashpoint, o texto digitalizado de 33 edições da revista CD Expert e de um CD de 1996 e o fórum Adrenaline, e trouxe 8 candidatos com vídeos. O Fernando reconheceu: "acredito que minha memória tenha misturado as coisas. Eu acho que joguei o Gravitron 2 de 2008 e o Crazy Gravity, mas o jogo que realmente inspirou foi o Crazy Gravity!"
+- **Confirmação:** o manual original, no Internet Archive, bate com as pistas: versão shareware com 3 fases (fácil, média e difícil), cópia livre em CD-ROM e disquete, barris e cargas que "somem para dentro da nave". O jogo saiu na coletânea "10 Tons of Games: Mega Collection 1" (1997), com 106 jogos num menu.
+- **Direitos:** o autor, Axel Meierhöfer (XLM Software), ainda mantém o site com o jogo e autorizou um remake de fã em 2009. A comparação com o nosso jogo (documento 10, seção 2.3) dá risco de plágio baixo: o parecido é mecânica e regra. A busca no INPI segue com o nome, na [#54](https://github.com/TARNAGS/resgate-espacial/issues/54).
+- **D-032:** o Fernando pediu para documentar tudo como benchmark de level design, ao lado dos casuais do ICP, e para mapear as fases do Crazy Gravity com imagens, porque nunca tinha jogado além das 3 da versão de teste.
+- **As 18 fases mapeadas:** o Claude decifrou o formato dos arquivos de fase (CGL1) e redesenhou cada fase como mapa esquemático, com uma cor por função, sem executar o jogo. Somadas, as fases têm 75 cargas, 162 barris, 45 chaves, 84 canhões, 73 ventiladores, 48 ímãs, 26 correntes de ar, 51 pares de hastes e 128 portões. A curva é em serrote: picos nas fases 3, 14 e 18 e respiros sem obstáculos na 6 e na 8.
+- **Recepção:** 80% na PC Player; 8,43/10 (44 votos) na Home of the Underdogs; jogadores que procuraram o jogo por 20 anos depois de uma demo em CD de revista, como o Fernando.
+- **Documentos:** novo [documento 10](10-benchmark-de-level-design.md) (v0.1) e [benchmark do Crazy Gravity](benchmark/crazy-gravity.md) (v1.0, com as imagens em `docs/benchmark/crazy-gravity/`); Visão 1.5 (referências do gênero); D-005 atualizada; D-032. Os arquivos do jogo original não entram no repositório (`.gitignore`).
+
 ## Aprendizados de produto
 
 - Separar o objetivo do projeto (portfólio) do objetivo do produto (o jogador), com uma regra de desempate: quando os dois brigam, o jogador vence.
@@ -324,4 +336,5 @@ O Fernando pediu "pode codar todas as melhorias". Construído, testado (92 teste
 - Privacidade também é requisito: antes de abrir o repositório, o e-mail pessoal foi tirado de todo o histórico.
 - Medir mostra o que ninguém conta: os amigos não falaram que pulavam o posto nem que recomeçavam a cada morte, mas os dados mostraram as duas coisas na primeira noite. E uma regra provada por um piloto automático só vale se o piloto jogar tão bem quanto as pessoas.
 - O ranking explica a telemetria: as corridas que derrubaram a regra do posto eram do próprio PM. Perguntar a quem jogou mostrou a causa (propulsor com gravidade) que os números sozinhos não davam.
+- A memória de um usuário mistura referências: o Fernando lembrava de um jogo que era dois. Mostrar candidatos concretos, com vídeo, destravou o reconhecimento melhor do que pedir mais detalhes.
 - Descoberta e entrega são trilhas diferentes. Separar as duas mostrou que boa parte do M1 (testes com pessoas e escolha do direcional) é pergunta a responder, e não código a escrever.

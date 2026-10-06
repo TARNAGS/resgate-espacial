@@ -1,0 +1,142 @@
+# Benchmark de Level Design — Resgate Espacial
+
+| Campo | Valor |
+|---|---|
+| Documento | 10 — Benchmark de level design |
+| Versão | 0.1 |
+| Data | 06/10/2026 |
+| Status | Em construção |
+| Responsável | Fernando Nunes (Product Manager) |
+
+O que os jogos de referência fazem com fases, obstáculos, dificuldade e ritmo, para inspirar (sem copiar, D-005) as fases e os mundos do Resgate Espacial. Decisão do Fernando em 05/10/2026 ([D-032](05-registro-de-decisoes.md#d-032--os-jogos-de-nave-com-gravidade-viram-benchmark-de-level-design)): os jogos de nave com gravidade achados na busca pelo jogo original ([#52](https://github.com/TARNAGS/resgate-espacial/issues/52)) ficam lado a lado com os casuais de celular do ICP ([D-028](05-registro-de-decisoes.md#d-026-a-d-029--decisões-da-primeira-análise-do-playtest), [#99](https://github.com/TARNAGS/resgate-espacial/issues/99)).
+
+## 1. Para que serve
+
+- Dar repertório para o catálogo de obstáculos (P-011, [#60](https://github.com/TARNAGS/resgate-espacial/issues/60)), os modificadores (P-012, [#61](https://github.com/TARNAGS/resgate-espacial/issues/61)) e a curva de dificuldade de cada mundo ([documento 08](08-design-de-mundos.md)).
+- Duas famílias de referência: **(a)** os jogos de nave com gravidade, a começar pelo original; **(b)** os casuais de celular do ICP.
+- Nada aqui é decisão. As ideias são **Proposta**, e o Fernando decide.
+
+| Benchmark | Documento | Status |
+|---|---|---|
+| Crazy Gravity (1996), o jogo original | [benchmark/crazy-gravity.md](benchmark/crazy-gravity.md): as 18 fases mapeadas, com imagens | Pronto (v1.0) |
+| Outros jogos de nave com gravidade | Seção 3 deste documento | Pronto (resumo) |
+| Casuais de celular do ICP | Seção 4 deste documento | A pesquisar ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)) |
+
+## 2. O jogo original: Crazy Gravity (1996)
+
+O jogo da juventude do Fernando é o **Crazy Gravity**, de Axel Meierhöfer (XLM Software, Alemanha), versão 2.0E de setembro de 1996, para Windows 95. Ele o reconheceu na lista de candidatos em 05/10/2026. O benchmark completo, com as 18 fases, está em [benchmark/crazy-gravity.md](benchmark/crazy-gravity.md).
+
+### 2.1 Como a memória do Fernando bate com o jogo
+
+| Lembrança (kickoff e #52) | No Crazy Gravity |
+|---|---|
+| Nave pequena, com gravidade e propulsor | Nave que só acelera para a frente e gira; a gravidade puxa sempre para baixo |
+| Combustível limitado e postos no meio da fase | Postos verde e branco; cada pouso puxa um barril, que "some para dentro da nave" |
+| Sair da base e voltar | Base amarela e rosa: a fase começa e termina nela |
+| Tripulantes que entram na nave | O jogo leva **contêineres de carga**, que também "somem para dentro da nave". Os resgatados que andam até a nave vêm do **Gravitron 2** (seção 3.1) |
+| Revista, CD ou disquete | Shareware de cópia livre "em CD-ROM e em disquete" |
+| Menu com outros jogos | Coletânea "10 Tons of Games: Mega Collection 1" (1997, 106 jogos) |
+| Limitado, poucas fases, como uma demo | A versão shareware tinha só 3 fases |
+
+**Conclusão:** a memória misturou dois jogos. O original é o Crazy Gravity, e o resgate de pessoas veio do Gravitron 2 (2008). O Fernando confirmou em 05/10/2026: "o jogo que realmente inspirou foi o Crazy Gravity".
+
+### 2.2 Direitos hoje (item 2 do #52)
+
+- O autor mantém o site da XLM Software ([xlmsoft.de](https://www.xlmsoft.de/)), e o Crazy Gravity continua na página de downloads, junto com Mad Robots e Dr. Harrison.
+- Em 2009, ele **autorizou** um fã a usar os gráficos e os sons do jogo num remake para PSP (Crazy Gravity Portable). Ele é localizável e já foi receptivo a homenagens.
+- Existe outro jogo chamado **Crazy Gravity**, de 2021 (JM Neto Game Dev; Steam, PlayStation, Switch e Xbox), sem relação com o original: é um jogo de plataforma em que um astronauta inverte a gravidade. Mais um motivo para o nosso nome ser outro.
+
+### 2.3 Comparação com o Resgate Espacial (item 3 do #52)
+
+| Elemento | Crazy Gravity | Resgate Espacial | Parecido? |
+|---|---|---|---|
+| Mecânica: girar e acelerar contra a gravidade | Sim | Sim | Igual, mas mecânica não é protegida por direito autoral (Lei 9.610/1998, art. 8º, II) |
+| Base de onde sai e para onde volta | Sim | Sim | Parecido, e é regra de jogo |
+| Combustível e postos | Plataforma verde e branca, um barril por pouso | Posto no meio do caminho que enche o tanque | Parecido na ideia, diferente na forma |
+| O que se leva | Contêineres de carga, um por vez, várias viagens | Três tripulantes, numa viagem só | Diferente |
+| Nave | Ônibus espacial prateado, desenhado | Triângulo minimalista | Diferente |
+| Fase | Labirinto de cavernas, com chaves, portões, ventiladores, ímãs, canhões e hastes | Corredor da esquerda para a direita, com pedras e, em proposta, obstáculos móveis; sem inimigos que atiram | Diferente |
+| Nome | Crazy Gravity | Codinome; o nome final é a P-003 ([#54](https://github.com/TARNAGS/resgate-espacial/issues/54)) | Diferente |
+| Arte e som | 256 cores, MIDI ou CD de áudio | 16 bits minimalista, chiptune próprio | Diferente |
+
+**Leitura:** o risco de plágio é baixo. O que é parecido é regra e mecânica, que não são protegidas; nome, arte, sons, desenho das fases e código são nossos. A D-005 continua valendo: inspirar-se nas ideias de obstáculo e de ritmo é normal; copiar o desenho de uma fase, os gráficos ou os sons não. Isto é orientação geral, não parecer jurídico. Se o jogo for vendido ([#98](https://github.com/TARNAGS/resgate-espacial/issues/98)), vale consultar um advogado de propriedade intelectual. A busca de marca no INPI (item 4 do #52) segue com a escolha do nome, na [#54](https://github.com/TARNAGS/resgate-espacial/issues/54).
+
+## 3. Outros jogos de nave com gravidade
+
+### 3.1 A outra metade da memória: GraviTron e Gravitron 2
+
+| | GraviTron (2006) | Gravitron 2 (2008) |
+|---|---|---|
+| Autor | Dark Castle Software | Dark Castle Software |
+| Plataforma | Windows, gratuito | Windows (Steam), com demo |
+| Objetivo da fase | Destruir os reatores do planeta | Destruir o núcleo do reator e fugir para a atmosfera antes da explosão |
+| Resgate | Astronautas andam pela superfície; pousar perto deles resgata e dá pontos | Cientistas presos na superfície; resgatar pousando repara a nave |
+| Combustível | Não confirmado | Gasta com o propulsor e o escudo; recarrega voando perto de células de combustível |
+| Tamanho | Editor de fases e modo multiplayer | Mais de 40 fases, gráficos vetoriais neon |
+
+**Lição de design:** no Gravitron, o resgate é recompensa secundária (pontos ou reparo); no Resgate Espacial, ele é o objetivo da fase. O Gravitron mostra como dar ao resgate um papel extra, por exemplo um bônus por resgatar sem pausa.
+
+### 3.2 O gênero ("cave flyers")
+
+| Jogo | Ano e plataforma | Objetivo da fase | Ideia de level design |
+|---|---|---|---|
+| Gravitar (Atari) | 1982, arcade; no PC na coletânea Atari Arcade Hits 2 (2000) | Destruir bunkers em vários planetas | Cada planeta com gravidade própria e um menu de planetas, que se parece com os nossos mundos |
+| Thrust | 1986; no PC: Thrust Deluxe (2000) e Thrust de Peter Ekberg (2001) | Pegar uma cápsula com raio trator e levá-la para o alto | 6 fases que voltam com gravidade invertida e paredes invisíveis: modificadores (P-012) |
+| Oids | 1987, Atari ST e Mac | Destruir a prisão, pousar perto e levar os androides até a nave-mãe | Os androides correm até a nave, como os nossos tripulantes |
+| Space Taxi e seus clones | 1984 (C64); Ugh! (DOS, 1992, em disquetes de revista); Mars Taxi (Windows, 1997 e 2001) | Levar passageiros de uma plataforma a outra | Plataformas numeradas e posto de gasolina pago; cada fase, uma tela com tema |
+| Sub-Terrania | 1994, Mega Drive | Missões em cavernas, com combustível a reabastecer | Missões diferentes por fase |
+| TerraFire | 1997, DOS (shareware) | Levar ogivas com raio trator até a superfície | Túneis de vento, paredes de fogo e lagos subterrâneos; 27 missões em 5 mundos; demo com 8 fases |
+| Super Transball 2 | 2002, Windows, gratuito | Achar a esfera e levá-la ao alto da fase | Canhões, tanques, portas e lasers; 26 fases em 3 pacotes |
+| Back to the Moon | 1997, DOS, gratuito | Pousar em plataformas para resgatar mineiros | Mais obstáculos e mais bônus a cada fase |
+
+## 4. Os casuais de celular do ICP (D-028)
+
+Jetpack Joyride, Subway Surfers, Candy Crush Saga, Plants vs. Zombies e Temple Run. A pesquisa está no cartão [#99](https://github.com/TARNAGS/resgate-espacial/issues/99), ainda em "A investigar". Quando for feita, ela preenche aqui as mesmas perguntas feitas ao Crazy Gravity, para comparar lado a lado:
+
+| Pergunta de level design | O que olhar nos casuais |
+|---|---|
+| Como a fase é organizada | Fases fixas e numeradas (Candy Crush, Plants vs. Zombies) ou corrida sem fim (Jetpack Joyride, Subway Surfers, Temple Run) |
+| Como a dificuldade sobe | Rampa, serrote, fases de respiro, fases-chefe |
+| Como um elemento novo é apresentado | Fase dedicada, primeira aparição segura, combinação depois |
+| Metas por fase | Estrelas, missões, recordes |
+| Duração de uma fase | Quanto cabe numa fila de 2 minutos |
+| O que faz voltar | Recordes, colecionáveis, eventos |
+
+## 5. Primeiras lições (Proposta)
+
+As ideias detalhadas, com a ligação a cada decisão e pendência, estão no [benchmark do Crazy Gravity, seção 9](benchmark/crazy-gravity.md#9-o-que-levar-para-o-resgate-espacial). Em resumo:
+
+1. **Ritmo em serrote:** em cada mundo de 10 fases, um respiro no meio e uma fase-chefe no fim.
+2. **Uma ideia por fase**, que dá para descrever numa frase.
+3. **Forças em vez de inimigos:** vento que empurra, campo que puxa e redemoinho que gira a nave são o catálogo mais natural para a P-011, sem quebrar a regra "sem inimigos que atiram".
+4. **Ensinar pela estrutura:** circuitos de mão única e recompensas dentro do perigo ensinam sem texto, combinando com a D-031.
+5. **Validações:** a DEMO das primeiras fases (D-031) e o recorde por fase (D-024) já existiam no jogo original.
+6. **Escala:** o Crazy Gravity tem fases de vários minutos; o nosso jogador quer partidas curtas (D-028). Levar as ideias, não o tamanho.
+
+## 6. Como a busca do jogo original foi feita
+
+| Data | O que aconteceu |
+|---|---|
+| 28/09/2026 | Kickoff: o Fernando descreve o jogo da juventude, sem lembrar o nome |
+| 01/10/2026 | Cartão [#52](https://github.com/TARNAGS/resgate-espacial/issues/52): achar o jogo e avaliar o risco de plágio |
+| 04/10/2026 | Novas pistas: revista com CD ou disquete, menu com vários jogos, talvez uma demo |
+| 05/10/2026 | Pesquisa do Claude: lista de 54 jogos do gênero na MobyGames, cerca de 3.400 jogos Flash do Flashpoint, texto digitalizado de 33 edições da revista CD Expert e de um CD de 1996, fórum Adrenaline. Saíram 8 candidatos, com vídeos; o Fernando reconheceu o Crazy Gravity (e o Gravitron 2) |
+| 05/10/2026 | O manual original, lido no Internet Archive, confirmou as pistas: 3 fases na versão shareware, cópia livre em CD e disquete, barris que entram na nave |
+| 06/10/2026 | O Claude decifrou os arquivos de fase e mapeou as 18 fases ([benchmark/crazy-gravity.md](benchmark/crazy-gravity.md)) |
+
+**Lição de processo:** a memória tinha misturado dois jogos. Mostrar candidatos com vídeo funcionou melhor do que pedir mais detalhes.
+
+## 7. Fontes
+
+- [Internet Archive: Crazy Gravity v2.0](https://archive.org/details/CrazyGravity_1020) (jogo, ajuda e fases)
+- [MobyGames: Crazy Gravity](https://www.mobygames.com/game/41247/crazy-gravity/) e [gênero cave flyer](https://www.mobygames.com/group/6133/genre-cave-flyers-and-thrust-variants/)
+- [XLM Software](https://www.xlmsoft.de/) e [GameBrew: Crazy Gravity Portable](https://www.gamebrew.org/wiki/Crazy_Gravity_Portable_PSP)
+- [Gravitron 2 no Steam](https://store.steampowered.com/app/21300)
+- [Oids (Wikipedia)](https://en.wikipedia.org/wiki/Oids), [Thrust Deluxe (Home of the Underdogs)](https://www.homeoftheunderdogs.net/game.php?id=3258), [TerraFire (Wikipedia)](https://en.wikipedia.org/wiki/TerraFire), [Super Transball 2](https://manpages.org/supertransball2/6), [Mars Taxi (MobyGames)](https://www.mobygames.com/game/5298/mars-taxi/), [Back to the Moon](https://www.dosgamesarchive.com/download/back-to-the-moon), [Atari Arcade Hits 2](https://www.arcade-history.com/game/82941/atari-arcade-hits-2)
+- [Lei 9.610/1998](https://www.planalto.gov.br/ccivil_03/leis/l9610.htm), art. 8º, II
+
+## Histórico de versões
+
+| Versão | Data | O que mudou |
+|---|---|---|
+| 0.1 | 06/10/2026 | Primeira versão: o jogo original identificado (Crazy Gravity), a comparação com o nosso, o Gravitron e o gênero; espaço para os casuais da #99 |

@@ -18,3 +18,8 @@ build/
 
 # Saída das ferramentas de análise (mapas do playtest), gerada a cada vez
 jogo/ferramentas/saida/
+
+# Arquivos do Crazy Gravity (do autor original) e a saída das ferramentas do benchmark: ficam fora do Git
+docs/benchmark/crazy-gravity/ferramentas/*.CGL
+docs/benchmark/crazy-gravity/ferramentas/*.cgl
+docs/benchmark/crazy-gravity/ferramentas/saida/

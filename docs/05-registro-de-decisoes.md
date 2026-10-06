@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 05 — Registro de decisões |
-| Última atualização | 04/10/2026 |
+| Última atualização | 06/10/2026 |
 | Responsável | Fernando Nunes (Product Manager) |
 
 Cada decisão relevante de produto fica registrada aqui, com o contexto e o motivo. Assim ela não é rediscutida sem necessidade e pode ser revista quando o contexto mudar.
@@ -43,6 +43,7 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-029 | Salvar no banco online tudo o que der para medir: perfil do jogador ligado ao nick e medição ampliada | 04/10/2026 | Aceita; a construir ([#102](https://github.com/TARNAGS/resgate-espacial/issues/102) e [#91](https://github.com/TARNAGS/resgate-espacial/issues/91)) |
 | D-030 | O jogo respeita a chave de silencioso do iPhone e deixa a música do jogador tocar junto | 04/10/2026 | Aceita; aviso em Settings em [#103](https://github.com/TARNAGS/resgate-espacial/issues/103) |
 | D-031 | Sem tutorial: uma DEMO jogada pelo próprio jogo antes da primeira partida e attract mode no menu | 04/10/2026 | Aceita; a construir ([#104](https://github.com/TARNAGS/resgate-espacial/issues/104) e [#105](https://github.com/TARNAGS/resgate-espacial/issues/105)) |
+| D-032 | Os jogos de nave com gravidade, a começar pelo Crazy Gravity (o jogo original), viram benchmark de level design, ao lado dos casuais do ICP | 05/10/2026 | Aceita; [documento 10](10-benchmark-de-level-design.md) e [benchmark do Crazy Gravity](benchmark/crazy-gravity.md) |
 
 ## D-001 — Sem login e sem contas
 
@@ -113,6 +114,8 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 **Decisão.** Nome, arte e sons próprios, inspirados no gênero, sem copiar nenhum jogo específico.
 
 **Consequências.** "Resgate Espacial" é um codinome; o nome final é a decisão pendente P-003.
+
+**Atualização (05/10/2026).** O jogo original foi identificado: **Crazy Gravity** (1996), de Axel Meierhöfer (XLM Software). A comparação no [documento 10, seção 2.3](10-benchmark-de-level-design.md#23-comparação-com-o-resgate-espacial-item-3-do-52) mostra que o parecido é mecânica e regra; nome, arte e sons continuam próprios, e esta decisão continua valendo.
 
 ## D-006 — Controle por toque: direcional virtual
 
@@ -529,6 +532,18 @@ Os eventos levam o **nickname**, e a tela do nick avisa que, no playtest, essas 
 **Consequências:** resolve a P-009; a DEMO depende do piloto econômico ([#92](https://github.com/TARNAGS/resgate-espacial/issues/92)), para voar como um bom jogador; as mensagens do início da fase podem encolher ([#97](https://github.com/TARNAGS/resgate-espacial/issues/97)).
 
 **Revisitar se** o próximo playtest mostrar jogadores que ainda não entendem o objetivo depois da DEMO (D-031), ou reclamações de som (D-030).
+
+## D-032 — Os jogos de nave com gravidade viram benchmark de level design
+
+**Contexto.** Em 05/10/2026, a pesquisa do Claude no cartão [#52](https://github.com/TARNAGS/resgate-espacial/issues/52) trouxe 8 candidatos com vídeos, e o Fernando reconheceu o jogo original: o **Crazy Gravity** (1996). A memória dele tinha misturado esse jogo com o **Gravitron 2** (2008), de onde vem o resgate de pessoas. O Fernando nunca tinha jogado além das 3 fases da versão shareware.
+
+**Opções consideradas.** Registrar só o nome do jogo e fechar o cartão; ou estudar o original e os parecidos a fundo, como referência de level design.
+
+**Decisão.** Nas palavras do Fernando: "Documente todos esses achados porque vamos usá-los para benchmark de level design ao lado dos jogos que citei de mobile". E, sobre o original: "faça uma leitura das fases, objetivos, obstáculos, desafios [...] catalogue as informações de level design com imagens para que eu consiga ver e me inspirar". Os jogos de nave com gravidade, a começar pelo Crazy Gravity, viram benchmark de level design, lado a lado com os casuais do ICP (D-028).
+
+**Consequências.** Novo [documento 10](10-benchmark-de-level-design.md), com o índice do benchmark, e o [benchmark do Crazy Gravity](benchmark/crazy-gravity.md), com as 18 fases mapeadas a partir dos arquivos do jogo. Ele alimenta o catálogo de obstáculos (P-011), os modificadores (P-012) e a curva de cada mundo (documento 08). A pesquisa dos casuais ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)) passa a responder também às perguntas de level design do documento 10, seção 4. A D-005 continua valendo: inspirar-se nas ideias, sem copiar desenho de fase, arte ou som.
+
+**Revisitar se** o benchmark começar a puxar o jogo para fases longas de labirinto, contra as partidas curtas do ICP (D-028).
 
 ## Decisões pendentes
 
