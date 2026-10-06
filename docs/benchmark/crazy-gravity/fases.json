@@ -1,0 +1,1370 @@
+[
+ {
+  "fase": 1,
+  "senha": "(primeira fase)",
+  "campos": "60×26",
+  "pixels": "1920×832",
+  "areaAberta": 49,
+  "cargas": 2,
+  "plataformasDeCarga": 1,
+  "postos": 1,
+  "barris": 5,
+  "chaves": [],
+  "extras": [],
+  "ventiladores": 0,
+  "imas": 0,
+  "correntes": 0,
+  "canhoes": 3,
+  "hastes": 1,
+  "portoesMaoUnica": 2,
+  "portoesTrancados": 0,
+  "maxChavesPorPortao": 0,
+  "viagens": 2,
+  "cargaMaisLonge": 62,
+  "vooEstimado": 248,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [
+    {
+     "cadencia": 100,
+     "velocidade": 2
+    },
+    {
+     "cadencia": 140,
+     "velocidade": 2
+    },
+    {
+     "cadencia": 180,
+     "velocidade": 3
+    }
+   ],
+   "hastes": [
+    {
+     "vao": 176,
+     "horizontal": false
+    }
+   ],
+   "ventiladores": [],
+   "imas": []
+  }
+ },
+ {
+  "fase": 2,
+  "senha": "HYACINTH",
+  "campos": "110×20",
+  "pixels": "3520×640",
+  "areaAberta": 48,
+  "cargas": 4,
+  "plataformasDeCarga": 3,
+  "postos": 1,
+  "barris": 5,
+  "chaves": [
+   "vermelha",
+   "amarela"
+  ],
+  "extras": [],
+  "ventiladores": 4,
+  "imas": 0,
+  "correntes": 0,
+  "canhoes": 3,
+  "hastes": 2,
+  "portoesMaoUnica": 4,
+  "portoesTrancados": 3,
+  "maxChavesPorPortao": 2,
+  "viagens": 4,
+  "cargaMaisLonge": 62,
+  "vooEstimado": 444,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [
+    {
+     "cadencia": 55,
+     "velocidade": 2
+    },
+    {
+     "cadencia": 75,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 100,
+     "velocidade": 4
+    }
+   ],
+   "hastes": [
+    {
+     "vao": 140,
+     "horizontal": false
+    },
+    {
+     "vao": 100,
+     "horizontal": true
+    }
+   ],
+   "ventiladores": [
+    "esquerda",
+    "esquerda",
+    "cima",
+    "cima"
+   ],
+   "imas": []
+  }
+ },
+ {
+  "fase": 3,
+  "senha": "MERIDIAN",
+  "campos": "65×55",
+  "pixels": "2080×1760",
+  "areaAberta": 48,
+  "cargas": 3,
+  "plataformasDeCarga": 3,
+  "postos": 1,
+  "barris": 6,
+  "chaves": [
+   "verde",
+   "amarela"
+  ],
+  "extras": [
+   "VIDA",
+   "TURBO"
+  ],
+  "ventiladores": 3,
+  "imas": 3,
+  "correntes": 2,
+  "canhoes": 10,
+  "hastes": 8,
+  "portoesMaoUnica": 6,
+  "portoesTrancados": 2,
+  "maxChavesPorPortao": 2,
+  "viagens": 3,
+  "cargaMaisLonge": 86,
+  "vooEstimado": 466,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [
+    {
+     "cadencia": 85,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 50,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 70,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 100,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 120,
+     "velocidade": 1
+    },
+    {
+     "cadencia": 50,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 100,
+     "velocidade": 2
+    },
+    {
+     "cadencia": 90,
+     "velocidade": 2
+    },
+    {
+     "cadencia": 90,
+     "velocidade": 2
+    },
+    {
+     "cadencia": 70,
+     "velocidade": 0
+    }
+   ],
+   "hastes": [
+    {
+     "vao": 120,
+     "horizontal": false
+    },
+    {
+     "vao": 120,
+     "horizontal": false
+    },
+    {
+     "vao": 100,
+     "horizontal": true
+    },
+    {
+     "vao": 100,
+     "horizontal": false
+    },
+    {
+     "vao": 100,
+     "horizontal": false
+    },
+    {
+     "vao": 100,
+     "horizontal": true
+    },
+    {
+     "vao": 100,
+     "horizontal": true
+    },
+    {
+     "vao": 100,
+     "horizontal": false
+    }
+   ],
+   "ventiladores": [
+    "esquerda",
+    "esquerda",
+    "direita"
+   ],
+   "imas": [
+    "esquerda",
+    "esquerda",
+    "esquerda"
+   ]
+  }
+ },
+ {
+  "fase": 4,
+  "senha": "KICKBACK",
+  "campos": "57×38",
+  "pixels": "1824×1216",
+  "areaAberta": 51,
+  "cargas": 3,
+  "plataformasDeCarga": 3,
+  "postos": 2,
+  "barris": 6,
+  "chaves": [
+   "azul",
+   "amarela"
+  ],
+  "extras": [],
+  "ventiladores": 0,
+  "imas": 0,
+  "correntes": 0,
+  "canhoes": 4,
+  "hastes": 2,
+  "portoesMaoUnica": 2,
+  "portoesTrancados": 2,
+  "maxChavesPorPortao": 2,
+  "viagens": 3,
+  "cargaMaisLonge": 62,
+  "vooEstimado": 316,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [
+    {
+     "cadencia": 86,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 110,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 15,
+     "velocidade": 1
+    },
+    {
+     "cadencia": 15,
+     "velocidade": 1
+    }
+   ],
+   "hastes": [
+    {
+     "vao": 180,
+     "horizontal": false
+    },
+    {
+     "vao": 200,
+     "horizontal": false
+    }
+   ],
+   "ventiladores": [],
+   "imas": []
+  }
+ },
+ {
+  "fase": 5,
+  "senha": "INTERVAL",
+  "campos": "110×20",
+  "pixels": "3520×640",
+  "areaAberta": 53,
+  "cargas": 3,
+  "plataformasDeCarga": 3,
+  "postos": 1,
+  "barris": 5,
+  "chaves": [
+   "vermelha",
+   "verde",
+   "amarela"
+  ],
+  "extras": [],
+  "ventiladores": 3,
+  "imas": 4,
+  "correntes": 0,
+  "canhoes": 4,
+  "hastes": 2,
+  "portoesMaoUnica": 6,
+  "portoesTrancados": 3,
+  "maxChavesPorPortao": 1,
+  "viagens": 3,
+  "cargaMaisLonge": 102,
+  "vooEstimado": 568,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [
+    {
+     "cadencia": 130,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 100,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 90,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 120,
+     "velocidade": 2
+    }
+   ],
+   "hastes": [
+    {
+     "vao": 160,
+     "horizontal": false
+    },
+    {
+     "vao": 160,
+     "horizontal": false
+    }
+   ],
+   "ventiladores": [
+    "baixo",
+    "baixo",
+    "baixo"
+   ],
+   "imas": [
+    "baixo",
+    "baixo",
+    "baixo",
+    "baixo"
+   ]
+  }
+ },
+ {
+  "fase": 6,
+  "senha": "YEARLING",
+  "campos": "80×30",
+  "pixels": "2560×960",
+  "areaAberta": 38,
+  "cargas": 4,
+  "plataformasDeCarga": 2,
+  "postos": 1,
+  "barris": 10,
+  "chaves": [
+   "vermelha",
+   "azul"
+  ],
+  "extras": [
+   "TURBO"
+  ],
+  "ventiladores": 0,
+  "imas": 0,
+  "correntes": 0,
+  "canhoes": 0,
+  "hastes": 0,
+  "portoesMaoUnica": 0,
+  "portoesTrancados": 2,
+  "maxChavesPorPortao": 1,
+  "viagens": 4,
+  "cargaMaisLonge": 53,
+  "vooEstimado": 408,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [],
+   "hastes": [],
+   "ventiladores": [],
+   "imas": []
+  }
+ },
+ {
+  "fase": 7,
+  "senha": "AMBROSIA",
+  "campos": "85×31",
+  "pixels": "2720×992",
+  "areaAberta": 53,
+  "cargas": 7,
+  "plataformasDeCarga": 3,
+  "postos": 1,
+  "barris": 5,
+  "chaves": [
+   "azul"
+  ],
+  "extras": [
+   "PORÃO",
+   "PORÃO"
+  ],
+  "ventiladores": 5,
+  "imas": 2,
+  "correntes": 0,
+  "canhoes": 4,
+  "hastes": 4,
+  "portoesMaoUnica": 6,
+  "portoesTrancados": 2,
+  "maxChavesPorPortao": 1,
+  "viagens": 7,
+  "cargaMaisLonge": 47,
+  "vooEstimado": 526,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [
+    {
+     "cadencia": 60,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 150,
+     "velocidade": 2
+    },
+    {
+     "cadencia": 70,
+     "velocidade": 2
+    },
+    {
+     "cadencia": 60,
+     "velocidade": 0
+    }
+   ],
+   "hastes": [
+    {
+     "vao": 112,
+     "horizontal": false
+    },
+    {
+     "vao": 100,
+     "horizontal": true
+    },
+    {
+     "vao": 128,
+     "horizontal": true
+    },
+    {
+     "vao": 180,
+     "horizontal": false
+    }
+   ],
+   "ventiladores": [
+    "esquerda",
+    "esquerda",
+    "cima",
+    "cima",
+    "cima"
+   ],
+   "imas": [
+    "baixo",
+    "baixo"
+   ]
+  }
+ },
+ {
+  "fase": 8,
+  "senha": "POSITRON",
+  "campos": "100×20",
+  "pixels": "3200×640",
+  "areaAberta": 44,
+  "cargas": 2,
+  "plataformasDeCarga": 2,
+  "postos": 1,
+  "barris": 5,
+  "chaves": [
+   "verde",
+   "amarela",
+   "vermelha"
+  ],
+  "extras": [],
+  "ventiladores": 0,
+  "imas": 0,
+  "correntes": 0,
+  "canhoes": 0,
+  "hastes": 0,
+  "portoesMaoUnica": 0,
+  "portoesTrancados": 3,
+  "maxChavesPorPortao": 3,
+  "viagens": 2,
+  "cargaMaisLonge": 96,
+  "vooEstimado": 350,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [],
+   "hastes": [],
+   "ventiladores": [],
+   "imas": []
+  }
+ },
+ {
+  "fase": 9,
+  "senha": "CLAVICLE",
+  "campos": "100×31",
+  "pixels": "3200×992",
+  "areaAberta": 52,
+  "cargas": 5,
+  "plataformasDeCarga": 5,
+  "postos": 2,
+  "barris": 8,
+  "chaves": [
+   "vermelha",
+   "azul",
+   "amarela",
+   "verde"
+  ],
+  "extras": [],
+  "ventiladores": 7,
+  "imas": 1,
+  "correntes": 1,
+  "canhoes": 3,
+  "hastes": 2,
+  "portoesMaoUnica": 4,
+  "portoesTrancados": 3,
+  "maxChavesPorPortao": 2,
+  "viagens": 5,
+  "cargaMaisLonge": 86,
+  "vooEstimado": 644,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [
+    {
+     "cadencia": 120,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 90,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 90,
+     "velocidade": 3
+    }
+   ],
+   "hastes": [
+    {
+     "vao": 180,
+     "horizontal": true
+    },
+    {
+     "vao": 100,
+     "horizontal": true
+    }
+   ],
+   "ventiladores": [
+    "esquerda",
+    "esquerda",
+    "esquerda",
+    "cima",
+    "baixo",
+    "baixo",
+    "baixo"
+   ],
+   "imas": [
+    "cima"
+   ]
+  }
+ },
+ {
+  "fase": 10,
+  "senha": "DAFFODIL",
+  "campos": "100×28",
+  "pixels": "3200×896",
+  "areaAberta": 41,
+  "cargas": 6,
+  "plataformasDeCarga": 5,
+  "postos": 2,
+  "barris": 10,
+  "chaves": [
+   "verde",
+   "amarela",
+   "vermelha",
+   "azul"
+  ],
+  "extras": [
+   "TURBO"
+  ],
+  "ventiladores": 4,
+  "imas": 3,
+  "correntes": 0,
+  "canhoes": 11,
+  "hastes": 2,
+  "portoesMaoUnica": 5,
+  "portoesTrancados": 3,
+  "maxChavesPorPortao": 4,
+  "viagens": 6,
+  "cargaMaisLonge": 81,
+  "vooEstimado": 682,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [
+    {
+     "cadencia": 35,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 50,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 45,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 35,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 70,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 80,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 40,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 75,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 80,
+     "velocidade": 2
+    },
+    {
+     "cadencia": 70,
+     "velocidade": 2
+    },
+    {
+     "cadencia": 75,
+     "velocidade": 2
+    }
+   ],
+   "hastes": [
+    {
+     "vao": 80,
+     "horizontal": true
+    },
+    {
+     "vao": 80,
+     "horizontal": false
+    }
+   ],
+   "ventiladores": [
+    "direita",
+    "esquerda",
+    "esquerda",
+    "direita"
+   ],
+   "imas": [
+    "esquerda",
+    "esquerda",
+    "esquerda"
+   ]
+  }
+ },
+ {
+  "fase": 11,
+  "senha": "DICTATOR",
+  "campos": "60×40",
+  "pixels": "1920×1280",
+  "areaAberta": 61,
+  "cargas": 4,
+  "plataformasDeCarga": 4,
+  "postos": 1,
+  "barris": 7,
+  "chaves": [
+   "vermelha",
+   "verde"
+  ],
+  "extras": [],
+  "ventiladores": 3,
+  "imas": 6,
+  "correntes": 2,
+  "canhoes": 1,
+  "hastes": 2,
+  "portoesMaoUnica": 4,
+  "portoesTrancados": 2,
+  "maxChavesPorPortao": 1,
+  "viagens": 4,
+  "cargaMaisLonge": 47,
+  "vooEstimado": 304,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [
+    {
+     "cadencia": 80,
+     "velocidade": 6
+    }
+   ],
+   "hastes": [
+    {
+     "vao": 100,
+     "horizontal": false
+    },
+    {
+     "vao": 120,
+     "horizontal": true
+    }
+   ],
+   "ventiladores": [
+    "esquerda",
+    "esquerda",
+    "esquerda"
+   ],
+   "imas": [
+    "esquerda",
+    "esquerda",
+    "esquerda",
+    "cima",
+    "cima",
+    "cima"
+   ]
+  }
+ },
+ {
+  "fase": 12,
+  "senha": "BLACKOUT",
+  "campos": "81×39",
+  "pixels": "2592×1248",
+  "areaAberta": 48,
+  "cargas": 7,
+  "plataformasDeCarga": 4,
+  "postos": 2,
+  "barris": 12,
+  "chaves": [
+   "vermelha",
+   "amarela",
+   "azul",
+   "verde"
+  ],
+  "extras": [
+   "PORÃO",
+   "VIDA"
+  ],
+  "ventiladores": 4,
+  "imas": 2,
+  "correntes": 4,
+  "canhoes": 7,
+  "hastes": 8,
+  "portoesMaoUnica": 5,
+  "portoesTrancados": 3,
+  "maxChavesPorPortao": 2,
+  "viagens": 7,
+  "cargaMaisLonge": 52,
+  "vooEstimado": 546,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [
+    {
+     "cadencia": 80,
+     "velocidade": 4
+    },
+    {
+     "cadencia": 40,
+     "velocidade": 4
+    },
+    {
+     "cadencia": 60,
+     "velocidade": 4
+    },
+    {
+     "cadencia": 60,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 60,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 40,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 100,
+     "velocidade": 0
+    }
+   ],
+   "hastes": [
+    {
+     "vao": 120,
+     "horizontal": false
+    },
+    {
+     "vao": 100,
+     "horizontal": false
+    },
+    {
+     "vao": 120,
+     "horizontal": false
+    },
+    {
+     "vao": 100,
+     "horizontal": false
+    },
+    {
+     "vao": 140,
+     "horizontal": false
+    },
+    {
+     "vao": 128,
+     "horizontal": false
+    },
+    {
+     "vao": 128,
+     "horizontal": true
+    },
+    {
+     "vao": 40,
+     "horizontal": false
+    }
+   ],
+   "ventiladores": [
+    "cima",
+    "cima",
+    "baixo",
+    "direita"
+   ],
+   "imas": [
+    "baixo",
+    "baixo"
+   ]
+  }
+ },
+ {
+  "fase": 13,
+  "senha": "LABURNUM",
+  "campos": "45×70",
+  "pixels": "1440×2240",
+  "areaAberta": 44,
+  "cargas": 3,
+  "plataformasDeCarga": 3,
+  "postos": 1,
+  "barris": 8,
+  "chaves": [
+   "vermelha"
+  ],
+  "extras": [
+   "VIDA"
+  ],
+  "ventiladores": 5,
+  "imas": 6,
+  "correntes": 4,
+  "canhoes": 7,
+  "hastes": 4,
+  "portoesMaoUnica": 3,
+  "portoesTrancados": 1,
+  "maxChavesPorPortao": 1,
+  "viagens": 3,
+  "cargaMaisLonge": 84,
+  "vooEstimado": 424,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [
+    {
+     "cadencia": 50,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 50,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 35,
+     "velocidade": 2
+    },
+    {
+     "cadencia": 100,
+     "velocidade": 2
+    },
+    {
+     "cadencia": 70,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 65,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 65,
+     "velocidade": 0
+    }
+   ],
+   "hastes": [
+    {
+     "vao": 100,
+     "horizontal": true
+    },
+    {
+     "vao": 100,
+     "horizontal": false
+    },
+    {
+     "vao": 100,
+     "horizontal": false
+    },
+    {
+     "vao": 128,
+     "horizontal": true
+    }
+   ],
+   "ventiladores": [
+    "cima",
+    "cima",
+    "cima",
+    "cima",
+    "cima"
+   ],
+   "imas": [
+    "esquerda",
+    "esquerda",
+    "esquerda",
+    "esquerda",
+    "esquerda",
+    "esquerda"
+   ]
+  }
+ },
+ {
+  "fase": 14,
+  "senha": "ZUCCHINI",
+  "campos": "100×51",
+  "pixels": "3200×1632",
+  "areaAberta": 42,
+  "cargas": 8,
+  "plataformasDeCarga": 4,
+  "postos": 3,
+  "barris": 27,
+  "chaves": [
+   "vermelha",
+   "amarela",
+   "azul",
+   "verde"
+  ],
+  "extras": [
+   "VIDA",
+   "VIDA",
+   "PORÃO",
+   "TURBO",
+   "PORÃO",
+   "VIDA"
+  ],
+  "ventiladores": 10,
+  "imas": 5,
+  "correntes": 3,
+  "canhoes": 8,
+  "hastes": 8,
+  "portoesMaoUnica": 8,
+  "portoesTrancados": 8,
+  "maxChavesPorPortao": 4,
+  "viagens": 8,
+  "cargaMaisLonge": 85,
+  "vooEstimado": 1228,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [
+    {
+     "cadencia": 15,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 17,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 50,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 40,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 60,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 50,
+     "velocidade": 4
+    },
+    {
+     "cadencia": 45,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 75,
+     "velocidade": 2
+    }
+   ],
+   "hastes": [
+    {
+     "vao": 20,
+     "horizontal": false
+    },
+    {
+     "vao": 80,
+     "horizontal": false
+    },
+    {
+     "vao": 100,
+     "horizontal": false
+    },
+    {
+     "vao": 100,
+     "horizontal": false
+    },
+    {
+     "vao": 80,
+     "horizontal": false
+    },
+    {
+     "vao": 80,
+     "horizontal": false
+    },
+    {
+     "vao": 100,
+     "horizontal": false
+    },
+    {
+     "vao": 80,
+     "horizontal": false
+    }
+   ],
+   "ventiladores": [
+    "direita",
+    "direita",
+    "cima",
+    "esquerda",
+    "baixo",
+    "baixo",
+    "direita",
+    "direita",
+    "direita",
+    "direita"
+   ],
+   "imas": [
+    "esquerda",
+    "direita",
+    "esquerda",
+    "direita",
+    "esquerda"
+   ]
+  }
+ },
+ {
+  "fase": 15,
+  "senha": "EYEGLASS",
+  "campos": "70×20",
+  "pixels": "2240×640",
+  "areaAberta": 41,
+  "cargas": 2,
+  "plataformasDeCarga": 2,
+  "postos": 1,
+  "barris": 3,
+  "chaves": [
+   "vermelha",
+   "amarela"
+  ],
+  "extras": [],
+  "ventiladores": 6,
+  "imas": 4,
+  "correntes": 2,
+  "canhoes": 4,
+  "hastes": 3,
+  "portoesMaoUnica": 5,
+  "portoesTrancados": 2,
+  "maxChavesPorPortao": 2,
+  "viagens": 2,
+  "cargaMaisLonge": 84,
+  "vooEstimado": 316,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [
+    {
+     "cadencia": 30,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 100,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 30,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 30,
+     "velocidade": 0
+    }
+   ],
+   "hastes": [
+    {
+     "vao": 60,
+     "horizontal": false
+    },
+    {
+     "vao": 100,
+     "horizontal": false
+    },
+    {
+     "vao": 80,
+     "horizontal": false
+    }
+   ],
+   "ventiladores": [
+    "direita",
+    "baixo",
+    "esquerda",
+    "cima",
+    "cima",
+    "direita"
+   ],
+   "imas": [
+    "direita",
+    "direita",
+    "direita",
+    "direita"
+   ]
+  }
+ },
+ {
+  "fase": 16,
+  "senha": "FRIPPERY",
+  "campos": "45×55",
+  "pixels": "1440×1760",
+  "areaAberta": 37,
+  "cargas": 4,
+  "plataformasDeCarga": 3,
+  "postos": 2,
+  "barris": 13,
+  "chaves": [
+   "azul"
+  ],
+  "extras": [
+   "TURBO"
+  ],
+  "ventiladores": 3,
+  "imas": 0,
+  "correntes": 2,
+  "canhoes": 6,
+  "hastes": 2,
+  "portoesMaoUnica": 6,
+  "portoesTrancados": 1,
+  "maxChavesPorPortao": 1,
+  "viagens": 4,
+  "cargaMaisLonge": 74,
+  "vooEstimado": 514,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [
+    {
+     "cadencia": 35,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 40,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 30,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 30,
+     "velocidade": 2
+    },
+    {
+     "cadencia": 20,
+     "velocidade": 3
+    },
+    {
+     "cadencia": 50,
+     "velocidade": 1
+    }
+   ],
+   "hastes": [
+    {
+     "vao": 128,
+     "horizontal": false
+    },
+    {
+     "vao": 128,
+     "horizontal": false
+    }
+   ],
+   "ventiladores": [
+    "baixo",
+    "baixo",
+    "baixo"
+   ],
+   "imas": []
+  }
+ },
+ {
+  "fase": 17,
+  "senha": "GUARDIAN",
+  "campos": "72×37",
+  "pixels": "2304×1184",
+  "areaAberta": 48,
+  "cargas": 4,
+  "plataformasDeCarga": 4,
+  "postos": 1,
+  "barris": 10,
+  "chaves": [
+   "amarela",
+   "azul",
+   "verde",
+   "vermelha"
+  ],
+  "extras": [
+   "TURBO"
+  ],
+  "ventiladores": 7,
+  "imas": 6,
+  "correntes": 2,
+  "canhoes": 4,
+  "hastes": 1,
+  "portoesMaoUnica": 4,
+  "portoesTrancados": 7,
+  "maxChavesPorPortao": 2,
+  "viagens": 4,
+  "cargaMaisLonge": 135,
+  "vooEstimado": 694,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [
+    {
+     "cadencia": 55,
+     "velocidade": 2
+    },
+    {
+     "cadencia": 40,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 50,
+     "velocidade": 0
+    },
+    {
+     "cadencia": 60,
+     "velocidade": 2
+    }
+   ],
+   "hastes": [
+    {
+     "vao": 60,
+     "horizontal": false
+    }
+   ],
+   "ventiladores": [
+    "baixo",
+    "baixo",
+    "cima",
+    "cima",
+    "baixo",
+    "baixo",
+    "baixo"
+   ],
+   "imas": [
+    "cima",
+    "cima",
+    "cima",
+    "baixo",
+    "baixo",
+    "baixo"
+   ]
+  }
+ },
+ {
+  "fase": 18,
+  "senha": "NUISANCE",
+  "campos": "60×46",
+  "pixels": "1920×1472",
+  "areaAberta": 41,
+  "cargas": 4,
+  "plataformasDeCarga": 4,
+  "postos": 2,
+  "barris": 17,
+  "chaves": [
+   "vermelha",
+   "amarela",
+   "verde",
+   "azul"
+  ],
+  "extras": [
+   "VIDA",
+   "VIDA",
+   "VIDA"
+  ],
+  "ventiladores": 9,
+  "imas": 6,
+  "correntes": 4,
+  "canhoes": 5,
+  "hastes": 0,
+  "portoesMaoUnica": 7,
+  "portoesTrancados": 4,
+  "maxChavesPorPortao": 4,
+  "viagens": 4,
+  "cargaMaisLonge": 44,
+  "vooEstimado": 304,
+  "cargasSemCaminhoDireto": 0,
+  "detalhes": {
+   "canhoes": [
+    {
+     "cadencia": 150,
+     "velocidade": 2
+    },
+    {
+     "cadencia": 130,
+     "velocidade": 2
+    },
+    {
+     "cadencia": 110,
+     "velocidade": 1
+    },
+    {
+     "cadencia": 130,
+     "velocidade": 2
+    },
+    {
+     "cadencia": 110,
+     "velocidade": 0
+    }
+   ],
+   "hastes": [],
+   "ventiladores": [
+    "direita",
+    "direita",
+    "direita",
+    "direita",
+    "cima",
+    "cima",
+    "baixo",
+    "esquerda",
+    "esquerda"
+   ],
+   "imas": [
+    "esquerda",
+    "esquerda",
+    "esquerda",
+    "esquerda",
+    "esquerda",
+    "esquerda"
+   ]
+  }
+ }
+]

@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 10 — Benchmark de level design |
-| Versão | 0.1 |
+| Versão | 0.2 |
 | Data | 06/10/2026 |
 | Status | Em construção |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -18,7 +18,8 @@ O que os jogos de referência fazem com fases, obstáculos, dificuldade e ritmo,
 
 | Benchmark | Documento | Status |
 |---|---|---|
-| Crazy Gravity (1996), o jogo original | [benchmark/crazy-gravity.md](benchmark/crazy-gravity.md): as 18 fases mapeadas, com imagens | Pronto (v1.0) |
+| Crazy Gravity (1996), o jogo original | [benchmark/crazy-gravity.md](benchmark/crazy-gravity.md): as 18 fases mapeadas, com imagens | Pronto (v1.1) |
+| Página de leitura do Crazy Gravity, para inspiração | [claude.ai/artifact/UfYWNwM15P6jd2YPDnReh4](https://claude.ai/artifact/UfYWNwM15P6jd2YPDnReh4) (privada, fixada na barra lateral) e a cópia [benchmark/crazy-gravity/pagina-de-leitura.html](benchmark/crazy-gravity/pagina-de-leitura.html) | Publicada |
 | Outros jogos de nave com gravidade | Seção 3 deste documento | Pronto (resumo) |
 | Casuais de celular do ICP | Seção 4 deste documento | A pesquisar ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)) |
 
@@ -126,6 +127,36 @@ As ideias detalhadas, com a ligação a cada decisão e pendência, estão no [b
 
 **Lição de processo:** a memória tinha misturado dois jogos. Mostrar candidatos com vídeo funcionou melhor do que pedir mais detalhes.
 
+### 6.1 Os candidatos mostrados ao Fernando (05/10/2026)
+
+A lista que levou ao reconhecimento, na ordem em que foi apresentada (da mais provável para a menos provável, pelas pistas da época). Os links levam a buscas de vídeo no YouTube.
+
+| # | Candidato | O que batia | O que não batia | Resultado |
+|---|---|---|---|---|
+| 1 | GraviTron (Dark Castle Software, Windows, 2006, gratuito) | Nave pequena que gira, gravidade, fase com rolagem, astronautas que andam e são resgatados com um pouso perto | Objetivo principal era destruir reatores | Não era ([vídeos](https://www.youtube.com/results?search_query=GraviTron+2006+Dark+Castle+Software)) |
+| 2 | Gravitron 2 (Dark Castle Software, Windows, 2008) | Cientistas resgatados ao pousar, células de combustível, demo com poucas fases | Gráfico neon, mais moderno | **Jogado pelo Fernando; é a origem do resgate de pessoas na memória** ([vídeos](https://www.youtube.com/results?search_query=Gravitron+2+gameplay)) |
+| 3 | Oids (FTL Games, Atari ST e Mac, 1987) | Nave triangular, gravidade, combustível, bonequinhos que correm para dentro da nave | Sem versão para PC na época | Não era ([vídeos](https://www.youtube.com/results?search_query=Oids+Atari+ST+gameplay)) |
+| 4 | Gravitar na coletânea Atari Arcade Hits 2 (PC, 2000) | Nave triangular minúscula, gravidade, combustível, escolha num menu com outros jogos | Sem resgate | Não era ([vídeos](https://www.youtube.com/results?search_query=Gravitar+arcade+gameplay)) |
+| 5 | Crazy Gravity (XLM Software, Windows, 1996) | Gravidade, combustível, carga levada de volta à base | Leva caixas, não pessoas | **É o jogo original** ([vídeos](https://www.youtube.com/results?search_query=Crazy+Gravity+1996+Windows)) |
+| 6 | Mars Taxi (Windows, 1997 e 2001) e Ugh! (DOS, 1992) | Passageiros que andam até a nave, posto de gasolina | São táxis, sem ida e volta à base | Não era |
+| 7 | Back to the Moon (DOS, 1997, gratuito) | Pousar em plataformas para resgatar mineiros, combustível | Estilo Lunar Lander | Não era |
+| 8 | Thrust para PC (Thrust Deluxe, 2000; Super Transball 2, 2002) | Nave triangular, combustível, cavernas | Carrega uma bola, não pessoas | Não era |
+| — | Jogos Flash Rocket Rescue (2DPlay, 2007) e planetX (Terry Paton, 2005) | Resgate de astronautas com gravidade | Jogos de navegador, com menos pistas batendo | Citados à parte, não eram |
+
+### 6.2 Onde a busca procurou
+
+| Fonte | O que foi feito | Resultado |
+|---|---|---|
+| Buscas na web, em inglês e português | Pedidos do tipo "qual é o nome deste jogo", listas de "cave flyers", sites de abandonware | Levantou os candidatos da seção 6.1 |
+| MobyGames, gênero "Cave-flyers and Thrust variants" | Lista completa (54 jogos), lida por uma cópia arquivada, porque o site pede verificação anti-robô | Filtro dos jogos de PC de 1990 a 2008 |
+| Flashpoint (acervo de jogos Flash e Java) | Busca de uns 3.400 jogos cuja descrição fala em combustível, gravidade, propulsor ou resgate | Rocket Rescue e planetX |
+| Revista CD Expert (Internet Archive) | Texto digitalizado de 33 edições, buscando "gravidade", "combustível", "nave" e "resgate" | Só o Lander e o Espace Explore; o jogo não estava |
+| Revista do CD-ROM Especial Games (1996) | Texto digitalizado do CD de shareware brasileiro | Não estava |
+| CD "600 Jogos para Windows" (CD Expert) | Tentativa de listar o conteúdo da imagem do CD | O Internet Archive não conseguiu abrir a imagem |
+| Fórum Adrenaline, tópico de jogos esquecidos | Pedidos parecidos | Um pedido de outro jogo (com nave-mãe) |
+| Reddit (r/tipofmyjoystick e r/tipofmytongue) | Tentativa de busca | Bloqueado para scripts e para o navegador do app |
+| Internet Archive, Crazy Gravity v2.0 | Manual do jogo e do editor, depois do reconhecimento | Confirmou todas as pistas e deu os arquivos das 18 fases |
+
 ## 7. Fontes
 
 - [Internet Archive: Crazy Gravity v2.0](https://archive.org/details/CrazyGravity_1020) (jogo, ajuda e fases)
@@ -140,3 +171,4 @@ As ideias detalhadas, com a ligação a cada decisão e pendência, estão no [b
 | Versão | Data | O que mudou |
 |---|---|---|
 | 0.1 | 06/10/2026 | Primeira versão: o jogo original identificado (Crazy Gravity), a comparação com o nosso, o Gravitron e o gênero; espaço para os casuais da #99 |
+| 0.2 | 06/10/2026 | Registro completo da busca (candidatos mostrados e fontes procuradas) e a página de leitura do Crazy Gravity |

@@ -3,12 +3,14 @@
 | Campo | Valor |
 |---|---|
 | Documento | Benchmark de level design — Crazy Gravity |
-| Versão | 1.0 |
+| Versão | 1.1 |
 | Data | 06/10/2026 |
 | Status | Referência |
 | Responsável | Fernando Nunes (Product Manager) |
 
 O Crazy Gravity é o jogo que inspirou o Resgate Espacial, identificado em 05/10/2026 ([#52](https://github.com/TARNAGS/resgate-espacial/issues/52)). O Fernando só jogou as 3 fases da versão shareware. Este documento abre o jogo inteiro: as **18 fases da versão completa**, cada elemento de jogo, a proposta, onde estavam a diversão e a dificuldade e o que os jogadores diziam. O objetivo é servir de referência para o nosso level design ([D-032](../05-registro-de-decisoes.md#d-032--os-jogos-de-nave-com-gravidade-viram-benchmark-de-level-design)), ao lado dos casuais de celular do ICP ([documento 10](../10-benchmark-de-level-design.md)).
+
+> **Página de leitura (para inspiração):** a mesma análise, com os 18 mapas, está publicada em [claude.ai/artifact/UfYWNwM15P6jd2YPDnReh4](https://claude.ai/artifact/UfYWNwM15P6jd2YPDnReh4) (privada, fixada na barra lateral do Fernando) e guardada aqui em [`crazy-gravity/pagina-de-leitura.html`](crazy-gravity/pagina-de-leitura.html), que abre direto no navegador.
 
 > **Sobre as imagens.** Os mapas abaixo **não são capturas de tela**. O Claude decifrou o formato dos arquivos de fase do jogo e redesenhou cada fase como um mapa esquemático, com uma cor por função. O jogo, as fases, a arte e os sons são de Axel Meierhöfer (XLM Software). Usamos para estudar ideias de design, sem copiar desenho de fase, arte ou som (D-005).
 
@@ -372,7 +374,8 @@ Tudo aqui é **Proposta** para o Fernando decidir. As ligações com as decisõe
 2. **Formato decifrado pelo Claude (CGL1):** cabeçalho com o tamanho em campos (`SIZE`); mapa de campos (`SOIN`, 1 byte por campo: quantos pedaços de pedra há nele e se está cheio); pedaços de pedra (`SOBS`, 4 bytes: posição e tamanho dentro do campo); ventiladores, ímãs e correntes de ar (`VENT`, `MAGN` e `DIST`, 38 bytes: direção, posição e área de efeito); canhões (`CANO`, 51 bytes: direção, cadência, velocidade, trajetória); hastes (`PIPE`, 24 bytes); portões de mão única e trancados (`ONEW` e `BARR`, 65 bytes; nos trancados, os 4 bits altos do primeiro byte são as chaves: vermelha, verde, azul e amarela); plataformas (`LPTS`, 52 bytes: tipo, posição, largura e até 10 itens); informações da fase (`LVIN`: fundo, senha, próxima fase e combustível inicial).
 3. **Conferências:** as senhas batem com as listas publicadas (HYACINTH, MERIDIAN, KICKBACK…); o posto da fase 1 tem 5 barris em pirâmide; o tamanho de cada bloco bate com a soma dos registros.
 4. **O que é aproximado:** os extras de código 5 e 6 foram lidos como turbo e vida pela ordem do manual (o 7, porão, confere com as fases de muitas cargas); os portões aparecem como a caixa das duas metades; o "voo estimado" ignora portões e obstáculos.
-5. **Ferramentas:** [`crazy-gravity/ferramentas/`](crazy-gravity/ferramentas/) (`render.js` desenha os mapas e mede as fases; `chart.js` faz o gráfico). Os mapas foram convertidos em imagem com o navegador Edge.
+5. **Ferramentas:** [`crazy-gravity/ferramentas/`](crazy-gravity/ferramentas/README.md), com a especificação completa do formato e o passo a passo para regenerar tudo (`render.js` desenha os mapas e mede as fases; `chart.js` faz o gráfico; `build-page.js` monta a página de leitura). Os mapas foram convertidos em imagem com o navegador Edge.
+6. **Dados:** os números de cada fase estão em [`crazy-gravity/fases.json`](crazy-gravity/fases.json).
 
 ## 11. Fontes
 
@@ -389,3 +392,4 @@ Tudo aqui é **Proposta** para o Fernando decidir. As ligações com as decisõe
 | Versão | Data | O que mudou |
 |---|---|---|
 | 1.0 | 06/10/2026 | Primeira versão: as 18 fases mapeadas a partir dos arquivos do jogo, catálogo de elementos, curva de dificuldade, padrões de design, recepção e ideias para o nosso jogo |
+| 1.1 | 06/10/2026 | Página de leitura publicada e guardada no repositório; dados de cada fase (`fases.json`) e especificação do formato nas ferramentas |
