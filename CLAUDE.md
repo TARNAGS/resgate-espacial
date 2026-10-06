@@ -35,6 +35,7 @@ Leia o [diário de bordo](docs/06-diario-de-bordo.md). A seção "Onde paramos" 
 - Toda decisão relevante vai para `docs/05-registro-de-decisoes.md` como D-xxx, com contexto, opções, consequências e "revisitar se". Perguntas ainda abertas viram pendências P-xxx.
 - Os documentos aprovados estão em v1.x; qualquer mudança entra no histórico de versões do próprio documento.
 - Antes de afirmar algo sobre plataforma (iOS, navegadores, GitHub), conferir numa fonte primária (MDN, WebKit, documentação oficial) e citar a fonte.
+- **Antes de construir (D-033):** ao criar ou mudar uma mecânica, fase, obstáculo ou regra de gameplay, passar pelos estudos de level design e gameplay (documento 10 e `docs/benchmark/`), validar a ideia contra eles e dizer de onde veio a inspiração. **Inspirar, nunca copiar** (D-005), e o Fernando orienta o que é criado. O passo a passo está na skill `discovery-de-jogos`, seção "Antes de construir".
 - Documentação em português. **Textos do jogo em inglês** (D-007). No código, nomes em inglês e comentários em português.
 
 ## Análise dos playtests

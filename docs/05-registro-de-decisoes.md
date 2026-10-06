@@ -44,6 +44,7 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-030 | O jogo respeita a chave de silencioso do iPhone e deixa a música do jogador tocar junto | 04/10/2026 | Aceita; aviso em Settings em [#103](https://github.com/TARNAGS/resgate-espacial/issues/103) |
 | D-031 | Sem tutorial: uma DEMO jogada pelo próprio jogo antes da primeira partida e attract mode no menu | 04/10/2026 | Aceita; a construir ([#104](https://github.com/TARNAGS/resgate-espacial/issues/104) e [#105](https://github.com/TARNAGS/resgate-espacial/issues/105)) |
 | D-032 | Os jogos de nave com gravidade, a começar pelo Crazy Gravity (o jogo original), viram benchmark de level design, ao lado dos casuais do ICP | 05/10/2026 | Aceita; [documento 10](10-benchmark-de-level-design.md) e [benchmark do Crazy Gravity](benchmark/crazy-gravity.md) |
+| D-033 | Antes de construir, passar pelos estudos de level design e gameplay e validar; inspirar, nunca copiar; o Fernando orienta a criação | 06/10/2026 | Aceita; skill `discovery-de-jogos` |
 
 ## D-001 — Sem login e sem contas
 
@@ -544,6 +545,28 @@ Os eventos levam o **nickname**, e a tela do nick avisa que, no playtest, essas 
 **Consequências.** Novo [documento 10](10-benchmark-de-level-design.md), com o índice do benchmark, e o [benchmark do Crazy Gravity](benchmark/crazy-gravity.md), com as 18 fases mapeadas a partir dos arquivos do jogo. Ele alimenta o catálogo de obstáculos (P-011), os modificadores (P-012) e a curva de cada mundo (documento 08). A pesquisa dos casuais ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)) passa a responder também às perguntas de level design do documento 10, seção 4. A D-005 continua valendo: inspirar-se nas ideias, sem copiar desenho de fase, arte ou som.
 
 **Revisitar se** o benchmark começar a puxar o jogo para fases longas de labirinto, contra as partidas curtas do ICP (D-028).
+
+## D-033 — Antes de construir, passar pelos estudos; inspirar, nunca copiar
+
+**Contexto.** Em 06/10/2026, depois do benchmark do Crazy Gravity (D-032), o Fernando pediu para transformar o método de discovery numa skill do Claude Code, a `discovery-de-jogos`, para que todo estudo novo de jogo (começando pelos casuais do ICP, [#99](https://github.com/TARNAGS/resgate-espacial/issues/99)) siga o mesmo modelo. Faltava dizer quando os estudos são usados.
+
+**Opções consideradas.**
+
+| Opção | A favor | Contra |
+|---|---|---|
+| Consultar os estudos só quando o Fernando pedir | Construção mais rápida | Os estudos ficam na gaveta, e as ideias se repetem ou contradizem o que já se aprendeu |
+| **Consultar sempre antes de construir** | Cada mecânica, fase ou obstáculo nasce com repertório e com as informações conferidas | Mais um passo antes de construir algo novo |
+
+**Decisão.** Nas palavras do Fernando: "sempre que for construir algo passe pelos nossos estudos de level design e gameplay e valide informações". E: "nunca copie informações, a ideia é se inspirar; vou orientar também a criação daquilo que quero a partir dos discoveries".
+
+- Antes de construir ou mudar uma mecânica, fase, obstáculo ou regra de gameplay, o Claude lê os estudos que tratam do tema (documento 10 e `docs/benchmark/`) e confere a ideia contra eles: o que os jogos de referência confirmam e o que contradizem.
+- Diz de onde veio cada inspiração. Se os estudos não cobrem o tema, diz isso e oferece uma consulta rápida, em vez de supor.
+- **Inspirar, nunca copiar:** desenho de fase, arte, som, nomes, textos e combinações de elementos dos jogos de referência não são transplantados. A ideia é traduzida para o nosso jogo (D-005).
+- **O Fernando orienta a criação:** os estudos dão repertório e opções; o que entra no jogo é o que ele decide.
+
+**Consequências.** A skill `discovery-de-jogos`, que fica no `context-directory` (`setup/claude-global/skills/`) e vale nas duas máquinas, guarda o método do discovery e o passo "Antes de construir". A regra também está no `CLAUDE.md` do projeto. Correção de bug que não muda o design não precisa da consulta.
+
+**Revisitar se** a consulta virar burocracia em mudanças pequenas, ou se os estudos começarem a puxar o jogo para perto demais do original.
 
 ## Decisões pendentes
 

@@ -24,7 +24,8 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
   - **primeiro playtest medido** (6 amigos, 229 tentativas): resultados no [documento 09](09-resultados-dos-playtests.md);
   - aviso de pouso, treino (TRAINING), painel de ajuste escondido e **75 testes automáticos**.
 - **Jogo original identificado (05/10):** o **Crazy Gravity** (1996), de Axel Meierhöfer; a memória do Fernando o misturou com o Gravitron 2 (2008). Virou benchmark de level design (D-032).
-- **Documentos:** Visão 1.5, Regras 1.6, PRD 1.6, Roadmap 1.5, Decisões até a D-032, documento 07 (roteiro de teste), 08 (design de mundos, com o rascunho do Mundo 1), 09 (resultados dos playtests, v0.2) e 10 (benchmark de level design, com as [18 fases do Crazy Gravity](benchmark/crazy-gravity.md) mapeadas).
+- **Discovery e construção (06/10, D-033):** todo estudo de jogo segue a skill `discovery-de-jogos`, e tudo o que for construído passa antes pelos estudos de level design e gameplay. Inspirar, nunca copiar; o Fernando orienta a criação.
+- **Documentos:** Visão 1.5, Regras 1.6, PRD 1.6, Roadmap 1.5, Decisões até a D-033, documento 07 (roteiro de teste), 08 (design de mundos, com o rascunho do Mundo 1), 09 (resultados dos playtests, v0.2) e 10 (benchmark de level design, com as [18 fases do Crazy Gravity](benchmark/crazy-gravity.md) mapeadas).
 - **Pendências abertas:** P-003 (nome), P-006 (pontuação), P-008 (medição), P-011 (obstáculos), P-012 (modificadores), P-014 (cobrar ou não, [#98](https://github.com/TARNAGS/resgate-espacial/issues/98)), P-015 (CNPJ), P-017 (loja), P-018 (modo Nightmare, [#79](https://github.com/TARNAGS/resgate-espacial/issues/79)), P-019 (ranking no lançamento, [#101](https://github.com/TARNAGS/resgate-espacial/issues/101)). Decididas em 04/10: P-009 (D-031), P-013 (D-028), P-020 (D-026), P-021 (D-027) e P-022 (D-029); P-016 respondida em parte pela arquitetura.
 
 ### Próximos passos
@@ -325,6 +326,12 @@ O Fernando pediu "pode codar todas as melhorias". Construído, testado (92 teste
 - **Recepção:** 80% na PC Player; 8,43/10 (44 votos) na Home of the Underdogs; jogadores que procuraram o jogo por 20 anos depois de uma demo em CD de revista, como o Fernando.
 - **Documentos:** novo [documento 10](10-benchmark-de-level-design.md) (v0.2, com o registro completo da busca: candidatos mostrados e fontes procuradas) e [benchmark do Crazy Gravity](benchmark/crazy-gravity.md) (v1.1, com as imagens em `docs/benchmark/crazy-gravity/`); Visão 1.5 (referências do gênero); D-005 atualizada; D-032. Os arquivos do jogo original não entram no repositório (`.gitignore`).
 - **Página de leitura, guardada para inspiração:** a análise com os 18 mapas foi publicada em [claude.ai/artifact/UfYWNwM15P6jd2YPDnReh4](https://claude.ai/artifact/UfYWNwM15P6jd2YPDnReh4) (privada, fixada na barra lateral do Fernando) e guardada no repositório em `docs/benchmark/crazy-gravity/pagina-de-leitura.html`. Ficaram também os números de cada fase (`fases.json`) e as ferramentas, com a especificação do formato de fase e o passo a passo para regenerar tudo (`docs/benchmark/crazy-gravity/ferramentas/README.md`). O Fernando pediu para guardar tudo para usar de inspiração depois.
+
+### 06/10/2026 — Skill de discovery e consulta antes de construir (D-033)
+
+- **Pedido do Fernando:** transformar o método do benchmark do Crazy Gravity em algo automático. Virou a skill global **`discovery-de-jogos`** do Claude Code, que fica no `context-directory` (`setup/claude-global/skills/`) e vale no Mac e no Windows. Ela tem três tamanhos: discovery completo de um jogo, comparativo de vários (o caso da [#99](https://github.com/TARNAGS/resgate-espacial/issues/99)) e consulta rápida, e um modelo de documento com as seções do benchmark do Crazy Gravity.
+- **D-033:** "sempre que for construir algo passe pelos nossos estudos de level design e gameplay e valide informações", mas "nunca copie informações, a ideia é se inspirar". A skill ganhou a seção "Antes de construir", e a regra entrou no `CLAUDE.md` do projeto.
+- **Próximo teste da skill:** a pesquisa dos casuais do ICP ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)).
 
 ## Aprendizados de produto
 
