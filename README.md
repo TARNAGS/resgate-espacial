@@ -32,6 +32,7 @@ Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável
 | 08 | [Design de mundos](docs/08-design-de-mundos.md) | O que é um mundo e como documentar cada um ([Mundo 1](docs/mundos/mundo-01.md)) | Proposta |
 | 09 | [Resultados dos playtests](docs/09-resultados-dos-playtests.md) | O que cada rodada de testes mostrou, com os dados da telemetria | Contínuo |
 | 10 | [Benchmark de level design](docs/10-benchmark-de-level-design.md) | O que os jogos de referência fazem com fases e obstáculos, a começar pelo original ([Crazy Gravity, 18 fases mapeadas](docs/benchmark/crazy-gravity.md)) | Em construção |
+| 11 | [Anticheat e ranking justo](docs/11-anticheat-e-ranking-justo.md) | Como proteger o ranking contra trapaça: tipos de anticheat, casos reais, as portas abertas de hoje e uma proposta em três degraus | Proposta |
 
 ## Como o trabalho é organizado
 

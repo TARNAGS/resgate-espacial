@@ -3,8 +3,8 @@
 | Campo | Valor |
 |---|---|
 | Documento | 09 — Resultados dos playtests |
-| Versão | 0.2 |
-| Data | 04/10/2026 |
+| Versão | 0.3 |
+| Data | 07/10/2026 |
 | Status | Contínuo |
 | Responsável | Fernando Nunes (Product Manager) |
 
@@ -157,9 +157,31 @@ O Fernando jogou e assistiu aos outros 5 jogadores ([#43](https://github.com/TAR
 | Recomeço rápido e uma vida só | P-006, [#53](https://github.com/TARNAGS/resgate-espacial/issues/53) | Recomeços logo depois de morrer (hoje 120 de 128) |
 | Medição | [#91](https://github.com/TARNAGS/resgate-espacial/issues/91) | — |
 
+### Como a rodada terminou (07/10/2026)
+
+A janela de teste ficou aberta de 02/10 a 07/10, mas a rodada de verdade durou um fim de semana, de sexta a domingo. A contagem abaixo é por dia, no horário de Brasília, e deixa de fora os testes feitos no computador:
+
+| Dia | Sessões | Com alguma fase jogada | Só abriram o jogo | Jogadores que jogaram uma fase |
+|---|---|---|---|---|
+| sex 02/10 | 22 | 16 | 5 | 6 |
+| sáb 03/10 | 17 | 7 | 9 | 2 |
+| dom 04/10 | 9 | 4 | 5 | 3 |
+| seg 05/10 | 4 | 1 | 3 | 1 (o Fernando) |
+| ter 06/10 | 1 | 0 | 1 | 0 |
+| qua 07/10 | 4 | 0 | 4 | 0 |
+
+- **Os amigos jogaram pela última vez no domingo, 04/10.** Depois disso, a única partida foi do Fernando (05/10, nível 3).
+- **As sessões de 05/10 em diante não são partidas.** As 8 sessões dos amigos têm um único registro, a abertura do jogo, e nenhuma fase. O mais provável é a aba do jogo deixada aberta no navegador recarregando sozinha. Um dos aparelhos ainda rodava a versão de 02/10, o que reforça essa leitura.
+- **A versão `2026-10-04a` quase não foi jogada pelos amigos.** Ela trouxe os avisos de combustível, a DEMO, o attract mode, as mensagens no alto e o som depois de ligação. Tudo isso fica para a próxima rodada, com um aviso na tela do que mudou ([#126](https://github.com/TARNAGS/resgate-espacial/issues/126)).
+- **O perfil online ([#102](https://github.com/TARNAGS/resgate-espacial/issues/102)) não gravou nada nesta rodada,** porque a regra do banco não estava publicada. O progresso de cada jogador ficou no próprio aparelho e sobe para o banco quando a regra for publicada e ele abrir o jogo de novo.
+- **A janela de teste foi fechada em 07/10/2026** (D-017): repositório privado e site fora do ar.
+
+**Lição para as próximas rodadas:** com amigos, uma rodada dura um fim de semana. Por isso, combinar o começo e o fim, avisar o que mudou e fechar a janela no fim.
+
 ## Histórico de versões
 
 | Versão | Data | O que mudou |
 |---|---|---|
 | 0.1 | 03/10/2026 | Primeira versão, com o playtest de 02/10/2026 |
 | 0.2 | 04/10/2026 | Retorno do Fernando, critério do M1 atendido e próximos passos depois das decisões D-026, D-027 e D-028 |
+| 0.3 | 07/10/2026 | Como a rodada 1 terminou: sessões por dia, última partida dos amigos em 04/10, perfil online sem a regra publicada e janela de teste fechada |

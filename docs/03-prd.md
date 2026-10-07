@@ -5,8 +5,8 @@
 | Campo | Valor |
 |---|---|
 | Documento | 03 — PRD (requisitos do produto) |
-| Versão | 1.6 |
-| Data | 02/10/2026 |
+| Versão | 1.7 |
+| Data | 07/10/2026 |
 | Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
 
@@ -192,6 +192,7 @@ O tempo entre o link e o controle da nave (RNF-01) é medido em teste, não pela
 | O polegar acionar gestos do sistema (voltar, ir para o início) sem querer | Média | Direcional longe das bordas; testar no iPhone |
 | O iOS mudar o comportamento dos web apps numa atualização | Baixa | Revisar a seção 6 a cada versão nova do iOS |
 | A ferramenta de medição gratuita mudar limites ou regras | Baixa | Medição isolada num único ponto do código, fácil de trocar |
+| Trapaça no ranking: tempo falso, nick de outra pessoa, jogo alterado, câmera lenta ou robô | Baixa no playtest; alta no lançamento | Proposta em três degraus no [documento 11](11-anticheat-e-ranking-justo.md) (P-023, [#109](https://github.com/TARNAGS/resgate-espacial/issues/109)): piso de tempo e dono do nick; conferência da corrida pelo replay; no lançamento, identidade da loja e revisão do top 10 |
 
 ## 10. Fora do escopo
 
@@ -243,3 +244,4 @@ Os próximos passos estão no [Roadmap](04-roadmap.md) e no [quadro kanban](http
 | 1.4 | 02/10/2026 | Big picture com prioridade "Depois": abertura (RF-18), loja de itens (RF-19), moedas (RF-20), publicação nas lojas (RF-21, D-019) e mundos com 10 fases (RF-22, D-020). O MVP não muda |
 | 1.5 | 02/10/2026 | RF-17 revisto: fases com cenário fixo, fase BONUS sorteada (D-021) e abastecer obrigatório uma vez (D-023) |
 | 1.6 | 02/10/2026 | Playtest: nickname e ranking por fase (RF-23, D-024) e telemetria das partidas (RF-24, D-025); RNF-06 e seção 7 ganham a exceção do playtest |
+| 1.7 | 07/10/2026 | Risco novo na seção 9: trapaça no ranking, com a mitigação proposta no documento 11 (P-023) |

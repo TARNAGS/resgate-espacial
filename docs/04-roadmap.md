@@ -3,8 +3,8 @@
 | Campo | Valor |
 |---|---|
 | Documento | 04 — Roadmap |
-| Versão | 1.5 |
-| Data | 02/10/2026 |
+| Versão | 1.7 |
+| Data | 07/10/2026 |
 | Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
 
@@ -37,7 +37,7 @@ flowchart LR
 
 | ID | Iniciativa | Objetivo da Visão que atende | Marcos |
 |---|---|---|---|
-| [I-01](https://github.com/TARNAGS/resgate-espacial/issues/1) | Fundação técnica | Publicar o jogo (seção 6.3) | M0 |
+| [I-01](https://github.com/TARNAGS/resgate-espacial/issues/1) | Fundação técnica | Publicar o jogo (seção 6.3) e crescer sem quebrar as regras (seção 8.3) | M0, M2 e M3 |
 | [I-02](https://github.com/TARNAGS/resgate-espacial/issues/2) | Provar a diversão do controle | Princípio "o controle é o produto" e maior risco do produto (seção 10) | M1 |
 | [I-03](https://github.com/TARNAGS/resgate-espacial/issues/3) | Jogo completo: do voo ao resgate | North Star: resgates concluídos (seção 6.1) | M2 e M3 |
 | [I-04](https://github.com/TARNAGS/resgate-espacial/issues/4) | Instalável e confiável no celular | Acesso sem atrito e instalação (seção 6.2) | M2 e M3 |
@@ -48,12 +48,13 @@ flowchart LR
 
 ## 3. Épicos
 
-### I-01 — Fundação técnica (M0)
+### I-01 — Fundação técnica (M0, M2 e M3)
 
 | ID | Épico | O que inclui | Referências |
 |---|---|---|---|
 | [E-01](https://github.com/TARNAGS/resgate-espacial/issues/7) | Decisões técnicas de base | Escolher a tecnologia, a visibilidade do repositório e a hospedagem, e registrar como decisões | P-004, P-001, P-005 |
 | [E-02](https://github.com/TARNAGS/resgate-espacial/issues/8) | Esqueleto publicado | Estrutura do código e publicação automática por HTTPS a cada envio ao GitHub, abrindo no iPhone | RNF-07, RNF-08 |
+| [E-26](https://github.com/TARNAGS/resgate-espacial/issues/110) | Abstração (M2 e M3) | Deixar o jogo pronto para 10 mundos, 100 fases, skins, naves diferentes e evoluções sem quebrar as regras básicas: mapa de impacto, testes que vigiam as regras, contratos de fase, obstáculo, evento e parâmetros, nave como dado, skins e o código dividido em peças. Nenhuma tarefa muda o jogo para o jogador | Pedido do Fernando (07/10/2026); D-018, D-021; P-017 |
 
 ### I-02 — Provar a diversão do controle (M1)
 
@@ -121,7 +122,9 @@ flowchart LR
 | Construir as telas de resultado (M2) | Sistema de pontuação | P-006 |
 | Construir a medição (M2) | Ferramenta de medição anônima | P-008 |
 | Lançar o MVP (M2) | Nome final do jogo | P-003 |
+| A próxima rodada de playtest | Se o degrau 1 do anticheat (piso de tempo por fase e dono do nick) entra já | P-023 |
 | Publicar nas lojas (M4) | Jogo pago, gratuito com loja, ou os dois; como empacotar e o risco de recusa | P-014; [#65](https://github.com/TARNAGS/resgate-espacial/issues/65) |
+| Publicar nas lojas (M4) | Ranking justo: que proteção contra trapaça e se o ranking é da loja, nosso ou os dois | P-019 e P-023; [#101](https://github.com/TARNAGS/resgate-espacial/issues/101) e [#109](https://github.com/TARNAGS/resgate-espacial/issues/109) |
 | Construir a loja (M5) | O que a loja vende, com que moeda e a regra de itens justos | P-017 |
 | Fechar o M5 | Quantos mundos no lançamento e a novidade de cada um | P-011 |
 
@@ -155,3 +158,5 @@ A hospedagem deixou de ser um detalhe do fim do projeto: para testar o controle 
 | 1.3 | 01/10/2026 | Fases geradas aleatoriamente (D-014) e menu com mapa de progresso (D-015): E-09 vira "Gerador de fases e níveis 1 a 3", E-12 vira "Níveis 4 e 5" e E-10 inclui o menu com mapa |
 | 1.4 | 02/10/2026 | Big picture do Fernando: marcos M4 (lojas) e M5 (mundos e loja) em proposta, iniciativas I-07 e I-08 e épicos E-21 a E-25. Publicação nas lojas decidida (D-019) e mundos com 10 fases (D-020). O MVP continua com 3 fases |
 | 1.5 | 02/10/2026 | M2 com cenários fixos (D-021) e os desafios PRACTICE e BONUS |
+| 1.6 | 07/10/2026 | Seção 4: ranking justo antes de publicar nas lojas e degrau 1 do anticheat antes da próxima rodada de playtest (P-019 e P-023, documento 11) |
+| 1.7 | 07/10/2026 | Épico E-26 · Abstração na I-01, que passa a cobrir também M2 e M3: 15 tarefas em cinco ondas, da mais barata à mais cara |

@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 05 — Registro de decisões |
-| Última atualização | 06/10/2026 |
+| Última atualização | 07/10/2026 |
 | Responsável | Fernando Nunes (Product Manager) |
 
 Cada decisão relevante de produto fica registrada aqui, com o contexto e o motivo. Assim ela não é rediscutida sem necessidade e pode ser revista quando o contexto mudar.
@@ -45,6 +45,8 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-031 | Sem tutorial: uma DEMO jogada pelo próprio jogo antes da primeira partida e attract mode no menu | 04/10/2026 | Aceita; a construir ([#104](https://github.com/TARNAGS/resgate-espacial/issues/104) e [#105](https://github.com/TARNAGS/resgate-espacial/issues/105)) |
 | D-032 | Os jogos de nave com gravidade, a começar pelo Crazy Gravity (o jogo original), viram benchmark de level design, ao lado dos casuais do ICP | 05/10/2026 | Aceita; [documento 10](10-benchmark-de-level-design.md) e [benchmark do Crazy Gravity](benchmark/crazy-gravity.md) |
 | D-033 | Antes de construir, passar pelos estudos de level design e gameplay e validar; inspirar, nunca copiar; o Fernando orienta a criação | 06/10/2026 | Aceita; skill `discovery-de-jogos` |
+| D-034 | Nave nova é só aparência (casco e atributos da clássica, sem mexer no ranking), a não ser que se diga expressamente que ela muda o jogo | 07/10/2026 | Aceita; épico E-26 ([#110](https://github.com/TARNAGS/resgate-espacial/issues/110)) |
+| D-035 | Evolução da nave que muda atributos muda o jogo e mexe no ranking; evolução só visual não mexe | 07/10/2026 | Aceita; como os tempos aparecem no ranking é a P-024 |
 
 ## D-001 — Sem login e sem contas
 
@@ -568,6 +570,62 @@ Os eventos levam o **nickname**, e a tela do nick avisa que, no playtest, essas 
 
 **Revisitar se** a consulta virar burocracia em mudanças pequenas, ou se os estudos começarem a puxar o jogo para perto demais do original.
 
+## D-034 — Nave nova é só aparência, a não ser que se diga que muda o jogo
+
+**Contexto.** Em 07/10/2026, o Fernando pediu o épico E-26 · Abstração ([#110](https://github.com/TARNAGS/resgate-espacial/issues/110)). O objetivo é que o jogo chegue a 10 mundos, 100 fases, skins e formatos de nave diferentes sem quebrar as regras básicas. Ficou a pergunta: uma nave com outro formato muda o que bate (o casco), os atributos e o ranking, ou só o visual? A resposta muda o custo de cada nave nova. Uma nave que muda o jogo precisa provar todas as fases com o piloto automático (D-018 e D-023), e os tempos dela não podem se misturar com os da nave clássica.
+
+**Opções consideradas.**
+
+| Opção | A favor | Contra |
+|---|---|---|
+| Toda nave muda o jogo (casco e atributos próprios) | Mais variedade de jogo | Cada nave prova todas as fases e separa o ranking; risco de vantagem comprada na loja (P-017) |
+| **Nave é só aparência por padrão; a que muda o jogo é declarada** | Naves e skins novas sem risco para as regras nem para o ranking, com a porta aberta para naves de jogo | Uma nave desenhada muito diferente do casco pode enganar o olho |
+| Toda nave é sempre só aparência | O mais simples | Fecha a porta para naves com jogo diferente |
+
+**Decisão.** Nas palavras do Fernando: "Uma nave com formato diferente é só aparência. A não ser que a gente diga expressamente que a nave nova muda o jogo." E: "Como as mudanças nas naves são cosméticas, não interferem no ranking, a não ser que seja uma nave que muda o jogo."
+
+- **Nave de aparência (o padrão):** usa o casco e os atributos da nave clássica, muda só o desenho e não mexe no ranking.
+- **Nave que muda o jogo:** precisa ser marcada como tal. Só ela pode ter casco ou atributos próprios. Ela prova cada fase com o piloto automático, e os tempos dela não se misturam com os da nave clássica no ranking.
+
+**Consequências.**
+
+- **No E-26:**
+  - a definição da nave ganha uma marca "muda o jogo", desligada por padrão ([#122](https://github.com/TARNAGS/resgate-espacial/issues/122));
+  - a nave clássica vira o casco padrão ([#121](https://github.com/TARNAGS/resgate-espacial/issues/121));
+  - a skin recebe o casco e não consegue mudá-lo ([#124](https://github.com/TARNAGS/resgate-espacial/issues/124));
+  - a chave do ranking só muda com uma nave que muda o jogo ([#120](https://github.com/TARNAGS/resgate-espacial/issues/120)).
+- **Pega:** como o casco é o mesmo, o desenho de uma nave de aparência precisa ficar perto dele. Uma nave desenhada com asas compridas passaria "por dentro" de uma pedra sem explodir, e o jogador acharia que é defeito. **Proposta:** o desenho fica dentro de uma folga de cerca de 3 pixels em volta do casco padrão, conferida por teste ([#124](https://github.com/TARNAGS/resgate-espacial/issues/124)).
+- Responde, para as naves, parte da P-017: uma nave de aparência nunca dá vantagem, então pode ser vendida sem afetar recordes.
+- **Em aberto:** como uma nave que muda o jogo aparece no ranking (P-024). As evoluções da nave seguem a mesma regra (D-035).
+
+**Revisitar se** a loja (P-017) precisar vender naves que mudam o jogo, ou se os jogadores sentirem que as naves de aparência não batem onde parecem.
+
+## D-035 — Evolução que muda atributos muda o jogo; evolução só visual, não
+
+**Contexto.** Depois da D-034, faltava a outra pergunta do épico E-26 ([#110](https://github.com/TARNAGS/resgate-espacial/issues/110)): as evoluções da nave contam no ranking? Elas podem ser melhorias que o jogador ganha ao avançar ou compra na loja (P-017). A cadeia de parâmetros da [#120](https://github.com/TARNAGS/resgate-espacial/issues/120) já reserva uma camada para elas.
+
+**Opções consideradas.** O Claude propôs separar a evolução pelo que ela muda, seguindo a D-034.
+
+| Opção | A favor | Contra |
+|---|---|---|
+| Nenhuma evolução mexe no ranking | Simples | Quem tem mais propulsor bate o recorde de quem não tem: vantagem ganha ou comprada |
+| **Evolução de atributos muda o jogo; evolução visual não** | A mesma regra das naves (D-034); o ranking só compara corridas feitas com o mesmo jogo | Mais configurações para o ranking tratar (P-024) |
+
+**Decisão.** O Fernando aprovou a proposta ("Siga com isso"):
+
+- uma evolução que muda atributos (mais propulsor, tanque maior) muda o jogo por natureza, então mexe no ranking;
+- uma evolução só visual não mexe.
+
+Juntas, a D-034 e a D-035 dão a regra geral: **o que muda só a aparência nunca mexe no ranking; o que muda o jogo sempre mexe.**
+
+**Consequências.**
+
+- **Na [#120](https://github.com/TARNAGS/resgate-espacial/issues/120):** a camada "evoluções" da cadeia de parâmetros entra na chave do ranking quando muda um atributo. A evolução visual fica na camada de aparência (skins, [#124](https://github.com/TARNAGS/resgate-espacial/issues/124)) e nunca entra na chave.
+- **Pega:** uma evolução de atributos também mexe no tanque provado (D-018 e D-023). Com mais propulsor ou tanque maior, o abastecimento que hoje é obrigatório pode deixar de fazer falta. O tanque das fases continua calculado com a nave base. Quando as evoluções forem desenhadas, é preciso decidir se a fase recalcula o tanque para cada configuração ou se facilitar é justamente o papel da evolução. Isso entrou na P-024.
+- Como os tempos de uma configuração que muda o jogo aparecem no ranking virou a P-024.
+
+**Revisitar se** as evoluções forem desenhadas só como progresso, sem ranking, ou se o ranking ficar dividido em configurações demais.
+
 ## Decisões pendentes
 
 | ID | Pergunta | Quando decidir | Observação |
@@ -582,10 +640,12 @@ Os eventos levam o **nickname**, e a tela do nick avisa que, no playtest, essas 
 | P-013 | Quem é o jogador ideal do jogo (ICP)? Resolvida pela D-028 (04/10/2026). | Antes dos testes com pessoas ([#43](https://github.com/TARNAGS/resgate-espacial/issues/43)) | Aprofunda a persona primária da Visão (seção 4). Cartão [#59](https://github.com/TARNAGS/resgate-espacial/issues/59) |
 | P-014 | O jogo será pago, gratuito com loja de itens, ou os dois? | Antes da publicação nas lojas (M4) | Ir para as lojas já foi decidido (D-019); falta decidir se e como cobrar: download pago, loja de itens e cosméticos, ou os dois. Desde 04/10/2026, na pesquisa única de lojas e dinheiro, cartão [#98](https://github.com/TARNAGS/resgate-espacial/issues/98) (substitui a #63 e a #65) |
 | P-018 | Como funciona o modo Nightmare, em que morrer não devolve o combustível? | Antes de construir o modo (M5) | Ideia do Fernando depois do teste com um amigo (02/10/2026). A nave reaparece pousada na base, que abastece: o modo precisa dizer se base e posto continuam abastecendo. Conversa com P-012 (modificadores) e P-017 (loja). Cartão [#79](https://github.com/TARNAGS/resgate-espacial/issues/79) |
-| P-019 | Como funciona um ranking de tempos por fase? Para os playtesters, resolvida pela D-024 (nickname e banco simples); para o lançamento, continua em aberto. | Antes da publicação nas lojas (M4) | Ideia do Fernando depois do teste com um amigo. Ranking entre jogadores esbarra em D-001 (sem login) e no cenário sorteado (D-014); saídas: rankings do Game Center e do Google Play Games e um desafio do dia com a mesma semente para todos. Para o lançamento: história [#101](https://github.com/TARNAGS/resgate-espacial/issues/101), que depende da pesquisa [#98](https://github.com/TARNAGS/resgate-espacial/issues/98) (a #80 foi encerrada em 04/10/2026) |
+| P-019 | Como funciona um ranking de tempos por fase? Para os playtesters, resolvida pela D-024 (nickname e banco simples); para o lançamento, continua em aberto. | Antes da publicação nas lojas (M4) | Ideia do Fernando depois do teste com um amigo. Ranking entre jogadores esbarra em D-001 (sem login) e no cenário sorteado (D-014); saídas: rankings do Game Center e do Google Play Games e um desafio do dia com a mesma semente para todos. Para o lançamento: história [#101](https://github.com/TARNAGS/resgate-espacial/issues/101), que depende da pesquisa [#98](https://github.com/TARNAGS/resgate-espacial/issues/98) (a #80 foi encerrada em 04/10/2026). Pesquisa de anticheat em 07/10/2026 ([documento 11](11-anticheat-e-ranking-justo.md), [#109](https://github.com/TARNAGS/resgate-espacial/issues/109)): os rankings das lojas resolvem o nome, mas não conferem o tempo; a proteção contra trapaça virou a P-023 |
+| P-023 | Que proteção contra trapaça o ranking terá, e quando? Proposta do Claude em três degraus: (1) já nos playtests, piso de tempo por fase e dono do nick (login anônimo do Firebase); (2) antes do lançamento, conferir a corrida pelo replay; (3) no lançamento, identidade da loja, App Check, revisão humana do top 10 e botão de denúncia. | Degrau 1: antes da próxima rodada de playtest. Degraus 2 e 3: antes da publicação nas lojas (M4) | Pergunta do Fernando (07/10/2026): pessoas podem usar trapaça para bater os recordes. Pesquisa e as cinco perguntas a responder no [documento 11](11-anticheat-e-ranking-justo.md), seção 9. Cartão [#109](https://github.com/TARNAGS/resgate-espacial/issues/109). Liga com a P-019 ([#101](https://github.com/TARNAGS/resgate-espacial/issues/101)) e a pesquisa de lojas ([#98](https://github.com/TARNAGS/resgate-espacial/issues/98), item 4). O mesmo replay daria o "fantasma" do melhor tempo |
 | P-020 | Abastecer obrigatório (D-023) não segura os jogadores reais: como garantir, ou a regra muda? Resolvida pela D-026 (04/10/2026): piloto mais econômico e tanque recalculado, sem regra que obrigue. | Antes da próxima rodada de playtest | Opções: piloto mais econômico e tanques recalculados, tanque calibrado pelos jogadores, posto como parada obrigatória, ou aceitar abastecer opcional. Mudar a fase recomeça o ranking dela. Dados no [documento 09](09-resultados-dos-playtests.md). Cartão [#89](https://github.com/TARNAGS/resgate-espacial/issues/89) |
 | P-021 | O pouso na tripulação é a maior dificuldade e o nível 1 travou um jogador: o que mudar? Resolvida pela D-027 (04/10/2026): o pouso fica como está; ensinar o propulsor vai para a P-009. | Antes da próxima rodada de playtest | Opções: afastar a plataforma da parede do fim, nível 1 mais tolerante, dica depois de mortes no pouso e oferecer o TRAINING. Conversa com P-009. Cartão [#90](https://github.com/TARNAGS/resgate-espacial/issues/90) |
-| P-017 | O que a loja de itens vende, com que moeda, e como evitar vantagem injusta? | Antes de construir a loja (E-24) | Ideia do Fernando: itens de jogo e de nave, com dinheiro real ou moedas do jogo. Itens que facilitem o jogo afetam recordes e a regra do melhor caminho (D-018). Cartão [#78](https://github.com/TARNAGS/resgate-espacial/issues/78) |
+| P-017 | O que a loja de itens vende, com que moeda, e como evitar vantagem injusta? | Antes de construir a loja (E-24) | Ideia do Fernando: itens de jogo e de nave, com dinheiro real ou moedas do jogo. Itens que facilitem o jogo afetam recordes e a regra do melhor caminho (D-018). Para as naves e as evoluções, a D-034 e a D-035 (07/10/2026) respondem em parte: o que muda só a aparência não mexe no ranking; uma nave marcada como "muda o jogo" ou uma evolução de atributos mexe (P-024). Cartão [#78](https://github.com/TARNAGS/resgate-espacial/issues/78) |
+| P-024 | Como os tempos de uma nave ou evolução que muda o jogo (D-034 e D-035) aparecem no ranking? | Antes de construir a primeira nave de jogo ou evolução de atributos (E-24, M5) | Opções: um ranking para cada configuração; ranking só com a nave base (com evolução, a corrida não entra); ou evoluções valendo só fora do ranking. Também decidir se o tanque provado (D-018 e D-023) é recalculado para cada configuração. Liga com a P-017 ([#78](https://github.com/TARNAGS/resgate-espacial/issues/78)) e a P-019 ([#101](https://github.com/TARNAGS/resgate-espacial/issues/101)). A [#120](https://github.com/TARNAGS/resgate-espacial/issues/120) serve para qualquer resposta |
 | P-015 | Como receber dinheiro, e é preciso CNPJ? | Só se a P-014 decidir cobrar ou aceitar doações | Cartão [#64](https://github.com/TARNAGS/resgate-espacial/issues/64) |
 | P-022 | Que informações do jogador o jogo salva no banco online (Firebase), além do ranking e da telemetria, e como protegê-las sem login? Resolvida pela D-029 (04/10/2026). | Antes do próximo playtest | Pedido do Fernando (04/10/2026): "quero que salve informações no banco de dados que temos". Recomendação do Claude: progresso de cada fase ligado ao nick, com regras que só deixam o progresso crescer. Cartão [#100](https://github.com/TARNAGS/resgate-espacial/issues/100) |
 | P-016 | O que o jogo guarda, e onde: só no aparelho ou também num servidor? Respondida em parte pela arquitetura (progresso no aparelho; ranking e telemetria no Firebase); o que falta virou a P-022. | Antes de construir o progresso salvo (E-14) | Hoje tudo fica no aparelho; um servidor reabre D-001, D-003 e D-004. Cartão [#62](https://github.com/TARNAGS/resgate-espacial/issues/62) |

@@ -3,8 +3,8 @@
 | Campo | Valor |
 |---|---|
 | Documento | 02 — Regras do jogo |
-| Versão | 1.6 |
-| Data | 04/10/2026 |
+| Versão | 1.7 |
+| Data | 07/10/2026 |
 | Status | Aprovado; pendente: pontuação (P-006) |
 | Responsável | Fernando Nunes (Product Manager) |
 
@@ -280,7 +280,7 @@ Registradas para não se perderem. **Não são compromisso**: só entram se o Ro
 - Gravidade diferente em cada planeta. Agora pode ser uma característica de mundo (D-020; P-012).
 - Itens da loja que mudam o visual da nave, do propulsor e das explosões (P-017).
 - Suporte a controle de videogame (gamepad).
-- "Fantasma" do melhor tempo, para o jogador competir contra si mesmo.
+- "Fantasma" do melhor tempo, para o jogador competir contra si mesmo. O replay proposto para conferir o ranking ([documento 11](11-anticheat-e-ranking-justo.md), seção 6.2) é a base dele, e também permitiria correr contra o primeiro do ranking ou assistir à corrida do recordista.
 - Compartilhar o recorde com um link ou uma imagem.
 
 ## 16. Glossário
@@ -307,3 +307,4 @@ Registradas para não se perderem. **Não são compromisso**: só entram se o Ro
 | 1.5 | 02/10/2026 | Depois do teste com amigos: fases fixas e fase BONUS (D-021), controle de dois polegares como principal (D-022) e abastecer pelo menos uma vez (D-023) |
 | 1.4 | 02/10/2026 | Big picture: mundos com 10 fases e visual próprio (D-020), abertura em três telas (seção 10.1, Proposta) e curva de dificuldade passa a ser a do Mundo 1. O MVP continua com 3 fases |
 | 1.6 | 04/10/2026 | Como o jogo ensina: DEMO e attract mode, sem tutorial (D-031, resolve a P-009); P-010 resolvida pela D-021; silencioso do iPhone (D-030) |
+| 1.7 | 07/10/2026 | Ideia do fantasma (seção 15) ligada ao replay proposto para conferir o ranking (documento 11) |

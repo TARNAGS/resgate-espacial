@@ -27,6 +27,7 @@ Leia o [diário de bordo](docs/06-diario-de-bordo.md). A seção "Onde paramos" 
 | Quadro kanban | GitHub Project "Resgate Espacial — Produto": https://github.com/users/TARNAGS/projects/1 |
 | Modelos de issue | `.github/ISSUE_TEMPLATE/` |
 | Abrir o jogo ou o protótipo pelo navegador do Claude Code | `.claude/launch.json`, configurações "jogo" e "prototipo" |
+| Anticheat e ranking justo (tipos de anticheat, casos, portas abertas do ranking e proposta em degraus) | `docs/11-anticheat-e-ranking-justo.md` ([#109](https://github.com/TARNAGS/resgate-espacial/issues/109)) |
 | Benchmarks de jogos de referência | `docs/benchmark/README.md` (guia: os estudos lidos juntos, insights e decisões pendentes; comece por ele), `docs/10-benchmark-de-level-design.md` (índice e lições) e `docs/benchmark/`; todo discovery novo segue a skill global `discovery-de-jogos` (fica no `context-directory`, em `setup/claude-global/skills/`) |
 
 ## Como trabalhamos
@@ -78,11 +79,15 @@ O campo "Quem" (Fernando ou Claude) diz com quem o cartão está.
 
 No plano gratuito, o GitHub Pages só publica repositórios públicos. Para o Fernando testar o jogo publicado:
 
+0. **Antes de abrir uma rodada com outras pessoas:**
+   - combinar com o Fernando o começo e o fim. Uma rodada com amigos dura um fim de semana (documento 09, "Como a rodada terminou");
+   - deixar pronta a linha de patch note da versão ([#126](https://github.com/TARNAGS/resgate-espacial/issues/126)), com o texto aprovado pelo Fernando;
+   - não enviar ao GitHub, enquanto a janela estiver aberta, documentos que expliquem as fraquezas do ranking (o documento 11, por exemplo).
 1. Avisar que, enquanto a janela estiver aberta, qualquer pessoa vê e pode copiar o repositório inteiro.
 2. Abrir: `gh repo edit TARNAGS/resgate-espacial --visibility public --accept-visibility-change-consequences`.
 3. Reativar o Pages, que é apagado quando o repositório fecha: `gh api -X POST repos/TARNAGS/resgate-espacial/pages -f "source[branch]=main" -f "source[path]=/"`. Depois do primeiro build, forçar HTTPS: `gh api -X PUT repos/TARNAGS/resgate-espacial/pages -F https_enforced=true`.
 4. Conferir que https://tarnags.github.io/resgate-espacial/prototipos/01/ responde, e passar o link.
-5. No fim do teste, fechar: `gh repo edit TARNAGS/resgate-espacial --visibility private --accept-visibility-change-consequences`. Conferir que o link volta a dar 404.
+5. No fim do teste, fechar: `gh repo edit TARNAGS/resgate-espacial --visibility private --accept-visibility-change-consequences`. Conferir que o link volta a dar 404. Depois, registrar no documento 09 como a rodada terminou (sessões por dia, a partir da telemetria) e tirar o aviso de janela aberta do diário de bordo.
 
 Fora das janelas, o protótipo roda na rede de casa. Rodar `node prototipos/servir.js` e, no iPhone, no mesmo Wi-Fi, abrir `http://<IP do computador>:8080/01/`. Para achar o IP: `ipconfig` no Windows, `ipconfig getifaddr en0` no Mac. O Windows pode pedir para liberar o Node no firewall. Sem HTTPS, não dá para instalar como app.
 
