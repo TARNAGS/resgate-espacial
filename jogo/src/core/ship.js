@@ -1,4 +1,4 @@
-import { SHIP } from './constants.js';
+import { DEFAULT_SHIP } from '../content/ships/index.js';
 import { clamp, lerp, rad, wrapAngle } from './math.js';
 
 // Física da nave (Regras do jogo, seção 3.1). Funções puras: recebem a nave, a intenção do
@@ -8,10 +8,13 @@ import { clamp, lerp, rad, wrapAngle } from './math.js';
 //   turn         -1, 0 ou 1: girar no teclado
 //   targetAngle  ângulo para onde o dedo aponta (direcional), ou null
 //   thrust       propulsor acionado
+//
+// O formato da nave (casco, pés, bocal, porta) vem de content/ships/ (#121). Hoje toda partida usa a nave
+// clássica, o casco padrão (D-034); as funções recebem a definição para a nave que mudar o jogo (#122).
 
-export function createShip(pad, fuel) {
+export function createShip(pad, fuel, def = DEFAULT_SHIP) {
   return {
-    x: (pad.x1 + pad.x2) / 2, y: pad.y - SHIP.base, vx: 0, vy: 0, a: 0,
+    x: (pad.x1 + pad.x2) / 2, y: pad.y - def.feet.y, vx: 0, vy: 0, a: 0,
     state: 'landed', pad, fuel, thrusting: false, explodeT: 0, resetCrew: false,
   };
 }
@@ -51,17 +54,17 @@ export function fly(s, input, p, dt, { crewOnBoard = false } = {}) {
   return ranOut;
 }
 
-export function shipVerts(s) {
+// Os vértices do casco, na posição e no ângulo da nave
+export function shipVerts(s, def = DEFAULT_SHIP) {
   const c = Math.cos(s.a), sn = Math.sin(s.a);
-  const tf = (lx, ly) => ({ x: s.x + lx * c - ly * sn, y: s.y + lx * sn + ly * c });
-  return [tf(0, -SHIP.tip), tf(SHIP.half, SHIP.base), tf(-SHIP.half, SHIP.base)];
+  return def.hull.map((v) => ({ x: s.x + v.x * c - v.y * sn, y: s.y + v.x * sn + v.y * c }));
 }
 
-// Pontos ao longo das bordas do triângulo, usados para detectar contato
+// Pontos ao longo das bordas do casco, usados para detectar contato
 export function shipSamples(verts) {
   const out = [];
-  for (let i = 0; i < 3; i++) {
-    const a = verts[i], b = verts[(i + 1) % 3];
+  for (let i = 0; i < verts.length; i++) {
+    const a = verts[i], b = verts[(i + 1) % verts.length];
     for (let k = 0; k < 4; k++) out.push({ x: lerp(a.x, b.x, k / 4), y: lerp(a.y, b.y, k / 4) });
   }
   return out;
@@ -79,13 +82,13 @@ export const landingSafe = (s, p) => landingCheck(s, p) === null;
 // Previsão do pouso (aviso de pouso, #50): a nave está descendo para a plataforma e, se o jogador
 // não fizer mais nada, toca nela devagar, reta e ainda em cima dela? Considera a gravidade e o
 // deslize até o toque, porque a nave continua acelerando: estar abaixo do limite agora não basta.
-export function landingForecast(s, p, pad, { crewOnBoard = false } = {}) {
+export function landingForecast(s, p, pad, { crewOnBoard = false, def = DEFAULT_SHIP } = {}) {
   if (s.vy <= 0) return null;   // subindo ou parada: não é pouso
   const g = p.gravity + (crewOnBoard ? p.crewWeight : 0);
-  const h = Math.max(0, pad.y - (s.y + SHIP.base));
+  const h = Math.max(0, pad.y - (s.y + def.feet.y));
   const vyAtTouch = Math.sqrt(s.vy * s.vy + 2 * g * h);
   const t = (vyAtTouch - s.vy) / g;
   const x = s.x + s.vx * t + (p.windX * t * t) / 2;
-  const onPad = x - SHIP.half >= pad.x1 - p.padMargin && x + SHIP.half <= pad.x2 + p.padMargin;
+  const onPad = x - def.feet.half >= pad.x1 - p.padMargin && x + def.feet.half <= pad.x2 + p.padMargin;
   return onPad && landingCheck({ ...s, vy: vyAtTouch }, p) === null;
 }

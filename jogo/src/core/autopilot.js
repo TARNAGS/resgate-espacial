@@ -1,4 +1,5 @@
-import { STEP, SHIP, WORLD_H } from './constants.js';
+import { STEP, WORLD_H } from './constants.js';
+import { DEFAULT_SHIP } from '../content/ships/index.js';
 import { clamp, wrapAngle } from './math.js';
 import { createShip, fly } from './ship.js';
 import { contact, takeOff } from './collision.js';
@@ -154,7 +155,7 @@ function flyLeg(level, p, path, fromPad, toPad, cruise, crewOnBoard, startX = nu
   const g = p.gravity + (crewOnBoard ? p.crewWeight : 0);
   const T = p.thrust;
   const target = (toPad.x1 + toPad.x2) / 2;
-  const padTop = toPad.y - SHIP.base;
+  const padTop = toPad.y - DEFAULT_SHIP.feet.y;
   const s = createShip(fromPad, 1);
   if (startX !== null) s.x = startX;
   takeOff(s);
@@ -353,7 +354,7 @@ function flyLegExpert(level, p, path, fromPad, toPad, o, rot, crewOnBoard, start
   const g = p.gravity + (crewOnBoard ? p.crewWeight : 0);
   const T = p.thrust;
   const target = (toPad.x1 + toPad.x2) / 2;
-  const padTop = toPad.y - SHIP.base;
+  const padTop = toPad.y - DEFAULT_SHIP.feet.y;
   const prof = speedProfile(path, o);
   const s = createShip(fromPad, 1);
   if (startX !== null) s.x = startX;

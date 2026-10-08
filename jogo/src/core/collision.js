@@ -1,4 +1,5 @@
-import { SHIP, STEP } from './constants.js';
+import { STEP } from './constants.js';
+import { DEFAULT_SHIP } from '../content/ships/index.js';
 import { sampleLine } from './math.js';
 import { shipVerts, shipSamples, landingCheck } from './ship.js';
 import { OBSTACLES } from '../content/obstacles/index.js';
@@ -33,9 +34,9 @@ export function contact(level, s, p) {
   return { land: pad };
 }
 
-// Deixa a nave parada e reta em cima da plataforma
-export function settle(s, pad) {
-  Object.assign(s, { state: 'landed', pad, vx: 0, vy: 0, a: 0, y: pad.y - SHIP.base, thrusting: false });
+// Deixa a nave parada e reta em cima da plataforma, com os pés na plataforma
+export function settle(s, pad, def = DEFAULT_SHIP) {
+  Object.assign(s, { state: 'landed', pad, vx: 0, vy: 0, a: 0, y: pad.y - def.feet.y, thrusting: false });
 }
 
 // Decolagem: o primeiro impulso que tira a nave da plataforma

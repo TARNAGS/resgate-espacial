@@ -28,6 +28,7 @@ Os módulos do navegador não abrem com dois cliques no `index.html` (`file://`)
 | `src/content/worlds.js` e `src/content/worlds/` | Mundos e níveis, um arquivo por mundo (mais os desafios e o treino): nome, objetivo, regras do gerador, modificadores. O `worlds.js` junta tudo e explica os campos | Uma fase nova é definida (P-011) |
 | `src/content/patchnotes.js` | A linha do patch note de cada versão (#126) | A versão sobe para uma rodada de playtest |
 | `src/content/obstacles/` | Catálogo de obstáculos; um arquivo por tipo | Um obstáculo novo é definido (P-011) |
+| `src/content/ships/` | Catálogo de naves (#121): o formato da nave clássica (casco que bate, pés, bocal, porta e contorno desenhado), lido pela física, pelo contato, pelo piloto automático e pelo desenho | Uma nave nova entra; pela D-034, nave de aparência usa o casco da clássica (#122) |
 | `src/content/modifiers.js` | Modificadores: gravidade, tanque, vento e nave mais pesada na volta | Os modificadores são decididos (P-012) |
 | `src/core/` | Regras: física da nave, contato e pouso, partida, gerador, pontuação e progresso | Uma regra do documento 02 muda |
 | `src/core/ranking.js`, `src/platform/leaderboard.js` e `src/ui/ranking.js` | Nickname e ranking por fase (#87): regras, banco (no aparelho e online) e tela | O banco online ou as regras do ranking mudam |

@@ -24,10 +24,10 @@ import { createEvents as createEventsLoose } from '../src/core/events.js';
 import { readIntent, touchThrust } from '../src/input/controls.js';
 import { emptySave } from '../src/platform/storage.js';
 import { isUnlocked, defaultLevel, recordCompletion, levelState, nextLevel } from '../src/core/progress.js';
-import { SHIP } from '../src/core/constants.js';
+import { DEFAULT_SHIP as CLASSIC_SHIP } from '../src/content/ships/index.js';
 import { mulberry32 } from '../src/core/rng.js';
 
-export { assert, PARAMS, DEFAULT_PARAMS, VIEW_ONLY, setParams, resetParams, changedParams, LEVELS, CHALLENGES, TRAINING_LEVEL, findLevel, effectiveParams, generateLevel, validateLevel, routeInputs, expertRun, expertPlans, createDemoPilot, DEMO_LABELS, DEMO_SPEED, INTRO_SONG, CHORDS, createPraise, rankKey, normalizeNick, validNick, createLeaderboard, createProfileSync, mergeIntoSave, profileUpdate, createTelemetry, cleanFields, createFrameStats, createRunTracker, encodePoint, decodePath, createShip, fly, steer, landingForecast, createMatch, Sound, readIntent, touchThrust, emptySave, isUnlocked, defaultLevel, recordCompletion, levelState, nextLevel, SHIP, mulberry32 };
+export { assert, PARAMS, DEFAULT_PARAMS, VIEW_ONLY, setParams, resetParams, changedParams, LEVELS, CHALLENGES, TRAINING_LEVEL, findLevel, effectiveParams, generateLevel, validateLevel, routeInputs, expertRun, expertPlans, createDemoPilot, DEMO_LABELS, DEMO_SPEED, INTRO_SONG, CHORDS, createPraise, rankKey, normalizeNick, validNick, createLeaderboard, createProfileSync, mergeIntoSave, profileUpdate, createTelemetry, cleanFields, createFrameStats, createRunTracker, encodePoint, decodePath, createShip, fly, steer, landingForecast, createMatch, Sound, readIntent, touchThrust, emptySave, isUnlocked, defaultLevel, recordCompletion, levelState, nextLevel, CLASSIC_SHIP, mulberry32 };
 
 // Nos testes, o canal de eventos é sempre estrito (#116): toda partida dos testes confere o contrato dos eventos
 export const createEvents = (options = {}) => createEventsLoose({ strict: true, ...options });

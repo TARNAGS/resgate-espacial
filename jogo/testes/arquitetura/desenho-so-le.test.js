@@ -2,7 +2,7 @@
 // Com skins de nave, de propulsor e de obstáculos, muita gente vai mexer no desenho. Um desenho que escreve no
 // estado mudaria a regra sem ninguém ver. Aqui o estado fica congelado: qualquer escrita vira erro.
 
-import { test, assert, DEFAULT_PARAMS, LEVELS, CHALLENGES, TRAINING_LEVEL, createMatch, createEvents, SHIP, DT, UP, step } from '../lib.js';
+import { test, assert, DEFAULT_PARAMS, LEVELS, CHALLENGES, TRAINING_LEVEL, createMatch, createEvents, CLASSIC_SHIP, DT, UP, step } from '../lib.js';
 import { createRenderer } from '../../src/render/renderer.js';
 import { createFakeCanvas, createFakeView, fakeJoystick, deepCopy, deepFreeze } from '../tela-de-mentira.js';
 
@@ -20,7 +20,7 @@ const SITUATIONS = {
   'embarcando a tripulação': (match) => {
     const q = padOf(match.state, 'crew');
     if (!q) return;
-    Object.assign(match.state.ship, { state: 'boarding', pad: q, x: (q.x1 + q.x2) / 2, y: q.y - SHIP.base, vx: 0, vy: 0, a: 0 });
+    Object.assign(match.state.ship, { state: 'boarding', pad: q, x: (q.x1 + q.x2) / 2, y: q.y - CLASSIC_SHIP.feet.y, vx: 0, vy: 0, a: 0 });
     match.state.boardingT = 0.9;
   },
   'tripulação a bordo, combustível baixo': (match) => { fly(match, 0.15); match.state.crewOnBoard = true; },

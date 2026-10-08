@@ -1,6 +1,6 @@
 // Partida
 
-import { test, assert, PARAMS, DEFAULT_PARAMS, LEVELS, TRAINING_LEVEL, landingForecast, createMatch, createEvents, SHIP, mulberry32, DT, NONE, UP, p, airShip, step } from '../lib.js';
+import { test, assert, PARAMS, DEFAULT_PARAMS, LEVELS, TRAINING_LEVEL, landingForecast, createMatch, createEvents, CLASSIC_SHIP, mulberry32, DT, NONE, UP, p, airShip, step } from '../lib.js';
 
 function newMatch(def, seed = 1) {
   const events = createEvents();
@@ -12,7 +12,7 @@ function newMatch(def, seed = 1) {
 // Coloca a nave logo acima de uma plataforma, descendo devagar
 function hover(m, kind, vy = 20, a = 0) {
   const pad = m.level.pads.find((q) => q.kind === kind);
-  Object.assign(m.ship, { state: 'flying', pad: null, x: (pad.x1 + pad.x2) / 2, y: pad.y - SHIP.base - 1, vx: 0, vy, a });
+  Object.assign(m.ship, { state: 'flying', pad: null, x: (pad.x1 + pad.x2) / 2, y: pad.y - CLASSIC_SHIP.feet.y - 1, vx: 0, vy, a });
 }
 
 test('#35 treino: encostar devagar na plataforma deixa a nave pousada', () => {
@@ -33,7 +33,7 @@ test('#35 treino: encostar rápido demais explode e reaparece pousada na platafo
 
 test('#35 treino: encostar fora da plataforma explode', () => {
   const { match, m, log } = newMatch(TRAINING_LEVEL);
-  Object.assign(m.ship, { state: 'flying', pad: null, x: 200, y: m.level.floor[10] - SHIP.base - 1, vy: 10 });
+  Object.assign(m.ship, { state: 'flying', pad: null, x: 200, y: m.level.floor[10] - CLASSIC_SHIP.feet.y - 1, vy: 10 });
   step(match, NONE, 0.1);
   assert.ok(log.some((e) => e.name === 'crash' && e.reason === 'TOUCHED THE GROUND'));
 });
@@ -48,7 +48,7 @@ test('#35 o limite de velocidade de pouso é um parâmetro de ajuste', () => {
 test('#50 pousar com a nave um pouco além da borda da plataforma ainda conta (padMargin)', () => {
   const { match, m } = newMatch(TRAINING_LEVEL);
   const pad = m.level.pads[0];
-  hover(m, 'base'); m.ship.x = pad.x2 - SHIP.half + PARAMS.padMargin - 1;   // a ponta da asa passa da borda
+  hover(m, 'base'); m.ship.x = pad.x2 - CLASSIC_SHIP.feet.half + PARAMS.padMargin - 1;   // a ponta da asa passa da borda
   step(match, NONE, 0.1);
   assert.equal(m.ship.state, 'landed');
 });
@@ -56,7 +56,7 @@ test('#50 pousar com a nave um pouco além da borda da plataforma ainda conta (p
 test('#50 passar da folga da borda explode', () => {
   const { match, m, log } = newMatch(TRAINING_LEVEL);
   const pad = m.level.pads[0];
-  hover(m, 'base'); m.ship.x = pad.x2 - SHIP.half + PARAMS.padMargin + 4; step(match, NONE, 0.1);
+  hover(m, 'base'); m.ship.x = pad.x2 - CLASSIC_SHIP.feet.half + PARAMS.padMargin + 4; step(match, NONE, 0.1);
   assert.ok(log.some((e) => e.name === 'crash'));
 });
 
@@ -70,12 +70,12 @@ test('#50 aviso de pouso: subindo da base não é pouso (sem verde nem halo)', (
 });
 
 test('#50 aviso de pouso: descer abaixo do limite agora, mas longe da plataforma, não é verde', () => {
-  const s = airShip(); s.vy = PARAMS.landingMaxVy - 5; s.y = 400 - SHIP.base - 100;
+  const s = airShip(); s.vy = PARAMS.landingMaxVy - 5; s.y = 400 - CLASSIC_SHIP.feet.y - 100;
   assert.equal(landingForecast(s, p(), { x1: s.x - 60, x2: s.x + 60, y: 400 }), false);
 });
 
 test('#50 aviso de pouso: deslizando para fora da plataforma, não é verde', () => {
-  const s = airShip(); s.vy = 10; s.vx = 40; s.y = 400 - SHIP.base - 120;
+  const s = airShip(); s.vy = 10; s.vx = 40; s.y = 400 - CLASSIC_SHIP.feet.y - 120;
   assert.equal(landingForecast(s, p(), { x1: s.x - 60, x2: s.x + 30, y: 400 }), false);
 });
 
@@ -86,7 +86,7 @@ test('#50 aviso de pouso: sempre que fica verde, soltar os controles termina em 
   for (let i = 0; i < 2000; i++) {
     const { match, m, log } = newMatch(TRAINING_LEVEL);
     const pad = m.level.pads[0];
-    Object.assign(m.ship, { state: 'flying', pad: null, x: rnd(pad.x1 + 10, pad.x2 - 10), y: pad.y - SHIP.base - rnd(1, 160), vx: rnd(-60, 60), vy: rnd(1, 90), a: rnd(-0.45, 0.45) });
+    Object.assign(m.ship, { state: 'flying', pad: null, x: rnd(pad.x1 + 10, pad.x2 - 10), y: pad.y - CLASSIC_SHIP.feet.y - rnd(1, 160), vx: rnd(-60, 60), vy: rnd(1, 90), a: rnd(-0.45, 0.45) });
     const green = landingForecast(m.ship, match.params(), pad);
     if (!green) continue;
     greens += 1;

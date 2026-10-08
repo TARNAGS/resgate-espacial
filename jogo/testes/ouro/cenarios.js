@@ -12,7 +12,8 @@
 import { DEFAULT_PARAMS, TRAINING_LEVEL, findLevel, createMatch, createEvents, expertRun, routeInputs, DT, NONE, UP } from '../lib.js';
 import { refuelPlans } from '../../src/core/autopilot.js';
 import { sampleLine } from '../../src/core/math.js';
-import { SHIP, STEP } from '../../src/core/constants.js';
+import { STEP } from '../../src/core/constants.js';
+import { DEFAULT_SHIP as CLASSIC_SHIP } from '../../src/content/ships/index.js';
 
 const KEYS_TURN = { touchRotationSpeed: DEFAULT_PARAMS.keyRotationSpeed };   // planos com posto: o giro do teclado (D-023)
 
@@ -89,7 +90,7 @@ export const SCENARIOS = [
     go(run) {
       const lv = run.match.state.level;
       const x = lv.L / 2;
-      placeShip(run, { x, y: sampleLine(lv.floor, x, STEP) - SHIP.base - 30, vy: 20 });
+      placeShip(run, { x, y: sampleLine(lv.floor, x, STEP) - CLASSIC_SHIP.feet.y - 30, vy: 20 });
       script(run, [[NONE, 3]]);
     },
   },
@@ -119,7 +120,7 @@ export const SCENARIOS = [
     def: TRAINING_LEVEL,
     go(run) {
       const q = run.match.state.level.pads[0];
-      placeShip(run, { x: padCenter(q), y: q.y - SHIP.base - 20, vy: 25, a: 0.45 });
+      placeShip(run, { x: padCenter(q), y: q.y - CLASSIC_SHIP.feet.y - 20, vy: 25, a: 0.45 });
       script(run, [[NONE, 2]]);
     },
   },
@@ -129,7 +130,7 @@ export const SCENARIOS = [
     def: TRAINING_LEVEL,
     go(run) {
       const q = run.match.state.level.pads[0];
-      placeShip(run, { x: padCenter(q), y: q.y - SHIP.base - 20, vy: 110 });
+      placeShip(run, { x: padCenter(q), y: q.y - CLASSIC_SHIP.feet.y - 20, vy: 110 });
       script(run, [[NONE, 2]]);
     },
   },
@@ -139,7 +140,7 @@ export const SCENARIOS = [
     def: TRAINING_LEVEL,
     go(run) {
       const q = run.match.state.level.pads[0];
-      placeShip(run, { x: padCenter(q), y: q.y - SHIP.base - 20, vy: 25 });
+      placeShip(run, { x: padCenter(q), y: q.y - CLASSIC_SHIP.feet.y - 20, vy: 25 });
       script(run, [[NONE, 2]]);
     },
   },

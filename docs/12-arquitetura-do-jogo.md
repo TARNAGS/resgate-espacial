@@ -3,8 +3,8 @@
 | Campo | Valor |
 |---|---|
 | Documento | 12 — Arquitetura do jogo e mapa de impacto |
-| Versão | 0.2 |
-| Data | 07/10/2026 |
+| Versão | 0.3 |
+| Data | 08/10/2026 |
 | Status | Em revisão (o Fernando aprova) |
 | Responsável | Fernando Nunes (Product Manager) |
 | Cartões | [#111](https://github.com/TARNAGS/resgate-espacial/issues/111), no épico E-26 · Abstração ([#110](https://github.com/TARNAGS/resgate-espacial/issues/110)) |
@@ -102,7 +102,7 @@ As chaves de antes não mudaram.
 | Limites de pouso (descida, deslize, inclinação, folga da borda) | `config/params.js` | Pouso e batida; o aviso verde de pouso; o piloto automático | Fichas de ouro; testes de pouso | Sim, sozinho |
 | Velocidade de giro (teclado ou toque) | `config/params.js` | O controle; o piloto automático, que prova as rotas com o giro do teclado | Fichas de ouro; testes do piloto expert | Sim, sozinho (desde a [#120](https://github.com/TARNAGS/resgate-espacial/issues/120)) |
 | Tempo de embarque ou velocidade de abastecer | `config/params.js` | O cronômetro: os dois acontecem com ele rodando | Fichas de ouro | Sim, sozinho (desde a [#120](https://github.com/TARNAGS/resgate-espacial/issues/120)) |
-| Formato ou tamanho da nave | `core/constants.js` (`SHIP`) **e** `render/renderer.js` (`drawShip`) | Colisão, pouso, previsão de pouso, piloto automático, elogios, desenho da nave, da chama e da tripulação | Mudar os dois lugares juntos até a [#121](https://github.com/TARNAGS/resgate-espacial/issues/121); fichas de ouro | Hoje, não sozinho. Pela D-034, só a nave que muda o jogo deve mexer no ranking |
+| Formato ou tamanho da nave | `content/ships/` (a nave clássica, em `classic.js`): casco, pés, bocal, porta e contorno desenhado | Colisão, pouso, previsão de pouso, piloto automático, elogios, desenho da nave, da chama e da tripulação: todos leem a mesma definição desde a [#121](https://github.com/TARNAGS/resgate-espacial/issues/121) | Fichas de ouro; teste da nave (`regras/nave.test.js`), que confere que o contorno desenhado fica perto do casco | Hoje, não sozinho. Pela D-034, só a nave que muda o jogo deve mexer no ranking ([#122](https://github.com/TARNAGS/resgate-espacial/issues/122)) |
 | Regra de contato ou de batida (código) | `core/collision.js` | A partida e o piloto automático, que usam a mesma função | Fichas de batida e de rotas; caminho provado (D-018) | **Não sozinho**: mudar código de regra não muda a chave. Para recomeçar, suba `RULES_VERSION` em `core/ranking.js`; a ficha de ouro que mudou lembra |
 | Obstáculo novo | `content/obstacles/` e `index.js` | Gerador, colisão, piloto automático (`blockedAt`) e desenho (`draw`) | Contrato do obstáculo ([#119](https://github.com/TARNAGS/resgate-espacial/issues/119)); 500 cenários; caminho provado | Só nas fases que o usam (as regras do gerador mudam) |
 | Regras do gerador de uma fase (comprimento, corredor, pedras) | `content/worlds/` | O cenário, o tanque provado e o `tank` gravado | Bateria completa; atualizar `tank` se o teste pedir | Sim, sozinho |
@@ -127,7 +127,7 @@ São ligações de propósito ou pontos frágeis. Cada um tem dono:
 | **Física → tanque → ranking** | O tanque de cada fase sai do piloto automático voando com a física atual (D-018, D-023, D-026) | Mudou a física? Rodar a bateria completa, atualizar `tank` e saber que o ranking recomeça |
 | **Tanque gravado nas fases fixas** | O jogo não roda o piloto no aparelho, para o cenário e o tanque serem iguais em todo navegador | O teste das fases fixas avisa quando o valor gravado ficou velho |
 | **Chave da fase = progresso salvo** | O aparelho e o perfil online guardam o progresso pela chave | Chave publicada nunca muda ([#117](https://github.com/TARNAGS/resgate-espacial/issues/117)) |
-| **Formato da nave em dois lugares** | A colisão usa um triângulo; o desenho tem o seu, com um entalhe embaixo e a chama na mão | [#121](https://github.com/TARNAGS/resgate-espacial/issues/121): um formato único |
+| **Formato da nave em dois lugares** | A colisão usava um triângulo; o desenho tinha o seu, com um entalhe embaixo e a chama na mão | **Resolvido** ([#121](https://github.com/TARNAGS/resgate-espacial/issues/121)): uma definição só, em `content/ships/`; o entalhe ficou como contorno desenhado, dentro do casco, e um teste confere a folga |
 | **Chave do ranking incompleta** | A lista de física da chave era escrita à mão | **Resolvido** ([#120](https://github.com/TARNAGS/resgate-espacial/issues/120)): a chave se monta sozinha. Um parâmetro novo de jogo entra em `SINCE` (`core/ranking.js`) com o valor do dia, e um teste lembra |
 | **Mudança de código de regra não recomeça o ranking** | A chave olha os números e a fase, não o código | **Resolvido** ([#120](https://github.com/TARNAGS/resgate-espacial/issues/120)): subir `RULES_VERSION` quando uma regra mudar de propósito |
 | **Piloto automático e regras andam juntos** | O piloto usa as mesmas funções da partida | Mudou a física ou o contato? O piloto, o tanque e as fichas mudam juntos |
@@ -172,4 +172,5 @@ Testes que tocam o alarme quando algo muda sem querer. Ficam em `jogo/testes/`, 
 | Versão | Data | O que mudou |
 |---|---|---|
 | 0.1 | 07/10/2026 | Primeira versão ([#111](https://github.com/TARNAGS/resgate-espacial/issues/111)): camadas, três tipos de mudança, mapa de impacto, acoplamentos e guardas automáticas, junto com as tarefas [#112](https://github.com/TARNAGS/resgate-espacial/issues/112) a [#115](https://github.com/TARNAGS/resgate-espacial/issues/115) |
+| 0.3 | 08/10/2026 | Onda 4, primeira tarefa ([#121](https://github.com/TARNAGS/resgate-espacial/issues/121)): o formato da nave vira dado, em `content/ships/`; mapa de impacto e acoplamentos atualizados |
 | 0.2 | 07/10/2026 | Onda 3 da abstração ([#116](https://github.com/TARNAGS/resgate-espacial/issues/116) a [#120](https://github.com/TARNAGS/resgate-espacial/issues/120)): tabela dos eventos, contratos da fase, do obstáculo e dos parâmetros, cadeia de parâmetros, chave do ranking que se monta sozinha, um arquivo por mundo e as guardas novas |

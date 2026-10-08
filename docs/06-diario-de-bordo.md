@@ -72,7 +72,7 @@ A janela de teste foi fechada em 07/10.
 **Próxima construção**
 
 5. **Fernando decide o tanque** ([#93](https://github.com/TARNAGS/resgate-espacial/issues/93)), com os números do piloto expert ([#92](https://github.com/TARNAGS/resgate-espacial/issues/92)). Depois, o Claude constrói. As fichas de ouro mostram o que mudou, e os rankings do nível 3, da PRACTICE e da BONUS recomeçam.
-6. **Abstração, ondas 4 e 5** (Claude, M3): formato único da nave ([#121](https://github.com/TARNAGS/resgate-espacial/issues/121)), conferência de naves novas ([#122](https://github.com/TARNAGS/resgate-espacial/issues/122)), desenho em peças ([#123](https://github.com/TARNAGS/resgate-espacial/issues/123)), skins ([#124](https://github.com/TARNAGS/resgate-espacial/issues/124)) e o `main.js` em fluxos ([#125](https://github.com/TARNAGS/resgate-espacial/issues/125)). As ondas 1 a 3 ficaram prontas em 07/10.
+6. **Abstração, ondas 4 e 5** (Claude, M3): formato único da nave ([#121](https://github.com/TARNAGS/resgate-espacial/issues/121), pronta em 08/10), conferência de naves novas ([#122](https://github.com/TARNAGS/resgate-espacial/issues/122)), desenho em peças ([#123](https://github.com/TARNAGS/resgate-espacial/issues/123)), skins ([#124](https://github.com/TARNAGS/resgate-espacial/issues/124)) e o `main.js` em fluxos ([#125](https://github.com/TARNAGS/resgate-espacial/issues/125)). As ondas 1 a 3 ficaram prontas em 07/10.
 
 **Próxima rodada de playtest**
 
@@ -555,6 +555,14 @@ O Fernando pediu "pode codar todas as melhorias". Construído, testado (92 teste
   - vinte anos depois, a mesma equipe acrescentou ajuda só depois do erro: 8 vidas no New Super Mario Bros. Wii (testaram no menu, 3, 5 e 10), 5 no 3D Land, com medalhas para quem não usa e uma demonstração gravada "com consideração", sem truques.
 - **Documentos:** [benchmark/super-mario-world.md](benchmark/super-mario-world.md) (v1.0), com cinco diagramas, `fases.json` e as ferramentas em `docs/benchmark/super-mario-world/ferramentas/`; página de leitura em [claude.ai/artifact/7LSubtYDh5iEywjTtB8hP3](https://claude.ai/artifact/7LSubtYDh5iEywjTtB8hP3) (privada); documento 10 v0.8 (lições 28 a 33); guia dos benchmarks v1.2, com o insight 4.14 (ajuda só depois do erro), republicado no mesmo link. O cartão [#128](https://github.com/TARNAGS/resgate-espacial/issues/128) foi para "Para conversar", com quatro recomendações.
 - **O que a skill aprendeu:** as entrevistas Iwata Asks trazem o texto completo de todas as partes dentro de cada página do site oficial, o que permite ler uma entrevista inteira e citar com segurança.
+
+### 08/10/2026 — Abstração, onda 4: formato único da nave ([#121](https://github.com/TARNAGS/resgate-espacial/issues/121))
+
+- **Pedido do Fernando:** "com os restantes dos créditos de hoje, você consegue codar mais alguma coisa que não precisa de decisão minha?" A primeira tarefa da onda 4 da abstração era a próxima da fila, com as dependências prontas e sem escolha de produto.
+- **O que mudou:** o formato da nave saiu da constante `SHIP` e do desenho e virou dado, em `jogo/src/content/ships/classic.js`: casco (o que bate), pés (o que pousa), bocal (de onde sai a chama), porta (para onde a tripulação corre) e o contorno desenhado. A física, o contato, o pouso, a previsão de pouso, o piloto automático, os elogios e o desenho leem essa definição. A constante `SHIP` deixou de existir.
+- **Provas de que nada mudou para o jogador:** as fichas de ouro continuam batendo (nenhuma regra mudou); os comandos de desenho de 72 quadros (6 situações, 6 fases, toque e teclado; cerca de 200 mil comandos) ficaram idênticos antes e depois, com os sorteios fixados; a bateria completa passou (135 testes); a DEMO roda no navegador sem erros.
+- **Teste novo** (`regras/nave.test.js`): o contorno desenhado não passa mais de 3 do casco, e o casco não fica a mais de 4 do desenho. A clássica tem um entalhe na base que deixa até 3,5 de casco sem desenho, no centro; isso já era assim e não mudou. O alarme foi conferido: com a ponta desenhada 5 além do casco, o teste falha.
+- **Documentos:** documento 12 v0.3 (mapa de impacto e acoplamentos) e `jogo/README.md`.
 
 ## Aprendizados de produto
 

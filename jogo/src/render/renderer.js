@@ -1,7 +1,8 @@
-import { WORLD_H, STEP, SHIP } from '../core/constants.js';
+import { WORLD_H, STEP } from '../core/constants.js';
 import { clamp, lerp, fmtTime } from '../core/math.js';
 import { landingSafe, landingForecast } from '../core/ship.js';
 import { OBSTACLES } from '../content/obstacles/index.js';
+import { DEFAULT_SHIP } from '../content/ships/index.js';
 import { cameraZoomFor } from './view.js';
 
 // Desenho do jogo no Canvas. Lê o estado da partida e nunca o altera.
@@ -356,8 +357,8 @@ export function createRenderer(canvas, view) {
       if (s.state === 'boarding') {
         const k = clamp((m.boardingT - i * 0.45) / 0.7, 0, 1);
         if (k >= 1) continue;
-        x = lerp(hx, s.x, k);
-        y = lerp(hy, s.y + SHIP.base, k);
+        x = lerp(hx, s.x + DEFAULT_SHIP.door.x, k);
+        y = lerp(hy, s.y + DEFAULT_SHIP.door.y, k);
         running = k > 0;
       }
       const leg = running ? Math.sin(t * 22 + i) * 2.5 : 2;
@@ -373,7 +374,7 @@ export function createRenderer(canvas, view) {
     }
   }
 
-  function drawShip(s, params, approach, t) {
+  function drawShip(s, params, approach, t, def = DEFAULT_SHIP) {
     if (s.state === 'exploding') return;
     if (approach?.landing) {
       // Halo quase imperceptível, só na descida para a plataforma: uma sugestão, não um aviso
@@ -390,17 +391,15 @@ export function createRenderer(canvas, view) {
     if (s.thrusting) {   // sinal visual do propulsor aceso (#33)
       ctx.fillStyle = Math.random() > 0.5 ? '#ffd166' : '#ff9f43';
       ctx.beginPath();
-      ctx.moveTo(-4, SHIP.base - 1);
-      ctx.lineTo(4, SHIP.base - 1);
-      ctx.lineTo(0, SHIP.base + 8 + Math.random() * 9);
+      const n = def.nozzle;
+      ctx.moveTo(-n.half, n.y);
+      ctx.lineTo(n.half, n.y);
+      ctx.lineTo(0, n.y + n.flame + Math.random() * n.flicker);
       ctx.closePath();
       ctx.fill();
     }
     ctx.beginPath();
-    ctx.moveTo(0, -SHIP.tip);
-    ctx.lineTo(SHIP.half, SHIP.base);
-    ctx.lineTo(0, SHIP.base - 4);
-    ctx.lineTo(-SHIP.half, SHIP.base);
+    def.outline.forEach((v, i) => (i ? ctx.lineTo(v.x, v.y) : ctx.moveTo(v.x, v.y)));
     ctx.closePath();
     // Verde só descendo para uma plataforma, com velocidade e inclinação que garantem o pouso
     ctx.fillStyle = approach?.landing && approach.safe ? '#7dffb0' : '#eef6ff';

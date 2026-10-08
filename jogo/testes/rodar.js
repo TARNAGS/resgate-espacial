@@ -9,6 +9,7 @@
 import { tasks, resetParams } from './lib.js';
 
 import './regras/fisica.test.js';
+import './regras/nave.test.js';
 import './regras/controles.test.js';
 import './regras/parametros.test.js';
 import './regras/partida.test.js';
