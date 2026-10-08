@@ -27,7 +27,7 @@ const along = (poly, n = 20) => poly.flatMap((a, i) => {
 test('#121 o formato da nave fica num lugar só: a nave clássica é a nave padrão (D-034)', () => {
   assert.equal(DEFAULT_SHIP, SHIPS.classic);
   for (const [id, ship] of Object.entries(SHIPS)) {
-    assert.equal(ship.id, id, `${id}: o id não bate com o catálogo`);
+    assert.equal(ship.key, id, `${id}: a key não bate com o catálogo`);
     assert.ok(ship.hull.length >= 3, `${id}: o casco precisa de pelo menos 3 vértices`);
     for (const campo of ['feet', 'nozzle', 'door', 'outline']) assert.ok(ship[campo], `${id}: falta ${campo}`);
   }

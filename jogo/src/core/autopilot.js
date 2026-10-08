@@ -1,5 +1,5 @@
 import { STEP, WORLD_H } from './constants.js';
-import { DEFAULT_SHIP } from '../content/ships/index.js';
+import { DEFAULT_SHIP, shipRadius } from '../content/ships/index.js';
 import { clamp, wrapAngle } from './math.js';
 import { createShip, fly } from './ship.js';
 import { contact, takeOff } from './collision.js';
@@ -33,17 +33,19 @@ const LAND_BRAKE = 40;                   // desaceleração vertical no fim da d
 const LEG_TIMEOUT = 120;                 // segundos
 
 // Espaço livre: free[i][j] diz se a altura j*Y_STEP cabe a nave na coluna i
-function freeSpace(level) {
+// As folgas foram medidas com a nave clássica; uma nave que muda o jogo e é maior ganha a diferença de raio (#122)
+function freeSpace(level, ship = DEFAULT_SHIP) {
+  const extra = Math.max(0, shipRadius(ship) - shipRadius(DEFAULT_SHIP));
   const free = [];
   for (let i = 0; i < level.n; i++) {
     const x = i * STEP;
     const nb = [i - 1, i, i + 1].filter((k) => k >= 0 && k < level.n);
-    const top = Math.max(...nb.map((k) => level.ceil[k])) + CLEAR_TERRAIN;
-    const bottom = Math.min(...nb.map((k) => level.floor[k])) - CLEAR_TERRAIN;
+    const top = Math.max(...nb.map((k) => level.ceil[k])) + CLEAR_TERRAIN + extra;
+    const bottom = Math.min(...nb.map((k) => level.floor[k])) - CLEAR_TERRAIN - extra;
     const blocked = [];
     for (const o of level.obstacles) {
       for (const dx of [-STEP / 2, 0, STEP / 2]) {
-        const b = OBSTACLES[o.type].blockedAt?.(o, x + dx, CLEAR_OBSTACLE);
+        const b = OBSTACLES[o.type].blockedAt?.(o, x + dx, CLEAR_OBSTACLE + extra);
         if (b) blocked.push(b);
       }
     }
@@ -150,13 +152,13 @@ function command(s, ax, ay, g, p, maxTilt, ctl) {
 // Um trecho: decola de uma plataforma e pousa na outra. Devolve { fuel, x }: os segundos de propulsor
 // e onde a nave parou na plataforma (a partida não recentraliza a nave), ou null.
 // Com `record`, guarda o comando de cada passo (para reproduzir a corrida numa partida de verdade).
-function flyLeg(level, p, path, fromPad, toPad, cruise, crewOnBoard, startX = null, record = null) {
+function flyLeg(level, p, path, fromPad, toPad, cruise, crewOnBoard, startX = null, record = null, ship = DEFAULT_SHIP) {
   const sim = { ...p, tankSeconds: 1e9, touchRotationSpeed: p.keyRotationSpeed };
   const g = p.gravity + (crewOnBoard ? p.crewWeight : 0);
   const T = p.thrust;
   const target = (toPad.x1 + toPad.x2) / 2;
-  const padTop = toPad.y - DEFAULT_SHIP.feet.y;
-  const s = createShip(fromPad, 1);
+  const padTop = toPad.y - ship.feet.y;
+  const s = createShip(fromPad, 1, ship);
   if (startX !== null) s.x = startX;
   takeOff(s);
   let thrustTime = 0, landing = false;
@@ -187,7 +189,7 @@ function flyLeg(level, p, path, fromPad, toPad, cruise, crewOnBoard, startX = nu
     record?.push(intent);
     fly(s, intent, sim, DT, { crewOnBoard });
     if (s.thrusting) thrustTime += DT;
-    const c = contact(level, s, sim);
+    const c = contact(level, s, sim, ship);
     if (c?.crash) return null;
     if (c?.land) return c.land === toPad ? { fuel: thrustTime, x: s.x } : null;   // pousar no posto não vale
   }
@@ -196,7 +198,7 @@ function flyLeg(level, p, path, fromPad, toPad, cruise, crewOnBoard, startX = nu
 
 // Voa uma rota de plataforma em plataforma (por exemplo: base, posto, tripulação, base), sem
 // abastecer no caminho. Cada trecho começa onde o anterior pousou. Devolve os trechos, ou null.
-function flyRoute(level, params, free, kinds) {
+function flyRoute(level, params, free, kinds, ship = DEFAULT_SHIP) {
   const pads = kinds.map((k) => level.pads.find((q) => q.kind === k));
   if (pads.some((p) => !p)) return null;
   const col = (pad) => Math.round((pad.x1 + pad.x2) / 2 / STEP);
@@ -209,7 +211,7 @@ function flyRoute(level, params, free, kinds) {
     if (!path) return null;
     let min = null;
     for (const v of CRUISE_SPEEDS) {
-      const r = flyLeg(level, params, path, from, to, Math.min(v, params.maxSpeed * 0.9), crewOnBoard, startX);
+      const r = flyLeg(level, params, path, from, to, Math.min(v, params.maxSpeed * 0.9), crewOnBoard, startX, null, ship);
       if (r && (min === null || r.fuel < min.fuel)) min = { ...r, cruise: v, startX, path, from: from.kind, to: to.kind, crewOnBoard };
     }
     if (!min) return null;
@@ -222,20 +224,20 @@ function flyRoute(level, params, free, kinds) {
 const sum = (legs) => legs.reduce((n, l) => n + l.fuel, 0);
 
 // Melhor corrida sem abastecer (base, tripulação, base), ou null se o piloto não conseguir concluir
-export function bestRun(level, params) {
+export function bestRun(level, params, ship = DEFAULT_SHIP) {
   if (level.obstacles.some((o) => !OBSTACLES[o.type].blockedAt)) return null;
-  const legs = flyRoute(level, params, freeSpace(level), ['base', 'crew', 'base']);
+  const legs = flyRoute(level, params, freeSpace(level, ship), ['base', 'crew', 'base'], ship);
   return legs && { thrustSeconds: sum(legs), legs };
 }
 
 // Fases com posto (D-023): os dois planos com um abastecimento, na ida ou na volta.
 // tank é o menor tanque que permite os dois; full é o gasto da corrida sem abastecer.
-export function refuelPlans(level, params) {
+export function refuelPlans(level, params, ship = DEFAULT_SHIP) {
   if (level.obstacles.some((o) => !OBSTACLES[o.type].blockedAt)) return null;
-  const free = freeSpace(level);
-  const full = flyRoute(level, params, free, ['base', 'crew', 'base']);
-  const going = flyRoute(level, params, free, ['base', 'fuel', 'crew', 'base']);
-  const back = flyRoute(level, params, free, ['base', 'crew', 'fuel', 'base']);
+  const free = freeSpace(level, ship);
+  const full = flyRoute(level, params, free, ['base', 'crew', 'base'], ship);
+  const going = flyRoute(level, params, free, ['base', 'fuel', 'crew', 'base'], ship);
+  const back = flyRoute(level, params, free, ['base', 'crew', 'fuel', 'base'], ship);
   if (!full || !going || !back) return null;
   const goingTank = Math.max(going[0].fuel, going[1].fuel + going[2].fuel);
   const backTank = Math.max(back[0].fuel + back[1].fuel, back[2].fuel);
@@ -349,14 +351,14 @@ function bendAt(path, x, k = 4) {
 }
 
 // Um trecho do piloto expert. Mesmo contrato do flyLeg; `rot` é a velocidade de giro usada.
-function flyLegExpert(level, p, path, fromPad, toPad, o, rot, crewOnBoard, startX = null, record = null) {
+function flyLegExpert(level, p, path, fromPad, toPad, o, rot, crewOnBoard, startX = null, record = null, ship = DEFAULT_SHIP) {
   const sim = { ...p, tankSeconds: 1e9, touchRotationSpeed: rot };
   const g = p.gravity + (crewOnBoard ? p.crewWeight : 0);
   const T = p.thrust;
   const target = (toPad.x1 + toPad.x2) / 2;
-  const padTop = toPad.y - DEFAULT_SHIP.feet.y;
+  const padTop = toPad.y - ship.feet.y;
   const prof = speedProfile(path, o);
-  const s = createShip(fromPad, 1);
+  const s = createShip(fromPad, 1, ship);
   if (startX !== null) s.x = startX;
   takeOff(s);
   let thrustTime = 0, landing = false;
@@ -389,7 +391,7 @@ function flyLegExpert(level, p, path, fromPad, toPad, o, rot, crewOnBoard, start
     record?.push(intent);
     fly(s, intent, sim, DT, { crewOnBoard });
     if (s.thrusting) thrustTime += DT;
-    const c = contact(level, s, sim);
+    const c = contact(level, s, sim, ship);
     if (c?.crash) return null;
     if (c?.land) return c.land === toPad ? { fuel: thrustTime, x: s.x, air: t } : null;
   }
@@ -397,7 +399,7 @@ function flyLegExpert(level, p, path, fromPad, toPad, o, rot, crewOnBoard, start
 }
 
 // Rota de plataforma em plataforma com o piloto expert, girando na velocidade `rot`
-function flyRouteExpert(level, params, free, kinds, rot) {
+function flyRouteExpert(level, params, free, kinds, rot, ship = DEFAULT_SHIP) {
   const pads = kinds.map((k) => level.pads.find((q) => q.kind === k));
   if (pads.some((q) => !q)) return null;
   const col = (pad) => Math.round((pad.x1 + pad.x2) / 2 / STEP);
@@ -415,7 +417,7 @@ function flyRouteExpert(level, params, free, kinds, rot) {
         if (!taut.has(tryOpts.margin)) taut.set(tryOpts.margin, tautPath(free, base, tryOpts.margin));
         const path = taut.get(tryOpts.margin);
         const o = { ...EXPERT, ...tryOpts };
-        const r = flyLegExpert(level, params, path, from, to, o, rot, crewOnBoard, startX);
+        const r = flyLegExpert(level, params, path, from, to, o, rot, crewOnBoard, startX, null, ship);
         if (r && (min === null || r.fuel < min.fuel)) min = { ...r, style: 'expert', o, rot, startX, path, from: from.kind, to: to.kind, crewOnBoard };
       }
     }
@@ -428,9 +430,9 @@ function flyRouteExpert(level, params, free, kinds, rot) {
 
 // Melhor corrida sem abastecer que dá para fazer (base, tripulação, base): o limite de baixo do
 // combustível, com o giro mais rápido dos controles (o do toque). Null se o piloto não concluir.
-export function expertRun(level, params) {
+export function expertRun(level, params, ship = DEFAULT_SHIP) {
   if (level.obstacles.some((o) => !OBSTACLES[o.type].blockedAt)) return null;
-  const legs = flyRouteExpert(level, params, freeSpace(level), ['base', 'crew', 'base'], params.touchRotationSpeed);
+  const legs = flyRouteExpert(level, params, freeSpace(level, ship), ['base', 'crew', 'base'], params.touchRotationSpeed, ship);
   return legs && { thrustSeconds: sum(legs), legs };
 }
 
@@ -438,14 +440,14 @@ export function expertRun(level, params) {
 // abastecimento, que precisam valer para todos (giro do teclado, o mais lento):
 //   oneTank: o tanque que permite abastecer uma vez, na ida ou na volta;
 //   twoTank: o tanque que permite abastecer na ida e na volta.
-export function expertPlans(level, params) {
+export function expertPlans(level, params, ship = DEFAULT_SHIP) {
   if (level.obstacles.some((o) => !OBSTACLES[o.type].blockedAt)) return null;
-  const free = freeSpace(level);
+  const free = freeSpace(level, ship);
   const keys = params.keyRotationSpeed;
-  const full = flyRouteExpert(level, params, free, ['base', 'crew', 'base'], params.touchRotationSpeed);
-  const going = flyRouteExpert(level, params, free, ['base', 'fuel', 'crew', 'base'], keys);
-  const back = flyRouteExpert(level, params, free, ['base', 'crew', 'fuel', 'base'], keys);
-  const both = flyRouteExpert(level, params, free, ['base', 'fuel', 'crew', 'fuel', 'base'], keys);
+  const full = flyRouteExpert(level, params, free, ['base', 'crew', 'base'], params.touchRotationSpeed, ship);
+  const going = flyRouteExpert(level, params, free, ['base', 'fuel', 'crew', 'base'], keys, ship);
+  const back = flyRouteExpert(level, params, free, ['base', 'crew', 'fuel', 'base'], keys, ship);
+  const both = flyRouteExpert(level, params, free, ['base', 'fuel', 'crew', 'fuel', 'base'], keys, ship);
   if (!full || !going || !back || !both) return null;
   return {
     full: sum(full),
@@ -456,14 +458,14 @@ export function expertPlans(level, params) {
 }
 
 // Comandos de cada trecho, passo a passo, para reproduzir a rota numa partida de verdade
-export function routeInputs(level, params, legs) {
+export function routeInputs(level, params, legs, ship = DEFAULT_SHIP) {
   return legs.map((leg) => {
     const record = [];
     const from = level.pads.find((q) => q.kind === leg.from), to = level.pads.find((q) => q.kind === leg.to);
-    if (leg.style === 'expert') flyLegExpert(level, params, leg.path, from, to, leg.o, leg.rot, leg.crewOnBoard, leg.startX, record);
-    else flyLeg(level, params, leg.path, from, to, Math.min(leg.cruise, params.maxSpeed * 0.9), leg.crewOnBoard, leg.startX, record);
+    if (leg.style === 'expert') flyLegExpert(level, params, leg.path, from, to, leg.o, leg.rot, leg.crewOnBoard, leg.startX, record, ship);
+    else flyLeg(level, params, leg.path, from, to, Math.min(leg.cruise, params.maxSpeed * 0.9), leg.crewOnBoard, leg.startX, record, ship);
     return record;
   });
 }
 
-export const bestRunInputs = (level, params, run) => routeInputs(level, params, run.legs);
+export const bestRunInputs = (level, params, run, ship = DEFAULT_SHIP) => routeInputs(level, params, run.legs, ship);

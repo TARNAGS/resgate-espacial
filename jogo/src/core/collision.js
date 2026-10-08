@@ -11,8 +11,8 @@ import { OBSTACLES } from '../content/obstacles/index.js';
 //   { crash: 'MOTIVO' }   explodiu
 //   { land: pad }         pousou com segurança nessa plataforma
 
-export function contact(level, s, p) {
-  const verts = shipVerts(s);
+export function contact(level, s, p, def = DEFAULT_SHIP) {
+  const verts = shipVerts(s, def);
   const samples = shipSamples(verts);
   const onFloor = [];
   for (const pt of samples) {

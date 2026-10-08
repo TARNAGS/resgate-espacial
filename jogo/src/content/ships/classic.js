@@ -4,7 +4,7 @@
 // Coordenadas da nave: origem no centro de giro, ponta para cima, y crescendo para baixo, em unidades do mundo.
 
 export const classic = {
-  id: 'classic',
+  key: 'classic',
   label: 'Classic',
 
   // Casco: o que bate. A física de contato, os obstáculos e os elogios leem estes vértices.

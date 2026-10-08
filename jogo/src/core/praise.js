@@ -1,6 +1,7 @@
 import { STEP } from './constants.js';
 import { clamp, rad, sampleLine } from './math.js';
 import { shipVerts, shipSamples } from './ship.js';
+import { DEFAULT_SHIP } from '../content/ships/index.js';
 
 // Elogios para manobras difíceis (#81, ideia do Fernando). Só detecta e avisa pelo canal de
 // eventos ('praise'); o desenho e o som ficam com quem ouve. Para não virar enfeite constante,
@@ -26,7 +27,7 @@ function segDist(px, py, ax, ay, bx, by) {
   return Math.hypot(px - (ax + k * dx), py - (ay + k * dy));
 }
 
-export function createPraise({ level, events }) {
+export function createPraise({ level, events, ship = DEFAULT_SHIP }) {
   const nearPad = (x) => level.pads.some((q) => x > q.x1 - 60 && x < q.x2 + 60);
   let cooldown = 0;
   let armedRocks = new Set();       // pedras que a nave está passando raspando
@@ -64,7 +65,7 @@ export function createPraise({ level, events }) {
       time += dt;
       if (cooldown > 0) cooldown = Math.max(0, cooldown - dt / p.praiseCooldown);
       const speed = Math.hypot(s.vx, s.vy);
-      const verts = shipVerts(s);
+      const verts = shipVerts(s, ship);
       const samples = shipSamples(verts);
 
       // Fininho no terreno (longe das plataformas, onde chegar perto do chão é normal)

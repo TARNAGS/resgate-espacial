@@ -1,5 +1,6 @@
 import { generateLevel } from './generator.js';
 import { createShip, fly } from './ship.js';
+import { resolveShip } from '../content/ships/index.js';
 import { contact, settle, takeOff } from './collision.js';
 import { effectiveParams } from '../content/modifiers.js';
 import { OBSTACLES } from '../content/obstacles/index.js';
@@ -13,14 +14,17 @@ import { createPraise } from './praise.js';
 //          lowFuel ({ level: 'low' | 'critical' }: o combustível passou de 20% ou de 10% em voo, #94),
 //          noFuel (apertou o propulsor sem combustível, ou pousou sem combustível onde não abastece, #94)
 
-export function createMatch({ def, seed, getParams, events }) {
+export function createMatch({ def, seed, getParams, events, ship }) {
+  // A nave da partida (#122): a clássica, ou outra do catálogo. Nave de aparência usa o casco da clássica (D-034).
+  const shipDef = resolveShip(ship);
   // O gerador pode trocar a semente, se o cenário sorteado não tiver um caminho provado (D-018)
-  const level = generateLevel(def, seed, effectiveParams(getParams(), def));
+  const level = generateLevel(def, seed, effectiveParams(getParams(), def, null, { ship: shipDef }), { ship: shipDef });
   seed = level.seed;
   const training = Boolean(def.training);   // treino: sem vidas, sem cronômetro e sem tripulação
-  const params = () => effectiveParams(getParams(), def, level);
+  const params = () => effectiveParams(getParams(), def, level, { ship: shipDef });
   const m = {
     def, seed, level, training,
+    shipDef,             // a definição da nave (content/ships/), lida pelo desenho
     lives: params().lives,
     livesLost: 0,
     crewOnBoard: false,
@@ -36,11 +40,11 @@ export function createMatch({ def, seed, getParams, events }) {
     fuelWarned: { low: false, critical: false },   // avisos de combustível já dados (#94)
     thrustHeld: false,   // o jogador já estava apertando o propulsor no passo anterior
   };
-  const praise = createPraise({ level, events });
+  const praise = createPraise({ level, events, ship: shipDef });
 
   function spawnAt(kind, fuel) {
     const pad = level.pads.find((p) => p.kind === kind);
-    m.ship = createShip(pad, fuel);
+    m.ship = createShip(pad, fuel, shipDef);
     m.outOfFuelT = 0;
   }
 
@@ -106,12 +110,12 @@ export function createMatch({ def, seed, getParams, events }) {
   }
 
   function checkCollisions(s, p) {
-    const c = contact(level, s, p);
+    const c = contact(level, s, p, shipDef);
     if (!c) return;
     if (c.crash) return explode(c.crash);
     const pad = c.land;
     const impact = { vx: s.vx, vy: s.vy, angle: s.a };
-    settle(s, pad);
+    settle(s, pad, shipDef);
     if (pad.kind === 'fuel') m.stationLandings += 1;
     events.emit('land', { pad: pad.kind, impact });
     praise.onLand(impact, s, p);

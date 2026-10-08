@@ -139,7 +139,7 @@ export function createRenderer(canvas, view) {
     drawPads(m.level, t, approach);
     drawObstacles(m.level, theme, t);
     if (!m.training) drawCrew(m, t, params);
-    drawShip(m.ship, params, approach, t);
+    drawShip(m.ship, params, approach, t, m.shipDef);
     drawParticles();
     ctx.restore();
 
@@ -281,7 +281,7 @@ export function createRenderer(canvas, view) {
     if (s.state !== 'flying') return null;
     const pad = m.level.pads.find((p) => s.x >= p.x1 - 30 && s.x <= p.x2 + 30 && p.y - s.y > 0 && p.y - s.y < 170);
     if (!pad) return null;
-    const forecast = landingForecast(s, params, pad, { crewOnBoard: m.crewOnBoard });
+    const forecast = landingForecast(s, params, pad, { crewOnBoard: m.crewOnBoard, def: m.shipDef });
     const landing = forecast !== null;
     return { pad, landing, safe: landing ? forecast : landingSafe(s, params) };
   }
@@ -357,8 +357,9 @@ export function createRenderer(canvas, view) {
       if (s.state === 'boarding') {
         const k = clamp((m.boardingT - i * 0.45) / 0.7, 0, 1);
         if (k >= 1) continue;
-        x = lerp(hx, s.x + DEFAULT_SHIP.door.x, k);
-        y = lerp(hy, s.y + DEFAULT_SHIP.door.y, k);
+        const door = (m.shipDef ?? DEFAULT_SHIP).door;
+        x = lerp(hx, s.x + door.x, k);
+        y = lerp(hy, s.y + door.y, k);
         running = k > 0;
       }
       const leg = running ? Math.sin(t * 22 + i) * 2.5 : 2;

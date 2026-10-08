@@ -98,6 +98,12 @@ Copie `src/content/obstacles/rock.js`, com o `example` (um nível de exemplo), m
 
 Um obstáculo móvel implementa `update(o, time)`; a partida chama essa função a cada passo.
 
+## Como criar uma nave
+
+As naves ficam em `src/content/ships/`, uma por arquivo, registradas em `index.js`, onde o contrato está explicado. Pela D-034, toda nave nova é **de aparência**: copie `classic.js`, troque a `key` e mude só o desenho (`outline`, `nozzle`, `door`). Ela usa o casco e os atributos da clássica, não mexe no ranking e não precisa de prova.
+
+Uma nave que **muda o jogo** precisa de `changesGameplay: true`; só ela pode ter casco, pés e atributos próprios. A bateria completa prova cada fase fixa com ela, e ela ganha ranking próprio. O documento 12, seção 2.1, explica a diferença; os testes ficam em `testes/regras/nave.test.js` e `testes/conteudo/contrato-nave.test.js`.
+
 ## Ferramentas de teste
 
 - **Painel de ajuste (#42):** abrir o jogo com `?tuning`, ou tocar 5 vezes no subtítulo do menu, ou apertar a tecla `` ` ``. Durante a partida, o botão **T** abre o painel. Os valores mudam na hora, ficam salvos no aparelho e podem ser copiados.

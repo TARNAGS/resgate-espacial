@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 12 — Arquitetura do jogo e mapa de impacto |
-| Versão | 0.3 |
+| Versão | 0.4 |
 | Data | 08/10/2026 |
 | Status | Em revisão (o Fernando aprova) |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -85,6 +85,21 @@ A tabela é conferida por um teste ([#112](https://github.com/TARNAGS/resgate-es
 | **Conteúdo** | Mundos, fases, obstáculos, naves que mudam o jogo, evoluções de atributos | Entrar sem mexer no motor, seguindo o contrato | Contratos conferidos por teste ([#116](https://github.com/TARNAGS/resgate-espacial/issues/116) a [#120](https://github.com/TARNAGS/resgate-espacial/issues/120), [#122](https://github.com/TARNAGS/resgate-espacial/issues/122)) | Fase e mundo, evento, obstáculo e parâmetros têm contrato conferido desde 07/10/2026. Falta o da nave ([#121](https://github.com/TARNAGS/resgate-espacial/issues/121), [#122](https://github.com/TARNAGS/resgate-espacial/issues/122)) |
 | **Regra** | Física, colisão, pouso, combustível, cronômetro, vidas | Mudar pouco e de propósito | Fichas de ouro ([#114](https://github.com/TARNAGS/resgate-espacial/issues/114)) e testes das regras do documento 02 | As fichas existem desde 07/10/2026 |
 
+### 2.1 Nave de aparência e nave que muda o jogo (D-034, [#122](https://github.com/TARNAGS/resgate-espacial/issues/122))
+
+Toda nave fica em `jogo/src/content/ships/`. A regra da D-034 vira código e teste:
+
+| | Nave de aparência (o padrão) | Nave que muda o jogo |
+|---|---|---|
+| Como se marca | Nada: toda nave é de aparência, a não ser que diga o contrário | `changesGameplay: true` na definição |
+| O que pode mudar | Só o desenho: contorno, chama (bocal) e para onde a tripulação corre (porta) | Também o casco, os pés e os atributos (`modifiers`) |
+| Casco e atributos | Os da clássica, sempre: `resolveShip` os impõe mesmo que a definição tente outros, e o contrato acusa a tentativa | Os dela; o contrato confere que o casco é válido (pelo menos 3 vértices, com área, sem bordas que se cruzam), que os pés e a porta ficam na base e que o bocal fica atrás |
+| Prova | Nenhuma | Cabe em cada fase (o diâmetro dela, que gira, menor que o corredor mínimo e que a passagem ao lado das pedras) **e** o piloto automático conclui cada fase fixa com ela, no cenário fixo (D-018 para cada nave) |
+| Ranking | Não mexe: a chave é a mesma da clássica | Ranking próprio: a chave inclui a nave |
+| Tanque das fases fixas | O de sempre | Hoje, o mesmo da clássica. Recalcular o tanque para cada configuração é a pendência P-024 |
+
+**Por que as duas provas:** a conta do tamanho é rápida, mas não basta. Uma nave de teste com o triplo do tamanho da clássica (65 de diâmetro contra 22) passa na conta do nível 3, cuja passagem ao lado das pedras mede 85, mas o piloto automático não consegue concluir o cenário fixo do nível 3 com ela. O teste do contrato registra exatamente isso.
+
 ## 3. Mapa de impacto: "se eu mudar X"
 
 A coluna do ranking diz se a chave do ranking da fase muda **sozinha**, recomeçando o ranking. Desde a [#120](https://github.com/TARNAGS/resgate-espacial/issues/120), a chave se monta sozinha (`core/ranking.js`) com:
@@ -145,6 +160,8 @@ Testes que tocam o alarme quando algo muda sem querer. Ficam em `jogo/testes/`, 
 | Fichas de ouro ([#114](https://github.com/TARNAGS/resgate-espacial/issues/114)) | Qualquer mudança nas regras: 8 rotas do piloto e 9 corridas montadas para bater ou pousar | `ouro/` | Rápida |
 | Contrato dos eventos ([#116](https://github.com/TARNAGS/resgate-espacial/issues/116)) | Evento fora da lista ou com campos diferentes, em todos os testes; quem avisa ou escuta um nome errado | `arquitetura/eventos.test.js` e o canal estrito de `lib.js` | Rápida |
 | Contrato da fase e do mundo ([#117](https://github.com/TARNAGS/resgate-espacial/issues/117)) | Campo faltando, chave repetida ou publicada que sumiu, semente ou tanque faltando, obstáculo ou modificador que não existe, cor do tema faltando, texto fora do inglês ou grande demais | `conteudo/contrato-fase.test.js` e `conteudo/chaves-publicadas.json` | Rápida |
+| Nave ([#121](https://github.com/TARNAGS/resgate-espacial/issues/121)) | Desenho da nave que passa do casco, ou casco que fica longe do desenho; pés, bocal ou porta fora da base | `regras/nave.test.js` | Rápida |
+| Contrato da nave ([#122](https://github.com/TARNAGS/resgate-espacial/issues/122)) | Nave de aparência com casco, pés ou atributos próprios; casco inválido; nave que muda o jogo e não cabe numa fase, que o piloto não prova no cenário fixo ou que divide o ranking com a clássica | `conteudo/contrato-nave.test.js` | Rápida (a prova pelo piloto, completa) |
 | Contrato do obstáculo ([#119](https://github.com/TARNAGS/resgate-espacial/issues/119)) | Função faltando, sorteio que muda com a mesma semente, obstáculo sem passagem, colisão que não bate, piloto que não desvia de onde bate, desenho maior que os limites | `conteudo/contrato-obstaculo.test.js` | Rápida |
 | Parâmetros e ranking ([#120](https://github.com/TARNAGS/resgate-espacial/issues/120)) | Parâmetro sem classificação, ordem das camadas, chave que não muda quando o jogo muda (ou que muda por aparência), chave de hoje que mudou | `regras/cadeia-e-ranking.test.js` | Rápida |
 | Regras do documento 02 | Física, controles, pouso, combustível, vidas, resgate, progresso, elogios | `regras/` | Rápida |
@@ -172,5 +189,6 @@ Testes que tocam o alarme quando algo muda sem querer. Ficam em `jogo/testes/`, 
 | Versão | Data | O que mudou |
 |---|---|---|
 | 0.1 | 07/10/2026 | Primeira versão ([#111](https://github.com/TARNAGS/resgate-espacial/issues/111)): camadas, três tipos de mudança, mapa de impacto, acoplamentos e guardas automáticas, junto com as tarefas [#112](https://github.com/TARNAGS/resgate-espacial/issues/112) a [#115](https://github.com/TARNAGS/resgate-espacial/issues/115) |
+| 0.4 | 08/10/2026 | Onda 4, segunda tarefa ([#122](https://github.com/TARNAGS/resgate-espacial/issues/122)): seção 2.1 (nave de aparência e nave que muda o jogo), guardas da nave e do contrato da nave |
 | 0.3 | 08/10/2026 | Onda 4, primeira tarefa ([#121](https://github.com/TARNAGS/resgate-espacial/issues/121)): o formato da nave vira dado, em `content/ships/`; mapa de impacto e acoplamentos atualizados |
 | 0.2 | 07/10/2026 | Onda 3 da abstração ([#116](https://github.com/TARNAGS/resgate-espacial/issues/116) a [#120](https://github.com/TARNAGS/resgate-espacial/issues/120)): tabela dos eventos, contratos da fase, do obstáculo e dos parâmetros, cadeia de parâmetros, chave do ranking que se monta sozinha, um arquivo por mundo e as guardas novas |

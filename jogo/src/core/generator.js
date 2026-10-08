@@ -3,6 +3,7 @@ import { clamp, lerp, sampleLine } from './math.js';
 import { mulberry32 } from './rng.js';
 import { OBSTACLES } from '../content/obstacles/index.js';
 import { bestRun, refuelPlans } from './autopilot.js';
+import { DEFAULT_SHIP } from '../content/ships/index.js';
 
 // Gerador de fases (D-014): o nível define as regras, a semente define o cenário.
 // Mesma semente, mesmo cenário; todo cenário gerado precisa ter solução (validateLevel).
@@ -21,7 +22,8 @@ const nextSeed = (s) => (Math.imul(s ^ 0x5bd1e995, 2654435761) >>> 0) % 10000000
 // no aparelho. Navegadores diferentes podem arredondar seno e cosseno de jeitos levemente diferentes, e
 // numa simulação longa isso pode mudar o resultado; sem o piloto no aparelho, o cenário e o tanque são
 // iguais para todos (o ranking depende disso). prove: true força o piloto, para os testes conferirem.
-export function generateLevel(def, seed, params = null, { prove = false } = {}) {
+// ship: a nave com que o piloto prova o cenário (a clássica, se ninguém disser outra; #122).
+export function generateLevel(def, seed, params = null, { prove = false, ship = DEFAULT_SHIP } = {}) {
   if (!params || def.generator.kind === 'training') return buildLayout(def, seed);
   if (!prove && def.seed != null && seed === def.seed && def.generator.tank != null) {
     const level = buildLayout(def, seed);
@@ -33,7 +35,7 @@ export function generateLevel(def, seed, params = null, { prove = false } = {}) 
     const level = buildLayout(def, s);
     if (def.generator.fuelStation) {
       // D-023: o tanque permite concluir abastecendo uma vez (na ida ou na volta), mas não sem abastecer
-      const plans = refuelPlans(level, params);
+      const plans = refuelPlans(level, params, ship);
       const tank = plans && plans.tank * (1 + (def.generator.refuelMargin ?? 0.08));
       if (plans && tank < plans.full * 0.95) {
         level.refuelPlans = plans;
@@ -41,7 +43,7 @@ export function generateLevel(def, seed, params = null, { prove = false } = {}) 
         return level;
       }
     } else {
-      const run = bestRun(level, params);
+      const run = bestRun(level, params, ship);
       if (run) {
         level.bestRun = run;
         level.tankSeconds = Math.max(def.generator.tankSeconds ?? 40, run.thrustSeconds * 1.25);
