@@ -44,7 +44,7 @@ Os módulos do navegador não abrem com dois cliques no `index.html` (`file://`)
 | `src/platform/audio.js` | Efeitos sonoros | A pesquisa de som no iPhone (#57) volta |
 | `src/platform/music.js` e `src/content/songs.js` | Motor de música chiptune (Web Audio, sem arquivos) e as partituras | Uma música nova ou mudança na da abertura |
 | `src/input/` | Teclado, direcional virtual e a junção dos dois | A variante final do direcional é escolhida (#44) |
-| `src/render/` | Desenho no Canvas | A identidade visual chega (E-19) |
+| `src/render/` | Desenho no Canvas, uma peça por camada: câmera, céu, caverna, plataformas, tripulação, nave, painel, mensagens e controles; o `renderer.js` só põe as camadas na ordem (#123; tabela no documento 12, seção 1) | A identidade visual chega (E-19) |
 | `src/ui/` | Menu, mapa de progresso, avisos e painel de ajuste | — |
 | `testes/` | Testes automáticos, por assunto: `regras/`, `conteudo/`, `plataforma/`, `arquitetura/` (camadas e desenho só lê) e `ouro/` (fichas de ouro); `rodar.js` roda tudo, e `lib.js` tem as peças comuns | Junto com cada mudança de regra |
 | `firebase/regras.json` | Cópia completa das regras publicadas no banco (ranking, telemetria e perfil) | As regras do banco mudam: colar o texto inteiro no console |
@@ -112,7 +112,7 @@ Uma nave que **muda o jogo** precisa de `changesGameplay: true`; só ela pode te
 - **Treino (#35):** no painel, TRAINING. Chão, paredes e uma plataforma, sem tripulação e sem perder vidas.
 - **Atalho de nível:** com o painel liberado, `?level=w1-3`, `?level=training`, `?level=practice` ou `?level=bonus` abre direto a fase.
 - **Fases fixas (D-021):** cada fase da sequência e a PRACTICE têm `seed` em `src/content/worlds.js`; a BONUS tem `random: true`.
-- **Abertura (#76):** aparece sozinha no primeiro PLAY; para rever, Settings → WATCH INTRO, ou abra o jogo com `?intro` (pede um toque antes, para liberar o som). SKIP (ou Esc) pula e para a música. A música é o relógio da abertura: as telas começam nos compassos de `INTRO_SONG.scenes`. O desenho fica em `src/render/intro.js`.
+- **Abertura (#76):** aparece sozinha no primeiro PLAY; para rever, Settings → WATCH INTRO, ou abra o jogo com `?intro` (pede um toque antes, para liberar o som). SKIP (ou Esc) pula e para a música. A música é o relógio da abertura: as telas começam nos compassos de `INTRO_SONG.scenes`. O controle das telas fica em `src/render/intro.js`, e os desenhos de cada tela em `src/render/intro-art.js`.
 - **Controle de toque (#44):** Settings → Touch control alterna entre A, o padrão (dois polegares: o esquerdo aponta e o direito acelera; a câmera mantém a nave longe dos polegares, D-022), e B (um polegar: tocar acelera e arrastar aponta), e a escolha fica salva no aparelho. Também dá para abrir com `?control=a` ou `?control=b`. Os botões do C só aparecem em telas de toque; no PC, o C funciona com o mouse apontando e ↑ ou Espaço no propulsor.
 - **Câmera (#95, D-037):** o zoom se adapta à tela (1,15 nas telas compridas, até 1 nas mais quadradas, como o iPhone SE), e o jogador pode aproximar em Settings → CAMERA (AUTO, CLOSE ou CLOSER), salvo no aparelho. Para testar um valor fixo, use `?zoom=1.3` ou o "Camera zoom" do painel (0 = automático). Um valor fixo tira a corrida do ranking, porque ver mais da fase muda a dificuldade. As regras ficam em `src/render/view.js`.
 - **Patch note (#126):** uma linha no alto do menu com o que mudou na versão, com SKIP.

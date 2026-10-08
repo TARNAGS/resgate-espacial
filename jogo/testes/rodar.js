@@ -34,6 +34,7 @@ import './arquitetura/camadas.test.js';
 import './arquitetura/desenho-so-le.test.js';
 import './arquitetura/eventos.test.js';
 import './ouro/ouro.test.js';
+import './ouro/desenho.test.js';
 
 const args = process.argv.slice(2);
 const rapido = args.includes('--rapido');

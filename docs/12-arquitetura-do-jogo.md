@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 12 — Arquitetura do jogo e mapa de impacto |
-| Versão | 0.5 |
+| Versão | 0.6 |
 | Data | 08/10/2026 |
 | Status | Em revisão (o Fernando aprova) |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -40,6 +40,22 @@ O código do jogo fica em `jogo/src`, e cada pasta é uma camada. A regra de dir
 | `main.js` | Liga todas as peças: telas, laço do jogo, DEMO, nick | Tudo | Ninguém importa o `main.js` |
 
 Regras, conteúdo e números também rodam no Node, nos testes e no piloto automático. Por isso **não tocam no navegador** (`window`, `document`, `localStorage`, `fetch`...).
+
+**Peças do desenho** ([#123](https://github.com/TARNAGS/resgate-espacial/issues/123)): o `render/renderer.js` só guarda o estado do desenho (câmera, partículas, mensagens e avisos) e põe as camadas na ordem do quadro. Cada camada é uma peça pequena, criada com o mesmo kit (`ctx`, a tela, o estado do desenho e as medidas da câmera):
+
+| Peça | O que desenha |
+|---|---|
+| `camera.js` | Não desenha: escala, o que cabe na tela, limites da câmera e a regra de manter a nave longe dos polegares |
+| `sky.js` | Céu de estrelas (semente fixa, para o desenho de ouro) |
+| `cave.js` | Teto e chão, barreiras nas pontas da fase e obstáculos |
+| `pads.js` | Plataformas e o aviso de pouso nas luzes delas |
+| `crew.js` | Tripulação acenando e correndo no embarque |
+| `ship.js` | Nave, chama, halo do pouso e destroços da explosão |
+| `hud.js` | Painel: fase, combustível e avisos, vidas, tripulação, cronômetro, rodapé e a seta do objetivo |
+| `messages.js` | Mensagens no alto, elogios e NO FUEL |
+| `controls.js` | Direcional, botão do propulsor, botões redondos e o selo da DEMO |
+| `style.js` | A fonte comum |
+| `intro.js` e `intro-art.js` | A abertura: o controle das telas e da música, e os desenhos de cada tela |
 
 A tabela é conferida por um teste ([#112](https://github.com/TARNAGS/resgate-espacial/issues/112), `jogo/testes/arquitetura/camadas.test.js`). Uma pasta nova precisa entrar na tabela do teste e nesta seção.
 
@@ -148,7 +164,7 @@ São ligações de propósito ou pontos frágeis. Cada um tem dono:
 | **Piloto automático e regras andam juntos** | O piloto usa as mesmas funções da partida | Mudou a física ou o contato? O piloto, o tanque e as fichas mudam juntos |
 | **Desenho do obstáculo junto das regras dele** | `draw` mora em `content/obstacles/rock.js` | [#124](https://github.com/TARNAGS/resgate-espacial/issues/124): o desenho vai para a skin |
 | **Vídeo de apresentação usa as peças do jogo** | `jogo/ferramentas/video/` desenha com o renderer e a abertura, toca a música e os efeitos de `platform/` e joga as fases com o piloto. Para isso, lê alguns detalhes por dentro (os campos da abertura e o `Sound.ctx`) e repete as mensagens da partida que ficam no `main.js` | Mexeu no desenho, na abertura, no som, nas mensagens ou no piloto? `node jogo/ferramentas/video/gravar.mjs --fotos 1,5,9` e olhar as fotos. Se a [#123](https://github.com/TARNAGS/resgate-espacial/issues/123) tirar as mensagens do `main.js`, o vídeo passa a importar de lá |
-| **`main.js` e `renderer.js` grandes** | Cresceram com cada tela e cada aviso (751 e 685 linhas) | [#123](https://github.com/TARNAGS/resgate-espacial/issues/123) e [#125](https://github.com/TARNAGS/resgate-espacial/issues/125) |
+| **`main.js` grande** | Cresceu com cada tela e cada aviso (794 linhas). O `renderer.js` já foi dividido em peças ([#123](https://github.com/TARNAGS/resgate-espacial/issues/123), 08/10) | [#125](https://github.com/TARNAGS/resgate-espacial/issues/125) |
 
 ## 5. Guardas automáticas
 
@@ -158,6 +174,7 @@ Testes que tocam o alarme quando algo muda sem querer. Ficam em `jogo/testes/`, 
 |---|---|---|---|
 | Camadas ([#112](https://github.com/TARNAGS/resgate-espacial/issues/112)) | Regra que importa o desenho, regra que usa o navegador, alguém importando o `main.js`, pasta nova sem regra | `arquitetura/camadas.test.js` | Rápida |
 | O desenho só lê ([#113](https://github.com/TARNAGS/resgate-espacial/issues/113)) | Desenho que escreve no estado da partida, em todas as fases, situações e controles | `arquitetura/desenho-so-le.test.js` | Rápida |
+| Desenho de ouro ([#123](https://github.com/TARNAGS/resgate-espacial/issues/123)) | Desenho que muda sem querer: os comandos de desenho de 162 quadros (todas as fases, 9 situações, 3 controles) viram impressões digitais, com os sorteios da chama e das faíscas fixados. Mudou de propósito? `--atualizar-ouro`; o desenho completo de cada quadro fica em `jogo/ferramentas/saida/desenho/` para comparar | `ouro/desenho.test.js` e `ouro/desenho.json` | Completa |
 | Fichas de ouro ([#114](https://github.com/TARNAGS/resgate-espacial/issues/114)) | Qualquer mudança nas regras: 8 rotas do piloto e 9 corridas montadas para bater ou pousar | `ouro/` | Rápida |
 | Contrato dos eventos ([#116](https://github.com/TARNAGS/resgate-espacial/issues/116)) | Evento fora da lista ou com campos diferentes, em todos os testes; quem avisa ou escuta um nome errado | `arquitetura/eventos.test.js` e o canal estrito de `lib.js` | Rápida |
 | Contrato da fase e do mundo ([#117](https://github.com/TARNAGS/resgate-espacial/issues/117)) | Campo faltando, chave repetida ou publicada que sumiu, semente ou tanque faltando, obstáculo ou modificador que não existe, cor do tema faltando, texto fora do inglês ou grande demais | `conteudo/contrato-fase.test.js` e `conteudo/chaves-publicadas.json` | Rápida |
@@ -190,6 +207,7 @@ Testes que tocam o alarme quando algo muda sem querer. Ficam em `jogo/testes/`, 
 | Versão | Data | O que mudou |
 |---|---|---|
 | 0.1 | 07/10/2026 | Primeira versão ([#111](https://github.com/TARNAGS/resgate-espacial/issues/111)): camadas, três tipos de mudança, mapa de impacto, acoplamentos e guardas automáticas, junto com as tarefas [#112](https://github.com/TARNAGS/resgate-espacial/issues/112) a [#115](https://github.com/TARNAGS/resgate-espacial/issues/115) |
+| 0.6 | 08/10/2026 | Onda 5, primeira tarefa ([#123](https://github.com/TARNAGS/resgate-espacial/issues/123)): o desenho dividido em peças (tabela na seção 1), a abertura separada dos desenhos dela e a guarda do desenho de ouro |
 | 0.5 | 08/10/2026 | Acoplamento novo: o vídeo de apresentação (`jogo/ferramentas/video/`) usa o desenho, a abertura, o som e o piloto do jogo |
 | 0.4 | 08/10/2026 | Onda 4, segunda tarefa ([#122](https://github.com/TARNAGS/resgate-espacial/issues/122)): seção 2.1 (nave de aparência e nave que muda o jogo), guardas da nave e do contrato da nave |
 | 0.3 | 08/10/2026 | Onda 4, primeira tarefa ([#121](https://github.com/TARNAGS/resgate-espacial/issues/121)): o formato da nave vira dado, em `content/ships/`; mapa de impacto e acoplamentos atualizados |
