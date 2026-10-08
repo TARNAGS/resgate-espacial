@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 12 — Arquitetura do jogo e mapa de impacto |
-| Versão | 0.4 |
+| Versão | 0.5 |
 | Data | 08/10/2026 |
 | Status | Em revisão (o Fernando aprova) |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -147,6 +147,7 @@ São ligações de propósito ou pontos frágeis. Cada um tem dono:
 | **Mudança de código de regra não recomeça o ranking** | A chave olha os números e a fase, não o código | **Resolvido** ([#120](https://github.com/TARNAGS/resgate-espacial/issues/120)): subir `RULES_VERSION` quando uma regra mudar de propósito |
 | **Piloto automático e regras andam juntos** | O piloto usa as mesmas funções da partida | Mudou a física ou o contato? O piloto, o tanque e as fichas mudam juntos |
 | **Desenho do obstáculo junto das regras dele** | `draw` mora em `content/obstacles/rock.js` | [#124](https://github.com/TARNAGS/resgate-espacial/issues/124): o desenho vai para a skin |
+| **Vídeo de apresentação usa as peças do jogo** | `jogo/ferramentas/video/` desenha com o renderer e a abertura, toca a música e os efeitos de `platform/` e joga as fases com o piloto. Para isso, lê alguns detalhes por dentro (os campos da abertura e o `Sound.ctx`) e repete as mensagens da partida que ficam no `main.js` | Mexeu no desenho, na abertura, no som, nas mensagens ou no piloto? `node jogo/ferramentas/video/gravar.mjs --fotos 1,5,9` e olhar as fotos. Se a [#123](https://github.com/TARNAGS/resgate-espacial/issues/123) tirar as mensagens do `main.js`, o vídeo passa a importar de lá |
 | **`main.js` e `renderer.js` grandes** | Cresceram com cada tela e cada aviso (751 e 685 linhas) | [#123](https://github.com/TARNAGS/resgate-espacial/issues/123) e [#125](https://github.com/TARNAGS/resgate-espacial/issues/125) |
 
 ## 5. Guardas automáticas
@@ -189,6 +190,7 @@ Testes que tocam o alarme quando algo muda sem querer. Ficam em `jogo/testes/`, 
 | Versão | Data | O que mudou |
 |---|---|---|
 | 0.1 | 07/10/2026 | Primeira versão ([#111](https://github.com/TARNAGS/resgate-espacial/issues/111)): camadas, três tipos de mudança, mapa de impacto, acoplamentos e guardas automáticas, junto com as tarefas [#112](https://github.com/TARNAGS/resgate-espacial/issues/112) a [#115](https://github.com/TARNAGS/resgate-espacial/issues/115) |
+| 0.5 | 08/10/2026 | Acoplamento novo: o vídeo de apresentação (`jogo/ferramentas/video/`) usa o desenho, a abertura, o som e o piloto do jogo |
 | 0.4 | 08/10/2026 | Onda 4, segunda tarefa ([#122](https://github.com/TARNAGS/resgate-espacial/issues/122)): seção 2.1 (nave de aparência e nave que muda o jogo), guardas da nave e do contrato da nave |
 | 0.3 | 08/10/2026 | Onda 4, primeira tarefa ([#121](https://github.com/TARNAGS/resgate-espacial/issues/121)): o formato da nave vira dado, em `content/ships/`; mapa de impacto e acoplamentos atualizados |
 | 0.2 | 07/10/2026 | Onda 3 da abstração ([#116](https://github.com/TARNAGS/resgate-espacial/issues/116) a [#120](https://github.com/TARNAGS/resgate-espacial/issues/120)): tabela dos eventos, contratos da fase, do obstáculo e dos parâmetros, cadeia de parâmetros, chave do ranking que se monta sozinha, um arquivo por mundo e as guardas novas |

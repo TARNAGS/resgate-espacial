@@ -31,6 +31,7 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **Temple Run estudado (06/10, [#108](https://github.com/TARNAGS/resgate-espacial/issues/108), parte da [#99](https://github.com/TARNAGS/resgate-espacial/issues/99)):** a corrida infinita em 3D, com perseguição, contada pelos criadores, e comparada ao Jetpack Joyride ([benchmark](benchmark/temple-run.md), [página de leitura](https://claude.ai/artifact/DatT92pPFFCnnDwG3vLoBZ)). Faltam Subway Surfers, Candy Crush Saga e Plants vs. Zombies.
 - **Geometry Dash estudado (08/10, [#127](https://github.com/TARNAGS/resgate-espacial/issues/127), em "Para conversar"):** o casual mais próximo do nosso jogo, com fases fixas. A curva das 22 fases, o mundo de 10 fases curtas (Geometry Dash World), como ele separa o treino com checkpoints da conclusão que vale e o modelo grátis com anúncios + pago ([benchmark](benchmark/geometry-dash.md), [página de leitura](https://claude.ai/artifact/Y7Y1rAykSbfkfXuaJdSXRC)). Responde a pergunta aberta da fase grande (documento 13, seção 3.2).
 - **Super Mario World estudado (08/10, [#128](https://github.com/TARNAGS/resgate-espacial/issues/128), em "Para conversar"):** a pedido do Fernando, como o jogo ensina sem tutorial e como a Nintendo construiu isso: pouco texto, opcional e no lugar; a fase que ensina feita por último; errar custa pouco; e a ajuda que a mesma equipe passou a oferecer só depois do erro ([benchmark](benchmark/super-mario-world.md), [página de leitura](https://claude.ai/artifact/7LSubtYDh5iEywjTtB8hP3)). Revisa em parte a D-031.
+- **Vídeo de apresentação (08/10):** 14 segundos para mostrar o jogo às pessoas, em inglês e em português, feito com o próprio jogo (partidas de verdade do piloto automático, com a música da abertura). Refaz-se com um comando quando o jogo mudar (`jogo/ferramentas/video/`). Em aberto com o Fernando: o formato vertical para Reels e Status e onde guardar a versão aprovada.
 - **Guia dos benchmarks (06/10, v1.2 em 08/10):** os quatro estudos lidos juntos, com 12 insights, divergências, validações, as decisões pendentes e três para decidir primeiro ([benchmark/README.md](benchmark/README.md), [página de leitura](https://claude.ai/artifact/TSGis8FXKTXWWgdQUJH9ar)). É a porta de entrada para tudo o que foi estudado.
 - **Anticheat (07/10, [#109](https://github.com/TARNAGS/resgate-espacial/issues/109), em "Para conversar"):** como proteger o ranking contra trapaça, com casos reais (Open Hexagon, Trackmania, lojas, speedrun.com), as portas abertas do nosso ranking hoje e uma proposta em três degraus, centrada em conferir a corrida pelo replay ([documento 11](11-anticheat-e-ranking-justo.md)).
 - **Épico E-26 · Abstração (07/10, [#110](https://github.com/TARNAGS/resgate-espacial/issues/110), no Backlog):** preparar o jogo para 10 mundos, 100 fases, skins, naves diferentes e evoluções sem quebrar as regras básicas. São 15 tarefas ([#111](https://github.com/TARNAGS/resgate-espacial/issues/111) a [#125](https://github.com/TARNAGS/resgate-espacial/issues/125)) em cinco ondas, da mais barata à mais cara: mapa de impacto, guardas automáticas, contratos, nave como dado e aparência separada das regras.
@@ -565,6 +566,26 @@ O Fernando pediu "pode codar todas as melhorias". Construído, testado (92 teste
 - **Documentos:** documento 12 v0.3 (mapa de impacto e acoplamentos) e `jogo/README.md`.
 - **Na mesma sessão, a [#122](https://github.com/TARNAGS/resgate-espacial/issues/122) (conferência automática para qualquer nave nova):** a regra da D-034 virou código e teste. Nave de aparência é o padrão: `resolveShip` impõe o casco, os pés e os atributos da clássica, e o contrato acusa a nave que tenta outros. Nave que muda o jogo (`changesGameplay: true`) precisa ter casco válido, caber em cada fase e ser provada pelo piloto automático em cada fase fixa, e ganha ranking próprio. Para isso, a nave passou a chegar ao piloto automático, ao contato, ao gerador, à partida, aos elogios e ao desenho, sempre com a clássica como padrão (fichas de ouro e desenho iguais; 143 testes). **Achado:** uma nave de teste com o triplo do tamanho passa na conta do nível 3, mas o piloto não conclui o cenário fixo com ela; a prova pelo piloto pega o que a conta simples deixa passar. **Em aberto (não mexi):** o tanque das fases fixas para uma nave que muda o jogo continua o da clássica; recalcular é a P-024. Documento 12 v0.4 (seção 2.1) e `jogo/README.md` (como criar uma nave).
 
+### 08/10/2026 — Vídeo de apresentação
+
+- **Pedido do Fernando:** "pensando em vender esse produto, crie um vídeo de até 15 segundos mostrando highlights do jogo para apresentar ele pras pessoas".
+- **O que foi feito:** um vídeo de 14 s, 1920 × 1080 a 60 quadros, com som, em duas versões: inglês (os textos do jogo são em inglês, D-007) e português. Roteiro em cima da música da abertura, que já tem a forma de um trailer (mistério, aventura, subida e acorde final), com os cortes nas batidas:
+  1. a tripulação presa (a primeira tela da abertura);
+  2. a decolagem na PRACTICE;
+  3. as pedras, com o elogio CLOSE CALL;
+  4. o pouso no SOS, com a tripulação correndo para a nave;
+  5. uma batida numa pedra no LONG HAUL;
+  6. a volta à base com PERFECT RUN;
+  7. o nome do jogo, o mote e o gancho do ranking: "a mesma fase para todos, dispute o tempo com os amigos".
+- **Como foi feito:** nada de gravar a tela. Uma página desenha cada quadro com o código do próprio jogo: o renderer, a abertura e as partidas do piloto expert nas fases fixas. A batida foi encenada: a partir de um ponto achado por busca, o piloto mira na pedra. O som é a música da abertura e os efeitos do jogo (propulsor, pouso, embarque, batida e elogios), tocados no tempo do vídeo. O MP4 é montado pelo próprio Chrome, sem ffmpeg e sem dependências. Grava as duas versões em uns 15 segundos.
+- **Conferido:** o MP4 abre no player do Chrome com 14 s, 1920 × 1080 e som estéreo; o quadro decodificado aos 8,55 s é a batida certa; o volume a cada meio segundo mostra a música e os efeitos no lugar. Os testes do jogo continuam passando: nada no jogo mudou.
+- **Escolhas para o Fernando revisar:**
+  - a câmera fica mais perto que no jogo (zoom de 1,4 a 1,8, contra 1,15 no celular), para ler numa tela pequena;
+  - o nome é o codinome (P-003);
+  - formato deitado (16:9).
+- **Não verificado:** ouvir o som (o Claude só mede os níveis) e ver no celular.
+- **Arquitetura:** acoplamento novo registrado no documento 12 (v0.5): o vídeo usa o desenho, a abertura, o som e o piloto do jogo.
+
 ## Aprendizados de produto
 
 - Separar o objetivo do projeto (portfólio) do objetivo do produto (o jogador), com uma regra de desempate: quando os dois brigam, o jogador vence.
@@ -582,4 +603,5 @@ O Fernando pediu "pode codar todas as melhorias". Construído, testado (92 teste
 - Pensar no abuso antes de lançar: o ranking que motivou os jogadores (D-021) é também a parte mais fácil de trapacear. E a salvaguarda pode virar recurso: o replay que confere o ranking é a mesma base do "fantasma" do melhor tempo.
 - Uma rodada de playtest com amigos dura um fim de semana: 48 sessões de sexta a domingo e, depois, nenhuma partida. Combinar o começo e o fim, avisar o que mudou e fechar a janela no fim. Deixar a janela aberta "para o caso de alguém jogar" só expôs o repositório por mais três dias.
 - Contrato conferido por teste acha defeito que ninguém procurava: o teste do obstáculo achou, na primeira rodada, a pedra com limites menores que o desenho. Escrever o contrato antes do segundo obstáculo saiu mais barato do que descobrir o problema com 10 tipos de obstáculo.
+- Material de divulgação feito com o próprio jogo acompanha o produto: o vídeo de apresentação sai do código das fases, então, quando uma fase mudar, ele é refeito em segundos, sem regravar a tela nem editar vídeo.
 - O teste do PM mostrou o que a classificação técnica escondia: a câmera estava marcada como "só imagem", mas quanto se vê à frente muda a dificuldade e o ranking. Testar sentindo o jogo achou a regra que faltava.

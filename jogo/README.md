@@ -8,6 +8,7 @@ Na pasta do projeto:
 
 - Jogo: `node jogo/servir.js` e abrir http://localhost:8081. No celular, no mesmo Wi-Fi: `http://<IP do computador>:8081`.
 - Relatório da telemetria do playtest (#88): `node jogo/ferramentas/relatorio-telemetria.mjs`, com `--desde AAAA-MM-DD` para um período e `--incluir-local` para ver também os testes no computador.
+- Vídeo de apresentação (14 s, partidas de verdade do piloto automático): `node jogo/ferramentas/video/gravar.mjs` grava a versão em inglês e a em português em `jogo/ferramentas/saida/` (fora do Git), em uns 15 segundos. `--lingua en` grava só uma; `--fotos 1,5,9` só tira fotos desses segundos, para conferir o roteiro. Cenas, tempos e textos ficam em `jogo/ferramentas/video/roteiro.js`. Precisa do Chrome ou do Edge.
 - Testes automáticos:
   - `node jogo/testes/rodar.js --rapido` a cada mudança (uns 3 s): regras do documento 02, camadas, desenho e fichas de ouro;
   - `node jogo/testes/rodar.js` antes de cada commit e antes de publicar: também os 500 cenários aleatórios de cada nível e o piloto automático provando cada fase, que crescem com o número de fases;
@@ -34,6 +35,7 @@ Os módulos do navegador não abrem com dois cliques no `index.html` (`file://`)
 | `src/core/ranking.js`, `src/platform/leaderboard.js` e `src/ui/ranking.js` | Nickname e ranking por fase (#87): regras, banco (no aparelho e online) e tela | O banco online ou as regras do ranking mudam |
 | `src/config/online.js` | Endereço do banco online do ranking (Firebase `resgate-espacial`) e o resumo das regras do banco; vazio = ranking só no aparelho | O banco é trocado |
 | `src/platform/telemetry.js` | Telemetria do playtest (#88, D-025): fila de eventos no aparelho, envio em lotes ao Firebase e medidor de quadros por segundo | Um evento novo é medido, ou a P-008 é decidida para o lançamento |
+| `ferramentas/video/` | Vídeo de apresentação: o roteiro (`roteiro.js`), o desenho quadro a quadro com o código do jogo (renderer, abertura e partidas do piloto), o som (música da abertura e efeitos, num `OfflineAudioContext`) e o MP4 (H.264 + AAC), feito pelo Chrome sem janela, sem dependências | O desenho, a abertura, o som, as mensagens da partida ou o piloto mudam: gravar de novo e olhar as fotos |
 | `ferramentas/relatorio-telemetria.mjs` | Relatório da telemetria no terminal: por fase (tentativas, conclusões, mortes e onde), por aparelho (quadros por segundo) e a abertura | Um evento novo precisa aparecer no relatório |
 | `src/core/praise.js` | Detecta manobras difíceis e avisa o elogio (#81): fininho, freada no limite, pouso perfeito e corrida perfeita | Os critérios dos elogios mudam |
 | `src/core/autopilot.js` | Piloto automático com dois jeitos de voar: o cauteloso, que prova cada cenário e calcula o tanque (D-018), e o expert, que voa como os melhores jogadores e mede o melhor que dá para fazer (D-026) | A física ou um obstáculo novo mudam |
