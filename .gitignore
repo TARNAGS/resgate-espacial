@@ -33,3 +33,6 @@ docs/benchmark/jetpack-joyride/ferramentas/saida/
 
 # Saída das ferramentas do benchmark do Temple Run, gerada a cada vez
 docs/benchmark/temple-run/ferramentas/saida/
+
+# Saída das ferramentas do benchmark do Geometry Dash, gerada a cada vez
+docs/benchmark/geometry-dash/ferramentas/saida/

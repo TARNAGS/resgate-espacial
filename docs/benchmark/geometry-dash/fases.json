@@ -1,0 +1,866 @@
+{
+ "jogo": "Geometry Dash",
+ "versaoEstudada": "completo 2.208 (jan/2026); Lite 2.21.7 (jan/2026)",
+ "consulta": "08/10/2026",
+ "fonte": "Geometry Dash Wiki (geometry-dash.fandom.com), páginas Main Levels, Geometry Dash World, Dashlands, Toxic Factory, Tower, The Tower, The Sewers, The Cellar, The Secret Hollow, Geometry Dash Meltdown, Geometry Dash SubZero, Geometry Dash Lite e o log de atualizações do iOS; traduções e a coluna \"novidade\" resumidas pelo Claude",
+ "notas": {
+  "segundos": "Duração de uma corrida perfeita, segundo a wiki (o jogo avança sozinho, então a duração é fixa).",
+  "estrelas": "Recompensa da fase; nas oficiais vai de 1 a 15 e acompanha a dificuldade.",
+  "dificuldadeAntesDa19": "Na atualização 1.9 (11/2014), os rótulos das fases 2 a 9 foram rebaixados, porque fases mais difíceis tinham entrado depois delas.",
+  "world": "Spin-off grátis com anúncios (12/2016): 10 fases curtas jogadas em sequência, em 2 mundos de 5.",
+  "torre": "Fases de plataforma (2.2, 12/2023): o jogador anda para os lados, com checkpoints fixos que valem no modo normal; a terceira moeda pede concluir abaixo de um tempo-limite."
+ },
+ "principais": [
+  {
+   "n": 1,
+   "nome": "Stereo Madness",
+   "dificuldade": "Easy",
+   "estrelas": 1,
+   "segundos": 89,
+   "pulosMinimos": 77,
+   "modos": [
+    "Cube",
+    "Ship"
+   ],
+   "portais": [],
+   "novidade": "Cubo e nave; a nave começa num espaço amplo, para aprender o controle",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "1.0",
+    "data": "08/2013"
+   },
+   "dificuldadeAntesDa19": null,
+   "trancadaPorMoedas": null,
+   "dicaNaTela": "Tap to jump over the spikes",
+   "naLite": true
+  },
+  {
+   "n": 2,
+   "nome": "Back On Track",
+   "dificuldade": "Easy",
+   "estrelas": 2,
+   "segundos": 84,
+   "pulosMinimos": 86,
+   "modos": [
+    "Cube",
+    "Ship"
+   ],
+   "portais": [],
+   "novidade": "Mola (pad): primeiro ajuda a pular, depois joga contra os espinhos",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "1.0",
+    "data": "08/2013"
+   },
+   "dificuldadeAntesDa19": "Normal",
+   "trancadaPorMoedas": null,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 3,
+   "nome": "Polargeist",
+   "dificuldade": "Normal",
+   "estrelas": 3,
+   "segundos": 93,
+   "pulosMinimos": 118,
+   "modos": [
+    "Cube",
+    "Ship"
+   ],
+   "portais": [],
+   "novidade": "Anel de pulo (pula no ar ao tocar dentro dele)",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "1.0",
+    "data": "08/2013"
+   },
+   "dificuldadeAntesDa19": "Hard",
+   "trancadaPorMoedas": null,
+   "dicaNaTela": "Tap while touching a orb to jump mid air",
+   "naLite": true
+  },
+  {
+   "n": 4,
+   "nome": "Dry Out",
+   "dificuldade": "Normal",
+   "estrelas": 4,
+   "segundos": 84,
+   "pulosMinimos": 106,
+   "modos": [
+    "Cube",
+    "Ship"
+   ],
+   "portais": [
+    "Gravity"
+   ],
+   "novidade": "Portal de gravidade (de cabeça para baixo), num trecho calmo",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "1.0",
+    "data": "08/2013"
+   },
+   "dificuldadeAntesDa19": "Harder",
+   "trancadaPorMoedas": null,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 5,
+   "nome": "Base After Base",
+   "dificuldade": "Hard",
+   "estrelas": 5,
+   "segundos": 86,
+   "pulosMinimos": 103,
+   "modos": [
+    "Cube",
+    "Ship"
+   ],
+   "portais": [
+    "Gravity"
+   ],
+   "novidade": "Nenhuma: repete o que já foi visto (a comunidade a acha \"esquecível\")",
+   "trazMecanicaNova": false,
+   "entrou": {
+    "versao": "1.0",
+    "data": "08/2013"
+   },
+   "dificuldadeAntesDa19": "Harder",
+   "trancadaPorMoedas": null,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 6,
+   "nome": "Can't Let Go",
+   "dificuldade": "Hard",
+   "estrelas": 6,
+   "segundos": 83,
+   "pulosMinimos": 108,
+   "modos": [
+    "Cube",
+    "Ship"
+   ],
+   "portais": [
+    "Gravity"
+   ],
+   "novidade": "Nenhuma mecânica nova: primeiro grande salto de dificuldade (pulos mais justos, molas e anéis de cabeça para baixo)",
+   "trazMecanicaNova": false,
+   "entrou": {
+    "versao": "1.0",
+    "data": "08/2013"
+   },
+   "dificuldadeAntesDa19": "Insane",
+   "trancadaPorMoedas": null,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 7,
+   "nome": "Jumper",
+   "dificuldade": "Harder",
+   "estrelas": 7,
+   "segundos": 89,
+   "pulosMinimos": 106,
+   "modos": [
+    "Cube",
+    "Ship"
+   ],
+   "portais": [
+    "Gravity"
+   ],
+   "novidade": "Gravidade invertida também na nave; manobras mais justas",
+   "trazMecanicaNova": false,
+   "entrou": {
+    "versao": "1.0",
+    "data": "08/2013"
+   },
+   "dificuldadeAntesDa19": "Insane",
+   "trancadaPorMoedas": null,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 8,
+   "nome": "Time Machine",
+   "dificuldade": "Harder",
+   "estrelas": 8,
+   "segundos": 99,
+   "pulosMinimos": 107,
+   "modos": [
+    "Cube",
+    "Ship"
+   ],
+   "portais": [
+    "Gravity",
+    "Mirror"
+   ],
+   "novidade": "Portal espelho (a tela inverte o sentido); espinhos triplos frequentes",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "1.1",
+    "data": "09/2013"
+   },
+   "dificuldadeAntesDa19": "Insane",
+   "trancadaPorMoedas": null,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 9,
+   "nome": "Cycles",
+   "dificuldade": "Harder",
+   "estrelas": 9,
+   "segundos": 82,
+   "pulosMinimos": 88,
+   "modos": [
+    "Cube",
+    "Ship",
+    "Ball"
+   ],
+   "portais": [
+    "Gravity",
+    "Mirror"
+   ],
+   "novidade": "Bola (cada toque inverte a gravidade)",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "1.2",
+    "data": "10/2013"
+   },
+   "dificuldadeAntesDa19": "Insane",
+   "trancadaPorMoedas": null,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 10,
+   "nome": "xStep",
+   "dificuldade": "Insane",
+   "estrelas": 10,
+   "segundos": 84,
+   "pulosMinimos": 77,
+   "modos": [
+    "Cube",
+    "Ship",
+    "Ball"
+   ],
+   "portais": [
+    "Gravity"
+   ],
+   "novidade": "Mola e anel azuis (de gravidade); trocas de modo mais frequentes",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "1.3",
+    "data": "11/2013"
+   },
+   "dificuldadeAntesDa19": null,
+   "trancadaPorMoedas": null,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 11,
+   "nome": "Clutterfunk",
+   "dificuldade": "Insane",
+   "estrelas": 11,
+   "segundos": 99,
+   "pulosMinimos": 125,
+   "modos": [
+    "Cube",
+    "Ship",
+    "Ball"
+   ],
+   "portais": [
+    "Gravity",
+    "Mirror",
+    "Size"
+   ],
+   "novidade": "Serra; portal de tamanho (o ícone fica miniatura)",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "1.4",
+    "data": "12/2013"
+   },
+   "dificuldadeAntesDa19": null,
+   "trancadaPorMoedas": null,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 12,
+   "nome": "Theory of Everything",
+   "dificuldade": "Insane",
+   "estrelas": 12,
+   "segundos": 86,
+   "pulosMinimos": 62,
+   "modos": [
+    "Cube",
+    "Ship",
+    "Ball",
+    "UFO"
+   ],
+   "portais": [
+    "Gravity",
+    "Mirror",
+    "Size"
+   ],
+   "novidade": "UFO (pulo no ar a cada toque); mola e anel rosa; caminhos falsos com setas que indicam o certo",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "1.5",
+    "data": "01/2014"
+   },
+   "dificuldadeAntesDa19": null,
+   "trancadaPorMoedas": null,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 13,
+   "nome": "Electroman Adventures",
+   "dificuldade": "Insane",
+   "estrelas": 10,
+   "segundos": 88,
+   "pulosMinimos": 88,
+   "modos": [
+    "Cube",
+    "Ship",
+    "Ball",
+    "UFO"
+   ],
+   "portais": [
+    "Gravity",
+    "Mirror",
+    "Size"
+   ],
+   "novidade": "Blocos que se quebram; muitas trocas de modo, mas jogabilidade mais fácil (respiro antes do demon)",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "1.6",
+    "data": "03/2014"
+   },
+   "dificuldadeAntesDa19": null,
+   "trancadaPorMoedas": null,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 14,
+   "nome": "Clubstep",
+   "dificuldade": "Demon",
+   "estrelas": 14,
+   "segundos": 90,
+   "pulosMinimos": 89,
+   "modos": [
+    "Cube",
+    "Ship",
+    "Ball",
+    "UFO"
+   ],
+   "portais": [
+    "Gravity",
+    "Size"
+   ],
+   "novidade": "Enganos: espinhos falsos, espinhos e blocos que somem",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "1.6",
+    "data": "03/2014"
+   },
+   "dificuldadeAntesDa19": null,
+   "trancadaPorMoedas": 10,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 15,
+   "nome": "Electrodynamix",
+   "dificuldade": "Insane",
+   "estrelas": 12,
+   "segundos": 84,
+   "pulosMinimos": 81,
+   "modos": [
+    "Cube",
+    "Ship",
+    "Ball",
+    "UFO"
+   ],
+   "portais": [
+    "Gravity",
+    "Size",
+    "Speed"
+   ],
+   "novidade": "Portal de velocidade (rápido e muito rápido); fica mais difícil ao longo da fase",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "1.7",
+    "data": "05/2014"
+   },
+   "dificuldadeAntesDa19": null,
+   "trancadaPorMoedas": null,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 16,
+   "nome": "Hexagon Force",
+   "dificuldade": "Insane",
+   "estrelas": 12,
+   "segundos": 92,
+   "pulosMinimos": 103,
+   "modos": [
+    "Cube",
+    "Ship",
+    "Ball",
+    "UFO"
+   ],
+   "portais": [
+    "Gravity",
+    "Size",
+    "Speed",
+    "Dual"
+   ],
+   "novidade": "Rampas; dual (dois ícones ao mesmo tempo, espelhados)",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "1.8",
+    "data": "08/2014"
+   },
+   "dificuldadeAntesDa19": null,
+   "trancadaPorMoedas": null,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 17,
+   "nome": "Blast Processing",
+   "dificuldade": "Harder",
+   "estrelas": 10,
+   "segundos": 102,
+   "pulosMinimos": 65,
+   "modos": [
+    "Cube",
+    "Ship",
+    "Ball",
+    "UFO",
+    "Wave"
+   ],
+   "portais": [
+    "Gravity",
+    "Dual"
+   ],
+   "novidade": "Wave (sobe e desce em diagonal), em trechos espaçosos; quase sem portais de manipulação",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "1.9",
+    "data": "11/2014"
+   },
+   "dificuldadeAntesDa19": null,
+   "trancadaPorMoedas": null,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 18,
+   "nome": "Theory of Everything 2",
+   "dificuldade": "Demon",
+   "estrelas": 14,
+   "segundos": 92,
+   "pulosMinimos": 90,
+   "modos": [
+    "Cube",
+    "Ship",
+    "Ball",
+    "UFO",
+    "Wave"
+   ],
+   "portais": [
+    "Gravity",
+    "Size",
+    "Speed"
+   ],
+   "novidade": "Serras que somem, rampas invisíveis e falsas: fase de memória",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "1.9",
+    "data": "11/2014"
+   },
+   "dificuldadeAntesDa19": null,
+   "trancadaPorMoedas": 20,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 19,
+   "nome": "Geometrical Dominator",
+   "dificuldade": "Harder",
+   "estrelas": 10,
+   "segundos": 100,
+   "pulosMinimos": 76,
+   "modos": [
+    "Cube",
+    "Ship",
+    "Ball",
+    "UFO",
+    "Wave",
+    "Robot"
+   ],
+   "portais": [
+    "Gravity",
+    "Size",
+    "Speed"
+   ],
+   "novidade": "Robô (pulo mais alto quanto mais segura); objetos que se movem; trecho de memória com estrelinhas que mostram o caminho",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "2.0",
+    "data": "08/2015"
+   },
+   "dificuldadeAntesDa19": null,
+   "trancadaPorMoedas": null,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 20,
+   "nome": "Deadlocked",
+   "dificuldade": "Demon",
+   "estrelas": 15,
+   "segundos": 99,
+   "pulosMinimos": 77,
+   "modos": [
+    "Cube",
+    "Ship",
+    "Ball",
+    "UFO",
+    "Wave",
+    "Robot"
+   ],
+   "portais": [
+    "Gravity",
+    "Size",
+    "Speed",
+    "Dual",
+    "Teleportation"
+   ],
+   "novidade": "Portal de teleporte; anel verde; uma \"luta com chefe\" decorativa a 64%",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "2.0",
+    "data": "08/2015"
+   },
+   "dificuldadeAntesDa19": null,
+   "trancadaPorMoedas": 30,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 21,
+   "nome": "Fingerdash",
+   "dificuldade": "Insane",
+   "estrelas": 12,
+   "segundos": 85,
+   "pulosMinimos": 79,
+   "modos": [
+    "Cube",
+    "Ship",
+    "UFO",
+    "Wave",
+    "Robot",
+    "Spider"
+   ],
+   "portais": [
+    "Gravity",
+    "Size",
+    "Speed",
+    "Teleportation"
+   ],
+   "novidade": "Aranha (teleporta para a superfície oposta); anéis de queda e de dash; mola vermelha",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "2.1",
+    "data": "01/2017"
+   },
+   "dificuldadeAntesDa19": null,
+   "trancadaPorMoedas": null,
+   "dicaNaTela": null,
+   "naLite": true
+  },
+  {
+   "n": 22,
+   "nome": "Dash",
+   "dificuldade": "Insane",
+   "estrelas": 12,
+   "segundos": 96,
+   "pulosMinimos": 83,
+   "modos": [
+    "Cube",
+    "Ship",
+    "Ball",
+    "Robot",
+    "Wave",
+    "Spider",
+    "Swing"
+   ],
+   "portais": [
+    "Gravity",
+    "Size",
+    "Speed",
+    "Teleportation"
+   ],
+   "novidade": "Swing (inverte a gravidade em voo); câmera controlada pela fase; setas que mudam a direção do ícone",
+   "trazMecanicaNova": true,
+   "entrou": {
+    "versao": "2.2",
+    "data": "12/2023"
+   },
+   "dificuldadeAntesDa19": null,
+   "trancadaPorMoedas": null,
+   "dicaNaTela": null,
+   "naLite": false
+  }
+ ],
+ "secreta": {
+  "nome": "The Challenge",
+  "dificuldade": "Hard",
+  "estrelas": 3,
+  "pulosMinimos": 20,
+  "nota": "Fase secreta e curta, aberta por código; usa molas e anéis de todos os tipos"
+ },
+ "world": [
+  {
+   "mundo": "Dashlands",
+   "n": 1,
+   "nome": "Payload",
+   "estrelas": 2,
+   "segundos": 27,
+   "novidade": "Cubo"
+  },
+  {
+   "mundo": "Dashlands",
+   "n": 2,
+   "nome": "Beast Mode",
+   "estrelas": 2,
+   "segundos": 32,
+   "novidade": "Mola"
+  },
+  {
+   "mundo": "Dashlands",
+   "n": 3,
+   "nome": "Machina",
+   "estrelas": 3,
+   "segundos": 33,
+   "novidade": "Anel de pulo; nave num trecho a 63%"
+  },
+  {
+   "mundo": "Dashlands",
+   "n": 4,
+   "nome": "Years",
+   "estrelas": 3,
+   "segundos": 33,
+   "novidade": "Objetos que se movem"
+  },
+  {
+   "mundo": "Dashlands",
+   "n": 5,
+   "nome": "Frontlines",
+   "estrelas": 3,
+   "segundos": 30,
+   "novidade": "Portal de gravidade"
+  },
+  {
+   "mundo": "Toxic Factory",
+   "n": 6,
+   "nome": "Space Pirates",
+   "estrelas": 3,
+   "segundos": 37,
+   "novidade": "UFO"
+  },
+  {
+   "mundo": "Toxic Factory",
+   "n": 7,
+   "nome": "Striker",
+   "estrelas": 3,
+   "segundos": 37,
+   "novidade": "Portal espelho"
+  },
+  {
+   "mundo": "Toxic Factory",
+   "n": 8,
+   "nome": "Embers",
+   "estrelas": 3,
+   "segundos": 29,
+   "novidade": "Bola"
+  },
+  {
+   "mundo": "Toxic Factory",
+   "n": 9,
+   "nome": "Round 1",
+   "estrelas": 3,
+   "segundos": 32,
+   "novidade": "Mola e anel azuis; um trecho de nave"
+  },
+  {
+   "mundo": "Toxic Factory",
+   "n": 10,
+   "nome": "Monster Dance Off",
+   "estrelas": 3,
+   "segundos": 36,
+   "novidade": "Wave, com rampas"
+  }
+ ],
+ "meltdown": [
+  {
+   "n": 1,
+   "nome": "The Seven Seas",
+   "dificuldade": "Easy",
+   "estrelas": 1,
+   "segundos": 94
+  },
+  {
+   "n": 2,
+   "nome": "Viking Arena",
+   "dificuldade": "Normal",
+   "estrelas": 2,
+   "segundos": 81
+  },
+  {
+   "n": 3,
+   "nome": "Airborne Robots",
+   "dificuldade": "Hard",
+   "estrelas": 3,
+   "segundos": 96
+  }
+ ],
+ "subzero": [
+  {
+   "n": 1,
+   "nome": "Press Start",
+   "dificuldade": "Normal",
+   "estrelas": 4,
+   "segundos": 97
+  },
+  {
+   "n": 2,
+   "nome": "Nock Em",
+   "dificuldade": "Hard",
+   "estrelas": 6,
+   "segundos": 102
+  },
+  {
+   "n": 3,
+   "nome": "Power Trip",
+   "dificuldade": "Harder",
+   "estrelas": 8,
+   "segundos": 94
+  }
+ ],
+ "torre": [
+  {
+   "n": 1,
+   "nome": "The Tower",
+   "dificuldade": "Normal",
+   "luas": 5,
+   "checkpoints": 2,
+   "tempoLimiteMoeda": 70,
+   "novidade": "Plataforma: abismos, anéis, plataformas que caem, giram e têm tempo, perigos que se movem"
+  },
+  {
+   "n": 2,
+   "nome": "The Sewers",
+   "dificuldade": "Hard",
+   "luas": 6,
+   "checkpoints": null,
+   "tempoLimiteMoeda": 100,
+   "novidade": "Esmagadores, interruptores e jaulas"
+  },
+  {
+   "n": 3,
+   "nome": "The Cellar",
+   "dificuldade": "Harder",
+   "luas": 7,
+   "checkpoints": null,
+   "tempoLimiteMoeda": 110,
+   "novidade": "Robô no modo plataforma"
+  },
+  {
+   "n": 4,
+   "nome": "The Secret Hollow",
+   "dificuldade": "Harder",
+   "luas": 7,
+   "checkpoints": null,
+   "tempoLimiteMoeda": 280,
+   "novidade": "Bola no modo plataforma; a única luta com chefe da Torre, depois do último checkpoint"
+  }
+ ],
+ "atualizacoes": [
+  {
+   "versao": "1.0",
+   "data": "13/08/2013",
+   "fases": 7,
+   "jogadoresSteam": null
+  },
+  {
+   "versao": "1.1",
+   "data": "14/09/2013",
+   "fases": 8
+  },
+  {
+   "versao": "1.2",
+   "data": "21/10/2013",
+   "fases": 9
+  },
+  {
+   "versao": "1.3",
+   "data": "20/11/2013",
+   "fases": 10
+  },
+  {
+   "versao": "1.4",
+   "data": "26/12/2013",
+   "fases": 11
+  },
+  {
+   "versao": "1.5",
+   "data": "30/01/2014",
+   "fases": 12
+  },
+  {
+   "versao": "1.6",
+   "data": "25/03/2014",
+   "fases": 14
+  },
+  {
+   "versao": "1.7",
+   "data": "22/05/2014",
+   "fases": 15
+  },
+  {
+   "versao": "1.8",
+   "data": "07/08/2014",
+   "fases": 16
+  },
+  {
+   "versao": "1.9",
+   "data": "09/11/2014",
+   "fases": 18
+  },
+  {
+   "versao": "2.0",
+   "data": "26/08/2015",
+   "fases": 20
+  },
+  {
+   "versao": "2.1",
+   "data": "18/01/2017",
+   "fases": 21
+  },
+  {
+   "versao": "2.2",
+   "data": "19/12/2023",
+   "fases": 22,
+   "extra": "+ 4 fases de plataforma (Torre)"
+  }
+ ]
+}

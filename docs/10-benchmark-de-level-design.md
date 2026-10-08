@@ -3,8 +3,8 @@
 | Campo | Valor |
 |---|---|
 | Documento | 10 — Benchmark de level design |
-| Versão | 0.6 |
-| Data | 06/10/2026 |
+| Versão | 0.7 |
+| Data | 08/10/2026 |
 | Status | Em construção |
 | Responsável | Fernando Nunes (Product Manager) |
 
@@ -28,6 +28,8 @@ O que os jogos de referência fazem com fases, obstáculos, dificuldade e ritmo,
 | Página de leitura do Jetpack Joyride | [claude.ai/artifact/TjsQe83tBnQbYzsddenUcb](https://claude.ai/artifact/TjsQe83tBnQbYzsddenUcb) (privada) e a cópia [benchmark/jetpack-joyride/pagina-de-leitura.html](benchmark/jetpack-joyride/pagina-de-leitura.html) | Publicada |
 | Temple Run (2011), o segundo casual do ICP | [benchmark/temple-run.md](benchmark/temple-run.md): a corrida infinita em 3D, com perseguição, e a comparação com o Jetpack Joyride ([#108](https://github.com/TARNAGS/resgate-espacial/issues/108)) | Pronto (v1.0) |
 | Página de leitura do Temple Run | [claude.ai/artifact/DatT92pPFFCnnDwG3vLoBZ](https://claude.ai/artifact/DatT92pPFFCnnDwG3vLoBZ) (privada) e a cópia [benchmark/temple-run/pagina-de-leitura.html](benchmark/temple-run/pagina-de-leitura.html) | Publicada |
+| Geometry Dash (2013), o casual mais próximo do nosso jogo | [benchmark/geometry-dash.md](benchmark/geometry-dash.md): a curva das 22 fases oficiais, o mundo de 10 fases curtas (Geometry Dash World), checkpoints e ranking, a comunidade e o modelo grátis + pago ([#127](https://github.com/TARNAGS/resgate-espacial/issues/127)) | Pronto (v1.0) |
+| Página de leitura do Geometry Dash | [claude.ai/artifact/Y7Y1rAykSbfkfXuaJdSXRC](https://claude.ai/artifact/Y7Y1rAykSbfkfXuaJdSXRC) (privada) e a cópia [benchmark/geometry-dash/pagina-de-leitura.html](benchmark/geometry-dash/pagina-de-leitura.html) | Publicada |
 | Outros casuais do ICP (Subway Surfers, Candy Crush Saga, Plants vs. Zombies) | Seção 4 deste documento | A pesquisar ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)) |
 
 ## 2. O jogo original: Crazy Gravity (1996)
@@ -101,16 +103,16 @@ O benchmark completo, com as regras do Gravitron 2 lidas no código e 45 fases m
 
 ## 4. Os casuais de celular do ICP (D-028)
 
-Jetpack Joyride, Subway Surfers, Candy Crush Saga, Plants vs. Zombies e Temple Run. A pesquisa está no cartão [#99](https://github.com/TARNAGS/resgate-espacial/issues/99). Cada jogo responde às mesmas perguntas feitas ao Crazy Gravity, para comparar lado a lado. O Fernando, em 06/10/2026: os jogos de nave com gravidade são muito parecidos com o que ele pensa em level design (artefatos de gameplay, obstáculos, incremento de fase); os modernos são inspiração menos direta, mas ajudam a entender como jogos infinitos funcionam.
+Jetpack Joyride, Subway Surfers, Candy Crush Saga, Plants vs. Zombies e Temple Run, e, desde a revisão do Lean Canvas de 07/10/2026, o Geometry Dash. A pesquisa está no cartão [#99](https://github.com/TARNAGS/resgate-espacial/issues/99). Cada jogo responde às mesmas perguntas feitas ao Crazy Gravity, para comparar lado a lado. O Fernando, em 06/10/2026: os jogos de nave com gravidade são muito parecidos com o que ele pensa em level design (artefatos de gameplay, obstáculos, incremento de fase); os modernos são inspiração menos direta, mas ajudam a entender como jogos infinitos funcionam.
 
-| Pergunta de level design | O que olhar nos casuais | Jetpack Joyride ([benchmark](benchmark/jetpack-joyride.md), [#107](https://github.com/TARNAGS/resgate-espacial/issues/107)) | Temple Run ([benchmark](benchmark/temple-run.md), [#108](https://github.com/TARNAGS/resgate-espacial/issues/108)) |
-|---|---|---|---|
-| Como a fase é organizada | Fases fixas e numeradas (Candy Crush, Plants vs. Zombies) ou corrida sem fim (Jetpack Joyride, Subway Surfers, Temple Run) | Sem fases: uma corrida sem fim, montada na hora por intervalos (entre um mínimo e um máximo) com probabilidades por tipo de objeto | Sem fases: um caminho único gerado na hora, com curvas de 90°; no 2, mapas temáticos |
-| Como a dificuldade sobe | Rampa, serrote, fases de respiro, fases-chefe | Com a distância; os veículos quebram a intensidade em serrote | Com a velocidade, que cresce com a distância; perseguidores sempre atrás |
-| Como um elemento novo é apresentado | Fase dedicada, primeira aparição segura, combinação depois | Avisos antes do perigo; câmera lenta, tela limpa e trilhas de moedas para cada veículo; missões que pedem para experimentar | Cada obstáculo pede um gesto que se entende pela forma; testado com pessoas sem nenhuma explicação |
-| Metas por fase | Estrelas, missões, recordes | Três missões ao mesmo tempo (1 a 3 estrelas), recorde de distância e ranking dos amigos | 56 objetivos que aumentam o multiplicador (no 2, três por vez e níveis), recorde e ranking |
-| Duração de uma fase | Quanto cabe numa fila de 2 minutos | A "jogada do intervalo comercial" | De 30 segundos a alguns minutos |
-| O que faz voltar | Recordes, colecionáveis, eventos | Missões que se renovam, níveis e insígnias, loja, roleta, desafio diário, eventos, bônus ao voltar | Multiplicador, melhorias de poderes, personagens, amigos; no 2, desafios diários com sequência, mapas novos e eventos |
+| Pergunta de level design | O que olhar nos casuais | Jetpack Joyride ([benchmark](benchmark/jetpack-joyride.md), [#107](https://github.com/TARNAGS/resgate-espacial/issues/107)) | Temple Run ([benchmark](benchmark/temple-run.md), [#108](https://github.com/TARNAGS/resgate-espacial/issues/108)) | Geometry Dash ([benchmark](benchmark/geometry-dash.md), [#127](https://github.com/TARNAGS/resgate-espacial/issues/127)) |
+|---|---|---|---|---|
+| Como a fase é organizada | Fases fixas e numeradas (Candy Crush, Plants vs. Zombies) ou corrida sem fim (Jetpack Joyride, Subway Surfers, Temple Run) | Sem fases: uma corrida sem fim, montada na hora por intervalos (entre um mínimo e um máximo) com probabilidades por tipo de objeto | Sem fases: um caminho único gerado na hora, com curvas de 90°; no 2, mapas temáticos | Fases fixas e numeradas, de 82 a 102 s, cada uma com uma música; no Geometry Dash World, 10 fases curtas em 2 mundos de 5 |
+| Como a dificuldade sobe | Rampa, serrote, fases de respiro, fases-chefe | Com a distância; os veículos quebram a intensidade em serrote | Com a velocidade, que cresce com a distância; perseguidores sempre atrás | Rampa de uma estrela por fase nas 12 primeiras; depois, em pares: uma fase que apresenta a mecânica e um Demon que cobra |
+| Como um elemento novo é apresentado | Fase dedicada, primeira aparição segura, combinação depois | Avisos antes do perigo; câmera lenta, tela limpa e trilhas de moedas para cada veículo; missões que pedem para experimentar | Cada obstáculo pede um gesto que se entende pela forma; testado com pessoas sem nenhuma explicação | Em trecho amplo e calmo; às vezes primeiro como ajuda e depois como armadilha; uma frase na tela só depois de duas batidas |
+| Metas por fase | Estrelas, missões, recordes | Três missões ao mesmo tempo (1 a 3 estrelas), recorde de distância e ranking dos amigos | 56 objetivos que aumentam o multiplicador (no 2, três por vez e níveis), recorde e ranking | Concluir (estrelas), recorde de % ("New Best!"), três moedas secretas; na Torre, terminar abaixo de um tempo |
+| Duração de uma fase | Quanto cabe numa fila de 2 minutos | A "jogada do intervalo comercial" | De 30 segundos a alguns minutos | 27 a 37 s no World; 82 a 102 s nas principais; metas de 70 a 280 s nas fases de plataforma, com checkpoints |
+| O que faz voltar | Recordes, colecionáveis, eventos | Missões que se renovam, níveis e insígnias, loja, roleta, desafio diário, eventos, bônus ao voltar | Multiplicador, melhorias de poderes, personagens, amigos; no 2, desafios diários com sequência, mapas novos e eventos | Mais de 150 milhões de fases da comunidade, fase do dia e demon da semana, missões, baús, ícones |
 
 ## 5. Primeiras lições (Proposta)
 
@@ -146,6 +148,15 @@ Do Temple Run ([benchmark, seção 14](benchmark/temple-run.md#14-o-que-levar-pa
 19. **Um motivo para seguir em frente:** em fases especiais, uma ameaça visível que avança, sem inimigo que atira.
 20. **O progresso no placar é o oposto do Jetpack Joyride:** o multiplicador do Temple Run mistura progresso (e, no 2, compras) com habilidade; reforça o ranking por tempo puro.
 21. **Regras do mundo:** poucos "mandamentos" de identidade, no documento 08, que todo mundo do jogo respeita.
+
+Do Geometry Dash ([benchmark, seção 15](benchmark/geometry-dash.md#15-o-que-levar-para-o-resgate-espacial)):
+
+22. **Checkpoint como parte da fase, com o relógio correndo:** a resposta da Torre para a fase grande; o ranking continua sendo o tempo total (D-024), e um botão recomeça do zero.
+23. **Treino que não vale:** o modo prática tem checkpoints livres, nenhuma recompensa e uma música própria; atende quem ainda aprende sem mexer em quem disputa tempo.
+24. **Progresso parcial à vista:** porcentagem e "New Best!" transformam a derrota em progresso; uma frase de dica só aparece depois de duas batidas no mesmo ponto.
+25. **O par "apresenta e cobra":** a mecânica estreia numa fase mais fácil, em espaço amplo, e a fase-chefe combina; o Geometry Dash World confirma o mundo de 10 fases curtas com uma novidade cada.
+26. **Anúncio nunca entre mortes:** o Lite mostra anúncio a cada algumas mortes; num jogo de muitas mortes, é o pior momento.
+27. **Fases fixas vendem dificuldade:** dos casuais estudados, é o único com fases fixas, o único que separa treino de conclusão e o único pago; a vida longa veio da comunidade.
 
 ## 6. Como a busca do jogo original foi feita
 
@@ -209,3 +220,4 @@ A lista que levou ao reconhecimento, na ordem em que foi apresentada (da mais pr
 | 0.4 | 06/10/2026 | Benchmark do Jetpack Joyride ([benchmark/jetpack-joyride.md](benchmark/jetpack-joyride.md), [#107](https://github.com/TARNAGS/resgate-espacial/issues/107)), com a página de leitura; seção 4 com a coluna do Jetpack Joyride e a observação do Fernando; lições 12 a 16 |
 | 0.5 | 06/10/2026 | Benchmark do Temple Run ([benchmark/temple-run.md](benchmark/temple-run.md), [#108](https://github.com/TARNAGS/resgate-espacial/issues/108)), com a página de leitura; coluna do Temple Run na seção 4; lições 17 a 21 |
 | 0.6 | 06/10/2026 | O [guia dos benchmarks](benchmark/README.md), com a página de leitura, entra no topo da tabela de estudos |
+| 0.7 | 08/10/2026 | Benchmark do Geometry Dash ([benchmark/geometry-dash.md](benchmark/geometry-dash.md), [#127](https://github.com/TARNAGS/resgate-espacial/issues/127)), com a página de leitura; coluna do Geometry Dash na seção 4; lições 22 a 27 |

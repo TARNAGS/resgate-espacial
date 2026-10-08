@@ -3,12 +3,12 @@
 | Campo | Valor |
 |---|---|
 | Documento | 06 — Diário de bordo |
-| Última atualização | 07/10/2026 |
+| Última atualização | 08/10/2026 |
 | Responsável | Fernando Nunes (Product Manager) |
 
 Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e de onde o projeto parou. É o ponto de partida para retomar o trabalho, em qualquer máquina.
 
-## Onde paramos (07/10/2026)
+## Onde paramos (08/10/2026)
 
 - **Primeiro, no próximo "bom dia": retomar a revisão do Lean Canvas no C1** ([documento 13](13-modelo-de-negocio.md), seção 4.1). P1 a P4 foram fechados em 07/10; o C1 espera 4 respostas do Fernando (faixa etária, Brasil ou global, Android junto com o iPhone e o canvas do portfólio). As decisões da revisão só viram D-xxx no fim (documento 13, seção 7); até lá, o que a revisão mudou (anúncios, público, proposta de valor e métricas) vale mais do que a Visão 1.5.
 - **Janela de teste fechada (07/10):** o repositório está privado e o site, fora do ar. A rodada 1 durou de 02 a 04/10 ([documento 09](09-resultados-dos-playtests.md), "Como a rodada terminou"). Para a próxima, seguir a janela de teste do `CLAUDE.md`, a partir do passo 0.
@@ -29,10 +29,11 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **Gravitron 1 e 2 estudados (06/10, [#106](https://github.com/TARNAGS/resgate-espacial/issues/106)):** a origem do resgate de pessoas. Regras do Gravitron 2 lidas no código que o autor publicou, 22 fases do 2 e 23 do 1 mapeadas ([benchmark](benchmark/gravitron.md), [página de leitura](https://claude.ai/artifact/8yu4nX63Xoix8VneHU59bv)). Primeiro uso da skill.
 - **Jetpack Joyride estudado (06/10, [#107](https://github.com/TARNAGS/resgate-espacial/issues/107), parte da [#99](https://github.com/TARNAGS/resgate-espacial/issues/99)):** como um jogo infinito funciona, contado pelo criador ([benchmark](benchmark/jetpack-joyride.md), [página de leitura](https://claude.ai/artifact/TjsQe83tBnQbYzsddenUcb)).
 - **Temple Run estudado (06/10, [#108](https://github.com/TARNAGS/resgate-espacial/issues/108), parte da [#99](https://github.com/TARNAGS/resgate-espacial/issues/99)):** a corrida infinita em 3D, com perseguição, contada pelos criadores, e comparada ao Jetpack Joyride ([benchmark](benchmark/temple-run.md), [página de leitura](https://claude.ai/artifact/DatT92pPFFCnnDwG3vLoBZ)). Faltam Subway Surfers, Candy Crush Saga e Plants vs. Zombies.
-- **Guia dos benchmarks (06/10):** os quatro estudos lidos juntos, com 12 insights, divergências, validações, as decisões pendentes e três para decidir primeiro ([benchmark/README.md](benchmark/README.md), [página de leitura](https://claude.ai/artifact/TSGis8FXKTXWWgdQUJH9ar)). É a porta de entrada para tudo o que foi estudado.
+- **Geometry Dash estudado (08/10, [#127](https://github.com/TARNAGS/resgate-espacial/issues/127), em "Para conversar"):** o casual mais próximo do nosso jogo, com fases fixas. A curva das 22 fases, o mundo de 10 fases curtas (Geometry Dash World), como ele separa o treino com checkpoints da conclusão que vale e o modelo grátis com anúncios + pago ([benchmark](benchmark/geometry-dash.md), [página de leitura](https://claude.ai/artifact/Y7Y1rAykSbfkfXuaJdSXRC)). Responde a pergunta aberta da fase grande (documento 13, seção 3.2).
+- **Guia dos benchmarks (06/10, v1.1 em 08/10):** os quatro estudos lidos juntos, com 12 insights, divergências, validações, as decisões pendentes e três para decidir primeiro ([benchmark/README.md](benchmark/README.md), [página de leitura](https://claude.ai/artifact/TSGis8FXKTXWWgdQUJH9ar)). É a porta de entrada para tudo o que foi estudado.
 - **Anticheat (07/10, [#109](https://github.com/TARNAGS/resgate-espacial/issues/109), em "Para conversar"):** como proteger o ranking contra trapaça, com casos reais (Open Hexagon, Trackmania, lojas, speedrun.com), as portas abertas do nosso ranking hoje e uma proposta em três degraus, centrada em conferir a corrida pelo replay ([documento 11](11-anticheat-e-ranking-justo.md)).
 - **Épico E-26 · Abstração (07/10, [#110](https://github.com/TARNAGS/resgate-espacial/issues/110), no Backlog):** preparar o jogo para 10 mundos, 100 fases, skins, naves diferentes e evoluções sem quebrar as regras básicas. São 15 tarefas ([#111](https://github.com/TARNAGS/resgate-espacial/issues/111) a [#125](https://github.com/TARNAGS/resgate-espacial/issues/125)) em cinco ondas, da mais barata à mais cara: mapa de impacto, guardas automáticas, contratos, nave como dado e aparência separada das regras.
-- **Documentos:** Visão 1.5, Regras 1.7, PRD 1.7, Roadmap 1.8, Decisões até a D-037 (pendências até a P-024), documento 07 (roteiro de teste), 08 (design de mundos, com o rascunho do Mundo 1), 09 (resultados dos playtests, v0.3), 10 (benchmark de level design, v0.6, com o [guia dos benchmarks](benchmark/README.md), as [18 fases do Crazy Gravity](benchmark/crazy-gravity.md), as [45 dos Gravitron](benchmark/gravitron.md), o [Jetpack Joyride](benchmark/jetpack-joyride.md) e o [Temple Run](benchmark/temple-run.md)) e 11 ([anticheat e ranking justo](11-anticheat-e-ranking-justo.md), v0.3).
+- **Documentos:** Visão 1.5, Regras 1.7, PRD 1.7, Roadmap 1.8, Decisões até a D-037 (pendências até a P-024), documento 07 (roteiro de teste), 08 (design de mundos, com o rascunho do Mundo 1), 09 (resultados dos playtests, v0.3), 10 (benchmark de level design, v0.7, com o [guia dos benchmarks](benchmark/README.md), as [18 fases do Crazy Gravity](benchmark/crazy-gravity.md), as [45 dos Gravitron](benchmark/gravitron.md), o [Jetpack Joyride](benchmark/jetpack-joyride.md), o [Temple Run](benchmark/temple-run.md) e o [Geometry Dash](benchmark/geometry-dash.md)) e 11 ([anticheat e ranking justo](11-anticheat-e-ranking-justo.md), v0.3).
 - **Pendências abertas:** P-003 (nome), P-006 (pontuação), P-008 (medição), P-011 (obstáculos), P-012 (modificadores), P-014 (cobrar ou não, [#98](https://github.com/TARNAGS/resgate-espacial/issues/98)), P-015 (CNPJ), P-017 (loja), P-018 (modo Nightmare, [#79](https://github.com/TARNAGS/resgate-espacial/issues/79)), P-019 (ranking no lançamento, [#101](https://github.com/TARNAGS/resgate-espacial/issues/101)), P-023 (anticheat, [#109](https://github.com/TARNAGS/resgate-espacial/issues/109)), P-024 (como naves e evoluções que mudam o jogo aparecem no ranking). Decididas em 04/10: P-009 (D-031), P-013 (D-028), P-020 (D-026), P-021 (D-027) e P-022 (D-029); P-016 respondida em parte pela arquitetura.
 
 ### Próximos passos
@@ -65,7 +66,7 @@ A janela de teste foi fechada em 07/10.
    - [#102](https://github.com/TARNAGS/resgate-espacial/issues/102): jogar com um nick, limpar os dados do Safari (ou usar outro aparelho), digitar o mesmo nick e ver o progresso voltar.
 2. **Ler e aprovar o mapa de impacto** ([#111](https://github.com/TARNAGS/resgate-espacial/issues/111), [documento 12](12-arquitetura-do-jogo.md)): o que cada mudança no jogo afeta, o que conferir e quando o ranking recomeça.
 3. **Retrospectivas do M0** ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)) **e do M1** ([#46](https://github.com/TARNAGS/resgate-espacial/issues/46)). Os épicos dos dois marcos já foram fechados; o Claude pode rascunhar as retros a partir deste diário, para o Fernando ajustar.
-4. **Benchmarks em "Para conversar"** ([#106](https://github.com/TARNAGS/resgate-espacial/issues/106) a [#108](https://github.com/TARNAGS/resgate-espacial/issues/108)): o Fernando lê o [guia dos benchmarks](benchmark/README.md) (ou a [página de leitura](https://claude.ai/artifact/TSGis8FXKTXWWgdQUJH9ar)) e decide as recomendações. O Claude pergunta de novo depois.
+4. **Benchmarks em "Para conversar"** ([#106](https://github.com/TARNAGS/resgate-espacial/issues/106) a [#108](https://github.com/TARNAGS/resgate-espacial/issues/108) e [#127](https://github.com/TARNAGS/resgate-espacial/issues/127)): o Fernando lê o [guia dos benchmarks](benchmark/README.md) (ou a [página de leitura](https://claude.ai/artifact/TSGis8FXKTXWWgdQUJH9ar)) e decide as recomendações. O Claude pergunta de novo depois. Da #127, a primeira é o modelo de checkpoints da fase grande, que destrava o protótipo de fase grande.
 
 **Próxima construção**
 
@@ -90,7 +91,7 @@ A janela de teste foi fechada em 07/10.
 **Conteúdo (M3 em diante)**
 
 11. **Fernando:** obstáculos ([#60](https://github.com/TARNAGS/resgate-espacial/issues/60), P-011) e modificadores ([#61](https://github.com/TARNAGS/resgate-espacial/issues/61), P-012), com as ideias do [benchmark do Crazy Gravity](benchmark/crazy-gravity.md), seção 9. Eles destravam os níveis 4 e 5 (E-12).
-12. **Claude:** benchmark dos casuais que faltam ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)): Subway Surfers, Candy Crush Saga e Plants vs. Zombies.
+12. **Claude:** benchmark dos casuais que faltam ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)): Candy Crush Saga e Plants vs. Zombies primeiro (mapa longo e metas em estrelas, o que o Geometry Dash não respondeu), depois o Subway Surfers.
 
 **Depois (M4 e M5)**
 
@@ -525,6 +526,21 @@ O Fernando pediu "pode codar todas as melhorias". Construído, testado (92 teste
 - **Decisão D-037** ([#95](https://github.com/TARNAGS/resgate-espacial/issues/95) fechada): o zoom se adapta à tela (1,15 até 1), e o jogador pode mudar nas configurações. Proposta construída para ele validar: CAMERA AUTO/CLOSE/CLOSER só aproxima. O zoom fixo de teste tira a corrida do ranking.
 - **Pega encontrado no teste:** um zoom salvo pelo painel de ajuste passava por cima do automático e tirava as corridas do ranking. O ajuste foi renomeado (`cameraZoomFixed`), e valores antigos deixam de valer sozinhos.
 - **Também:** configurações em duas colunas em tela baixa (cabem no iPhone SE), a linha do teclado só aparece com teclado, a telemetria registra o zoom e o texto do patch note passou a citar a câmera. 132 testes passando.
+
+### 08/10/2026 — Benchmark do Geometry Dash ([#127](https://github.com/TARNAGS/resgate-espacial/issues/127))
+
+- **Pedido do Fernando:** "Comece o discovery do Geometry Dash". O cartão tinha nascido na revisão do Lean Canvas (07/10), com a pergunta da fase grande: como checkpoint e ranking convivem. Quarto uso da skill `discovery-de-jogos`.
+- **Fontes:** o criador (entrevista à Cult of Mac, 2014; texto dele no Game Developer, 2015; 231 respostas nas duas AMAs do Reddit, lidas pelo Arctic Shift porque o Reddit recusa scripts; o guia oficial de avaliação de fases); a Geometry Dash Wiki pela interface de dados (as 22 fases oficiais, o World, a Torre, o Lite, o modo prática e o ranking); Steam, lojas, Common Sense Media, Sensor Tower e imprensa. Nenhum arquivo do jogo foi baixado ou aberto.
+- **Achados principais:**
+  - 22 fases de 82 a 102 s, 19 com mecânica nova; rampa de uma estrela por fase nas 12 primeiras e, depois, o par "apresenta e cobra" (uma fase mais baixa com a mecânica, um Demon que combina tudo);
+  - o Geometry Dash World é um mundo de 10 fases de cerca de 30 s, cada uma com uma novidade, o formato do nosso Mundo 1;
+  - três respostas para checkpoints: a corrida que vale é sem morrer; o modo prática não vale e tem outra música; nas fases de plataforma, os checkpoints valem e o ranking é o tempo total, com o relógio correndo nas mortes (inferido). O nosso jogo já funciona como a fase de plataforma;
+  - morte fatal, mas barata: recomeço automático, porcentagem e "New Best!", moeda paga pelo progresso;
+  - modelo pago sem anúncios + Lite grátis com anúncios, escolhido para subir no ranking dos pagos; os anúncios do Lite aparecem entre mortes;
+  - uma pessoa fez o jogo, e ainda faz; a comunidade segurou o jogo por quase 7 anos sem fase oficial nova, até o recorde de 100 mil jogadores no Steam em jan/2026.
+- **Pega encontrado:** o conceito "Geometry Dash, só que pilotando uma nave" serve como frase interna, mas a diretriz 2.3.7 da App Store proíbe citar outros apps no subtítulo da loja.
+- **Documentos:** [benchmark/geometry-dash.md](benchmark/geometry-dash.md) (v1.0), com cinco diagramas, `fases.json` e as ferramentas em `docs/benchmark/geometry-dash/ferramentas/`; página de leitura em [claude.ai/artifact/Y7Y1rAykSbfkfXuaJdSXRC](https://claude.ai/artifact/Y7Y1rAykSbfkfXuaJdSXRC) (privada); documento 10 v0.7 (coluna do Geometry Dash na seção 4 e lições 22 a 27); guia dos benchmarks v1.1, com o insight 4.13 (checkpoint não precisa estragar o ranking), republicado no mesmo link. O cartão [#127](https://github.com/TARNAGS/resgate-espacial/issues/127) foi para "Para conversar", com quatro recomendações.
+- **O que a skill aprendeu:** quando o criador responde perguntas no Reddit e o Reddit recusa scripts, o arquivo público Arctic Shift traz as respostas dele com as perguntas (busca por autor e data; a busca por texto esgota o tempo).
 
 ## Aprendizados de produto
 
