@@ -1,0 +1,21 @@
+{
+  "cenario": "nível 1 · sobe reto da base até bater no teto",
+  "fase": "w1-1",
+  "semente": 101,
+  "fim": "exploding",
+  "passos": 481,
+  "cronometro": 4,
+  "combustivel": 0.933,
+  "vidas": 2,
+  "nave": {
+    "x": 130,
+    "y": 102.342,
+    "vx": 0,
+    "vy": -213.417,
+    "a": 0
+  },
+  "eventos": [
+    [0,"takeoff",{}],
+    [323,"crash",{"reason":"HIT THE CEILING","x":130,"y":102.342,"vx":0,"vy":-213.417,"a":0,"lives":2}]
+  ]
+}

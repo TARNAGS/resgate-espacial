@@ -1,0 +1,21 @@
+{
+  "cenario": "treino · desce devagar na plataforma, inclinada demais",
+  "fase": "training",
+  "semente": 1,
+  "fim": "landed",
+  "passos": 241,
+  "cronometro": 0,
+  "combustivel": 1,
+  "vidas": 3,
+  "nave": {
+    "x": 700,
+    "y": 502,
+    "vx": 0,
+    "vy": 0,
+    "a": 0
+  },
+  "eventos": [
+    [55,"crash",{"reason":"LANDED TILTED","x":700,"y":499.762,"vx":0,"vy":50.667,"a":0.45,"lives":3}],
+    [224,"respawn",{"lives":3,"at":"base"}]
+  ]
+}

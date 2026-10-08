@@ -112,6 +112,11 @@ if (demos.length || attract.length) {
   console.log(`DEMO (#104): ${demos.length} vistas · puladas ${pct(demos.filter((e) => e.skipped).length, demos.length)} · segundo mediano em que pulam ${fmt(median(demos.filter((e) => e.skipped).map((e) => e.at)))} · ${count(demos.map((e) => e.source)).map(([k, n]) => `${k} ×${n}`).join(' · ')}`);
   console.log(`ATTRACT MODE (#105): começou ${attract.filter((e) => e.action === 'start').length} vezes · interrompido por um toque ${attract.filter((e) => e.action === 'stop').length} vezes`);
 }
+const patch = events.filter((e) => e.ev === 'patch_note');
+if (patch.length) {
+  const by = (action) => patch.filter((e) => e.action === action).length;
+  console.log(`PATCH NOTE (#126): apareceu ${by('show')} vezes · fechado no SKIP ${by('skip')} · no PLAY ${by('play')} · versões: ${count(patch.map((e) => e.build)).map(([k, n]) => `${k} ×${n}`).join(' · ')}`);
+}
 
 // Ranking (sempre junto da telemetria): os tempos de cada fase, com o Fernando destacado
 console.log('\nRANKING DE CADA FASE (chave · nick · tempo · controle)');

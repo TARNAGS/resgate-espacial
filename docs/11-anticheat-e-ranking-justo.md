@@ -3,9 +3,9 @@
 | Campo | Valor |
 |---|---|
 | Documento | 11 — Anticheat e ranking justo |
-| Versão | 0.2 |
+| Versão | 0.3 |
 | Data | 07/10/2026 |
-| Status | Proposta (para conversar) |
+| Status | Degrau 1 recusado para os playtests (D-036); o resto fica para antes do lançamento |
 | Responsável | Fernando Nunes (Product Manager) |
 | Cartão | [#109](https://github.com/TARNAGS/resgate-espacial/issues/109) |
 
@@ -198,7 +198,7 @@ O replay é pequeno: os comandos mudam pouco de um passo para o outro, então ba
 ## 9. Perguntas para você
 
 1. **Quanto o ranking importa no lançamento?** Se ele for o centro da diversão (D-021), o degrau 2 é obrigatório antes de publicar. Se for um extra, dá para lançar com o degrau 1 e a revisão manual do topo.
-2. **Fazemos o degrau 1 agora**, nos playtests, ou só depois?
+2. **Fazemos o degrau 1 agora**, nos playtests, ou só depois? **Respondida em 07/10/2026: não agora (D-036).** O anticheat inteiro fica para antes do lançamento.
 3. **Ranking da loja, nosso, ou os dois?** (liga com a [#98](https://github.com/TARNAGS/resgate-espacial/issues/98), item 4)
 4. **Aceita o plano Blaze** (cartão cadastrado, cobrança por uso) para conferir na hora, ou começamos pela conferência gratuita por script?
 5. **O fantasma entra como ideia de produto?** Ele usa o mesmo replay e daria um motivo a mais para o investimento.
@@ -272,3 +272,4 @@ Consultadas em 07/10/2026. As fontes oficiais (Apple, Google, Firebase) aparecem
 |---|---|---|
 | 0.1 | 07/10/2026 | Primeira versão: tipos de anticheat, casos (Open Hexagon, Trackmania, lojas, speedrun.com), as portas abertas do nosso ranking, a conferência por replay e a recomendação em três degraus ([#109](https://github.com/TARNAGS/resgate-espacial/issues/109)) |
 | 0.2 | 07/10/2026 | Registrado nos outros documentos (P-023, risco no PRD, Roadmap e Regras do jogo) e nos cartões #101 e #98; nota sobre o repositório público na seção 5.2 |
+| 0.3 | 07/10/2026 | Pergunta 2 respondida pelo Fernando: o degrau 1 não entra nos playtests (D-036). As perguntas 1, 3, 4 e 5 ficam para antes do lançamento |

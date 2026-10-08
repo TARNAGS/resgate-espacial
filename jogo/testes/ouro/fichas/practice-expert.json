@@ -1,0 +1,31 @@
+{
+  "cenario": "practice · piloto expert, sem abastecer, girando como no toque",
+  "fase": "practice",
+  "semente": 293233524,
+  "fim": "complete",
+  "passos": 5887,
+  "cronometro": 49.05,
+  "combustivel": 0.25,
+  "vidas": 3,
+  "nave": {
+    "x": 128.37,
+    "y": 508.361,
+    "vx": 0,
+    "vy": 0,
+    "a": 0
+  },
+  "eventos": [
+    [0,"takeoff",{}],
+    [1431,"praise",{"kind":"closeCall","label":"CLOSE CALL","x":1992.606,"y":334.658}],
+    [2864,"land",{"pad":"crew","impact":{"vx":26.231,"vy":49.242,"angle":-0.25}}],
+    [2864,"boarding",{"lowFuel":false}],
+    [2948,"boardStep",{"index":0}],
+    [3003,"boardStep",{"index":1}],
+    [3057,"boardStep",{"index":2}],
+    [3105,"crewOnBoard",{}],
+    [3106,"takeoff",{}],
+    [5027,"praise",{"kind":"greatSave","label":"GREAT SAVE","x":1337.529,"y":439.686}],
+    [5886,"land",{"pad":"base","impact":{"vx":-16.567,"vy":50.664,"angle":0.25}}],
+    [5886,"complete",{"seed":293233524,"run":{"time":49,"livesLost":0,"fuelLeft":0.25,"perfectRun":false}}]
+  ]
+}

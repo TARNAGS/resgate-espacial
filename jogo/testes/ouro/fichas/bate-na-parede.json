@@ -1,0 +1,21 @@
+{
+  "cenario": "nível 1 · vai de lado contra a parede do começo da fase",
+  "fase": "w1-1",
+  "semente": 101,
+  "fim": "landed",
+  "passos": 241,
+  "cronometro": 0,
+  "combustivel": 1,
+  "vidas": 2,
+  "nave": {
+    "x": 130,
+    "y": 425.996,
+    "vx": 0,
+    "vy": 0,
+    "a": 0
+  },
+  "eventos": [
+    [65,"crash",{"reason":"HIT THE WALL","x":7,"y":322.441,"vx":-60,"vy":30.25,"a":0,"lives":2}],
+    [234,"respawn",{"lives":2,"at":"base"}]
+  ]
+}

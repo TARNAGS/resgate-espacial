@@ -1,0 +1,21 @@
+{
+  "cenario": "treino · desce reta na plataforma, rápido demais",
+  "fase": "training",
+  "semente": 1,
+  "fim": "landed",
+  "passos": 241,
+  "cronometro": 0,
+  "combustivel": 1,
+  "vidas": 3,
+  "nave": {
+    "x": 700,
+    "y": 502,
+    "vx": 0,
+    "vy": 0,
+    "a": 0
+  },
+  "eventos": [
+    [20,"crash",{"reason":"LANDED TOO FAST","x":700,"y":502.132,"vx":0,"vy":119.625,"a":0,"lives":3}],
+    [189,"respawn",{"lives":3,"at":"base"}]
+  ]
+}

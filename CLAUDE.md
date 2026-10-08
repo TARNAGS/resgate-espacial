@@ -19,7 +19,7 @@ Leia o [diário de bordo](docs/06-diario-de-bordo.md). A seção "Onde paramos" 
 | Visão, regras do jogo, PRD, roadmap e decisões | `docs/01` a `docs/05` |
 | Design de cada mundo (modelo e documentos) | `docs/08-design-de-mundos.md` e `docs/mundos/` |
 | O que foi feito e onde paramos | `docs/06-diario-de-bordo.md` |
-| O jogo (código, testes e como criar fases e obstáculos) | `jogo/` e [`jogo/README.md`](jogo/README.md); roda com `node jogo/servir.js` em http://localhost:8081 e os testes com `node jogo/testes/rodar.js`; telemetria do playtest com `node jogo/ferramentas/relatorio-telemetria.mjs` (traz o ranking junto) e mapas de calor com `node jogo/ferramentas/mapas-telemetria.mjs` (salva em `jogo/ferramentas/saida/`, fora do Git) |
+| O jogo (código, testes e como criar fases e obstáculos) | `jogo/` e [`jogo/README.md`](jogo/README.md); roda com `node jogo/servir.js` em http://localhost:8081 e os testes com `node jogo/testes/rodar.js` (`--rapido` durante o trabalho); telemetria do playtest com `node jogo/ferramentas/relatorio-telemetria.mjs` (traz o ranking junto) e mapas de calor com `node jogo/ferramentas/mapas-telemetria.mjs` (salva em `jogo/ferramentas/saida/`, fora do Git) |
 | Roteiro de teste com pessoas | `docs/07-roteiro-de-teste-do-controle.md` |
 | Resultados dos playtests (análise da telemetria, sem nicknames) | `docs/09-resultados-dos-playtests.md` |
 | Protótipos descartáveis | `prototipos/`; o 01 roda com `node prototipos/servir.js` em http://localhost:8080 |
@@ -27,7 +27,9 @@ Leia o [diário de bordo](docs/06-diario-de-bordo.md). A seção "Onde paramos" 
 | Quadro kanban | GitHub Project "Resgate Espacial — Produto": https://github.com/users/TARNAGS/projects/1 |
 | Modelos de issue | `.github/ISSUE_TEMPLATE/` |
 | Abrir o jogo ou o protótipo pelo navegador do Claude Code | `.claude/launch.json`, configurações "jogo" e "prototipo" |
+| Arquitetura do jogo e mapa de impacto (camadas, o que cada mudança afeta, acoplamentos e guardas automáticas) | `docs/12-arquitetura-do-jogo.md` ([#111](https://github.com/TARNAGS/resgate-espacial/issues/111)) |
 | Anticheat e ranking justo (tipos de anticheat, casos, portas abertas do ranking e proposta em degraus) | `docs/11-anticheat-e-ranking-justo.md` ([#109](https://github.com/TARNAGS/resgate-espacial/issues/109)) |
+| Modelo de negócio (Lean Canvas revisado com o Fernando: problema, solução, proposta de valor, métricas, segmentos, canais, receita e custos) | `docs/13-modelo-de-negocio.md` |
 | Benchmarks de jogos de referência | `docs/benchmark/README.md` (guia: os estudos lidos juntos, insights e decisões pendentes; comece por ele), `docs/10-benchmark-de-level-design.md` (índice e lições) e `docs/benchmark/`; todo discovery novo segue a skill global `discovery-de-jogos` (fica no `context-directory`, em `setup/claude-global/skills/`) |
 
 ## Como trabalhamos
@@ -82,6 +84,7 @@ No plano gratuito, o GitHub Pages só publica repositórios públicos. Para o Fe
 0. **Antes de abrir uma rodada com outras pessoas:**
    - combinar com o Fernando o começo e o fim. Uma rodada com amigos dura um fim de semana (documento 09, "Como a rodada terminou");
    - deixar pronta a linha de patch note da versão ([#126](https://github.com/TARNAGS/resgate-espacial/issues/126)), com o texto aprovado pelo Fernando;
+   - acrescentar as chaves das fases novas em `jogo/testes/conteudo/chaves-publicadas.json` (#117);
    - não enviar ao GitHub, enquanto a janela estiver aberta, documentos que expliquem as fraquezas do ranking (o documento 11, por exemplo).
 1. Avisar que, enquanto a janela estiver aberta, qualquer pessoa vê e pode copiar o repositório inteiro.
 2. Abrir: `gh repo edit TARNAGS/resgate-espacial --visibility public --accept-visibility-change-consequences`.
@@ -97,8 +100,16 @@ Fora das janelas, o protótipo roda na rede de casa. Rodar `node prototipos/serv
 - Hospedagem no GitHub Pages, em `tarnags.github.io/resgate-espacial` (D-013), só durante as janelas de teste (D-017). Como o jogo roda nesse subcaminho, manifesto e service worker precisam usar caminhos relativos.
 - Prioridade para o iPhone (D-008). As limitações do iPhone para PWAs estão no PRD, seção 6.
 - Os parâmetros de ajuste da física ficam num lugar só: `jogo/src/config/params.js`.
-- Conteúdo é dado, não código: mundos e níveis em `jogo/src/content/worlds.js`, obstáculos em `jogo/src/content/obstacles/`, modificadores em `jogo/src/content/modifiers.js`.
-- Antes de cada commit que mexe no jogo, rodar `node jogo/testes/rodar.js`; regra nova ou mudada ganha teste.
+- **Regras do banco (Firebase):** `jogo/firebase/regras.json` é a cópia fiel do que está publicado (ranking, telemetria e perfil, desde 07/10/2026). Para mudar:
+  1. o Claude edita o arquivo;
+  2. o Fernando cola o texto **inteiro** no console do Firebase (Ctrl+A, Ctrl+V) e publica;
+  3. o Claude confere pelo terminal com leituras e gravações que precisam ser recusadas.
+
+  Nunca colar só um pedaço: a lista é uma só, e o que faltar fica fechado. Publicar regras e apagar dados do banco são ações do Fernando.
+- Conteúdo é dado, não código: mundos e níveis em `jogo/src/content/worlds/` (um arquivo por mundo, juntados por `worlds.js`), obstáculos em `jogo/src/content/obstacles/`, modificadores em `jogo/src/content/modifiers.js`. Cada um tem contrato conferido por teste (documento 12, seção 1).
+- **Antes de mudar o jogo, consultar o mapa de impacto** (documento 12, seção 3): o que muda junto e o que conferir. Quem criar um acoplamento novo acrescenta a linha no mapa (épico E-26).
+- Testes: `node jogo/testes/rodar.js --rapido` a cada mudança (uns 3 s); `node jogo/testes/rodar.js` (todos) antes de cada commit que mexe no jogo. Regra nova ou mudada ganha teste.
+- **Fichas de ouro (#114):** se uma regra mudou de propósito, regravar com `node jogo/testes/rodar.js --atualizar-ouro` e mostrar ao Fernando a diferença das fichas (`jogo/testes/ouro/fichas/`). Nunca regravar só para o teste passar sem entender por que a ficha mudou.
 - Fases geradas a partir de uma semente (D-014): a mesma semente gera sempre o mesmo cenário, e todo cenário precisa ter solução. As fases da sequência e a PRACTICE usam semente fixa (D-021); só a BONUS sorteia.
 - Caminho provado (D-018) e abastecer obrigatório (D-023): o piloto automático (`jogo/src/core/autopilot.js`) joga cada cenário; nas fases com posto, o tanque permite concluir abastecendo uma vez (na ida ou na volta), mas não sem abastecer. Mudou a física, um obstáculo ou o contato? Rodar os testes, que reproduzem essas rotas numa partida de verdade.
 - Piloto expert (D-026, #92): no mesmo arquivo, voa como os melhores jogadores e mede o melhor que dá para fazer; os números do tanque saem de `node jogo/ferramentas/medir-tanque.mjs`. O tanque das fases ainda vem do piloto cauteloso, até a #93.

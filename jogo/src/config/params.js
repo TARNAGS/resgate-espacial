@@ -36,8 +36,12 @@ export const DEFAULT_PARAMS = Object.freeze({
                             // 1 = a tela inteira, como no protótipo testado (#50); a #39 propunha 0.5
   joystickRadius: 56,       // raio do direcional (px de tela)
   joystickDeadzone: 10,     // abaixo disso, o arrasto não muda a direção
-  // Câmera. Não mudam a dificuldade: mexer nelas não tira o tempo do ranking.
-  cameraZoom: 1,            // aproximação (#95): 1 mostra a altura inteira da fase; acima de 1, aproxima e segue a nave na vertical
+  // Câmera (D-037; as regras do zoom ficam em render/view.js). O zoom muda quanto se vê à frente, e isso muda a
+  // dificuldade: por isso o automático é igual para todos, e o jogador só pode aproximar.
+  cameraZoomFixed: 0,       // 0: automático, que se adapta à tela (1,15 nos celulares de tela comprida, até 1 nos mais
+                            // quadrados). De 1 a 1,6: valor fixo de teste (painel ou ?zoom=), que tira a corrida do ranking.
+                            // Até 07/10/2026 se chamava cameraZoom: valores antigos salvos no aparelho são ignorados
+  cameraNear: 0,            // escolha do jogador nas configurações: 0 AUTO, 1 CLOSE, 2 CLOSER; só aproxima, nunca afasta
   cameraMode: 'thumbs',     // 'thumbs' (o padrão, #44 e #50): a câmera mantém a nave longe dos polegares e pode
                             // passar das pontas da fase, deixando uma área ao lado para os controles no início e no
                             // fim; 'stage' (#96, opção): para nas pontas, com os controles por cima da fase. O Fernando
@@ -45,7 +49,22 @@ export const DEFAULT_PARAMS = Object.freeze({
 });
 
 // Parâmetros que só mudam a imagem, não a dificuldade
-export const VIEW_ONLY = ['touchScheme', 'cameraZoom', 'cameraMode'];
+// O zoom fixo de teste (cameraZoomFixed) não está aqui: ver mais da fase muda a dificuldade (D-037)
+export const VIEW_ONLY = ['touchScheme', 'cameraNear', 'cameraMode'];
+
+// O que cada parâmetro muda (#120). Todo parâmetro novo precisa entrar aqui (um teste confere):
+//   'jogo'    muda a dificuldade ou o tempo de uma corrida, e entra sozinho na chave do ranking (core/ranking.js)
+//   'aviso'   só os avisos e os elogios
+//   'imagem'  câmera e controles na tela
+export const PARAM_KIND = {
+  gravity: 'jogo', thrust: 'jogo', keyRotationSpeed: 'jogo', touchRotationSpeed: 'jogo', maxSpeed: 'jogo',
+  landingMaxVy: 'jogo', landingMaxVx: 'jogo', landingMaxAngle: 'jogo', padMargin: 'jogo',
+  refuelPerSecond: 'jogo', boardingSeconds: 'jogo', lives: 'jogo',   // abastecer e embarcar contam no cronômetro
+  lowFuel: 'aviso', criticalFuel: 'aviso', noFuelLandedSeconds: 'aviso',
+  praiseNear: 'aviso', praiseMinSpeed: 'aviso', praiseSaveSpeed: 'aviso', praiseSaveHorizon: 'aviso', praiseCooldown: 'aviso',
+  touchScheme: 'imagem', joystickMode: 'imagem', joystickArea: 'imagem', joystickRadius: 'imagem', joystickDeadzone: 'imagem',
+  cameraZoomFixed: 'imagem', cameraNear: 'imagem', cameraMode: 'imagem',
+};
 
 // Valores em uso. Começam iguais aos padrões e podem ser alterados pelo painel de ajuste.
 export const PARAMS = { ...DEFAULT_PARAMS };
@@ -68,7 +87,7 @@ export const TUNABLE = [
   { key: 'joystickArea', label: 'Joystick area', min: 0.25, max: 1, step: 0.05 },
   { key: 'touchScheme', label: 'Touch control', options: [['twin', 'A · two thumbs'], ['hold', 'B · one thumb']] },
   { key: 'joystickMode', label: 'Joystick', options: ['follow', 'fixed'] },
-  { key: 'cameraZoom', label: 'Camera zoom', min: 1, max: 1.6, step: 0.05 },
+  { key: 'cameraZoomFixed', label: 'Camera zoom (0 = auto)', min: 0, max: 1.6, step: 0.05 },
   { key: 'cameraMode', label: 'Camera', options: [['thumbs', 'avoid thumbs'], ['stage', 'whole stage · controls on top']] },
 ];
 

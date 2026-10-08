@@ -1,0 +1,24 @@
+{
+  "cenario": "nível 1 · combustível acaba subindo; a nave cai sem propulsor",
+  "fase": "w1-1",
+  "semente": 101,
+  "fim": "exploding",
+  "passos": 842,
+  "cronometro": 7.008,
+  "combustivel": 0,
+  "vidas": 2,
+  "nave": {
+    "x": 130,
+    "y": 426.541,
+    "vx": 0,
+    "vy": 163.458,
+    "a": 0
+  },
+  "eventos": [
+    [0,"takeoff",{}],
+    [1,"lowFuel",{"level":"low"}],
+    [1,"lowFuel",{"level":"critical"}],
+    [168,"outOfFuel",{"landed":false}],
+    [793,"crash",{"reason":"LANDED TOO FAST","x":130,"y":426.541,"vx":0,"vy":163.458,"a":0,"lives":2}]
+  ]
+}

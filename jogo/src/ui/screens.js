@@ -29,6 +29,11 @@ export function createScreens({ onClick }) {
       box.querySelector('.primary')?.focus();
     },
     hideOverlay() { overlay.classList.add('hidden'); },
+    // Patch note (#126): a linha com o que mudou na versão, no alto do menu; null esconde
+    patchNote(text) {
+      el('patch-text').textContent = text ?? '';
+      el('patch').classList.toggle('hidden', !text);
+    },
     rotate(show) { el('rotate').classList.toggle('hidden', !show); },
   };
 }

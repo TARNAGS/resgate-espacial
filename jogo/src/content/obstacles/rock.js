@@ -6,10 +6,13 @@ import { pointInPoly } from '../../core/math.js';
 //   passGap  espaço mínimo livre acima ou abaixo de cada pedra
 //   spacing  distância mínima entre pedras (padrão 170)
 
+const TIP = 1.1;   // as pontas da pedra chegam a 1,1 vez o raio (0,72 + 0,38 em generate)
+
 export const rock = {
   type: 'rock',
   label: 'Rock',
   moving: false,
+  example: { type: 'rock', count: 7, passGap: 105 },   // um nível de exemplo, usado pelo contrato (#119)
 
   generate({ spec, rnd, length, busy, top, bottom }) {
     const out = [];
@@ -35,12 +38,12 @@ export const rock = {
     return out;
   },
 
-  bounds: (o) => ({ x1: o.x - o.r, x2: o.x + o.r }),
+  // As pontas da pedra chegam a 1,1 vez o raio (veja generate): é até onde ela aparece na tela
+  bounds: (o) => ({ x1: o.x - o.r * TIP, x2: o.x + o.r * TIP }),
 
-  // Faixa vertical que a pedra ocupa na posição x, com folga (para o piloto automático).
-  // As pontas da pedra chegam a 1,1 vez o raio.
+  // Faixa vertical que a pedra ocupa na posição x, com folga (para o piloto automático)
   blockedAt(o, x, margin) {
-    const R = o.r * 1.1 + margin;
+    const R = o.r * TIP + margin;
     const dx = x - o.x;
     if (Math.abs(dx) >= R) return null;
     const h = Math.sqrt(R * R - dx * dx);

@@ -10,6 +10,7 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 
 ## Onde paramos (07/10/2026)
 
+- **Primeiro, no próximo "bom dia": retomar a revisão do Lean Canvas no C1** ([documento 13](13-modelo-de-negocio.md), seção 4.1). P1 a P4 foram fechados em 07/10; o C1 espera 4 respostas do Fernando (faixa etária, Brasil ou global, Android junto com o iPhone e o canvas do portfólio). As decisões da revisão só viram D-xxx no fim (documento 13, seção 7); até lá, o que a revisão mudou (anúncios, público, proposta de valor e métricas) vale mais do que a Visão 1.5.
 - **Janela de teste fechada (07/10):** o repositório está privado e o site, fora do ar. A rodada 1 durou de 02 a 04/10 ([documento 09](09-resultados-dos-playtests.md), "Como a rodada terminou"). Para a próxima, seguir a janela de teste do `CLAUDE.md`, a partir do passo 0.
 - **Objetivo:** portfólio, aprendizado e negócio. O jogo será publicado na App Store e no Google Play (D-019); cobrar ou não segue em aberto (P-014, na pesquisa de lojas e dinheiro [#98](https://github.com/TARNAGS/resgate-espacial/issues/98); loja de itens, P-017, [#78](https://github.com/TARNAGS/resgate-espacial/issues/78)).
 - **Público (D-028):** o jogador casual de celular, o mesmo de Jetpack Joyride, Subway Surfers, Candy Crush Saga, Plants vs. Zombies e Temple Run, com o fã da estética retrô dentro dele. Esses jogos viram benchmark ([#98](https://github.com/TARNAGS/resgate-espacial/issues/98) e [#99](https://github.com/TARNAGS/resgate-espacial/issues/99)).
@@ -31,7 +32,7 @@ Registro do que foi feito em cada sessão de trabalho, das decisões tomadas e d
 - **Guia dos benchmarks (06/10):** os quatro estudos lidos juntos, com 12 insights, divergências, validações, as decisões pendentes e três para decidir primeiro ([benchmark/README.md](benchmark/README.md), [página de leitura](https://claude.ai/artifact/TSGis8FXKTXWWgdQUJH9ar)). É a porta de entrada para tudo o que foi estudado.
 - **Anticheat (07/10, [#109](https://github.com/TARNAGS/resgate-espacial/issues/109), em "Para conversar"):** como proteger o ranking contra trapaça, com casos reais (Open Hexagon, Trackmania, lojas, speedrun.com), as portas abertas do nosso ranking hoje e uma proposta em três degraus, centrada em conferir a corrida pelo replay ([documento 11](11-anticheat-e-ranking-justo.md)).
 - **Épico E-26 · Abstração (07/10, [#110](https://github.com/TARNAGS/resgate-espacial/issues/110), no Backlog):** preparar o jogo para 10 mundos, 100 fases, skins, naves diferentes e evoluções sem quebrar as regras básicas. São 15 tarefas ([#111](https://github.com/TARNAGS/resgate-espacial/issues/111) a [#125](https://github.com/TARNAGS/resgate-espacial/issues/125)) em cinco ondas, da mais barata à mais cara: mapa de impacto, guardas automáticas, contratos, nave como dado e aparência separada das regras.
-- **Documentos:** Visão 1.5, Regras 1.7, PRD 1.7, Roadmap 1.7, Decisões até a D-035 (pendências até a P-024), documento 07 (roteiro de teste), 08 (design de mundos, com o rascunho do Mundo 1), 09 (resultados dos playtests, v0.2), 10 (benchmark de level design, v0.6, com o [guia dos benchmarks](benchmark/README.md), as [18 fases do Crazy Gravity](benchmark/crazy-gravity.md), as [45 dos Gravitron](benchmark/gravitron.md), o [Jetpack Joyride](benchmark/jetpack-joyride.md) e o [Temple Run](benchmark/temple-run.md)) e 11 ([anticheat e ranking justo](11-anticheat-e-ranking-justo.md), v0.2).
+- **Documentos:** Visão 1.5, Regras 1.7, PRD 1.7, Roadmap 1.8, Decisões até a D-037 (pendências até a P-024), documento 07 (roteiro de teste), 08 (design de mundos, com o rascunho do Mundo 1), 09 (resultados dos playtests, v0.3), 10 (benchmark de level design, v0.6, com o [guia dos benchmarks](benchmark/README.md), as [18 fases do Crazy Gravity](benchmark/crazy-gravity.md), as [45 dos Gravitron](benchmark/gravitron.md), o [Jetpack Joyride](benchmark/jetpack-joyride.md) e o [Temple Run](benchmark/temple-run.md)) e 11 ([anticheat e ranking justo](11-anticheat-e-ranking-justo.md), v0.3).
 - **Pendências abertas:** P-003 (nome), P-006 (pontuação), P-008 (medição), P-011 (obstáculos), P-012 (modificadores), P-014 (cobrar ou não, [#98](https://github.com/TARNAGS/resgate-espacial/issues/98)), P-015 (CNPJ), P-017 (loja), P-018 (modo Nightmare, [#79](https://github.com/TARNAGS/resgate-espacial/issues/79)), P-019 (ranking no lançamento, [#101](https://github.com/TARNAGS/resgate-espacial/issues/101)), P-023 (anticheat, [#109](https://github.com/TARNAGS/resgate-espacial/issues/109)), P-024 (como naves e evoluções que mudam o jogo aparecem no ranking). Decididas em 04/10: P-009 (D-031), P-013 (D-028), P-020 (D-026), P-021 (D-027) e P-022 (D-029); P-016 respondida em parte pela arquitetura.
 
 ### Próximos passos
@@ -43,60 +44,57 @@ Priorizados em 07/10/2026, a pedido do Fernando, a partir do quadro, deste diár
 
 A janela de teste foi fechada em 07/10.
 
-**Agora (minutos)**
+**Resolvido em 07/10**
 
-1. **Publicar a regra do perfil** (Fernando, no [console do Firebase](https://console.firebase.google.com/project/resgate-espacial/database/resgate-espacial-default-rtdb/rules)). Em 07/10, o banco ainda recusava `players`, então o perfil online ([#102](https://github.com/TARNAGS/resgate-espacial/issues/102)) não gravou nada desde 04/10. O progresso está nos aparelhos e sobe quando a regra for publicada.
-   - O bloco `players` de `jogo/firebase/regras-players.json` é **acrescentado** dentro de `"rules"`, ao lado de `scores` e `telemetry`, sem substituir as regras que já estão lá.
-   - Depois, o Claude confere pelo terminal: ler `players` funciona, e gravar progresso inválido é recusado.
-2. **Apagar as linhas de teste do banco** (Fernando, no [console do Firebase](https://console.firebase.google.com/project/resgate-espacial/database/resgate-espacial-default-rtdb/data)):
-   - `scores` → `w1-2_1wyelcg` → `CLAUDETEST` (ainda aparece em 5º no ranking do nível 2);
-   - `scores` → `teste_abc1`;
-   - `telemetry` → `1999-01-01`.
+- **Fila "Em revisão" esvaziada** (revisão com o Fernando):
+  - 22 cartões aprovados e fechados;
+  - os épicos do M0 e do M1 (E-02 a E-06) fechados;
+  - ficaram [#95](https://github.com/TARNAGS/resgate-espacial/issues/95) (escolher o zoom) e [#102](https://github.com/TARNAGS/resgate-espacial/issues/102) (perfil), que precisam do teste no iPhone.
+- **Anticheat: não agora** (D-036). O degrau 1 não entra nos playtests; o resto da P-023 fica para antes do lançamento. [#109](https://github.com/TARNAGS/resgate-espacial/issues/109) fechada.
+- **Benchmarks** ([#106](https://github.com/TARNAGS/resgate-espacial/issues/106) a [#108](https://github.com/TARNAGS/resgate-espacial/issues/108)): continuam em "Para conversar". O Fernando quer ler os estudos antes de decidir.
 
-   Em cada um, o menu da linha → Excluir. O Claude confere pelo terminal que sumiram.
-3. **Enviar ao GitHub o trabalho de 07/10** (Claude, quando o Fernando pedir ou no "boa noite"): anticheat, abstração, D-034 e D-035, o fim da rodada 1, o patch note e o portfólio no `context-directory`. Com o repositório privado, o documento 11 já pode ir.
+- **Regra do perfil publicada** pelo Fernando no console do Firebase, conferida pelo Claude pelo terminal: o perfil pode ser lido, gravações inválidas e apagar são recusados, e o ranking e a telemetria continuam funcionando. A cópia completa das regras está em `jogo/firebase/regras.json`. O progresso da rodada 1 que ainda estiver nos aparelhos sobe quando cada jogador abrir o jogo de novo (decisão do Fernando: o que se perdeu da rodada 1 pode ficar de fora).
+- **Linhas de teste do banco ficam onde estão** (decisão do Fernando): o CLAUDETEST continua no ranking do nível 2, e `scores/teste_abc1` e `telemetry/1999-01-01` também ficam. "É só um teste do jogo que estamos criando."
+- **Trabalho de 07/10 enviado ao GitHub** (commit 25489f9) e o portfólio no `context-directory` (e36fe2b).
 
-**Esvaziar a fila "Em revisão"** (o maior gargalo: 23 cartões com o Fernando, alguns parados desde 02/10)
+**Esperando o Fernando** (a fila "Em revisão" tem 3 cartões em 07/10, todos com ele)
 
-4. **Fechar em bloco o que já foi provado** (proposta do Claude; o Fernando aprova):
-   - [#39](https://github.com/TARNAGS/resgate-espacial/issues/39), [#40](https://github.com/TARNAGS/resgate-espacial/issues/40) e [#41](https://github.com/TARNAGS/resgate-espacial/issues/41): o M1 passou no critério de saída em 04/10;
-   - [#82](https://github.com/TARNAGS/resgate-espacial/issues/82), [#84](https://github.com/TARNAGS/resgate-espacial/issues/84) a [#88](https://github.com/TARNAGS/resgate-espacial/issues/88), [#91](https://github.com/TARNAGS/resgate-espacial/issues/91) e [#92](https://github.com/TARNAGS/resgate-espacial/issues/92): rodaram no playtest, e a telemetria mostra que funcionam;
-   - [#83](https://github.com/TARNAGS/resgate-espacial/issues/83): revista pela D-026, continua na [#93](https://github.com/TARNAGS/resgate-espacial/issues/93);
-   - [#66](https://github.com/TARNAGS/resgate-espacial/issues/66): o giro no toque já foi escolhido (420°/s desde a [#50](https://github.com/TARNAGS/resgate-espacial/issues/50)).
-5. **Sessão de iPhone de cerca de 30 minutos**, com um roteiro do Claude: [#94](https://github.com/TARNAGS/resgate-espacial/issues/94), [#95](https://github.com/TARNAGS/resgate-espacial/issues/95) (escolher o zoom), [#97](https://github.com/TARNAGS/resgate-espacial/issues/97), [#103](https://github.com/TARNAGS/resgate-espacial/issues/103), [#104](https://github.com/TARNAGS/resgate-espacial/issues/104), [#105](https://github.com/TARNAGS/resgate-espacial/issues/105), [#76](https://github.com/TARNAGS/resgate-espacial/issues/76), [#81](https://github.com/TARNAGS/resgate-espacial/issues/81), [#35](https://github.com/TARNAGS/resgate-espacial/issues/35), [#42](https://github.com/TARNAGS/resgate-espacial/issues/42) e [#102](https://github.com/TARNAGS/resgate-espacial/issues/102) (este depois do passo 1).
-6. **Fechar o M1:** retrospectivas do M0 ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)) e do M1 ([#46](https://github.com/TARNAGS/resgate-espacial/issues/46)), e fechar os épicos do M0 e do M1 que ficarem sem cartões abertos.
+1. **Teste rápido no iPhone** (Fernando, cerca de 10 minutos, em http://192.168.15.159:8081, o endereço do Wi-Fi do computador):
+   - [#126](https://github.com/TARNAGS/resgate-espacial/issues/126): aprovar o texto do patch note ("NEW: closer camera, fuel warnings, DEMO, messages up top") e ver a faixa no menu;
+   - câmera (D-037): conferir o zoom automático e o Settings → CAMERA, e validar a proposta de o jogador só poder aproximar;
+   - [#102](https://github.com/TARNAGS/resgate-espacial/issues/102): jogar com um nick, limpar os dados do Safari (ou usar outro aparelho), digitar o mesmo nick e ver o progresso voltar.
+2. **Ler e aprovar o mapa de impacto** ([#111](https://github.com/TARNAGS/resgate-espacial/issues/111), [documento 12](12-arquitetura-do-jogo.md)): o que cada mudança no jogo afeta, o que conferir e quando o ranking recomeça.
+3. **Retrospectivas do M0** ([#45](https://github.com/TARNAGS/resgate-espacial/issues/45)) **e do M1** ([#46](https://github.com/TARNAGS/resgate-espacial/issues/46)). Os épicos dos dois marcos já foram fechados; o Claude pode rascunhar as retros a partir deste diário, para o Fernando ajustar.
+4. **Benchmarks em "Para conversar"** ([#106](https://github.com/TARNAGS/resgate-espacial/issues/106) a [#108](https://github.com/TARNAGS/resgate-espacial/issues/108)): o Fernando lê o [guia dos benchmarks](benchmark/README.md) (ou a [página de leitura](https://claude.ai/artifact/TSGis8FXKTXWWgdQUJH9ar)) e decide as recomendações. O Claude pergunta de novo depois.
 
 **Próxima construção**
 
-7. **Abstração, ondas 1 e 2** (Claude), nesta ordem: [#111](https://github.com/TARNAGS/resgate-espacial/issues/111), [#112](https://github.com/TARNAGS/resgate-espacial/issues/112), [#113](https://github.com/TARNAGS/resgate-espacial/issues/113) e [#114](https://github.com/TARNAGS/resgate-espacial/issues/114). Não muda o jogo para o jogador e deixa as fichas de ouro prontas antes da mudança de física.
-8. **Fernando decide o tanque** ([#93](https://github.com/TARNAGS/resgate-espacial/issues/93)), em paralelo ao passo 7, com os números do piloto expert ([#92](https://github.com/TARNAGS/resgate-espacial/issues/92)). Depois, o Claude constrói. As fichas de ouro mostram o que mudou, e os rankings do nível 3, da PRACTICE e da BONUS recomeçam.
+5. **Fernando decide o tanque** ([#93](https://github.com/TARNAGS/resgate-espacial/issues/93)), com os números do piloto expert ([#92](https://github.com/TARNAGS/resgate-espacial/issues/92)). Depois, o Claude constrói. As fichas de ouro mostram o que mudou, e os rankings do nível 3, da PRACTICE e da BONUS recomeçam.
+6. **Abstração, ondas 4 e 5** (Claude, M3): formato único da nave ([#121](https://github.com/TARNAGS/resgate-espacial/issues/121)), conferência de naves novas ([#122](https://github.com/TARNAGS/resgate-espacial/issues/122)), desenho em peças ([#123](https://github.com/TARNAGS/resgate-espacial/issues/123)), skins ([#124](https://github.com/TARNAGS/resgate-espacial/issues/124)) e o `main.js` em fluxos ([#125](https://github.com/TARNAGS/resgate-espacial/issues/125)). As ondas 1 a 3 ficaram prontas em 07/10.
 
 **Próxima rodada de playtest**
 
-9. **Patch note** ([#126](https://github.com/TARNAGS/resgate-espacial/issues/126), Claude): uma linha com o que mudou na versão, com SKIP. O Fernando aprova o texto.
-10. **Fernando lê o [documento 11](11-anticheat-e-ranking-justo.md)** e decide se o degrau 1 do anticheat entra antes da rodada ([#109](https://github.com/TARNAGS/resgate-espacial/issues/109), P-023).
-11. **Fernando lê o [guia dos benchmarks](benchmark/README.md)** (ou a [página de leitura](https://claude.ai/artifact/TSGis8FXKTXWWgdQUJH9ar)) e decide os cartões em "Para conversar" ([#106](https://github.com/TARNAGS/resgate-espacial/issues/106), [#107](https://github.com/TARNAGS/resgate-espacial/issues/107) e [#108](https://github.com/TARNAGS/resgate-espacial/issues/108)). As três decisões sugeridas são: testar o controle sem explicar, tripulantes que andam até a nave e ranking por tempo puro. A primeira muda o jeito de conduzir a rodada.
-12. **Rodada de playtest** num fim de semana combinado, seguindo a janela de teste do `CLAUDE.md` a partir do passo 0. Usa a telemetria nova ([#91](https://github.com/TARNAGS/resgate-espacial/issues/91)). Relatório com `node jogo/ferramentas/relatorio-telemetria.mjs` e mapas de calor com `node jogo/ferramentas/mapas-telemetria.mjs`.
+7. **Patch note** ([#126](https://github.com/TARNAGS/resgate-espacial/issues/126)): construído em 07/10; falta o Fernando aprovar o texto (passo 1).
+8. **Rodada de playtest** num fim de semana combinado, seguindo a janela de teste do `CLAUDE.md` a partir do passo 0. Usa a telemetria nova ([#91](https://github.com/TARNAGS/resgate-espacial/issues/91)). Relatório com `node jogo/ferramentas/relatorio-telemetria.mjs` e mapas de calor com `node jogo/ferramentas/mapas-telemetria.mjs`.
 
 **Caminho para fechar o MVP (M2)**, pelo checklist do PRD (seção 8)
 
-13. **Decisões do Fernando:**
-    - pontuação ([#53](https://github.com/TARNAGS/resgate-espacial/issues/53), P-006); o "ranking por tempo puro" do passo 11 pode resolver;
+9. **Decisões do Fernando:**
+    - pontuação ([#53](https://github.com/TARNAGS/resgate-espacial/issues/53), P-006); o "ranking por tempo puro" dos benchmarks (passo 4) pode resolver;
     - nome final ([#54](https://github.com/TARNAGS/resgate-espacial/issues/54), P-003);
     - referências visuais para a arte ([#55](https://github.com/TARNAGS/resgate-espacial/issues/55)).
-14. **Claude:**
+10. **Claude:**
     - ferramenta de medição ([#56](https://github.com/TARNAGS/resgate-espacial/issues/56), P-008);
-    - escrever as histórias de app instalável (E-13) e sem internet (E-14), que ainda não existem (hoje o jogo não tem manifesto nem service worker);
-    - onda 3 da abstração ([#116](https://github.com/TARNAGS/resgate-espacial/issues/116) a [#120](https://github.com/TARNAGS/resgate-espacial/issues/120)).
+    - escrever as histórias de app instalável (E-13) e sem internet (E-14), que ainda não existem (hoje o jogo não tem manifesto nem service worker).
 
 **Conteúdo (M3 em diante)**
 
-15. **Fernando:** obstáculos ([#60](https://github.com/TARNAGS/resgate-espacial/issues/60), P-011) e modificadores ([#61](https://github.com/TARNAGS/resgate-espacial/issues/61), P-012), com as ideias do [benchmark do Crazy Gravity](benchmark/crazy-gravity.md), seção 9. Eles destravam os níveis 4 e 5 (E-12).
-16. **Claude:** benchmark dos casuais que faltam ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)): Subway Surfers, Candy Crush Saga e Plants vs. Zombies.
+11. **Fernando:** obstáculos ([#60](https://github.com/TARNAGS/resgate-espacial/issues/60), P-011) e modificadores ([#61](https://github.com/TARNAGS/resgate-espacial/issues/61), P-012), com as ideias do [benchmark do Crazy Gravity](benchmark/crazy-gravity.md), seção 9. Eles destravam os níveis 4 e 5 (E-12).
+12. **Claude:** benchmark dos casuais que faltam ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)): Subway Surfers, Candy Crush Saga e Plants vs. Zombies.
 
 **Depois (M4 e M5)**
 
-17. Lojas e dinheiro ([#98](https://github.com/TARNAGS/resgate-espacial/issues/98), Claude); loja ([#78](https://github.com/TARNAGS/resgate-espacial/issues/78)), Nightmare ([#79](https://github.com/TARNAGS/resgate-espacial/issues/79)), CNPJ ([#64](https://github.com/TARNAGS/resgate-espacial/issues/64)), a P-024 e o ranking justo no lançamento ([#101](https://github.com/TARNAGS/resgate-espacial/issues/101)).
+13. Lojas e dinheiro ([#98](https://github.com/TARNAGS/resgate-espacial/issues/98), Claude); loja ([#78](https://github.com/TARNAGS/resgate-espacial/issues/78)), Nightmare ([#79](https://github.com/TARNAGS/resgate-espacial/issues/79)), CNPJ ([#64](https://github.com/TARNAGS/resgate-espacial/issues/64)), a P-024 e o ranking justo no lançamento ([#101](https://github.com/TARNAGS/resgate-espacial/issues/101)).
 
 ## Sessões
 
@@ -467,6 +465,67 @@ O Fernando pediu "pode codar todas as melhorias". Construído, testado (92 teste
 - **Achado:** a regra do perfil online ([#102](https://github.com/TARNAGS/resgate-espacial/issues/102)) não estava publicada; o banco recusava `players`. Nada se perdeu: o progresso fica no aparelho e sobe depois da publicação.
 - **Pedido do Fernando que voltou para ele:** apagar o CLAUDETEST e publicar a regra do perfil. Apagar dados para sempre e mudar regras de segurança do banco são ações que o Claude não faz pelo console. Ficaram como os passos 1 e 2, com o caminho exato, e o Claude confere pelo terminal depois.
 
+### 07/10/2026 — Revisão do Lean Canvas (P1 a P4)
+
+- **Pedido do Fernando:** revisar as decisões "by the book" com o Business Model Canvas e o Lean Canvas, e conversar sobre os riscos de produto, cliente e mercado; depois, "traga cada um e vamos conversar para revisar", bloco a bloco.
+- **Diagnóstico de partida:** só a solução tinha evidência (6 amigos); canais e early adopters vazios; receita em aberto (P-014), com o E-26 já pressupondo uma loja de itens.
+- **Fechados:**
+  - **P1 Problema:** público-alvo passa a ser adolescentes e jovens com muito tempo de tela que gostam de casuais (o fã retrô vira "acerto por consequência"). Problemas: passar fases difíceis e criativas e ficar bom (o centro); tempo de tela livre; bater o tempo dos outros (amplificador). Fase sem duração fixa, com fases maiores inspiradas no Crazy Gravity e checkpoints a testar.
+  - **Anúncios entram**, sem ser tóxicos nem excessivos, e todo anúncio se fecha com facilidade. O anúncio como obstáculo foi descartado. A pesquisa do ECA Digital (em vigor desde 17/03/2026) mostrou o que muda para menores: anúncio sem perfil e loja sem nada sorteado.
+  - **P2 Solução:** uma solução por problema; o próximo teste é um protótipo de fase grande com e sem checkpoint; E-26, Nightmare e loja saem da solução e vão para o M2.
+  - **P3 Proposta de valor:** "Fácil de pegar, difícil de dominar. A gravidade sempre vence… até você ficar bom."
+  - **P4 Métricas:** North Star nova (jogadores que concluem pelo menos uma fase nova na semana), funil com D1 e D7, limites de proteção e metas só depois da linha de base.
+- **Cartão novo:** benchmark do Geometry Dash ([#127](https://github.com/TARNAGS/resgate-espacial/issues/127)), sub-issue da [#99](https://github.com/TARNAGS/resgate-espacial/issues/99), em "A investigar", com o Claude.
+- **Parou no C1**, com 4 perguntas ([documento 13](13-modelo-de-negocio.md), seção 4.1).
+- **Documentos:** documento 13 criado (v0.1, em revisão), README e `CLAUDE.md`.
+
+### 07/10/2026 — Regra do perfil publicada e revisão das filas
+
+- **Regra do perfil ([#102](https://github.com/TARNAGS/resgate-espacial/issues/102)):**
+  - o Fernando colou as regras do console, e o Claude devolveu o texto completo, com o bloco `players` acrescentado;
+  - o Fernando publicou, e o Claude conferiu pelo terminal, só com leituras e gravações que precisam ser recusadas;
+  - a cópia completa das regras publicadas passou a ser `jogo/firebase/regras.json`, que substitui o `regras-players.json`, e o `CLAUDE.md` diz como mudar.
+- **Linhas de teste do banco:** ficam (decisão do Fernando: "é só um teste do jogo").
+- **Revisão das filas, com perguntas de múltipla escolha** (pedido do Fernando: "tudo que depender de informação minha me envie com o AskUserQuestion"):
+  - 22 cartões aprovados e fechados, com um comentário em cada;
+  - os épicos E-02 a E-06 fechados;
+  - o zoom ([#95](https://github.com/TARNAGS/resgate-espacial/issues/95)) e o perfil ([#102](https://github.com/TARNAGS/resgate-espacial/issues/102)) esperam o teste no iPhone.
+- **Para conversar:**
+  - anticheat: o degrau 1 não entra agora (D-036), e [#109](https://github.com/TARNAGS/resgate-espacial/issues/109) foi fechada;
+  - benchmarks: o Fernando não marcou recomendações e preferiu ler os estudos antes, então [#106](https://github.com/TARNAGS/resgate-espacial/issues/106) a [#108](https://github.com/TARNAGS/resgate-espacial/issues/108) continuam na coluna.
+- **Documentos:** registro de decisões (D-036, P-023), Roadmap 1.8, documento 11 v0.3 e este diário.
+
+### 07/10/2026 — Abstração, ondas 1 a 3, e patch note
+
+- **Pedido do Fernando:** "existe alguma tarefa para ser codada? Se sim, code."
+- **Ondas 1 e 2** ([#111](https://github.com/TARNAGS/resgate-espacial/issues/111) a [#115](https://github.com/TARNAGS/resgate-espacial/issues/115)):
+  - mapa de impacto ([documento 12](12-arquitetura-do-jogo.md), em revisão com o Fernando);
+  - teste das camadas;
+  - teste de que o desenho só lê, com uma "tela de mentira" que roda no Node;
+  - 17 fichas de ouro: 8 rotas do piloto e 9 corridas montadas para bater ou pousar. Com a gravidade de 55 para 56, de propósito, 17 de 18 falharam com mensagens legíveis;
+  - o `testes/rodar.js` dividido em arquivos por assunto, com `--rapido` (uns 3 s) e `--atualizar-ouro`.
+- **Onda 3** ([#116](https://github.com/TARNAGS/resgate-espacial/issues/116) a [#120](https://github.com/TARNAGS/resgate-espacial/issues/120)):
+  - contrato dos eventos, com o canal estrito em todos os testes;
+  - contrato da fase e do mundo, com a lista de chaves publicadas;
+  - um arquivo por mundo em `content/worlds/`, com o conteúdo idêntico byte a byte;
+  - contrato do obstáculo;
+  - cadeia de parâmetros em camadas (nave → evoluções → mundo e fase → modo) e a chave do ranking montada sozinha, com `RULES_VERSION`. As cinco chaves de hoje não mudaram.
+- **Patch note** ([#126](https://github.com/TARNAGS/resgate-espacial/issues/126), em revisão): faixa no alto do menu, com SKIP, uma vez por versão, só para quem já jogava; o attract mode espera. Versão do jogo `2026-10-07a`. Conferido no navegador do Claude.
+- **Defeitos encontrados no caminho:**
+  - os limites da pedra eram menores que o desenho (corrigido; só afeta o desenho);
+  - `takeoff` e `refuel` não têm quem escute;
+  - o exemplo de fase no README usava um campo antigo.
+- **Testes:** a bateria completa tem 129 testes (uns 12 s); a rápida, 108 (uns 3 s). Nenhuma regra do jogo mudou.
+
+### 07/10/2026 — Câmera que se adapta à tela (D-037)
+
+- **O servidor do jogo parou** quando o app bateu o limite de uso, e o link do iPhone deixou de abrir. O Claude religou. O endereço certo agora é o do Wi-Fi (192.168.15.159), porque o do cabo (.82) não responde mais.
+- **Teste do Fernando:** 1,15 é o melhor zoom (ver a fase e antecipar); 1,3 e 1,45 escondem obstáculos e ficam "punitivistas demais". Ele perguntou se o zoom podia se adaptar à tela.
+- **Contas:** deitados, os celulares têm alturas parecidas e a nave fica quase do mesmo tamanho em todos. O que muda é o formato: com 1,15 fixo, o iPhone SE veria 82% do trecho à frente, e o iPad, 67%.
+- **Decisão D-037** ([#95](https://github.com/TARNAGS/resgate-espacial/issues/95) fechada): o zoom se adapta à tela (1,15 até 1), e o jogador pode mudar nas configurações. Proposta construída para ele validar: CAMERA AUTO/CLOSE/CLOSER só aproxima. O zoom fixo de teste tira a corrida do ranking.
+- **Pega encontrado no teste:** um zoom salvo pelo painel de ajuste passava por cima do automático e tirava as corridas do ranking. O ajuste foi renomeado (`cameraZoomFixed`), e valores antigos deixam de valer sozinhos.
+- **Também:** configurações em duas colunas em tela baixa (cabem no iPhone SE), a linha do teclado só aparece com teclado, a telemetria registra o zoom e o texto do patch note passou a citar a câmera. 132 testes passando.
+
 ## Aprendizados de produto
 
 - Separar o objetivo do projeto (portfólio) do objetivo do produto (o jogador), com uma regra de desempate: quando os dois brigam, o jogador vence.
@@ -483,3 +542,5 @@ O Fernando pediu "pode codar todas as melhorias". Construído, testado (92 teste
 - Ler os benchmarks juntos rende mais do que ler um por um: o placar puro do Jetpack Joyride só aparece como escolha ao lado do multiplicador do Temple Run, e dois jogos diferentes (Gravitron e Temple Run) apontaram o mesmo modificador de erro com perdão.
 - Pensar no abuso antes de lançar: o ranking que motivou os jogadores (D-021) é também a parte mais fácil de trapacear. E a salvaguarda pode virar recurso: o replay que confere o ranking é a mesma base do "fantasma" do melhor tempo.
 - Uma rodada de playtest com amigos dura um fim de semana: 48 sessões de sexta a domingo e, depois, nenhuma partida. Combinar o começo e o fim, avisar o que mudou e fechar a janela no fim. Deixar a janela aberta "para o caso de alguém jogar" só expôs o repositório por mais três dias.
+- Contrato conferido por teste acha defeito que ninguém procurava: o teste do obstáculo achou, na primeira rodada, a pedra com limites menores que o desenho. Escrever o contrato antes do segundo obstáculo saiu mais barato do que descobrir o problema com 10 tipos de obstáculo.
+- O teste do PM mostrou o que a classificação técnica escondia: a câmera estava marcada como "só imagem", mas quanto se vê à frente muda a dificuldade e o ranking. Testar sentindo o jogo achou a regra que faltava.

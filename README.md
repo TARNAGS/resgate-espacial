@@ -33,6 +33,8 @@ Projeto de portfólio de gestão de produto: um produto real, pequeno e jogável
 | 09 | [Resultados dos playtests](docs/09-resultados-dos-playtests.md) | O que cada rodada de testes mostrou, com os dados da telemetria | Contínuo |
 | 10 | [Benchmark de level design](docs/10-benchmark-de-level-design.md) | O que os jogos de referência fazem com fases e obstáculos, a começar pelo original ([Crazy Gravity, 18 fases mapeadas](docs/benchmark/crazy-gravity.md)) | Em construção |
 | 11 | [Anticheat e ranking justo](docs/11-anticheat-e-ranking-justo.md) | Como proteger o ranking contra trapaça: tipos de anticheat, casos reais, as portas abertas de hoje e uma proposta em três degraus | Proposta |
+| 12 | [Arquitetura do jogo e mapa de impacto](docs/12-arquitetura-do-jogo.md) | As camadas do código, o que cada mudança afeta ("se eu mudar X"), os acoplamentos e os testes que tocam o alarme | Em revisão |
+| 13 | [Modelo de negócio (Lean Canvas)](docs/13-modelo-de-negocio.md) | A revisão do Lean Canvas bloco a bloco, pelos riscos de produto, cliente e mercado, e as decisões que ela gerou | Em revisão |
 
 ## Como o trabalho é organizado
 

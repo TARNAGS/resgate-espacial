@@ -1,0 +1,21 @@
+{
+  "cenario": "nível 1 · desce devagar no meio da fase, longe das plataformas",
+  "fase": "w1-1",
+  "semente": 101,
+  "fim": "landed",
+  "passos": 361,
+  "cronometro": 0,
+  "combustivel": 1,
+  "vidas": 2,
+  "nave": {
+    "x": 130,
+    "y": 425.996,
+    "vx": 0,
+    "vy": 0,
+    "a": 0
+  },
+  "eventos": [
+    [88,"crash",{"reason":"TOUCHED THE GROUND","x":900,"y":478.728,"vx":0,"vy":60.792,"a":0,"lives":2}],
+    [257,"respawn",{"lives":2,"at":"base"}]
+  ]
+}

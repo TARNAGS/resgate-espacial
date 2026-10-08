@@ -1,0 +1,20 @@
+{
+  "cenario": "treino · desce devagar e reta: pousa, sem perder nada",
+  "fase": "training",
+  "semente": 1,
+  "fim": "landed",
+  "passos": 241,
+  "cronometro": 0,
+  "combustivel": 1,
+  "vidas": 3,
+  "nave": {
+    "x": 700,
+    "y": 502,
+    "vx": 0,
+    "vy": 0,
+    "a": 0
+  },
+  "eventos": [
+    [61,"land",{"pad":"base","impact":{"vx":0,"vy":53.417,"angle":0}}]
+  ]
+}

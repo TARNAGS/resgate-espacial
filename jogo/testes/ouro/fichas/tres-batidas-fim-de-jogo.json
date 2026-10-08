@@ -1,0 +1,28 @@
+{
+  "cenario": "nível 1 · bate no teto três vezes seguidas: fim de jogo",
+  "fase": "w1-1",
+  "semente": 101,
+  "fim": "gameOver",
+  "passos": 3001,
+  "cronometro": 12.317,
+  "combustivel": 0.933,
+  "vidas": 0,
+  "nave": {
+    "x": 130,
+    "y": 102.342,
+    "vx": 0,
+    "vy": -213.417,
+    "a": 0
+  },
+  "eventos": [
+    [0,"takeoff",{}],
+    [323,"crash",{"reason":"HIT THE CEILING","x":130,"y":102.342,"vx":0,"vy":-213.417,"a":0,"lives":2}],
+    [492,"respawn",{"lives":2,"at":"base"}],
+    [493,"takeoff",{}],
+    [816,"crash",{"reason":"HIT THE CEILING","x":130,"y":102.342,"vx":0,"vy":-213.417,"a":0,"lives":1}],
+    [985,"respawn",{"lives":1,"at":"base"}],
+    [986,"takeoff",{}],
+    [1309,"crash",{"reason":"HIT THE CEILING","x":130,"y":102.342,"vx":0,"vy":-213.417,"a":0,"lives":0}],
+    [1478,"gameOver",{"seed":101}]
+  ]
+}

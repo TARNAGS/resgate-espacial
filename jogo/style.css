@@ -203,6 +203,20 @@ html, body { touch-action: manipulation; }
 }
 .btn.skip { min-width: 0; opacity: 0.85; }
 
+/* Patch note (#126): uma linha discreta no alto do menu, longe do PLAY */
+.patch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: min(560px, 100%);
+  padding: 4px 6px 4px 12px;
+  border: 1px solid var(--teal);
+  background: rgba(3, 5, 10, 0.6);
+  color: var(--teal);
+  font-size: 13px;
+}
+.patch span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
 /* Nickname (#87) */
 .nick-input {
   width: min(320px, 80vw);
@@ -232,3 +246,13 @@ html, body { touch-action: manipulation; }
 @media (max-height: 520px) { .rank-list { font-size: 13px; } .rank-list li { padding: 2px 8px; } }
 .controls-help.privacy { max-width: 460px; font-size: 11px; opacity: 0.8; }
 @media (max-height: 520px) { .controls-help.privacy { font-size: 10px; } }
+
+/* Configurações: cada opção com a sua explicação embaixo, numa coluna. No celular deitado (tela baixa), duas
+   colunas, e a linha do teclado some nas telas de toque, para tudo caber sem rolar até no iPhone SE (D-037) */
+.settings-list { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.setting { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+@media (pointer: coarse) { .keyboard-help { display: none; } }
+@media (max-height: 520px) {
+  .settings-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 18px; align-items: start; }
+  .setting .controls-help { font-size: 11px; line-height: 1.35; max-width: 300px; }
+}

@@ -11,7 +11,7 @@ import { loadSave, writeSave, emptySave } from './platform/storage.js';
 import { createKeyboard } from './input/keyboard.js';
 import { createJoystick } from './input/joystick.js';
 import { readIntent, TOUCH_HINTS, SCHEME_NAMES } from './input/controls.js';
-import { createView } from './render/view.js';
+import { createView, cameraZoomFor } from './render/view.js';
 import { createRenderer } from './render/renderer.js';
 import { createScreens } from './ui/screens.js';
 import { renderMap } from './ui/map.js';
@@ -22,8 +22,10 @@ import { createLeaderboard } from './platform/leaderboard.js';
 import { createProfileSync, mergeIntoSave } from './platform/profile.js';
 import { rankKey, normalizeNick, validNick } from './core/ranking.js';
 import { createRankingScreen } from './ui/ranking.js';
-import { createTelemetry, createFrameStats, createRunTracker, deviceKind } from './platform/telemetry.js';
+import { createTelemetry, createFrameStats, createRunTracker, deviceKind, BUILD } from './platform/telemetry.js';
 import { INTRO_SONG } from './content/songs.js';
+import { PATCH_NOTES } from './content/patchnotes.js';
+import { patchNoteFor, patchNoteKey } from './core/patchnote.js';
 
 // Resgate Espacial — ponto de entrada. Liga as partes: regras (core), conteúdo (content),
 // controles (input), desenho (render), telas (ui) e aparelho (platform).
@@ -96,9 +98,9 @@ const tuning = await createTuning({
 // Esquema do toque pelo endereço (D-022): ?control=a (dois polegares) ou b (um polegar)
 const CONTROL_FROM_URL = { a: 'twin', b: 'hold' }[(new URLSearchParams(location.search).get('control') || '').toLowerCase()];
 if (CONTROL_FROM_URL) PARAMS.touchScheme = CONTROL_FROM_URL;
-// Câmera mais próxima para testar (#95): ?zoom=1.3 (de 1 a 1.6)
+// Zoom fixo para testar (#95): ?zoom=1.3 (de 1 a 1.6). Muda quanto se vê à frente, então a corrida sai do ranking (D-037)
 const ZOOM_FROM_URL = Number(new URLSearchParams(location.search).get('zoom'));
-if (ZOOM_FROM_URL >= 1 && ZOOM_FROM_URL <= 1.6) PARAMS.cameraZoom = ZOOM_FROM_URL;
+if (ZOOM_FROM_URL >= 1 && ZOOM_FROM_URL <= 1.6) PARAMS.cameraZoomFixed = ZOOM_FROM_URL;
 
 // ===== Mensagens e efeitos ligados aos eventos da partida =====
 events.on('start', ({ def }) => {
@@ -197,6 +199,7 @@ function startRun(def, m, genMs) {
   telemetry.track('level_start', {
     level: def.key, seed: m.level.seed, attempt: app.run.attempt, genMs, tank: m.level.tankSeconds, control: app.ranControl,
     w: window.innerWidth, h: window.innerHeight,   // a tela durante a fase, não só ao carregar o jogo
+    zoom: Number(cameraZoomFor(view, PARAMS).toFixed(2)), near: PARAMS.cameraNear,   // a câmera usada (D-037)
   });
 }
 
@@ -301,6 +304,19 @@ screens.el('btn-control').addEventListener('click', () => {
   updateControlButton();
 });
 
+// Câmera (D-037): o zoom se adapta à tela, e o jogador pode aproximar (nunca afastar), salvo no aparelho
+const CAMERA_NAMES = ['AUTO', 'CLOSE', 'CLOSER'];
+function updateCameraButton() {
+  screens.el('btn-camera').textContent = `CAMERA: ${CAMERA_NAMES[PARAMS.cameraNear]}`;
+}
+screens.el('btn-camera').addEventListener('click', () => {
+  click();
+  PARAMS.cameraNear = (PARAMS.cameraNear + 1) % CAMERA_NAMES.length;
+  app.save.settings.cameraNear = PARAMS.cameraNear;
+  writeSave(app.save);
+  updateCameraButton();
+});
+
 // ===== Abertura (#76) =====
 const music = createMusic();
 const intro = createIntro(canvas, view, { song: INTRO_SONG, music });
@@ -341,6 +357,7 @@ window.addEventListener('keydown', (e) => {
 screens.el('btn-play').addEventListener('click', () => {
   Sound.unlock();
   click();
+  closePatchNote('play');
   const lv = app.selected;
   withNick(() => {
     if (app.save.seen?.intro) startWithDemo(lv);
@@ -452,7 +469,8 @@ window.addEventListener('keydown', (e) => {
 }, { capture: true });
 
 function updateAttract(elapsed) {
-  if (app.screen !== 'menu' || document.hidden) { stopAttract(false); return; }
+  // Com o patch note na tela, a DEMO espera ele ser fechado (#126)
+  if (app.screen !== 'menu' || document.hidden || patchNote) { stopAttract(false); return; }
   menuIdle += elapsed;
   if (!app.attract && menuIdle > ATTRACT_IDLE) {
     app.attract = createDemoRun();
@@ -460,6 +478,28 @@ function updateAttract(elapsed) {
   }
   if (app.attract && stepDemo(app.attract, elapsed)) app.attract = createDemoRun();   // recomeça
 }
+
+// ===== Patch note (#126) =====
+// Uma linha no alto do menu com o que mudou na versão, para quem já jogava. Fecha no SKIP ou no PLAY e
+// não volta naquela versão; as regras de quando aparece ficam em core/patchnote.js.
+let patchNote = null;   // o texto na tela, enquanto o jogador não fecha
+function showPatchNote() {
+  patchNote = patchNoteFor(app.save, BUILD, PATCH_NOTES);
+  screens.patchNote(patchNote);
+  if (patchNote) telemetry.track('patch_note', { action: 'show', build: BUILD });
+  else if (app.save.build !== BUILD) { app.save.build = BUILD; writeSave(app.save); }
+}
+function closePatchNote(action) {
+  if (!patchNote) return;
+  patchNote = null;
+  screens.patchNote(null);
+  app.save.seen[patchNoteKey(BUILD)] = true;
+  app.save.build = BUILD;
+  writeSave(app.save);
+  pushProfile();
+  telemetry.track('patch_note', { action, build: BUILD });
+}
+screens.el('btn-patch-skip').addEventListener('click', () => { click(); closePatchNote('skip'); });
 
 // ===== Nickname e ranking (#87) =====
 // O nick é o ID do jogador no ranking. Fica salvo no aparelho; quem limpar os dados ou trocar de
@@ -706,6 +746,8 @@ Sound.enabled = app.save.settings.sound !== false;
 updateSoundButton();
 if (!CONTROL_FROM_URL && SCHEMES.includes(app.save.settings.touchScheme)) PARAMS.touchScheme = app.save.settings.touchScheme;
 updateControlButton();
+if (CAMERA_NAMES[app.save.settings.cameraNear]) PARAMS.cameraNear = app.save.settings.cameraNear;
+updateCameraButton();
 updateNickButton();
 leaderboard.flush();
 syncProfile();   // perfil do nick salvo neste aparelho (#102)
@@ -715,6 +757,7 @@ telemetry.track('session', {
   dpr: window.devicePixelRatio || 1, control: PARAMS.touchScheme, sound: Sound.enabled,
   loadMs: Math.round(performance.now()), installed: window.matchMedia('(display-mode: standalone)').matches,
 });
+showPatchNote();
 telemetry.flush();
 setInterval(() => telemetry.flush(), 20000);
 // Saiu do app (o jogo pausa): registra e envia a fila; a tentativa continua se ele voltar

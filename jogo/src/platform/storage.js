@@ -10,7 +10,8 @@ const SAVE_VERSION = 1;
 
 // seen: telas que o jogador já viu (por exemplo, a abertura), para não repetir sozinhas
 // praise: quantos elogios de cada tipo o jogador já fez (#102)
-export const emptySave = () => ({ version: SAVE_VERSION, levels: {}, settings: { sound: true }, seen: {}, praise: {} });
+// build: a última versão do jogo que o jogador abriu e viu por inteiro, para o patch note (#126); fica só no aparelho
+export const emptySave = () => ({ version: SAVE_VERSION, levels: {}, settings: { sound: true }, seen: {}, praise: {}, build: null });
 
 function migrate(data) {
   if (!data || typeof data !== 'object' || data.version !== SAVE_VERSION) return emptySave();

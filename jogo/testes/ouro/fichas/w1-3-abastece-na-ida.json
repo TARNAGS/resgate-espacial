@@ -1,0 +1,35 @@
+{
+  "cenario": "w1-3 · piloto cauteloso, abastecendo na ida, girando como no teclado",
+  "fase": "w1-3",
+  "semente": 303,
+  "fim": "complete",
+  "passos": 10850,
+  "cronometro": 90.408,
+  "combustivel": 0.074,
+  "vidas": 3,
+  "nave": {
+    "x": 89.615,
+    "y": 497.581,
+    "vx": 0,
+    "vy": 0,
+    "a": 0
+  },
+  "eventos": [
+    [0,"takeoff",{}],
+    [2328,"land",{"pad":"fuel","impact":{"vx":-2.039,"vy":22.063,"angle":0.25}}],
+    [2384,"refuel",{"pad":"fuel"}],
+    [2385,"takeoff",{}],
+    [5532,"land",{"pad":"crew","impact":{"vx":0.272,"vy":22.143,"angle":-0.25}}],
+    [5532,"boarding",{"lowFuel":false}],
+    [5616,"boardStep",{"index":0}],
+    [5671,"boardStep",{"index":1}],
+    [5725,"boardStep",{"index":2}],
+    [5773,"crewOnBoard",{}],
+    [5774,"takeoff",{}],
+    [9729,"lowFuel",{"level":"low"}],
+    [10614,"lowFuel",{"level":"critical"}],
+    [10849,"land",{"pad":"base","impact":{"vx":-4.997,"vy":20.35,"angle":0.25}}],
+    [10849,"praise",{"kind":"perfectRun","label":"PERFECT RUN","x":89.615,"y":497.581}],
+    [10849,"complete",{"seed":303,"run":{"time":90.4,"livesLost":0,"fuelLeft":0.074,"perfectRun":true}}]
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "cenario": "nível 2 · vai de lado contra a primeira pedra",
+  "fase": "w1-2",
+  "semente": 202,
+  "fim": "landed",
+  "passos": 241,
+  "cronometro": 0,
+  "combustivel": 1,
+  "vidas": 2,
+  "nave": {
+    "x": 130,
+    "y": 552,
+    "vx": 0,
+    "vy": 0,
+    "a": 0
+  },
+  "eventos": [
+    [44,"crash",{"reason":"HIT A ROCK","x":475.471,"y":386.753,"vx":80,"vy":20.625,"a":0,"lives":2}],
+    [213,"respawn",{"lives":2,"at":"base"}]
+  ]
+}

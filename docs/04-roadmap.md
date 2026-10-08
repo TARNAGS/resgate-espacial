@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 04 — Roadmap |
-| Versão | 1.7 |
+| Versão | 1.8 |
 | Data | 07/10/2026 |
 | Status | Aprovado |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -122,7 +122,6 @@ flowchart LR
 | Construir as telas de resultado (M2) | Sistema de pontuação | P-006 |
 | Construir a medição (M2) | Ferramenta de medição anônima | P-008 |
 | Lançar o MVP (M2) | Nome final do jogo | P-003 |
-| A próxima rodada de playtest | Se o degrau 1 do anticheat (piso de tempo por fase e dono do nick) entra já | P-023 |
 | Publicar nas lojas (M4) | Jogo pago, gratuito com loja, ou os dois; como empacotar e o risco de recusa | P-014; [#65](https://github.com/TARNAGS/resgate-espacial/issues/65) |
 | Publicar nas lojas (M4) | Ranking justo: que proteção contra trapaça e se o ranking é da loja, nosso ou os dois | P-019 e P-023; [#101](https://github.com/TARNAGS/resgate-espacial/issues/101) e [#109](https://github.com/TARNAGS/resgate-espacial/issues/109) |
 | Construir a loja (M5) | O que a loja vende, com que moeda e a regra de itens justos | P-017 |
@@ -160,3 +159,4 @@ A hospedagem deixou de ser um detalhe do fim do projeto: para testar o controle 
 | 1.5 | 02/10/2026 | M2 com cenários fixos (D-021) e os desafios PRACTICE e BONUS |
 | 1.6 | 07/10/2026 | Seção 4: ranking justo antes de publicar nas lojas e degrau 1 do anticheat antes da próxima rodada de playtest (P-019 e P-023, documento 11) |
 | 1.7 | 07/10/2026 | Épico E-26 · Abstração na I-01, que passa a cobrir também M2 e M3: 15 tarefas em cinco ondas, da mais barata à mais cara |
+| 1.8 | 07/10/2026 | Seção 4: o degrau 1 do anticheat saiu das decisões da próxima rodada de playtest (D-036, não agora) |

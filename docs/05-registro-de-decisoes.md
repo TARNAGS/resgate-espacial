@@ -47,6 +47,8 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-033 | Antes de construir, passar pelos estudos de level design e gameplay e validar; inspirar, nunca copiar; o Fernando orienta a criação | 06/10/2026 | Aceita; skill `discovery-de-jogos` |
 | D-034 | Nave nova é só aparência (casco e atributos da clássica, sem mexer no ranking), a não ser que se diga expressamente que ela muda o jogo | 07/10/2026 | Aceita; épico E-26 ([#110](https://github.com/TARNAGS/resgate-espacial/issues/110)) |
 | D-035 | Evolução da nave que muda atributos muda o jogo e mexe no ranking; evolução só visual não mexe | 07/10/2026 | Aceita; como os tempos aparecem no ranking é a P-024 |
+| D-036 | Anticheat só antes do lançamento: o degrau 1 não entra nos playtests | 07/10/2026 | Aceita; o resto da P-023 fica para antes do M4 |
+| D-037 | Zoom da câmera que se adapta à tela (1,15 nas telas compridas, até 1 nas mais quadradas); o jogador pode aproximar nas configurações | 07/10/2026 | Aceita; [#95](https://github.com/TARNAGS/resgate-espacial/issues/95) |
 
 ## D-001 — Sem login e sem contas
 
@@ -626,6 +628,75 @@ Juntas, a D-034 e a D-035 dão a regra geral: **o que muda só a aparência nunc
 
 **Revisitar se** as evoluções forem desenhadas só como progresso, sem ranking, ou se o ranking ficar dividido em configurações demais.
 
+## D-036 — Anticheat só antes do lançamento; os playtests seguem sem proteção
+
+**Contexto.** A pesquisa de anticheat ([#109](https://github.com/TARNAGS/resgate-espacial/issues/109), [documento 11](11-anticheat-e-ranking-justo.md)) propôs três degraus de proteção para o ranking (P-023). Ficou a pergunta: o degrau 1 entra já, antes da próxima rodada de playtest? Ele tem quatro partes e custa cerca de um dia de trabalho:
+- piso de tempo por fase;
+- dono do nick, com o login anônimo do Firebase;
+- esconder a porta de depuração;
+- tirar do ranking a corrida com engasgo.
+
+**Opções consideradas.**
+
+| Opção | A favor | Contra |
+|---|---|---|
+| Degrau 1 inteiro agora | O ranking dos playtests já fica protegido contra o básico | Um dia de trabalho antes de uma rodada com amigos de confiança |
+| Só o piso de tempo | O mais barato | Protege pouco: o nick continua sem dono |
+| **Não agora** | O tempo vai para o que já está priorizado (abstração, tanque, patch note) | O ranking dos playtests continua aceitando tempo falso de quem souber o endereço do banco |
+
+**Decisão.** O Fernando, na revisão das filas de 07/10/2026: "Não agora". Os playtests seguem com amigos de confiança, sem proteção contra trapaça. O anticheat inteiro fica para antes do lançamento (M4), dentro da [#101](https://github.com/TARNAGS/resgate-espacial/issues/101).
+
+**Consequências.**
+
+- **Risco baixo:** o repositório é privado fora das janelas de teste, e os jogadores são conhecidos.
+- **Continua em aberto na P-023, para antes do M4:**
+  - quanto o ranking importa no lançamento;
+  - se o ranking é da loja, nosso ou os dois ([#98](https://github.com/TARNAGS/resgate-espacial/issues/98));
+  - se usamos o plano Blaze ou a conferência por script;
+  - se o "fantasma" do melhor tempo entra como ideia de produto.
+- **O trabalho não se perde:** as fichas de ouro da abstração ([#114](https://github.com/TARNAGS/resgate-espacial/issues/114)) usam o mesmo formato de corrida gravada que o degrau 2 vai precisar.
+
+**Revisitar se** aparecer um tempo suspeito no ranking dos playtests, ou se uma rodada for aberta a desconhecidos.
+
+## D-037 — Zoom da câmera que se adapta à tela; o jogador pode aproximar
+
+**Contexto.** A câmera mostrava a altura inteira da fase. O Fernando achou a câmera um pouco distante no playtest de 04/10 ([#95](https://github.com/TARNAGS/resgate-espacial/issues/95)) e, em 07/10, testou no iPhone os zooms 1,15, 1,3 e 1,45.
+
+Nas palavras dele:
+- **1,15** "é a melhor, porque você consegue ver a fase, se programar para antecipar batidas e construir rota para chegar mais rápido. Apesar do gráfico ficar muito pequeno no celular".
+- **1,3 e 1,45** "ficam ligeiramente grandes, cortando o topo da tela, e alguns obstáculos se tornam inesperados por conta de você só conseguir avistá-los quando está rápido ou perto demais. Isso atrapalha a gameplay e se torna punitivista demais".
+
+Ele perguntou se o zoom podia se adaptar a celulares de tela menor. As contas do Claude mostraram que, deitados, os celulares têm alturas parecidas, então a nave fica quase do mesmo tamanho em todos (13 a 16 px). O que muda é o **formato**: telas mais "quadradas" veem menos da fase à frente. Com 1,15 fixo, o iPhone SE veria 82% do trecho de um iPhone 14, e o iPad, 67%.
+
+**Opções consideradas.**
+
+| Opção | A favor | Contra |
+|---|---|---|
+| 1,15 fixo para todos | Simples | No iPhone SE, 18% menos à frente; no iPad, 33% menos |
+| **Zoom que se adapta ao formato da tela** | Todo celular vê quase o mesmo trecho à frente (o iPhone SE, 95%) | No iPhone SE, a nave fica um pouco menor (12 px em vez de 14) |
+
+E, sobre o ajuste: o jogador muda o zoom ou o jogo escolhe? Como o zoom muda quanto se vê à frente, ele muda a dificuldade, e quem vê mais leva vantagem no ranking.
+
+**Decisão.** O Fernando escolheu:
+- **o zoom se adapta à tela:** 1,15 nas telas compridas (a maioria dos celulares) e até 1 nas mais quadradas;
+- **o jogador pode mudar o zoom nas configurações.**
+
+**Proposta do Claude, já construída e para o Fernando validar:** nas configurações, o jogador só **aproxima** (CAMERA: AUTO, CLOSE ou CLOSER). Isso resolve o conforto de quem acha os desenhos pequenos sem dar a ninguém a vantagem de ver mais da fase. O zoom fixo de teste (painel de ajuste ou `?zoom=`) tira a corrida do ranking.
+
+**Consequências.**
+
+- **Câmera e dificuldade:** a câmera deixa de ser tratada como "só imagem". Ver mais à frente muda a dificuldade, e o ranking depende disso.
+- **No código:**
+  - regra do zoom em `render/view.js`;
+  - escolha do jogador em `cameraNear`, salva no aparelho, fora do perfil online;
+  - ajuste de teste renomeado para `cameraZoomFixed`, então zooms antigos salvos pelo painel deixam de valer sozinhos;
+  - telemetria: o início de cada fase passa a registrar o zoom usado;
+  - configurações em duas colunas em tela baixa, para caber o botão novo.
+- **Ainda falta:** no iPad, a tela 4:3 continua vendo menos à frente (76%). Se o jogo for para tablets, isso volta à mesa.
+- **Para medir no próximo playtest:** mortes e tempos por formato de tela, para ver se as telas mais quadradas ainda saem perdendo.
+
+**Revisitar se** jogadores de telas pequenas ou quadradas morrerem bem mais que os outros, ou se muita gente escolher CLOSER (sinal de que os desenhos estão pequenos demais para todos).
+
 ## Decisões pendentes
 
 | ID | Pergunta | Quando decidir | Observação |
@@ -641,7 +712,7 @@ Juntas, a D-034 e a D-035 dão a regra geral: **o que muda só a aparência nunc
 | P-014 | O jogo será pago, gratuito com loja de itens, ou os dois? | Antes da publicação nas lojas (M4) | Ir para as lojas já foi decidido (D-019); falta decidir se e como cobrar: download pago, loja de itens e cosméticos, ou os dois. Desde 04/10/2026, na pesquisa única de lojas e dinheiro, cartão [#98](https://github.com/TARNAGS/resgate-espacial/issues/98) (substitui a #63 e a #65) |
 | P-018 | Como funciona o modo Nightmare, em que morrer não devolve o combustível? | Antes de construir o modo (M5) | Ideia do Fernando depois do teste com um amigo (02/10/2026). A nave reaparece pousada na base, que abastece: o modo precisa dizer se base e posto continuam abastecendo. Conversa com P-012 (modificadores) e P-017 (loja). Cartão [#79](https://github.com/TARNAGS/resgate-espacial/issues/79) |
 | P-019 | Como funciona um ranking de tempos por fase? Para os playtesters, resolvida pela D-024 (nickname e banco simples); para o lançamento, continua em aberto. | Antes da publicação nas lojas (M4) | Ideia do Fernando depois do teste com um amigo. Ranking entre jogadores esbarra em D-001 (sem login) e no cenário sorteado (D-014); saídas: rankings do Game Center e do Google Play Games e um desafio do dia com a mesma semente para todos. Para o lançamento: história [#101](https://github.com/TARNAGS/resgate-espacial/issues/101), que depende da pesquisa [#98](https://github.com/TARNAGS/resgate-espacial/issues/98) (a #80 foi encerrada em 04/10/2026). Pesquisa de anticheat em 07/10/2026 ([documento 11](11-anticheat-e-ranking-justo.md), [#109](https://github.com/TARNAGS/resgate-espacial/issues/109)): os rankings das lojas resolvem o nome, mas não conferem o tempo; a proteção contra trapaça virou a P-023 |
-| P-023 | Que proteção contra trapaça o ranking terá, e quando? Proposta do Claude em três degraus: (1) já nos playtests, piso de tempo por fase e dono do nick (login anônimo do Firebase); (2) antes do lançamento, conferir a corrida pelo replay; (3) no lançamento, identidade da loja, App Check, revisão humana do top 10 e botão de denúncia. | Degrau 1: antes da próxima rodada de playtest. Degraus 2 e 3: antes da publicação nas lojas (M4) | Pergunta do Fernando (07/10/2026): pessoas podem usar trapaça para bater os recordes. Pesquisa e as cinco perguntas a responder no [documento 11](11-anticheat-e-ranking-justo.md), seção 9. Cartão [#109](https://github.com/TARNAGS/resgate-espacial/issues/109). Liga com a P-019 ([#101](https://github.com/TARNAGS/resgate-espacial/issues/101)) e a pesquisa de lojas ([#98](https://github.com/TARNAGS/resgate-espacial/issues/98), item 4). O mesmo replay daria o "fantasma" do melhor tempo |
+| P-023 | Que proteção contra trapaça o ranking terá, e quando? Proposta do Claude em três degraus: (1) já nos playtests, piso de tempo por fase e dono do nick (login anônimo do Firebase); (2) antes do lançamento, conferir a corrida pelo replay; (3) no lançamento, identidade da loja, App Check, revisão humana do top 10 e botão de denúncia. | Antes da publicação nas lojas (M4). O degrau 1 nos playtests foi recusado pela D-036 (07/10/2026) | Pergunta do Fernando (07/10/2026): pessoas podem usar trapaça para bater os recordes. Pesquisa e as cinco perguntas a responder no [documento 11](11-anticheat-e-ranking-justo.md), seção 9. Cartão [#109](https://github.com/TARNAGS/resgate-espacial/issues/109). Liga com a P-019 ([#101](https://github.com/TARNAGS/resgate-espacial/issues/101)) e a pesquisa de lojas ([#98](https://github.com/TARNAGS/resgate-espacial/issues/98), item 4). O mesmo replay daria o "fantasma" do melhor tempo |
 | P-020 | Abastecer obrigatório (D-023) não segura os jogadores reais: como garantir, ou a regra muda? Resolvida pela D-026 (04/10/2026): piloto mais econômico e tanque recalculado, sem regra que obrigue. | Antes da próxima rodada de playtest | Opções: piloto mais econômico e tanques recalculados, tanque calibrado pelos jogadores, posto como parada obrigatória, ou aceitar abastecer opcional. Mudar a fase recomeça o ranking dela. Dados no [documento 09](09-resultados-dos-playtests.md). Cartão [#89](https://github.com/TARNAGS/resgate-espacial/issues/89) |
 | P-021 | O pouso na tripulação é a maior dificuldade e o nível 1 travou um jogador: o que mudar? Resolvida pela D-027 (04/10/2026): o pouso fica como está; ensinar o propulsor vai para a P-009. | Antes da próxima rodada de playtest | Opções: afastar a plataforma da parede do fim, nível 1 mais tolerante, dica depois de mortes no pouso e oferecer o TRAINING. Conversa com P-009. Cartão [#90](https://github.com/TARNAGS/resgate-espacial/issues/90) |
 | P-017 | O que a loja de itens vende, com que moeda, e como evitar vantagem injusta? | Antes de construir a loja (E-24) | Ideia do Fernando: itens de jogo e de nave, com dinheiro real ou moedas do jogo. Itens que facilitem o jogo afetam recordes e a regra do melhor caminho (D-018). Para as naves e as evoluções, a D-034 e a D-035 (07/10/2026) respondem em parte: o que muda só a aparência não mexe no ranking; uma nave marcada como "muda o jogo" ou uma evolução de atributos mexe (P-024). Cartão [#78](https://github.com/TARNAGS/resgate-espacial/issues/78) |

@@ -1,0 +1,36 @@
+{
+  "cenario": "practice · piloto cauteloso, abastecendo na volta, girando como no teclado",
+  "fase": "practice",
+  "semente": 293233524,
+  "fim": "complete",
+  "passos": 11409,
+  "cronometro": 95.067,
+  "combustivel": 0.644,
+  "vidas": 3,
+  "nave": {
+    "x": 94.795,
+    "y": 508.361,
+    "vx": 0,
+    "vy": 0,
+    "a": 0
+  },
+  "eventos": [
+    [0,"takeoff",{}],
+    [5816,"land",{"pad":"crew","impact":{"vx":4.894,"vy":20.899,"angle":-0.25}}],
+    [5816,"boarding",{"lowFuel":false}],
+    [5900,"boardStep",{"index":0}],
+    [5955,"boardStep",{"index":1}],
+    [6009,"boardStep",{"index":2}],
+    [6057,"crewOnBoard",{}],
+    [6058,"takeoff",{}],
+    [6523,"praise",{"kind":"closeCall","label":"CLOSE CALL","x":3776.055,"y":297.837}],
+    [7170,"lowFuel",{"level":"low"}],
+    [7730,"lowFuel",{"level":"critical"}],
+    [8112,"land",{"pad":"fuel","impact":{"vx":4.741,"vy":20.813,"angle":-0.25}}],
+    [8303,"refuel",{"pad":"fuel"}],
+    [8304,"takeoff",{}],
+    [11408,"land",{"pad":"base","impact":{"vx":-7.545,"vy":19.099,"angle":0.25}}],
+    [11408,"praise",{"kind":"perfectRun","label":"PERFECT RUN","x":94.795,"y":508.361}],
+    [11408,"complete",{"seed":293233524,"run":{"time":95.1,"livesLost":0,"fuelLeft":0.644,"perfectRun":true}}]
+  ]
+}

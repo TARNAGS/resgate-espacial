@@ -2,6 +2,7 @@ import { WORLD_H, STEP, SHIP } from '../core/constants.js';
 import { clamp, lerp, fmtTime } from '../core/math.js';
 import { landingSafe, landingForecast } from '../core/ship.js';
 import { OBSTACLES } from '../content/obstacles/index.js';
+import { cameraZoomFor } from './view.js';
 
 // Desenho do jogo no Canvas. Lê o estado da partida e nunca o altera.
 
@@ -52,7 +53,7 @@ export function createRenderer(canvas, view) {
   }
 
   r.resetCamera = (match, params) => {
-    r.zoom = params.cameraZoom ?? 1;
+    r.zoom = cameraZoomFor(view, params);
     r.camX = clamp(match.state.ship.x - viewW() / 2, ...camLimits(match.state.level, params));
     r.camY = camYTarget(match.state.ship);
     keepShipVisible(match.state.ship, params);
@@ -65,7 +66,7 @@ export function createRenderer(canvas, view) {
 
   r.update = (dt, match, params) => {
     const s = match.state.ship;
-    r.zoom = params.cameraZoom ?? 1;
+    r.zoom = cameraZoomFor(view, params);
     const look = clamp(s.vx * 0.6, -viewW() * 0.25, viewW() * 0.25);
     const target = clamp(s.x - viewW() / 2 + look, ...camLimits(match.state.level, params));
     r.camX += (target - r.camX) * Math.min(1, dt * 4);

@@ -12,6 +12,10 @@
 <div id="safe-probe" aria-hidden="true"></div>
 
 <section id="menu" class="screen">
+  <div id="patch" class="patch hidden" role="status">
+    <span id="patch-text"></span>
+    <button id="btn-patch-skip" class="btn small">SKIP</button>
+  </div>
   <h1 class="title">RESGATE <br>ESPACIAL</h1>
   <p id="subtitle" class="subtitle">codename · early build</p>
   <div id="map" class="map" aria-label="Level map"></div>
@@ -47,14 +51,24 @@
 
 <section id="settings" class="screen hidden">
   <h2>SETTINGS</h2>
-  <button id="btn-sound" class="btn">SOUND: ON</button>
-  <p id="sound-help" class="controls-help hidden">iPhone silent mode also mutes the game.</p>
-  <button id="btn-control" class="btn">TOUCH CONTROL: A</button>
-  <p id="control-help" class="controls-help"></p>
-  <button id="btn-nickname" class="btn">PILOT: —</button>
-  <button id="btn-intro" class="btn">WATCH INTRO</button>
-  <button id="btn-reset" class="btn">RESET PROGRESS</button>
-  <p class="controls-help">
+  <div class="settings-list">
+    <div class="setting">
+      <button id="btn-sound" class="btn">SOUND: ON</button>
+      <p id="sound-help" class="controls-help hidden">iPhone silent mode also mutes the game.</p>
+    </div>
+    <div class="setting">
+      <button id="btn-control" class="btn">TOUCH CONTROL: A</button>
+      <p id="control-help" class="controls-help"></p>
+    </div>
+    <div class="setting">
+      <button id="btn-camera" class="btn">CAMERA: AUTO</button>
+      <p class="controls-help">Closer camera: bigger graphics, less of the level ahead.</p>
+    </div>
+    <div class="setting"><button id="btn-nickname" class="btn">PILOT: —</button></div>
+    <div class="setting"><button id="btn-intro" class="btn">WATCH INTRO</button></div>
+    <div class="setting"><button id="btn-reset" class="btn">RESET PROGRESS</button></div>
+  </div>
+  <p class="controls-help keyboard-help">
     KEYBOARD · ←/→ rotate · ↑ thrust · P pause
   </p>
   <button id="btn-back" class="btn primary">BACK</button>

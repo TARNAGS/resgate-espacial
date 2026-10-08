@@ -1,0 +1,4 @@
+{
+  "_sobre": "Chaves de fase que já chegaram aos jogadores (#117). A chave é o progresso salvo no aparelho e no perfil online: depois de publicada, nunca some nem muda. Ao abrir uma rodada ou publicar uma fase nova, acrescente a chave dela aqui.",
+  "fases": ["w1-1", "w1-2", "w1-3", "practice", "bonus", "training"]
+}
