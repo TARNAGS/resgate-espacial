@@ -3,14 +3,14 @@
 | Campo | Valor |
 |---|---|
 | Documento | Guia de leitura dos benchmarks |
-| Versão | 1.1 |
+| Versão | 1.2 |
 | Data | 08/10/2026 |
 | Status | Referência |
 | Responsável | Fernando Nunes (Product Manager) |
 
-Este guia junta num lugar só tudo o que foi estudado de 05 a 08/10/2026: cinco estudos de jogos (Crazy Gravity, GraviTron e Gravitron 2, Jetpack Joyride, Temple Run e Geometry Dash), a skill que automatiza o método e a regra que manda consultar os estudos antes de construir (D-033). Ele cruza os jogos, mostra onde concordam e onde divergem e lista o que espera decisão. Os detalhes e as fontes ficam no documento de cada jogo.
+Este guia junta num lugar só tudo o que foi estudado de 05 a 08/10/2026: seis estudos de jogos (Crazy Gravity, GraviTron e Gravitron 2, Jetpack Joyride, Temple Run, Geometry Dash e Super Mario World), a skill que automatiza o método e a regra que manda consultar os estudos antes de construir (D-033). Ele cruza os jogos, mostra onde concordam e onde divergem e lista o que espera decisão. Os detalhes e as fontes ficam no documento de cada jogo.
 
-> **Página de leitura:** https://claude.ai/artifact/TSGis8FXKTXWWgdQUJH9ar (privada), com links para as cinco páginas dos estudos; cópia em [pagina-de-leitura.html](pagina-de-leitura.html).
+> **Página de leitura:** https://claude.ai/artifact/TSGis8FXKTXWWgdQUJH9ar (privada), com links para as seis páginas dos estudos; cópia em [pagina-de-leitura.html](pagina-de-leitura.html).
 
 Tudo o que está em "o que isso sugere para nós" é **Proposta**: interpretação para o Fernando decidir, não decisão.
 
@@ -33,7 +33,7 @@ Tudo o que está em "o que isso sugere para nós" é **Proposta**: interpretaç�
 | Tempo disponível | O que ler |
 |---|---|
 | 5 minutos | As seções 4 (insights) e 7 (decisões) deste guia |
-| 20 minutos | As cinco páginas de leitura, nesta ordem: Crazy Gravity, Gravitron, Jetpack Joyride, Temple Run e Geometry Dash (links na seção 3) |
+| 20 minutos | As seis páginas de leitura, nesta ordem: Crazy Gravity, Gravitron, Jetpack Joyride, Temple Run, Geometry Dash e Super Mario World (links na seção 3) |
 | Para decidir um cartão | A seção "O que levar para o Resgate Espacial" do benchmark do jogo e o último comentário do cartão |
 | Antes de construir algo | A skill `discovery-de-jogos`, no modo consulta rápida (D-033), que começa por este guia e pelo [documento 10](../10-benchmark-de-level-design.md) |
 
@@ -50,6 +50,8 @@ Daí a divisão de trabalho entre os estudos:
 
 O **Geometry Dash** fica entre as duas famílias: é um casual de celular do público-alvo, mas tem fases fixas e numeradas e uma curva de dificuldade medida fase a fase, como os jogos de nave. Entrou na lista na revisão do Lean Canvas (07/10/2026), quando o problema central do jogador virou "passar fases difíceis e criativas e sentir que fiquei bom nisso".
 
+O **Super Mario World** (1990) não é de nenhuma das duas famílias: é uma **referência de método**, pedida pelo Fernando em 08/10/2026 para entender como um jogo ensina sem tutorial. Responde a uma pergunta só, a da D-031: como o jogador aprende jogando.
+
 ## 3. O que foi produzido
 
 ### 3.1 Os estudos
@@ -61,23 +63,24 @@ O **Geometry Dash** fica entre as duas famílias: é um casual de celular do pú
 | **Jetpack Joyride** (2011) | O primeiro casual do ICP: como um jogo infinito funciona | [jetpack-joyride.md](jetpack-joyride.md): contado pelo criador (vídeo de 2023 e slides da GDC 2012) | [TjsQe83tBnQbYzsddenUcb](https://claude.ai/artifact/TjsQe83tBnQbYzsddenUcb) | 4 diagramas | [#107](https://github.com/TARNAGS/resgate-espacial/issues/107) |
 | **Temple Run** (2011) | O segundo casual: a corrida infinita com perseguição, comparada ao Jetpack Joyride | [temple-run.md](temple-run.md): contado pelos criadores (GDC 2014, entrevistas dos 10 anos) | [DatT92pPFFCnnDwG3vLoBZ](https://claude.ai/artifact/DatT92pPFFCnnDwG3vLoBZ) | 3 diagramas | [#108](https://github.com/TARNAGS/resgate-espacial/issues/108) |
 | **Geometry Dash** (2013) | O casual mais próximo do nosso: dificuldade com fases fixas, checkpoints e ranking, modelo grátis + pago | [geometry-dash.md](geometry-dash.md): o criador (entrevistas, 231 respostas em duas AMAs, guia de avaliação de fases) e as 22 fases oficiais pela wiki | [Y7Y1rAykSbfkfXuaJdSXRC](https://claude.ai/artifact/Y7Y1rAykSbfkfXuaJdSXRC) | 5 diagramas: a curva, o mundo de 10 fases, checkpoints, o funil e a linha do tempo | [#127](https://github.com/TARNAGS/resgate-espacial/issues/127) |
+| **Super Mario World** (1990) | Referência de como ensinar sem tutorial, a pedido do Fernando | [super-mario-world.md](super-mario-world.md): a equipe contando como construiu (sete entrevistas Iwata Asks lidas inteiras), os 31 textos do jogo classificados, o primeiro mundo aula por aula e as lições de design do Super Mario Maker 2 | [7LSubtYDh5iEywjTtB8hP3](https://claude.ai/artifact/7LSubtYDh5iEywjTtB8hP3) | 5 diagramas: onde o jogo fala, o primeiro mundo, os quatro tempos, as camadas de erro e a ajuda depois do erro | [#128](https://github.com/TARNAGS/resgate-espacial/issues/128) |
 
 As páginas de leitura ficam em claude.ai/artifact/ seguido do código da tabela, todas privadas. Cada pasta tem uma cópia da página (`pagina-de-leitura.html`) e as ferramentas que geram as imagens (`ferramentas/`, com um README de como regenerar). Os arquivos originais dos jogos ficam fora do Git.
 
 ### 3.2 O que mudou no resto do projeto
 
-- **[Documento 10](../10-benchmark-de-level-design.md)** (benchmark de level design), da versão 0.1 à 0.7: a tabela de estudos, a seção 3.1 corrigida pelo que o código do Gravitron 2 mostrou, a tabela que compara os casuais (seção 4) e 27 lições numeradas (seção 5).
+- **[Documento 10](../10-benchmark-de-level-design.md)** (benchmark de level design), da versão 0.1 à 0.8: a tabela de estudos, a seção 3.1 corrigida pelo que o código do Gravitron 2 mostrou, a tabela que compara os casuais (seção 4) e 33 lições numeradas (seção 5).
 - **[D-033](../05-registro-de-decisoes.md#d-033--antes-de-construir-passar-pelos-estudos-inspirar-nunca-copiar)**: antes de construir uma mecânica, fase, obstáculo ou regra, passar pelos estudos e validar; inspirar, nunca copiar; o Fernando orienta o que é criado. Entrou também no `CLAUDE.md` do projeto.
 - **[Diário de bordo](../06-diario-de-bordo.md)**: uma entrada por estudo e os próximos passos.
-- **Quadro:** os cartões #106, #107, #108 e #127 estão em "Para conversar", com Quem = Fernando, cada um com resposta, evidências, recomendação e o que ficou em aberto.
+- **Quadro:** os cartões #106, #107, #108, #127 e #128 estão em "Para conversar", com Quem = Fernando, cada um com resposta, evidências, recomendação e o que ficou em aberto.
 
 ### 3.3 A skill `discovery-de-jogos`
 
 - **O que é:** o método do estudo do Crazy Gravity transformado em instruções que o Claude segue sozinho, a pedido do Fernando em 06/10/2026.
 - **Onde fica:** `context-directory/setup/claude-global/skills/discovery-de-jogos/` (`SKILL.md` e `modelo.md`). Vale no Mac e no Windows.
 - **Como usar:** pedir "estude o <jogo>" ou digitar `/discovery-de-jogos`.
-- **Três tamanhos:** completo (como os cinco estudos), comparativo (vários jogos lado a lado) e consulta rápida (antes de construir, D-033).
-- **Como melhorou com o uso:** o estudo dos Gravitron trouxe a leitura de formatos de arquivo e o arquivo da internet (Wayback); o do Jetpack Joyride, a variante "jogo infinito" do modelo; o do Temple Run, a seção de comparação com outro jogo do gênero e dicas para ler transcrições de vídeos; o do Geometry Dash, ler as respostas do criador em AMAs do Reddit por um arquivo público (Arctic Shift), já que o Reddit recusa scripts.
+- **Três tamanhos:** completo (como os seis estudos), comparativo (vários jogos lado a lado) e consulta rápida (antes de construir, D-033).
+- **Como melhorou com o uso:** o estudo dos Gravitron trouxe a leitura de formatos de arquivo e o arquivo da internet (Wayback); o do Jetpack Joyride, a variante "jogo infinito" do modelo; o do Temple Run, a seção de comparação com outro jogo do gênero e dicas para ler transcrições de vídeos; o do Geometry Dash, ler as respostas do criador em AMAs do Reddit por um arquivo público (Arctic Shift), já que o Reddit recusa scripts; o do Super Mario World, ler as entrevistas Iwata Asks inteiras pelo texto que cada página do site oficial traz embutido.
 
 ## 4. Insights: o que os jogos ensinam juntos
 
@@ -98,9 +101,10 @@ Cada insight junta evidências de mais de um jogo. As fontes estão no documento
 - **Gravitron 2:** a fase 1 mostra tudo à vista. Mesmo assim, o autor acrescentou uma página de instruções na versão 1.7, e a campanha difícil, selecionada por padrão, espantou jogadores.
 - **Jetpack Joyride:** avisos antes do perigo e trilhas de moedas em forma de seta, acrescentadas porque, no primeiro grande teste, as pessoas morriam logo depois de entrar num veículo, quando o controle muda.
 - **Temple Run:** a forma do obstáculo diz o gesto. O teste era entregar o celular sem explicar nada.
+- **Super Mario World:** sem tutorial, mas com texto: 19 dicas opcionais, cada uma um passo antes de onde serve, 11 delas no primeiro mundo. Na reedição de 2001, a Nintendo acrescentou dicas ao começo. Vinte anos depois, a mesma equipe passou a oferecer ajuda depois de 8 vidas perdidas numa fase.
 - **Geometry Dash:** sem tutorial, mas com uma frase na tela depois de duas batidas no primeiro obstáculo das fases 1 e 3. Mesmo assim, a Common Sense Media critica a curva íngreme e a falta de tutorial, e jogadores ficam semanas presos nas fases 6 e 7.
 
-**O que isso sugere para nós:** a DEMO e o attract mode (D-031) estão do lado certo. O risco é achar que bastam; a dica mínima do Geometry Dash, só depois do erro, é um meio-termo a testar no nível 1. Vale medir no próximo playtest se quem vê a DEMO entende "ir, resgatar e voltar", e garantir que o padrão de qualquer menu seja o caminho mais fácil.
+**O que isso sugere para nós:** a DEMO e o attract mode (D-031) estão do lado certo. O risco é achar que bastam; a dica mínima do Geometry Dash e a ajuda calibrada da Nintendo, só depois do erro, são meios-termos a testar no nível 1 (insight 4.14). Vale medir no próximo playtest se quem vê a DEMO entende "ir, resgatar e voltar", e garantir que o padrão de qualquer menu seja o caminho mais fácil.
 
 ### 4.3 Placar: os dois casuais fizeram escolhas opostas
 
@@ -126,6 +130,7 @@ Cada insight junta evidências de mais de um jogo. As fontes estão no documento
 - **Erro fatal:** no Crazy Gravity, encostar explode a nave e a carga volta para a origem; no Jetpack Joyride, um golpe acaba a corrida; no nosso jogo, hoje, também.
 - **Erro com perdão:** no Gravitron, bater faz a nave quicar e perder energia. É divertido, mas vira caos em corredores, e o laser que mata na hora é criticado justamente por destoar. No Temple Run, há dois tipos de erro: o tropeço avisa, e o segundo tropeço logo depois, ou um erro grande, encerra a corrida.
 - **O custo em três partes** (Jetpack Joyride): tempo perdido, custo emocional e atrito para recomeçar, cada um atacado de um jeito.
+- **Erro em camadas** (Super Mario World): o poder absorve o golpe, a reserva cai sozinha, o Yoshi foge e volta, o portão do meio ainda dá um cogumelo, e o jogo sobra em vidas.
 - **Erro fatal, mas barato** (Geometry Dash): bater volta ao 0%, mas o recomeço é automático e instantâneo, a porcentagem e o "New Best!" mostram o progresso, e a moeda da loja é paga pelo recorde de %, mesmo sem concluir.
 
 **O que isso sugere para nós:** o atrito já é baixo: no primeiro playtest, quem disputava tempo recomeçava com mediana de 0,9 segundo (documento 09). Falta olhar o custo emocional, ou seja, o que a tela de fim mostra. E o "casco" do Gravitron ou o "tropeço" do Temple Run podem virar um modificador ou um modo mais fácil para o jogador casual (D-028), sem mexer no modo padrão.
@@ -144,6 +149,7 @@ Cada insight junta evidências de mais de um jogo. As fontes estão no documento
 - **Crazy Gravity:** cada fase tem um destaque que cabe numa frase (o porão, a cadeia de chaves, a fase vertical), e os obstáculos aparecem em série, formando trechos com identidade.
 - **Gravitron 2:** as fases 1 a 5 trazem uma novidade cada (terreno aberto, primeiro poço, laser e elevador, caverna que gira, três lasers seguidos).
 - **Jetpack Joyride:** cada veículo entra com câmera lenta, tela limpa e uma trilha que ensina.
+- **Super Mario World e a Nintendo:** a fase de uma ideia em quatro tempos (apresentar, desenvolver, surpreender, concluir), formalizada por Koichi Hayashida em 2012; no Super Mario World, uma ou duas ideias por fase no primeiro mundo, sempre com segunda chance.
 - **Geometry Dash:** 19 das 22 fases apresentam uma mecânica, em trecho amplo e calmo; no Geometry Dash World, um mundo de 10 fases de cerca de 30 s, cada uma com uma novidade só.
 
 **O que isso sugere para nós:** no documento 08, cada fase do mundo ganha uma frase de destaque; a novidade aparece primeiro numa fase curta e segura e só depois é combinada com outras.
@@ -180,6 +186,7 @@ Cada insight junta evidências de mais de um jogo. As fontes estão no documento
 
 - **Jetpack Joyride:** diante do "chato", o criador passou semanas acrescentando poderes (o diagnóstico errado) até perceber que o problema era a intensidade constante.
 - **Gravitron 2:** quase todas as atualizações depois do lançamento deixaram o jogo mais fácil ou mais claro, sinal de que o autor calibrou difícil demais para quem chegava.
+- **Super Mario 3D Land:** um testador travado recusou voar por cima do trecho; queria jogá-lo. Daí veio uma ajuda que deixa continuar jogando.
 - **No nosso projeto:** a D-027 já ensinou isso. As mortes no pouso pareciam um problema de pouso, e o problema era entender o propulsor.
 
 **O que isso sugere para nós:** ao ler o próximo playtest, perguntar o que a pessoa quis dizer antes de construir a resposta.
@@ -197,9 +204,20 @@ Cada insight junta evidências de mais de um jogo. As fontes estão no documento
 - **Geometry Dash, fase clássica:** a conclusão que vale é sem morrer; o treino com checkpoints existe à parte, não dá recompensa e tem outra música.
 - **Geometry Dash, fase de plataforma:** os checkpoints são desenhados na fase e valem; o ranking é o tempo total, com o relógio correndo nas mortes (inferido), e um botão recomeça do zero.
 - **Gravitron 2:** checkpoints acrescentados na versão 1.2.
+- **Super Mario World:** um portão do meio por fase, de propósito: para Miyamoto, repetir os trechos fáceis dá prazer e faz o jogador melhorar. A Nintendo ensina a pô-lo logo antes do trecho que vai pedir muitas tentativas.
 - **No nosso playtest:** quem disputava tempo recomeçava logo depois da primeira morte (mediana de 0,9 s), e a base e a plataforma da tripulação já funcionam como pontos de retorno.
 
 **O que isso sugere para nós:** a fase grande pode ter checkpoints sem mexer no ranking por tempo puro (D-024): o tempo corre direto, e quem quer o recorde recomeça do zero. O treino com checkpoints livres, que não vale, atende quem ainda aprende.
+
+### 4.14 Ajuda só depois do erro, na hora certa
+
+- **Super Mario World (1990):** nenhuma ajuda depois do erro; só dicas fixas e opcionais.
+- **New Super Mario Bros. Wii (2009):** o Super Guide (o computador joga a fase) aparece depois de 8 vidas perdidas. No menu, Miyamoto recusou; depois de 3, ele mesmo se irritou; discutiram 5 e 10.
+- **Super Mario 3D Land (2011):** ajuda depois de 5 e de 10; Tezuka pediu 5 "confiando no instinto de jogador".
+- **Geometry Dash (2013):** uma frase depois de 2 batidas.
+- **Orgulho:** medalhas para quem termina sem ver a ajuda; a demonstração gravada sem truques, para quem vê pensar que também consegue.
+
+**O que isso sugere para nós:** a D-031 ("sem oferta de ajuda") fica na companhia do Super Mario World, mas a mesma equipe mudou de ideia com números testados. Testar uma oferta opcional depois de N mortes no mesmo ponto, com N medido no playtest, e uma DEMO mais modesta. Como a nossa física é menos intuitiva que o pulo do Mario, talvez precisemos de mais ajuda, não de menos.
 
 ## 5. Onde os estudos discordam
 
@@ -211,8 +229,8 @@ Cada insight junta evidências de mais de um jogo. As fontes estão no documento
 | Tamanho da fase | Fases longas, com chaves e várias viagens (Crazy Gravity); fases enormes no fim (Gravitron) | Corridas de 30 segundos a poucos minutos (Jetpack Joyride, Temple Run) | Partidas curtas (D-028): levar as ideias, não a escala |
 | Fases | Desenhadas à mão e fixas (Crazy Gravity, Gravitron) | Geradas na hora (Jetpack Joyride, Temple Run) | Fixas (D-021); a BONUS sorteada poderia usar intervalos entre um mínimo e um máximo (Proposta) |
 | Cobrança | Pago, com demo de algumas fases (Crazy Gravity, Gravitron 2); pago sem anúncios + Lite grátis com anúncios (Geometry Dash) | Grátis com compras (Jetpack Joyride, Temple Run) | Anúncios decididos na revisão do Lean Canvas (documento 13); cobrar ou não segue em aberto (P-014, #98) |
-| Checkpoints | Nenhum na corrida que vale; treino à parte (Geometry Dash, fase clássica) | Checkpoints fixos que valem, com o tempo correndo (Geometry Dash, fase de plataforma; Gravitron 2) | Pontos de retorno na base e na tripulação; a fase grande está em aberto (documento 13, seção 3.2) |
-| Ajuda depois do erro | Nenhuma (a nossa D-031) | Uma frase na tela depois de duas batidas (Geometry Dash) | Sem oferta de ajuda (D-031); a dica mínima é Proposta da #127 |
+| Checkpoints | Nenhum na corrida que vale; treino à parte (Geometry Dash, fase clássica); um só por fase, porque repetir o fácil dá prazer (Super Mario World) | Checkpoints fixos que valem, com o tempo correndo (Geometry Dash, fase de plataforma; Gravitron 2) | Pontos de retorno na base e na tripulação; a fase grande está em aberto (documento 13, seção 3.2) |
+| Ajuda depois do erro | Nenhuma (a nossa D-031; Super Mario World) | Uma frase depois de duas batidas (Geometry Dash); o Super Guide depois de 8 vidas (New Super Mario Bros. Wii) | Sem oferta de ajuda (D-031); a oferta depois do erro é Proposta da #127 e da #128 |
 
 ## 6. O que já tínhamos decidido e os estudos confirmam
 
@@ -222,7 +240,7 @@ Cada insight junta evidências de mais de um jogo. As fontes estão no documento
 | Fases fixas para comparar tempos e ranking por fase (D-021, D-024) | Crazy Gravity (3 melhores tempos por fase), Gravitron (placar online), Jetpack Joyride (placar puro), Geometry Dash (fases fixas; ranking por tempo nas fases de plataforma) |
 | Mundos de 10 fases, com uma novidade por fase (D-020) | Geometry Dash World (10 fases de cerca de 30 s, em 2 mundos de 5, uma novidade cada) |
 | Aparência separada das regras e do ranking (D-034, D-035) | Geometry Dash (ícones só cosméticos, ganhos jogando) |
-| Sem tutorial: DEMO e attract mode (D-031) | Crazy Gravity (demonstração das fases 1 a 3), Gravitron 2 (fase 1 com tudo à vista), Temple Run (testar sem explicar), Geometry Dash (sem tutorial); com o alerta das instruções acrescentadas no Gravitron 2 e da dica mínima do Geometry Dash |
+| Sem tutorial: DEMO e attract mode (D-031) | Crazy Gravity (demonstração das fases 1 a 3), Gravitron 2 (fase 1 com tudo à vista), Temple Run (testar sem explicar), Geometry Dash (sem tutorial), Super Mario World (sem tutorial, com dicas opcionais no lugar); com o alerta das instruções acrescentadas no Gravitron 2, da dica mínima do Geometry Dash e da ajuda depois do erro que a Nintendo acrescentou em 2009 |
 | Partidas curtas para o jogador casual (D-028) | Jetpack Joyride (a "jogada do intervalo comercial"), Gravitron (um jogador que volta há anos, 10 minutos por vez), Temple Run (30 segundos a minutos) |
 | Sem anúncios (D-003), revista na revisão do Lean Canvas: anúncios entram, sem ser tóxicos (documento 13) | Jetpack Joyride (anúncios são a maior reclamação hoje) e Geometry Dash (o Lite põe anúncio entre mortes) mostram onde o anúncio incomoda |
 | Conteúdo como dado (D-011) | Temple Run 2 (reescrito para crescer), Jetpack Joyride (loja feita para atualizações) |
@@ -232,7 +250,7 @@ Cada insight junta evidências de mais de um jogo. As fontes estão no documento
 
 ## 7. Decisões que esperam o Fernando
 
-Os quatro cartões estão em "Para conversar". Cada um tem quatro recomendações.
+Os cinco cartões estão em "Para conversar". Cada um tem quatro recomendações.
 
 | Cartão | Recomendação | Ligado a |
 |---|---|---|
@@ -252,6 +270,10 @@ Os quatro cartões estão em "Para conversar". Cada um tem quatro recomendaçõe
 | | 2. Treino com checkpoints livres que não vale (o TRAINING ampliado) e o progresso parcial à vista | D-031; P-009; documento 09, achado 4 |
 | | 3. Anúncio nunca entre mortes, só em pausas naturais ou por escolha | Documento 13, seção 5.2; P-014 |
 | | 4. Uma fase da semana, igual para todos, como motor da North Star | Documento 13, seção 3.4; P-019 |
+| [#128](https://github.com/TARNAGS/resgate-espacial/issues/128) Super Mario World | 1. Oferecer ajuda opcional só depois de N mortes no mesmo ponto, com N medido no playtest (revisa a D-031) | D-031; P-009; #127 |
+| | 2. No nível 1, dicas presas ao lugar (um passo antes de onde servem) e um começo em que o jogador vive o propulsor de qualquer jeito | D-031; D-027; #97; mundo 1 |
+| | 3. Uma DEMO mais modesta, no ritmo de um jogador comum | D-031; #104; #92 |
+| | 4. Refazer o nível 1 por último, depois das fases 4 a 10, e testar com quem nunca jogou, em silêncio | Mundo 1; documento 07; #44 |
 | Crazy Gravity (sem cartão) | Ritmo em serrote em cada mundo, uma ideia por fase, forças em vez de inimigos, ensinar pela estrutura | Documento 10, lições 1 a 6; documento 08 |
 
 **Se for decidir só três agora** (recomendação do Claude):
@@ -259,6 +281,8 @@ Os quatro cartões estão em "Para conversar". Cada um tem quatro recomendaçõe
 1. **Testar o controle sem explicar no próximo playtest** (#108, item 2): custa pouco e ataca o maior risco do produto.
 2. **Tripulantes que andam até a nave** (#106, item 1): é pequeno, deixa claro o objetivo da fase e pode virar o momento marcante do jogo (seção 4.12).
 3. **Registrar o ranking como tempo puro** (#107, item 1, e #108, item 4): fecha uma parte da P-006 com dois exemplos opostos.
+
+**Da #128, a primeira:** testar no próximo playtest uma ajuda opcional depois de N mortes no mesmo ponto, porque toca a decisão de ensino (D-031) e o jogador travado no nível 1.
 
 **Da #127, a primeira:** o modelo de checkpoints da fase grande (item 1), porque o protótipo de fase grande é o próximo teste definido na revisão do Lean Canvas, e ele mantém o ranking por tempo puro.
 
@@ -269,6 +293,7 @@ Os quatro cartões estão em "Para conversar". Cada um tem quatro recomendaçõe
 | Crazy Gravity | As 18 fases, lidas dos arquivos do jogo; o manual original | Pouca crítica da época além da nota da PC Player (80%) |
 | Gravitron | As regras do Gravitron 2, lidas no código que o autor publicou em 2012 | Só 8 das mais de 40 fases da campanha principal (as outras vêm só no jogo pago); no GraviTron, o código se perdeu, e a ordem das fases e alguns objetos foram deduzidos |
 | Jetpack Joyride | As falas do criador (vídeo de 2023 e slides da GDC 2012) | A transcrição da palestra da GDC não carregou; os números da wiki são da versão atual, que mudou muito desde 2011 |
+| Super Mario World | A equipe contando como fez (sete entrevistas Iwata Asks lidas inteiras); os 31 textos do jogo pela wiki | A transcrição do vídeo da Eurogamer não carregou; quase tudo o que os criadores dizem sobre ensinar fala do Super Mario Bros. e dos jogos seguintes, não do Super Mario World; os quatro tempos aplicados ao Super Mario World são leitura nossa |
 | Temple Run | As falas dos criadores (GDC 2014, Vice 2021, TechCrunch 2012) | A transcrição da entrevista da Shacknews falhou; GameSpot, Wired, Polygon e VentureBeat estavam bloqueadas ou fora do ar; o dado de público majoritariamente feminino vem só do título de uma matéria da The Verge (2014) |
 | Geometry Dash | As 22 fases oficiais e o World, pela wiki; as falas do criador (Cult of Mac, Game Developer, 231 respostas nas AMAs) | O relógio das fases de plataforma correr nas mortes é inferido; o momento dos anúncios do Lite vem de resenhas que não batem; o lucro vem da imprensa sueca; a idade do público, de sinais indiretos; acusações recentes sobre a comunidade, nas avaliações do Steam, não apareceram na imprensa |
 
@@ -302,10 +327,12 @@ Faltam três casuais do ICP no cartão [#99](https://github.com/TARNAGS/resgate-
 | 06/10/2026 | Este guia, a pedido do Fernando: "documente tudo, todos os achados e artifacts criados, para que eu consiga ler depois e ter insights" |
 | 07/10/2026 | Na revisão do Lean Canvas, o Geometry Dash entra na lista (#127) |
 | 08/10/2026 | Estudo do Geometry Dash (#127): a curva das 22 fases, o mundo de 10 fases, checkpoints e ranking, o modelo grátis + pago; insight 4.13 neste guia |
+| 08/10/2026 | Estudo do Super Mario World (#128), a pedido do Fernando: como o jogo ensina sem tutorial; insight 4.14 neste guia |
 
 ## Histórico de versões
 
 | Versão | Data | O que mudou |
 |---|---|---|
 | 1.0 | 06/10/2026 | Primeira versão: os quatro estudos, a skill, 12 insights, divergências, validações, decisões pendentes, lacunas e o que falta estudar |
+| 1.2 | 08/10/2026 | O Super Mario World entra como sexto estudo (referência de método): tabelas, evidências em seis insights, o insight 4.14 (ajuda só depois do erro), divergências, validações, as recomendações da #128 e lacunas |
 | 1.1 | 08/10/2026 | O Geometry Dash entra como quinto estudo: tabelas, evidências em oito insights, o insight 4.13 (checkpoint e ranking), três divergências, validações, as recomendações da #127, lacunas e a ordem do que falta estudar |

@@ -36,3 +36,6 @@ docs/benchmark/temple-run/ferramentas/saida/
 
 # Saída das ferramentas do benchmark do Geometry Dash, gerada a cada vez
 docs/benchmark/geometry-dash/ferramentas/saida/
+
+# Saída das ferramentas do benchmark do Super Mario World, gerada a cada vez
+docs/benchmark/super-mario-world/ferramentas/saida/

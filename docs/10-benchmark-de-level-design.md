@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 10 — Benchmark de level design |
-| Versão | 0.7 |
+| Versão | 0.8 |
 | Data | 08/10/2026 |
 | Status | Em construção |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -30,6 +30,8 @@ O que os jogos de referência fazem com fases, obstáculos, dificuldade e ritmo,
 | Página de leitura do Temple Run | [claude.ai/artifact/DatT92pPFFCnnDwG3vLoBZ](https://claude.ai/artifact/DatT92pPFFCnnDwG3vLoBZ) (privada) e a cópia [benchmark/temple-run/pagina-de-leitura.html](benchmark/temple-run/pagina-de-leitura.html) | Publicada |
 | Geometry Dash (2013), o casual mais próximo do nosso jogo | [benchmark/geometry-dash.md](benchmark/geometry-dash.md): a curva das 22 fases oficiais, o mundo de 10 fases curtas (Geometry Dash World), checkpoints e ranking, a comunidade e o modelo grátis + pago ([#127](https://github.com/TARNAGS/resgate-espacial/issues/127)) | Pronto (v1.0) |
 | Página de leitura do Geometry Dash | [claude.ai/artifact/Y7Y1rAykSbfkfXuaJdSXRC](https://claude.ai/artifact/Y7Y1rAykSbfkfXuaJdSXRC) (privada) e a cópia [benchmark/geometry-dash/pagina-de-leitura.html](benchmark/geometry-dash/pagina-de-leitura.html) | Publicada |
+| Super Mario World (1990), referência de como ensinar sem tutorial | [benchmark/super-mario-world.md](benchmark/super-mario-world.md): onde o jogo fala, como a Nintendo construiu, o primeiro mundo aula por aula, as camadas de erro e a ajuda depois do erro na série ([#128](https://github.com/TARNAGS/resgate-espacial/issues/128)) | Pronto (v1.0) |
+| Página de leitura do Super Mario World | [claude.ai/artifact/7LSubtYDh5iEywjTtB8hP3](https://claude.ai/artifact/7LSubtYDh5iEywjTtB8hP3) (privada) e a cópia [benchmark/super-mario-world/pagina-de-leitura.html](benchmark/super-mario-world/pagina-de-leitura.html) | Publicada |
 | Outros casuais do ICP (Subway Surfers, Candy Crush Saga, Plants vs. Zombies) | Seção 4 deste documento | A pesquisar ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)) |
 
 ## 2. O jogo original: Crazy Gravity (1996)
@@ -158,6 +160,15 @@ Do Geometry Dash ([benchmark, seção 15](benchmark/geometry-dash.md#15-o-que-le
 26. **Anúncio nunca entre mortes:** o Lite mostra anúncio a cada algumas mortes; num jogo de muitas mortes, é o pior momento.
 27. **Fases fixas vendem dificuldade:** dos casuais estudados, é o único com fases fixas, o único que separa treino de conclusão e o único pago; a vida longa veio da comunidade.
 
+Do Super Mario World e da equipe que o fez ([benchmark, seção 13](benchmark/super-mario-world.md#13-o-que-levar-para-o-resgate-espacial)):
+
+28. **A fase que ensina é feita por último:** as fases divertidas primeiro; o teste com iniciantes puxa o fácil para o começo.
+29. **Pouco texto, opcional, um passo antes da necessidade:** 19 dicas em 73 fases, 11 delas no primeiro mundo, todas atrás de um bloco que o jogador escolhe bater.
+30. **Segunda chance de viver a novidade:** o cogumelo que volta do cano, o segundo bloco do Yoshi.
+31. **Errar custa pouco, em camadas,** com um ponto de retorno por fase: repetir o fácil faz parte de ficar bom.
+32. **Ajuda só depois do erro, com hora calibrada:** a mesma equipe, vinte anos depois, testou 3, 5, 8 e 10 vidas antes de oferecer ajuda; contradiz em parte a D-031.
+33. **Demonstração modesta:** "jogue com consideração", para quem vê pensar que também consegue.
+
 ## 6. Como a busca do jogo original foi feita
 
 | Data | O que aconteceu |
@@ -220,4 +231,5 @@ A lista que levou ao reconhecimento, na ordem em que foi apresentada (da mais pr
 | 0.4 | 06/10/2026 | Benchmark do Jetpack Joyride ([benchmark/jetpack-joyride.md](benchmark/jetpack-joyride.md), [#107](https://github.com/TARNAGS/resgate-espacial/issues/107)), com a página de leitura; seção 4 com a coluna do Jetpack Joyride e a observação do Fernando; lições 12 a 16 |
 | 0.5 | 06/10/2026 | Benchmark do Temple Run ([benchmark/temple-run.md](benchmark/temple-run.md), [#108](https://github.com/TARNAGS/resgate-espacial/issues/108)), com a página de leitura; coluna do Temple Run na seção 4; lições 17 a 21 |
 | 0.6 | 06/10/2026 | O [guia dos benchmarks](benchmark/README.md), com a página de leitura, entra no topo da tabela de estudos |
+| 0.8 | 08/10/2026 | Benchmark do Super Mario World ([benchmark/super-mario-world.md](benchmark/super-mario-world.md), [#128](https://github.com/TARNAGS/resgate-espacial/issues/128)), com a página de leitura; lições 28 a 33 |
 | 0.7 | 08/10/2026 | Benchmark do Geometry Dash ([benchmark/geometry-dash.md](benchmark/geometry-dash.md), [#127](https://github.com/TARNAGS/resgate-espacial/issues/127)), com a página de leitura; coluna do Geometry Dash na seção 4; lições 22 a 27 |

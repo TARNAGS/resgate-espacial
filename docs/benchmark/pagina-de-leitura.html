@@ -80,12 +80,12 @@ footer { margin-top: 4rem; font-size: 0.85rem; color: var(--muted); border-top: 
 <header class="hero">
   <span class="eyebrow">Resgate Espacial · benchmark de level design e gameplay</span>
   <h1>Guia dos Benchmarks</h1>
-  <p class="lede">Cinco estudos de jogos, lidos juntos: o que ensinam, onde discordam, o que confirmam no nosso jogo e o que espera a sua decisão.</p>
-  <div class="facts"><span><b>5</b> estudos</span><span><b>6</b> jogos</span><span><b>13</b> insights</span><span><b>16</b> recomendações em 4 cartões</span><span>05 a 08/10/2026</span></div>
+  <p class="lede">Seis estudos de jogos, lidos juntos: o que ensinam, onde discordam, o que confirmam no nosso jogo e o que espera a sua decisão.</p>
+  <div class="facts"><span><b>6</b> estudos</span><span><b>7</b> jogos</span><span><b>14</b> insights</span><span><b>20</b> recomendações em 5 cartões</span><span>05 a 08/10/2026</span></div>
   <p class="note">Tudo o que aparece como "para nós" é <b>Proposta</b>: interpretação para o Fernando decidir. Os detalhes e as fontes estão no documento de cada jogo; este guia está em <span class="mono">docs/benchmark/README.md</span>.</p>
 </header>
 
-<h2 id="estudos">Os cinco estudos</h2>
+<h2 id="estudos">Os seis estudos</h2>
 <div class="estudos">
   <article class="estudo">
     <span class="ano">1996 · Windows 95 · shareware</span>
@@ -117,6 +117,12 @@ footer { margin-top: 4rem; font-size: 0.85rem; color: var(--muted); border-top: 
     <p>Dificuldade com fases fixas, feita por uma pessoa: a curva das 22 fases, um mundo de 10 fases curtas, o treino que não vale, os checkpoints que valem e o grátis que leva ao pago.</p>
     <div class="links"><a href="https://claude.ai/artifact/Y7Y1rAykSbfkfXuaJdSXRC">Página de leitura</a><a href="https://github.com/TARNAGS/resgate-espacial/blob/main/docs/benchmark/geometry-dash.md">Documento</a><a href="https://github.com/TARNAGS/resgate-espacial/issues/127">#127</a></div>
   </article>
+  <article class="estudo">
+    <span class="ano">1990 · Super Nintendo · referência de método</span>
+    <h3>Super Mario World</h3>
+    <p>Como um jogo ensina sem tutorial: pouco texto, opcional e no lugar; a fase que ensina feita por último; errar custa pouco; e a ajuda que a mesma equipe só oferece depois do erro.</p>
+    <div class="links"><a href="https://claude.ai/artifact/7LSubtYDh5iEywjTtB8hP3">Página de leitura</a><a href="https://github.com/TARNAGS/resgate-espacial/blob/main/docs/benchmark/super-mario-world.md">Documento</a><a href="https://github.com/TARNAGS/resgate-espacial/issues/128">#128</a></div>
+  </article>
 </div>
 
 <h2 id="familias">Duas famílias, duas perguntas</h2>
@@ -125,6 +131,7 @@ footer { margin-top: 4rem; font-size: 0.85rem; color: var(--muted); border-top: 
   <div><span class="eyebrow">Naves com gravidade · D-032</span><h3>Level design</h3><p>Crazy Gravity, GraviTron e Gravitron 2. Que obstáculos e objetos uma fase pode ter, como a dificuldade sobe de fase em fase, como uma novidade é apresentada.</p></div>
   <div><span class="eyebrow">Casuais do ICP · D-028</span><h3>Produto</h3><p>Jetpack Joyride, Temple Run e Geometry Dash, que fica entre as duas famílias: é casual de celular, mas tem fases fixas, como os de nave. Como o jogador aprende, quanto custa perder, o que faz voltar, como a pontuação e o negócio funcionam.</p></div>
 </div>
+<p class="note">O <b>Super Mario World</b> não é de nenhuma das duas famílias: é uma referência de método, pedida pelo Fernando para entender como um jogo ensina sem tutorial (D-031).</p>
 
 <h2 id="insights">O que os jogos ensinam juntos</h2>
 <div class="insights">
@@ -144,9 +151,10 @@ footer { margin-top: 4rem; font-size: 0.85rem; color: var(--muted); border-top: 
 <li><span>Gravitron 2</span><span>Fase 1 com tudo à vista. Mesmo assim, o autor acrescentou instruções na versão 1.7, e a campanha difícil, selecionada por padrão, espantou jogadores.</span></li>
 <li><span>Jetpack Joyride</span><span>Avisos antes do perigo e trilhas de moedas em seta, acrescentadas porque as pessoas morriam logo depois de entrar num veículo, quando o controle muda.</span></li>
 <li><span>Temple Run</span><span>A forma do obstáculo diz o gesto. O teste era entregar o celular sem explicar nada.</span></li>
+<li><span>Super Mario World</span><span>Sem tutorial, mas com 19 dicas opcionais, cada uma um passo antes de onde serve; 11 delas no primeiro mundo. A reedição de 2001 acrescentou dicas ao começo.</span></li>
 <li><span>Geometry Dash</span><span>Sem tutorial, mas com uma frase na tela depois de duas batidas no primeiro obstáculo das fases 1 e 3. Mesmo assim, a curva íngreme é a crítica mais comum.</span></li>
 </ul>
-<p class="para-nos"><b>Para nós</b>A DEMO e o attract mode (D-031) estão do lado certo; o risco é achar que bastam. A dica mínima, só depois do erro, é um meio-termo a testar no nível 1. Medir no próximo playtest se quem vê a DEMO entende "ir, resgatar e voltar", e garantir que o padrão de qualquer menu seja o caminho mais fácil.</p></section>
+<p class="para-nos"><b>Para nós</b>A DEMO e o attract mode (D-031) estão do lado certo; o risco é achar que bastam. A dica mínima e a ajuda calibrada, só depois do erro, são meios-termos a testar no nível 1 (insight 14). Medir no próximo playtest se quem vê a DEMO entende "ir, resgatar e voltar", e garantir que o padrão de qualquer menu seja o caminho mais fácil.</p></section>
 
 <section class="insight"><h3><span class="n">03</span>Placar: os dois casuais fizeram escolhas opostas</h3>
 <ul>
@@ -173,6 +181,7 @@ footer { margin-top: 4rem; font-size: 0.85rem; color: var(--muted); border-top: 
 <li><span>Gravitron</span><span>Bater faz quicar e perder energia: divertido, mas vira caos em corredores; o laser que mata na hora é criticado por destoar.</span></li>
 <li><span>Temple Run</span><span>Dois tipos de erro: o tropeço avisa; o segundo tropeço logo depois, ou um erro grande, encerra.</span></li>
 <li><span>Jetpack Joyride</span><span>O custo de perder em três partes: tempo perdido, custo emocional e atrito para recomeçar.</span></li>
+<li><span>Super Mario World</span><span>Erro em camadas: o poder absorve o golpe, a reserva cai sozinha, o Yoshi foge e volta, o portão do meio ainda dá um cogumelo, vidas de sobra.</span></li>
 <li><span>Geometry Dash</span><span>Erro fatal, mas barato: recomeço automático, porcentagem e "New Best!" à vista, e a moeda da loja paga pelo recorde de %, mesmo sem concluir.</span></li>
 </ul>
 <p class="para-nos"><b>Para nós</b>O atrito já é baixo: no primeiro playtest, o recomeço teve mediana de 0,9 segundo. Falta olhar o custo emocional (o que a tela de fim mostra). O "casco" ou o "tropeço" podem virar modificador ou modo mais fácil para o casual, sem mexer no modo padrão.</p></section>
@@ -191,6 +200,7 @@ footer { margin-top: 4rem; font-size: 0.85rem; color: var(--muted); border-top: 
 <li><span>Crazy Gravity</span><span>Cada fase tem um destaque que cabe numa frase (o porão, a cadeia de chaves, a fase vertical); obstáculos em série formam trechos com identidade.</span></li>
 <li><span>Gravitron 2</span><span>Fases 1 a 5, uma novidade cada: terreno aberto, poço, laser e elevador, caverna que gira, três lasers seguidos.</span></li>
 <li><span>Jetpack Joyride</span><span>Cada veículo entra com câmera lenta, tela limpa e uma trilha que ensina.</span></li>
+<li><span>Super Mario World</span><span>A fase de uma ideia em quatro tempos (apresentar, desenvolver, surpreender, concluir), como a Nintendo a descreve; uma ou duas ideias por fase no primeiro mundo, sempre com segunda chance.</span></li>
 <li><span>Geometry Dash</span><span>19 das 22 fases apresentam uma mecânica, em trecho calmo; o Geometry Dash World é um mundo de 10 fases de cerca de 30 s, uma novidade cada.</span></li>
 </ul>
 <p class="para-nos"><b>Para nós</b>No documento 08, cada fase do mundo com uma frase de destaque; a novidade primeiro numa fase curta e segura, combinada só depois.</p></section>
@@ -227,6 +237,7 @@ footer { margin-top: 4rem; font-size: 0.85rem; color: var(--muted); border-top: 
 <ul>
 <li><span>Jetpack Joyride</span><span>Diante do "chato", semanas de poderes novos (o diagnóstico errado) até achar a intensidade constante.</span></li>
 <li><span>Gravitron 2</span><span>Quase todas as atualizações deixaram o jogo mais fácil ou mais claro: o autor calibrou difícil demais para quem chegava.</span></li>
+<li><span>Super Mario 3D Land</span><span>Um testador travado recusou voar por cima do trecho: queria jogá-lo. Daí veio uma ajuda que deixa continuar jogando.</span></li>
 <li><span>Nosso projeto</span><span>A D-027 já ensinou isso: as mortes no pouso eram falta de entender o propulsor.</span></li>
 </ul>
 <p class="para-nos"><b>Para nós</b>Ao ler o próximo playtest, perguntar o que a pessoa quis dizer antes de construir a resposta.</p></section>
@@ -244,9 +255,20 @@ footer { margin-top: 4rem; font-size: 0.85rem; color: var(--muted); border-top: 
 <li><span>Geometry Dash, clássica</span><span>A conclusão que vale é sem morrer; o treino com checkpoints existe à parte, sem recompensa e com outra música.</span></li>
 <li><span>Geometry Dash, plataforma</span><span>Os checkpoints são desenhados na fase e valem; o ranking é o tempo total, com o relógio correndo nas mortes (inferido), e um botão recomeça do zero.</span></li>
 <li><span>Gravitron 2</span><span>Checkpoints acrescentados na versão 1.2.</span></li>
+<li><span>Super Mario World</span><span>Um portão do meio por fase, de propósito: repetir o fácil dá prazer e faz melhorar (Miyamoto). A Nintendo ensina a pô-lo antes do trecho que pede mais tentativas.</span></li>
 <li><span>Nosso playtest</span><span>Quem disputava tempo recomeçava logo depois da primeira morte (mediana de 0,9 s); a base e a tripulação já são pontos de retorno.</span></li>
 </ul>
 <p class="para-nos"><b>Para nós</b>A fase grande pode ter checkpoints sem mexer no ranking por tempo puro (D-024): o tempo corre direto, e quem quer o recorde recomeça do zero. Um treino com checkpoints livres, que não vale, atende quem ainda aprende.</p></section>
+
+<section class="insight"><h3><span class="n">14</span>Ajuda só depois do erro, na hora certa</h3>
+<ul>
+<li><span>Super Mario World</span><span>Nenhuma ajuda depois do erro; só dicas fixas e opcionais.</span></li>
+<li><span>NSMB Wii (2009)</span><span>O computador joga a fase depois de 8 vidas perdidas. No menu, Miyamoto recusou; depois de 3, ele mesmo se irritou.</span></li>
+<li><span>3D Land (2011)</span><span>Ajuda depois de 5 e de 10; Tezuka pediu 5 "confiando no instinto de jogador".</span></li>
+<li><span>Geometry Dash</span><span>Uma frase depois de 2 batidas.</span></li>
+<li><span>Orgulho</span><span>Medalhas para quem termina sem ver a ajuda; a demonstração gravada sem truques, para quem vê pensar que também consegue.</span></li>
+</ul>
+<p class="para-nos"><b>Para nós</b>A D-031 ("sem oferta de ajuda") está com o Super Mario World, mas a mesma equipe mudou de ideia com números testados. Testar uma oferta opcional depois de N mortes no mesmo ponto e uma DEMO mais modesta. Com uma física menos intuitiva que o pulo do Mario, talvez precisemos de mais ajuda, não de menos.</p></section>
 </div>
 
 <h2 id="divergencias">Onde os estudos discordam</h2>
@@ -259,8 +281,8 @@ footer { margin-top: 4rem; font-size: 0.85rem; color: var(--muted); border-top: 
 <tr><td>Tamanho da fase</td><td>Longas, com chaves (Crazy Gravity); enormes no fim (Gravitron)</td><td>30 segundos a minutos (Jetpack Joyride, Temple Run)</td><td>Partidas curtas (D-028): as ideias, não a escala</td></tr>
 <tr><td>Fases</td><td>Desenhadas e fixas (Crazy Gravity, Gravitron)</td><td>Geradas na hora (Jetpack Joyride, Temple Run)</td><td>Fixas (D-021); BONUS com intervalos entre mínimo e máximo (Proposta)</td></tr>
 <tr><td>Cobrança</td><td>Pago com demo (Crazy Gravity, Gravitron 2); pago + Lite grátis com anúncios (Geometry Dash)</td><td>Grátis com compras (Jetpack Joyride, Temple Run)</td><td>Anúncios decididos (documento 13); cobrar ou não em aberto (P-014, #98)</td></tr>
-<tr><td>Checkpoints</td><td>Nenhum na corrida que vale; treino à parte (Geometry Dash, clássica)</td><td>Fixos e valendo, com o tempo correndo (Geometry Dash, plataforma; Gravitron 2)</td><td>Pontos de retorno na base e na tripulação; fase grande em aberto</td></tr>
-<tr><td>Ajuda depois do erro</td><td>Nenhuma (D-031)</td><td>Uma frase depois de duas batidas (Geometry Dash)</td><td>Sem oferta de ajuda (D-031); dica mínima é Proposta da #127</td></tr>
+<tr><td>Checkpoints</td><td>Nenhum na corrida que vale; treino à parte (Geometry Dash, clássica); um só por fase (Super Mario World)</td><td>Fixos e valendo, com o tempo correndo (Geometry Dash, plataforma; Gravitron 2)</td><td>Pontos de retorno na base e na tripulação; fase grande em aberto</td></tr>
+<tr><td>Ajuda depois do erro</td><td>Nenhuma (D-031; Super Mario World)</td><td>Uma frase depois de duas batidas (Geometry Dash); o Super Guide depois de 8 vidas (NSMB Wii)</td><td>Sem oferta de ajuda (D-031); oferecer depois do erro é Proposta da #127 e da #128</td></tr>
 </tbody></table></div>
 
 <h2 id="validacoes">O que os estudos confirmam</h2>
@@ -272,7 +294,7 @@ footer { margin-top: 4rem; font-size: 0.85rem; color: var(--muted); border-top: 
 <tr><td>Fases fixas e ranking por fase (D-021, D-024)</td><td>Crazy Gravity, Gravitron, Jetpack Joyride, Geometry Dash</td></tr>
 <tr><td>Mundos de 10 fases, uma novidade cada (D-020)</td><td>Geometry Dash World: 10 fases de cerca de 30 s, em 2 mundos de 5</td></tr>
 <tr><td>Aparência separada do ranking (D-034, D-035)</td><td>Geometry Dash: ícones só cosméticos, ganhos jogando</td></tr>
-<tr><td>DEMO no lugar de tutorial (D-031)</td><td>Crazy Gravity, Gravitron 2, Temple Run, Geometry Dash; com os alertas das instruções acrescentadas no Gravitron 2 e da dica mínima do Geometry Dash</td></tr>
+<tr><td>DEMO no lugar de tutorial (D-031)</td><td>Crazy Gravity, Gravitron 2, Temple Run, Geometry Dash, Super Mario World; com os alertas das instruções acrescentadas no Gravitron 2 e da dica mínima do Geometry Dash</td></tr>
 <tr><td>Partidas curtas (D-028)</td><td>Jetpack Joyride, Gravitron, Temple Run</td></tr>
 <tr><td>Sem anúncios (D-003), revista em 07/10: anúncios entram, sem ser tóxicos</td><td>Jetpack Joyride (a maior reclamação hoje) e Geometry Dash (anúncio entre mortes no Lite) mostram onde o anúncio incomoda</td></tr>
 <tr><td>Conteúdo como dado (D-011)</td><td>Temple Run 2, Jetpack Joyride</td></tr>
@@ -282,7 +304,7 @@ footer { margin-top: 4rem; font-size: 0.85rem; color: var(--muted); border-top: 
 </tbody></table></div>
 
 <h2 id="decisoes">O que espera a sua decisão</h2>
-<p>Os cartões <a href="https://github.com/TARNAGS/resgate-espacial/issues/106">#106</a>, <a href="https://github.com/TARNAGS/resgate-espacial/issues/107">#107</a> , <a href="https://github.com/TARNAGS/resgate-espacial/issues/108">#108</a> e <a href="https://github.com/TARNAGS/resgate-espacial/issues/127">#127</a> estão em "Para conversar", com quatro recomendações cada.</p>
+<p>Os cartões <a href="https://github.com/TARNAGS/resgate-espacial/issues/106">#106</a>, <a href="https://github.com/TARNAGS/resgate-espacial/issues/107">#107</a> , <a href="https://github.com/TARNAGS/resgate-espacial/issues/108">#108</a>, <a href="https://github.com/TARNAGS/resgate-espacial/issues/127">#127</a> e <a href="https://github.com/TARNAGS/resgate-espacial/issues/128">#128</a> estão em "Para conversar", com quatro recomendações cada.</p>
 <div class="tabela"><table>
 <thead><tr><th>Cartão</th><th>Recomendação</th><th>Ligado a</th></tr></thead>
 <tbody>
@@ -302,6 +324,10 @@ footer { margin-top: 4rem; font-size: 0.85rem; color: var(--muted); border-top: 
 <tr><td></td><td>Treino com checkpoints livres que não vale, e o progresso parcial à vista</td><td>D-031; P-009; doc. 09</td></tr>
 <tr><td></td><td>Anúncio nunca entre mortes, só em pausas naturais ou por escolha</td><td>Doc. 13, 5.2; P-014</td></tr>
 <tr><td></td><td>Uma fase da semana, igual para todos, como motor da North Star</td><td>Doc. 13, 3.4; P-019</td></tr>
+<tr><td>#128 Super Mario World</td><td>Ajuda opcional só depois de N mortes no mesmo ponto, com N medido no playtest</td><td>D-031; P-009; #127</td></tr>
+<tr><td></td><td>No nível 1, dicas presas ao lugar e um começo em que se vive o propulsor de qualquer jeito</td><td>D-031; D-027; #97</td></tr>
+<tr><td></td><td>DEMO mais modesta, no ritmo de um jogador comum</td><td>D-031; #104; #92</td></tr>
+<tr><td></td><td>Refazer o nível 1 por último e testar com quem nunca jogou, em silêncio</td><td>Mundo 1; doc. 07; #44</td></tr>
 <tr><td>Crazy Gravity</td><td>Serrote em cada mundo, uma ideia por fase, forças em vez de inimigos, ensinar pela estrutura</td><td>Doc. 10, lições 1 a 6</td></tr>
 </tbody></table></div>
 <h3>Se for decidir só três agora</h3>
@@ -310,6 +336,7 @@ footer { margin-top: 4rem; font-size: 0.85rem; color: var(--muted); border-top: 
 <li><b>Tripulantes que andam até a nave</b> (#106). Pequeno, deixa claro o objetivo e pode virar o momento marcante do jogo.</li>
 <li><b>Registrar o ranking como tempo puro</b> (#107 e #108). Fecha parte da P-006 com dois exemplos opostos.</li>
 </ol>
+<p><b>Da #128, a primeira:</b> testar no próximo playtest uma ajuda opcional depois de N mortes no mesmo ponto: toca a D-031 e o jogador travado no nível 1.</p>
 <p><b>Da #127, a primeira:</b> o modelo de checkpoints da fase grande, porque o protótipo de fase grande é o próximo teste definido na revisão do Lean Canvas, e ele mantém o ranking por tempo puro.</p>
 <p class="note">Recomendação do Claude. A decisão é sua.</p>
 
@@ -321,6 +348,7 @@ footer { margin-top: 4rem; font-size: 0.85rem; color: var(--muted); border-top: 
 <tr><td>Gravitron</td><td>Regras do Gravitron 2, lidas no código publicado pelo autor</td><td>Só 8 das mais de 40 fases da campanha principal; no GraviTron, código perdido: ordem das fases e alguns objetos deduzidos</td></tr>
 <tr><td>Jetpack Joyride</td><td>Falas do criador (vídeo de 2023, slides da GDC 2012)</td><td>Transcrição da GDC não carregou; números da wiki são da versão atual</td></tr>
 <tr><td>Temple Run</td><td>Falas dos criadores (GDC 2014, Vice 2021, TechCrunch 2012)</td><td>Transcrição da Shacknews falhou; GameSpot, Wired, Polygon e VentureBeat bloqueadas ou fora do ar; público feminino só pelo título de uma matéria da The Verge</td></tr>
+<tr><td>Super Mario World</td><td>A equipe contando como fez (sete Iwata Asks lidas inteiras); os 31 textos do jogo pela wiki</td><td>A transcrição da Eurogamer não carregou; quase tudo o que os criadores dizem sobre ensinar fala de outros Mario; os quatro tempos no Super Mario World são leitura nossa</td></tr>
 <tr><td>Geometry Dash</td><td>As 22 fases oficiais e o World, pela wiki; falas do criador (Cult of Mac, Game Developer, 231 respostas em AMAs)</td><td>Relógio das fases de plataforma inferido; momento dos anúncios do Lite por resenhas que não batem; lucro pela imprensa sueca; idade do público por sinais indiretos</td></tr>
 </tbody></table></div>
 <p>Em todos: nenhum programa de jogo foi executado, os arquivos de jogo foram baixados só com a sua permissão (no Geometry Dash, nenhum), e as imagens são redesenhos com crédito.</p>
@@ -337,10 +365,11 @@ footer { margin-top: 4rem; font-size: 0.85rem; color: var(--muted); border-top: 
 <li><span>06/10/2026</span><span>Este guia.</span></li>
 <li><span>07/10/2026</span><span>Na revisão do Lean Canvas, o Geometry Dash entra na lista (#127).</span></li>
 <li><span>08/10/2026</span><span>Estudo do Geometry Dash (#127) e o insight 13, sobre checkpoints e ranking.</span></li>
+<li><span>08/10/2026</span><span>Estudo do Super Mario World (#128), a pedido do Fernando, e o insight 14, sobre ajuda depois do erro.</span></li>
 </ul>
 
 <h2 id="como">Como pedir o próximo estudo</h2>
-<p>Peça "estude o &lt;jogo&gt;" ou digite <span class="mono">/discovery-de-jogos</span>. A skill tem três tamanhos: completo (como estes cinco), comparativo (vários jogos lado a lado) e consulta rápida, usada antes de construir qualquer mecânica, fase ou obstáculo (D-033). Inspirar, nunca copiar.</p>
+<p>Peça "estude o &lt;jogo&gt;" ou digite <span class="mono">/discovery-de-jogos</span>. A skill tem três tamanhos: completo (como estes seis), comparativo (vários jogos lado a lado) e consulta rápida, usada antes de construir qualquer mecânica, fase ou obstáculo (D-033). Inspirar, nunca copiar.</p>
 
-<footer>Resgate Espacial (codinome) · guia dos benchmarks, versão 1.1, 08/10/2026 · fonte: <span class="mono">docs/benchmark/README.md</span> no repositório TARNAGS/resgate-espacial · os jogos citados pertencem aos seus autores; este material serve para estudar ideias, sem copiar (D-005).</footer>
+<footer>Resgate Espacial (codinome) · guia dos benchmarks, versão 1.2, 08/10/2026 · fonte: <span class="mono">docs/benchmark/README.md</span> no repositório TARNAGS/resgate-espacial · os jogos citados pertencem aos seus autores; este material serve para estudar ideias, sem copiar (D-005).</footer>
 </main>

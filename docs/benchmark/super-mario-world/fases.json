@@ -1,0 +1,346 @@
+{
+ "jogo": "Super Mario World",
+ "consulta": "08/10/2026",
+ "versaoEstudada": "Super Famicom / Super Nintendo (1990-1992); a reedição de Game Boy Advance (2001) aparece só onde mudou o ensino",
+ "ficha": {
+  "lancamento": "Japão 21/11/1990 (junto com o Super Famicom); América do Norte 08/1991; Europa 04/1992",
+  "equipe": "Direção de Takashi Tezuka; produção de Shigeru Miyamoto; mapa de Hideki Konno; direção de fases de Katsuya Eguchi; arte de Shigefumi Hino; música de Koji Kondo. Cerca de 16 pessoas e uns 3 anos (Miyamoto, Mario Mania, 1991, pela Super Mario Wiki)",
+  "tamanho": "9 mundos, 73 fases, 24 delas com saída secreta: 96 saídas contadas pelo jogo",
+  "vendas": "Cerca de 20 milhões de cópias, o mais vendido do Super Nintendo (vinha junto com o console)",
+  "recepcao": "Média de 94,44% no GameRankings; o Mario favorito de Miyamoto (Engadget, 2010)"
+ },
+ "fonte": "Super Mario Wiki (mariowiki.com), páginas \"Tourist Tips\", \"Message Block\", \"Super Mario World\", \"Yoshi's House\", \"Yoshi's Island 1\" a \"4\", \"#1 Iggy's Castle\", \"Yellow Switch Palace\", \"Midway Gate\", \"Switch Palace\", \"Donut Plains 1\" e \"Special Zone\"; resumos em português do Claude",
+ "dicas": [
+  {
+   "fase": "Intro",
+   "mundo": 1,
+   "contexto": "",
+   "tipo": "historia",
+   "resumo": "Abertura: uma tela diz que a princesa sumiu e que Bowser está de volta"
+  },
+  {
+   "fase": "Yoshi's House",
+   "mundo": 1,
+   "contexto": "Default",
+   "tipo": "historia",
+   "resumo": "Bilhete do Yoshi: saiu para salvar os amigos"
+  },
+  {
+   "fase": "Yoshi's House",
+   "mundo": 1,
+   "contexto": "Before defeating Bowser with Yoshi",
+   "tipo": "jogo",
+   "resumo": "Montado no Yoshi: os blocos pontilhados se enchem; os amarelos, indo a oeste e ao norte até o topo da montanha"
+  },
+  {
+   "fase": "Yoshi's Island 1",
+   "mundo": 1,
+   "contexto": "Aboveground",
+   "tipo": "jogo",
+   "resumo": "A caixa no alto da tela guarda um item extra; SELECT o solta"
+  },
+  {
+   "fase": "Yoshi's Island 1",
+   "mundo": 1,
+   "contexto": "Second aboveground",
+   "tipo": "jogo",
+   "resumo": "Como pegar um casco e jogá-lo para cima (logo antes de um casco e de um bloco que só se quebra assim)"
+  },
+  {
+   "fase": "Yoshi's Island 2",
+   "mundo": 1,
+   "contexto": "After rescuing Yoshi",
+   "tipo": "historia",
+   "resumo": "O Yoshi se apresenta e agradece"
+  },
+  {
+   "fase": "Yoshi's Island 2",
+   "mundo": 1,
+   "contexto": "To the immediate right of where Yoshi is found",
+   "tipo": "jogo",
+   "resumo": "Como fazer o pulo giratório, que quebra blocos e vence inimigos mais duros"
+  },
+  {
+   "fase": "Yoshi's Island 2",
+   "mundo": 1,
+   "contexto": "Right before the midpoint gate",
+   "tipo": "jogo",
+   "resumo": "Este portão marca o meio da fase: rompendo a fita, recomeça daqui"
+  },
+  {
+   "fase": "Yoshi's Island 3",
+   "mundo": 1,
+   "contexto": "At the beginning of the level",
+   "tipo": "jogo",
+   "resumo": "As moedas grandes são Dragon Coins: cinco numa fase dão uma vida"
+  },
+  {
+   "fase": "Yoshi's Island 3",
+   "mundo": 1,
+   "contexto": "At the midpoint gate",
+   "tipo": "jogo",
+   "resumo": "Segurar o pulo ao pisar num inimigo dá um pulo mais alto; na água rasa, para cima"
+  },
+  {
+   "fase": "Yoshi's Island 4",
+   "mundo": 1,
+   "contexto": "In the Pokey area",
+   "tipo": "jogo",
+   "resumo": "Numa fase já concluída, START e SELECT voltam ao mapa"
+  },
+  {
+   "fase": "Yoshi's Island 4",
+   "mundo": 1,
+   "contexto": "At the end of the level",
+   "tipo": "jogo",
+   "resumo": "A fita do fim dá estrelas; 100 estrelas abrem um jogo de bônus"
+  },
+  {
+   "fase": "#1 Iggy's Castle",
+   "mundo": 1,
+   "contexto": "At the beginning",
+   "tipo": "jogo",
+   "resumo": "Para cima durante o pulo agarra a grade; para cima também abre a porta do fim"
+  },
+  {
+   "fase": "#1 Iggy's Castle",
+   "mundo": 1,
+   "contexto": "At the end of the first section",
+   "tipo": "jogo",
+   "resumo": "Dica do chefe: empurre o Iggy para a lava"
+  },
+  {
+   "fase": "#1 Iggy's Castle",
+   "mundo": 1,
+   "contexto": "After defeating Iggy, first time",
+   "tipo": "historia",
+   "resumo": "Fim do castelo: o amigo do Yoshi foi salvo; segue para Donut Plains"
+  },
+  {
+   "fase": "Donut Plains 1",
+   "mundo": 2,
+   "contexto": "In the 500-coin (600-coin in the GBA version) area",
+   "tipo": "jogo",
+   "resumo": "Como voar com a capa (numa sala cheia de moedas, feita para treinar o voo)"
+  },
+  {
+   "fase": "Donut Plains 1",
+   "mundo": 2,
+   "contexto": "At the end of the course",
+   "tipo": "jogo",
+   "resumo": "As fases com ponto vermelho no mapa têm duas saídas; procure-as"
+  },
+  {
+   "fase": "Donut Ghost House",
+   "mundo": 2,
+   "contexto": "At the very beginning",
+   "tipo": "jogo",
+   "resumo": "Esta é uma casa assombrada: consegue achar a saída?"
+  },
+  {
+   "fase": "Donut Plains 3",
+   "mundo": 2,
+   "contexto": "Before the first moving platform",
+   "tipo": "jogo",
+   "resumo": "L e R deslizam a tela para ver mais à frente"
+  },
+  {
+   "fase": "Donut Secret House",
+   "mundo": 2,
+   "contexto": "After the secret exits, before the fake exit",
+   "tipo": "jogo",
+   "resumo": "Existem cinco entradas para o Star World; ache todas"
+  },
+  {
+   "fase": "#2 Morton's Castle",
+   "mundo": 2,
+   "contexto": "After defeating Morton, first time",
+   "tipo": "historia",
+   "resumo": "Fim do castelo 2; segue para Vanilla Dome"
+  },
+  {
+   "fase": "#3 Lemmy's Castle",
+   "mundo": 3,
+   "contexto": "After defeating Lemmy, first time",
+   "tipo": "historia",
+   "resumo": "Fim do castelo 3; a aventura fica mais difícil (e pergunta pelos palácios dos botões)"
+  },
+  {
+   "fase": "#4 Ludwig's Castle",
+   "mundo": 4,
+   "contexto": "After defeating Ludwig, first time",
+   "tipo": "historia",
+   "resumo": "Fim do castelo 4; segue para a Forest of Illusion"
+  },
+  {
+   "fase": "#5 Roy's Castle",
+   "mundo": 5,
+   "contexto": "After defeating Roy, first time",
+   "tipo": "historia",
+   "resumo": "Fim do castelo 5; segue para Chocolate Island"
+  },
+  {
+   "fase": "Chocolate Island 2",
+   "mundo": 6,
+   "contexto": "At the beginning of the level",
+   "tipo": "jogo",
+   "resumo": "Aqui, as moedas pegas ou o tempo restante mudam o caminho: ache a saída especial"
+  },
+  {
+   "fase": "#6 Wendy's Castle",
+   "mundo": 6,
+   "contexto": "After defeating Wendy, first time",
+   "tipo": "historia",
+   "resumo": "Fim do castelo 6; um navio afundado espera"
+  },
+  {
+   "fase": "#7 Larry's Castle",
+   "mundo": 7,
+   "contexto": "After defeating Larry, first time",
+   "tipo": "historia",
+   "resumo": "Fim do castelo 7; só falta o castelo do Bowser"
+  },
+  {
+   "fase": "Front Door, Back Door, Ending",
+   "mundo": 7,
+   "contexto": "After defeating Bowser, first time",
+   "tipo": "historia",
+   "resumo": "Fim da aventura: todos saem de férias"
+  },
+  {
+   "fase": "Credits",
+   "mundo": 7,
+   "contexto": "",
+   "tipo": "historia",
+   "resumo": "Créditos"
+  },
+  {
+   "fase": "Gnarly",
+   "mundo": 9,
+   "contexto": "Prior to clearing the Special Zone",
+   "tipo": "jogo",
+   "resumo": "Poucos chegaram até aqui; complete a Special Zone e explore um mundo novo"
+  },
+  {
+   "fase": "All Switch Palaces",
+   "mundo": null,
+   "contexto": "Once the switch is pressed",
+   "tipo": "jogo",
+   "resumo": "O botão transforma os blocos pontilhados em blocos; o progresso foi salvo"
+  }
+ ],
+ "primeiroMundo": [
+  {
+   "ordem": 0,
+   "fase": "Yoshi's House",
+   "obrigatoria": false,
+   "apresenta": "Ponto de partida no mapa; um bilhete do Yoshi",
+   "comoEnsina": "A primeira tela já é o mapa com dois caminhos abertos; a casa é opcional",
+   "dicas": 1,
+   "redeDeSeguranca": "Montado no Yoshi, o bilhete vira uma pista de onde fica o primeiro palácio"
+  },
+  {
+   "ordem": 1,
+   "fase": "Yoshi's Island 1",
+   "obrigatoria": false,
+   "apresenta": "Rex, a caixa de item extra, carregar e jogar casco",
+   "comoEnsina": "Cada dica fica logo antes do lugar onde ela serve; o casco aparece em seguida, perto de um bloco que só se quebra jogando o casco para cima",
+   "dicas": 2,
+   "redeDeSeguranca": "Cogumelo num bloco voador e outro que salta de um arbusto quando Mario passa"
+  },
+  {
+   "ordem": 2,
+   "fase": "Yellow Switch Palace",
+   "obrigatoria": false,
+   "apresenta": "O P Switch e os blocos pontilhados",
+   "comoEnsina": "Uma sala aberta, sem inimigos, com um P Switch que faz aparecer 470 moedas por uns 12 segundos: lugar para brincar sem risco",
+   "dicas": 1,
+   "redeDeSeguranca": "Apertar o botão enche blocos amarelos em 21 fases, muitos com cogumelo: uma ajuda que o jogador conquista"
+  },
+  {
+   "ordem": 3,
+   "fase": "Yoshi's Island 2",
+   "obrigatoria": true,
+   "apresenta": "Yoshi, Monty Moles, pés de feijão, pulo giratório, meio da fase",
+   "comoEnsina": "Yoshi sai de um bloco; a dica do pulo giratório fica bem ao lado; outra dica antes do primeiro portão do meio",
+   "dicas": 2,
+   "redeDeSeguranca": "Um segundo bloco mais à frente dá outra chance de pegar o Yoshi (ou uma vida, se já estiver com ele)"
+  },
+  {
+   "ordem": 4,
+   "fase": "Yoshi's Island 3",
+   "obrigatoria": true,
+   "apresenta": "Plataformas que balançam e se movem, Dragon Coins, pulo alto",
+   "comoEnsina": "A dica das Dragon Coins abre a fase; a do pulo alto fica no portão do meio, onde a fase sobe de nível",
+   "dicas": 2,
+   "redeDeSeguranca": "Um bloco de bônus dá uma vida a quem juntar 30 moedas"
+  },
+  {
+   "ordem": 5,
+   "fase": "Yoshi's Island 4",
+   "obrigatoria": true,
+   "apresenta": "Água, Cheep Cheeps, Pokeys, ilhas que afundam",
+   "comoEnsina": "Plataformas que afundam obrigam a continuar andando; cair na água não mata, só leva para trás",
+   "dicas": 2,
+   "redeDeSeguranca": "Fire Flower logo no começo; cogumelo amarelo se o palácio foi visitado"
+  },
+  {
+   "ordem": 6,
+   "fase": "#1 Iggy's Castle",
+   "obrigatoria": true,
+   "apresenta": "Grades para escalar, lava, o primeiro chefe",
+   "comoEnsina": "A dica da grade fica na entrada; a dica do chefe, na porta dele",
+   "dicas": 2,
+   "redeDeSeguranca": "Fire Flower num bloco no meio da sala da grade"
+  }
+ ],
+ "depoisDoPrimeiroMundo": {
+  "fase": "Donut Plains 1",
+  "apresenta": "A capa e a primeira fase com duas saídas",
+  "comoEnsina": "Inimigos com capa entregam o poder; uma sala com 500 moedas serve para treinar o voo; no fim, uma dica avisa que fases com ponto vermelho no mapa têm duas saídas"
+ },
+ "ajudaDepoisDoErro": [
+  {
+   "jogo": "Super Mario Bros. 3",
+   "ano": 1988,
+   "ajuda": "Item P-Wing, que deixa voar a fase inteira",
+   "quando": "Quando o jogador quiser usar (ganho no jogo)",
+   "fonte": "Iwata Asks, New Super Mario Bros. Wii"
+  },
+  {
+   "jogo": "Super Mario World",
+   "ano": 1990,
+   "ajuda": "Nenhuma ajuda depois do erro; só dicas fixas e opcionais nos blocos de mensagem",
+   "quando": "—",
+   "fonte": "Super Mario Wiki"
+  },
+  {
+   "jogo": "New Super Mario Bros. Wii",
+   "ano": 2009,
+   "ajuda": "Bloco que oferece o Super Guide: Luigi joga a fase, e o jogador pode assumir depois do trecho difícil ou pular a fase",
+   "quando": "Depois de perder 8 vidas na mesma fase (testaram no menu, 3, 5 e 10)",
+   "fonte": "Iwata Asks, New Super Mario Bros. Wii"
+  },
+  {
+   "jogo": "Super Mario 3D Land",
+   "ano": 2011,
+   "ajuda": "Folha de invencibilidade (continua jogando o trecho) e, depois, P-Wing (pula para perto do fim)",
+   "quando": "Depois de 5 e de 10 vidas perdidas (planejado 8 e 16)",
+   "fonte": "Iwata Asks, Super Mario 3D Land"
+  },
+  {
+   "jogo": "Geometry Dash",
+   "ano": 2013,
+   "ajuda": "Uma frase na tela",
+   "quando": "Depois de 2 batidas no primeiro obstáculo das fases 1 e 3",
+   "fonte": "Geometry Dash Wiki"
+  },
+  {
+   "jogo": "Resgate Espacial",
+   "ano": 2026,
+   "ajuda": "Nenhuma oferta de ajuda depois de fins de jogo seguidos",
+   "quando": "D-031",
+   "fonte": "Registro de decisões"
+  }
+ ]
+}
