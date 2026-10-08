@@ -6,8 +6,9 @@ import { OBSTACLES } from '../../src/content/obstacles/index.js';
 import { rock } from '../../src/content/obstacles/rock.js';
 import { createShip, shipVerts, shipSamples } from '../../src/core/ship.js';
 import { createFakeCanvas } from '../tela-de-mentira.js';
+import { SKINS, resolveSkin } from '../../src/render/skins/index.js';
 
-const FUNCTIONS = ['generate', 'bounds', 'hits', 'validate', 'blockedAt', 'draw'];
+const FUNCTIONS = ['generate', 'bounds', 'hits', 'validate', 'blockedAt'];   // o desenho fica nas skins (#124)
 const SEEDS = [1, 2, 3, 4, 5, 6, 7, 8];
 const BASE = { ...LEVELS[1], generator: { ...LEVELS[1].generator, obstacles: [] } };   // o relevo do nível 2, sem pedras
 const THEME = LEVELS[0].world.theme;
@@ -30,7 +31,7 @@ function instances(kind, seed) {
 // X de tudo o que o desenho do obstáculo pôs na tela de mentira
 function drawnXs(kind, o) {
   const { ctx, calls } = createFakeCanvas();
-  kind.draw(ctx, o, THEME, 0);
+  for (const key of Object.keys(SKINS)) { const skin = resolveSkin(key); skin.obstacles[kind.type](ctx, o, skin.theme(THEME), 0); }   // todas as skins (#124)
   const xs = [];
   for (const [name, args] of calls) {
     if (['moveTo', 'lineTo', 'fillRect', 'strokeRect', 'rect'].includes(name)) xs.push(args[0]);

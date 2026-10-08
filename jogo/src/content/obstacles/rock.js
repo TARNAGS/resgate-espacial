@@ -61,15 +61,4 @@ export const rock = {
     const gap = Math.max(o.y - o.r - ceilY, floorY - (o.y + o.r));
     return gap >= o.passGap ? null : `rock at x=${o.x.toFixed(0)} leaves only ${gap.toFixed(0)}`;
   },
-
-  draw(ctx, o, theme) {
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    o.pts.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)));
-    ctx.closePath();
-    ctx.fillStyle = theme.rockFill;
-    ctx.fill();
-    ctx.strokeStyle = theme.rock;
-    ctx.stroke();
-  },
 };

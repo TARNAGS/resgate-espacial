@@ -4,16 +4,17 @@
 
 import { test, assert, LEVELS, CHALLENGES, TRAINING_LEVEL } from '../lib.js';
 import { SITUATIONS, drawFrozen, playFrames } from '../quadros.js';
+import { SKINS } from '../../src/render/skins/index.js';
 
-test('#113 o desenho só lê: em todas as fases e situações, desenhar não muda o estado da partida', () => {
-  for (const def of [...LEVELS, ...CHALLENGES, TRAINING_LEVEL]) {
+test('#113 o desenho só lê: em todas as fases, situações e skins (#124), desenhar não muda o estado da partida', () => {
+  for (const def of [...LEVELS, ...CHALLENGES, TRAINING_LEVEL]) for (const skin of Object.keys(SKINS)) {
     for (const [name, prepare] of Object.entries(SITUATIONS)) {
       for (const device of [{ isTouch: true, scheme: 'twin' }, { isTouch: true, scheme: 'hold' }, { isTouch: false }]) {
         let calls;
         try {
-          calls = drawFrozen(def, prepare, playFrames, device);
+          calls = drawFrozen(def, prepare, playFrames, { ...device, skin });
         } catch (e) {
-          assert.fail(`${def.key} · ${name}${device.isTouch ? ` · toque ${device.scheme}` : ' · teclado'}: o desenho tentou mudar o estado (${e.message})`);
+          assert.fail(`${def.key} · ${skin} · ${name}${device.isTouch ? ` · toque ${device.scheme}` : ' · teclado'}: o desenho tentou mudar o estado (${e.message})`);
         }
         assert.ok(calls.length > 200, `${def.key} · ${name}: a tela de mentira quase não recebeu desenho (${calls.length} comandos)`);
       }

@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 12 — Arquitetura do jogo e mapa de impacto |
-| Versão | 0.6 |
+| Versão | 0.7 |
 | Data | 08/10/2026 |
 | Status | Em revisão (o Fernando aprova) |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -54,6 +54,7 @@ Regras, conteúdo e números também rodam no Node, nos testes e no piloto autom
 | `hud.js` | Painel: fase, combustível e avisos, vidas, tripulação, cronômetro, rodapé e a seta do objetivo |
 | `messages.js` | Mensagens no alto, elogios e NO FUEL |
 | `controls.js` | Direcional, botão do propulsor, botões redondos e o selo da DEMO |
+| `skins/` | As skins ([#124](https://github.com/TARNAGS/resgate-espacial/issues/124)): como desenhar a nave, a chama, cada obstáculo e as cores do mundo. A `classic` é o visual de sempre; a `hitbox` mostra as formas que batem |
 | `style.js` | A fonte comum |
 | `intro.js` e `intro-art.js` | A abertura: o controle das telas e da música, e os desenhos de cada tela |
 
@@ -62,7 +63,7 @@ A tabela é conferida por um teste ([#112](https://github.com/TARNAGS/resgate-es
 **Como as camadas conversam:**
 - **Eventos:** a partida avisa o que aconteceu (pousou, explodiu, abasteceu, concluiu), e quem precisa reage (som, mensagens, elogios, telemetria). As regras não chamam o som; o som escuta as regras. A lista dos eventos é um contrato (tabela abaixo).
 - **Contratos:** cada peça de conteúdo segue um formato conferido por teste.
-  - **Obstáculo** ([#119](https://github.com/TARNAGS/resgate-espacial/issues/119)): responde às mesmas perguntas (`generate`, `bounds`, `hits`, `validate`, `blockedAt`, `draw`, mais um `example`; lista em `content/obstacles/index.js`). A colisão, o gerador e o piloto automático só falam com o contrato e não sabem o que é uma pedra.
+  - **Obstáculo** ([#119](https://github.com/TARNAGS/resgate-espacial/issues/119)): responde às mesmas perguntas (`generate`, `bounds`, `hits`, `validate`, `blockedAt`, mais um `example`; lista em `content/obstacles/index.js`). O desenho saiu do obstáculo e foi para as skins ([#124](https://github.com/TARNAGS/resgate-espacial/issues/124)). A colisão, o gerador e o piloto automático só falam com o contrato e não sabem o que é uma pedra.
   - **Fase e mundo** ([#117](https://github.com/TARNAGS/resgate-espacial/issues/117)): os campos explicados em `content/worlds.js`, um arquivo por mundo em `content/worlds/` ([#118](https://github.com/TARNAGS/resgate-espacial/issues/118)).
   - **Parâmetros** ([#120](https://github.com/TARNAGS/resgate-espacial/issues/120)): cada número diz se muda o **jogo**, só um **aviso** ou só a **imagem** (`PARAM_KIND` em `config/params.js`).
 - **Estado:** a física atualiza a nave (`x`, `y`, `a`, `fuel`, `thrusting`...), e o desenho só lê. A chama do propulsor depende só de `thrusting`.
@@ -97,7 +98,7 @@ A tabela é conferida por um teste ([#112](https://github.com/TARNAGS/resgate-es
 
 | Tipo | Exemplos | Pode | Quem garante | Hoje |
 |---|---|---|---|---|
-| **Aparência** | Cores dos mundos, skins da nave, do propulsor e dos obstáculos, formatos de nave de aparência (D-034), evoluções só visuais (D-035) | Mudar à vontade, sem nunca alterar uma regra | O desenho só lê ([#113](https://github.com/TARNAGS/resgate-espacial/issues/113)). A skin não define o casco ([#124](https://github.com/TARNAGS/resgate-espacial/issues/124)) | Ainda não há camada de skins: o desenho de cada obstáculo mora com as regras dele, e o formato da nave está em dois lugares ([#121](https://github.com/TARNAGS/resgate-espacial/issues/121)) |
+| **Aparência** | Cores dos mundos, skins da nave, do propulsor e dos obstáculos, formatos de nave de aparência (D-034), evoluções só visuais (D-035) | Mudar à vontade, sem nunca alterar uma regra | O desenho só lê ([#113](https://github.com/TARNAGS/resgate-espacial/issues/113)). A skin não define o casco ([#124](https://github.com/TARNAGS/resgate-espacial/issues/124)) | Desde a [#124](https://github.com/TARNAGS/resgate-espacial/issues/124), a aparência é uma skin (`render/skins/`): trocar de skin não muda o que bate nem o ranking, e a nave que a skin desenha fica a até 3 unidades do casco |
 | **Conteúdo** | Mundos, fases, obstáculos, naves que mudam o jogo, evoluções de atributos | Entrar sem mexer no motor, seguindo o contrato | Contratos conferidos por teste ([#116](https://github.com/TARNAGS/resgate-espacial/issues/116) a [#120](https://github.com/TARNAGS/resgate-espacial/issues/120), [#122](https://github.com/TARNAGS/resgate-espacial/issues/122)) | Fase e mundo, evento, obstáculo e parâmetros têm contrato conferido desde 07/10/2026. Falta o da nave ([#121](https://github.com/TARNAGS/resgate-espacial/issues/121), [#122](https://github.com/TARNAGS/resgate-espacial/issues/122)) |
 | **Regra** | Física, colisão, pouso, combustível, cronômetro, vidas | Mudar pouco e de propósito | Fichas de ouro ([#114](https://github.com/TARNAGS/resgate-espacial/issues/114)) e testes das regras do documento 02 | As fichas existem desde 07/10/2026 |
 
@@ -136,12 +137,14 @@ As chaves de antes não mudaram.
 | Formato ou tamanho da nave | `content/ships/` (a nave clássica, em `classic.js`): casco, pés, bocal, porta e contorno desenhado | Colisão, pouso, previsão de pouso, piloto automático, elogios, desenho da nave, da chama e da tripulação: todos leem a mesma definição desde a [#121](https://github.com/TARNAGS/resgate-espacial/issues/121) | Fichas de ouro; teste da nave (`regras/nave.test.js`), que confere que o contorno desenhado fica perto do casco | Hoje, não sozinho. Pela D-034, só a nave que muda o jogo deve mexer no ranking ([#122](https://github.com/TARNAGS/resgate-espacial/issues/122)) |
 | Regra de contato ou de batida (código) | `core/collision.js` | A partida e o piloto automático, que usam a mesma função | Fichas de batida e de rotas; caminho provado (D-018) | **Não sozinho**: mudar código de regra não muda a chave. Para recomeçar, suba `RULES_VERSION` em `core/ranking.js`; a ficha de ouro que mudou lembra |
 | Obstáculo novo | `content/obstacles/` e `index.js` | Gerador, colisão, piloto automático (`blockedAt`) e desenho (`draw`) | Contrato do obstáculo ([#119](https://github.com/TARNAGS/resgate-espacial/issues/119)); 500 cenários; caminho provado | Só nas fases que o usam (as regras do gerador mudam) |
+| Contrato da skin ([#124](https://github.com/TARNAGS/resgate-espacial/issues/124)) | Skin sem nave, chama ou cores; skin que não desenha um obstáculo do catálogo; skin que tenta definir o casco; nave desenhada a mais de 3 unidades do casco (com o alarme conferido); skin que muda a chave do ranking ou tira a corrida do ranking; painel com skins diferentes do catálogo | `conteudo/contrato-skin.test.js` | Rápida |
 | Regras do gerador de uma fase (comprimento, corredor, pedras) | `content/worlds/` | O cenário, o tanque provado e o `tank` gravado | Bateria completa; atualizar `tank` se o teste pedir | Sim, sozinho |
 | Semente de uma fase fixa | `content/worlds/` | O cenário inteiro e o tanque | Atualizar `tank`; fichas de ouro | Sim, sozinho |
 | Tanque (`tank`, `refuelMargin`, `fuelAt`) | `content/worlds/` | Abastecer é preciso ou não (D-023, D-026) | Teste das fases fixas; fichas de ouro | Sim, sozinho |
 | Modificador numa fase ou mundo | `content/worlds/` e `content/modifiers.js` | A física daquela fase | Testes de modificadores; fichas, se a fase tiver ficha | Sim, sozinho (desde a [#120](https://github.com/TARNAGS/resgate-espacial/issues/120)) |
 | Chave de uma fase (`key`) | `content/worlds/` | O progresso salvo no aparelho e no perfil online; o ranking | **Nunca mudar depois de publicada** ([#117](https://github.com/TARNAGS/resgate-espacial/issues/117)) | Sim, e o progresso dos jogadores se perde |
 | Cores do mundo (`theme`) | `content/worlds/` | Só o desenho | Teste do desenho ([#113](https://github.com/TARNAGS/resgate-espacial/issues/113)) | Não |
+| Skin nova ou mudada (nave, chama, obstáculos, cores) | `render/skins/` e as opções do parâmetro `skin` em `config/params.js` | Só o desenho | Contrato da skin ([#124](https://github.com/TARNAGS/resgate-espacial/issues/124)) e o desenho só lê; se mudou a `classic`, o desenho de ouro (regravar de propósito) | Não (D-034 e D-035) |
 | Zoom da câmera (D-037) | `render/view.js` (`cameraZoomFor`) e `config/params.js` | **Quanto se vê à frente, e isso muda a dificuldade:** o automático se adapta à tela, o jogador só aproxima, e o zoom fixo de teste tira a corrida do ranking | Testes da câmera (`regras/camera.test.js`); conferir no iPhone e numa tela de iPhone SE | Não, mas o zoom fixo de teste tira a corrida do ranking |
 | Controles na tela, modo da câmera | `config/params.js` (`VIEW_ONLY`), `render/`, `input/` | A imagem e o controle | Conferir no iPhone | Não |
 | Textos do jogo | `main.js`, `content/worlds/` | As telas | Inglês (D-007); cabe na tela do iPhone deitado | Não |
@@ -207,6 +210,7 @@ Testes que tocam o alarme quando algo muda sem querer. Ficam em `jogo/testes/`, 
 | Versão | Data | O que mudou |
 |---|---|---|
 | 0.1 | 07/10/2026 | Primeira versão ([#111](https://github.com/TARNAGS/resgate-espacial/issues/111)): camadas, três tipos de mudança, mapa de impacto, acoplamentos e guardas automáticas, junto com as tarefas [#112](https://github.com/TARNAGS/resgate-espacial/issues/112) a [#115](https://github.com/TARNAGS/resgate-espacial/issues/115) |
+| 0.7 | 08/10/2026 | Onda 5, segunda tarefa ([#124](https://github.com/TARNAGS/resgate-espacial/issues/124)): camada de skins, com a `classic` e a `hitbox`; o desenho dos obstáculos saiu do conteúdo; contrato da skin e linha nova no mapa de impacto |
 | 0.6 | 08/10/2026 | Onda 5, primeira tarefa ([#123](https://github.com/TARNAGS/resgate-espacial/issues/123)): o desenho dividido em peças (tabela na seção 1), a abertura separada dos desenhos dela e a guarda do desenho de ouro |
 | 0.5 | 08/10/2026 | Acoplamento novo: o vídeo de apresentação (`jogo/ferramentas/video/`) usa o desenho, a abertura, o som e o piloto do jogo |
 | 0.4 | 08/10/2026 | Onda 4, segunda tarefa ([#122](https://github.com/TARNAGS/resgate-espacial/issues/122)): seção 2.1 (nave de aparência e nave que muda o jogo), guardas da nave e do contrato da nave |

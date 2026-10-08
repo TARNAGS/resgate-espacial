@@ -1,5 +1,6 @@
 import { clamp } from '../core/math.js';
 import { cameraZoomFor } from './view.js';
+import { resolveSkin } from './skins/index.js';
 import { createCamera } from './camera.js';
 import { createSky } from './sky.js';
 import { createCave } from './cave.js';
@@ -16,7 +17,7 @@ import { createHud, LOW_FUEL_FLASH } from './hud.js';
 
 export function createRenderer(canvas, view) {
   const ctx = canvas.getContext('2d');
-  const r = { camX: 0, camY: 0, zoom: 1, particles: [], messages: [], noFuelT: 0, lowFuelT: 0 };
+  const r = { camX: 0, camY: 0, zoom: 1, particles: [], messages: [], noFuelT: 0, lowFuelT: 0, skin: resolveSkin() };
 
   const cam = createCamera(r, view);
   const { viewW, camLimits, camYTarget, keepShipVisible } = cam;
@@ -95,7 +96,8 @@ export function createRenderer(canvas, view) {
   r.draw = (now, scene) => {
     const t = now / 1000;
     const { match, params } = scene;
-    const theme = (match ? match.state.def.world.theme : scene.theme);
+    r.skin = resolveSkin(params?.skin);   // a skin escolhida (#124): só a aparência muda
+    const theme = r.skin.theme(match ? match.state.def.world.theme : scene.theme);
     ctx.setTransform(view.dpr, 0, 0, view.dpr, 0, 0);
     const g = ctx.createLinearGradient(0, 0, 0, view.cssH);
     g.addColorStop(0, theme.sky[0]);

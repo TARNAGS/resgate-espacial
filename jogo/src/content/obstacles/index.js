@@ -10,14 +10,16 @@ import { rock } from './rock.js';
 //   example              opções de um nível de exemplo, usadas pelos testes
 //   generate(ctx)        → lista de instâncias, a partir das opções do nível e da semente; a mesma semente
 //                          gera sempre os mesmos obstáculos
-//   bounds(o)            → { x1, x2 }, para só desenhar o que está na tela; cobre todo o desenho
+//   bounds(o)            → { x1, x2 }, para só desenhar o que está na tela; cobre o desenho de todas as skins
 //   hits(o, ship)        → true se a nave encostou (ship tem x, y, verts e samples)
 //   validate(o, level)   → texto do problema se o cenário ficar sem solução, ou null
 //   blockedAt(o, x, m)   → faixa [y1, y2] que o obstáculo ocupa em x, com folga m, ou null; é o que o
 //                          piloto automático usa para planejar a melhor rota (core/autopilot.js). Precisa
 //                          cobrir todo lugar em que hits acusa batida, senão o piloto prova uma rota que explode.
 //                          Obstáculos móveis vão precisar de uma versão que considere o tempo.
-//   draw(ctx, o, theme, t)  só desenha: nunca muda o obstáculo (#113)
+//
+// O desenho não fica aqui: cada skin desenha cada tipo de obstáculo (render/skins/, #124). Obstáculo novo
+// ganha o desenho na skin classic, e o teste do contrato da skin confere.
 //   update(o, time)      → só nos móveis; mudam de posição com o tempo da partida
 
 export const OBSTACLES = {

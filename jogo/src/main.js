@@ -1,4 +1,4 @@
-import { PARAMS, DEFAULT_PARAMS } from './config/params.js';
+import { PARAMS, DEFAULT_PARAMS, setParams } from './config/params.js';
 import { LEVELS, WORLDS, CHALLENGES, TRAINING_LEVEL, findLevel } from './content/worlds.js';
 import { createEvents } from './core/events.js';
 import { createMatch } from './core/match.js';
@@ -101,6 +101,9 @@ if (CONTROL_FROM_URL) PARAMS.touchScheme = CONTROL_FROM_URL;
 // Zoom fixo para testar (#95): ?zoom=1.3 (de 1 a 1.6). Muda quanto se vê à frente, então a corrida sai do ranking (D-037)
 const ZOOM_FROM_URL = Number(new URLSearchParams(location.search).get('zoom'));
 if (ZOOM_FROM_URL >= 1 && ZOOM_FROM_URL <= 1.6) PARAMS.cameraZoomFixed = ZOOM_FROM_URL;
+// Skin pelo endereço (#124): ?skin=hitbox mostra as formas que batem. Só a aparência muda, e a corrida vale no ranking
+const SKIN_FROM_URL = (new URLSearchParams(location.search).get('skin') || '').toLowerCase();
+if (SKIN_FROM_URL) setParams({ skin: SKIN_FROM_URL });
 
 // ===== Mensagens e efeitos ligados aos eventos da partida =====
 events.on('start', ({ def }) => {

@@ -40,8 +40,8 @@ export const SCENES = [
 ];
 
 // Monta o estado, congela uma cópia e entrega ao desenho. Devolve as anotações da tela de mentira.
-export function drawFrozen(def, prepare, draw, { isTouch = true, scheme = 'twin' } = {}) {
-  const P = { ...DEFAULT_PARAMS, touchScheme: scheme };
+export function drawFrozen(def, prepare, draw, { isTouch = true, scheme = 'twin', skin = 'classic' } = {}) {
+  const P = { ...DEFAULT_PARAMS, touchScheme: scheme, skin };
   // A BONUS sorteia e prova cada cenário com o piloto automático; para o desenho, basta um cenário fixo
   const fixed = def.seed != null && def.generator.tank != null ? def : { ...def, seed: 1, generator: { ...def.generator, tank: 40 } };
   const match = createMatch({ def: fixed, seed: fixed.seed, getParams: () => P, events: createEvents() });

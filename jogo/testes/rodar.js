@@ -25,6 +25,7 @@ import './conteudo/demo-e-fases.test.js';
 import './conteudo/contrato-fase.test.js';
 import './conteudo/contrato-obstaculo.test.js';
 import './conteudo/contrato-nave.test.js';
+import './conteudo/contrato-skin.test.js';
 import './plataforma/musica.test.js';
 import './plataforma/ranking.test.js';
 import './plataforma/perfil.test.js';

@@ -96,9 +96,24 @@ Copie `src/content/obstacles/rock.js`, com o `example` (um nível de exemplo), m
 - a passagem;
 - a colisão;
 - a faixa que o piloto automático evita;
-- os limites do desenho.
+- os limites do desenho, em todas as skins.
+
+O desenho do obstáculo fica nas skins (#124): acrescente um desenho para o tipo novo em `src/render/skins/classic.js` (e, se quiser, nas outras skins; o que faltar, a classic completa).
 
 Um obstáculo móvel implementa `update(o, time)`; a partida chama essa função a cada passo.
+
+## Como criar uma skin
+
+Uma skin muda só a aparência (#124): a nave, a chama, cada obstáculo e as cores do mundo. Nunca muda uma regra, o que bate nem o ranking (D-034 e D-035).
+
+1. Copie `src/render/skins/hitbox.js` (a menor) ou `classic.js`, troque a `key` e o `label` e mude os desenhos. O que a skin não desenhar, a classic desenha.
+2. Registre em `src/render/skins/index.js`, onde o formato está explicado.
+3. Acrescente a chave nas opções do parâmetro `skin` em `src/config/params.js` (é o que aparece no painel de ajuste).
+4. Teste com `?skin=<chave>` no endereço ou pelo painel de ajuste (Skin).
+
+A skin recebe a nave da partida e não consegue defini-la: o casco vem de `src/content/ships/`. O desenho da nave precisa ficar a até 3 unidades do casco; sem isso, uma nave com asas compridas pareceria passar por dentro de uma pedra. O teste do contrato da skin (`testes/conteudo/contrato-skin.test.js`) confere tudo isso sozinho.
+
+A skin `hitbox` (`?skin=hitbox`) desenha exatamente as formas que batem: ajuda a desenhar fases e a entender uma batida estranha.
 
 ## Como criar uma nave
 

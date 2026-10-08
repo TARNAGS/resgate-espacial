@@ -18,25 +18,9 @@ export function createShip({ ctx, r }) {
     ctx.save();
     ctx.translate(s.x, s.y);
     ctx.rotate(s.a);
-    if (s.thrusting) {   // sinal visual do propulsor aceso (#33)
-      ctx.fillStyle = Math.random() > 0.5 ? '#ffd166' : '#ff9f43';
-      ctx.beginPath();
-      const n = def.nozzle;
-      ctx.moveTo(-n.half, n.y);
-      ctx.lineTo(n.half, n.y);
-      ctx.lineTo(0, n.y + n.flame + Math.random() * n.flicker);
-      ctx.closePath();
-      ctx.fill();
-    }
-    ctx.beginPath();
-    def.outline.forEach((v, i) => (i ? ctx.lineTo(v.x, v.y) : ctx.moveTo(v.x, v.y)));
-    ctx.closePath();
-    // Verde só descendo para uma plataforma, com velocidade e inclinação que garantem o pouso
-    ctx.fillStyle = approach?.landing && approach.safe ? '#7dffb0' : '#eef6ff';
-    ctx.fill();
-    ctx.lineWidth = 1.2;
-    ctx.strokeStyle = '#0b0f17';
-    ctx.stroke();
+    if (s.thrusting) r.skin.flame(ctx, def.nozzle);   // sinal visual do propulsor aceso (#33)
+    // A skin desenha a nave sobre o casco da partida (#124); verde só com o pouso garantido
+    r.skin.ship(ctx, def, Boolean(approach?.landing && approach.safe));
     ctx.restore();
   }
 

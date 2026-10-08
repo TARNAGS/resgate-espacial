@@ -42,6 +42,7 @@ export const DEFAULT_PARAMS = Object.freeze({
                             // quadrados). De 1 a 1,6: valor fixo de teste (painel ou ?zoom=), que tira a corrida do ranking.
                             // Até 07/10/2026 se chamava cameraZoom: valores antigos salvos no aparelho são ignorados
   cameraNear: 0,            // escolha do jogador nas configurações: 0 AUTO, 1 CLOSE, 2 CLOSER; só aproxima, nunca afasta
+  skin: 'classic',         // aparência (#124): 'classic' ou 'hitbox' (as formas que batem); nunca muda a regra nem o ranking
   cameraMode: 'thumbs',     // 'thumbs' (o padrão, #44 e #50): a câmera mantém a nave longe dos polegares e pode
                             // passar das pontas da fase, deixando uma área ao lado para os controles no início e no
                             // fim; 'stage' (#96, opção): para nas pontas, com os controles por cima da fase. O Fernando
@@ -50,12 +51,12 @@ export const DEFAULT_PARAMS = Object.freeze({
 
 // Parâmetros que só mudam a imagem, não a dificuldade
 // O zoom fixo de teste (cameraZoomFixed) não está aqui: ver mais da fase muda a dificuldade (D-037)
-export const VIEW_ONLY = ['touchScheme', 'cameraNear', 'cameraMode'];
+export const VIEW_ONLY = ['touchScheme', 'cameraNear', 'cameraMode', 'skin'];
 
 // O que cada parâmetro muda (#120). Todo parâmetro novo precisa entrar aqui (um teste confere):
 //   'jogo'    muda a dificuldade ou o tempo de uma corrida, e entra sozinho na chave do ranking (core/ranking.js)
 //   'aviso'   só os avisos e os elogios
-//   'imagem'  câmera e controles na tela
+//   'imagem'  câmera, controles na tela e skin
 export const PARAM_KIND = {
   gravity: 'jogo', thrust: 'jogo', keyRotationSpeed: 'jogo', touchRotationSpeed: 'jogo', maxSpeed: 'jogo',
   landingMaxVy: 'jogo', landingMaxVx: 'jogo', landingMaxAngle: 'jogo', padMargin: 'jogo',
@@ -63,7 +64,7 @@ export const PARAM_KIND = {
   lowFuel: 'aviso', criticalFuel: 'aviso', noFuelLandedSeconds: 'aviso',
   praiseNear: 'aviso', praiseMinSpeed: 'aviso', praiseSaveSpeed: 'aviso', praiseSaveHorizon: 'aviso', praiseCooldown: 'aviso',
   touchScheme: 'imagem', joystickMode: 'imagem', joystickArea: 'imagem', joystickRadius: 'imagem', joystickDeadzone: 'imagem',
-  cameraZoomFixed: 'imagem', cameraNear: 'imagem', cameraMode: 'imagem',
+  cameraZoomFixed: 'imagem', cameraNear: 'imagem', cameraMode: 'imagem', skin: 'imagem',
 };
 
 // Valores em uso. Começam iguais aos padrões e podem ser alterados pelo painel de ajuste.
@@ -89,6 +90,7 @@ export const TUNABLE = [
   { key: 'joystickMode', label: 'Joystick', options: ['follow', 'fixed'] },
   { key: 'cameraZoomFixed', label: 'Camera zoom (0 = auto)', min: 0, max: 1.6, step: 0.05 },
   { key: 'cameraMode', label: 'Camera', options: [['thumbs', 'avoid thumbs'], ['stage', 'whole stage · controls on top']] },
+  { key: 'skin', label: 'Skin', options: [['classic', 'classic'], ['hitbox', 'hitbox · collision shapes']] },   // as chaves de render/skins/
 ];
 
 // Ignora o que não existe mais (por exemplo, uma opção removida e ainda salva no aparelho)

@@ -84,7 +84,7 @@ export function createCave({ ctx, r, viewW }) {
       const kind = OBSTACLES[o.type];
       const b = kind.bounds(o);
       if (b.x2 < r.camX - 10 || b.x1 > r.camX + viewW() + 10) continue;
-      kind.draw(ctx, o, theme, t);
+      r.skin.obstacles[o.type](ctx, o, theme, t);   // o desenho do obstáculo vem da skin (#124)
     }
   }
 
