@@ -19,7 +19,7 @@ import { createMusic } from '../../src/platform/music.js';
 import { ROTEIRO as R } from './roteiro.js';
 import { muxMp4 } from './mp4.js';
 
-const DT = 1 / 120;                 // o passo da física, igual ao laço do jogo (main.js)
+const DT = 1 / 120;                 // o passo da física, igual ao laço do jogo (src/app/loop.js)
 const NONE = { turn: 0, targetAngle: null, thrust: false };
 const UP = { turn: 0, targetAngle: null, thrust: true };
 const KEYS = { touchRotationSpeed: DEFAULT_PARAMS.keyRotationSpeed };   // planos com posto: o giro do teclado (D-023)
@@ -70,7 +70,7 @@ function aimAtRock(m) {
   return { turn: 0, targetAngle: Math.atan2(o.x - s.x, -(o.y - s.y)), thrust: true };
 }
 
-// As mensagens e os efeitos da partida, ligados como no main.js (o vídeo não abre o jogo inteiro)
+// As mensagens e os efeitos da partida, ligados como em src/app/messages.js (o vídeo não abre o jogo inteiro)
 function wireMessages(events, renderer, match) {
   events.on('land', ({ pad }) => {
     if (pad === 'base' && !match.state.crewOnBoard) renderer.message('REFUELED · GO GET THE CREW →', 2.5);

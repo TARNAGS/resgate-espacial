@@ -14,10 +14,11 @@ const PERMITIDO = {
   input: ['input', 'core', 'config'],
   platform: ['platform', 'core', 'content', 'config'],
   ui: ['ui', 'core', 'content', 'config', 'platform'],
+  app: ['app', 'config', 'content', 'core', 'render', 'input', 'platform', 'ui'],   // os fluxos (#125): só o main.js os importa
 };
 const NOME = {
   config: 'os números de ajuste', content: 'o conteúdo', core: 'as regras', render: 'o desenho',
-  input: 'os controles', platform: 'os serviços do aparelho', ui: 'as telas', main: 'o main.js',
+  input: 'os controles', platform: 'os serviços do aparelho', ui: 'as telas', app: 'os fluxos', main: 'o main.js',
 };
 // Regras, conteúdo e números rodam também no Node (testes e piloto automático): não podem tocar no navegador
 const SEM_NAVEGADOR = ['core', 'content', 'config'];

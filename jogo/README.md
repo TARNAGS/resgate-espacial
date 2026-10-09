@@ -45,6 +45,7 @@ Os módulos do navegador não abrem com dois cliques no `index.html` (`file://`)
 | `src/platform/music.js` e `src/content/songs.js` | Motor de música chiptune (Web Audio, sem arquivos) e as partituras | Uma música nova ou mudança na da abertura |
 | `src/input/` | Teclado, direcional virtual e a junção dos dois | A variante final do direcional é escolhida (#44) |
 | `src/render/` | Desenho no Canvas, uma peça por camada: câmera, céu, caverna, plataformas, tripulação, nave, painel, mensagens e controles; o `renderer.js` só põe as camadas na ordem (#123; tabela no documento 12, seção 1) | A identidade visual chega (E-19) |
+| `src/main.js` e `src/app/` | O `main.js` cria as peças e liga os fluxos do jogo, um arquivo por fluxo em `src/app/`: partida, mensagens, telemetria da tentativa, configurações, abertura, DEMO, patch note, ranking, aparelho e o laço principal (#125; tabela no documento 12, seção 1) | Uma tela ou um fluxo novo entra |
 | `src/ui/` | Menu, mapa de progresso, avisos e painel de ajuste | — |
 | `testes/` | Testes automáticos, por assunto: `regras/`, `conteudo/`, `plataforma/`, `arquitetura/` (camadas e desenho só lê) e `ouro/` (fichas de ouro); `rodar.js` roda tudo, e `lib.js` tem as peças comuns | Junto com cada mudança de regra |
 | `firebase/regras.json` | Cópia completa das regras publicadas no banco (ranking, telemetria e perfil) | As regras do banco mudam: colar o texto inteiro no console |
@@ -125,6 +126,7 @@ Uma nave que **muda o jogo** precisa de `changesGameplay: true`; só ela pode te
 
 - **Painel de ajuste (#42):** abrir o jogo com `?tuning`, ou tocar 5 vezes no subtítulo do menu, ou apertar a tecla `` ` ``. Durante a partida, o botão **T** abre o painel. Os valores mudam na hora, ficam salvos no aparelho e podem ser copiados.
 - **Treino (#35):** no painel, TRAINING. Chão, paredes e uma plataforma, sem tripulação e sem perder vidas.
+- **Acesso pelo console (`window.__game`):** a partida, os parâmetros, o desenho e os controles; `kit` traz todos os fluxos de `src/app/`. Com o navegador escondido, o laço não roda sozinho: `__game.kit.loop(performance.now())` avança um quadro.
 - **Atalho de nível:** com o painel liberado, `?level=w1-3`, `?level=training`, `?level=practice` ou `?level=bonus` abre direto a fase.
 - **Fases fixas (D-021):** cada fase da sequência e a PRACTICE têm `seed` em `src/content/worlds.js`; a BONUS tem `random: true`.
 - **Abertura (#76):** aparece sozinha no primeiro PLAY; para rever, Settings → WATCH INTRO, ou abra o jogo com `?intro` (pede um toque antes, para liberar o som). SKIP (ou Esc) pula e para a música. A música é o relógio da abertura: as telas começam nos compassos de `INTRO_SONG.scenes`. O controle das telas fica em `src/render/intro.js`, e os desenhos de cada tela em `src/render/intro-art.js`.

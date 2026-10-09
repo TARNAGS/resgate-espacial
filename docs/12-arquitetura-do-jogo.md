@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 12 — Arquitetura do jogo e mapa de impacto |
-| Versão | 0.7 |
+| Versão | 0.8 |
 | Data | 08/10/2026 |
 | Status | Em revisão (o Fernando aprova) |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -37,7 +37,8 @@ O código do jogo fica em `jogo/src`, e cada pasta é uma camada. A regra de dir
 | `input` | Teclado, direcional e a junção dos dois | `core`, `config` | Desenho, telas, aparelho |
 | `platform` | Som, música, o que fica salvo, banco online (ranking e perfil) e telemetria | `core`, `content`, `config` | Desenho, telas, controles |
 | `ui` | Menu, mapa de progresso, painel de ajuste e tela do ranking | `core`, `content`, `config`, `platform` | Desenho do jogo, controles |
-| `main.js` | Liga todas as peças: telas, laço do jogo, DEMO, nick | Tudo | Ninguém importa o `main.js` |
+| `app` | Os fluxos do jogo ([#125](https://github.com/TARNAGS/resgate-espacial/issues/125)): partida, mensagens, telemetria da tentativa, configurações, abertura, DEMO e attract mode, patch note, nickname e ranking, aparelho e o laço principal | Todas as camadas, menos o `main.js` | Só o `main.js` importa os fluxos |
+| `main.js` | Cria as peças e liga os fluxos | Tudo | Ninguém importa o `main.js` |
 
 Regras, conteúdo e números também rodam no Node, nos testes e no piloto automático. Por isso **não tocam no navegador** (`window`, `document`, `localStorage`, `fetch`...).
 
@@ -58,6 +59,23 @@ Regras, conteúdo e números também rodam no Node, nos testes e no piloto autom
 | `style.js` | A fonte comum |
 | `intro.js` e `intro-art.js` | A abertura: o controle das telas e da música, e os desenhos de cada tela |
 
+**Fluxos do jogo** ([#125](https://github.com/TARNAGS/resgate-espacial/issues/125)): o `main.js` só cria as peças (tela, desenho, eventos, telas, controles, som e telemetria) e liga os fluxos, que ficam em `app/`. Os fluxos se chamam uns aos outros (a partida chama o ranking, que chama o menu...), então falam por um objeto só, o **kit** `g` (`app/kit.js`): cada fluxo recebe o kit, acrescenta as funções dele, e as dos outros são procuradas só na hora da chamada.
+
+| Fluxo | O que faz |
+|---|---|
+| `messages.js` | Mensagens e efeitos na tela ligados aos eventos da partida (objetivo, pousos, embarque, elogios, avisos de combustível, batidas e vidas) |
+| `run.js` | Telemetria de cada tentativa: começo, pousos, batidas, elogios, trajetória, fim e o envio da fila ao sair do app |
+| `play.js` | A partida: começar uma fase, pausar, resultado, voltar ao menu, botões na tela e a dica do polegar |
+| `settings.js` | Configurações (som, controle, câmera, apagar o progresso), o painel de ajuste escondido e os parâmetros pelo endereço |
+| `intro-flow.js` | A abertura e o PLAY do menu (no primeiro PLAY, a abertura vem antes) |
+| `demo.js` | DEMO e attract mode |
+| `patch-note.js` | A linha do patch note no menu |
+| `ranking.js` | Nickname, ranking e perfil no banco |
+| `device.js` | Toque sem rolar, pausa ao sair do app e o aviso para girar o celular |
+| `loop.js` | O laço principal: passo fixo da física, DEMO, attract mode e o desenho de cada quadro |
+
+A ordem em que o `main.js` liga os fluxos conta para quem escuta o mesmo evento: as mensagens antes da telemetria, e a telemetria antes do resultado.
+
 A tabela é conferida por um teste ([#112](https://github.com/TARNAGS/resgate-espacial/issues/112), `jogo/testes/arquitetura/camadas.test.js`). Uma pasta nova precisa entrar na tabela do teste e nesta seção.
 
 **Como as camadas conversam:**
@@ -77,7 +95,7 @@ A tabela é conferida por um teste ([#112](https://github.com/TARNAGS/resgate-es
 
 | Evento | Campos | Quem avisa | Quem escuta |
 |---|---|---|---|
-| `start` | def, seed | main.js | mensagens do início da fase (objetivo e dicas) |
+| `start` | def, seed | `app/play.js` | mensagens do início da fase (objetivo e dicas) |
 | `takeoff` | — | partida | ninguém no jogo, hoje (as fichas de ouro registram) |
 | `land` | pad, impact | partida | mensagens, som, telemetria |
 | `crash` | reason, x, y, vx, vy, a, lives | partida | mensagens, explosão, som, telemetria |
@@ -147,7 +165,7 @@ As chaves de antes não mudaram.
 | Skin nova ou mudada (nave, chama, obstáculos, cores) | `render/skins/` e as opções do parâmetro `skin` em `config/params.js` | Só o desenho | Contrato da skin ([#124](https://github.com/TARNAGS/resgate-espacial/issues/124)) e o desenho só lê; se mudou a `classic`, o desenho de ouro (regravar de propósito) | Não (D-034 e D-035) |
 | Zoom da câmera (D-037) | `render/view.js` (`cameraZoomFor`) e `config/params.js` | **Quanto se vê à frente, e isso muda a dificuldade:** o automático se adapta à tela, o jogador só aproxima, e o zoom fixo de teste tira a corrida do ranking | Testes da câmera (`regras/camera.test.js`); conferir no iPhone e numa tela de iPhone SE | Não, mas o zoom fixo de teste tira a corrida do ranking |
 | Controles na tela, modo da câmera | `config/params.js` (`VIEW_ONLY`), `render/`, `input/` | A imagem e o controle | Conferir no iPhone | Não |
-| Textos do jogo | `main.js`, `content/worlds/` | As telas | Inglês (D-007); cabe na tela do iPhone deitado | Não |
+| Textos do jogo | `app/` (mensagens e telas), `content/worlds/` | As telas | Inglês (D-007); cabe na tela do iPhone deitado | Não |
 | Sons e músicas | `platform/audio.js`, `platform/music.js`, `content/songs.js` | Reagem aos eventos | Teste da música; ouvir no iPhone | Não |
 | Nome ou campos de um evento da partida | `core/match.js` | Som, mensagens, elogios e telemetria, que podem parar **em silêncio** | Fichas de ouro; contrato dos eventos ([#116](https://github.com/TARNAGS/resgate-espacial/issues/116)) | Não |
 | Regras do banco online | `jogo/firebase/regras.json` e `config/online.js` | Ranking, perfil e telemetria | Colar o texto **inteiro** no console; o Claude confere pelo terminal (`CLAUDE.md`) | Não |
@@ -166,8 +184,8 @@ São ligações de propósito ou pontos frágeis. Cada um tem dono:
 | **Mudança de código de regra não recomeça o ranking** | A chave olha os números e a fase, não o código | **Resolvido** ([#120](https://github.com/TARNAGS/resgate-espacial/issues/120)): subir `RULES_VERSION` quando uma regra mudar de propósito |
 | **Piloto automático e regras andam juntos** | O piloto usa as mesmas funções da partida | Mudou a física ou o contato? O piloto, o tanque e as fichas mudam juntos |
 | **Desenho do obstáculo junto das regras dele** | `draw` mora em `content/obstacles/rock.js` | [#124](https://github.com/TARNAGS/resgate-espacial/issues/124): o desenho vai para a skin |
-| **Vídeo de apresentação usa as peças do jogo** | `jogo/ferramentas/video/` desenha com o renderer e a abertura, toca a música e os efeitos de `platform/` e joga as fases com o piloto. Para isso, lê alguns detalhes por dentro (os campos da abertura e o `Sound.ctx`) e repete as mensagens da partida que ficam no `main.js` | Mexeu no desenho, na abertura, no som, nas mensagens ou no piloto? `node jogo/ferramentas/video/gravar.mjs --fotos 1,5,9` e olhar as fotos. Se a [#123](https://github.com/TARNAGS/resgate-espacial/issues/123) tirar as mensagens do `main.js`, o vídeo passa a importar de lá |
-| **`main.js` grande** | Cresceu com cada tela e cada aviso (794 linhas). O `renderer.js` já foi dividido em peças ([#123](https://github.com/TARNAGS/resgate-espacial/issues/123), 08/10) | [#125](https://github.com/TARNAGS/resgate-espacial/issues/125) |
+| **Vídeo de apresentação usa as peças do jogo** | `jogo/ferramentas/video/` desenha com o renderer e a abertura, toca a música e os efeitos de `platform/` e joga as fases com o piloto. Para isso, lê alguns detalhes por dentro (os campos da abertura e o `Sound.ctx`) e repete parte das mensagens da partida, que ficam em `app/messages.js` (sem o objetivo e as dicas do início, de propósito) | Mexeu no desenho, na abertura, no som, nas mensagens ou no piloto? `node jogo/ferramentas/video/gravar.mjs --fotos 1,5,9` e olhar as fotos. Mudou uma mensagem em `app/messages.js`? Ver se o vídeo precisa da mesma mudança |
+| **Fluxos ligados pelo kit** ([#125](https://github.com/TARNAGS/resgate-espacial/issues/125)) | Os fluxos de `app/` se chamam uns aos outros pelo kit `g`, procurando a função só na hora da chamada. Um nome errado só aparece quando aquela função roda, e os fluxos rodam só no navegador, fora dos testes do Node | Mexeu em `app/`? Rodar no navegador o roteiro menu → fase → pausa → resultado → ranking → DEMO → abertura → configurações. Com o navegador escondido, o laço não roda sozinho: `window.__game.kit.loop(t)` avança um quadro |
 
 ## 5. Guardas automáticas
 
@@ -210,6 +228,7 @@ Testes que tocam o alarme quando algo muda sem querer. Ficam em `jogo/testes/`, 
 | Versão | Data | O que mudou |
 |---|---|---|
 | 0.1 | 07/10/2026 | Primeira versão ([#111](https://github.com/TARNAGS/resgate-espacial/issues/111)): camadas, três tipos de mudança, mapa de impacto, acoplamentos e guardas automáticas, junto com as tarefas [#112](https://github.com/TARNAGS/resgate-espacial/issues/112) a [#115](https://github.com/TARNAGS/resgate-espacial/issues/115) |
+| 0.8 | 09/10/2026 | Onda 5, última tarefa ([#125](https://github.com/TARNAGS/resgate-espacial/issues/125)): o `main.js` dividido em fluxos na pasta `app/`, camada nova na tabela da seção 1 e no teste, o kit dos fluxos, e os acoplamentos do vídeo e dos fluxos atualizados |
 | 0.7 | 08/10/2026 | Onda 5, segunda tarefa ([#124](https://github.com/TARNAGS/resgate-espacial/issues/124)): camada de skins, com a `classic` e a `hitbox`; o desenho dos obstáculos saiu do conteúdo; contrato da skin e linha nova no mapa de impacto |
 | 0.6 | 08/10/2026 | Onda 5, primeira tarefa ([#123](https://github.com/TARNAGS/resgate-espacial/issues/123)): o desenho dividido em peças (tabela na seção 1), a abertura separada dos desenhos dela e a guarda do desenho de ouro |
 | 0.5 | 08/10/2026 | Acoplamento novo: o vídeo de apresentação (`jogo/ferramentas/video/`) usa o desenho, a abertura, o som e o piloto do jogo |
