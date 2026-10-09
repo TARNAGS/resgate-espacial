@@ -80,7 +80,52 @@ Palestra na GDC de março de 2024, de Jan Wedekind (insights) e Xavier Guardiola
 
 ## 3. Plants vs. Zombies
 
-*Em andamento.*
+### 3.1 Como funciona
+
+- **Proposta:** defender a casa plantando plantas em linhas de um gramado, contra zumbis que andam da direita para a esquerda. O sol, que cai do céu e nasce dos girassóis, paga as plantas.
+- **Autor:** PopCap Games, 2009 (computador), depois em celulares. Criador: George Fan. Estudado o modo Aventura do jogo original, pelo wiki dos fãs consultado em 09/10/2026.
+- **Modelo de negócio:** jogo pago no lançamento. A versão grátis para celular (Plants vs. Zombies FREE) veio depois.
+- **Tamanho:** o modo Aventura tem **50 fases em 5 mundos de 10** (Dia, Noite, Piscina, Neblina e Telhado). Depois dele, abrem minijogos, quebra-cabeças e um modo de sobrevivência.
+
+### 3.2 O molde de cada mundo de 10 fases
+
+Cada mundo segue o mesmo ritmo (wiki, página "Adventure Mode"):
+
+| Fase do mundo | O que acontece |
+|---|---|
+| 1, 2, 3, 5, 6, 7 e 8 | Uma planta nova no fim da fase |
+| 1, 3, 6 e 8 | Um zumbi novo aparece |
+| 4 | Um item no fim (no Dia, a pá) |
+| 5 | **Fase bônus:** um minijogo com regra diferente (no Dia, o boliche de nozes) |
+| 9 | Um bilhete dos zumbis (o pouco de história que o jogo tem) |
+| 10 | **Fase de esteira:** não tem sol, as plantas chegam numa esteira; no fim, a planta que o próximo mundo pede |
+| 50 (5-10) | O chefe, Dr. Zomboss, e os créditos |
+
+**Cada mundo muda uma regra do gramado:** a Noite tira o sol do céu (pede cogumelos), a Piscina põe água em duas das seis linhas, a Neblina esconde parte da tela, e o Telhado inclina o terreno (pede vasos e plantas que arremessam).
+
+**O primeiro mundo ensina reduzindo o tabuleiro:** a fase 1-1 tem uma linha só, a 1-2 e a 1-3 têm três. A variedade de zumbis cresce de um tipo na 1-1 para quatro na 1-6. As "bandeiras" (as ondas grandes) começam em zero na 1-1, passam a uma e chegam a duas na 1-7.
+
+**Segunda volta mais difícil:** quem termina a Aventura pode jogar de novo. As fases ganham uma bandeira a mais, os zumbis perigosos aparecem mais, e o Crazy Dave fixa três plantas sorteadas que o jogador não pode trocar.
+
+### 3.3 Como o criador ensinou a jogar
+
+Palestra de George Fan na GDC de 2012, "How I Got My Mom to Play Through Plants vs. Zombies" (resumida por notas de quem assistiu; vídeo nas fontes). As dez técnicas:
+
+1. **O tutorial se mistura ao jogo:** ninguém percebe que está num tutorial.
+2. **Fazer, não ler:** a pá passou por quatro versões até o boliche de nozes ensinar a coisa certa.
+3. **Espalhar as mecânicas:** uma ferramenta nova a cada umas 5 fases; na primeira visita à loja, só dá para comprar um item. "Deixe o jogador brincar com os brinquedos antes de dar outros."
+4. **Fazer o jogador agir uma vez:** o primeiro girassol custa o sol que o jogador tem, e o botão acende.
+5. **Poucas palavras:** no máximo oito palavras na tela de cada vez.
+6. **Mensagem que não interrompe:** o aviso fica na tela sem um botão de OK.
+7. **Mensagem que se adapta:** a dica aparece só quando o jogador erra (por exemplo, depois que uma planta morre).
+8. **Sem barulho:** o jogo original não tinha pop-up de conquista no meio da fase.
+9. **O desenho ensina:** o bico da ervilheira, a porta que protege o zumbi e os espinhos dizem o que cada um faz.
+10. **Usar o que a pessoa já sabe:** plantas não andam, zumbis são lentos, ímãs puxam metal, e os nomes dizem a função.
+
+### 3.4 O que faz voltar e o que não copiar
+
+- **Volta:** uma planta nova quase toda fase (é a recompensa e é o próximo brinquedo), o mundo novo com regra nova, os minijogos e a segunda volta mais difícil.
+- **Não copiar:** a história com personagens (o nosso jogo não tem enredo; a abertura é curta, documento 02, seção 10.1). A loja e as moedas ficam para a P-017 ([#78](https://github.com/TARNAGS/resgate-espacial/issues/78)).
 
 ## 4. Subway Surfers
 
@@ -96,12 +141,15 @@ Palestra na GDC de março de 2024, de Jan Wedekind (insights) e Xavier Guardiola
 
 ## 7. Como este material foi feito
 
+- **Plants vs. Zombies:** sem abrir o jogo. O molde dos mundos vem do wiki dos fãs; as dez técnicas, de notas sobre a palestra do criador (fonte secundária, conferida com a lista que a GDC anunciou: "10 técnicas para ensinar mecânicas"). A duração de uma fase não foi medida.
 - **Candy Crush Saga:** sem abrir o jogo. As fases vêm do wiki dos fãs pela interface de dados (`api.php`), lidas por um script que grava `candy-crush.json`. A dificuldade é a nota dos fãs, e os rótulos do mapa vêm das categorias do wiki. A duração de uma fase (uns 2 minutos para 25 jogadas) é estimativa, não medida.
 
 ### Onde a busca procurou
 
 | Fonte | O que foi feito | Resultado |
 |---|---|---|
+| Wiki dos fãs do Plants vs. Zombies (plantsvszombies.fandom.com, `api.php`) | Páginas "Adventure Mode" e o modelo da lista de fases | Ok: o ritmo de cada mundo, as linhas do primeiro mundo e as bandeiras |
+| Busca da palestra de George Fan (GDC 2012) | Notas de quem assistiu e o vídeo | Ok pelas notas; o vídeo não foi lido (o Claude não assiste vídeo) |
 | Wiki dos fãs do Candy Crush (candycrush.fandom.com, `api.php`) | 110 fases lidas (tipo, jogadas, estrelas, dificuldade, novidades, rótulos) e as páginas Lives, Episodes e o total de fases | Ok |
 | mobilegamer.biz, 27/03/2024 | Relato da palestra da King na GDC 2024 | Ok |
 | Página da sessão na agenda da GDC ("Sugary Statistics") | Resumo oficial da palestra | Bloqueada (403) |
@@ -109,6 +157,8 @@ Palestra na GDC de março de 2024, de Jan Wedekind (insights) e Xavier Guardiola
 
 ## 8. Fontes
 
+- Wiki dos fãs do Plants vs. Zombies: https://plantsvszombies.fandom.com/wiki/Adventure_Mode e o modelo "Adventure Mode levels", consultados em 09/10/2026.
+- George Fan, "How I Got My Mom to Play Through Plants vs. Zombies", GDC 2012. Vídeo: https://www.youtube.com/watch?v=fbzhHSexzpY. Notas: https://notes.hamatti.org/Sources/Talks/How-I-got-my-mom-to-play-through-Plants-vs.-Zombies
 - Wiki dos fãs do Candy Crush: https://candycrush.fandom.com (fases 1 a 80, 1001 a 1015 e 5001 a 5015; páginas Lives e Episodes), consultado em 09/10/2026.
 - Neil Long, "How King defines a 'good' Candy Crush Saga level – and constantly prunes the bad ones", mobilegamer.biz, 27/03/2024: https://mobilegamer.biz/how-king-defines-a-good-candy-crush-saga-level-and-why-it-constantly-prunes-the-bad-ones/
 - GDC 2024, "Sugary Statistics: What We Have Learned About Candy Crush Content After 10 Years and Over 15,000 Levels" (Jan Wedekind e Xavier Guardiola): https://www.gdcvault.com/play/1034392/Sugary-Statistics-What-We-Have
@@ -118,4 +168,4 @@ Palestra na GDC de março de 2024, de Jan Wedekind (insights) e Xavier Guardiola
 
 | Versão | Data | O que mudou |
 |---|---|---|
-| 1.0 | 09/10/2026 | Primeira versão, em construção: Candy Crush Saga |
+| 1.0 | 09/10/2026 | Primeira versão, em construção: Candy Crush Saga e Plants vs. Zombies |
