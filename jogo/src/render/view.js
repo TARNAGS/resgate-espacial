@@ -25,7 +25,10 @@ export function createView(canvas, probe) {
     safe: { top: 0, right: 0, bottom: 0, left: 0 },
     isTouch: window.matchMedia('(pointer: coarse)').matches,
     resize() {
-      view.dpr = Math.min(2, window.devicePixelRatio || 1);
+      // Densidade da tela: até 3 pixels por ponto, a do iPhone. Até 09/10/2026 o limite era 2, e o jogo ficava
+      // levemente borrado nos iPhones (desenhado com 2/3 da resolução e esticado). Com o limite 2, o iPhone do
+      // Fernando rodava a 60 quadros por segundo, sem engasgos; a telemetria (fps e jank) mostra se o 3 pesar
+      view.dpr = Math.min(3, window.devicePixelRatio || 1);
       view.cssW = window.innerWidth;
       view.cssH = window.innerHeight;
       canvas.width = Math.round(view.cssW * view.dpr);

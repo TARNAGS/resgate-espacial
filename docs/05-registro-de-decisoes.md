@@ -681,7 +681,7 @@ E, sobre o ajuste: o jogador muda o zoom ou o jogo escolhe? Como o zoom muda qua
 - **o zoom se adapta à tela:** 1,15 nas telas compridas (a maioria dos celulares) e até 1 nas mais quadradas;
 - **o jogador pode mudar o zoom nas configurações.**
 
-**Proposta do Claude, já construída e para o Fernando validar:** nas configurações, o jogador só **aproxima** (CAMERA: AUTO, CLOSE ou CLOSER). Isso resolve o conforto de quem acha os desenhos pequenos sem dar a ninguém a vantagem de ver mais da fase. O zoom fixo de teste (painel de ajuste ou `?zoom=`) tira a corrida do ranking.
+**Validado pelo Fernando no iPhone (09/10/2026; era proposta do Claude):** nas configurações, o jogador só **aproxima** (CAMERA: AUTO, CLOSE ou CLOSER). Isso resolve o conforto de quem acha os desenhos pequenos sem dar a ninguém a vantagem de ver mais da fase. O zoom fixo de teste (painel de ajuste ou `?zoom=`) tira a corrida do ranking.
 
 **Consequências.**
 
