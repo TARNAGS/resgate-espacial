@@ -1,7 +1,7 @@
 // Mapas de calor do playtest (#91, D-029): para cada fase de cenário fixo, desenha o cenário e, por cima,
 // onde os jogadores morreram (por motivo), onde ganharam elogios e por onde voaram (trajetórias).
 // Gera uma página HTML, fora do repositório (jogo/ferramentas/saida/, ignorada pelo Git).
-// Uso, na pasta do projeto:  node jogo/ferramentas/mapas-telemetria.mjs [--desde 2026-10-04] [--incluir-local]
+// Uso, na pasta do projeto:  node jogo/ferramentas/mapas-telemetria.mjs [--desde 2026-10-04] [--incluir-local] [--nick NOME]
 // Depois, abrir o arquivo: no Mac, open jogo/ferramentas/saida/mapas.html; no Windows, start "" jogo\ferramentas\saida\mapas.html
 
 import fs from 'node:fs';
@@ -22,7 +22,10 @@ const all = Object.entries((await res.json()) || {})
   .flatMap(([, evs]) => Object.values(evs))
   .filter((e) => e.ev !== 'test');
 const localSids = new Set(all.filter((e) => e.ev === 'session' && /^(localhost|127.0.0.1)$/.test(e.host || '')).map((e) => e.sid));
-const events = process.argv.includes('--incluir-local') ? all : all.filter((e) => !localSids.has(e.sid));
+const nick = arg('--nick', null)?.toUpperCase();   // só as sessões em que esse nick jogou
+const nickSids = new Set(all.filter((e) => nick && e.nick === nick).map((e) => e.sid));
+const events = (process.argv.includes('--incluir-local') ? all : all.filter((e) => !localSids.has(e.sid)))
+  .filter((e) => !nick || nickSids.has(e.sid));
 
 const COLORS = { 'HIT A ROCK': '#c08cff', 'TOUCHED THE GROUND': '#ff9f43', 'LANDED TOO FAST': '#ff5d5d', 'LANDED TILTED': '#ff5d9e', 'HIT THE WALL': '#ffd166', 'HIT THE CEILING': '#7cc4ff', 'OUT OF FUEL': '#e8f1ff' };
 const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
@@ -70,12 +73,12 @@ const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><met
   .legend i.ring { border: 2px solid #7dffb0; width: 7px; height: 7px; }
   .legend i.line { background: #7cc4ff; border-radius: 0; height: 3px; vertical-align: 3px; }
 </style></head><body>
-<h1>Mapas do playtest <small>desde ${esc(since)} · ${events.length} eventos</small></h1>
+<h1>Mapas do playtest <small>desde ${esc(since)}${nick ? ` · ${esc(nick)}` : ''} · ${events.length} eventos</small></h1>
 <p><small>Bolinhas: onde morreram, pela cor do motivo. Anéis verdes: elogios. Linhas azuis: por onde voaram (as trajetórias existem a partir da versão 2026-10-04a).</small></p>
 ${[...LEVELS, ...CHALLENGES].filter((d) => d.seed != null).map(levelSvg).join('\n')}
 </body></html>`;
 
-const out = path.join(path.dirname(fileURLToPath(import.meta.url)), 'saida', 'mapas.html');
+const out = path.join(path.dirname(fileURLToPath(import.meta.url)), 'saida', nick ? `mapas-${nick.toLowerCase()}.html` : 'mapas.html');
 fs.mkdirSync(path.dirname(out), { recursive: true });
 fs.writeFileSync(out, html);
 console.log(`Mapas salvos em ${path.relative(process.cwd(), out)}`);
