@@ -1,0 +1,2674 @@
+{
+ "fonte": "candycrush.fandom.com (wiki dos fãs), consultado em 09/10/2026",
+ "fases": [
+  {
+   "n": 1,
+   "episode": "Candy Town",
+   "types": [
+    "order"
+   ],
+   "moves": 28,
+   "time": null,
+   "colors": 4,
+   "spaces": 64,
+   "stars": [
+    5120,
+    47233,
+    92400
+   ],
+   "difficulty": "Very easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": []
+  },
+  {
+   "n": 2,
+   "episode": "Candy Town",
+   "types": [
+    "order"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 4,
+   "spaces": 49,
+   "stars": [
+    3500,
+    41918,
+    84710
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting"
+   ]
+  },
+  {
+   "n": 3,
+   "episode": "Candy Town",
+   "types": [
+    "order"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 4,
+   "spaces": 42,
+   "stars": [
+    6000,
+    49858,
+    92650
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 4,
+   "episode": "Candy Town",
+   "types": [
+    "order"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 5,
+   "spaces": 66,
+   "stars": [
+    12500,
+    50158,
+    92950
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 5,
+   "episode": "Candy Town",
+   "types": [
+    "jelly"
+   ],
+   "moves": 15,
+   "time": null,
+   "colors": 4,
+   "spaces": 37,
+   "stars": [
+    21560,
+    51057,
+    85140
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": []
+  },
+  {
+   "n": 6,
+   "episode": "Candy Town",
+   "types": [
+    "jelly"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 5,
+   "spaces": 57,
+   "stars": [
+    59000,
+    98738,
+    141530
+   ],
+   "difficulty": "Very easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": []
+  },
+  {
+   "n": 7,
+   "episode": "Candy Town",
+   "types": [
+    "jelly"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 5,
+   "spaces": 69,
+   "stars": [
+    23000,
+    62338,
+    105130
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting"
+   ]
+  },
+  {
+   "n": 8,
+   "episode": "Candy Town",
+   "types": [
+    "order"
+   ],
+   "moves": 30,
+   "time": null,
+   "colors": 5,
+   "spaces": 72,
+   "stars": [
+    9200,
+    53030,
+    99780
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Five-layered Frosting"
+   ]
+  },
+  {
+   "n": 9,
+   "episode": "Candy Town",
+   "types": [
+    "jelly",
+    "order"
+   ],
+   "moves": 23,
+   "time": null,
+   "colors": 4,
+   "spaces": 61,
+   "stars": [
+    24000,
+    63098,
+    105890
+   ],
+   "difficulty": "Very easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting"
+   ]
+  },
+  {
+   "n": 10,
+   "episode": "Candy Town",
+   "types": [
+    "order"
+   ],
+   "moves": 27,
+   "time": null,
+   "colors": 5,
+   "spaces": 69,
+   "stars": [
+    9880,
+    70615,
+    114990
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": true,
+   "blockers": [
+    "One-layered Frosting",
+    "Two-layered Frosting",
+    "Three-layered Frosting"
+   ]
+  },
+  {
+   "n": 11,
+   "episode": "Candy Factory",
+   "types": [
+    "order"
+   ],
+   "moves": 27,
+   "time": null,
+   "colors": 4,
+   "spaces": 63,
+   "stars": [
+    9980,
+    49555,
+    93930
+   ],
+   "difficulty": "Very easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting",
+    "Two-layered Frosting",
+    "One-layered Bubblegum Pop",
+    "Two-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 12,
+   "episode": "Candy Factory",
+   "types": [
+    "jelly"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 5,
+   "spaces": 63,
+   "stars": [
+    64000,
+    104818,
+    147610
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Bubblegum Pop",
+    "Two-layered Bubblegum Pop",
+    "Three-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 13,
+   "episode": "Candy Factory",
+   "types": [
+    "jelly",
+    "order"
+   ],
+   "moves": 30,
+   "time": null,
+   "colors": 5,
+   "spaces": 69,
+   "stars": [
+    73700,
+    116170,
+    162920
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting",
+    "Two-layered Frosting",
+    "One-layered Bubblegum Pop",
+    "Three-layered Bubblegum Pop",
+    "Four-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 14,
+   "episode": "Candy Factory",
+   "types": [
+    "order"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 5,
+   "spaces": 49,
+   "stars": [
+    9300,
+    53518,
+    96310
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 15,
+   "episode": "Candy Factory",
+   "types": [
+    "jelly"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 5,
+   "spaces": 63,
+   "stars": [
+    72000,
+    117338,
+    160130
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting",
+    "Two-layered Frosting",
+    "One-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 16,
+   "episode": "Candy Factory",
+   "types": [
+    "jelly",
+    "order"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 5,
+   "spaces": 63,
+   "stars": [
+    94300,
+    133678,
+    176470
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Bubblegum Pop",
+    "Two-layered Bubblegum Pop",
+    "Three-layered Bubblegum Pop",
+    "Four-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 17,
+   "episode": "Candy Factory",
+   "types": [
+    "order"
+   ],
+   "moves": 27,
+   "time": null,
+   "colors": 5,
+   "spaces": 70,
+   "stars": [
+    9620,
+    59653,
+    104820
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting",
+    "Two-layered Frosting",
+    "Four-layered Frosting",
+    "Five-layered Frosting"
+   ]
+  },
+  {
+   "n": 18,
+   "episode": "Candy Factory",
+   "types": [
+    "jelly"
+   ],
+   "moves": 30,
+   "time": null,
+   "colors": 5,
+   "spaces": 73,
+   "stars": [
+    77200,
+    123950,
+    170700
+   ],
+   "difficulty": "Very easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": [
+    "One-layered Bubblegum Pop",
+    "Two-layered Bubblegum Pop",
+    "Three-layered Bubblegum Pop",
+    "Four-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 19,
+   "episode": "Candy Factory",
+   "types": [
+    "jelly",
+    "order"
+   ],
+   "moves": 27,
+   "time": null,
+   "colors": 5,
+   "spaces": 53,
+   "stars": [
+    57500,
+    101778,
+    144570
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Two-layered Frosting",
+    "Three-layered Frosting"
+   ]
+  },
+  {
+   "n": 20,
+   "episode": "Candy Factory",
+   "types": [
+    "order"
+   ],
+   "moves": 28,
+   "time": null,
+   "colors": 5,
+   "spaces": 63,
+   "stars": [
+    12820,
+    53693,
+    98860
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": true,
+   "blockers": [
+    "Two-layered Frosting",
+    "Three-layered Frosting",
+    "Five-layered Frosting",
+    "One-layered Bubblegum Pop",
+    "Three-layered Bubblegum Pop",
+    "Five-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 21,
+   "episode": "Lemonade Lake (Episode 3)",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 15,
+   "time": null,
+   "colors": 4,
+   "spaces": 53,
+   "stars": [
+    30600,
+    61935,
+    96810
+   ],
+   "difficulty": "Very easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": []
+  },
+  {
+   "n": 22,
+   "episode": "Lemonade Lake (Episode 3)",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 5,
+   "spaces": 59,
+   "stars": [
+    31000,
+    71258,
+    114050
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting",
+    "Two-layered Bubblegum Pop",
+    "Three-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 23,
+   "episode": "Lemonade Lake (Episode 3)",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 4,
+   "spaces": 60,
+   "stars": [
+    51000,
+    94058,
+    136850
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 24,
+   "episode": "Lemonade Lake (Episode 3)",
+   "types": [
+    "order"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 5,
+   "spaces": 71,
+   "stars": [
+    15600,
+    53618,
+    96410
+   ],
+   "difficulty": "Very easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting",
+    "Two-layered Frosting",
+    "Three-layered Frosting",
+    "One-layered Bubblegum Pop",
+    "Two-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 25,
+   "episode": "Lemonade Lake (Episode 3)",
+   "types": [
+    "ingredients",
+    "order"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 4,
+   "spaces": 57,
+   "stars": [
+    25100,
+    63118,
+    105910
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting"
+   ]
+  },
+  {
+   "n": 26,
+   "episode": "Lemonade Lake (Episode 3)",
+   "types": [
+    "jelly"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 5,
+   "spaces": 69,
+   "stars": [
+    82000,
+    127578,
+    170370
+   ],
+   "difficulty": "Easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 27,
+   "episode": "Super hard",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 23,
+   "time": null,
+   "colors": 4,
+   "spaces": 61,
+   "stars": [
+    220920,
+    258702,
+    299910
+   ],
+   "difficulty": "Easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 28,
+   "episode": "Lemonade Lake (Episode 3)",
+   "types": [
+    "jelly",
+    "order"
+   ],
+   "moves": 30,
+   "time": null,
+   "colors": 5,
+   "spaces": 61,
+   "stars": [
+    93640,
+    144128,
+    191670
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting",
+    "Five-layered Frosting",
+    "Two-layered Bubblegum Pop",
+    "Three-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 29,
+   "episode": "Lemonade Lake (Episode 3)",
+   "types": [
+    "jelly"
+   ],
+   "moves": 20,
+   "time": null,
+   "colors": 4,
+   "spaces": 44,
+   "stars": [
+    38800,
+    74487,
+    113320
+   ],
+   "difficulty": "Very easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": [
+    "Marmalade"
+   ]
+  },
+  {
+   "n": 30,
+   "episode": "Lemonade Lake (Episode 3)",
+   "types": [
+    "order"
+   ],
+   "moves": 20,
+   "time": null,
+   "colors": 4,
+   "spaces": 59,
+   "stars": [
+    5800,
+    43367,
+    82200
+   ],
+   "difficulty": "Easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Marmalade",
+    "Five-layered Frosting",
+    "Five-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 31,
+   "episode": "Lemonade Lake (Episode 3)",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 20,
+   "time": null,
+   "colors": 4,
+   "spaces": 44,
+   "stars": [
+    140800,
+    175967,
+    214800
+   ],
+   "difficulty": "Very easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": [
+    "Marmalade"
+   ]
+  },
+  {
+   "n": 32,
+   "episode": "Lemonade Lake (Episode 3)",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 29,
+   "time": null,
+   "colors": 5,
+   "spaces": 72,
+   "stars": [
+    21200,
+    65990,
+    112740
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 33,
+   "episode": "Lemonade Lake (Episode 3)",
+   "types": [
+    "jelly"
+   ],
+   "moves": 28,
+   "time": null,
+   "colors": 5,
+   "spaces": 62,
+   "stars": [
+    117160,
+    171712,
+    217670
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Marmalade"
+   ]
+  },
+  {
+   "n": 34,
+   "episode": "Lemonade Lake (Episode 3)",
+   "types": [
+    "ingredients",
+    "order"
+   ],
+   "moves": 29,
+   "time": null,
+   "colors": 5,
+   "spaces": 62,
+   "stars": [
+    126960,
+    169292,
+    215250
+   ],
+   "difficulty": "Easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Marmalade",
+    "One-layered Frosting",
+    "Two-layered Frosting",
+    "Three-layered Frosting",
+    "One-layered Bubblegum Pop",
+    "Two-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 35,
+   "episode": "Lemonade Lake (Episode 3)",
+   "types": [
+    "jelly",
+    "order"
+   ],
+   "moves": 30,
+   "time": null,
+   "colors": 5,
+   "spaces": 81,
+   "stars": [
+    128340,
+    174868,
+    222410
+   ],
+   "difficulty": "Easy",
+   "newThing": false,
+   "finale": true,
+   "blockers": [
+    "Marmalade",
+    "Three-layered Frosting",
+    "One-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 36,
+   "episode": "Sugar Drop",
+   "types": [
+    "order"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 4,
+   "spaces": 48,
+   "stars": [
+    6000,
+    45138,
+    87930
+   ],
+   "difficulty": "Very easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": [
+    "Gumball Machine"
+   ]
+  },
+  {
+   "n": 37,
+   "episode": "Chocolate Mountains",
+   "types": [
+    "jelly",
+    "order"
+   ],
+   "moves": 28,
+   "time": null,
+   "colors": 5,
+   "spaces": 49,
+   "stars": [
+    61120,
+    102553,
+    147720
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Gumball Machine"
+   ]
+  },
+  {
+   "n": 38,
+   "episode": "Super hard",
+   "types": [
+    "ingredients",
+    "order"
+   ],
+   "moves": 23,
+   "time": null,
+   "colors": 4,
+   "spaces": 53,
+   "stars": [
+    35320,
+    72222,
+    113430
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Two-layered Frosting",
+    "Four-layered Frosting",
+    "Gumball Machine"
+   ]
+  },
+  {
+   "n": 39,
+   "episode": "Chocolate Mountains",
+   "types": [
+    "jelly",
+    "order"
+   ],
+   "moves": 32,
+   "time": null,
+   "colors": 5,
+   "spaces": 69,
+   "stars": [
+    79300,
+    122010,
+    168760
+   ],
+   "difficulty": null,
+   "newThing": true,
+   "finale": false,
+   "blockers": [
+    "Two-layered Frosting",
+    "Three-layered Frosting",
+    "Four-layered Frosting",
+    "Two-layered Bubblegum Pop",
+    "Three-layered Bubblegum Pop",
+    "Four-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 40,
+   "episode": "Chocolate Mountains",
+   "types": [
+    "order"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 4,
+   "spaces": 60,
+   "stars": [
+    12000,
+    50818,
+    93610
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Four-layered Bubblegum Pop",
+    "Gumball Machine"
+   ]
+  },
+  {
+   "n": 41,
+   "episode": "Chocolate Mountains",
+   "types": [
+    "jelly",
+    "ingredients"
+   ],
+   "moves": 30,
+   "time": null,
+   "colors": 5,
+   "spaces": 54,
+   "stars": [
+    101200,
+    145110,
+    191860
+   ],
+   "difficulty": "Very easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": [
+    "Marmalade"
+   ]
+  },
+  {
+   "n": 42,
+   "episode": "Sugar Drop",
+   "types": [
+    "order"
+   ],
+   "moves": 26,
+   "time": null,
+   "colors": 4,
+   "spaces": 50,
+   "stars": [
+    13500,
+    56338,
+    99130
+   ],
+   "difficulty": "Somewhat easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Five-layered Frosting",
+    "Gumball Machine"
+   ]
+  },
+  {
+   "n": 43,
+   "episode": "Sugar Drop",
+   "types": [
+    "jelly"
+   ],
+   "moves": 30,
+   "time": null,
+   "colors": 4,
+   "spaces": 24,
+   "stars": [
+    21200,
+    64120,
+    110870
+   ],
+   "difficulty": "Somewhat easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": []
+  },
+  {
+   "n": 44,
+   "episode": "Chocolate Mountains",
+   "types": [
+    "jelly"
+   ],
+   "moves": 32,
+   "time": null,
+   "colors": 5,
+   "spaces": 36,
+   "stars": [
+    29280,
+    83467,
+    131800
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting",
+    "Two-layered Frosting",
+    "Three-layered Frosting"
+   ]
+  },
+  {
+   "n": 45,
+   "episode": "Chocolate Mountains",
+   "types": [
+    "order"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 4,
+   "spaces": 48,
+   "stars": [
+    5000,
+    44378,
+    87170
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Marmalade",
+    "Gumball Machine"
+   ]
+  },
+  {
+   "n": 46,
+   "episode": "Nightmarishly hard",
+   "types": [
+    "jelly"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 4,
+   "spaces": 49,
+   "stars": [
+    99000,
+    140738,
+    183530
+   ],
+   "difficulty": "Hard",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Three-layered Frosting"
+   ]
+  },
+  {
+   "n": 47,
+   "episode": "Chocolate Mountains",
+   "types": [
+    "jelly"
+   ],
+   "moves": 30,
+   "time": null,
+   "colors": 5,
+   "spaces": 49,
+   "stars": [
+    65000,
+    110908,
+    153700
+   ],
+   "difficulty": "Easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": [
+    "Marmalade"
+   ]
+  },
+  {
+   "n": 48,
+   "episode": "Chocolate Mountains",
+   "types": [
+    "order"
+   ],
+   "moves": 24,
+   "time": null,
+   "colors": 5,
+   "spaces": 59,
+   "stars": [
+    7800,
+    46418,
+    89210
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Two-layered Frosting",
+    "Three-layered Frosting",
+    "One-layered Bubblegum Pop",
+    "Two-layered Bubblegum Pop",
+    "Three-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 49,
+   "episode": "Chocolate Mountains",
+   "types": [
+    "jelly",
+    "order"
+   ],
+   "moves": 28,
+   "time": null,
+   "colors": null,
+   "spaces": 49,
+   "stars": [
+    55000,
+    95368,
+    138160
+   ],
+   "difficulty": "Easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Marmalade",
+    "One-layered Frosting",
+    "Gumball Machine"
+   ]
+  },
+  {
+   "n": 50,
+   "episode": "Chocolate Mountains",
+   "types": [
+    "jelly",
+    "order"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 5,
+   "spaces": 71,
+   "stars": [
+    75800,
+    126458,
+    169250
+   ],
+   "difficulty": "Somewhat easy",
+   "newThing": false,
+   "finale": true,
+   "blockers": [
+    "Marmalade",
+    "One-layered Frosting",
+    "Two-layered Frosting",
+    "Three-layered Frosting",
+    "Four-layered Frosting",
+    "One-layered Bubblegum Pop",
+    "Two-layered Bubblegum Pop",
+    "Three-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 51,
+   "episode": "Minty Meadow (Episode 5)",
+   "types": [
+    "order"
+   ],
+   "moves": 23,
+   "time": null,
+   "colors": null,
+   "spaces": 63,
+   "stars": [
+    3900,
+    75000,
+    100000
+   ],
+   "difficulty": "Very easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": [
+    "Marmalade",
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 52,
+   "episode": "Minty Meadow (Episode 5)",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 30,
+   "time": null,
+   "colors": null,
+   "spaces": 63,
+   "stars": [
+    30000,
+    80000,
+    123000
+   ],
+   "difficulty": "Easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Lock",
+    "Marmalade",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 53,
+   "episode": "Minty Meadow (Episode 5)",
+   "types": [
+    "jelly"
+   ],
+   "moves": 21,
+   "time": null,
+   "colors": null,
+   "spaces": 65,
+   "stars": [
+    130000,
+    200000,
+    250000
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Lock",
+    "One-layered Frosting"
+   ]
+  },
+  {
+   "n": 54,
+   "episode": "Minty Meadow (Episode 5)",
+   "types": [
+    "jelly"
+   ],
+   "moves": 21,
+   "time": null,
+   "colors": null,
+   "spaces": 71,
+   "stars": [
+    142000,
+    800000,
+    1000000
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Marmalade",
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 55,
+   "episode": "Sugar Drop",
+   "types": [
+    "order"
+   ],
+   "moves": 20,
+   "time": null,
+   "colors": 4,
+   "spaces": 68,
+   "stars": [
+    8600,
+    42327,
+    81160
+   ],
+   "difficulty": "Somewhat easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 56,
+   "episode": "Minty Meadow (Episode 5)",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 27,
+   "time": null,
+   "colors": null,
+   "spaces": 72,
+   "stars": [
+    30000,
+    145000,
+    175000
+   ],
+   "difficulty": "Somewhat easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Lock",
+    "Marmalade",
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 57,
+   "episode": "Minty Meadow (Episode 5)",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 29,
+   "time": null,
+   "colors": null,
+   "spaces": 51,
+   "stars": [
+    90000,
+    125000,
+    175000
+   ],
+   "difficulty": "Medium",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Liquorice Lock"
+   ]
+  },
+  {
+   "n": 58,
+   "episode": "Minty Meadow (Episode 5)",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": null,
+   "spaces": 58,
+   "stars": [
+    30000,
+    60000,
+    70000
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Marmalade",
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 59,
+   "episode": "Sugar Drop",
+   "types": [
+    "jelly"
+   ],
+   "moves": 21,
+   "time": null,
+   "colors": null,
+   "spaces": 67,
+   "stars": [
+    134000,
+    300000,
+    400000
+   ],
+   "difficulty": "Somewhat hard",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Lock",
+    "One-layered Frosting",
+    "Five-layered Frosting"
+   ]
+  },
+  {
+   "n": 60,
+   "episode": "Sugar Drop",
+   "types": [
+    "order"
+   ],
+   "moves": 33,
+   "time": null,
+   "colors": null,
+   "spaces": 71,
+   "stars": [
+    5000,
+    45000,
+    60000
+   ],
+   "difficulty": "Easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Marmalade",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 61,
+   "episode": "Minty Meadow (Episode 5)",
+   "types": [
+    "jelly"
+   ],
+   "moves": 33,
+   "time": null,
+   "colors": null,
+   "spaces": 66,
+   "stars": [
+    132000,
+    225000,
+    250000
+   ],
+   "difficulty": "Somewhat easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 62,
+   "episode": "Minty Meadow (Episode 5)",
+   "types": [
+    "order"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": 4,
+   "spaces": 73,
+   "stars": [
+    9300,
+    47358,
+    90150
+   ],
+   "difficulty": "Medium",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 63,
+   "episode": "Minty Meadow (Episode 5)",
+   "types": [
+    "jelly"
+   ],
+   "moves": 28,
+   "time": null,
+   "colors": null,
+   "spaces": 61,
+   "stars": [
+    108000,
+    275000,
+    300000
+   ],
+   "difficulty": "Easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Marmalade",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 64,
+   "episode": "Super hard",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 19,
+   "time": null,
+   "colors": null,
+   "spaces": 79,
+   "stars": [
+    160000,
+    300000,
+    400000
+   ],
+   "difficulty": "Somewhat easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Liquorice Lock",
+    "Marmalade"
+   ]
+  },
+  {
+   "n": 65,
+   "episode": "Minty Meadow (Episode 5)",
+   "types": [
+    "order"
+   ],
+   "moves": 16,
+   "time": null,
+   "colors": null,
+   "spaces": 67,
+   "stars": [
+    8300,
+    25000,
+    40000
+   ],
+   "difficulty": "Easy",
+   "newThing": true,
+   "finale": true,
+   "blockers": [
+    "Marmalade",
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 66,
+   "episode": "Sugar Drop",
+   "types": [
+    "jelly"
+   ],
+   "moves": 26,
+   "time": null,
+   "colors": null,
+   "spaces": 44,
+   "stars": [
+    92000,
+    100000,
+    150000
+   ],
+   "difficulty": "Very easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": []
+  },
+  {
+   "n": 67,
+   "episode": "Easter Bunny Hills",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 30,
+   "time": null,
+   "colors": null,
+   "spaces": 67,
+   "stars": [
+    30000,
+    50000,
+    65000
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl"
+   ]
+  },
+  {
+   "n": 68,
+   "episode": "Easter Bunny Hills",
+   "types": [
+    "jelly"
+   ],
+   "moves": 20,
+   "time": null,
+   "colors": null,
+   "spaces": 47,
+   "stars": [
+    94000,
+    110000,
+    160000
+   ],
+   "difficulty": "Somewhat easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Liquorice Lock"
+   ]
+  },
+  {
+   "n": 69,
+   "episode": "Easter Bunny Hills",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 26,
+   "time": null,
+   "colors": null,
+   "spaces": 65,
+   "stars": [
+    10000,
+    90000,
+    120000
+   ],
+   "difficulty": "Very easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": [
+    "Liquorice Lock",
+    "Marmalade",
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 70,
+   "episode": "Easter Bunny Hills",
+   "types": [
+    "jelly"
+   ],
+   "moves": 30,
+   "time": null,
+   "colors": null,
+   "spaces": 60,
+   "stars": [
+    120000,
+    150000,
+    190000
+   ],
+   "difficulty": "Easy",
+   "newThing": true,
+   "finale": false,
+   "blockers": [
+    "Liquorice Lock",
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 71,
+   "episode": "Easter Bunny Hills",
+   "types": [
+    "order"
+   ],
+   "moves": 32,
+   "time": null,
+   "colors": null,
+   "spaces": 57,
+   "stars": [
+    2500,
+    3500,
+    6500
+   ],
+   "difficulty": "Somewhat easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Marmalade",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 72,
+   "episode": "Nightmarishly hard",
+   "types": [
+    "jelly"
+   ],
+   "moves": 20,
+   "time": null,
+   "colors": null,
+   "spaces": 57,
+   "stars": [
+    114000,
+    230000,
+    240000
+   ],
+   "difficulty": "Hard",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 73,
+   "episode": "Sugar Drop",
+   "types": [
+    "jelly"
+   ],
+   "moves": 30,
+   "time": null,
+   "colors": null,
+   "spaces": 65,
+   "stars": [
+    156000,
+    270000,
+    300000
+   ],
+   "difficulty": "Medium",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Liquorice Lock",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 74,
+   "episode": "Easter Bunny Hills",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 30,
+   "time": null,
+   "colors": null,
+   "spaces": 55,
+   "stars": [
+    30000,
+    50000,
+    70000
+   ],
+   "difficulty": "Somewhat easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Lock",
+    "Marmalade",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 75,
+   "episode": "Super hard",
+   "types": [
+    "jelly"
+   ],
+   "moves": 16,
+   "time": null,
+   "colors": null,
+   "spaces": 42,
+   "stars": [
+    84000,
+    95000,
+    100000
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "One-layered Frosting"
+   ]
+  },
+  {
+   "n": 76,
+   "episode": "Easter Bunny Hills",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 20,
+   "time": null,
+   "colors": null,
+   "spaces": 35,
+   "stars": [
+    4000,
+    10000,
+    15000
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Marmalade",
+    "One-layered Frosting"
+   ]
+  },
+  {
+   "n": 77,
+   "episode": "Easter Bunny Hills",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 27,
+   "time": null,
+   "colors": null,
+   "spaces": 59,
+   "stars": [
+    20000,
+    30000,
+    35000
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "One-layered Frosting"
+   ]
+  },
+  {
+   "n": 78,
+   "episode": "Sugar Drop",
+   "types": [
+    "jelly"
+   ],
+   "moves": 26,
+   "time": null,
+   "colors": null,
+   "spaces": 44,
+   "stars": [
+    114000,
+    120000,
+    130000
+   ],
+   "difficulty": "Medium",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 79,
+   "episode": "Easter Bunny Hills",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 28,
+   "time": null,
+   "colors": null,
+   "spaces": 73,
+   "stars": [
+    40000,
+    60000,
+    70000
+   ],
+   "difficulty": "Easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Marmalade",
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 80,
+   "episode": "Easter Bunny Hills",
+   "types": [
+    "order"
+   ],
+   "moves": 17,
+   "time": null,
+   "colors": null,
+   "spaces": 49,
+   "stars": [
+    2200,
+    4000,
+    6000
+   ],
+   "difficulty": "Medium",
+   "newThing": false,
+   "finale": true,
+   "blockers": [
+    "Liquorice Swirl",
+    "Liquorice Lock",
+    "Marmalade",
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 1001,
+   "episode": "Caramel Keep",
+   "types": [
+    "jelly"
+   ],
+   "moves": 22,
+   "time": null,
+   "colors": 5,
+   "spaces": 75,
+   "stars": [
+    87420,
+    128482,
+    169690
+   ],
+   "difficulty": "Medium",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Two-layered Frosting",
+    "Two-layered Toffee Swirl",
+    "Three-layered Rainbow Twist",
+    "One-layered Jelly Jar"
+   ]
+  },
+  {
+   "n": 1002,
+   "episode": "Caramel Keep",
+   "types": [
+    "order"
+   ],
+   "moves": 19,
+   "time": null,
+   "colors": 4,
+   "spaces": 71,
+   "stars": [
+    13420,
+    52162,
+    93370
+   ],
+   "difficulty": "Somewhat hard",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Two-layered Frosting",
+    "One-layered Rainbow Twist",
+    "Two-layered Rainbow Twist",
+    "Gumball Machine"
+   ]
+  },
+  {
+   "n": 1003,
+   "episode": "Sugar Drop",
+   "types": [
+    "jelly"
+   ],
+   "moves": 16,
+   "time": null,
+   "colors": null,
+   "spaces": 65,
+   "stars": [
+    30000,
+    50000,
+    90000
+   ],
+   "difficulty": "Hard",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting",
+    "Two-layered Frosting"
+   ]
+  },
+  {
+   "n": 1004,
+   "episode": "Caramel Keep",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 20,
+   "time": null,
+   "colors": null,
+   "spaces": 59,
+   "stars": [
+    40000,
+    60000,
+    80000
+   ],
+   "difficulty": "Somewhat easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Marmalade",
+    "Five-layered Frosting",
+    "One-layered Toffee Swirl",
+    "Three-layered Toffee Swirl",
+    "One-layered Chest",
+    "Three-layered Chest",
+    "Five-layered Chest"
+   ]
+  },
+  {
+   "n": 1005,
+   "episode": "Caramel Keep",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 15,
+   "time": null,
+   "colors": null,
+   "spaces": 80,
+   "stars": [
+    40000,
+    80000,
+    115000
+   ],
+   "difficulty": "Very easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Lock",
+    "Marmalade",
+    "One-layered Frosting",
+    "Three-layered Frosting"
+   ]
+  },
+  {
+   "n": 1006,
+   "episode": "Legendary",
+   "types": [
+    "jelly"
+   ],
+   "moves": 16,
+   "time": null,
+   "colors": null,
+   "spaces": 81,
+   "stars": [
+    100000,
+    150000,
+    250000
+   ],
+   "difficulty": "Very hard",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Liquorice Lock",
+    "Marmalade",
+    "Two-layered Frosting",
+    "Three-layered Frosting"
+   ]
+  },
+  {
+   "n": 1007,
+   "episode": "Caramel Keep",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 15,
+   "time": null,
+   "colors": null,
+   "spaces": 61,
+   "stars": [
+    60000,
+    100000,
+    130000
+   ],
+   "difficulty": "Medium",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Three-layered Toffee Swirl",
+    "Four-layered Toffee Swirl",
+    "Three-layered Bubblegum Pop",
+    "Four-layered Bubblegum Pop",
+    "Five-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 1008,
+   "episode": "Caramel Keep",
+   "types": [
+    "order"
+   ],
+   "moves": 17,
+   "time": null,
+   "colors": 5,
+   "spaces": 72,
+   "stars": [
+    10460,
+    52352,
+    98310
+   ],
+   "difficulty": "Somewhat easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "One-layered Toffee Swirl",
+    "Two-layered Toffee Swirl",
+    "One-layered Bubblegum Pop",
+    "Two-layered Bubblegum Pop",
+    "Three-layered Bubblegum Pop",
+    "Four-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 1009,
+   "episode": "Variable",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 18,
+   "time": null,
+   "colors": null,
+   "spaces": 81,
+   "stars": [
+    20000,
+    40000,
+    70000
+   ],
+   "difficulty": null,
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Two-layered Frosting",
+    "Three-layered Frosting",
+    "One-layered Toffee Swirl",
+    "Three-layered Toffee Swirl"
+   ]
+  },
+  {
+   "n": 1010,
+   "episode": "Sugar Drop",
+   "types": [
+    "order"
+   ],
+   "moves": 15,
+   "time": null,
+   "colors": null,
+   "spaces": 81,
+   "stars": [
+    16900,
+    100000,
+    200000
+   ],
+   "difficulty": "Hard",
+   "newThing": false,
+   "finale": true,
+   "blockers": [
+    "Liquorice Lock",
+    "Marmalade",
+    "Three-layered Frosting",
+    "Four-layered Frosting",
+    "Three-layered Bubblegum Pop",
+    "Four-layered Bubblegum Pop"
+   ]
+  },
+  {
+   "n": 1011,
+   "episode": "Tasty Treasury",
+   "types": [
+    "jelly"
+   ],
+   "moves": 15,
+   "time": null,
+   "colors": 4,
+   "spaces": 77,
+   "stars": [
+    146920,
+    202202,
+    243410
+   ],
+   "difficulty": "Somewhat hard",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Liquorice Lock",
+    "One-layered Frosting",
+    "Two-layered Frosting",
+    "Three-layered Frosting",
+    "Two-layered Chest",
+    "Five-layered Chest"
+   ]
+  },
+  {
+   "n": 1012,
+   "episode": "Tasty Treasury",
+   "types": [
+    "jelly"
+   ],
+   "moves": 18,
+   "time": null,
+   "colors": 5,
+   "spaces": 72,
+   "stars": [
+    100840,
+    137065,
+    176690
+   ],
+   "difficulty": "Medium",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Four-layered Frosting",
+    "Three-layered Rainbow Twist"
+   ]
+  },
+  {
+   "n": 1013,
+   "episode": "Tasty Treasury",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 20,
+   "time": null,
+   "colors": null,
+   "spaces": 56,
+   "stars": [
+    10000,
+    25000,
+    50000
+   ],
+   "difficulty": "Easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl"
+   ]
+  },
+  {
+   "n": 1014,
+   "episode": "Extremely hard",
+   "types": [
+    "jelly"
+   ],
+   "moves": 15,
+   "time": null,
+   "colors": 5,
+   "spaces": 77,
+   "stars": [
+    106720,
+    146930,
+    184180
+   ],
+   "difficulty": null,
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Liquorice Lock",
+    "Marmalade"
+   ]
+  },
+  {
+   "n": 1015,
+   "episode": "Legendary",
+   "types": [
+    "jelly"
+   ],
+   "moves": 26,
+   "time": null,
+   "colors": 5,
+   "spaces": 77,
+   "stars": [
+    123000,
+    165458,
+    208250
+   ],
+   "difficulty": "Easy",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Three-layered Frosting",
+    "Five-layered Frosting",
+    "Two-layered Rainbow Twist",
+    "Four-layered Rainbow Twist"
+   ]
+  },
+  {
+   "n": 5001,
+   "episode": "Celestial Cinema",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 18,
+   "time": null,
+   "colors": null,
+   "spaces": 71,
+   "stars": [
+    10000,
+    120000,
+    135000
+   ],
+   "difficulty": "Nearly impossible",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Liquorice Lock",
+    "One-layered Toffee Swirl",
+    "Two-layered Toffee Swirl",
+    "Two-layered Crystal",
+    "Three-layered Chest",
+    "Five-layered Chest"
+   ]
+  },
+  {
+   "n": 5002,
+   "episode": "Extremely hard",
+   "types": [
+    "order"
+   ],
+   "moves": 23,
+   "time": null,
+   "colors": null,
+   "spaces": 68,
+   "stars": [
+    50000,
+    75000,
+    100000
+   ],
+   "difficulty": null,
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Toffee Swirl",
+    "Two-layered Toffee Swirl",
+    "Cake Bomb"
+   ]
+  },
+  {
+   "n": 5003,
+   "episode": "Celestial Cinema",
+   "types": [
+    "jelly",
+    "ingredients"
+   ],
+   "moves": 26,
+   "time": null,
+   "colors": null,
+   "spaces": 74,
+   "stars": [
+    164000,
+    300000,
+    400000
+   ],
+   "difficulty": "Somewhat hard",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Three-layered Bubblegum Pop",
+    "Four-layered Bubblegum Pop",
+    "One-layered Chest",
+    "Two-layered Chest",
+    "Three-layered Chest",
+    "Four-layered Chest",
+    "Five-layered Chest"
+   ]
+  },
+  {
+   "n": 5004,
+   "episode": "Celestial Cinema",
+   "types": [
+    "jelly"
+   ],
+   "moves": 20,
+   "time": null,
+   "colors": null,
+   "spaces": 78,
+   "stars": [
+    156000,
+    500000,
+    1000000
+   ],
+   "difficulty": "Hard",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Liquorice Lock",
+    "Marmalade",
+    "Cake Bomb",
+    "One-layered Chest"
+   ]
+  },
+  {
+   "n": 5005,
+   "episode": "Celestial Cinema",
+   "types": [
+    "jelly",
+    "ingredients"
+   ],
+   "moves": 30,
+   "time": null,
+   "colors": null,
+   "spaces": 62,
+   "stars": [
+    178000,
+    290000,
+    320000
+   ],
+   "difficulty": "Hard",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Marmalade",
+    "Four-layered Toffee Swirl",
+    "One-layered Crystal",
+    "Two-layered Crystal",
+    "Three-layered Crystal",
+    "Liquorice Shell",
+    "Bobber"
+   ]
+  },
+  {
+   "n": 5006,
+   "episode": "Super hard",
+   "types": [
+    "order"
+   ],
+   "moves": 23,
+   "time": null,
+   "colors": null,
+   "spaces": 69,
+   "stars": [
+    10000,
+    20000,
+    30000
+   ],
+   "difficulty": "Hard",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Marmalade",
+    "Two-layered Frosting",
+    "Liquorice Shell",
+    "Candy Cane Fence"
+   ]
+  },
+  {
+   "n": 5007,
+   "episode": "Celestial Cinema",
+   "types": [
+    "jelly"
+   ],
+   "moves": 28,
+   "time": null,
+   "colors": null,
+   "spaces": 69,
+   "stars": [
+    15000,
+    125000,
+    135000
+   ],
+   "difficulty": "Somewhat hard",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Two-layered Frosting",
+    "Three-layered Frosting",
+    "Four-layered Frosting",
+    "Three-layered Toffee Swirl",
+    "Four-layered Toffee Swirl"
+   ]
+  },
+  {
+   "n": 5008,
+   "episode": "Extremely hard",
+   "types": [
+    "jelly"
+   ],
+   "moves": 20,
+   "time": null,
+   "colors": 5,
+   "spaces": 79,
+   "stars": [
+    159840,
+    201265,
+    240890
+   ],
+   "difficulty": null,
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Toffee Swirl",
+    "Two-layered Toffee Swirl",
+    "Five-layered Toffee Swirl",
+    "Five-layered Bubblegum Pop",
+    "Cake Bomb",
+    "Bobber",
+    "Candy Cane Fence",
+    "Two-layered Jelly Jar"
+   ]
+  },
+  {
+   "n": 5009,
+   "episode": "Celestial Cinema",
+   "types": [
+    "order"
+   ],
+   "moves": 25,
+   "time": null,
+   "colors": null,
+   "spaces": 63,
+   "stars": [
+    10000,
+    72000,
+    930000
+   ],
+   "difficulty": "Very hard",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Three-layered Frosting",
+    "One-layered Toffee Swirl",
+    "Cake Bomb",
+    "Candy Cane Fence"
+   ]
+  },
+  {
+   "n": 5010,
+   "episode": "Celestial Cinema",
+   "types": [
+    "jelly"
+   ],
+   "moves": 23,
+   "time": null,
+   "colors": null,
+   "spaces": 60,
+   "stars": [
+    10000,
+    300000,
+    350000
+   ],
+   "difficulty": "Nearly impossible",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Liquorice Lock",
+    "Three-layered Frosting"
+   ]
+  },
+  {
+   "n": 5011,
+   "episode": "Super hard",
+   "types": [
+    "jelly",
+    "order"
+   ],
+   "moves": 19,
+   "time": null,
+   "colors": null,
+   "spaces": 69,
+   "stars": [
+    47000,
+    195000,
+    230000
+   ],
+   "difficulty": "Very hard",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "One-layered Frosting",
+    "Two-layered Frosting",
+    "Three-layered Frosting",
+    "Cake Bomb"
+   ]
+  },
+  {
+   "n": 5012,
+   "episode": "Super hard",
+   "types": [
+    "ingredients"
+   ],
+   "moves": 19,
+   "time": null,
+   "colors": null,
+   "spaces": 69,
+   "stars": [
+    20000,
+    40000,
+    60000
+   ],
+   "difficulty": "Very hard",
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Liquorice Lock",
+    "Candy Cane Fence"
+   ]
+  },
+  {
+   "n": 5013,
+   "episode": "Extremely hard",
+   "types": [
+    "order"
+   ],
+   "moves": 16,
+   "time": null,
+   "colors": null,
+   "spaces": 63,
+   "stars": [
+    40000,
+    140000,
+    180000
+   ],
+   "difficulty": null,
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "Liquorice Lock",
+    "Four-layered Toffee Swirl",
+    "Five-layered Toffee Swirl",
+    "Three-layered Candy Cane Curl"
+   ]
+  },
+  {
+   "n": 5014,
+   "episode": "Extremely hard",
+   "types": [
+    "jelly",
+    "ingredients"
+   ],
+   "moves": 15,
+   "time": null,
+   "colors": null,
+   "spaces": 72,
+   "stars": [
+    50000,
+    100000,
+    150000
+   ],
+   "difficulty": null,
+   "newThing": false,
+   "finale": false,
+   "blockers": [
+    "Liquorice Swirl",
+    "One-layered Frosting"
+   ]
+  },
+  {
+   "n": 5015,
+   "episode": "Celestial Cinema",
+   "types": [
+    "jelly"
+   ],
+   "moves": 15,
+   "time": null,
+   "colors": null,
+   "spaces": 55,
+   "stars": [
+    23000,
+    220000,
+    260000
+   ],
+   "difficulty": "Nearly impossible",
+   "newThing": false,
+   "finale": true,
+   "blockers": [
+    "Three-layered Frosting",
+    "Four-layered Frosting",
+    "Bobber"
+   ]
+  }
+ ]
+}
