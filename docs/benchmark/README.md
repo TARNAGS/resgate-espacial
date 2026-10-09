@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | Guia de leitura dos benchmarks |
-| Versão | 1.2 |
+| Versão | 1.3 |
 | Data | 08/10/2026 |
 | Status | Referência |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -64,6 +64,7 @@ O **Super Mario World** (1990) não é de nenhuma das duas famílias: é uma **r
 | **Temple Run** (2011) | O segundo casual: a corrida infinita com perseguição, comparada ao Jetpack Joyride | [temple-run.md](temple-run.md): contado pelos criadores (GDC 2014, entrevistas dos 10 anos) | [DatT92pPFFCnnDwG3vLoBZ](https://claude.ai/artifact/DatT92pPFFCnnDwG3vLoBZ) | 3 diagramas | [#108](https://github.com/TARNAGS/resgate-espacial/issues/108) |
 | **Geometry Dash** (2013) | O casual mais próximo do nosso: dificuldade com fases fixas, checkpoints e ranking, modelo grátis + pago | [geometry-dash.md](geometry-dash.md): o criador (entrevistas, 231 respostas em duas AMAs, guia de avaliação de fases) e as 22 fases oficiais pela wiki | [Y7Y1rAykSbfkfXuaJdSXRC](https://claude.ai/artifact/Y7Y1rAykSbfkfXuaJdSXRC) | 5 diagramas: a curva, o mundo de 10 fases, checkpoints, o funil e a linha do tempo | [#127](https://github.com/TARNAGS/resgate-espacial/issues/127) |
 | **Super Mario World** (1990) | Referência de como ensinar sem tutorial, a pedido do Fernando | [super-mario-world.md](super-mario-world.md): a equipe contando como construiu (sete entrevistas Iwata Asks lidas inteiras), os 31 textos do jogo classificados, o primeiro mundo aula por aula e as lições de design do Super Mario Maker 2 | [7LSubtYDh5iEywjTtB8hP3](https://claude.ai/artifact/7LSubtYDh5iEywjTtB8hP3) | 5 diagramas: onde o jogo fala, o primeiro mundo, os quatro tempos, as camadas de erro e a ajuda depois do erro | [#128](https://github.com/TARNAGS/resgate-espacial/issues/128) |
+| **Candy Crush Saga** (2012), **Plants vs. Zombies** (2009) e **Subway Surfers** (2012) | Os três casuais do ICP que faltavam (D-028): mapa longo, metas por fase e o que faz voltar | [casuais-do-icp.md](casuais-do-icp.md): comparativo, com 110 fases do Candy Crush pela wiki, o molde dos mundos do Plants vs. Zombies, a palestra do criador e as entrevistas da King e da SYBO | — (comparativo, sem página própria) | — | [#99](https://github.com/TARNAGS/resgate-espacial/issues/99) |
 
 As páginas de leitura ficam em claude.ai/artifact/ seguido do código da tabela, todas privadas. Cada pasta tem uma cópia da página (`pagina-de-leitura.html`) e as ferramentas que geram as imagens (`ferramentas/`, com um README de como regenerar). Os arquivos originais dos jogos ficam fora do Git.
 
@@ -125,6 +126,8 @@ Cada insight junta evidências de mais de um jogo. As fontes estão no documento
 
 **O que isso sugere para nós:** já temos um serrote natural (voo tenso, pouso no posto ou na tripulação, voo de novo); os pousos são os nossos "veículos". Em cada mundo, um respiro por volta da fase 5 e uma fase-chefe na 10 (documento 08). E não encher uma fase de obstáculos sem um ponto de alívio.
 
+**Reforço dos casuais (09/10, [comparativo](casuais-do-icp.md)):** no Plants vs. Zombies, a fase 5 de cada mundo é um respiro com outra regra, e a 10 é especial; no Candy Crush, os picos de dificuldade vêm isolados no meio de fases fáceis, e o jogo avisa no mapa.
+
 ### 4.5 Quanto custa errar é uma decisão de design
 
 - **Erro fatal:** no Crazy Gravity, encostar explode a nave e a carga volta para a origem; no Jetpack Joyride, um golpe acaba a corrida; no nosso jogo, hoje, também.
@@ -153,6 +156,8 @@ Cada insight junta evidências de mais de um jogo. As fontes estão no documento
 - **Geometry Dash:** 19 das 22 fases apresentam uma mecânica, em trecho amplo e calmo; no Geometry Dash World, um mundo de 10 fases de cerca de 30 s, cada uma com uma novidade só.
 
 **O que isso sugere para nós:** no documento 08, cada fase do mundo ganha uma frase de destaque; a novidade aparece primeiro numa fase curta e segura e só depois é combinada com outras.
+
+**Reforço dos casuais (09/10):** o Candy Crush apresenta uma novidade a cada 3 ou 4 fases nas 80 primeiras e só combina depois; o Plants vs. Zombies dá uma planta e apresenta um zumbi por vez, e começa com uma linha só no gramado.
 
 ### 4.8 A mecânica primeiro, o tema depois, e o conteúdo feito para crescer
 
@@ -219,6 +224,18 @@ Cada insight junta evidências de mais de um jogo. As fontes estão no documento
 
 **O que isso sugere para nós:** a D-031 ("sem oferta de ajuda") fica na companhia do Super Mario World, mas a mesma equipe mudou de ideia com números testados. Testar uma oferta opcional depois de N mortes no mesmo ponto, com N medido no playtest, e uma DEMO mais modesta. Como a nossa física é menos intuitiva que o pulo do Mario, talvez precisemos de mais ajuda, não de menos.
 
+**Reforço dos casuais (09/10):** a sétima técnica do criador do Plants vs. Zombies é a mensagem que se adapta: a dica aparece só quando o jogador erra, com no máximo oito palavras na tela.
+
+### 4.15 Diversão e dificuldade se medem separadas
+
+A King mede a diversão de cada fase pelo tempo até passar e pelo tempo até abandonar, e a dificuldade pelo perfil de quem joga (vitórias, derrotas e tentativas). As 100 fases menos divertidas são consertadas sempre, e isso aumentou o engajamento. A fase 65, a mais difícil do lançamento, foi a que mais vendeu e a que mais fez gente desistir; a versão mais fácil segurou os jogadores por mais tempo. Conclusões dela: fases difíceis demais "nunca compensam" no longo prazo, e quanto mais longa a fase, menor a chance de ser divertida ([comparativo, seção 2.3](casuais-do-icp.md)).
+
+**O que isso sugere para nós:** a telemetria já mede tentativas e mortes ([#91](https://github.com/TARNAGS/resgate-espacial/issues/91)); falta olhar o tempo até passar e o tempo até abandonar por fase, e fazer da lista das fases menos divertidas um passo de cada rodada de playtest (P-008, [#56](https://github.com/TARNAGS/resgate-espacial/issues/56)).
+
+### 4.16 Um molde para o mundo de 10 fases
+
+O Plants vs. Zombies repete o mesmo ritmo em cada mundo de 10 fases: novidades nas primeiras, um respiro com regra diferente na 5, um pouco de história na 9 e uma fase especial na 10, que entrega a peça do mundo seguinte. Cada mundo muda uma regra do cenário. O Candy Crush faz parecido por episódio: a novidade entra na fase de abertura. É a resposta mais concreta, entre os estudos, para o design dos nossos mundos (D-020, documento 08).
+
 ## 5. Onde os estudos discordam
 
 | Tema | De um lado | Do outro | Onde estamos |
@@ -250,7 +267,7 @@ Cada insight junta evidências de mais de um jogo. As fontes estão no documento
 
 ## 7. Decisões que esperam o Fernando
 
-Os cinco cartões estão em "Para conversar". Cada um tem quatro recomendações.
+Os seis cartões estão em "Para conversar". Cada um tem quatro recomendações.
 
 | Cartão | Recomendação | Ligado a |
 |---|---|---|
@@ -274,6 +291,10 @@ Os cinco cartões estão em "Para conversar". Cada um tem quatro recomendações
 | | 2. No nível 1, dicas presas ao lugar (um passo antes de onde servem) e um começo em que o jogador vive o propulsor de qualquer jeito | D-031; D-027; #97; mundo 1 |
 | | 3. Uma DEMO mais modesta, no ritmo de um jogador comum | D-031; #104; #92 |
 | | 4. Refazer o nível 1 por último, depois das fases 4 a 10, e testar com quem nunca jogou, em silêncio | Mundo 1; documento 07; #44 |
+| [#99](https://github.com/TARNAGS/resgate-espacial/issues/99) Casuais (Candy Crush, Plants vs. Zombies, Subway Surfers) | 1. Molde do mundo de 10 fases: novidades nas primeiras, respiro com outra regra na 5, fase especial na 10, e cada mundo mudando uma regra do cenário | D-020; documento 08; P-012 |
+| | 2. Estrelas: a primeira é concluir; a segunda e a terceira, um tempo de mestre | P-006 ([#53](https://github.com/TARNAGS/resgate-espacial/issues/53)); D-024 |
+| | 3. Medir por fase o tempo até passar e o tempo até abandonar, e consertar as fases menos divertidas a cada rodada | P-008 ([#56](https://github.com/TARNAGS/resgate-espacial/issues/56)); [#91](https://github.com/TARNAGS/resgate-espacial/issues/91) |
+| | 4. Dica só depois do erro, com até 8 palavras (reforça a [#128](https://github.com/TARNAGS/resgate-espacial/issues/128)) | D-031 |
 | Crazy Gravity (sem cartão) | Ritmo em serrote em cada mundo, uma ideia por fase, forças em vez de inimigos, ensinar pela estrutura | Documento 10, lições 1 a 6; documento 08 |
 
 **Se for decidir só três agora** (recomendação do Claude):
@@ -286,6 +307,8 @@ Os cinco cartões estão em "Para conversar". Cada um tem quatro recomendações
 
 **Da #127, a primeira:** o modelo de checkpoints da fase grande (item 1), porque o protótipo de fase grande é o próximo teste definido na revisão do Lean Canvas, e ele mantém o ranking por tempo puro.
 
+**Da #99, a primeira:** o molde do mundo de 10 fases (item 1), porque o design dos mundos (documento 08) é a próxima construção de conteúdo, e o molde já traz o respiro e a fase especial testados num jogo de 50 fases.
+
 ## 8. Lacunas e grau de confiança
 
 | Estudo | O que é sólido | O que é aproximado ou faltou |
@@ -296,14 +319,15 @@ Os cinco cartões estão em "Para conversar". Cada um tem quatro recomendações
 | Super Mario World | A equipe contando como fez (sete entrevistas Iwata Asks lidas inteiras); os 31 textos do jogo pela wiki | A transcrição do vídeo da Eurogamer não carregou; quase tudo o que os criadores dizem sobre ensinar fala do Super Mario Bros. e dos jogos seguintes, não do Super Mario World; os quatro tempos aplicados ao Super Mario World são leitura nossa |
 | Temple Run | As falas dos criadores (GDC 2014, Vice 2021, TechCrunch 2012) | A transcrição da entrevista da Shacknews falhou; GameSpot, Wired, Polygon e VentureBeat estavam bloqueadas ou fora do ar; o dado de público majoritariamente feminino vem só do título de uma matéria da The Verge (2014) |
 | Geometry Dash | As 22 fases oficiais e o World, pela wiki; as falas do criador (Cult of Mac, Game Developer, 231 respostas nas AMAs) | O relógio das fases de plataforma correr nas mortes é inferido; o momento dos anúncios do Lite vem de resenhas que não batem; o lucro vem da imprensa sueca; a idade do público, de sinais indiretos; acusações recentes sobre a comunidade, nas avaliações do Steam, não apareceram na imprensa |
+| Casuais (comparativo) | As 110 fases do Candy Crush pela wiki; o molde dos mundos do Plants vs. Zombies pela wiki; a palestra da King na GDC 2024 | A dificuldade do Candy Crush é a nota dos fãs; as técnicas do Plants vs. Zombies vêm de notas sobre a palestra; nenhuma duração foi medida; as entrevistas da SYBO são relatos |
 
 Em todos: nenhum programa de jogo foi executado, os arquivos de jogo foram baixados só com a permissão do Fernando (no Geometry Dash, nenhum), e as imagens são redesenhos com crédito, não capturas de tela.
 
 ## 9. O que falta estudar
 
-Faltam três casuais do ICP no cartão [#99](https://github.com/TARNAGS/resgate-espacial/issues/99): Subway Surfers, Candy Crush Saga e Plants vs. Zombies.
+Os cinco casuais do ICP estão estudados: Jetpack Joyride, Temple Run e, no comparativo de 09/10/2026, Candy Crush Saga, Plants vs. Zombies e Subway Surfers ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)).
 
-**Proposta de ordem:** o Geometry Dash (08/10/2026) já respondeu parte da pergunta sobre fases fixas: a curva fase a fase, um mundo de 10 fases e o treino com checkpoints. O Candy Crush Saga e o Plants vs. Zombies ainda respondem o que ele não tem: um mapa longo, com centenas de fases, e metas por fase em estrelas. O Subway Surfers, terceira corrida infinita, pode ser um estudo comparativo rápido ao lado do Jetpack Joyride e do Temple Run.
+**Para aprofundar, se o Fernando quiser:** o estudo completo do Plants vs. Zombies (as 50 fases, mundo a mundo), que é o que mais ensina para o design dos nossos mundos.
 
 ## 10. Como os estudos foram feitos
 
@@ -328,11 +352,13 @@ Faltam três casuais do ICP no cartão [#99](https://github.com/TARNAGS/resgate-
 | 07/10/2026 | Na revisão do Lean Canvas, o Geometry Dash entra na lista (#127) |
 | 08/10/2026 | Estudo do Geometry Dash (#127): a curva das 22 fases, o mundo de 10 fases, checkpoints e ranking, o modelo grátis + pago; insight 4.13 neste guia |
 | 08/10/2026 | Estudo do Super Mario World (#128), a pedido do Fernando: como o jogo ensina sem tutorial; insight 4.14 neste guia |
+| 09/10/2026 | Comparativo dos três casuais que faltavam ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)): Candy Crush Saga, Plants vs. Zombies e Subway Surfers; insights 4.15 e 4.16 neste guia |
 
 ## Histórico de versões
 
 | Versão | Data | O que mudou |
 |---|---|---|
 | 1.0 | 06/10/2026 | Primeira versão: os quatro estudos, a skill, 12 insights, divergências, validações, decisões pendentes, lacunas e o que falta estudar |
+| 1.3 | 09/10/2026 | O comparativo dos casuais entra ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)): tabela de estudos, reforços nos insights 4.4, 4.7 e 4.14, os insights 4.15 (diversão e dificuldade medidas separadas) e 4.16 (o molde do mundo de 10 fases), as recomendações, a lacuna e o que falta estudar |
 | 1.2 | 08/10/2026 | O Super Mario World entra como sexto estudo (referência de método): tabelas, evidências em seis insights, o insight 4.14 (ajuda só depois do erro), divergências, validações, as recomendações da #128 e lacunas |
 | 1.1 | 08/10/2026 | O Geometry Dash entra como quinto estudo: tabelas, evidências em oito insights, o insight 4.13 (checkpoint e ranking), três divergências, validações, as recomendações da #127, lacunas e a ordem do que falta estudar |

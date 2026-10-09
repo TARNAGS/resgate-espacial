@@ -5,7 +5,7 @@
 | Documento | Benchmark comparativo dos casuais do ICP — Candy Crush Saga, Plants vs. Zombies e Subway Surfers |
 | Versão | 1.0 |
 | Data | 09/10/2026 |
-| Status | Referência (em construção: os jogos entram um por vez) |
+| Status | Referência |
 | Responsável | Fernando Nunes (Product Manager) |
 | Cartão | [#99](https://github.com/TARNAGS/resgate-espacial/issues/99), que fecha os cinco casuais da D-028 (Jetpack Joyride e Temple Run já estudados em [#107](https://github.com/TARNAGS/resgate-espacial/issues/107) e [#108](https://github.com/TARNAGS/resgate-espacial/issues/108)) |
 
@@ -28,15 +28,15 @@
 
 ## 1. Resumo
 
-| Item | Candy Crush Saga |
-|---|---|
-| Proposta | Combinar três doces iguais para cumprir a meta da fase em poucas jogadas |
-| Autor | King (Suécia), 2012; estudada a versão de celular, pelo wiki dos fãs consultado em 09/10/2026 |
-| Modelo de negócio | Grátis, com compras: vidas, jogadas extras e reforços (boosters) |
-| Tamanho | **23.525 fases** em mais de 270 episódios; os dois primeiros com 10 fases, os outros com 15 |
-| Onde estava a diversão | Uma meta clara por fase, cumprida em 15 a 33 jogadas, e um elemento novo a cada 4 fases no começo |
-| Onde estava a dificuldade | Picos isolados no meio de fases fáceis, avisados no mapa; adiante, fases "quase impossíveis" |
-| Lição principal | A King mede diversão e dificuldade separadas, conserta sempre as 100 fases menos divertidas e concluiu que "fases difíceis demais nunca compensam" |
+| Item | Candy Crush Saga | Plants vs. Zombies | Subway Surfers |
+|---|---|---|---|
+| Proposta | Combinar três doces iguais para cumprir a meta da fase em poucas jogadas | Plantar defesas em linhas de um gramado contra zumbis que avançam | Correr sem fim pelos trilhos do metrô, desviando de trens e barreiras e juntando moedas |
+| Autor | King (Suécia), 2012 | PopCap Games (EUA), 2009; criador George Fan | SYBO (Dinamarca), 2012 |
+| Modelo de negócio | Grátis, com compras: vidas, jogadas extras e reforços | Pago no lançamento; versão grátis depois | Grátis, com anúncios e compras |
+| Tamanho | **23.525 fases** em mais de 270 episódios (10 nos dois primeiros, 15 nos outros) | **50 fases em 5 mundos de 10**, mais minijogos e modos | Uma corrida sem fim; cidade nova a cada 3 semanas desde 2013 |
+| Onde estava a diversão | Uma meta clara por fase, em 15 a 33 jogadas, e uma novidade a cada 4 fases no começo | Uma planta nova quase toda fase; cada mundo muda uma regra do gramado | A velocidade e o desvio; missões que sobem o multiplicador |
+| Onde estava a dificuldade | Picos isolados no meio de fases fáceis, avisados no mapa; adiante, fases "quase impossíveis" | Um zumbi novo de cada vez e ondas maiores | A velocidade que cresce durante a corrida |
+| Lição principal | A King mede diversão e dificuldade separadas, conserta sempre as 100 fases menos divertidas e concluiu que fases difíceis demais "nunca compensam" | O molde do mundo de 10 fases e as dez técnicas de ensino do criador | Conteúdo novo a cada 3 semanas, sem mexer na sensação da corrida de 2012 |
 
 ## 2. Candy Crush Saga
 
@@ -129,18 +129,76 @@ Palestra de George Fan na GDC de 2012, "How I Got My Mom to Play Through Plants 
 
 ## 4. Subway Surfers
 
-*Em andamento.*
+### 4.1 Como funciona
+
+- **Proposta:** correr sem fim pelos trilhos do metrô, fugindo do inspetor e do cachorro, em três trilhos: pular, abaixar e trocar de trilho para desviar de trens e barreiras, juntando moedas e poderes.
+- **Autor:** SYBO (Dinamarca), 2012, lançado com a Kiloo. Celular. Grátis, com anúncios e compras. Passou de 4 bilhões de downloads (GamesBeat), e a SYBO anunciou em janeiro de 2026 a continuação, Subway Surfers City.
+- **Tamanho:** uma corrida sem fim. O que muda é o cenário, a cada World Tour.
+
+### 4.2 Metas e progressão
+
+- **Missões em trios:** cada conjunto tem 3 missões (juntar moedas, fazer pontos, usar um poder...). Concluir as três sobe o multiplicador de pontos em 1, até x30; depois disso, cada conjunto dá uma caixa-surpresa grande. As missões ficam mais difíceis e mais longas. Dá para pular uma missão pagando moedas ou **vendo um anúncio** (wiki, página "Missions").
+- **Palavra do dia (Word Hunt, antes Daily Challenge):** letras espalhadas pelas corridas formam uma palavra que muda todo dia. O prêmio cresce com os dias seguidos, até 5 ou mais.
+- **Top Run:** ranking semanal contra jogadores do mesmo país (relato de entrevista do presidente da SYBO).
+
+### 4.3 World Tour: o jogo muda de lugar
+
+- Desde 2013, a cada 3 semanas (4 no fim do ano), a corrida muda para uma cidade nova ou volta a uma antiga, com um personagem e uma prancha que só saem naquele evento. A equipe ouve sugestões dos jogadores sobre a próxima cidade (wiki, página "World Tour"; Wikipedia; relato da WN Hub).
+- **Proteger a sensação:** a SYBO percebeu que uma versão nova começava a corrida um pouco mais rápida e chegava ao mesmo ritmo, e que os jogadores mais fiéis estranharam. A equipe refez o jogo para bater com a sensação de 2012 (blog da Unity, entrevista com a SYBO).
+
+### 4.4 O que faz voltar e o que não copiar
+
+- **Volta:** missões que sobem o multiplicador (o recorde fica mais alcançável a cada conjunto), a palavra do dia com sequência, a cidade nova a cada 3 semanas e o ranking semanal do país.
+- **Não copiar:** as caixas-surpresa sorteadas. Com o público adolescente, a ECA Digital proíbe esse tipo de sorteio (documento 13). Já o anúncio que o jogador escolhe ver para pular uma missão combina com a regra do Lean Canvas: opcional e fácil de fechar.
 
 ## 5. Lado a lado
 
-*Em andamento: entra quando os três jogos estiverem prontos.*
+As perguntas de level design do documento 10, seção 4. O Jetpack Joyride, o Temple Run e o Geometry Dash estão na mesma tabela de lá.
+
+| Pergunta | Candy Crush Saga | Plants vs. Zombies | Subway Surfers |
+|---|---|---|---|
+| Como a fase é organizada | Fases fixas e numeradas num mapa, em episódios de 10 e 15 | Fases fixas em 5 mundos de 10, e cada mundo muda uma regra do gramado | Sem fases: corrida sem fim, e o cenário troca a cada World Tour |
+| Como a dificuldade sobe | Rampa muito suave (as 25 primeiras "muito fáceis"), depois serrote com picos isolados, avisados no mapa | Um zumbi novo nas fases 1, 3, 6 e 8 de cada mundo; ondas grandes de 0 a 2 no primeiro mundo | Com a velocidade da corrida (não medida neste estudo) |
+| Como um elemento novo é apresentado | Uma novidade a cada 3 ou 4 fases nas 80 primeiras; a do episódio, na fase de abertura | Tabuleiro reduzido (uma linha na 1-1), a planta nova como recompensa e próximo brinquedo, dica só depois do erro, no máximo 8 palavras | Missões que pedem para usar um poder ou fazer um movimento |
+| Metas por fase | Três estrelas por pontos: a primeira é passar; a segunda e a terceira valem 9 e 18 vezes a primeira | Passar; a recompensa é a planta nova | Missões em trios que sobem o multiplicador até x30, recorde, palavra do dia e ranking semanal do país |
+| Duração de uma fase | 15 a 33 jogadas (uns 2 minutos, estimativa) | Alguns minutos (não medido) | Até a primeira batida (não medido) |
+| O que faz voltar | A próxima fase à vista, a novidade do episódio, as estrelas que faltam, eventos e as vidas que voltam a cada 30 minutos | A planta nova, o mundo novo, os minijogos e a segunda volta mais difícil | A cidade nova a cada 3 semanas, com personagem e prancha exclusivos, a palavra do dia com sequência e o multiplicador |
+
+**O que se repete nos três:** uma novidade pequena de cada vez, perto do começo, e depois combinações; a recompensa que é também o próximo brinquedo (a planta, o elemento do episódio, o poder da missão); e conteúdo novo em ritmo fixo (por episódio, por mundo ou a cada 3 semanas).
 
 ## 6. O que levar para o Resgate Espacial
 
-*Em andamento: as propostas do Candy Crush já estão na seção 2 e entram aqui, com as dos outros dois, no fim.*
+Tudo aqui é **Proposta**. O Fernando decide.
+
+| Ideia | De onde vem | Como poderia entrar no nosso jogo | Ligado a |
+|---|---|---|---|
+| **Molde do mundo de 10 fases** | Plants vs. Zombies | Fases 1 a 3 apresentam (uma novidade cada), a 5 é um respiro com regra diferente, a 9 prepara e a 10 é a fase especial do mundo; cada mundo muda uma regra do cenário (gravidade, vento, neblina) | D-020; documento 08; P-012 ([#61](https://github.com/TARNAGS/resgate-espacial/issues/61)); P-011 ([#60](https://github.com/TARNAGS/resgate-espacial/issues/60)) |
+| **Primeira fase com o cenário reduzido** | Plants vs. Zombies (uma linha na 1-1) | O nível 1 com um único trecho e um único desafio, crescendo nas fases 2 e 3 | D-031; mundo 1 |
+| **Estrelas: a primeira é concluir; a segunda e a terceira, um tempo de mestre** | Candy Crush Saga (9 e 18 vezes a primeira) | Passar é para todos; o tempo-alvo é para quem quer dominar, sem tirar o ranking por tempo | P-006 ([#53](https://github.com/TARNAGS/resgate-espacial/issues/53)); D-024 |
+| **Aviso de fase difícil no mapa** | Candy Crush Saga | No mapa de progresso, marcar a fase especial do mundo antes de o jogador entrar | D-015 |
+| **Medir diversão separada da dificuldade** | Candy Crush Saga (King, GDC 2024) | Por fase: tempo até passar, tempo até abandonar e tentativas; e uma lista das fases menos divertidas para consertar a cada rodada | P-008 ([#56](https://github.com/TARNAGS/resgate-espacial/issues/56)); [#91](https://github.com/TARNAGS/resgate-espacial/issues/91); documento 09 |
+| **Um piloto que joga como uma pessoa** | Candy Crush Saga (robôs que imitam jogadores) | Além do piloto que prova a fase (D-018) e do expert (D-026), um piloto "mediano" para prever a dificuldade antes do playtest | D-018; D-026; [#93](https://github.com/TARNAGS/resgate-espacial/issues/93) |
+| **Fase difícil demais não compensa, e fase longa diverte menos** | Candy Crush Saga (a fase 65) | Deixar o difícil extremo opcional (PRACTICE, Nightmare) e limitar o tamanho da fase grande pela dificuldade | P-018 ([#79](https://github.com/TARNAGS/resgate-espacial/issues/79)); documento 13, seção 3.2 |
+| **Segunda volta mais difícil, com uma restrição sorteada** | Plants vs. Zombies | Depois de terminar o mundo, rejogar com um modificador fixo (menos tanque, vento) | P-018 ([#79](https://github.com/TARNAGS/resgate-espacial/issues/79)); P-012 |
+| **Missões em trios que sobem um multiplicador, e a palavra do dia** | Subway Surfers | Depois do MVP: metas que se renovam e uma meta diária com sequência, ligadas à North Star (fase nova por semana) | Documento 13; P-006; [#81](https://github.com/TARNAGS/resgate-espacial/issues/81) |
+| **Pular uma meta vendo um anúncio** | Subway Surfers | Anúncio recompensado só por escolha do jogador | Documento 13, seção 5.2; P-014 ([#98](https://github.com/TARNAGS/resgate-espacial/issues/98)) |
+| **Conteúdo novo em ritmo fixo** | Os três (episódio, mundo, World Tour) | Depois do lançamento, um mundo novo num calendário conhecido | Roadmap, M5; P-014 |
+| **Dica só depois do erro, com até 8 palavras** | Plants vs. Zombies | Reforça a recomendação 1 da [#128](https://github.com/TARNAGS/resgate-espacial/issues/128) | D-031; [#128](https://github.com/TARNAGS/resgate-espacial/issues/128) |
+
+**Validações** (o que já decidimos e os casuais confirmam):
+- **Mundos de 10 fases (D-020):** o Plants vs. Zombies usa exatamente 10 por mundo, e os dois primeiros episódios do Candy Crush também têm 10.
+- **Serrote, com respiro e fase especial (documento 10, lição 1):** a fase 5 de cada mundo do Plants vs. Zombies é um respiro com outra regra, e a 10 é especial; no Candy Crush, os picos vêm isolados entre fases fáceis.
+- **Ensinar jogando, sem tutorial separado (D-031):** é a primeira técnica do criador do Plants vs. Zombies.
+- **Proteger a sensação do controle:** a SYBO refez a corrida para bater com a de 2012 porque os jogadores fiéis estranharam a mudança; é o papel das nossas fichas de ouro ([#114](https://github.com/TARNAGS/resgate-espacial/issues/114)), que conferem que a física não muda sem querer.
+- **Sem enredo:** o Plants vs. Zombies conta quase nada (um bilhete na fase 9 de cada mundo), e funciona.
+
+**Diferença importante:** o Candy Crush tem 23 mil fases, e a SYBO troca de cidade a cada 3 semanas, com estúdios grandes. Nós somos um PM e uma IA: levar o molde e o ritmo, não o volume. E os gêneros são outros (quebra-cabeça por jogadas, estratégia, corrida de reflexo): o que se transfere é como ensinar, medir e fazer voltar; a física e o tempo continuam sendo o nosso jogo.
+
+**Para aprofundar, se o Fernando quiser:** o estudo completo do **Plants vs. Zombies** (as 50 fases mapeadas, mundo a mundo) é o que mais ensina para o design dos nossos mundos.
 
 ## 7. Como este material foi feito
 
+- **Subway Surfers:** sem abrir o jogo. Missões, palavra do dia e World Tour vêm do wiki dos fãs; o porquê, de entrevistas da SYBO relatadas pela Unity e pela WN Hub. A velocidade da corrida e a duração não foram medidas.
 - **Plants vs. Zombies:** sem abrir o jogo. O molde dos mundos vem do wiki dos fãs; as dez técnicas, de notas sobre a palestra do criador (fonte secundária, conferida com a lista que a GDC anunciou: "10 técnicas para ensinar mecânicas"). A duração de uma fase não foi medida.
 - **Candy Crush Saga:** sem abrir o jogo. As fases vêm do wiki dos fãs pela interface de dados (`api.php`), lidas por um script que grava `candy-crush.json`. A dificuldade é a nota dos fãs, e os rótulos do mapa vêm das categorias do wiki. A duração de uma fase (uns 2 minutos para 25 jogadas) é estimativa, não medida.
 
@@ -148,6 +206,8 @@ Palestra de George Fan na GDC de 2012, "How I Got My Mom to Play Through Plants 
 
 | Fonte | O que foi feito | Resultado |
 |---|---|---|
+| Wiki dos fãs do Subway Surfers (subwaysurf.fandom.com, `api.php`) | Páginas "Missions", "World Tour" e "Daily Challenge" | Ok; a página do multiplicador não existe |
+| Busca de entrevistas da SYBO | Blog da Unity, PocketGamer.biz, WN Hub, Gamereactor, podcast da Naavik | Ok pelos relatos; a transcrição do podcast não estava disponível |
 | Wiki dos fãs do Plants vs. Zombies (plantsvszombies.fandom.com, `api.php`) | Páginas "Adventure Mode" e o modelo da lista de fases | Ok: o ritmo de cada mundo, as linhas do primeiro mundo e as bandeiras |
 | Busca da palestra de George Fan (GDC 2012) | Notas de quem assistiu e o vídeo | Ok pelas notas; o vídeo não foi lido (o Claude não assiste vídeo) |
 | Wiki dos fãs do Candy Crush (candycrush.fandom.com, `api.php`) | 110 fases lidas (tipo, jogadas, estrelas, dificuldade, novidades, rótulos) e as páginas Lives, Episodes e o total de fases | Ok |
@@ -157,6 +217,10 @@ Palestra de George Fan na GDC de 2012, "How I Got My Mom to Play Through Plants 
 
 ## 8. Fontes
 
+- Wiki dos fãs do Subway Surfers: https://subwaysurf.fandom.com (Missions, World Tour, Daily Challenge), consultado em 09/10/2026.
+- "Behind the scenes of Subway Surfers: a Q&A with SYBO", blog da Unity: https://blog.unity.com/games/behind-the-scenes-of-subway-surfers-a-qa-with-sybo
+- "Seven years on: SYBO Games' Subway Surfers, 2.5 billion downloads", PocketGamer.biz: https://www.pocketgamer.biz/interview/71122/seven-years-on-sybo-games-subway-surfers-2-5-billion-downloads/ e o relato da WN Hub: https://wnhub.io/news/other/item-15835
+- Subway Surfers na Wikipedia: https://en.wikipedia.org/wiki/Subway_Surfers; GamesBeat (4 bilhões de downloads): https://gamesbeat.com/?p=219818; anúncio do Subway Surfers City (BusinessWire, 15/01/2026): https://www.businesswire.com/news/home/20260115285583/en/
 - Wiki dos fãs do Plants vs. Zombies: https://plantsvszombies.fandom.com/wiki/Adventure_Mode e o modelo "Adventure Mode levels", consultados em 09/10/2026.
 - George Fan, "How I Got My Mom to Play Through Plants vs. Zombies", GDC 2012. Vídeo: https://www.youtube.com/watch?v=fbzhHSexzpY. Notas: https://notes.hamatti.org/Sources/Talks/How-I-got-my-mom-to-play-through-Plants-vs.-Zombies
 - Wiki dos fãs do Candy Crush: https://candycrush.fandom.com (fases 1 a 80, 1001 a 1015 e 5001 a 5015; páginas Lives e Episodes), consultado em 09/10/2026.
@@ -168,4 +232,4 @@ Palestra de George Fan na GDC de 2012, "How I Got My Mom to Play Through Plants 
 
 | Versão | Data | O que mudou |
 |---|---|---|
-| 1.0 | 09/10/2026 | Primeira versão, em construção: Candy Crush Saga e Plants vs. Zombies |
+| 1.0 | 09/10/2026 | Primeira versão: Candy Crush Saga, Plants vs. Zombies e Subway Surfers, a tabela lado a lado e 12 propostas |

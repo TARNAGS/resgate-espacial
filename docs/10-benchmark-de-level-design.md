@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 10 — Benchmark de level design |
-| Versão | 0.8 |
+| Versão | 0.9 |
 | Data | 08/10/2026 |
 | Status | Em construção |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -32,7 +32,7 @@ O que os jogos de referência fazem com fases, obstáculos, dificuldade e ritmo,
 | Página de leitura do Geometry Dash | [claude.ai/artifact/Y7Y1rAykSbfkfXuaJdSXRC](https://claude.ai/artifact/Y7Y1rAykSbfkfXuaJdSXRC) (privada) e a cópia [benchmark/geometry-dash/pagina-de-leitura.html](benchmark/geometry-dash/pagina-de-leitura.html) | Publicada |
 | Super Mario World (1990), referência de como ensinar sem tutorial | [benchmark/super-mario-world.md](benchmark/super-mario-world.md): onde o jogo fala, como a Nintendo construiu, o primeiro mundo aula por aula, as camadas de erro e a ajuda depois do erro na série ([#128](https://github.com/TARNAGS/resgate-espacial/issues/128)) | Pronto (v1.0) |
 | Página de leitura do Super Mario World | [claude.ai/artifact/7LSubtYDh5iEywjTtB8hP3](https://claude.ai/artifact/7LSubtYDh5iEywjTtB8hP3) (privada) e a cópia [benchmark/super-mario-world/pagina-de-leitura.html](benchmark/super-mario-world/pagina-de-leitura.html) | Publicada |
-| Outros casuais do ICP (Subway Surfers, Candy Crush Saga, Plants vs. Zombies) | Seção 4 deste documento | A pesquisar ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)) |
+| Candy Crush Saga (2012), Plants vs. Zombies (2009) e Subway Surfers (2012), os outros casuais do ICP | [benchmark/casuais-do-icp.md](benchmark/casuais-do-icp.md): comparativo com uma seção por jogo, a tabela lado a lado e 12 propostas ([#99](https://github.com/TARNAGS/resgate-espacial/issues/99)) | Pronto (v1.0) |
 
 ## 2. O jogo original: Crazy Gravity (1996)
 
@@ -115,6 +115,8 @@ Jetpack Joyride, Subway Surfers, Candy Crush Saga, Plants vs. Zombies e Temple R
 | Metas por fase | Estrelas, missões, recordes | Três missões ao mesmo tempo (1 a 3 estrelas), recorde de distância e ranking dos amigos | 56 objetivos que aumentam o multiplicador (no 2, três por vez e níveis), recorde e ranking | Concluir (estrelas), recorde de % ("New Best!"), três moedas secretas; na Torre, terminar abaixo de um tempo |
 | Duração de uma fase | Quanto cabe numa fila de 2 minutos | A "jogada do intervalo comercial" | De 30 segundos a alguns minutos | 27 a 37 s no World; 82 a 102 s nas principais; metas de 70 a 280 s nas fases de plataforma, com checkpoints |
 | O que faz voltar | Recordes, colecionáveis, eventos | Missões que se renovam, níveis e insígnias, loja, roleta, desafio diário, eventos, bônus ao voltar | Multiplicador, melhorias de poderes, personagens, amigos; no 2, desafios diários com sequência, mapas novos e eventos | Mais de 150 milhões de fases da comunidade, fase do dia e demon da semana, missões, baús, ícones |
+
+**Os outros três casuais** (09/10/2026, [comparativo](benchmark/casuais-do-icp.md)): o **Candy Crush Saga** organiza 23 mil fases fixas em episódios de 10 e 15, ensina uma novidade a cada 3 ou 4 fases no começo, mede diversão separada da dificuldade e conserta sempre as fases menos divertidas. O **Plants vs. Zombies** dá o molde mais útil para nós: mundos de 10 fases com o mesmo ritmo (novidades nas primeiras, um respiro com regra diferente na 5, uma fase especial na 10) e cada mundo mudando uma regra do cenário. O **Subway Surfers** não tem fases: faz voltar com missões em trios, a palavra do dia e uma cidade nova a cada 3 semanas, sem mexer na sensação da corrida.
 
 ## 5. Primeiras lições (Proposta)
 
@@ -231,5 +233,6 @@ A lista que levou ao reconhecimento, na ordem em que foi apresentada (da mais pr
 | 0.4 | 06/10/2026 | Benchmark do Jetpack Joyride ([benchmark/jetpack-joyride.md](benchmark/jetpack-joyride.md), [#107](https://github.com/TARNAGS/resgate-espacial/issues/107)), com a página de leitura; seção 4 com a coluna do Jetpack Joyride e a observação do Fernando; lições 12 a 16 |
 | 0.5 | 06/10/2026 | Benchmark do Temple Run ([benchmark/temple-run.md](benchmark/temple-run.md), [#108](https://github.com/TARNAGS/resgate-espacial/issues/108)), com a página de leitura; coluna do Temple Run na seção 4; lições 17 a 21 |
 | 0.6 | 06/10/2026 | O [guia dos benchmarks](benchmark/README.md), com a página de leitura, entra no topo da tabela de estudos |
+| 0.9 | 09/10/2026 | Comparativo dos outros três casuais do ICP ([benchmark/casuais-do-icp.md](benchmark/casuais-do-icp.md), [#99](https://github.com/TARNAGS/resgate-espacial/issues/99)): Candy Crush Saga, Plants vs. Zombies e Subway Surfers |
 | 0.8 | 08/10/2026 | Benchmark do Super Mario World ([benchmark/super-mario-world.md](benchmark/super-mario-world.md), [#128](https://github.com/TARNAGS/resgate-espacial/issues/128)), com a página de leitura; lições 28 a 33 |
 | 0.7 | 08/10/2026 | Benchmark do Geometry Dash ([benchmark/geometry-dash.md](benchmark/geometry-dash.md), [#127](https://github.com/TARNAGS/resgate-espacial/issues/127)), com a página de leitura; coluna do Geometry Dash na seção 4; lições 22 a 27 |
