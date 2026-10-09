@@ -8,14 +8,15 @@ import { writeSave } from '../platform/storage.js';
 import { late } from './kit.js';
 import { DT } from './loop.js';
 
-// DEMO (#104) e attract mode (#105), D-031: o nível 1 jogado pelo piloto expert, na tela ou atrás do menu parado.
+// DEMO (#104) e attract mode (#105), D-031: o nível 1 jogado pelo piloto da DEMO (calmo desde a D-038), na tela
+// ou atrás do menu parado.
 
 export function createDemo(g) {
   const { view, renderer, telemetry, app, screens, click, keyboard, joystick } = g;
   const [startLevel, toMenu, patchNoteShown] = late(g, 'startLevel', 'toMenu', 'patchNoteShown');
 
-  // Uma partida do nível 1 jogada pelo piloto expert. Na DEMO, ela ocupa a tela, com o selo, os rótulos
-  // e os polegares fantasmas; no attract mode, passa escurecida atrás do menu parado.
+  // Uma partida do nível 1 jogada pelo piloto da DEMO. Na DEMO, ela ocupa a tela, com o selo, os rótulos
+  // e os polegares e as teclas fantasmas; no attract mode, passa escurecida atrás do menu parado.
   function createDemoRun() {
     const def = LEVELS[0];
     const match = createMatch({ def, seed: def.seed, getParams: () => PARAMS, events: createEvents() });
@@ -47,6 +48,13 @@ export function createDemo(g) {
     return { cx: c.x, cy: c.y, x: c.x + Math.sin(input.targetAngle) * R, y: c.y - Math.cos(input.targetAngle) * R };
   }
 
+  // Na DEMO automática, a primeira, toques e teclas só pulam depois de alguns segundos (D-038): no playtest de
+  // 09/10/2026 ela era pulada em 1,3 s, quase sempre por quem apertou uma tecla para jogar. Pela DEMO pedida no
+  // botão ou no fim de jogo, dá para sair na hora.
+  const MIN_WATCH = 3;
+  const canSkip = (d) => d.source !== 'auto' || d.t >= MIN_WATCH;
+  let skipTimer = 0;
+
   function playDemo(source, then) {
     stopAttract(false);
     const run = createDemoRun();
@@ -57,6 +65,10 @@ export function createDemo(g) {
     joystick.reset();
     keyboard.reset();
     Sound.setThrust(false);
+    const skip = screens.el('btn-demo-skip');
+    clearTimeout(skipTimer);
+    skip.classList.toggle('hidden', source === 'auto');
+    if (source === 'auto') skipTimer = setTimeout(() => skip.classList.remove('hidden'), MIN_WATCH * 1000);
   }
 
   function endDemo(skipped) {
@@ -75,12 +87,12 @@ export function createDemo(g) {
     else startLevel(lv);
   }
 
-  screens.el('demo').addEventListener('click', () => { click(); endDemo(true); });
+  screens.el('demo').addEventListener('click', () => { if (app.demo && canSkip(app.demo)) { click(); endDemo(true); } });
   screens.el('btn-demo').addEventListener('click', () => { Sound.unlock(); click(); playDemo('button', toMenu); });
   window.addEventListener('keydown', (e) => {
     if (app.screen !== 'demo') return;
     e.preventDefault();
-    endDemo(true);
+    if (app.demo && canSkip(app.demo)) endDemo(true);
   });
 
   // Attract mode: com o menu parado por alguns segundos, a DEMO passa ao fundo, como nos arcades.

@@ -20,14 +20,15 @@ import { createPlay } from './app/play.js';
 import { createSettings } from './app/settings.js';
 import { createIntroFlow } from './app/intro-flow.js';
 import { createDemo } from './app/demo.js';
+import { createCoach } from './app/coach.js';
 import { createPatchNote } from './app/patch-note.js';
 import { createRanking } from './app/ranking.js';
 import { connectDevice } from './app/device.js';
 import { createLoop } from './app/loop.js';
 
 // Resgate Espacial — ponto de entrada. Cria as peças (tela, desenho, eventos, telas, controles e som) e liga os
-// fluxos do jogo, que ficam em app/ (#125): mensagens, telemetria da tentativa, partida, configurações, abertura,
-// DEMO, patch note, ranking, aparelho e o laço principal. Os fluxos se falam pelo kit `g` (app/kit.js).
+// fluxos do jogo, que ficam em app/ (#125): mensagens, telemetria da tentativa, treinador da fase que ensina,
+// partida, configurações, abertura, DEMO, patch note, ranking, aparelho e o laço principal. Os fluxos se falam pelo kit `g` (app/kit.js).
 
 const canvas = document.getElementById('game');
 const view = createView(canvas, document.getElementById('safe-probe'));
@@ -45,6 +46,7 @@ const app = {
   attract: null,       // a DEMO passando atrás do menu parado (#105)
   paused: false,
   thumbHintShown: false,   // a dica do polegar aparece uma vez por partida
+  coach: null,         // o treinador da fase que ensina, quando ligado (D-038, app/coach.js)
   selected: LEVELS[0],
   save: emptySave(),
 };
@@ -97,6 +99,7 @@ Object.assign(g, { keyboard, joystick, tuning, music, intro });
 // A ordem conta para quem escuta o mesmo evento: as mensagens antes da telemetria, a telemetria antes do resultado.
 connectMessages(g);
 Object.assign(g, createRunTelemetry(g));
+Object.assign(g, createCoach(g));
 Object.assign(g, createPlay(g));
 Object.assign(g, createSettings(g));
 Object.assign(g, createIntroFlow(g));

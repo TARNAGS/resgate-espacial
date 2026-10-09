@@ -18,6 +18,7 @@ import './regras/elogios.test.js';
 import './regras/patch-note.test.js';
 import './regras/cadeia-e-ranking.test.js';
 import './regras/camera.test.js';
+import './regras/treinador.test.js';
 import './conteudo/gerador.test.js';
 import './conteudo/caminho-provado.test.js';
 import './conteudo/piloto-expert.test.js';

@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 05 — Registro de decisões |
-| Última atualização | 07/10/2026 |
+| Última atualização | 09/10/2026 |
 | Responsável | Fernando Nunes (Product Manager) |
 
 Cada decisão relevante de produto fica registrada aqui, com o contexto e o motivo. Assim ela não é rediscutida sem necessidade e pode ser revista quando o contexto mudar.
@@ -42,13 +42,14 @@ Cada decisão relevante de produto fica registrada aqui, com o contexto e o moti
 | D-028 | ICP: o jogador casual de celular, com o fã da estética retrô dos anos 2000; os grandes casuais viram benchmark | 04/10/2026 | Aceita; benchmark em [#98](https://github.com/TARNAGS/resgate-espacial/issues/98) e [#99](https://github.com/TARNAGS/resgate-espacial/issues/99) |
 | D-029 | Salvar no banco online tudo o que der para medir: perfil do jogador ligado ao nick e medição ampliada | 04/10/2026 | Aceita; a construir ([#102](https://github.com/TARNAGS/resgate-espacial/issues/102) e [#91](https://github.com/TARNAGS/resgate-espacial/issues/91)) |
 | D-030 | O jogo respeita a chave de silencioso do iPhone e deixa a música do jogador tocar junto | 04/10/2026 | Aceita; aviso em Settings em [#103](https://github.com/TARNAGS/resgate-espacial/issues/103) |
-| D-031 | Sem tutorial: uma DEMO jogada pelo próprio jogo antes da primeira partida e attract mode no menu | 04/10/2026 | Aceita; a construir ([#104](https://github.com/TARNAGS/resgate-espacial/issues/104) e [#105](https://github.com/TARNAGS/resgate-espacial/issues/105)) |
+| D-031 | Sem tutorial: uma DEMO jogada pelo próprio jogo antes da primeira partida e attract mode no menu | 04/10/2026 | Aceita; construída ([#104](https://github.com/TARNAGS/resgate-espacial/issues/104) e [#105](https://github.com/TARNAGS/resgate-espacial/issues/105)); revista em parte pela D-038 (ajuda depois do erro) |
 | D-032 | Os jogos de nave com gravidade, a começar pelo Crazy Gravity (o jogo original), viram benchmark de level design, ao lado dos casuais do ICP | 05/10/2026 | Aceita; [documento 10](10-benchmark-de-level-design.md) e [benchmark do Crazy Gravity](benchmark/crazy-gravity.md) |
 | D-033 | Antes de construir, passar pelos estudos de level design e gameplay e validar; inspirar, nunca copiar; o Fernando orienta a criação | 06/10/2026 | Aceita; skill `discovery-de-jogos` |
 | D-034 | Nave nova é só aparência (casco e atributos da clássica, sem mexer no ranking), a não ser que se diga expressamente que ela muda o jogo | 07/10/2026 | Aceita; épico E-26 ([#110](https://github.com/TARNAGS/resgate-espacial/issues/110)) |
 | D-035 | Evolução da nave que muda atributos muda o jogo e mexe no ranking; evolução só visual não mexe | 07/10/2026 | Aceita; como os tempos aparecem no ranking é a P-024 |
 | D-036 | Anticheat só antes do lançamento: o degrau 1 não entra nos playtests | 07/10/2026 | Aceita; o resto da P-023 fica para antes do M4 |
 | D-037 | Zoom da câmera que se adapta à tela (1,15 nas telas compridas, até 1 nas mais quadradas); o jogador pode aproximar nas configurações | 07/10/2026 | Aceita; [#95](https://github.com/TARNAGS/resgate-espacial/issues/95) |
+| D-038 | A fase 1 ensina jogando: treinador até a primeira conclusão, lição depois do erro, WATCH HOW no fim de jogo e DEMO modesta (revê em parte a D-031) | 09/10/2026 | Construída e publicada na rodada 2 (versão 2026-10-09b); a medir com jogadores novos |
 
 ## D-001 — Sem login e sem contas
 
@@ -696,6 +697,66 @@ E, sobre o ajuste: o jogador muda o zoom ou o jogo escolhe? Como o zoom muda qua
 - **Para medir no próximo playtest:** mortes e tempos por formato de tela, para ver se as telas mais quadradas ainda saem perdendo.
 
 **Revisitar se** jogadores de telas pequenas ou quadradas morrerem bem mais que os outros, ou se muita gente escolher CLOSER (sinal de que os desenhos estão pequenos demais para todos).
+
+## D-038 — A fase 1 ensina jogando: treinador até a primeira conclusão, lição depois do erro e DEMO modesta
+
+**Contexto.** Na rodada 2 do playtest (09/10/2026), os dois jogadores novos jogaram no computador, com teclado. O Fernando trouxe o retorno deles:
+- não entenderam que tinham de voar, nem os controles;
+- não entenderam que a gravidade ajuda a controlar a nave e a frear;
+- não entenderam que o propulsor também freia, não só acelera;
+- não entenderam que era preciso pousar devagar para pegar as pessoas;
+- não entenderam que era preciso resgatar e voltar para a base.
+
+A telemetria confirmou e separou dois tropeços. Um dos jogadores bateu 13 de 22 vezes perto da base e pousou de volta na base 5 vezes, sem ir a lugar nenhum. O outro bateu 18 de 31 vezes a 200 de velocidade ou mais (o máximo é 260), 6 delas na parede do fim, e não concluiu nenhuma de 10 tentativas. A DEMO foi pulada em 5 das 6 vezes, com 1,3 s no meio; quem a viu inteira bateu 3 vezes nos primeiros 15 s. Nos 17 pousos fatais do nível 1, a nave nunca ficou verde antes da batida. Era a condição que a D-031 deixou para revisitar: jogadores que ainda não entendem o objetivo depois da DEMO.
+
+O Claude consultou os estudos (D-033) e propôs as soluções na conversa. O Fernando respondeu: "Implemente toda e qualquer melhoria na fase 1 que você julgar pertinente para garantir que ela se torne friendly para pessoas entenderem o jogo na fase 1."
+
+**Opções consideradas.**
+
+| Opção | A favor | Contra |
+|---|---|---|
+| Só melhorar a DEMO | Barato | A DEMO é pulada, e quem a viu inteira não aprendeu a frear |
+| Tutorial com telas de instrução | Explica tudo antes | Contra a D-031 e contra todos os jogos estudados; o Gravitron 2 acrescentou instruções e ainda assim facilitou o jogo depois |
+| Redesenhar o nível 1 (mais curto, SOS mais perto) | Ataca a velocidade | Recomeça o ranking do nível 1; o Super Mario World manda refazer a fase que ensina por último, depois das fases 4 a 10 |
+| **Ensinar dentro da fase, na hora certa, e ajudar depois do erro** | O jogador aprende jogando; não mexe em regra, cenário nem ranking | Mais texto na tela no nível 1; precisa ser medido |
+
+**Decisão.** A última, construída pelo Claude com a autorização do Fernando:
+
+- **Treinador no nível 1** (a fase marcada com `hint`), até o jogador concluí-la pela primeira vez; `?coach` no endereço mostra de novo. Dicas de até 8 palavras perto da nave, sem botão de OK, cada uma na hora em que serve:
+  - **voar:** HOLD THRUST TO FLY, com as teclas desenhadas (↑ voa, ← → giram) e acendendo quando o jogador aperta; no celular, o botão do propulsor pulsa;
+  - **objetivo:** FLY TO THE SOS →, THE CREW IS WAITING AT THE SOS → e CREW ON BOARD! BACK TO BASE ←;
+  - **frear:** TOO FAST! TURN BACK AND THRUST, com um nariz-guia (o contorno da nave apontando para trás e uma seta), a tecla do giro e o ↑;
+  - **gravidade:** LET GO: GRAVITY PULLS YOU DOWN, para quem segura o propulsor subindo, até a pessoa voar solta uma vez;
+  - **pouso:** o que vai dar errado no toque (TAP THRUST TO LAND SOFTLY, STRAIGHTEN THE SHIP TO LAND, STOP SLIDING, LINE UP OVER THE PAD) e GOOD! LET IT TOUCH DOWN quando está bom;
+  - **na fase:** luzes de aproximação no chão antes do objetivo (vermelhas piscando quando é preciso frear), HELP! sobre a tripulação, farol sobre a base na volta e a seta do objetivo maior e chamada SOS, o mesmo nome da plataforma (antes, CREW).
+- **Lição depois do erro**, escolhida pelo motivo da batida, a partir da segunda batida do mesmo tipo: aparece no alto da fase por 5 segundos quando a nave volta, e no fim de jogo.
+- **WATCH HOW** no fim de jogo do nível 1, a partir do segundo fim de jogo: abre a DEMO e volta para a fase.
+- **DEMO modesta:** o piloto voa calmo (no máximo 150 de velocidade, contra 250 do expert) e freia de forma visível, a corrida passa a 1,5× (era 2,5×), oito rótulos dizem o gesto da hora, as teclas ← ↑ → acendem no teclado, e a DEMO automática só pode ser pulada depois de 3 segundos.
+
+**O que não muda:** física, pouso, cenário, tanque e ranking (as fichas de ouro das regras ficaram iguais, e as chaves do ranking também). A D-027 continua: a plataforma não sai do lugar.
+
+**De onde veio cada ideia (D-033: inspirar, nunca copiar).**
+
+| Ideia | Inspiração |
+|---|---|
+| Dica curta, no lugar e na hora; o texto some quando o jogador já sabe | Super Mario World: dicas um passo antes de onde servem, quase todas no primeiro mundo |
+| Até 8 palavras, sem botão de OK; a mensagem se adapta ao erro; o desenho ensina | Plants vs. Zombies (palestra de George Fan, GDC 2012) |
+| Lição depois de duas batidas iguais | Geometry Dash (uma frase depois de duas batidas) |
+| Ajuda só depois do erro, opcional, com a hora calibrada; demonstração modesta | Nintendo (Super Guide depois de 8 vidas; 3D Land depois de 5; "jogue com consideração") |
+| Frear virando a nave para o lado contrário; não inclinar mais de 45° no começo; limite de pouso marcado | Manual e velocímetro do Crazy Gravity |
+| Aviso antes do perigo | Jetpack Joyride |
+| A tripulação que chama e corre para a nave | Gravitron 2 (os cientistas andando até a nave) |
+
+**Consequências.**
+
+- **Revê a D-031 em parte:** continua sem tutorial e com DEMO, mas agora há ajuda depois do erro (a lição e o WATCH HOW).
+- **Versão 2026-10-09b.** Telemetria: o começo e o fim de cada tentativa dizem se o treinador estava ligado (`coach`), o fim soma as dicas mostradas (`c_<dica>`), e cada lição vira um evento `hint`. O relatório ganhou a linha TREINADOR.
+- **Código:** `core/coach.js` (as regras de cada dica, testadas no Node), `app/coach.js` (a memória da tentativa) e `render/coach.js` (o desenho); documento 12 atualizado.
+- **Testes:** 10 novos (D-038), entre eles um que confere que quem obedece ao aviso de frear chega ao SOS devagar. O desenho de ouro foi regravado de propósito (seta SOS, teclas da DEMO e cenas do treinador).
+
+**Para medir no próximo playtest:** jogadores novos que concluem o nível 1 e em quantas tentativas, batidas acima de 200 de velocidade, mortes perto da base, a DEMO pulada (quantas e em que segundo), o uso do WATCH HOW e as lições que mais aparecem.
+
+**Revisitar se** quem conclui o nível 1 travar no nível 2 (o treinador pode precisar valer por mais tempo), se as dicas incomodarem quem já sabe jogar, ou se a mesma lição continuar aparecendo tentativa após tentativa (sinal de que a dica não está ensinando).
 
 ## Decisões pendentes
 

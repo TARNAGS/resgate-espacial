@@ -5,28 +5,30 @@ import { FONT } from './style.js';
 export const LOW_FUEL_FLASH = 1.1;   // segundos do aviso amarelo de combustível baixo (#94)
 
 export function createHud({ ctx, view, r, twinControls }) {
-  // Seta na borda da faixa da fase, apontando para o objetivo quando ele está fora da tela
-  function drawObjectiveArrow(m, t, params) {
+  // Seta na borda da faixa da fase, apontando para o objetivo quando ele está fora da tela.
+  // Na fase que ensina (D-038), maior: é o caminho que o jogador novo procura.
+  function drawObjectiveArrow(m, t, params, big = false) {
     const target = m.level.pads.find((p) => p.kind === (m.crewOnBoard ? 'base' : 'crew'));
     const sx = r.toScreen((target.x1 + target.x2) / 2, 0).x;
     const playRight = view.play.x + view.play.w;
     if (sx >= view.play.x && sx <= playRight) return;
     const right = sx > playRight;
-    const x = right ? playRight - 24 - view.safe.right : view.play.x + 24 + view.safe.left;
+    const k = big ? 1.7 : 1;
+    const x = right ? playRight - 24 * k - view.safe.right : view.play.x + 24 * k + view.safe.left;
     // No controle A (dois polegares), a seta da direita fica acima do botão do propulsor
     const bottom = right && twinControls(params) ? view.cssH - 70 - params.joystickRadius * 1.8 - view.safe.bottom : view.cssH - 50;
     const y = clamp(r.toScreen(0, target.y).y, 110, Math.max(110, bottom));
     const pulse = (0.6 + 0.4 * Math.sin(t * 5)).toFixed(2);
     ctx.fillStyle = m.crewOnBoard ? `rgba(124,196,255,${pulse})` : `rgba(255,159,67,${pulse})`;
     ctx.beginPath();
-    if (right) { ctx.moveTo(x + 10, y); ctx.lineTo(x - 6, y - 10); ctx.lineTo(x - 6, y + 10); }
-    else { ctx.moveTo(x - 10, y); ctx.lineTo(x + 6, y - 10); ctx.lineTo(x + 6, y + 10); }
+    if (right) { ctx.moveTo(x + 10 * k, y); ctx.lineTo(x - 6 * k, y - 10 * k); ctx.lineTo(x - 6 * k, y + 10 * k); }
+    else { ctx.moveTo(x - 10 * k, y); ctx.lineTo(x + 6 * k, y - 10 * k); ctx.lineTo(x + 6 * k, y + 10 * k); }
     ctx.closePath();
     ctx.fill();
-    ctx.font = `700 10px ${FONT}`;
+    ctx.font = `700 ${big ? 12 : 10}px ${FONT}`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
-    ctx.fillText(m.crewOnBoard ? 'BASE' : 'CREW', x, y + 14);
+    ctx.fillText(m.crewOnBoard ? 'BASE' : 'SOS', x, y + 14 * k);   // o mesmo nome da plataforma (D-038)
   }
 
   function drawHUD(m, t, params, scene) {

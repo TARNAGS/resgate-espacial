@@ -13,7 +13,8 @@ import { late } from './kit.js';
 
 export function createPlay(g) {
   const { view, renderer, events, app, screens, click, isPlaying, keyboard, joystick, tuning } = g;
-  const [startRun, endRun, submitRanking] = late(g, 'startRun', 'endRun', 'submitRanking');
+  const [startRun, endRun, submitRanking, startCoach, coachGameOver, playDemo] = late(g,
+    'startRun', 'endRun', 'submitRanking', 'startCoach', 'coachGameOver', 'playDemo');
 
   // Botões desenhados no Canvas durante a partida
   function hudButtons() {
@@ -41,10 +42,14 @@ export function createPlay(g) {
   });
   events.on('gameOver', ({ def, seed }) => {
     Sound.setThrust(false);
-    screens.overlay('GAME OVER', 'No lives left. Try the same layout again or go back to the map.', [
-      ['TRY AGAIN', () => startLevel(def, seed), true],
-      ['MENU', toMenu],
-    ]);
+    // Na fase que ensina (D-038): a lição mais repetida no lugar do texto e, depois de alguns fins de jogo,
+    // a DEMO como opção, nunca no caminho de quem quer tentar de novo
+    const coach = coachGameOver();
+    const buttons = [['TRY AGAIN', () => startLevel(def, seed), true]];
+    if (coach?.offerDemo) buttons.push(['WATCH HOW', () => { screens.hideOverlay(); playDemo('gameover', () => startLevel(def, seed)); }]);
+    buttons.push(['MENU', toMenu]);
+    const text = coach?.lesson ? `TIP: ${coach.lesson}` : 'No lives left. Try the same layout again or go back to the map.';
+    screens.overlay('GAME OVER', text, buttons);
   });
 
   // ===== Fluxo =====
@@ -72,6 +77,7 @@ export function createPlay(g) {
     if (def.seed != null) seed = def.seed;   // fases fixas: o mesmo cenário para todos (D-021)
     const t0 = performance.now();
     app.match = createMatch({ def, seed, getParams: () => PARAMS, events });
+    startCoach(def);   // antes da telemetria e do start: os dois dependem do treinador (D-038)
     startRun(def, app.match.state, Math.round(performance.now() - t0));
     app.paused = false;
     app.thumbHintShown = false;

@@ -3,8 +3,8 @@
 | Campo | Valor |
 |---|---|
 | Mundo | 01 |
-| Versão | 0.1 |
-| Data | 02/10/2026 |
+| Versão | 0.2 |
+| Data | 09/10/2026 |
 | Status | Rascunho |
 
 Rascunho feito a partir do que já existe no jogo (`jogo/src/content/worlds.js`). O que está no jogo aparece como **Definido**; o resto, como **Proposta** ou **Em aberto**. O modelo deste documento está no [documento 08](../08-design-de-mundos.md).
@@ -58,7 +58,7 @@ As fases 1 a 3 são as do MVP (D-009) e já estão no jogo. As fases 4 e 5 vêm 
 
 | Fase | Nome | Novidade | Regras do gerador | Status |
 |---|---|---|---|---|
-| 1 | FIRST FLIGHT | Decolar e pousar, sem obstáculos, com dicas na tela | Cenário fixo (semente 101, D-021); 1.800 de comprimento, corredor 225, relevo 60, sem posto, tanque 40 s | Definido |
+| 1 | FIRST FLIGHT | A fase que ensina (D-038): decolar, ir ao SOS, frear virando para trás, pousar devagar e voltar, sem obstáculos. Até a primeira conclusão, um treinador mostra cada gesto perto da nave, com luzes de aproximação, nariz-guia da freada, HELP! na tripulação e farol na base; lição depois do erro e DEMO no fim de jogo | Cenário fixo (semente 101, D-021); 1.800 de comprimento, corredor 225, relevo 60, sem posto, tanque 40 s | Definido |
 | 2 | ROCK FIELD | Obstáculos fixos simples | Cenário fixo (semente 202); 2.600, corredor 185, relevo 95, 9 pedras com 95 de passagem, tanque 40 s | Definido |
 | 3 | LONG HAUL | Distância que obriga a abastecer uma vez, na ida ou na volta (D-023) | Cenário fixo (semente 303); 3.800, corredor 165, relevo 110, posto, 12 pedras com 85 de passagem, tanque do melhor plano com um abastecimento + 8% | Definido |
 | 4 | — | Passagens estreitas e túneis | — | Proposta (E-12) |
@@ -83,3 +83,4 @@ As fases 1 a 3 são as do MVP (D-009) e já estão no jogo. As fases 4 e 5 vêm 
 | Versão | Data | O que mudou |
 |---|---|---|
 | 0.1 | 02/10/2026 | Rascunho a partir do que já está no jogo |
+| 0.2 | 09/10/2026 | A fase 1 vira a fase que ensina (D-038), depois do retorno da rodada 2 do playtest. Pelo Super Mario World, o desenho dela deve ser refeito por último, quando as fases 4 a 10 existirem |

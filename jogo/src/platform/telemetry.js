@@ -10,7 +10,7 @@ import { LEADERBOARD_URL } from '../config/online.js';
 //     esperam; a fila tem limite, para não crescer sem fim.
 //   - Sem banco configurado (LEADERBOARD_URL vazio), nada sai do aparelho.
 
-export const BUILD = '2026-10-09a';       // versão do jogo, para separar os dados por versão; também é a chave do patch note (#126)
+export const BUILD = '2026-10-09b';       // versão do jogo, para separar os dados por versão; também é a chave do patch note (#126)
 const QUEUE_KEY = 'resgate-espacial:telemetry';
 const MAX_QUEUE = 400;
 const BATCH = 40;

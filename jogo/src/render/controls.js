@@ -3,9 +3,9 @@ import { FONT } from './style.js';
 // Controles na tela: direcional, botão do propulsor, botões redondos (pausa e T) e o selo da DEMO.
 
 export function createControls({ ctx, view, r }) {
-  // DEMO (#104): selo "DEMO" o tempo todo, o rótulo da vez na faixa do alto e, sem o controle de dois
-  // polegares, a tecla do propulsor acendendo junto com a chama
-  function drawDemo({ label, thrust, twin }, t) {
+  // DEMO (#104): selo "DEMO" o tempo todo, o rótulo da vez no alto e, sem o controle de dois polegares, as teclas
+  // acendendo junto com o piloto: o ↑ com a chama e, no teclado, o ← e o → quando a nave gira (D-038)
+  function drawDemo({ label, thrust, turn = 0, twin }, t) {
     const top = 14 + view.safe.top;
     const right = view.cssW - 16 - view.safe.right;
     ctx.textBaseline = 'top';
@@ -13,23 +13,33 @@ export function createControls({ ctx, view, r }) {
     ctx.font = `700 13px ${FONT}`;
     ctx.fillStyle = Math.sin(t * 4) > -0.6 ? 'rgba(255,209,102,0.95)' : 'rgba(255,209,102,0.55)';
     ctx.fillText('● DEMO', right - 104, top + 8);   // à esquerda do botão SKIP
+    // O rótulo do gesto, maior e sobre um fundo escuro, para ser lido sem esforço
     ctx.textAlign = 'center';
-    ctx.font = `700 14px ${FONT}`;
-    ctx.fillStyle = 'rgba(232,241,255,0.95)';
-    ctx.fillText(label, view.play.x + view.play.w / 2, top + 30);
+    ctx.font = `700 16px ${FONT}`;
+    const cx = view.play.x + view.play.w / 2, w = ctx.measureText(label).width + 28;
+    ctx.fillStyle = 'rgba(5,8,16,0.8)';
+    ctx.fillRect(cx - w / 2, top + 24, w, 28);
+    ctx.fillStyle = 'rgba(232,241,255,0.97)';
+    ctx.fillText(label, cx, top + 30);
     if (twin) return;
-    const x = right - 30, y = view.cssH - 46 - view.safe.bottom;
+    const y = view.cssH - 46 - view.safe.bottom;
+    const keys = view.isTouch ? [['↑', thrust]] : [['←', turn < 0], ['↑', thrust], ['→', turn > 0]];
+    keys.forEach(([glyph, lit], i) => drawGhostKey(right - 30 - (keys.length - 1 - i) * 52, y, glyph, lit));
+  }
+
+  function drawGhostKey(x, y, glyph, lit) {
     ctx.lineWidth = 2;
-    ctx.strokeStyle = thrust ? 'rgba(255,159,67,0.95)' : 'rgba(255,159,67,0.4)';
-    ctx.fillStyle = thrust ? 'rgba(255,159,67,0.3)' : 'rgba(255,159,67,0.05)';
+    ctx.strokeStyle = lit ? 'rgba(255,159,67,0.95)' : 'rgba(255,159,67,0.4)';
+    ctx.fillStyle = lit ? 'rgba(255,159,67,0.3)' : 'rgba(255,159,67,0.05)';
     ctx.beginPath();
     ctx.rect(x - 22, y - 22, 44, 44);
     ctx.fill();
     ctx.stroke();
-    ctx.fillStyle = thrust ? 'rgba(255,209,102,1)' : 'rgba(255,209,102,0.5)';
+    ctx.fillStyle = lit ? 'rgba(255,209,102,1)' : 'rgba(255,209,102,0.5)';
     ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
     ctx.font = `700 20px ${FONT}`;
-    ctx.fillText('↑', x, y);
+    ctx.fillText(glyph, x, y);
   }
 
   // Direcional e, no esquema de dois polegares, o botão do propulsor (#44)

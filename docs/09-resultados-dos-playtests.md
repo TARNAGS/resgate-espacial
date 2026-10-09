@@ -3,8 +3,8 @@
 | Campo | Valor |
 |---|---|
 | Documento | 09 — Resultados dos playtests |
-| Versão | 0.3 |
-| Data | 07/10/2026 |
+| Versão | 0.4 |
+| Data | 09/10/2026 |
 | Status | Contínuo |
 | Responsável | Fernando Nunes (Product Manager) |
 
@@ -178,6 +178,39 @@ A janela de teste ficou aberta de 02/10 a 07/10, mas a rodada de verdade durou u
 
 **Lição para as próximas rodadas:** com amigos, uma rodada dura um fim de semana. Por isso, combinar o começo e o fim, avisar o que mudou e fechar a janela no fim.
 
+## Playtest 2 — primeiros retornos (09/10/2026, rodada em andamento)
+
+Versão `2026-10-09a`. Nas primeiras horas, dois jogadores novos (jogadores 7 e 8), os dois no computador, com teclado. O Fernando trouxe o que eles disseram, e a telemetria mostrou onde cada um travou.
+
+### Achado 1 — O nível 1 não ensinava a voar, a frear nem o objetivo
+
+O que os dois disseram: não entenderam que tinham de voar, nem os controles; que a gravidade ajuda a controlar e a frear; que o propulsor também freia; que era preciso pousar devagar para pegar as pessoas; e que era preciso resgatar e voltar à base.
+
+| | Jogador 7 | Jogador 8 |
+|---|---|---|
+| DEMO | Viu inteira e bateu 3 vezes nos primeiros 15 s; depois abriu a DEMO duas vezes e fechou em cerca de 1 s | Pulou com 1,1 s |
+| Onde travou | 13 de 22 batidas perto da base; decolou e pousou de volta na base 5 vezes | 18 de 31 batidas a 200 de velocidade ou mais (o máximo é 260); 6 na parede do fim, logo depois do SOS |
+| Resultado | Concluiu na 8ª tentativa | 10 tentativas, nenhuma concluída; pousou no SOS duas vezes e bateu nas duas voltas |
+
+- Os dois quase nunca soltavam o propulsor: o maior voo solto ficou em torno de 1,5 s.
+- Nos 17 pousos fatais do nível 1, a nave nunca ficou verde antes da batida.
+- A DEMO apareceu 6 vezes e foi pulada em 5, no 1,3 s mediano.
+
+**Leitura:** são dois tropeços diferentes. Um não sabia decolar e sair da base; o outro voava na velocidade máxima e não sabia frear. Em comum, a DEMO não ensinou, porque foi pulada ou porque passou rápido demais para ler o gesto. Era a condição de revisitar da D-031.
+
+**Decisão:** a fase que ensina (D-038), construída no mesmo dia na versão `2026-10-09b`: treinador no nível 1, lição depois do erro, WATCH HOW no fim de jogo e DEMO modesta. Nada disso muda as regras, o cenário ou o ranking.
+
+### O que observar com a versão 2026-10-09b
+
+| O quê | Antes (rodadas 1 e 2) | Como medir |
+|---|---|---|
+| Jogadores novos que concluem o nível 1 | 5 de 6 na rodada 1; 1 de 2 na rodada 2 | Relatório: linha TREINADOR e funil do `w1-1` |
+| Tentativas até a primeira conclusão | 1 a 5 (rodada 1); 8 (rodada 2) | Relatório, por jogador |
+| Batidas a 200 de velocidade ou mais no nível 1 | 18 de 31 do jogador 8 | Batidas do `w1-1` com `vx` |
+| DEMO pulada, e em que segundo | 5 de 6, no 1,3 s | Linha DEMO do relatório (a automática agora segura 3 s) |
+| WATCH HOW usado no fim de jogo | — | DEMO com origem `gameover` |
+| Lições que mais aparecem e se somem entre tentativas | — | Linha TREINADOR: lições depois do erro |
+
 ## Histórico de versões
 
 | Versão | Data | O que mudou |
@@ -185,3 +218,4 @@ A janela de teste ficou aberta de 02/10 a 07/10, mas a rodada de verdade durou u
 | 0.1 | 03/10/2026 | Primeira versão, com o playtest de 02/10/2026 |
 | 0.2 | 04/10/2026 | Retorno do Fernando, critério do M1 atendido e próximos passos depois das decisões D-026, D-027 e D-028 |
 | 0.3 | 07/10/2026 | Como a rodada 1 terminou: sessões por dia, última partida dos amigos em 04/10, perfil online sem a regra publicada e janela de teste fechada |
+| 0.4 | 09/10/2026 | Primeiros retornos da rodada 2: o nível 1 não ensinava a voar, a frear nem o objetivo; a fase que ensina (D-038) e o que observar na versão 2026-10-09b |

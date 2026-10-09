@@ -112,6 +112,18 @@ if (demos.length || attract.length) {
   console.log(`DEMO (#104): ${demos.length} vistas · puladas ${pct(demos.filter((e) => e.skipped).length, demos.length)} · segundo mediano em que pulam ${fmt(median(demos.filter((e) => e.skipped).map((e) => e.at)))} · ${count(demos.map((e) => e.source)).map(([k, n]) => `${k} ×${n}`).join(' · ')}`);
   console.log(`ATTRACT MODE (#105): começou ${attract.filter((e) => e.action === 'start').length} vezes · interrompido por um toque ${attract.filter((e) => e.action === 'stop').length} vezes`);
 }
+// Treinador da fase que ensina (D-038): quem jogou com ele, se concluiu, e que dicas e lições apareceram
+const coached = events.filter((e) => e.ev === 'level_end' && e.coach && e.outcome !== 'menu');
+const hints = events.filter((e) => e.ev === 'hint');
+if (coached.length || hints.length) {
+  const tips = {};
+  for (const e of coached) for (const [k, n] of Object.entries(e)) if (k.startsWith('c_')) tips[k.slice(2)] = (tips[k.slice(2)] || 0) + n;
+  const players = new Set(coached.map((e) => e.nick).filter(Boolean));
+  const finished = new Set(coached.filter((e) => e.outcome === 'complete').map((e) => e.nick));
+  console.log(`TREINADOR (D-038): ${coached.length} tentativas com ele · ${players.size} jogadores, ${finished.size} concluíram · concluídas ${pct(coached.filter((e) => e.outcome === 'complete').length, coached.length)}`);
+  console.log(`  lições depois do erro: ${count(hints.map((e) => e.kind)).map(([k, n]) => `${k} ×${n}`).join(' · ') || '—'}`);
+  console.log(`  dicas mostradas: ${Object.entries(tips).sort((a, b) => b[1] - a[1]).map(([k, n]) => `${k} ×${n}`).join(' · ') || '—'}`);
+}
 const patch = events.filter((e) => e.ev === 'patch_note');
 if (patch.length) {
   const by = (action) => patch.filter((e) => e.action === action).length;

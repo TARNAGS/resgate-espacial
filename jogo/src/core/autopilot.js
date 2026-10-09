@@ -398,8 +398,9 @@ function flyLegExpert(level, p, path, fromPad, toPad, o, rot, crewOnBoard, start
   return null;
 }
 
-// Rota de plataforma em plataforma com o piloto expert, girando na velocidade `rot`
-function flyRouteExpert(level, params, free, kinds, rot, ship = DEFAULT_SHIP) {
+// Rota de plataforma em plataforma com o piloto expert, girando na velocidade `rot`.
+// `tries` troca os ajustes tentados (a DEMO voa de um jeito mais calmo, D-038).
+function flyRouteExpert(level, params, free, kinds, rot, ship = DEFAULT_SHIP, tries = EXPERT_TRIES) {
   const pads = kinds.map((k) => level.pads.find((q) => q.kind === k));
   if (pads.some((q) => !q)) return null;
   const col = (pad) => Math.round((pad.x1 + pad.x2) / 2 / STEP);
@@ -413,7 +414,7 @@ function flyRouteExpert(level, params, free, kinds, rot, ship = DEFAULT_SHIP) {
       const base = planPath(level, free, col(from), col(to), w);
       if (!base) continue;
       const taut = new Map();
-      for (const tryOpts of EXPERT_TRIES) {
+      for (const tryOpts of tries) {
         if (!taut.has(tryOpts.margin)) taut.set(tryOpts.margin, tautPath(free, base, tryOpts.margin));
         const path = taut.get(tryOpts.margin);
         const o = { ...EXPERT, ...tryOpts };
@@ -433,6 +434,19 @@ function flyRouteExpert(level, params, free, kinds, rot, ship = DEFAULT_SHIP) {
 export function expertRun(level, params, ship = DEFAULT_SHIP) {
   if (level.obstacles.some((o) => !OBSTACLES[o.type].blockedAt)) return null;
   const legs = flyRouteExpert(level, params, freeSpace(level, ship), ['base', 'crew', 'base'], params.touchRotationSpeed, ship);
+  return legs && { thrustSeconds: sum(legs), legs };
+}
+
+// A corrida da DEMO (D-038): a mesma pilotagem do expert, mas calma, como a Nintendo pedia nas demonstrações
+// ("jogue com consideração": quem assiste tem de pensar "eu também consigo"). Voa mais devagar, freia cedo e de
+// forma visível, virando a nave para trás, e pousa devagar.
+const DEMO_TRIES = [
+  { stencils: [4], margin: 12, cruise: 150, accel: 55, brake: 50, touch: 32, landBrake: 45, lead: 0.6 },
+  { stencils: [2, 3, 4], margin: 12, cruise: 130, accel: 50, brake: 45, touch: 32, landBrake: 45, lead: 0.6 },
+];
+export function demoRun(level, params, ship = DEFAULT_SHIP) {
+  if (level.obstacles.some((o) => !OBSTACLES[o.type].blockedAt)) return null;
+  const legs = flyRouteExpert(level, params, freeSpace(level, ship), ['base', 'crew', 'base'], params.touchRotationSpeed, ship, DEMO_TRIES);
   return legs && { thrustSeconds: sum(legs), legs };
 }
 

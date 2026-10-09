@@ -305,6 +305,8 @@ Os seis cartões estão em "Para conversar". Cada um tem quatro recomendações.
 
 **Da #128, a primeira:** testar no próximo playtest uma ajuda opcional depois de N mortes no mesmo ponto, porque toca a decisão de ensino (D-031) e o jogador travado no nível 1.
 
+**Construído em 09/10/2026 ([D-038](../05-registro-de-decisoes.md)):** depois do retorno da rodada 2, o Fernando pediu as melhorias do nível 1. Entraram as recomendações 1 a 3 da #128 (ajuda depois do erro, com a lição a partir da segunda batida igual e o WATCH HOW a partir do segundo fim de jogo; dicas presas ao lugar e à hora; DEMO modesta) e a 4 da #99 (dica só depois do erro, com até 8 palavras). A 4 da #128 (refazer o desenho do nível 1 por último) continua de pé.
+
 **Da #127, a primeira:** o modelo de checkpoints da fase grande (item 1), porque o protótipo de fase grande é o próximo teste definido na revisão do Lean Canvas, e ele mantém o ranking por tempo puro.
 
 **Da #99, a primeira:** o molde do mundo de 10 fases (item 1), porque o design dos mundos (documento 08) é a próxima construção de conteúdo, e o molde já traz o respiro e a fase especial testados num jogo de 50 fases.

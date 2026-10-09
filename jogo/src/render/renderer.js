@@ -10,6 +10,7 @@ import { createShip } from './ship.js';
 import { createMessages } from './messages.js';
 import { createControls } from './controls.js';
 import { createHud, LOW_FUEL_FLASH } from './hud.js';
+import { createCoachArt } from './coach.js';
 
 // Desenho do jogo no Canvas. Lê o estado da partida e nunca o altera.
 // Cada camada fica numa peça própria (#123); aqui ficam só o estado do desenho (câmera, partículas e mensagens)
@@ -30,6 +31,7 @@ export function createRenderer(canvas, view) {
   const { drawObjectiveArrow, drawHUD } = createHud(kit);
   const { drawMessages, drawPraise, drawNoFuel } = createMessages(kit);
   const { drawJoystick, drawButtons, drawDemo } = createControls(kit);
+  const { drawCoachWorld, drawCoachScreen } = createCoachArt(kit);
 
   // ===== Partículas e mensagens =====
   r.resetCamera = (match, params) => {
@@ -119,6 +121,7 @@ export function createRenderer(canvas, view) {
     drawPads(m.level, t, approach);
     drawObstacles(m.level, theme, t);
     if (!m.training) drawCrew(m, t, params);
+    if (scene.coach) drawCoachWorld(m, scene.coach, t);   // o treinador da fase que ensina (D-038)
     drawShip(m.ship, params, approach, t, m.shipDef);
     drawParticles();
     ctx.restore();
@@ -130,9 +133,10 @@ export function createRenderer(canvas, view) {
       ctx.fillRect(0, 0, view.cssW, view.cssH);
       return;
     }
-    if (!m.training) drawObjectiveArrow(m, t, params);
+    if (!m.training) drawObjectiveArrow(m, t, params, Boolean(scene.coach));
     drawHUD(m, t, params, scene);
     drawMessages(t, m.ship, scene);
+    if (scene.coach) drawCoachScreen(m, scene.coach, t, scene);
     drawPraise();
     drawNoFuel(m.ship, t);
     drawJoystick(scene);

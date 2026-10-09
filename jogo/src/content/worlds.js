@@ -9,7 +9,8 @@
 // Campos do nível:
 //   key        identificador salvo no aparelho; nunca mudar depois de publicado (testes/conteudo/chaves-publicadas.json)
 //   name, goal textos do jogo (em inglês, D-007)
-//   hint       dicas de controle na tela (o tutorial ainda está em aberto, P-009)
+//   hint       a fase que ensina (D-038): com ela, o treinador (app/coach.js) mostra dicas perto da nave e lições
+//              depois do erro até o jogador concluir a fase pela primeira vez
 //   seed       semente fixa, igual para todos (D-021); só a BONUS (random: true) sorteia
 //   generator  regras do cenário: comprimento, corredor mínimo, relevo, posto e obstacles (lista com as
 //              opções de cada tipo do catálogo, content/obstacles). Tanque, em segundos de propulsor:

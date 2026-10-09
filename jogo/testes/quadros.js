@@ -3,6 +3,7 @@
 
 import { DEFAULT_PARAMS, LEVELS, CHALLENGES, TRAINING_LEVEL, createMatch, createEvents, CLASSIC_SHIP, DT, UP, step } from './lib.js';
 import { createRenderer } from '../src/render/renderer.js';
+import { TIPS, LESSONS } from '../src/core/coach.js';
 import { createFakeCanvas, createFakeView, fakeJoystick, deepCopy, deepFreeze } from './tela-de-mentira.js';
 
 const padOf = (m, kind) => m.level.pads.find((q) => q.kind === kind);
@@ -29,11 +30,15 @@ export const SITUATIONS = {
   'fim de jogo': (match) => { match.state.lives = 0; match.state.over = 'gameOver'; },
 };
 
-// Variações da tela: menu com a DEMO ao fundo, DEMO, botões e painel de ajuste, polegar no direcional, parado
+// Variações da tela: menu com a DEMO ao fundo, DEMO, botões e painel de ajuste, polegar no direcional, parado e o
+// treinador da fase que ensina (D-038): a decolagem com as teclas e a freada com o nariz-guia e a lição
 export const SCENES = [
   {},
   { attract: true },
-  { demo: { label: 'THRUST TO TAKE OFF', thrust: true, twin: false } },
+  { demo: { label: 'THRUST TO TAKE OFF', thrust: true, turn: -1, twin: false } },
+  { coach: { tip: { id: 'takeoff', text: TIPS.takeoff, tone: 'info' }, tipT: 1, lesson: null, lessonT: 0 }, keys: { thrust: true } },
+  { coach: { tip: { id: 'brake', text: TIPS.brake, tone: 'warn', nose: -1.1 }, tipT: 1, lesson: LESSONS.brake, lessonT: 3 }, keys: {} },
+  { coach: { tip: { id: 'goSos', text: TIPS.goSos, tone: 'info', dir: 1 }, tipT: 0.05, lesson: null, lessonT: 0 } },
   { buttons: [{ id: 'pause', x: 800, y: 30, r: 18 }, { id: 'tuning', label: 'T', x: 760, y: 30, r: 18 }], tuned: true },
   { joy: { cx: 90, cy: 320, x: 130, y: 300 }, thrustHeld: true },
   { idle: true },

@@ -3,8 +3,8 @@
 | Campo | Valor |
 |---|---|
 | Documento | 02 — Regras do jogo |
-| Versão | 1.7 |
-| Data | 07/10/2026 |
+| Versão | 1.8 |
+| Data | 09/10/2026 |
 | Status | Aprovado; pendente: pontuação (P-006) |
 | Responsável | Fernando Nunes (Product Manager) |
 
@@ -182,7 +182,8 @@ Perguntas a responder para fechar a pontuação:
 | Cada nível define as regras do gerador: comprimento, largura mínima do corredor, quantidade de pedras, posto de abastecimento e tamanho do tanque | Proposta |
 | Todo cenário gerado tem solução: corredor mínimo, passagem ao lado de toda pedra e combustível suficiente | Definido: o piloto automático conclui cada cenário antes de ele ser jogado (D-018) |
 | Além dos níveis, há desafios fora da sequência, sempre liberados no mapa: a **PRACTICE**, a fase mais difícil do jogo (corredor mais estreito, mais pedras e menos espaço para passar), e a **BONUS**, com cenário novo a cada partida e recorde separado | Definido |
-| **Como o jogo ensina (D-031, resolve a P-009):** sem tutorial nem tela de instruções. Antes da primeira partida, uma **DEMO** de uns 10 segundos, jogada pelo piloto automático no cenário do nível 1, mostra o objetivo (ir até o SOS, pousar, embarcar, voltar e pousar na base) e a dinâmica do propulsor, com no máximo oito palavras na tela. Dá para pular, e ela fica num botão DEMO no mapa. Com o menu parado, a DEMO passa ao fundo (attract mode). Não há oferta de ajuda depois de fins de jogo seguidos. A fase 1 é fixa, e tentar de novo repete o cenário (D-021) | Definido ([#104](https://github.com/TARNAGS/resgate-espacial/issues/104) e [#105](https://github.com/TARNAGS/resgate-espacial/issues/105)) |
+| **Como o jogo ensina (D-031, resolve a P-009; revista em parte pela D-038):** sem tutorial nem tela de instruções. Antes da primeira partida, uma **DEMO** de uns 20 segundos, jogada por um piloto calmo no cenário do nível 1, mostra o objetivo (ir até o SOS, pousar, embarcar, voltar e pousar na base) e cada gesto do propulsor (decolar, tocar o propulsor contra a gravidade, virar para trás para frear, pousar devagar), com no máximo oito palavras na tela e as teclas acendendo. A DEMO automática só pode ser pulada depois de 3 segundos; ela também fica num botão DEMO no mapa. Com o menu parado, a DEMO passa ao fundo (attract mode). A fase 1 é fixa, e tentar de novo repete o cenário (D-021) | Definido ([#104](https://github.com/TARNAGS/resgate-espacial/issues/104), [#105](https://github.com/TARNAGS/resgate-espacial/issues/105) e D-038) |
+| **A fase que ensina (D-038):** no nível 1, até o jogador concluí-lo pela primeira vez, um treinador mostra dicas curtas perto da nave, na hora em que servem: decolar (com as teclas desenhadas, ou o botão do propulsor pulsando no celular), ir ao SOS, frear virando para trás (com um nariz-guia e luzes de aproximação no chão), soltar o propulsor para descer, pousar devagar e voltar à base. A partir da segunda batida do mesmo tipo, uma lição escolhida pelo motivo da batida aparece no alto da fase e no fim de jogo. A partir do segundo fim de jogo no nível 1, o fim de jogo oferece a DEMO (WATCH HOW). Nada disso muda as regras, o cenário ou o ranking | Definido |
 | **Big picture:** o jogo se organiza em mundos, cada um com 10 fases e identidade visual própria, descrita num documento de design por mundo ([documento 08](08-design-de-mundos.md)). As fases 1 a 3 do MVP são as do Mundo 1 | Definido (D-020) |
 | Concluir a fase 10 de um mundo libera a fase 1 do próximo | Proposta |
 | Quantos mundos o jogo terá no lançamento nas lojas | Em aberto |
@@ -308,3 +309,4 @@ Registradas para não se perderem. **Não são compromisso**: só entram se o Ro
 | 1.4 | 02/10/2026 | Big picture: mundos com 10 fases e visual próprio (D-020), abertura em três telas (seção 10.1, Proposta) e curva de dificuldade passa a ser a do Mundo 1. O MVP continua com 3 fases |
 | 1.6 | 04/10/2026 | Como o jogo ensina: DEMO e attract mode, sem tutorial (D-031, resolve a P-009); P-010 resolvida pela D-021; silencioso do iPhone (D-030) |
 | 1.7 | 07/10/2026 | Ideia do fantasma (seção 15) ligada ao replay proposto para conferir o ranking (documento 11) |
+| 1.8 | 09/10/2026 | A fase que ensina (D-038): treinador no nível 1, lição depois do erro, WATCH HOW no fim de jogo e DEMO modesta; revê em parte a D-031 |

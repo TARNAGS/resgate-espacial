@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | 12 — Arquitetura do jogo e mapa de impacto |
-| Versão | 0.8 |
+| Versão | 0.9 |
 | Data | 08/10/2026 |
 | Status | Em revisão (o Fernando aprova) |
 | Responsável | Fernando Nunes (Product Manager) |
@@ -54,7 +54,8 @@ Regras, conteúdo e números também rodam no Node, nos testes e no piloto autom
 | `ship.js` | Nave, chama, halo do pouso e destroços da explosão |
 | `hud.js` | Painel: fase, combustível e avisos, vidas, tripulação, cronômetro, rodapé e a seta do objetivo |
 | `messages.js` | Mensagens no alto, elogios e NO FUEL |
-| `controls.js` | Direcional, botão do propulsor, botões redondos e o selo da DEMO |
+| `controls.js` | Direcional, botão do propulsor, botões redondos e o selo da DEMO, com as teclas fantasmas |
+| `coach.js` | O treinador da fase que ensina (D-038): a dica perto da nave, as teclas desenhadas, o nariz-guia da freada, as luzes de aproximação, o HELP! da tripulação, o farol da base e a lição depois do erro. Só desenha quando a cena traz `coach` |
 | `skins/` | As skins ([#124](https://github.com/TARNAGS/resgate-espacial/issues/124)): como desenhar a nave, a chama, cada obstáculo e as cores do mundo. A `classic` é o visual de sempre; a `hitbox` mostra as formas que batem |
 | `style.js` | A fonte comum |
 | `intro.js` e `intro-art.js` | A abertura: o controle das telas e da música, e os desenhos de cada tela |
@@ -65,6 +66,7 @@ Regras, conteúdo e números também rodam no Node, nos testes e no piloto autom
 |---|---|
 | `messages.js` | Mensagens e efeitos na tela ligados aos eventos da partida (objetivo, pousos, embarque, elogios, avisos de combustível, batidas e vidas) |
 | `run.js` | Telemetria de cada tentativa: começo, pousos, batidas, elogios, trajetória, fim e o envio da fila ao sair do app |
+| `coach.js` | O treinador da fase que ensina (D-038): liga só na fase com `hint` e até a primeira conclusão; guarda a memória da tentativa, escolhe a dica a cada quadro (as regras ficam em `core/coach.js`), dá a lição depois do erro e diz ao fim de jogo se oferece a DEMO |
 | `play.js` | A partida: começar uma fase, pausar, resultado, voltar ao menu, botões na tela e a dica do polegar |
 | `settings.js` | Configurações (som, controle, câmera, apagar o progresso), o painel de ajuste escondido e os parâmetros pelo endereço |
 | `intro-flow.js` | A abertura e o PLAY do menu (no primeiro PLAY, a abertura vem antes) |
@@ -166,6 +168,8 @@ As chaves de antes não mudaram.
 | Zoom da câmera (D-037) | `render/view.js` (`cameraZoomFor`) e `config/params.js` | **Quanto se vê à frente, e isso muda a dificuldade:** o automático se adapta à tela, o jogador só aproxima, e o zoom fixo de teste tira a corrida do ranking | Testes da câmera (`regras/camera.test.js`); conferir no iPhone e numa tela de iPhone SE | Não, mas o zoom fixo de teste tira a corrida do ranking |
 | Controles na tela, modo da câmera | `config/params.js` (`VIEW_ONLY`), `render/`, `input/` | A imagem e o controle | Conferir no iPhone | Não |
 | Textos do jogo | `app/` (mensagens e telas), `content/worlds/` | As telas | Inglês (D-007); cabe na tela do iPhone deitado | Não |
+| Dicas e lições do treinador (D-038) | `core/coach.js` (textos, quando cada dica aparece, frenagem, pouso e lição pela batida), `app/coach.js` (quando liga, memória e telemetria), `render/coach.js` (desenho) | Só o nível 1, até a primeira conclusão; as mensagens do início da fase (`app/messages.js`) ficam de fora com ele ligado | Testes `D-038` (`regras/treinador.test.js`): até 8 palavras, lição pelas batidas reais, o aviso de frear chega a tempo; desenho de ouro; no navegador, a fase com `?coach` | Não |
+| Piloto ou rótulos da DEMO | `core/demo.js` e `demoRun` em `core/autopilot.js` | A DEMO e o attract mode | Testes `D-038` da DEMO (`conteudo/demo-e-fases.test.js`): conclui, ordem dos gestos, duração e tempo de leitura | Não |
 | Sons e músicas | `platform/audio.js`, `platform/music.js`, `content/songs.js` | Reagem aos eventos | Teste da música; ouvir no iPhone | Não |
 | Nome ou campos de um evento da partida | `core/match.js` | Som, mensagens, elogios e telemetria, que podem parar **em silêncio** | Fichas de ouro; contrato dos eventos ([#116](https://github.com/TARNAGS/resgate-espacial/issues/116)) | Não |
 | Regras do banco online | `jogo/firebase/regras.json` e `config/online.js` | Ranking, perfil e telemetria | Colar o texto **inteiro** no console; o Claude confere pelo terminal (`CLAUDE.md`) | Não |
@@ -204,6 +208,7 @@ Testes que tocam o alarme quando algo muda sem querer. Ficam em `jogo/testes/`, 
 | Contrato do obstáculo ([#119](https://github.com/TARNAGS/resgate-espacial/issues/119)) | Função faltando, sorteio que muda com a mesma semente, obstáculo sem passagem, colisão que não bate, piloto que não desvia de onde bate, desenho maior que os limites | `conteudo/contrato-obstaculo.test.js` | Rápida |
 | Parâmetros e ranking ([#120](https://github.com/TARNAGS/resgate-espacial/issues/120)) | Parâmetro sem classificação, ordem das camadas, chave que não muda quando o jogo muda (ou que muda por aparência), chave de hoje que mudou | `regras/cadeia-e-ranking.test.js` | Rápida |
 | Regras do documento 02 | Física, controles, pouso, combustível, vidas, resgate, progresso, elogios | `regras/` | Rápida |
+| Treinador e DEMO (D-038) | Texto com mais de 8 palavras ou fora do inglês, lição errada para uma batida real, aviso de frear que chega tarde, dica fora de ordem, DEMO que não conclui, que voa rápido demais ou troca de rótulo antes de dar tempo de ler | `regras/treinador.test.js` e `conteudo/demo-e-fases.test.js` | Rápida |
 | Cenários e caminho provado (D-014, D-018, D-023) | Fase sem solução, tanque errado, abastecer que deixou de ser preciso | `conteudo/` | Completa |
 | Fases fixas ([#87](https://github.com/TARNAGS/resgate-espacial/issues/87)) | Tanque gravado desatualizado | `conteudo/caminho-provado.test.js` | Completa |
 
@@ -228,6 +233,7 @@ Testes que tocam o alarme quando algo muda sem querer. Ficam em `jogo/testes/`, 
 | Versão | Data | O que mudou |
 |---|---|---|
 | 0.1 | 07/10/2026 | Primeira versão ([#111](https://github.com/TARNAGS/resgate-espacial/issues/111)): camadas, três tipos de mudança, mapa de impacto, acoplamentos e guardas automáticas, junto com as tarefas [#112](https://github.com/TARNAGS/resgate-espacial/issues/112) a [#115](https://github.com/TARNAGS/resgate-espacial/issues/115) |
+| 0.9 | 09/10/2026 | A fase que ensina (D-038): peça `render/coach.js`, fluxo `app/coach.js`, regras em `core/coach.js`, a DEMO com piloto próprio e duas linhas novas no mapa de impacto |
 | 0.8 | 09/10/2026 | Onda 5, última tarefa ([#125](https://github.com/TARNAGS/resgate-espacial/issues/125)): o `main.js` dividido em fluxos na pasta `app/`, camada nova na tabela da seção 1 e no teste, o kit dos fluxos, e os acoplamentos do vídeo e dos fluxos atualizados |
 | 0.7 | 08/10/2026 | Onda 5, segunda tarefa ([#124](https://github.com/TARNAGS/resgate-espacial/issues/124)): camada de skins, com a `classic` e a `hitbox`; o desenho dos obstáculos saiu do conteúdo; contrato da skin e linha nova no mapa de impacto |
 | 0.6 | 08/10/2026 | Onda 5, primeira tarefa ([#123](https://github.com/TARNAGS/resgate-espacial/issues/123)): o desenho dividido em peças (tabela na seção 1), a abertura separada dos desenhos dela e a guarda do desenho de ouro |

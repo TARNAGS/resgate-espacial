@@ -8,4 +8,5 @@ export const PATCH_NOTE_MAX = 60;
 export const PATCH_NOTES = {
   '2026-10-07a': 'NEW: closer camera, fuel warnings, DEMO, messages up top',
   '2026-10-09a': 'NEW: sharper graphics, closer camera, fuel warnings, DEMO',   // rodada 2 (09 a 12/10/2026)
+  '2026-10-09b': 'NEW: level 1 flight tips, calmer DEMO',   // D-038; aprovado pelo Fernando, rodada 2 em andamento
 };

@@ -1,6 +1,7 @@
 import { PARAMS } from '../config/params.js';
 import { WORLDS } from '../content/worlds.js';
 import { DEMO_LABELS } from '../core/demo.js';
+import { wrapAngle } from '../core/math.js';
 import { Sound } from '../platform/audio.js';
 import { readIntent, SCHEME_NAMES } from '../input/controls.js';
 import { late } from './kit.js';
@@ -11,7 +12,15 @@ export const DT = 1 / 120;   // passo fixo da física
 
 export function createLoop(g) {
   const { view, renderer, app, isIdle, keyboard, joystick, tuning, intro } = g;
-  const [hudButtons, checkThumbHint, stepDemo, ghostJoy, endDemo, updateAttract] = late(g, 'hudButtons', 'checkThumbHint', 'stepDemo', 'ghostJoy', 'endDemo', 'updateAttract');
+  const [hudButtons, checkThumbHint, stepDemo, ghostJoy, endDemo, updateAttract, stepCoach, updateCoach, coachScene] = late(g,
+    'hudButtons', 'checkThumbHint', 'stepDemo', 'ghostJoy', 'endDemo', 'updateAttract', 'stepCoach', 'updateCoach', 'coachScene');
+
+  // Teclas fantasmas da DEMO no teclado (D-038): para que lado o piloto está girando a nave
+  const ghostTurn = (input, ship) => {
+    if (input?.targetAngle == null || !ship) return 0;
+    const d = wrapAngle(input.targetAngle - ship.a);
+    return Math.abs(d) < 0.04 ? 0 : Math.sign(d);
+  };
 
   // ===== Laço principal (passo fixo de física) =====
   let last = performance.now();
@@ -29,6 +38,7 @@ export function createLoop(g) {
         const intent = readIntent(keyboard.keys, joystick.state, p, joystick.thrustHeld);
         m.update(DT, intent);
         app.run?.tracker.step(DT, m.state.ship, intent.thrust);
+        stepCoach(DT, m.state.ship, intent.thrust);
         renderer.update(DT, m, p);
         acc -= DT;
       }
@@ -36,6 +46,7 @@ export function createLoop(g) {
       app.run?.frames.add(raw);
       if (keyboard.keys.left || keyboard.keys.right || keyboard.keys.thrust) app.ranControl = 'keys';
       checkThumbHint(m.state);
+      updateCoach(elapsed, m.state);
     } else {
       acc = 0;
     }
@@ -61,7 +72,12 @@ export function createLoop(g) {
       idle: isIdle(),
       buttons: app.screen === 'game' ? hudButtons() : [],
       tuned: tuning.isTuned(),
-      demo: demo && { label: DEMO_LABELS[demo.pilot.label], thrust: ghost.thrust, twin: view.isTouch && PARAMS.touchScheme === 'twin' },
+      demo: demo && {
+        label: DEMO_LABELS[demo.pilot.label], thrust: ghost.thrust, turn: ghostTurn(ghost, demo.match.state.ship),
+        twin: view.isTouch && PARAMS.touchScheme === 'twin',
+      },
+      coach: app.screen === 'game' ? coachScene() : null,   // o treinador da fase que ensina (D-038)
+      keys: keyboard.keys,
       attract: Boolean(app.attract) && app.screen === 'menu',
     });
     requestAnimationFrame(loop);

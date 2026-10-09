@@ -9,7 +9,7 @@ import { late } from './kit.js';
 
 export function createRunTelemetry(g) {
   const { view, renderer, events, telemetry, app, tuning } = g;
-  const [pushProfile] = late(g, 'pushProfile');
+  const [pushProfile, coachSummary] = late(g, 'pushProfile', 'coachSummary');
 
   const attempts = {};        // tentativas por fase nesta sessão
   events.on('praise', ({ kind, x, y }) => {
@@ -57,6 +57,7 @@ export function createRunTelemetry(g) {
       level: def.key, seed: m.level.seed, attempt: app.run.attempt, genMs, tank: m.level.tankSeconds, control: app.ranControl,
       w: window.innerWidth, h: window.innerHeight,   // a tela durante a fase, não só ao carregar o jogo
       zoom: Number(cameraZoomFor(view, PARAMS).toFixed(2)), near: PARAMS.cameraNear,   // a câmera usada (D-037)
+      coach: Boolean(app.coach),   // o treinador da fase que ensina estava ligado (D-038)
     });
   }
 
@@ -70,7 +71,8 @@ export function createRunTelemetry(g) {
     telemetry.track('level_end', {
       level: r.level, attempt: r.attempt, outcome, durS: (performance.now() - r.t0) / 1000,
       timer: m?.timer ?? 0, crashes: r.crashes, refuels: r.refuels, control: app.ranControl,
-      crew: m?.crewOnBoard ?? false, tuned: tuning.isTuned(), ...r.frames.summary(), ...r.tracker.summary(), ...praise, ...extra,
+      crew: m?.crewOnBoard ?? false, tuned: tuning.isTuned(), ...r.frames.summary(), ...r.tracker.summary(), ...praise,
+      ...coachSummary(), ...extra,
     });
     // A trajetória da tentativa, em pedaços curtos (#91, D-029)
     r.tracker.pathChunks().forEach((p, i) => telemetry.track('path', { level: r.level, attempt: r.attempt, i, p }));
