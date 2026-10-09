@@ -255,7 +255,7 @@ O Plants vs. Zombies repete o mesmo ritmo em cada mundo de 10 fases: novidades n
 |---|---|
 | Controle como maior risco, testado e comparado (D-006, D-022) | Crazy Gravity, Gravitron, Jetpack Joyride e Temple Run (seção 4.1) |
 | Fases fixas para comparar tempos e ranking por fase (D-021, D-024) | Crazy Gravity (3 melhores tempos por fase), Gravitron (placar online), Jetpack Joyride (placar puro), Geometry Dash (fases fixas; ranking por tempo nas fases de plataforma) |
-| Mundos de 10 fases, com uma novidade por fase (D-020) | Geometry Dash World (10 fases de cerca de 30 s, em 2 mundos de 5, uma novidade cada) |
+| Mundos de 10 fases, com uma novidade por fase (D-020) | Geometry Dash World (10 fases de cerca de 30 s, em 2 mundos de 5, uma novidade cada); Plants vs. Zombies (5 mundos de 10, com o mesmo molde em cada um) |
 | Aparência separada das regras e do ranking (D-034, D-035) | Geometry Dash (ícones só cosméticos, ganhos jogando) |
 | Sem tutorial: DEMO e attract mode (D-031) | Crazy Gravity (demonstração das fases 1 a 3), Gravitron 2 (fase 1 com tudo à vista), Temple Run (testar sem explicar), Geometry Dash (sem tutorial), Super Mario World (sem tutorial, com dicas opcionais no lugar); com o alerta das instruções acrescentadas no Gravitron 2, da dica mínima do Geometry Dash e da ajuda depois do erro que a Nintendo acrescentou em 2009 |
 | Partidas curtas para o jogador casual (D-028) | Jetpack Joyride (a "jogada do intervalo comercial"), Gravitron (um jogador que volta há anos, 10 minutos por vez), Temple Run (30 segundos a minutos) |
